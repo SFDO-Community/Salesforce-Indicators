@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="indsTitle" type="String" label="Title" default="Indiciators" placeholder = "Indicators" description = "The Title of the Indicators Card"/>
+            <property name="indsIcon" type="String" label="Icon" default="standard:marketing_actions" placeholder="standard:account" description="enter the SLDS Icon Name available at https://www.lightningdesignsystem.com/icons"/>
+            <property name="indsSize" type="String" label="Icon Size" placeholder="large" datasource="large,medium" description="Choose the Icon Size."/>
+            <property name="indsShape" type="String" label="Icon Shape" placeholder="base" datasource="base,circle" description="Choose the Icon Shape."/>
+            <property name="indsHeading" type="String" label="Heading Text" description="Enter descriptive text to appear at the top of the card. Can be blank."/>
+            <property name="indFields" label="Indicator Field Names" type="String" required="true" default="Id;Name" description="The Field Names of each Indicator's Value." />    
+            <property name="indIcons" label="Indicator Icons" type="String" required="true" default="standard:marketing_actions;standard:marketing_actions" description="The Lightning Design System name of the icon. Names are written in the format '\utility:down\' where 'utility' is the category, and 'down' is the specific icon to be displayed. Icons can be found here - https://lightningdesignsystem.com/icons/"/>
+            <property name="indTexts" label="Indicator Text Values" type="String" required="true" default=";" description="The text you want displayed. Separate the Text with a semicolon e.g. 'IN1;IN2'"/>
+            <property name="indImages" label="Indicator Image URLs" type="String" required="true" default="/;/" description="The URLs to the image of each Indicator, separated by a semicolon."/>
+            <property name="indHovers" label="Incicator Hover Texts" type="String" required="true" default="Indicator 1 Hover Text;Indicator 2 Hover Text" description="The Hover Text of each Indicator you want displayed. For multiple Indicators separate the text with a semicolon e.g. 'Hover Text 1;Hover Text 2 2'"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
