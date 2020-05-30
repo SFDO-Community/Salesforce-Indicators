@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 
-export default class Indicator extends LightningElement {
+export default class IndicatorListItem extends LightningElement {
     @api indSize = 'large';
     @api indShape = 'base';
     @api indText = 'IND';

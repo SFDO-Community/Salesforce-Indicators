@@ -9,14 +9,14 @@
                 <template if:true={results}>
                     <template for:each={results} for:item="fld">
                         <!-- <p key={fld.fName}>{fld.fName} {fld.fValue}</p> -->
-                        <c-indicator if:true={fld.fValue} key={fld.fName}
+                        <c-indicatorListItem if:true={fld.fValue} key={fld.fName}
                             ind-text={fld.fTextShown}
                             ind-size={indsSize}
                             ind-shape={indsShape} 
                             ind-hover-text={fld.fHoverValue}
                             ind-icon={fld.fIconName}
                             ind-image={fld.fImageURL}>
-                        </c-indicator>
+                        </c-indicatorListItem>
                     </template>
                 </template>
             </div>

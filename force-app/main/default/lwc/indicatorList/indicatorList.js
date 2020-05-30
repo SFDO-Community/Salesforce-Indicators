@@ -1,7 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 
-export default class Indicators extends LightningElement {
+export default class IndicatorList extends LightningElement {
 @api objectApiName;
 @api recordId;
 @api indsTitle = 'Indicators';
