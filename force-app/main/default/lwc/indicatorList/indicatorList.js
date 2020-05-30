@@ -87,8 +87,6 @@ wiredRecord({data, error}) {
         this.results = matchingFields;
     } else if (error) {
         this.errorMessage = JSON.stringify(error);
-    } else {
-        console.log("Both undefined, something went wrong.");  
     }
 }
 

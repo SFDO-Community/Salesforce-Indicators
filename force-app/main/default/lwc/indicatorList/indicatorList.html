@@ -8,7 +8,6 @@
             <div class="slds-var-m-left_medium">
                 <template if:true={results}>
                     <template for:each={results} for:item="fld">
-                        <!-- <p key={fld.fName}>{fld.fName} {fld.fValue}</p> -->
                         <c-indicator-list-item if:true={fld.fValue} key={fld.fName}
                             ind-text={fld.fTextShown}
                             ind-size={indsSize}
