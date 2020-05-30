@@ -4,7 +4,7 @@
     </template>
     <template if:false={errorOccurred}>
         <lightning-card variant="base" title={indsTitle} icon-name={indsIcon}>
-            <p class="slds-p-horizontal_medium">{indsHeading}</p>
+            <p class="slds-var-p-horizontal_medium">{indsHeading}</p>
             <div class="slds-var-m-left_medium">
                 <template if:true={results}>
                     <template for:each={results} for:item="fld">
