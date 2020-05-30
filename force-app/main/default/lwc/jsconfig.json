@@ -2,7 +2,14 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/indicator": [
+                "indicator/indicator.js"
+            ],
+            "c/indicators": [
+                "indicators/indicators.js"
+            ]
+        }
     },
     "include": [
         "**/*",
