@@ -60,7 +60,7 @@ error = '';
 results = [];
 
 
-@wire(getRecord, { recordId: '$recordId', fields: '$apiFieldnameDefinitions' })
+@wire(getRecord, { recordId: '$recordId', optionalFields: '$apiFieldnameDefinitions' })
 wiredRecord({data, error}) {
     if (data) {
         console.log('Data => ', JSON.stringify(data));
