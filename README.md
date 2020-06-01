@@ -112,3 +112,6 @@ Your ideas and your help is needed. This is my very first component so it may be
   * Salesforce-sas
   * Rahul Gawale
 * Here is [my question on the SFSE](https://salesforce.stackexchange.com/questions/307055/simplest-way-to-display-values-from-field-names-listed-in-design-attributes) to get to the bottom of one of the hardest parts of this code.
+
+## Attribution
+Icon made by itim2101 from www.flaticon.com
