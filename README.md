@@ -8,8 +8,8 @@ The icons are based off the standard Lightning Web Component [Avatar](https://de
 
 * Add the **Indicators** Component to the Lightning Record Page. 
 * Enter the Settings for each Indicator
-  * **Title** - Required
-  * **Icon** - Requried - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity
+  * **Title** - Not Required, but looks best if it is defined
+  * **Icon** - Not Requried, but looks best if it is defined - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity
   * **Icon Size** - large or medium, defaults to large
   * **Icon Shape** - circle or base (sqare), defaults to base
   * **Heading Text** - _Optional_ - the text to display above the icons
@@ -39,12 +39,15 @@ Images coming soon!
 
 ## Tips
 * Create a new Boolean Formula Field - eg Is Active (Is_Active__c)
-```ISPICKVAL(Status__c,"Active")```
+```ISPICKVAL(Status__c,"Active")```. These fields can then be used on your reports and list views directly. 
+* You can use dot notation directly in the Setup panel. Eg if the Component is on a Case and there is a field on the Account for Current Subscriber, enter ```Account.Is_Current_Subscriber__c``` in the Field Name field in the setup panel. 
 * Create a new Text field that returns a 3 character (max) value based on Picklist values eg
 ```CASE(TEXT(Status__c),"Oh Hold","HLD","Waiting","WT!","Cancelled","X","ACT")```
-* Create a Formula for Is High Value Donor (Is_High_Value_Donor__c) and use $$$ as the text or the green money bag icon
+* It looks better to ensure that one icon is always visible. Eg you might need an Is Active field and an Is Inactive field both set with different colours / icons. Having sets of fields like Is Open and Is Closed next to each other in the setup works well. 
+* Example: Create a Formula for Is High Value Donor (Is_High_Value_Donor__c) and use $$$ as the text or the green money bag icon
 ```npo02__TotalOppAmount__c > $CustomMetadata.ReportingSettings__mdt.HighValueDonor.Amount__c```
 * To get icons in non-SLDS colours, use an external service like [DaButtonFactory](https://www.clickminded.com/button-generator/) or eg [IconS8 rounded square](https://img.icons8.com/ios-filled/50/cd0000/rounded-square.png) (replace the colour in the URL) to generate an icon with the text and download it. Add it to your Asset Library, make the image public, and grab the URL. You can use the images from the external service directly, but it may not be a good idea long term. But beware, it might look a bit crap mixing with the SLDS colours. 
+
 
 # Indicator Ideas
 * High Value Client / Donor
@@ -68,19 +71,17 @@ Images coming soon!
 * Is Membership Due
 * Is Event Attendee
 * Is Employee
+* Do Not Email
+* Do Not Contact
 * Funds in (eg Donor)
 * Funds out (eg Grant Recipient)
 * Contact missing key information
 * Should this Contact exist? (eg has no valid information)
+* Anything from [this blog post](https://dandonin.com/2017/07/06/customer-account-health-indicators/)
 
 # Future Component Ideas
 
-* Icons
-  * Different Coloured icons for different states (eg if Is Active = false then show icon greyed out or different colour)
-* Setup
-  * Easier setup?
-  * Setup via CMDT?
-  * One click deploy button
+See [Issues Register](https://github.com/JodieM/Indicators/issues)
 
 Your ideas and your help is needed. This is my very first component so it may be a bit rough around the edges, and I welcome pull requests for suggestions on how to fix or improve it. But be kind, please. 
 
@@ -112,3 +113,7 @@ Your ideas and your help is needed. This is my very first component so it may be
   * Salesforce-sas
   * Rahul Gawale
 * Here is [my question on the SFSE](https://salesforce.stackexchange.com/questions/307055/simplest-way-to-display-values-from-field-names-listed-in-design-attributes) to get to the bottom of one of the hardest parts of this code.
+
+## Attribution
+* Icon made by itim2101 from www.flaticon.com
+
