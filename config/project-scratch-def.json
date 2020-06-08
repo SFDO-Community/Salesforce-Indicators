@@ -1,5 +1,6 @@
 {
-  "orgName": "Demo company",
+  "orgName": "Indicators Component",
   "edition": "Developer",
+  "hasSampleData": true,
   "features": []
 }
