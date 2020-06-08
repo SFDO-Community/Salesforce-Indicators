@@ -4,52 +4,51 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 export default class IndicatorList extends LightningElement {
 @api objectApiName;
 @api recordId;
-@api indsTitle = 'Indicators';
-@api indsIcon = 'standard:marketing_actions';
-@api indsHeading = '';
-@api indsSize = 'large';
-@api indsShape = 'base';
+@api indicatorsListTitle = 'Indicators';
+@api indicatorsListIcon = 'standard:marketing_actions';
+@api indicatorsListHeading = '';
+@api indicatorsSize = 'large';
+@api indicatorsShape = 'base';
 @api
-get indFields() {
-    return this._indFields;
+get indicatorsFields() {
+    return this._indicatorsFields;
 }
-set indFields(value) {
-    this._indFields = value.split(";");
+set indicatorsFields(value) {
+    this._indicatorsFields = value.split(";");
     //Use this value to compare the lengths across all other settings
-    this._indSettingsCount = this._indFields.length;
+    this._indicatorsSettingsCount = this._indicatorsFields.length;
 }
 @api
-get indIcons() {
-    return this._indIcons;
+get indicatorsIcons() {
+    return this._indicatorsIcons;
 }
-set indIcons(value) {
-    this._indIcons = value.split(";");
+set indicatorsIcons(value) {
+    this._indicatorsIcons = value.split(";");
 }
 @api 
-get indTexts() {
-    return this._indTexts;
+get indicatorsTextValues() {
+    return this._indicatorsTextValues;
 }
-set indTexts(value) {
-    this._indTexts = value.split(";");
-}
-@api
-get indImages() {
-    return this._indImages;
-}
-set indImages(value) {
-    this._indImages = value.split(";");
+set indicatorsTextValues(value) {
+    this._indicatorsTextValues = value.split(";");
 }
 @api
-get indHovers() {
-    return this._indHovers;
+get indicatorsImages() {
+    return this._indicatorsImages;
 }
-set indHovers(value) {
-    this._indHovers = value.split(";");
+set indicatorsImages(value) {
+    this._indicatorsImages = value.split(";");
+}
+@api
+get indicatorsHoverTextValues() {
+    return this._indicatorsHoverTextValues;
+}
+set indicatorsHoverTextValues(value) {
+    this._indicatorsHoverTextValues = value.split(";");
 }
 
  //Holds the constructed indicators to be rendered.
-inds = [];
-fSettings = [];
+indicatorsSettings = [];
 //Holds the Field Name and Object Name to use in the Wire Service
 apiFieldnameDefinitions = [];
 
@@ -57,7 +56,7 @@ apiFieldnameDefinitions = [];
 errorOccurred = false;
 errorMessage = '';
 error = '';
-results = [];
+indicatorResults = [];
 
 
 @wire(getRecord, { recordId: '$recordId', optionalFields: '$apiFieldnameDefinitions' })
@@ -67,24 +66,24 @@ wiredRecord({data, error}) {
         let matchingFields = [];
         this.apiFieldnameDefinitions.forEach(definition => {
         matchingFields.push({
-            fName: definition.fieldApiName,
+            indicatorDisplayFieldName: definition.fieldApiName,
             //This is not needed for the Component display but leaving it here for useful debugging
-            fValue: getFieldValue(data, definition),
-            fTextValue: definition.setTextVal,
-            fIconName: definition.setIconName,
-            fImageURL: definition.setImageURL,
-            fHoverValue: definition.setHoverValue,
+            indicatorDisplayFieldValue: getFieldValue(data, definition),
+            indicatorDisplayTextValue: definition.indicatorConfigurationTextValue,
+            indicatorDisplayIconName: definition.indicatorConfigurationIconName,
+            indicatorDisplayImageURL: definition.indicatorConfigurationImageURL,
+            indicatorDisplayHoverValue: definition.indicatorConfigurationHoverTextValue,
             //If the Field Value is "true" then show the Text Value from the Settings.
             //If the Text Value from Settings is empty the Image will be shown
             //If the Field Value is "false" the Avatar will not be shown 
             ...`${getFieldValue(data, definition)}` === 'true' ? {
-                    fTextShown : definition.setTextVal
+                    indicatorDisplayText : definition.indicatorConfigurationTextValue
                 } : {
-                    fTextShown : `${getFieldValue(data, definition)}`.toUpperCase().substring(0,3)
+                    indicatorDisplayText : `${getFieldValue(data, definition)}`.toUpperCase().substring(0,3)
                 }
             });
         });
-        this.results = matchingFields;
+        this.indicatorResults = matchingFields;
     } else if (error) {
         this.errorMessage = JSON.stringify(error);
     }
@@ -92,16 +91,16 @@ wiredRecord({data, error}) {
 
 connectedCallback() {
     //Check that all the Indicator settings are the same length
-    if([this.indFields, this.indIcons, this.indTexts, this.indImages, this.indHovers].every(this.indLengthSettingsMatch, this)) {
+    if([this.indicatorsFields, this.indicatorsIcons, this.indicatorsTextValues, this.indicatorsImages, this.indicatorsHoverTextValues].every(this.indicatorsLengthSettingsMatch, this)) {
         //Set up the Settings Fields;
-         for(let i = 0; i < this._indSettingsCount; i++) {
-            this.inds.push({
-                "indCount" : this.inds[i],
-                "indFieldName" : this.indFields.shift(),
-                "iconName" : this.indIcons.shift(),
-                "textValue" : this.indTexts.shift(),
-                "imageURL" : this.indImages.shift(),
-                "hoverValue" : this.indHovers.shift()
+         for(let i = 0; i < this._indicatorsSettingsCount; i++) {
+            this.indicatorsSettings.push({
+                "indicatorsCount" : this.indicatorsSettings[i],
+                "indicatorFieldName" : this.indicatorsFields.shift(),
+                "indicatorIconName" : this.indicatorsIcons.shift(),
+                "indicatorTextValue" : this.indicatorsTextValues.shift(),
+                "indicatorImageURL" : this.indicatorsImages.shift(),
+                "indicatorHoverTextValue" : this.indicatorsHoverTextValues.shift()
             });
         }
     }
@@ -112,21 +111,21 @@ connectedCallback() {
     }
     // Map the Settings along with the Fields Names into the one Object
     // TODO: I would like to see if this could all be done in the same setup as above
-    this.apiFieldnameDefinitions = (this.inds).map(indSetting => 
+    this.apiFieldnameDefinitions = (this.indicatorsSettings).map(indicatorsConfigurations => 
        {
         let fieldNameDefinition = {
-            fieldApiName: indSetting.indFieldName,
+            fieldApiName: indicatorsConfigurations.indicatorFieldName,
             objectApiName: this.objectApiName,
-            setTextVal: indSetting.textValue,
-            setIconName: indSetting.iconName,
-            setImageURL: indSetting.imageURL,
-            setHoverValue: indSetting.hoverValue
+            indicatorConfigurationTextValue: indicatorsConfigurations.indicatorTextValue,
+            indicatorConfigurationIconName: indicatorsConfigurations.indicatorIconName,
+            indicatorConfigurationImageURL: indicatorsConfigurations.indicatorImageURL,
+            indicatorConfigurationHoverTextValue: indicatorsConfigurations.indicatorHoverTextValue
           };
           return fieldNameDefinition;
        });
 }
     //Utility for checking setting lengths
-    indLengthSettingsMatch(setting) {
-        return setting.length === this._indSettingsCount;
+    indicatorsLengthSettingsMatch(setting) {
+        return setting.length === this._indicatorsSettingsCount;
     }
 }

@@ -80,49 +80,6 @@
     <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
-                <name>indFields</name>
-                <value>Id;Name</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indHovers</name>
-                <value>Indicator 1 Hover For ID;Indicator 2 Hover for Name</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indIcons</name>
-                <value>standard:account;standard:account</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indImages</name>
-                <value>/;/</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indTexts</name>
-                <value>;</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsHeading</name>
-                <value>Key Account Indicators</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsIcon</name>
-                <value>standard:account</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsShape</name>
-                <value>base</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsSize</name>
-                <value>large</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsTitle</name>
-                <value>Indicators</value>
-            </componentInstanceProperties>
-            <componentName>indicatorList</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
                 <name>displayOption</name>
                 <value>BOTH</value>
             </componentInstanceProperties>

@@ -3,18 +3,18 @@
         <p>{errorMessage}</p>
     </template>
     <template if:false={errorOccurred}>
-        <lightning-card variant="base" title={indsTitle} icon-name={indsIcon}>
-            <p class="slds-var-p-horizontal_medium">{indsHeading}</p>
+        <lightning-card variant="base" title={indicatorsListTitle} icon-name={indicatorsListIcon}>
+            <p class="slds-var-p-horizontal_medium">{indicatorsListHeading}</p>
             <div class="slds-var-m-left_medium">
-                <template if:true={results}>
-                    <template for:each={results} for:item="fld">
-                        <c-indicator-list-item if:true={fld.fValue} key={fld.fName}
-                            ind-text={fld.fTextShown}
-                            ind-size={indsSize}
-                            ind-shape={indsShape} 
-                            ind-hover-text={fld.fHoverValue}
-                            ind-icon={fld.fIconName}
-                            ind-image={fld.fImageURL}>
+                <template if:true={indicatorResults}>
+                    <template for:each={indicatorResults} for:item="indc">
+                        <c-indicator-list-item if:true={indc.indicatorDisplayFieldValue} key={indc.indicatorDisplayFieldName}
+                            ind-text={indc.indicatorDisplayText}
+                            ind-size={indicatorsSize}
+                            ind-shape={indicatorsShape} 
+                            ind-hover-text={indc.indicatorDisplayHoverValue}
+                            ind-icon={indc.indicatorDisplayIconName}
+                            ind-image={indc.indicatorDisplayImageURL}>
                         </c-indicator-list-item>
                     </template>
                 </template>
