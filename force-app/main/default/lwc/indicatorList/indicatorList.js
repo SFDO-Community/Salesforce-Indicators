@@ -4,8 +4,8 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 export default class IndicatorList extends LightningElement {
 @api objectApiName;
 @api recordId;
-@api indsTitle = 'Indicators';
-@api indsIcon = 'standard:marketing_actions';
+@api indsTitle = '';
+@api indsIcon = '';
 @api indsHeading = '';
 @api indsSize = 'large';
 @api indsShape = 'base';
