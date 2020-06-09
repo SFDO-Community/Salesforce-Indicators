@@ -8,7 +8,7 @@
 /force-app/main/default/profiles/**
 /force-app/main/default/flexipages/**
 /force-app/main/default/applications/**
-/force-app/main/defaul/appMenus/**
+/force-app/main/default/appMenus/**
 
 # LWC VSCode autocomplete
 jsconfig.json
