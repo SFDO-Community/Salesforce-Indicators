@@ -18,7 +18,7 @@ Deploy this component to your Salesforce org.
 * Add the **IndicatorsListView** Component to the Lightning Record Page. 
 * Enter the Settings for the Lightning Card:
   * **Title** - Not Required, but looks best if it is defined
-  * **Icon** - Not Requiried, but looks best if it is defined - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity
+  * **Icon** - Not Required, but looks best if it is defined - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity
   * **Heading Text** - _Optional_ - the text to display above the icons
   * **Icon Size** - large or medium, defaults to large
   * **Icon Shape** - circle or base (square), defaults to base
