@@ -47,12 +47,15 @@ Deploy this component to your Salesforce org.
 ## Examples
 
 ![](2020-06-09-18-53-03.png)
+
 _Default view after adding component to the page_
 
 ![](2020-06-09-19-00-47.png)
+
 _Suggested location and usage_
 
 ![](2020-06-09-19-01-44.png)
+
 _Hover Text shown_
 
 See the Wiki Page from [The Detail Department Wiki](https://tddprojects.atlassian.net/wiki/x/CYBTPQ) for more images and examples for using this component. 
@@ -65,6 +68,7 @@ See the Wiki Page from [The Detail Department Wiki](https://tddprojects.atlassia
 ```CASE(TEXT(Status__c),"Oh Hold","HLD","Waiting","WT!","Cancelled","X","ACT")```
 * Create a Formula for Is High Value Donor (Is_High_Value_Donor__c) and use $$$ as the text or the green money bag icon
 ```npo02__TotalOppAmount__c > $CustomMetadata.ReportingSettings__mdt.HighValueDonor.Amount__c```
+* You can traverse to parent field relationships by entering for example ```Account.IsActive__c``` on a Component on the Contact page.
 * The Images can come from the Salesforce Logos page at https://login.salesforce.com/logos/. Copy the Logo URL value. If using images, the SLDS icon must still be entered, but you can enter a default icon like custom:empty
 * To get icons in non-SLDS colours, use an external service like [DaButtonFactory](https://www.clickminded.com/button-generator/) or eg [IconS8 rounded square](https://img.icons8.com/ios-filled/50/cd0000/rounded-square.png) (replace the colour in the URL) to generate an icon with the text and download it. Add it to your Asset Library, make the image public, and grab the URL. You can use the images from the external service directly, but it may not be a good idea long term. But beware, it might look a bit crap mixing with the SLDS colours. You may also need to display an attribution somewhere on the page, depending on where the images come from.
 
