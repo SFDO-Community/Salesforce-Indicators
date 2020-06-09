@@ -38,12 +38,7 @@ $RECYCLE.BIN/
 .vscode/
 
 # Added by menu
-/force-app/main/default/applications
-/force-app/main/default/appMenus
-/force-app/main/default/flexipages
-/force-app/main/default/profiles
-/force-app/main/default/appMenus/AppSwitcher.appMenu-meta.xml
-/force-app/main/default/flexipages/Account_Record_Page.flexipage-meta.xml
-/force-app/main/default/flexipages/Account_UtilityBar.flexipage-meta.xml
-/force-app/main/default/flexipages/Base_Account_Page.flexipage-meta.xml
-/force-app/main/default/profiles/Admin.profile-meta.xml
+/force-app/main/default/applications/**
+/force-app/main/default/appMenus/**
+/force-app/main/default/flexipages/**
+/force-app/main/default/profiles/**
