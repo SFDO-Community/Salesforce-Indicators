@@ -12,6 +12,7 @@ Deploy this component to your Salesforce org.
   <img alt="Deploy to Salesforce"
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
+
 The Component will be installed as a custom component, which you can modify if needed. If there are any updates, it is up to you to deploy the changes. Ensure that your org has My Domain available to use the Component. 
 
 # Steps
