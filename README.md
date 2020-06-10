@@ -2,7 +2,7 @@
 
 Bring some colour and visibility to the data on your Lightning Pages. Allow users to see at a glance what this record is about and what it's status is. This component is highly customisable and can be used in many record pages. 
 
-The icons are based off the standard Lightning Web Component - [Avatar](https://developer.salesforce.com/docs/component-library/bundle/lightning-avatar/example).
+The icons are based off the standard Lightning Web Component, [Avatar](https://developer.salesforce.com/docs/component-library/bundle/lightning-avatar/example).
 
 See the Wiki Page from [The Detail Department Wiki](https://tddprojects.atlassian.net/wiki/x/CYBTPQ) for more details about the history, and reason for this component. 
 
@@ -12,10 +12,11 @@ Deploy this component to your Salesforce org.
   <img alt="Deploy to Salesforce"
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
+The Component will be installed as a custom component, which you can modify if needed. If there are any updates, it is up to you to deploy the changes. Ensure that your org has My Domain available to use the Component. 
 
 # Steps
 
-* Add the **IndicatorsListView** Component to the Lightning Record Page. 
+* Add the **indicatorList** Component to the Lightning Record Page. 
 * Enter the Settings for the Lightning Card:
   * **Title** - Not Required, but looks best if it is defined
   * **Icon** - Not Required, but looks best if it is defined - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity
