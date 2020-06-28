@@ -40,3 +40,4 @@ $RECYCLE.BIN/
 
 # VS Code project settings
 .vscode/
+force-app/main/default/appMenus/AppSwitcher.appMenu-meta.xml
