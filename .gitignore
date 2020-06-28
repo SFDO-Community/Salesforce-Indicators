@@ -37,3 +37,8 @@ $RECYCLE.BIN/
 # VS Code project settings
 .vscode/
 force-app/main/default/appMenus/AppSwitcher.appMenu-meta.xml
+force-app/main/default/applications/Account.app-meta.xml
+force-app/main/default/flexipages/Account_Record_Page.flexipage-meta.xml
+force-app/main/default/flexipages/Account_UtilityBar.flexipage-meta.xml
+force-app/main/default/flexipages/Base_Account_Page.flexipage-meta.xml
+force-app/main/default/profiles/Admin.profile-meta.xml
