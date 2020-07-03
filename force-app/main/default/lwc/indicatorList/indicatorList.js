@@ -77,14 +77,16 @@ wiredRecord({data, error}) {
             //If the Field Value is "true" then show the Text Value from the Settings.
             //If the Text Value from Settings is empty the Image will be shown
             //If the Field Value is "false" the Avatar will not be shown 
-            ...`${getFieldValue(data, definition)}` === 'true' ? {
+            ...definition.setTextVal != '' ? {
                     fTextShown : definition.setTextVal
                 } : {
                     fTextShown : `${getFieldValue(data, definition)}`.toUpperCase().substring(0,3)
+                
                 }
             });
         });
         this.results = matchingFields;
+        console.log('FieldValue => ', JSON.stringify(this.results));
     } else if (error) {
         this.errorMessage = JSON.stringify(error);
     }
