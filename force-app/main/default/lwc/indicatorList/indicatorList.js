@@ -89,15 +89,14 @@ wiredRecord({data, error}) {
             fImageURL: definition.setImageURL,
             fHoverValue: definition.setHoverValue,
             //If the value is false, the false icon will be set. Note: Avatar will not be shown unless False Text is also entered.
-            ...definition.setIconName != '' || definition.setFalseIcon != '' ? {
-                ...dataValue === false ? {
-                    fIconName : definition.setFalseIcon 
-                    } : {
-                    fIconName : definition.setIconName 
-                    }
+            ...dataValue === false ? {
+                fIconName : definition.setFalseIcon 
                 } : {
-                    fIconName : definition.setIconName
+                fIconName : definition.setIconName 
                 },
+            //If the False Text is entered and the Boolean is False, then set the False Text
+            //If the Icon Text is entered then show that
+            //If no text is entered, then show the field value    
             ...definition.setTextVal != '' || definition.setFalseText != '' ? {
                 ...dataValue === true ? {
                     fTextShown : definition.setTextVal 
@@ -111,6 +110,7 @@ wiredRecord({data, error}) {
                     fTextShown : '' 
                     }
                 },
+            //If False Text is not entered AND the boolean value is False, then do not display the Avatar
             ...dataValue === true || dataValue != '' || definition.setFalseText != '' ? {
                 fShowAvatar : true
                 } : {
