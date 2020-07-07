@@ -89,29 +89,33 @@ wiredRecord({data, error}) {
             fImageURL: definition.setImageURL,
             fHoverValue: definition.setHoverValue,
             //If the value is false, the false icon will be set. Note: Avatar will not be shown unless False Text is also entered.
-            ...dataValue === false ? {
-                fIconName : definition.setFalseIcon 
-                } : {
+            ...dataValue ? {
                 fIconName : definition.setIconName 
+                } : {
+                ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseText ? {
+                    fIconName : definition.setFalseIcon 
+                    } : {
+                    fIconName : ''
+                    }
                 },
             //If the False Text is entered and the Boolean is False, then set the False Text
             //If the Icon Text is entered then show that
             //If no text is entered, then show the field value    
-            ...definition.setTextVal != '' || definition.setFalseText != '' ? {
-                ...dataValue === true ? {
+            ...dataValue ? {
+                ...dataValue && definition.setTextVal ? {
                     fTextShown : definition.setTextVal 
                     } : {
-                    fTextShown : definition.setFalseText 
+                    fTextShown : String(dataValue).toUpperCase().substring(0,3) 
                     }
                 } : {
-                ...dataValue === true || dataValue != '' ? {
-                    fTextShown : dataValue.toUpperCase().substring(0,3)
+                ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseText ? {
+                    fTextShown : definition.setFalseText
                     } : {
                     fTextShown : '' 
                     }
                 },
             //If False Text is not entered AND the boolean value is False, then do not display the Avatar
-            ...dataValue === true || dataValue != '' || definition.setFalseText != '' ? {
+            ...dataValue || definition.setFalseText ? {
                 fShowAvatar : true
                 } : {
                 fShowAvatar : false
