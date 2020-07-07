@@ -28,23 +28,25 @@ The Component will be installed as a custom component, which you can modify if n
   * **Indicator Field Names** - the exact API Name of the field to display - case is important. Separated by a semicolon. 
   * **Indicator Icons** - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity separated by a semicolon
   * **Indicator Text Values** - the three character (max) text values to show for each icon. Separated by a semicolon. Eg enter ;; if there are 3 icons with no text.
-  * **Indicator Image URLs** - the full URL of the Image to display, separated by a semicolon. Note: No quotation marks. 
-  * **Indicator Hover Texts** - the text to display on hover. Keep it short. Separate by semicolons. No semicolons in the text. No wrapping allowed. 
+  * **Indicator Image URLs** - the full URL of the Image to display, separated by a semicolon. Note: No quotation marks. Image URLs are not applicable for False values. 
+  * **Indicator Hover Texts** - the text to display on hover. Keep it short. Separate by semicolons. No semicolons in the text. Suggest enter Something like "Status - Green: Active - Red: Inactive" as no semicolons or wrapping is allowed. Alt text should be less than 50 chars long for good accessibility.
+  * **Icons for False** - if you want the False value to display then enter an icon here. the icon name from SLDS Icons or default icons such as standard:account, standard:opportunity separated by a semicolon. Enter semicolons between all indicators if no False values are to be shown.
+  * **Text Values for False** - works similar to Indicator Text Values, but if the value is False or blank. This works in conjunction with Icons for False and the Avatar will only show if Icons for False is entered for that Indicator. 
 * After entering all settings, the Indicators should display on the Lightning Page preview and will then change in the preview as you adjust the settings. 
 * Click **Save**
-* Test a boolean field to ensure the indicator disappears if false.
+* Test a boolean field to ensure the indicator disappears if False. Test a boolean field with False values to make sure the indicator appears if the boolean is False.
 
   _Hint:_ Use the [configuration worksheet](https://docs.google.com/spreadsheets/d/1e-Qxi0MY9An9Hb9mHPVxFom--HCNK6xNRkWO12xRxg0/edit?usp=sharing) ([Make your own copy](https://docs.google.com/spreadsheets/d/1e-Qxi0MY9An9Hb9mHPVxFom--HCNK6xNRkWO12xRxg0/copy)), I've created to help you work out the whole component before you set it up on the page.
 
 ## Rules
-* The indicators work with Boolean or Text fields. 
-* If the field is a Boolean and the value is False the Indicator will not show.
-* If there is a value in *Indicator Image URLs* that image will show.
+* The indicators work with Boolean or Text fields. Date Fields can be used if you enter *Indicator Text Values* as the value that is shown does not make much sense. Number fields can be used, if the number is not too big, or you use *Indicator Text Values*. 
+* If the field is a Boolean and the value is False the Indicator will not show unless there is an *Icons for False* entered for that Indicator.
+* If there is a value in *Indicator Image URLs* that image will show. Images do not work for False values,
 * If the field is a Boolean and there is a value in *Indicator Text Values* then that text will show. Limit this text to 3 characters max, and Uppercase. 
 * If the field is a Boolean and there is no value in *Indicator Text Values* the Icon will be shown.
-* If the field is a Text field the first 3 characters will show, in Uppercase.
-* If there is a text value, the Icon image will not be shown, but the colour will be from the SLDS icon name entered.
-* There is no field validation to ensure you don't use a Date field or similar, so if it looks strange, just go back to simple boolean or text fields.
+* If the field is a Text field and there is no value in *Indicator Text Values* the first 3 characters will show, in Uppercase.
+* If there is an *Indicator Text Values*, the Icon image will not be shown, but the colour will be from the SLDS icon name entered.
+* There is no field validation to ensure you don't use a combination of entries that look wierd, so if it looks strange, just go back to simple boolean or text fields.
 
 ## Examples
 
@@ -60,7 +62,7 @@ _Suggested location and usage_
 
 _Hover Text shown_
 
-See the Wiki Page from [The Detail Department Wiki](https://tddprojects.atlassian.net/wiki/x/CYBTPQ) for more images and examples for using this component. 
+See the Wiki Page from [The Detail Department Wiki](https://tddprojects.atlassian.net/wiki/x/CYBTPQ) for more images and extensive examples for using this component. 
 
 
 ## Tips
