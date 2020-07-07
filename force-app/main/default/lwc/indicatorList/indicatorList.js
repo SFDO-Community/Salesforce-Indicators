@@ -46,6 +46,20 @@ get indHovers() {
 set indHovers(value) {
     this._indHovers = value.split(";");
 }
+@api
+get falseIcons() {
+    return this._falseIcons;
+}
+set falseIcons(value) {
+    this._falseIcons = value.split(";");
+}
+@api 
+get falseTexts() {
+    return this._falseTexts;
+}
+set falseTexts(value) {
+    this._falseTexts = value.split(";");
+}
 
  //Holds the constructed indicators to be rendered.
 inds = [];
@@ -66,33 +80,55 @@ wiredRecord({data, error}) {
         console.log('Data => ', JSON.stringify(data));
         let matchingFields = [];
         this.apiFieldnameDefinitions.forEach(definition => {
+        let dataValue = getFieldValue(data, definition);
         matchingFields.push({
             fName: definition.fieldApiName,
             //This is not needed for the Component display but leaving it here for useful debugging
             fValue: getFieldValue(data, definition),
-            fTextValue: definition.setTextVal,
-            fIconName: definition.setIconName,
+            fTextValue: dataValue,
             fImageURL: definition.setImageURL,
             fHoverValue: definition.setHoverValue,
-            //If the Field Value is "true" then show the Text Value from the Settings.
-            //If the Text Value from Settings is empty the Image will be shown
-            //If the Field Value is "false" the Avatar will not be shown 
-            ...`${getFieldValue(data, definition)}` === 'true' ? {
-                    fTextShown : definition.setTextVal
+            //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
+            ...dataValue || definition.setFalseIcon ? {
+                fShowAvatar : true
                 } : {
-                    fTextShown : `${getFieldValue(data, definition)}`.toUpperCase().substring(0,3)
+                fShowAvatar : false
+                },
+            //If the value is false, the false icon will be set.
+            ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseIcon ? {
+                fIconName : definition.setFalseIcon 
+                } : {
+                fIconName : definition.setIconName
+                },
+            //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
+            //If the Icon Text is entered then show that
+            //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
+            ...dataValue ? {
+                ...dataValue && definition.setTextVal ? {
+                    fTextShown : definition.setTextVal 
+                    } : {
+                    fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).toUpperCase().substring(0,3) 
+                    }
+                } : {
+                ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseIcon ? {
+                    fTextShown : definition.setFalseText ? definition.setFalseText : ''
+                    } : {
+                    fTextShown : '' 
+                    }
                 }
             });
         });
         this.results = matchingFields;
+        console.log('FieldValue => ', JSON.stringify(this.results));
     } else if (error) {
         this.errorMessage = JSON.stringify(error);
+        this.errorOccurred = true;
     }
 }
 
 connectedCallback() {
     //Check that all the Indicator settings are the same length
-    if([this.indFields, this.indIcons, this.indTexts, this.indImages, this.indHovers].every(this.indLengthSettingsMatch, this)) {
+    if([this.indFields, this.indIcons, this.indTexts, this.indImages, this.indHovers, this.falseIcons, this.falseTexts].every(this.indLengthSettingsMatch, this)) {
         //Set up the Settings Fields;
          for(let i = 0; i < this._indSettingsCount; i++) {
             this.inds.push({
@@ -101,7 +137,9 @@ connectedCallback() {
                 "iconName" : this.indIcons.shift(),
                 "textValue" : this.indTexts.shift(),
                 "imageURL" : this.indImages.shift(),
-                "hoverValue" : this.indHovers.shift()
+                "hoverValue" : this.indHovers.shift(),
+                "falseIcon" : this.falseIcons.shift(),
+                "falseText" : this.falseTexts.shift()
             });
         }
     }
@@ -120,10 +158,13 @@ connectedCallback() {
             setTextVal: indSetting.textValue,
             setIconName: indSetting.iconName,
             setImageURL: indSetting.imageURL,
-            setHoverValue: indSetting.hoverValue
+            setHoverValue: indSetting.hoverValue,
+            setFalseIcon: indSetting.falseIcon,
+            setFalseText: indSetting.falseText
           };
           return fieldNameDefinition;
        });
+       console.log('Definitions => ', JSON.stringify(this.apiFieldnameDefinitions));
 }
     //Utility for checking setting lengths
     indLengthSettingsMatch(setting) {

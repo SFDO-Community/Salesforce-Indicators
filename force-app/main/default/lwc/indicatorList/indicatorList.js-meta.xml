@@ -17,6 +17,8 @@
             <property name="indTexts" label="Indicator Text Values" type="String" required="true" default=";" description="The text you want displayed. Separate the Text with a semicolon e.g. 'IN1;IN2'"/>
             <property name="indImages" label="Indicator Image URLs" type="String" required="true" default="/;/" description="The URLs to the image of each Indicator, separated by a semicolon."/>
             <property name="indHovers" label="Indicator Hover Texts" type="String" required="true" default="Indicator 1 Hover Text;Indicator 2 Hover Text" description="The Hover Text of each Indicator you want displayed. For multiple Indicators separate the text with a semicolon e.g. 'Hover Text 1;Hover Text 2 2'"/>
+            <property name="falseIcons" label="Icons for False" type="String" required="true" default=";" description="The Lightning Design System name of the icon to be displayed if the value of a boolean field is false. Names are written in the format '\utility:down\' where 'utility' is the category, and 'down' is the specific icon to be displayed. Icons can be found here - https://lightningdesignsystem.com/icons/"/>
+            <property name="falseTexts" label="Text Values for False" type="String" required="true" default=";" description="The text you want displayed if the value of a boolean field is false. Separate the Text with a semicolon e.g. 'IN1;IN2'"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
