@@ -88,37 +88,33 @@ wiredRecord({data, error}) {
             fTextValue: dataValue,
             fImageURL: definition.setImageURL,
             fHoverValue: definition.setHoverValue,
-            //If the value is false, the false icon will be set. Note: Avatar will not be shown unless False Text is also entered.
-            ...dataValue ? {
-                fIconName : definition.setIconName 
+            //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
+            ...dataValue || definition.setFalseIcon ? {
+                fShowAvatar : true
                 } : {
-                ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseText ? {
-                    fIconName : definition.setFalseIcon 
-                    } : {
-                    fIconName : ''
-                    }
+                fShowAvatar : false
                 },
-            //If the False Text is entered and the Boolean is False, then set the False Text
+            //If the value is false, the false icon will be set.
+            ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseIcon ? {
+                fIconName : definition.setFalseIcon 
+                } : {
+                fIconName : definition.setIconName
+                },
+            //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
             //If the Icon Text is entered then show that
-            //If no text is entered, then show the field value    
+            //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
             ...dataValue ? {
                 ...dataValue && definition.setTextVal ? {
                     fTextShown : definition.setTextVal 
                     } : {
-                    fTextShown : String(dataValue).toUpperCase().substring(0,3) 
+                    fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).toUpperCase().substring(0,3) 
                     }
                 } : {
-                ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseText ? {
-                    fTextShown : definition.setFalseText
+                ...(dataValue === false || dataValue === null || dataValue === '') && definition.setFalseIcon ? {
+                    fTextShown : definition.setFalseText ? definition.setFalseText : ''
                     } : {
                     fTextShown : '' 
                     }
-                },
-            //If False Text is not entered AND the boolean value is False, then do not display the Avatar
-            ...dataValue || definition.setFalseText ? {
-                fShowAvatar : true
-                } : {
-                fShowAvatar : false
                 }
             });
         });
