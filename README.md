@@ -46,7 +46,7 @@ The Component will be installed as a custom component, which you can modify if n
 * If the field is a Boolean and there is no value in *Indicator Text Values* the Icon will be shown.
 * If the field is a Text field and there is no value in *Indicator Text Values* the first 3 characters will show, in Uppercase.
 * If there is an *Indicator Text Values*, the Icon image will not be shown, but the colour will be from the SLDS icon name entered.
-* If you enter *none* for the icon it makes the spacing smaller between the avatars and the text is inversed. This is helpful when you want to use Emoji text for the avatars insted of icons. See [Building a Checking Component](https://tddprojects.atlassian.net/wiki/x/IICBQQ#Building-a-Checking-Component) for an example. 
+* If you enter *none* for the icon it makes the spacing smaller between the avatars and sets the text colour as inversed. This is helpful when you want to use Emoji text for the avatars insted of icons. See [Building a Checking Component](https://tddprojects.atlassian.net/wiki/x/IICBQQ#Building-a-Checking-Component) for an example. 
 * There is no field validation to ensure you don't use a combination of entries that look wierd, so if it looks strange, just go back to simple boolean or text fields.
 
 ## Examples
