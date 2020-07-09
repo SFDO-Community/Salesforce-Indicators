@@ -9,6 +9,6 @@ export default class IndicatorListItem extends LightningElement {
     @api indHoverText = '';
 
     get indClass() {
-        return this.indSize == 'large' ? 'slds-var-m-right_medium slds-var-m-vertical_medium' : 'slds-var-m-right_small slds-var m-vertical_small';
+        return this.indSize == 'large' ? 'slds-var-m-right_small slds-var-m-vertical_medium' : this.indIcon == 'none' ? 'slds-var-m-right_xxx-small slds-var-m-vertical_small slds-avatar__initials_inverse' : 'slds-var-m-right_x-small slds-var-m-vertical_small';
     }
 }
