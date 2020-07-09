@@ -26,7 +26,7 @@ The Component will be installed as a custom component, which you can modify if n
   * **Icon Shape** - circle or base (square), defaults to base
 * Enter the Settings for each Indicator:
   * **Indicator Field Names** - the exact API Name of the field to display - case is important. Separated by a semicolon. 
-  * **Indicator Icons** - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity separated by a semicolon
+  * **Indicator Icons** - the icon name from [SLDS Icons](https://www.lightningdesignsystem.com/icons/) or default icons such as standard:account, standard:opportunity separated by a semicolon. 
   * **Indicator Text Values** - the three character (max) text values to show for each icon. Separated by a semicolon. Eg enter ;; if there are 3 icons with no text.
   * **Indicator Image URLs** - the full URL of the Image to display, separated by a semicolon. Note: No quotation marks. Image URLs are not applicable for False values. 
   * **Indicator Hover Texts** - the text to display on hover. Keep it short. Separate by semicolons. No semicolons in the text. Suggest enter Something like "Status - Green: Active - Red: Inactive" as no semicolons or wrapping is allowed. Alt text should be less than 50 chars long for good accessibility.
@@ -46,6 +46,7 @@ The Component will be installed as a custom component, which you can modify if n
 * If the field is a Boolean and there is no value in *Indicator Text Values* the Icon will be shown.
 * If the field is a Text field and there is no value in *Indicator Text Values* the first 3 characters will show, in Uppercase.
 * If there is an *Indicator Text Values*, the Icon image will not be shown, but the colour will be from the SLDS icon name entered.
+* If you enter *none* for the icon it makes the spacing smaller between the avatars and the text is inversed. This is helpful when you want to use Emoji text for the avatars insted of icons. See [Building a Checking Component](https://tddprojects.atlassian.net/wiki/x/IICBQQ#Building-a-Checking-Component) for an example. 
 * There is no field validation to ensure you don't use a combination of entries that look wierd, so if it looks strange, just go back to simple boolean or text fields.
 
 ## Examples
