@@ -11,6 +11,10 @@
                 <value>false</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
+                <name>enableActionsInNative</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
                 <name>hideChatterActions</name>
                 <value>false</value>
             </componentInstanceProperties>
@@ -25,17 +29,6 @@
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentName>force:detailPanel</componentName>
-        </componentInstances>
-        <mode>Replace</mode>
-        <name>detailTabContent</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
-            <componentName>cooper:companyInsightTeaserCard</componentName>
-        </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
                 <name>displayOption</name>
@@ -64,10 +57,37 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
+            <componentName>force:detailPanel</componentName>
+        </componentInstances>
+        <mode>Replace</mode>
+        <name>detailTabContent</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentName>runtime_sales_social:socialPanel</componentName>
+        </componentInstances>
+        <mode>Replace</mode>
+        <name>newsTabContent</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
             <componentInstanceProperties>
                 <name>active</name>
                 <value>true</value>
             </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>relatedTabContent</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.relatedLists</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <componentInstances>
             <componentInstanceProperties>
                 <name>body</name>
                 <value>detailTabContent</value>
@@ -80,16 +100,12 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>active</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
                 <name>body</name>
-                <value>relatedTabContent</value>
+                <value>newsTabContent</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>title</name>
-                <value>Standard.Tab.relatedLists</value>
+                <value>Standard.Tab.news</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
@@ -111,14 +127,6 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>forceChatter:recordFeedContainer</componentName>
-        </componentInstances>
-        <mode>Replace</mode>
-        <name>feedTabContent</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
             <componentName>runtime_sales_activities:activityPanel</componentName>
         </componentInstances>
         <mode>Replace</mode>
@@ -127,24 +135,17 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentInstanceProperties>
-                <name>active</name>
-                <value>true</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>feedTabContent</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Standard.Tab.collaborate</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
+            <componentName>forceChatter:recordFeedContainer</componentName>
         </componentInstances>
+        <mode>Replace</mode>
+        <name>feedTabContent</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
                 <name>active</name>
-                <value>false</value>
+                <value>true</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>body</name>
@@ -156,64 +157,22 @@
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>feedTabContent</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.collaborate</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
         <mode>Replace</mode>
         <name>sidebartabs</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>falseIcons</name>
-                <value>none;none;none;none</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>falseTexts</name>
-                <value>❌;❌;❌;❌</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indFields</name>
-                <value>Id;Site;Checkbox__c;NumberofLocations__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indHovers</name>
-                <value>ID;Name;Status - True: Active - False: Inactive;Priority</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indIcons</name>
-                <value>none;none;none;none</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indImages</name>
-                <value>/;/;/;/</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indTexts</name>
-                <value>✔️;✔️;✔️;✔️</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsIcon</name>
-                <value>custom:custom109</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsShape</name>
-                <value>base</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsSize</name>
-                <value>medium</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>indsTitle</name>
-                <value>Indicators</value>
-            </componentInstanceProperties>
-            <componentName>indicatorList</componentName>
-            <visibilityRule>
-                <criteria>
-                    <leftValue>{!Record.Name}</leftValue>
-                    <operator>EQUAL</operator>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
         <componentInstances>
             <componentName>exceptionGrid</componentName>
         </componentInstances>
@@ -228,9 +187,9 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Account Record Page LWC</masterLabel>
-    <parentFlexiPage>sfa__Account_rec_L</parentFlexiPage>
-    <sobjectType>Account</sobjectType>
+    <masterLabel>Contact Record Page</masterLabel>
+    <parentFlexiPage>sfa__Contact_rec_L</parentFlexiPage>
+    <sobjectType>Contact</sobjectType>
     <template>
         <name>flexipage:recordHomeTemplateDesktop</name>
     </template>

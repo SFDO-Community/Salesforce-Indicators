@@ -40,6 +40,7 @@ public with sharing class IndicatorsController {
                 objectName +
                 ' WHERE ID =:recordId WITH SECURITY_ENFORCED LIMIT 1';
             // Get the record with all the field values configured in CMDT
+            System.debug(soql);
             sObject record = Database.query(soql);
             // Loop over the fields and do a Match between what is configured in CMDT vs whats in the record
             for (String field : mapFieldNameByIndicatorMDT.keyset()) {
