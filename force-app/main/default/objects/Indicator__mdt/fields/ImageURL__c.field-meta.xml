@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImageURL__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Enter the Image URL that this Indicator will display</inlineHelpText>
+    <label>Image URL</label>
+    <required>false</required>
+    <type>Url</type>
+</CustomField>
