@@ -12,4 +12,9 @@ const columns = [
 export default class IndicatorItemCMDT extends LightningElement {
     @api
     recordId;
+
+    columns = columns;
+
+    @wire(showIndicators, { recordId: '$recordId' })
+    indData;
 }

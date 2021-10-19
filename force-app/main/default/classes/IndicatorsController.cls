@@ -15,21 +15,21 @@ public with sharing class IndicatorsController {
                     TextFalse__c,
                     Icon__c,
                     IconFalse__c,
-                    Field__c,
+                    Field__r.QualifiedAPIName,
                     Type__c,
                     ImageURL__c
                 FROM Indicator__mdt
                 WHERE Object__c = :objectName
             ]) {
                 // Split to get field Name from Entity Particle
-                List<String> particle = (indMetadata.Field__c).split('\\.');
+                /*List<String> particle = (indMetadata.Field__r.QualifiedAPIName).split('\\.');
                 String fieldName;
                 if (particle.size() == 3) {
                     fieldName = particle[2];
                 } else {
                     fieldName = particle[1];
-                }
-                mapFieldNameByIndicatorMDT.put(fieldName, indMetadata);
+                }*/
+                mapFieldNameByIndicatorMDT.put(indMetadata.Field__r.QualifiedAPIName, indMetadata);
             }
             // This prepares all the fields on which query will run
             fields.addAll(mapFieldNameByIndicatorMDT.keyset());
