@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>No. Of Locations</label>
+    <label>Account ID</label>
     <protected>false</protected>
     <values>
         <field>Field__c</field>
-        <value xsi:type="xsd:string">NumberofLocations__c</value>
+        <value xsi:type="xsd:string">AccountId</value>
     </values>
     <values>
         <field>HoverText__c</field>
-        <value xsi:type="xsd:string">The Number of Locations</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>IconFalse__c</field>
@@ -16,7 +16,7 @@
     </values>
     <values>
         <field>Icon__c</field>
-        <value xsi:type="xsd:string">custom32</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>ImageURL__c</field>
@@ -24,11 +24,11 @@
     </values>
     <values>
         <field>IndicatorsGroup__c</field>
-        <value xsi:type="xsd:string">AccountDefault</value>
+        <value xsi:type="xsd:string">Contact_Default</value>
     </values>
     <values>
         <field>Object__c</field>
-        <value xsi:type="xsd:string">Account</value>
+        <value xsi:type="xsd:string">Contact</value>
     </values>
     <values>
         <field>TextFalse__c</field>
@@ -36,7 +36,7 @@
     </values>
     <values>
         <field>TextValue__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">IDV</value>
     </values>
     <values>
         <field>Type__c</field>
