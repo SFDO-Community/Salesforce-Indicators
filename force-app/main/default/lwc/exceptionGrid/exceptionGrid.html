@@ -1,9 +1,11 @@
 <template>
+<template if:true={account}>
     <lightning-datatable
         key-field="fieldName"
-        data={gridData.data}
+        data={gridData}
         columns={columns}
         hide-checkbox-column="true"
     >
     </lightning-datatable>
+    </template>
 </template>

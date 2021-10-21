@@ -1,6 +1,5 @@
 import { LightningElement, api, wire} from 'lwc';
-import { refreshApex } from '@salesforce/apex';
-import { getRecordNotifyChange } from 'lightning/uiRecordApi';
+import { getRecord } from 'lightning/uiRecordApi';
 import showExceptionGrid from '@salesforce/apex/ExceptionGridController.showExceptionGrid';
 
 const columns = [
@@ -10,29 +9,33 @@ const columns = [
 ];
 
 export default class ExceptionGrid extends LightningElement {
+    @api recordId;
     columns = columns;
-    @api 
-    recordId;
- 
+    account;
     gridData;
-    @wire(showExceptionGrid, { recordId: '$recordId' })
-    retrieveExceptions(wireResult){
-        const { data, error } = wireResult;
-        this.gridData = wireResult;
-        if(data){
-            console.log("ExceptData", data)
-            this.records = data
-        }
-        if(error) {
-            console.error(error)
+    err;
+
+    @wire(getRecord, {recordId: '$recordId', fields: ['Account.Id']})
+    getaccountRecord({ data, error }) {
+        console.log('accountRecord => ', data, error);
+        if (data) {
+            this.account = data;
+            this._refreshView();
+        } else if (error) {
+            console.error('ERROR => ', JSON.stringify(error)); // handle error properly
         }
     }
+
+    _refreshView(){
+    console.log('In Refresh View => ', JSON.stringify(this.account));
+    showExceptionGrid({ recordId: this.recordId })
+         .then(result => {
+            this.gridData = result;
+            console.log('Grid Data After => ', JSON.stringify(this.gridData));
+        })
+        .catch(error => {
+            this.err = error;
+        })
+    }
     
-    handler() { 
-        updateRecordApexMethod()
-        .then(() => {
-            refreshApex(this.gridData);
-            getRecordNotifyChange([{recordId: this.recordId}]); // Refresh the Lightning Data Service cache
-        });
-      }
 }
