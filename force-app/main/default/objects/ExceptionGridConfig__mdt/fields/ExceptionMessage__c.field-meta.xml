@@ -3,6 +3,7 @@
     <fullName>ExceptionMessage__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The message to display in the Grid to the user, if this Exception is true.</inlineHelpText>
     <label>ExceptionMessage</label>
     <required>false</required>
     <type>TextArea</type>

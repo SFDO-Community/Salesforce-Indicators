@@ -3,6 +3,7 @@
     <fullName>Type__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Choose the Type - Boolean, Text, or Picklist</inlineHelpText>
     <label>Type</label>
     <required>false</required>
     <type>Picklist</type>

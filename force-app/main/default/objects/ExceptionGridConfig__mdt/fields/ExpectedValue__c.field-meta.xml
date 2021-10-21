@@ -3,6 +3,7 @@
     <fullName>ExpectedValue__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>What is the Expected value - eg true or false</inlineHelpText>
     <label>Expected Value</label>
     <length>250</length>
     <required>false</required>

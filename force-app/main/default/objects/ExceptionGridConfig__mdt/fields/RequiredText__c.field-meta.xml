@@ -4,6 +4,7 @@
     <defaultValue>false</defaultValue>
     <externalId>false</externalId>
     <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The Text in the field must exactly match this value. Eg &quot;Active&quot;</inlineHelpText>
     <label>RequiredText</label>
     <type>Checkbox</type>
 </CustomField>
