@@ -38,6 +38,7 @@ export default class ExceptionGrid extends LightningElement {
     @track columns = columns;
     @track baseRecord;
     @track gridData;
+    @track emptyGrid = true;
 
 
     @wire(getRecord, {recordId: '$recordId', fields: ['Id']})
@@ -53,7 +54,12 @@ export default class ExceptionGrid extends LightningElement {
     _refreshView(){
     showExceptionGrid({ recordId: this.recordId })
         .then(result => {
-            this.gridData = result;                    
+            this.gridData = result; 
+            console.log('Grid Size First =>', this.gridData.length); 
+            if(this.gridData.length > 0) {
+                this.emptyGrid = false;
+                console.log('Grid Size IF > 0 =>', this.gridData.length);  
+              }                     
         })
         .catch(error => {
             console.error('ERROR => ', JSON.stringify(error)); 
