@@ -1,11 +1,15 @@
 <template>
-<template if:true={account}>
+<template if:true={gridData}>
     <lightning-datatable
         key-field="fieldName"
         data={gridData}
         columns={columns}
         hide-checkbox-column="true"
+        column-widths-mode="auto"
     >
     </lightning-datatable>
     </template>
+    <template if:true={emptyGrid}>
+        No messages to display
+    </template> 
 </template>

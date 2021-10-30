@@ -1,5 +1,5 @@
 public with sharing class ExceptionGridController {
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<ExceptionGridResponse> showExceptionGrid(Id recordId) {
         List<ExceptionGridResponse> response = new List<ExceptionGridResponse>();
         Map<String, ExceptionGridConfig__mdt> mapFieldNameByExceptionGridMDT = new Map<String, ExceptionGridConfig__mdt>();
@@ -13,7 +13,9 @@ public with sharing class ExceptionGridController {
                     ExpectedValue__c,
                     ExceptionMessage__c,
                     Field__r.QualifiedAPIName,
+                    Field__r.Label,
                     RequiredText__c,
+                    Icon__c,
                     Type__c
                 FROM ExceptionGridConfig__mdt
                 WHERE Object__c = :objectName
@@ -45,8 +47,9 @@ public with sharing class ExceptionGridController {
                         if (String.isBlank((String) record.get(field))) {
                             response.add(
                                 new ExceptionGridResponse(
-                                    field,
+                                    expectionGridRecord.Field__r.Label,
                                     true,
+                                    expectionGridRecord.Icon__c,
                                     expectionGridRecord.ExceptionMessage__c
                                 )
                             );
@@ -61,8 +64,9 @@ public with sharing class ExceptionGridController {
                                 
                                 response.add(
                                     new ExceptionGridResponse(
-                                        field,
+                                        expectionGridRecord.Field__r.Label,
                                         true,
+                                        expectionGridRecord.Icon__c,
                                         expectionGridRecord.ExceptionMessage__c
                                     )
                                 );
@@ -70,7 +74,7 @@ public with sharing class ExceptionGridController {
                         }
                     }
                 }
-                // Condition 2 - If the field is a Boolean field
+                // Condition 2 - If the field is a Picklist field
                 if (expectionGridRecord.Type__c == 'Picklist') {
                     if (
                         (String) record.get(field) !=
@@ -78,8 +82,24 @@ public with sharing class ExceptionGridController {
                     )
                         response.add(
                             new ExceptionGridResponse(
-                                field,
+                                expectionGridRecord.Field__r.Label,
                                 true,
+                                expectionGridRecord.Icon__c,
+                                expectionGridRecord.ExceptionMessage__c
+                            )
+                        );
+                }
+                // Condition 3 - If the field is a Boolean Field
+                if (expectionGridRecord.Type__c == 'Boolean') {
+                    if (
+                        (String) String.valueOf(record.get(field)) !=
+                        expectionGridRecord.ExpectedValue__c
+                    )
+                        response.add(
+                            new ExceptionGridResponse(
+                                expectionGridRecord.Field__r.Label,
+                                Boolean.valueOf(expectionGridRecord.ExpectedValue__c),
+                                expectionGridRecord.Icon__c,
                                 expectionGridRecord.ExceptionMessage__c
                             )
                         );
@@ -97,15 +117,19 @@ public with sharing class ExceptionGridController {
         @AuraEnabled
         public Boolean isError;
         @AuraEnabled
+        public String icon;
+        @AuraEnabled
         public String exceptionMessage;
 
         public ExceptionGridResponse(
             String fieldName,
             Boolean isError,
+            String icon,
             String exceptionMessage
         ) {
             this.fieldName = fieldName;
             this.isError = isError;
+            this.icon = icon;
             this.exceptionMessage = exceptionMessage;
         }
     }

@@ -1,40 +1,62 @@
-import { LightningElement, api, wire} from 'lwc';
+import { LightningElement, api, wire, track} from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 import showExceptionGrid from '@salesforce/apex/ExceptionGridController.showExceptionGrid';
 
 const columns = [
-    { label: 'Field Name', fieldName: 'fieldName', type: 'text' },
-    { label: 'Error', fieldName: 'isError', type: 'boolean' },
-    { label: 'Exception Message', fieldName: 'exceptionMessage', type: 'text' }
+    { 
+        label: 'Field', 
+        fieldName: 'fieldName', 
+        type: 'text', 
+        initialWidth: 120,
+        hideDefaultActions: true,
+        clipText: true  
+    },
+    { 
+        label: 'Icon', 
+        cellAttributes: {
+            iconName: { 
+                fieldName: 'icon' 
+            }, 
+            iconAlternativeText: { 
+                fieldName: 'icon' 
+            }
+        }, 
+        initialWidth: 40,
+        hideDefaultActions: true
+    },
+    { 
+        label: 'Message', 
+        fieldName: 'exceptionMessage', 
+        type: 'text',
+        hideDefaultActions: true,
+        wrapText: true 
+    }
 ];
 
 export default class ExceptionGrid extends LightningElement {
     @api recordId;
-    columns = columns;
-    account;
-    gridData;
-    err;
+    @track columns = columns;
+    @track baseRecord;
+    @track gridData;
 
-    @wire(getRecord, {recordId: '$recordId', fields: ['Account.Id']})
-    getaccountRecord({ data, error }) {
-        console.log('accountRecord => ', data, error);
+
+    @wire(getRecord, {recordId: '$recordId', fields: ['Id']})
+    getbaseRecord({ data, error }) {
         if (data) {
-            this.account = data;
+            this.baseRecord = data;
             this._refreshView();
         } else if (error) {
-            console.error('ERROR => ', JSON.stringify(error)); // handle error properly
+            console.error('ERROR => ', JSON.stringify(error)); 
         }
     }
 
     _refreshView(){
-    console.log('In Refresh View => ', JSON.stringify(this.account));
     showExceptionGrid({ recordId: this.recordId })
-         .then(result => {
-            this.gridData = result;
-            console.log('Grid Data After => ', JSON.stringify(this.gridData));
+        .then(result => {
+            this.gridData = result;                    
         })
         .catch(error => {
-            this.err = error;
+            console.error('ERROR => ', JSON.stringify(error)); 
         })
     }
     
