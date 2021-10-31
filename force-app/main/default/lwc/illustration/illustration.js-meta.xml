@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <description>An image and inline text that work in tandem to communicate a state in a more friendly way. Use within other components, such as cards, to express the state of the component.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Illustration</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__UtilityBar</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage,lightning__UtilityBar">
+            <property label="Heading" name="heading" required="" type="String" description="Text displayed below the image to describe why it is being displayed. Should always be specified unless `Text Only` is checked." />
+            <property label="Message" name="messageBody" required="false" type="String" description="Text displayed below the Heading to provide further description about the why the illustration is being displayed." />
+            <property label="Image" name="imageName" required="true" type="String" datasource="custom:fishing_deals,custom:lake_mountain,custom:no_events,custom:no_task,custom:setup,error:no_access,error:no_connection,error:not_available_in_lightning,error:page_not_available,error:walkthrough_not_available,info:going_camping,info:maintenance,misc:gone_fishing,misc:no_access2,misc:no_content,misc:no_preview,misc:preview,misc:research,no_data:desert,no_data:open_road" description="The image to show." />
+            <property label="Image Size" name="imageSize" default="small" type="String" datasource="small,large" />
+            <property label="Text Only" name="textOnly" default="false" type="Boolean" description="Whether or not to hide the image from the layout." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

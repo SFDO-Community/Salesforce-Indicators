@@ -7,11 +7,27 @@ const columns = [
         label: 'Field', 
         fieldName: 'fieldName', 
         type: 'text', 
-        initialWidth: 120,
+        initialWidth: 150,
         hideDefaultActions: true,
         clipText: true  
     },
     { 
+        label: 'Value', 
+        fieldName: 'fieldValue', 
+        type: 'text', 
+        initialWidth: 150,
+        hideDefaultActions: true,
+        wrapText: true  
+    },
+    { 
+        label: 'Error', 
+        fieldName: 'isError', 
+        type: 'boolean', 
+        initialWidth: 50,
+        hideDefaultActions: true,
+        clipText: true  
+    },
+    /*{ 
         label: 'Icon', 
         cellAttributes: {
             iconName: { 
@@ -21,9 +37,9 @@ const columns = [
                 fieldName: 'icon' 
             }
         }, 
-        initialWidth: 40,
+        initialWidth: 50,
         hideDefaultActions: true
-    },
+    },*/
     { 
         label: 'Message', 
         fieldName: 'exceptionMessage', 
@@ -39,14 +55,19 @@ export default class ExceptionGrid extends LightningElement {
     @track baseRecord;
     @track gridData;
     @track emptyGrid = true;
+    @track errorOccurred = false;
+    @track errorMessgae = '';
 
 
-    @wire(getRecord, {recordId: '$recordId', fields: ['Id']})
+    @wire(getRecord, {recordId: '$recordId', layoutTypes: ['Compact'], modes: ['View'] })
     getbaseRecord({ data, error }) {
         if (data) {
             this.baseRecord = data;
+            this.errorOccurred = false;
             this._refreshView();
         } else if (error) {
+            this.errorOccurred = true;
+            this.errorMessage = JSON.stringify(error);
             console.error('ERROR => ', JSON.stringify(error)); 
         }
     }
@@ -54,14 +75,20 @@ export default class ExceptionGrid extends LightningElement {
     _refreshView(){
     showExceptionGrid({ recordId: this.recordId })
         .then(result => {
-            this.gridData = result; 
+            this.gridData = result;
+            this.errorOccurred = false; 
             console.log('Grid Size First =>', this.gridData.length); 
             if(this.gridData.length > 0) {
                 this.emptyGrid = false;
                 console.log('Grid Size IF > 0 =>', this.gridData.length);  
-              }                     
+              } else {
+                this.emptyGrid = true;
+                console.log('Grid Size IF = 0 =>', this.gridData.length);
+              }                    
         })
         .catch(error => {
+            this.errorOccurred = true;
+            this.errorMessage = JSON.stringify(error);
             console.error('ERROR => ', JSON.stringify(error)); 
         })
     }

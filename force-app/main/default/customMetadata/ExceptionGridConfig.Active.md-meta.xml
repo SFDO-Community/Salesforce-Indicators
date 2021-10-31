@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>Site</label>
+    <label>Active</label>
     <protected>false</protected>
     <values>
         <field>ExceptionMessage__c</field>
-        <value xsi:type="xsd:string">Site must be entered</value>
+        <value xsi:type="xsd:string">The Account must be Active</value>
     </values>
     <values>
         <field>ExpectedValue__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Yes</value>
     </values>
     <values>
         <field>Field__c</field>
-        <value xsi:type="xsd:string">Site</value>
+        <value xsi:type="xsd:string">Active__c</value>
     </values>
     <values>
         <field>Icon__c</field>
-        <value xsi:type="xsd:string">utility:merge_field</value>
+        <value xsi:type="xsd:string">utility:error</value>
     </values>
     <values>
         <field>Object__c</field>
@@ -24,10 +24,10 @@
     </values>
     <values>
         <field>RequiredText__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Type__c</field>
-        <value xsi:type="xsd:string">Text</value>
+        <value xsi:type="xsd:string">Picklist</value>
     </values>
 </CustomMetadata>

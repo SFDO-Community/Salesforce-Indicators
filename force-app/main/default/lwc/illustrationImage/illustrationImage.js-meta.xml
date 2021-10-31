@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <description>The image portion of the SLDS Illustration component. Expands to fill the width of its container.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Illustration Image</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__UtilityBar</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage,lightning__UtilityBar">
+            <property label="Image" name="imageName" required="true" type="String" datasource="custom:fishing_deals,custom:lake_mountain,custom:no_events,custom:no_task,custom:setup,error:no_access,error:no_connection,error:not_available_in_lightning,error:page_not_available,error:walkthrough_not_available,info:going_camping,info:maintenance,misc:gone_fishing,misc:no_access2,misc:no_content,misc:no_preview,misc:preview,misc:research,no_data:desert,no_data:open_road" description="The image to show." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -3,7 +3,15 @@
     <apiVersion>52.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Exception Grid</masterLabel>
-    <targets>
-        <target>lightning__RecordPage</target>
-    </targets>
+        <targets>
+            <target>lightning__RecordPage</target>
+        </targets>
+        <targetConfigs>
+            <targetConfig targets="lightning__RecordPage">
+                <supportedFormFactors>
+                    <supportedFormFactor type="Small" />
+                    <supportedFormFactor type="Large" />
+                </supportedFormFactors>
+            </targetConfig>
+        </targetConfigs>
 </LightningComponentBundle>

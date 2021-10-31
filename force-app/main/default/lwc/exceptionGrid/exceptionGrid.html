@@ -1,16 +1,26 @@
 <!-- sldsValidatorIgnore -->
 <template>
-<template if:true={gridData}>
-    <lightning-datatable
-        key-field="fieldName"
-        data={gridData}
-        columns={columns}
-        hide-checkbox-column="true"
-        column-widths-mode="auto"
-    >
-    </lightning-datatable>
+    <template if:true={errorOccurred}>
+        <p>{errorMessage}</p>
     </template>
-    <template if:true={emptyGrid}>
-        No messages to display
-    </template> 
+    <template if:false={errorOccurred}>
+        <lightning-card variant="base" title="Exception Grid" icon-name="standard:account">
+            <lightning-button-icon  icon-name="utility:down" variant="border-filled" alternative-text="Show" slot="actions"></lightning-button-icon>
+            <template if:true={emptyGrid}>
+                <c-illustration
+                    heading="There are no messages to display"
+                    image-name="no_data:open_road">
+                </c-illustration>
+            </template>
+            <template if:false={emptyGrid}>
+                <lightning-datatable
+                    key-field="fieldName"
+                    data={gridData}
+                    columns={columns}
+                    hide-checkbox-column="true"
+                    column-widths-mode="auto">
+                </lightning-datatable>
+            </template>
+        </lightning-card>
+    </template>
 </template>

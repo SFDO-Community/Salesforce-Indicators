@@ -34,6 +34,10 @@
                 <behavior>Edit</behavior>
                 <field>ExceptionMessage__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Icon__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

@@ -4,15 +4,19 @@
     <protected>false</protected>
     <values>
         <field>ExceptionMessage__c</field>
-        <value xsi:type="xsd:string">Checkbox must be checked</value>
+        <value xsi:type="xsd:string">Checkbox must not be checked</value>
     </values>
     <values>
         <field>ExpectedValue__c</field>
-        <value xsi:type="xsd:string">true</value>
+        <value xsi:type="xsd:string">false</value>
     </values>
     <values>
         <field>Field__c</field>
         <value xsi:type="xsd:string">Checkbox__c</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">standard:call</value>
     </values>
     <values>
         <field>Object__c</field>
@@ -20,7 +24,7 @@
     </values>
     <values>
         <field>RequiredText__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Type__c</field>

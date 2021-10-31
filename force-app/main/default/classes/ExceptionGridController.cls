@@ -43,34 +43,47 @@ public with sharing class ExceptionGridController {
                 // Condition 1 - If the field is a Text field
                 if (expectionGridRecord.Type__c == 'Text') {
                     if (expectionGridRecord.RequiredText__c && String.isBlank((String) expectionGridRecord.ExpectedValue__c)) {
-                        System.debug('SHOW One Field Value: ' + field + ' - ' + record.get(field) + ' - ' + String.isBlank((String) record.get(field)));
-                        if (String.isBlank((String) record.get(field))) {
+                        System.debug('SHOW One Field Value: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
+                        if (String.isBlank((String) String.valueOf(record.get(field)))) {
                             response.add(
                                 new ExceptionGridResponse(
                                     expectionGridRecord.Field__r.Label,
+                                    (String) String.valueOf(record.get(field)),
                                     true,
                                     expectionGridRecord.Icon__c,
                                     expectionGridRecord.ExceptionMessage__c
                                 )
                             );
-                        } else {
-                            if (expectionGridRecord.RequiredText__c &&
-                                (String) record.get(field) !=
-                                expectionGridRecord.ExpectedValue__c && 
-                                String.isNotBlank((String) expectionGridRecord.ExpectedValue__c))
-                            {
+                        } else if (expectionGridRecord.RequiredText__c &&
+                            (String) String.valueOf(record.get(field)) !=
+                            expectionGridRecord.ExpectedValue__c && 
+                            String.isNotBlank((String) expectionGridRecord.ExpectedValue__c)) {
                             
-                                System.debug('SHOW Text Not Equal: ' + field + ' - ' + record.get(field) + ' - ' + String.isBlank((String) record.get(field)));
+                                System.debug('SHOW Text Not Equal: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
                                 
                                 response.add(
                                     new ExceptionGridResponse(
                                         expectionGridRecord.Field__r.Label,
+                                        (String) String.valueOf(record.get(field)),
                                         true,
                                         expectionGridRecord.Icon__c,
                                         expectionGridRecord.ExceptionMessage__c
                                     )
-                                );
-                            }
+                                );        
+
+                        } else {
+                            
+                            System.debug('SHOW Text Not Equal: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
+                            // Correct Value
+                            response.add(
+                                new ExceptionGridResponse(
+                                    expectionGridRecord.Field__r.Label,
+                                    (String) String.valueOf(record.get(field)),
+                                    false,
+                                    expectionGridRecord.Icon__c,
+                                    ''
+                                )
+                            );
                         }
                     }
                 }
@@ -79,30 +92,55 @@ public with sharing class ExceptionGridController {
                     if (
                         (String) record.get(field) !=
                         expectionGridRecord.ExpectedValue__c
-                    )
+                    ) {
                         response.add(
                             new ExceptionGridResponse(
                                 expectionGridRecord.Field__r.Label,
+                                (String) record.get(field),
                                 true,
                                 expectionGridRecord.Icon__c,
                                 expectionGridRecord.ExceptionMessage__c
                             )
                         );
+                    } else {
+                        response.add(
+                            new ExceptionGridResponse(
+                                expectionGridRecord.Field__r.Label,
+                                (String) record.get(field),
+                                false,
+                                expectionGridRecord.Icon__c,
+                                ''
+                            )
+                        );
+                    }
                 }
                 // Condition 3 - If the field is a Boolean Field
                 if (expectionGridRecord.Type__c == 'Boolean') {
                     if (
                         (String) String.valueOf(record.get(field)) !=
                         expectionGridRecord.ExpectedValue__c
-                    )
+                    ) {
                         response.add(
                             new ExceptionGridResponse(
                                 expectionGridRecord.Field__r.Label,
+                                (String) String.valueOf(record.get(field)),
                                 Boolean.valueOf(expectionGridRecord.ExpectedValue__c),
                                 expectionGridRecord.Icon__c,
                                 expectionGridRecord.ExceptionMessage__c
                             )
                         );
+                    } else {
+                        response.add(
+                            new ExceptionGridResponse(
+                                expectionGridRecord.Field__r.Label,
+                                (String) String.valueOf(record.get(field)),
+                                false,
+                                expectionGridRecord.Icon__c,
+                                ''
+                            )
+                        );
+
+                    }
                 }
             }
         } catch (Exception e) {
@@ -115,6 +153,8 @@ public with sharing class ExceptionGridController {
         @AuraEnabled
         public String fieldName;
         @AuraEnabled
+        public String fieldValue;
+        @AuraEnabled
         public Boolean isError;
         @AuraEnabled
         public String icon;
@@ -123,11 +163,13 @@ public with sharing class ExceptionGridController {
 
         public ExceptionGridResponse(
             String fieldName,
+            String fieldValue,
             Boolean isError,
             String icon,
             String exceptionMessage
         ) {
             this.fieldName = fieldName;
+            this.fieldValue = fieldValue;
             this.isError = isError;
             this.icon = icon;
             this.exceptionMessage = exceptionMessage;

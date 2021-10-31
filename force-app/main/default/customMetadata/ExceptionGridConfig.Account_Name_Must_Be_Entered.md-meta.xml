@@ -8,11 +8,15 @@
     </values>
     <values>
         <field>ExpectedValue__c</field>
-        <value xsi:type="xsd:string">%</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Field__c</field>
         <value xsi:type="xsd:string">Name</value>
+    </values>
+    <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">utility:error</value>
     </values>
     <values>
         <field>Object__c</field>

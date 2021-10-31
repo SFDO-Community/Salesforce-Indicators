@@ -15,6 +15,10 @@
         <value xsi:type="xsd:string">Email</value>
     </values>
     <values>
+        <field>Icon__c</field>
+        <value xsi:type="xsd:string">utility:error</value>
+    </values>
+    <values>
         <field>Object__c</field>
         <value xsi:type="xsd:string">Contact</value>
     </values>
