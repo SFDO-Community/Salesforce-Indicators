@@ -1,3 +1,6 @@
+# Getting ready for the Sprint
+Hold tight... this repo is in a state of flux at the moment... more good things to come as we head towards the November '22 sprint. 
+
 # Indicators Lightning Web Component
 
 Bring some colour and visibility to the data on your Lightning Pages. Allow users to see at a glance what this record is about and what it's status is. This component is highly customisable and can be used in many record pages. 
