@@ -40,51 +40,84 @@ public with sharing class ExceptionGridController {
                 );
                 // Based on the Type check for the condition
 
-                // Condition 1 - If the field is a Text field
-                if (expectionGridRecord.Type__c == 'Text') {
-                    if (expectionGridRecord.RequiredText__c && String.isBlank((String) expectionGridRecord.ExpectedValue__c)) {
-                        System.debug('SHOW One Field Value: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
-                        if (String.isBlank((String) String.valueOf(record.get(field)))) {
-                            response.add(
-                                new ExceptionGridResponse(
-                                    expectionGridRecord.Field__r.Label,
-                                    (String) String.valueOf(record.get(field)),
-                                    true,
-                                    expectionGridRecord.Icon__c,
-                                    expectionGridRecord.ExceptionMessage__c
-                                )
-                            );
-                        } else if (expectionGridRecord.RequiredText__c &&
-                            (String) String.valueOf(record.get(field)) !=
-                            expectionGridRecord.ExpectedValue__c && 
-                            String.isNotBlank((String) expectionGridRecord.ExpectedValue__c)) {
-                            
-                                System.debug('SHOW Text Not Equal: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
-                                
-                                response.add(
-                                    new ExceptionGridResponse(
-                                        expectionGridRecord.Field__r.Label,
-                                        (String) String.valueOf(record.get(field)),
-                                        true,
-                                        expectionGridRecord.Icon__c,
-                                        expectionGridRecord.ExceptionMessage__c
-                                    )
-                                );        
-
+                // Condition 1 - If the field is a Text field and a Specific Text is Required 
+                Integer stringSize = 117;
+                String fldValue;
+                // Text does not Match
+                if (expectionGridRecord.Type__c == 'Text' && expectionGridRecord.RequiredText__c == true) {
+                    if ((String) String.valueOf(record.get(field)) !=
+                    expectionGridRecord.ExpectedValue__c && 
+                    String.isNotBlank((String) expectionGridRecord.ExpectedValue__c)) {
+                    
+                        System.debug('SHOW Text Not Equal: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
+                        
+                        if (String.valueOf(record.get(field)).length() > stringSize) {
+                            fldValue = (String) String.valueOf(record.get(field)).substring(0,stringSize) + '...';
                         } else {
-                            
-                            System.debug('SHOW Text Not Equal: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
-                            // Correct Value
+                            fldValue = (String) String.valueOf(record.get(field));
+                        }
+                        
+                        response.add(
+                            new ExceptionGridResponse(
+                                expectionGridRecord.Field__r.Label,
+                                fldValue,
+                                true,
+                                expectionGridRecord.Icon__c,
+                                expectionGridRecord.ExceptionMessage__c
+                            )
+                        );        
+                    // Text Matches    
+                    } else {
+
+                            System.debug('SHOW Text IS Equal: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
+                        
                             response.add(
                                 new ExceptionGridResponse(
                                     expectionGridRecord.Field__r.Label,
-                                    (String) String.valueOf(record.get(field)),
+                                    fldValue,
                                     false,
-                                    expectionGridRecord.Icon__c,
+                                    '',
                                     ''
                                 )
-                            );
-                        }
+                            );  
+                    }
+                }    
+                // Condition 2 - If the field is a Text field and only checking for blanks 
+                // Text is blank
+                if (expectionGridRecord.Type__c == 'Text' && expectionGridRecord.RequiredText__c == false) {
+                    System.debug('SHOW One Field Value: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
+
+                    if (String.isBlank((String) String.valueOf(record.get(field)))) {
+                        fldValue = '';
+                    } else if (String.valueOf(record.get(field)).length() > stringSize) {
+                        fldValue = (String) String.valueOf(record.get(field)).substring(0,stringSize) + '...';
+                    } else {
+                        fldValue = (String) String.valueOf(record.get(field));
+                    }
+
+                    if (String.isBlank((String) String.valueOf(record.get(field)))) {
+                        response.add(
+                            new ExceptionGridResponse(
+                                expectionGridRecord.Field__r.Label,
+                                fldValue,
+                                true,
+                                expectionGridRecord.Icon__c,
+                                expectionGridRecord.ExceptionMessage__c
+                            )
+                        );
+                    } else {
+                            
+                        System.debug('SHOW Text Not Equal: ' + field + ' - ' + String.valueOf(record.get(field)) + ' - ' + String.isBlank((String) record.get(field)));
+                        // Text is not Blank
+                        response.add(
+                            new ExceptionGridResponse(
+                                expectionGridRecord.Field__r.Label,
+                                fldValue,
+                                false,
+                                '',
+                                ''
+                            )
+                        );
                     }
                 }
                 // Condition 2 - If the field is a Picklist field
@@ -108,7 +141,7 @@ public with sharing class ExceptionGridController {
                                 expectionGridRecord.Field__r.Label,
                                 (String) record.get(field),
                                 false,
-                                expectionGridRecord.Icon__c,
+                                '',
                                 ''
                             )
                         );
@@ -135,7 +168,7 @@ public with sharing class ExceptionGridController {
                                 expectionGridRecord.Field__r.Label,
                                 (String) String.valueOf(record.get(field)),
                                 false,
-                                expectionGridRecord.Icon__c,
+                                '',
                                 ''
                             )
                         );

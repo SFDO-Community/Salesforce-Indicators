@@ -5,6 +5,7 @@
 # Salesforce dev
 .sfdx/
 .localdevserver/
+.sf/
 
 # LWC VSCode autocomplete
 jsconfig.json

@@ -5,12 +5,23 @@
     </template>
     <template if:false={errorOccurred}>
         <lightning-card variant="base" title="Exception Grid" icon-name="standard:account">
-            <lightning-button-icon  icon-name="utility:down" variant="border-filled" alternative-text="Show" slot="actions"></lightning-button-icon>
+            <lightning-button-menu  icon-name="utility:down" variant="border-filled" alternative-text="Show" slot="actions" menu-alignment="right" onselect={handleOnselect}>
+                <lightning-menu-item value="MenuShowError" label="Show Errors Only"></lightning-menu-item>
+                <lightning-menu-item value="MenuShowAll" label="Show All Rows"></lightning-menu-item>
+            </lightning-button-menu>
             <template if:true={emptyGrid}>
-                <c-illustration
-                    heading="There are no messages to display"
-                    image-name="no_data:open_road">
-                </c-illustration>
+                <template if:true={MenuShowError}>
+                    <c-illustration
+                        heading="There are no rows to display"
+                        image-name="no_data:open_road">
+                    </c-illustration>
+                </template>
+                <template if:false={MenuShowError}>
+                    <c-illustration
+                        heading="There are no errors to display"
+                        image-name="no_data:open_road">
+                    </c-illustration>
+                </template>
             </template>
             <template if:false={emptyGrid}>
                 <lightning-datatable

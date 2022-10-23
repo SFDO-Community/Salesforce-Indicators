@@ -12,6 +12,7 @@
                     <supportedFormFactor type="Small" />
                     <supportedFormFactor type="Large" />
                 </supportedFormFactors>
+                <property name="exeptShow" type="String" label="Show" placeholder="base" datasource="error,icon" description="Choose to Show Error or Icon."/>
             </targetConfig>
         </targetConfigs>
 </LightningComponentBundle>

@@ -50,6 +50,7 @@ const columns = [
 ];
 
 export default class ExceptionGrid extends LightningElement {
+    @api exeptShow = 'error';
     @api recordId;
     @track columns = columns;
     @track baseRecord;
@@ -57,6 +58,8 @@ export default class ExceptionGrid extends LightningElement {
     @track emptyGrid = true;
     @track errorOccurred = false;
     @track errorMessgae = '';
+    selectedVal;
+    filteredResults = [];
 
 
     @wire(getRecord, {recordId: '$recordId', layoutTypes: ['Compact'], modes: ['View'] })
@@ -75,7 +78,18 @@ export default class ExceptionGrid extends LightningElement {
     _refreshView(){
     showExceptionGrid({ recordId: this.recordId })
         .then(result => {
-            this.gridData = result;
+            //this.gridData = result;
+            if(this.selectedVal == 'MenuShowError') {
+                let recs = [];
+                for (let rec of this.gridData) {
+                    if (rec.isError === true) {
+                        recs.push(rec);
+                    }
+                }
+                this.gridData = recs;
+            } else {
+                this.gridData = result;
+            }
             this.errorOccurred = false; 
             console.log('Grid Size First =>', this.gridData.length); 
             if(this.gridData.length > 0) {
@@ -91,6 +105,13 @@ export default class ExceptionGrid extends LightningElement {
             this.errorMessage = JSON.stringify(error);
             console.error('ERROR => ', JSON.stringify(error)); 
         })
+    }
+
+    handleOnselect(event) {
+        if(event) {
+        this.selectedVal = event.detail.value;
+        this._refreshView();
+        }
     }
     
 }
