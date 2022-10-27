@@ -1,5 +1,4 @@
-# Project Name
-Salesforce Indicators
+# Salesforce Indicators
 
 # Project Overview
 ## Vision & Goals
