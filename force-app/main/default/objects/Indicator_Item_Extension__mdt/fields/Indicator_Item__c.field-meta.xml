@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Indicator_Item__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Indicator Item</label>
+    <referenceTo>Indicator_Item__mdt</referenceTo>
+    <relationshipLabel>Indicator Item Extensions</relationshipLabel>
+    <relationshipName>Indicator_Item_Extensions</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>
