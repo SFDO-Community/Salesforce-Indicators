@@ -4,7 +4,7 @@
     <protected>false</protected>
     <values>
         <field>Field__c</field>
-        <value xsi:type="xsd:string">AnnualRevenue</value>
+        <value xsi:type="xsd:string">NumberOfEmployees</value>
     </values>
     <values>
         <field>Hover_Text__c</field>
