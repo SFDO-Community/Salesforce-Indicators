@@ -25,6 +25,10 @@ public with sharing class IndicatorController {
         public List<IndicatorExtension> Extensions {get; set;}
         @AuraEnabled
         public Decimal SortOrder {get; set;}
+        @AuraEnabled
+        public Boolean Active {get; set;}
+        @AuraEnabled
+        public String EmptyStaticBehavior {get; set;}
     }
 
     public class IndicatorExtension {
@@ -44,6 +48,9 @@ public with sharing class IndicatorController {
         public String ExtensionTextValue {get; set;}
         @AuraEnabled
         public Decimal PriorityOrder {get; set;}
+        @AuraEnabled
+        public Boolean Active {get; set;}
+        
     }
     
     @AuraEnabled(cacheable=true)
@@ -66,7 +73,9 @@ public with sharing class IndicatorController {
                 Inverse_Static_Text__c, 
                 Show_False_or_Blank__c, 
                 sObject__c, 
-                Static_Text__c, 
+                Static_Text__c,
+                Advanced_Field__c, 
+                Empty_Static_Text_Behavior__c, 
                 sObject__r.QualifiedApiName,
                 (
                     SELECT Id,
@@ -79,22 +88,32 @@ public with sharing class IndicatorController {
                         Image__c,
                         Static_Text__c
                     FROM Indicator_Item_Extensions__r 
+                    WHERE Active__c = TRUE
                 ), 
                 (
                     SELECT Order__c 
                     FROM Indicator_Bundle_Items__r
                 )
             FROM Indicator_Item__mdt
-            WHERE Id IN (
+            WHERE Active__c = TRUE 
+            AND Id IN (
                 SELECT Indicator_Item__c 
                 FROM Indicator_Bundle_Item__mdt 
                 WHERE Indicator_Bundle__c = :bundleId
             )
         ]) {
             IndicatorSetting indicatorSetting = new IndicatorSetting();
-            indicatorSetting.FieldApiName = indicatorItem.Field__r.QualifiedApiName;
+
+            if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
+                indicatorSetting.FieldApiName = indicatorItem.Advanced_Field__c;
+            } 
+            else {
+                indicatorSetting.FieldApiName = indicatorItem.Field__r.QualifiedApiName;
+            }
+            
             indicatorSetting.IconName = indicatorItem.Icon_Value__c;
             indicatorSetting.TextValue = indicatorItem.Static_Text__c;
+            indicatorSetting.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
             indicatorSetting.ImageUrl  = indicatorItem.Image__c;
             indicatorSetting.HoverValue = indicatorItem.Hover_Text__c;
             indicatorSetting.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
@@ -193,23 +212,4 @@ public with sharing class IndicatorController {
 
     }
 
-
-    /*
-    SELECT Indicator_Item__r.Id, 
-        Indicator_Item__r.Field__r.QualifiedApiName, 
-        Indicator_Item__r.Hover_Text__c, 
-        Indicator_Item__r.Icon_Value__c, 
-        Indicator_Item__r.Image__c, 
-        Indicator_Item__r.Inverse_Hover_Text__c, 
-        Indicator_Item__r.Inverse_Icon_Value__c, 
-        Indicator_Item__r.Inverse_Image__c, 
-        Indicator_Item__r.Inverse_Static_Text__c, 
-        Indicator_Item__r.Show_False_or_Blank__c, 
-        Indicator_Item__r.sObject__c, 
-        Indicator_Item__r.Static_Text__c, 
-        Indicator_Item__r.sObject__r.QualifiedApiName
-    FROM Indicator_Bundle_Item__mdt
-    WHERE Indicator_Bundle__c = 'm00P0000000chgb'
-    ORDER BY Order__c ASC
-    */
 }
