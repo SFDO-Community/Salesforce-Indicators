@@ -15,10 +15,19 @@ This Component is a must-have for any Nonprofit org, but it works in any org and
 https://salesforce-external.slack.com/archives/C0476TZEAH3
 
 ## How to Contribute:
-- Install the Component
-- Try it out
-- Create Recipes
-- Add reviews of any similar or competitor components
+- [Install the Component](/wiki/Installing-Salesforce-Indicators)
+- [Try it out](/wiki/Indicator-Bundle)
+- Check out the the [Cookbook](/wiki/Cookbook) and add your own Recipes
+- Add reviews of any [similar or competitor components](/wiki/Other-Components)
+- [Volunteer](/wiki/How-to-Volunteer) to enhance the code
 
 # Project Resources and Documentation
-Documentation can be found in the repository [wiki](https://github.com/SFDO-Community-Sprints/Salesforce-Indicators/wiki)
+Documentation can be found in the repository [wiki](/wiki)
+
+# Project Acomplishments
+* Working on the rebuild to support Custom Metadata Types
+* Enhancements to the Indicator Component
+* New companion Components in progress
+* Working on the packaging and release
+
+
