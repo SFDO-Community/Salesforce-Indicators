@@ -133,9 +133,20 @@ export default class IndicatorList2 extends LightningElement {
                 definition => 
                 {
                     console.log('Def',definition);
+                    
+                    let showDefault = false;
+                    if( definition.HoverValue || definition.TextValue || definition.IconName || definition.ImageURL ){
+                        showDefault = true;
+                    }
+                    
                     let dataField = this.objectApiName + "." + definition.FieldApiName;
                     // console.log('DataField',dataField);
                     let dataValue = getFieldValue(data, dataField); // Get the record's field value for the current CMDT indicator setting
+                    
+                    if (definition.ZeroBehavior === 'Treat Zeroes as Blanks' && dataValue === 0){
+                        dataValue = null;
+                    }
+
                     let extValue;
                     // console.log('DataValue',dataValue);
 
@@ -196,7 +207,7 @@ export default class IndicatorList2 extends LightningElement {
                         )
                         
                     }
-                    console.log(definition.EmptyStaticBehavior);
+
                     matchingFields.push(
                     {
                         fName: definition.FieldApiName,
@@ -229,23 +240,36 @@ export default class IndicatorList2 extends LightningElement {
                                 }
                             },
                         //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
-                        ...dataValue  || dataValue === 0 || definition.DisplayFalse ? {
-                            fShowAvatar : true
-                            } : {
-                            fShowAvatar : false
-                            },
-                        //If the value is false, the false icon will be set.
-                        ...dataValue || dataValue === 0? {
+                        // ...((dataValue  || dataValue === 0) && showDefault) || definition.DisplayFalse ? {
+                        //     fShowAvatar : true
+                        //     } : {
+                        //     fShowAvatar : false
+                        //     },
+                        ...dataValue || dataValue === 0 ? {
                             ...dataValue && extValue ? {
-                                fIconName : extValue.iconName
+                                fShowAvatar : true
                                 } : {
-                                fIconName : definition.IconName ? definition.IconName : 'standard:default'
+                                fShowAvatar : showDefault
                                 }
                             } : {
                             ...(dataValue === false || dataValue === null || dataValue === '') && definition.DisplayFalse ? {
-                                fIconName : definition.FalseIcon ? definition.FalseIcon : 'standard:default'
+                                fIconName : true
                                 } : {
-                                fIconName : 'standard:default'
+                                fIconName : false
+                                }
+                            },
+                        //If the value is false, the false icon will be set.
+                        ...dataValue || dataValue === 0 ? {
+                            ...dataValue && extValue ? {
+                                fIconName : extValue.iconName
+                                } : {
+                                fIconName : definition.IconName ? definition.IconName : ''
+                                }
+                            } : {
+                            ...(dataValue === false || dataValue === null || dataValue === '') && definition.DisplayFalse ? {
+                                fIconName : definition.FalseIcon ? definition.FalseIcon : ''
+                                } : {
+                                fIconName : ''
                                 }
                             },
                         //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text

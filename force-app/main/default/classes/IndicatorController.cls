@@ -29,6 +29,8 @@ public with sharing class IndicatorController {
         public Boolean Active {get; set;}
         @AuraEnabled
         public String EmptyStaticBehavior {get; set;}
+        @AuraEnabled
+        public String ZeroBehavior {get; set;}
     }
 
     public class IndicatorExtension {
@@ -75,7 +77,8 @@ public with sharing class IndicatorController {
                 sObject__c, 
                 Static_Text__c,
                 Advanced_Field__c, 
-                Empty_Static_Text_Behavior__c, 
+                Empty_Static_Text_Behavior__c,
+                Zero_Behavior__c, 
                 sObject__r.QualifiedApiName,
                 (
                     SELECT Id,
@@ -114,6 +117,7 @@ public with sharing class IndicatorController {
             indicatorSetting.IconName = indicatorItem.Icon_Value__c;
             indicatorSetting.TextValue = indicatorItem.Static_Text__c;
             indicatorSetting.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
+            indicatorSetting.ZeroBehavior = indicatorItem.Zero_Behavior__c;
             indicatorSetting.ImageUrl  = indicatorItem.Image__c;
             indicatorSetting.HoverValue = indicatorItem.Hover_Text__c;
             indicatorSetting.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
@@ -136,7 +140,7 @@ public with sharing class IndicatorController {
                 extension.ExtensionIconValue = ext.Icon_Value__c;
                 extension.ExtensionImageUrl = ext.Image__c;
                 extension.ExtensionTextValue = ext.Static_Text__c;
-                extension.PriorityOrder= ext.Priority__c;
+                extension.PriorityOrder = ext.Priority__c;
 
                 String extensionKey = String.valueOf(extension.PriorityOrder) + '-' + ext.Minimum__c + '-' + ext.Contains_Text__c + '-' + ext.Id;
                 extensionPrioritySort.add(extensionKey);
