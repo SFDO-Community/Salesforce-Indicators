@@ -6,6 +6,12 @@
 .sf/
 .sfdx/
 .localdevserver/
+.github
+cci-project/
+datasets/
+orgs/
+robot/
+cumulusci.yml
 
 # LWC VSCode autocomplete
 jsconfig.json
