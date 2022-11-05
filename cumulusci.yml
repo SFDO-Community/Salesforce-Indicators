@@ -1,0 +1,24 @@
+minimum_cumulusci_version: '3.68.0'
+project:
+    name: Scratch3
+    package:
+        name: Scratch3
+        api_version: '55.0'
+    git:
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/Scratch3/tests
+            options:
+                outputdir: robot/Scratch3/results
+
+    robot_testdoc:
+        options:
+            path: robot/Scratch3/tests
+            output: robot/Scratch3/doc/Scratch3_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
