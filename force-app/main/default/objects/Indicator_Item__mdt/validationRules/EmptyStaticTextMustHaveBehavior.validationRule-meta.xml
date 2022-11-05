@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>EmptyStaticTextMustHaveBehavior</fullName>
-    <active>false</active>
-    <description>Require a behavior when static text is empty.</description>
-    <errorConditionFormula>ISPICKVAL(Empty_Static_Text_Behavior__c,&apos;&apos;) &amp;&amp; ISBLANK(Static_Text__c)</errorConditionFormula>
-    <errorDisplayField>Empty_Static_Text_Behavior__c</errorDisplayField>
-    <errorMessage>If Static Text field is empty, please select a behavior for the indicator.</errorMessage>
-</ValidationRule>
