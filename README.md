@@ -36,5 +36,3 @@ Documentation can be found in the repository [wiki](/wiki)
 * Enhancements to the Indicator Component
 * New companion Components in progress
 * Working on the packaging and release
-
-
