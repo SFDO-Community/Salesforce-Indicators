@@ -1,5 +1,12 @@
 # Salesforce Indicators
 
+# Status of Code
+We are in a bit of a transition phase at the moment and are in active development. 
+You can still use the older Indicators List Component and it will work fine. 
+If you would like to test where we are at, use the Deploy button on the [Instalation](/wiki/Installing-Salesforce-Indicators) page and deploy the `Indicator-Bundle` branch and add the `Indicator Bundle Wire` component to the page layout. 
+NOTE: Only test in a Scratch org or Developer org at the moment whilst we are in active development.
+We can't wait to get something stable that you can start to use in your production orgs. 
+
 # Project Overview
 ## Vision & Goals
 * Build a customisable Indicators Component to help users see the value, status, and key details about a record at a glance and in nice colours and graphics 
