@@ -3,7 +3,7 @@
 # Status of Code
 We are in a bit of a transition phase at the moment and are in active development. 
 You can still use the older Indicators List Component and it will work fine. 
-If you would like to test where we are at, use the Deploy button on the [Instalation](/wiki/Installing-Salesforce-Indicators) page and deploy the `Indicator-Bundle` branch and add the `Indicator Bundle Wire` component to the page layout. 
+If you would like to test where we are at, use the Deploy button on the [Instalation](../../wiki/Installing-Salesforce-Indicators) page and deploy the `Indicator-Bundle` branch and add the `Indicator Bundle Wire` component to the page layout. 
 NOTE: Only test in a Scratch org or Developer org at the moment whilst we are in active development.
 We can't wait to get something stable that you can start to use in your production orgs. 
 
@@ -22,14 +22,14 @@ This Component is a must-have for any Nonprofit org, but it works in any org and
 https://salesforce-external.slack.com/archives/C0476TZEAH3
 
 ## How to Contribute:
-- [Install the Component](/wiki/Installing-Salesforce-Indicators)
-- [Try it out](/wiki/Indicator-Bundle)
-- Check out the the [Cookbook](/wiki/Cookbook) and add your own Recipes
-- Add reviews of any [similar or competitor components](/wiki/Other-Components)
-- [Volunteer](/wiki/How-to-Volunteer) to enhance the code
+- [Install the Component](../../wiki/Installing-Salesforce-Indicators)
+- [Try it out](../../wiki/Indicator-Bundle)
+- Check out the the [Cookbook](../../wiki/Cookbook) and add your own Recipes
+- Add reviews of any [similar or competitor components](../../wiki/Other-Components)
+- [Volunteer](../../wiki/How-to-Volunteer) to enhance the code
 
 # Project Resources and Documentation
-Documentation can be found in the repository [wiki](/wiki)
+Documentation can be found in the repository [wiki](../../wiki)
 
 # Project Acomplishments
 * Working on the rebuild to support Custom Metadata Types
