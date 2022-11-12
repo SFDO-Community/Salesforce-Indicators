@@ -14,12 +14,8 @@ global class IndicatorListBundleSelector extends VisualEditor.DynamicPickList {
     
             valuePairs.addRow(getDefaultValue());
     
-            for(Indicator_Bundle__mdt bundle : [
-                SELECT Id, Label 
-                FROM Indicator_Bundle__mdt
-                WHERE Active__c = true 
-            ]) {
-                VisualEditor.DataRow valuePair = new VisualEditor.DataRow(bundle.Label, String.valueOf(bundle.Id));
+            for(Indicator_Bundle__mdt bundle : Cmdt.getAllActiveBundles()) {
+                VisualEditor.DataRow valuePair = new VisualEditor.DataRow(bundle.Label, bundle.DeveloperName);
                 valuePairs.addRow(valuePair);
             }
             return valuePairs;

@@ -1,6 +1,19 @@
 public with sharing class IndicatorController {
 
-    public class IndicatorSetting {
+    public class IndicatorBundle {
+        @AuraEnabled
+        public Boolean IsActive {get; set;}
+        @AuraEnabled
+        public String CardIcon {get; set;}
+        @AuraEnabled
+        public String CardText {get; set;}
+        @AuraEnabled
+        public String CardTitle {get; set;}
+        @AuraEnabled
+        public List<IndicatorItem> Items {get; set;}
+    }
+
+    public class IndicatorItem {
         @AuraEnabled 
         public String FieldApiName { get; set;}
         @AuraEnabled
@@ -26,8 +39,6 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public Decimal SortOrder {get; set;}
         @AuraEnabled
-        public Boolean Active {get; set;}
-        @AuraEnabled
         public String EmptyStaticBehavior {get; set;}
         @AuraEnabled
         public String ZeroBehavior {get; set;}
@@ -50,170 +61,95 @@ public with sharing class IndicatorController {
         public String ExtensionTextValue {get; set;}
         @AuraEnabled
         public Decimal PriorityOrder {get; set;}
-        @AuraEnabled
-        public Boolean Active {get; set;}
-        
     }
     
     @AuraEnabled(cacheable=true)
-    public static List<IndicatorSetting> getIndicatorSettingsForBundle2(Id bundleId){
-        
-        List<IndicatorSetting> indicators = new List<IndicatorSetting>();
-        Map<String,IndicatorSetting> indicatorsBySortOrder = new Map<String,IndicatorSetting>();
-        List<String> sortOrderIndicatorKey = new List<String>();
-        Map<String,IndicatorExtension> extensionByPriority = new Map<String,IndicatorExtension>();
+    public static IndicatorBundle getIndicatorBundle(String bundleDevName){
 
-        for(Indicator_Item__mdt indicatorItem : [
-            SELECT Id,
-                Field__r.QualifiedApiName, 
-                Hover_Text__c,
-                Icon_Value__c, 
-                Image__c, 
-                Inverse_Hover_Text__c, 
-                Inverse_Icon_Value__c, 
-                Inverse_Image__c, 
-                Inverse_Static_Text__c, 
-                Show_False_or_Blank__c, 
-                sObject__c, 
-                Static_Text__c,
-                Advanced_Field__c, 
-                Empty_Static_Text_Behavior__c,
-                Zero_Behavior__c, 
-                sObject__r.QualifiedApiName,
-                (
-                    SELECT Id,
-                        Contains_Text__c, 
-                        Maximum__c, 
-                        Minimum__c, 
-                        Priority__c,
-                        Hover_Text__c,
-                        Icon_Value__c,
-                        Image__c,
-                        Static_Text__c
-                    FROM Indicator_Item_Extensions__r 
-                    WHERE Active__c = TRUE
-                ), 
-                (
-                    SELECT Order__c 
-                    FROM Indicator_Bundle_Items__r
-                )
-            FROM Indicator_Item__mdt
-            WHERE Active__c = TRUE 
-            AND Id IN (
-                SELECT Indicator_Item__c 
-                FROM Indicator_Bundle_Item__mdt 
-                WHERE Indicator_Bundle__c = :bundleId
-            )
-        ]) {
-            IndicatorSetting indicatorSetting = new IndicatorSetting();
+        IndicatorBundle wrapper = new IndicatorBundle();
 
-            if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
-                indicatorSetting.FieldApiName = indicatorItem.Advanced_Field__c;
-            } 
-            else {
-                indicatorSetting.FieldApiName = indicatorItem.Field__r.QualifiedApiName;
+        Set<String> durableIds = new Set<String>();
+        Map<String,String> fieldByDurableId = new Map<String,String>();
+
+        Indicator_Bundle__mdt bundle = Cmdt.getBundle(bundleDevName);
+        if(bundle != null){
+
+            List<Indicator_Bundle_Item__mdt> bundleItems = Cmdt.getBundleItems(bundleDevName);
+
+            if(!bundleItems.isEmpty()){
+                for(Indicator_Bundle_Item__mdt bundleItem : Cmdt.getBundleItems(bundleDevName)){
+                    Indicator_Item__mdt indicatorItem = Cmdt.getItem(bundleItem.Indicator_Item__r.DeveloperName);
+                    if(indicatorItem != null){
+                        durableIds.add(indicatorItem.Field__c);
+                    }
+                }
             }
+
+            for(EntityParticle particle : [SELECT DurableId,QualifiedApiName FROM EntityParticle WHERE DurableId = :durableIds]){
+                fieldByDurableId.put(particle.DurableId, particle.QualifiedApiName);
+            }
+
+            wrapper.IsActive = bundle.Active__c;
+            wrapper.CardIcon = bundle.Card_Icon__c;
+            wrapper.CardText = bundle.Card_Text__c;
+            wrapper.CardTitle = bundle.Card_Title__c;
+            wrapper.Items = new List<IndicatorItem>();
+
+            if(!bundleItems.isEmpty()){     // TODO: Commenting out this check is a great way to test throwing an error in the LWC
+                for(Indicator_Bundle_Item__mdt bundleItem : Cmdt.getBundleItems(bundleDevName)){
+                    
+                    IndicatorItem item = new IndicatorItem();
+
+                    item.SortOrder = bundleItem.Order__c;
+    
+                    Indicator_Item__mdt indicatorItem = Cmdt.getItem(bundleItem.Indicator_Item__r.DeveloperName);
+                    if(indicatorItem != null){
+
+                        if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
+                            item.FieldApiName = indicatorItem.Advanced_Field__c;
+                        } else {
+                            item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
+                        }
             
-            indicatorSetting.IconName = indicatorItem.Icon_Value__c;
-            indicatorSetting.TextValue = indicatorItem.Static_Text__c;
-            indicatorSetting.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
-            indicatorSetting.ZeroBehavior = indicatorItem.Zero_Behavior__c;
-            indicatorSetting.ImageUrl  = indicatorItem.Image__c;
-            indicatorSetting.HoverValue = indicatorItem.Hover_Text__c;
-            indicatorSetting.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
-            indicatorSetting.FalseIcon = indicatorItem.Inverse_Icon_Value__c;
-            indicatorSetting.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
-            indicatorSetting.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
-            indicatorSetting.FalseImageUrl = indicatorItem.Inverse_Image__c;
-            indicatorSetting.SortOrder = indicatorItem.Indicator_Bundle_Items__r[0].Order__c;
+                        item.IconName = indicatorItem.Icon_Value__c;
+                        item.TextValue = indicatorItem.Static_Text__c;
+                        item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
+                        item.ZeroBehavior = indicatorItem.Zero_Behavior__c;
+                        item.ImageUrl  = indicatorItem.Image__c;
+                        item.HoverValue = indicatorItem.Hover_Text__c;
+                        item.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
+                        item.FalseIcon = indicatorItem.Inverse_Icon_Value__c;
+                        item.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
+                        item.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
+                        item.FalseImageUrl = indicatorItem.Inverse_Image__c;
+                        
+                        List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
 
-            List<IndicatorExtension> extensions = new List<IndicatorExtension>();
-            List<String> extensionPrioritySort = new List<String>();
+                        if(!itemExtensions.isEmpty()){
+                            item.Extensions = new List<IndicatorExtension>();    
 
-            for(Indicator_Item_Extension__mdt ext : indicatorItem.Indicator_Item_Extensions__r ) {
-                IndicatorExtension extension = new IndicatorExtension();
+                            for(Indicator_Item_Extension__mdt itemExtension : itemExtensions){
+                                IndicatorExtension extension = new IndicatorExtension();
                 
-                extension.ContainsText = ext.Contains_Text__c;
-                extension.Maximum = ext.Maximum__c;
-                extension.Minimum = ext.Minimum__c;
-                extension.ExtensionHoverText = ext.Hover_Text__c;
-                extension.ExtensionIconValue = ext.Icon_Value__c;
-                extension.ExtensionImageUrl = ext.Image__c;
-                extension.ExtensionTextValue = ext.Static_Text__c;
-                extension.PriorityOrder = ext.Priority__c;
+                                extension.ContainsText = itemExtension.Contains_Text__c;
+                                extension.Maximum = itemExtension.Maximum__c;
+                                extension.Minimum = itemExtension.Minimum__c;
+                                extension.ExtensionHoverText = itemExtension.Hover_Text__c;
+                                extension.ExtensionIconValue = itemExtension.Icon_Value__c;
+                                extension.ExtensionImageUrl = itemExtension.Image__c;
+                                extension.ExtensionTextValue = itemExtension.Static_Text__c;
+                                extension.PriorityOrder = itemExtension.Priority__c;
+                
+                                item.Extensions.add(extension);
+                            }
 
-                String extensionKey = String.valueOf(extension.PriorityOrder) + '-' + ext.Minimum__c + '-' + ext.Contains_Text__c + '-' + ext.Id;
-                extensionPrioritySort.add(extensionKey);
-                extensionByPriority.put(extensionKey, extension);
-
+                        }
+                    }
+                    wrapper.Items.add(item);
+                }
             }
-
-            extensionPrioritySort.sort();
-
-            for(String key : extensionPrioritySort){
-                extensions.add(extensionByPriority.get(key));
-            }
-            indicatorSetting.Extensions = extensions;
-
-            String indicatorKey = indicatorSetting.SortOrder + '-' + indicatorSetting.FieldApiName;
-            sortOrderIndicatorKey.add(indicatorKey);
-
-            indicatorsBySortOrder.put(indicatorKey, indicatorSetting);
         }
-
-        sortOrderIndicatorKey.sort();
-
-        for(String key : sortOrderIndicatorKey ){
-            indicators.add(indicatorsBySortOrder.get(key));
-        }
-
-        return indicators;
-
-    }
-
-    @AuraEnabled
-    public static List<Indicator_Item__mdt> getIndicatorSettingsForBundle(Id bundleId){
-
-        return [
-            SELECT Field__r.QualifiedApiName, 
-                Hover_Text__c,
-                Icon_Value__c, 
-                Image__c, 
-                Inverse_Hover_Text__c, 
-                Inverse_Icon_Value__c, 
-                Inverse_Image__c, 
-                Inverse_Static_Text__c, 
-                Show_False_or_Blank__c, 
-                sObject__c, 
-                Static_Text__c, 
-                sObject__r.QualifiedApiName,
-                (
-                    SELECT Contains_Text__c, 
-                        Maximum__c, 
-                        Minimum__c, 
-                        Priority__c,
-                        Hover_Text__c,
-                        Icon_Value__c,
-                        Image__c,
-                        Static_Text__c
-                    FROM Indicator_Item_Extensions__r 
-                    // ! Why doesn't this work?  For now, it means extensions may be random if more than one is met.
-                    // ! Even adding some of these query ORDER BY broke the result entirely.
-                    // ? Should this sorting be done on its own and then return the result of an sObject List rather than a SOQL result?
-                    // ORDER BY Priority__c, Minimum__c, Maximum__c, Contains_Text__c
-                ), 
-                (
-                    SELECT Order__c 
-                    FROM Indicator_Bundle_Items__r
-                )
-            FROM Indicator_Item__mdt
-            WHERE Id IN (
-                SELECT Indicator_Item__c 
-                FROM Indicator_Bundle_Item__mdt 
-                WHERE Indicator_Bundle__c = :bundleId
-            )
-        ];
-
+        return wrapper;
     }
 
 }
