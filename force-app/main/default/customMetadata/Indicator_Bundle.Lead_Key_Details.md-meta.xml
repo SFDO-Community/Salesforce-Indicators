@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Lead Key Details</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Card_Icon__c</field>
+        <value xsi:type="xsd:string">standard:lead_insights</value>
+    </values>
+    <values>
+        <field>Card_Text__c</field>
+        <value xsi:type="xsd:string">These are some key details about the lead you are viewing.</value>
+    </values>
+    <values>
+        <field>Card_Title__c</field>
+        <value xsi:type="xsd:string">Lead Key Details</value>
+    </values>
+    <values>
+        <field>sObject__c</field>
+        <value xsi:type="xsd:string">Lead</value>
+    </values>
+</CustomMetadata>
