@@ -83,7 +83,7 @@ private class CmdtTests {
 
         Indicator_Item_Extension__mdt extension = 
             Build.anExtension()
-            .withItemDevName(item.DeveloperName)
+            .withItem(item)
             .build();
 
         // Actual test
