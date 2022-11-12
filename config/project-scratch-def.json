@@ -1,6 +1,6 @@
 {
   "orgName": "Demo company",
   "edition": "Developer",
-  "hasSampleData": true,
+  "hasSampleData": false,
   "features": []
 }
