@@ -3,7 +3,7 @@
     <fullName>Minimum__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <label>Minimum ( &lt;= )</label>
+    <label>Minimum ( &gt;= )</label>
     <precision>18</precision>
     <required>false</required>
     <scale>3</scale>

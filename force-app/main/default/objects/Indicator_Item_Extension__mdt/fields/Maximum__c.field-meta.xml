@@ -3,7 +3,7 @@
     <fullName>Maximum__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <label>Maximum ( &gt; )</label>
+    <label>Maximum ( &lt; )</label>
     <precision>18</precision>
     <required>false</required>
     <scale>3</scale>

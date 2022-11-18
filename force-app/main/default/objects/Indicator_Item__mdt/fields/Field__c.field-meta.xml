@@ -3,10 +3,9 @@
     <fullName>Field__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>The field used by the Indicator.</inlineHelpText>
     <label>Field</label>
     <metadataRelationshipControllingField>Indicator_Item__mdt.sObject__c</metadataRelationshipControllingField>
-    <referenceTo>FieldDefinition</referenceTo>
+    <referenceTo>EntityParticle</referenceTo>
     <relationshipLabel>Indicator_Items</relationshipLabel>
     <relationshipName>Indicator_Items</relationshipName>
     <required>false</required>

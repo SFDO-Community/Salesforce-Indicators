@@ -10,3 +10,14 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
+
+# Profile
+**profile
+**/profiles/**
+**/settings/**
+**/Account/**
+**/Contact/**
+**/flexipages/**
+
+**/old-versions/**
+**/unpackaged/**

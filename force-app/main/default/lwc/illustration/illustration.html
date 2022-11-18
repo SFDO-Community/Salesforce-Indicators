@@ -1,0 +1,13 @@
+<template>
+  <div class={rootClass}>
+    <template if:false={textOnly}>
+      <c-illustration-image image-name={imageName}></c-illustration-image>
+    </template>
+    <div class="slds-text-longform">
+      <h3 class="slds-text-heading_medium">{heading}</h3>
+      <slot name="messageBody">
+        <p class="slds-text-body_regular">{messageBody}</p>
+      </slot>
+    </div>
+  </div>
+</template>
