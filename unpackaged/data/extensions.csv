@@ -1,0 +1,22 @@
+"Active__c","Contains_Text__c","Description__c","Hover_Text__c","Icon_Value__c","Image__c","Indicator_Item__c","Name","Maximum__c","Minimum__c","Priority__c","Static_Text__c"
+"true",,,,"standard:settings",,"Lead_Annual_Revenue","Lead Annual Revenue--100k - 500k","500000.0","100000.0","1.0","$"
+"true",,,,"standard:settings",,"Lead_Annual_Revenue","Lead Annual Revenue--1M+",,"1000000.0","3.0","$$$"
+"true",,,,"standard:settings",,"Lead_Annual_Revenue","Lead Annual Revenue--500k - 1M","1000000.0","500000.0","2.0","$$"
+"true","CA",,,"standard:address",,"Lead_Location","Lead Location--CA",,,"2.0","CA"
+"true","US",,,"custom:custom106",,"Lead_Location","Lead Location--US",,,"1.0","US"
+"true","Construction",,,"custom:custom44",,"Lead_Industry","Lead Industry--Construction",,,,
+"true","Electronics",,,"custom:custom63",,"Lead_Industry","Lead Industry--Electronics",,,,
+"true","Energy",,,"custom:custom9",,"Lead_Industry","Lead Industry--Energy",,,,
+"true","Engineering",,,"custom:custom32",,"Lead_Industry","Lead Industry--Engineering",,,,
+"true","Government",,,"custom:custom16",,"Lead_Industry","Lead Industry--Government",,,,
+"true","Manufacturing",,,"custom:custom32",,"Lead_Industry","Lead Industry--Manufacturing",,,,
+"true","Technology",,,"standard:bot",,"Lead_Industry","Lead Industry--Technology",,,,
+"true","Utilities",,,"custom:custom67",,"Lead_Industry","Lead Industry--Utilities",,,,
+"true","Cold",,,,"/logos/Custom/Temp_Primary/logo.png","Lead_Rating","Lead Rating--Cold",,,"1.3",
+"true","Hot",,,,"/logos/Custom/Temp_Red/logo.png","Lead_Rating","Lead Rating--Hot",,,"1.0",
+"true","Warm",,,,"/logos/Custom/Temp_Yellow/logo.png","Lead_Rating","Lead Rating--Warm",,,"1.2",
+"true","Other",,,,"/logos/Custom/Flux_Grey/logo.png","Lead_Source","Lead Source--Other",,,"1.0",
+"true","Partner Referral",,,,"/logos/Custom/People_Grey/logo.png","Lead_Source","Lead Source--Partner Referral",,,"1.0",
+"true","Phone",,,,"/logos/Custom/Phone_Grey/logo.png","Lead_Source","Lead Source--Phone",,,"1.0",
+"true","Purchased List",,,,"/logos/Custom/Doc_Grey/logo.png","Lead_Source","Lead Source--Purchased List",,,"1.0",
+"true","Web",,,,"/logos/Custom/Globe_Grey/logo.png","Lead_Source","Lead Source--Web",,,"1.0",
