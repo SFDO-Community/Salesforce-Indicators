@@ -1,0 +1,6 @@
+"Active__c","Card_Icon__c","Card_Text__c","Card_Title__c","Description__c","Name","sObject__c"
+"false",,,,,"Empty","Lead"
+"true",,"Key details about the company",,"Holds key details about the company and industry","Lead_Company_Info","Lead"
+"true",,,,"Holds key details about the person behind the lead","Lead_Contact_Info","Lead"
+"false",,,,,"Lead_Details","Lead"
+"true","standard:lead_insights","These are some key details about the lead you are viewing.","Lead Key Details",,"Lead_Key_Details","Lead"

@@ -1,0 +1,35 @@
+minimum_cumulusci_version: '3.68.1'
+project:
+    name: Salesforce-Indicators
+    package:
+        name: Salesforce-Indicators
+        namespace: sfind
+        api_version: '55.0'
+    git:
+        default_branch: 'master'
+    test:
+        name_match: '%Tests'
+    source_format: sfdx
+
+orgs:
+    scratch:
+        dev:
+            config_file: orgs/dev.json
+            days: 30
+            namespaced: True
+
+tasks:
+    robot:
+        options:
+            suites: robot/Salesforce-Indicators/tests
+            options:
+                outputdir: robot/Salesforce-Indicators/results
+
+    robot_testdoc:
+        options:
+            path: robot/Salesforce-Indicators/tests
+            output: robot/Salesforce-Indicators/doc/Salesforce-Indicators_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
