@@ -7,8 +7,24 @@
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
+        <field>Contains_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Hover_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Icon_Value__c</field>
         <value xsi:type="xsd:string">standard:settings</value>
+    </values>
+    <values>
+        <field>Image__c</field>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Indicator_Item__c</field>

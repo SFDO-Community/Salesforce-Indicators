@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_with_Details</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>Indicator_Item__c</columns>
+    <columns>Minimum__c</columns>
+    <columns>Maximum__c</columns>
+    <columns>Contains_Text__c</columns>
+    <columns>Description__c</columns>
+    <columns>Hover_Text__c</columns>
+    <columns>Static_Text__c</columns>
+    <columns>Icon_Value__c</columns>
+    <columns>Image__c</columns>
+    <columns>Priority__c</columns>
+    <columns>Active__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All with Details</label>
+</ListView>

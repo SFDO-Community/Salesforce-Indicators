@@ -11,11 +11,39 @@
         <value xsi:type="xsd:string">Manufacturing</value>
     </values>
     <values>
+        <field>Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Hover_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Icon_Value__c</field>
         <value xsi:type="xsd:string">custom:custom32</value>
     </values>
     <values>
+        <field>Image__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Indicator_Item__c</field>
         <value xsi:type="xsd:string">Lead_Industry</value>
+    </values>
+    <values>
+        <field>Maximum__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Minimum__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Priority__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Static_Text__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>
