@@ -93,6 +93,7 @@ private class CmdtTests {
         Test.stopTest();
     
         // Asserts
+        Assert.isNotNull(extensions);
     }
 
     @isTest
