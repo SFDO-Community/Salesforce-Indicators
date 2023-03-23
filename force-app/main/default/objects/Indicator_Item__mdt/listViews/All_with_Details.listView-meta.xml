@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_with_Details</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>sObject__c</columns>
+    <columns>Field__c</columns>
+    <columns>Description__c</columns>
+    <columns>Hover_Text__c</columns>
+    <columns>Static_Text__c</columns>
+    <columns>Empty_Static_Text_Behavior__c</columns>
+    <columns>Icon_Value__c</columns>
+    <columns>Zero_Behavior__c</columns>
+    <columns>Show_False_or_Blank__c</columns>
+    <columns>Inverse_Hover_Text__c</columns>
+    <columns>Inverse_Static_Text__c</columns>
+    <columns>Inverse_Icon_Value__c</columns>
+    <columns>Active__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All with Details</label>
+</ListView>
