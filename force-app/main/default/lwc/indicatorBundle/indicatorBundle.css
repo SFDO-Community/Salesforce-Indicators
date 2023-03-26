@@ -1,0 +1,7 @@
+.cardIcon {
+    --sds-c-icon-color-foreground: var(--foregroundColor);
+    --sds-c-icon-color-background: var(--backgroundColor);
+    /* --slds-c-icon-color-background: black; 
+    --slds-c-icon-color-foreground: red; */
+
+}

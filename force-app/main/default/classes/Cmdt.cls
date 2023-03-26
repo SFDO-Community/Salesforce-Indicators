@@ -8,6 +8,8 @@ public with sharing class Cmdt {
             SELECT DeveloperName, MasterLabel, Label,
                 Active__c,
                 Card_Icon__c, 
+                Card_Icon_Background__c, 
+                Card_Icon_Foreground__c, 
                 Card_Text__c, 
                 Card_Title__c, 
                 sObject__c, sObject__r.QualifiedApiName

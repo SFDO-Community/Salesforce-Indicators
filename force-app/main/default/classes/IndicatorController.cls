@@ -6,6 +6,10 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String CardIcon {get; set;}
         @AuraEnabled
+        public String CardIconBackground {get; set;}
+        @AuraEnabled
+        public String CardIconForeground {get; set;}
+        @AuraEnabled
         public String CardText {get; set;}
         @AuraEnabled
         public String CardTitle {get; set;}
@@ -91,6 +95,8 @@ public with sharing class IndicatorController {
 
             wrapper.IsActive = bundle.Active__c;
             wrapper.CardIcon = bundle.Card_Icon__c;
+            wrapper.CardIconBackground = bundle.Card_Icon_Background__c;
+            wrapper.CardIconForeground = bundle.Card_Icon_Foreground__c;
             wrapper.CardText = bundle.Card_Text__c;
             wrapper.CardTitle = bundle.Card_Title__c;
             wrapper.Items = new List<IndicatorItem>();

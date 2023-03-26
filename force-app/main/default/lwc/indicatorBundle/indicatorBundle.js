@@ -32,6 +32,27 @@ export default class IndicatorBundle extends LightningElement {
     showIllustration = false;
     illustration = {};
 
+    renderedCallback() { 
+        if(this.bundle){
+            this.initCSSVariables();
+        }
+    }
+
+    initCSSVariables() {
+        // if(this.bundle.CardIconBackground != null){
+            console.log('Background Color: ', this.bundle.CardIconBackground);
+            this.template
+                .querySelector('.cardIcon')
+                .style.setProperty('--backgroundColor', this.bundle.CardIconBackground);
+        // }
+        // if(this.bundle.CardIconForeground != null){
+            console.log('Foreground Color: ', this.bundle.CardIconForeground);
+            this.template
+                .querySelector('.cardIcon')
+                .style.setProperty('--foregroundColor', this.bundle.CardIconForeground);
+        // }
+    }
+
     // Call the Apex Class to return the CMDT Bundle, Items, and Extensions wrapper.
     @wire(getIndicatorConfig, {bundleDevName : '$bundleName'})
     bundleWire (result) {
@@ -64,6 +85,15 @@ export default class IndicatorBundle extends LightningElement {
                     if(this.bundle.CardTitle || this.bundle.CardIcon){
                         this.hasHeader = true;
                     }
+
+                    if(this.bundle.CardIconBackground != null || this.bundle.CardIconCoreground != null){
+                        this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
+                    } else {
+                        this.card.iconClass = 'slds-var-m-right_xx-small ';
+                    }
+
+                    console.log('Card Data');
+                    console.dir(JSON.stringify(this.card));
 
                     // console.log(this.bundle.Items.length);
 
@@ -260,8 +290,6 @@ export default class IndicatorBundle extends LightningElement {
             console.log('Error!');
             this.errorMessage = JSON.stringify(error);
             this.errorOccurred = true;
-        } else {
-            console.log('Just Else?!');
         }
 
     }
