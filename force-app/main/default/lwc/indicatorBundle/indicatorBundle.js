@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
+import KeyModal from 'c/indicatorBundleKey';
 
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
 
@@ -266,5 +267,18 @@ export default class IndicatorBundle extends LightningElement {
 
     }
 
+    async handleInfoKeyClick() {
+        const result = await KeyModal.open({
+            // `label` is not included here in this example.
+            // it is set on lightning-modal-header instead
+            size: 'medium',
+            description: 'Accessible description of modal\'s purpose',
+            bundleName: this.bundleName,
+            bundle: this.bundle,
+        });
+        // if modal closed with X button, promise returns result = 'undefined'
+        // if modal closed with OK button, promise returns result = 'okay'
+        console.log(result);
+    }
 
 }

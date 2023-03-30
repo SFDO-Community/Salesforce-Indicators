@@ -1,0 +1,31 @@
+<template>
+    <lightning-layout
+        vertical-align="center"
+        pull-to-boundary="small"
+        multiple-rows
+    >
+        <lightning-layout-item padding="around-small" size="1">
+            <c-indicator-bundle-item  
+                ind-icon={keyIcon}
+                ind-image={keyImage}
+                ind-text={keyText}>
+            </c-indicator-bundle-item>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" size="4">
+            {keyDescription}
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" size="2">
+            {keyFillType}
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" size="2">
+            {keyHoverValue}
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" size="1">
+            {keyPriority}
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" size="2">
+            {keyExtensionLogic}
+        </lightning-layout-item>
+    </lightning-layout>
+
+</template>

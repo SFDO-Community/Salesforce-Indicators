@@ -1,0 +1,76 @@
+<template>
+    <lightning-modal-header label={bundleDetails.Title}></lightning-modal-header>
+    <lightning-modal-body><b>Bundle Description:</b> {bundleDetails.Description}<br/>
+        <br/>
+        <template for:each={indicatorItems} for:item="indicatorItem">
+            <div key={indicatorItem.FieldApiName}>
+                <hr/>
+                <div class="slds-text-heading_medium">{indicatorItem.FieldApiName}</div>
+                <p><b>Indicator Description:</b> {indicatorItem.Description}</p>
+                <p><b>Display Inverse when false or empty:</b> 
+                    <template lwc:if={indicatorItem.DisplayFalse}>
+                        <lightning-icon 
+                            icon-name="utility:success" 
+                            alternative-text="True" 
+                            variant="success"
+                            title="Display Inverse True"
+                            size="small"
+                            class="slds-p-left_small"
+                        ></lightning-icon>
+                    </template>
+                    <template lwc:else>
+                        <lightning-icon 
+                            icon-name="utility:close" 
+                            alternative-text="False" 
+                            variant="error"
+                            title="Display Inverse False"
+                            size="small"
+                            class="slds-p-left_small"
+                        ></lightning-icon>
+                    </template>
+                </p>
+                <p><b>How are Zeros handled?</b> {indicatorItem.ZeroValueMode}</p>
+                <lightning-layout
+                    vertical-align="end"
+                    pull-to-boundary="small"
+                >
+                    <lightning-layout-item padding="around-small" size="1">
+                        <b>Indicator</b>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="4">
+                        <b>Description</b>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="2">
+                        <b>Fill Type</b>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="2">
+                        <b>Hover Value</b>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="1">
+                        <b>Priority</b>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="2">
+                        <b>Extension Logic</b>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <template for:each={indicatorItem.Indicators} for:item="indicator">
+                    <div key={indicator.Priority}>
+                        <c-indicator-key-row
+                            key-icon={indicator.IconName}
+                            key-image={indicator.ImageUrl}
+                            key-text={indicator.TextValue}
+                            key-description={indicator.Description}
+                            key-fill-type={indicator.FillType}
+                            key-hover-value={indicator.HoverValue}
+                            key-priority={indicator.Priority}
+                            key-extension-logic={indicator.ExtensionLogic}
+                        ></c-indicator-key-row>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+    </lightning-modal-footer>
+</template>
