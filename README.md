@@ -3,8 +3,8 @@
 # Status of Code
 We are in a bit of a transition phase at the moment and are in active development. 
 You can still use the older Indicators List Component and it will work fine, if you already have it installed.
-If you would like to test where we are at, use the Deploy button on the [Installation](../../wiki/Installing-Salesforce-Indicators) page and deploy the `Indicator-Bundle` branch and add the `Indicator Bundle` component to the page layout. 
-NOTE: Only test in a Scratch org or Developer org at the moment whilst we are in active development.
+If you would like to test where we are at, install the managed package from the [Installation](../../wiki/Installing-Salesforce-Indicators) page and follow the steps to add the `Indicator Bundle` component to the page layout. 
+NOTE: Only test in a Scratch org, Developer org, or Sandbox at the moment whilst we are in active development.
 We can't wait to get something stable that you can start to use in your production orgs. 
 
 # Project Overview
