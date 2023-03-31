@@ -2,6 +2,7 @@ import { LightningElement, api } from 'lwc';
 
 export default class IndicatorKeyRow extends LightningElement {
 
+    @api keyId = '';
     @api keyIcon = 'custom:custom20';
     @api keyImage = '';
     @api keyText = '🙃';
@@ -10,5 +11,11 @@ export default class IndicatorKeyRow extends LightningElement {
     @api keyHoverValue = 'Field Value || Hover Text';
     @api keyPriority = 'Priority ("Last" for Normal / "First" for Inverse)';
     @api keyExtensionLogic = 'Extension Logic (Contains Text or Within Range)';
+    @api isManageEnabled = false;
+
+    handleClick(event){
+        console.log('Indicator Btn Click')
+        window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
+    }
 
 }

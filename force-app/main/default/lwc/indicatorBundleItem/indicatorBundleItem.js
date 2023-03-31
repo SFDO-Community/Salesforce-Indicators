@@ -7,8 +7,8 @@ export default class IndicatorListItem extends LightningElement {
     @api indImage = '';
     @api indIcon = 'standard:marketing_actions';
     @api indHoverText = '';
-    @api foregroundColor;
-    @api backgroundColor;
+    // @api foregroundColor;
+    // @api backgroundColor;
 
     get indClass() {
         let classValue = '';
