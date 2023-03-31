@@ -33,6 +33,20 @@ export default class IndicatorBundle extends LightningElement {
     showIllustration = false;
     illustration = {};
 
+    connectedCallback(){
+        if(!this.bundleName){
+            this.showIllustration=true;
+            this.illustration = {
+                heading : 'LOOK OUT!',
+                messageBody: 'Bundle not assigned... select one.',
+                imageName: 'misc:no_preview'
+            }
+        } else {
+            this.showIllustration=false;
+            this.illustration = {};
+        }
+    }
+
     // Call the Apex Class to return the CMDT Bundle, Items, and Extensions wrapper.
     @wire(getIndicatorConfig, {bundleDevName : '$bundleName'})
     bundleWire (result) {
