@@ -79,28 +79,37 @@
                             pull-to-boundary="small"
                             class="slds-p-top_small"
                         >
-                            <lightning-layout-item padding="around-small" size="1" class="slds-border_top slds-border_bottom slds-border_left slds-border_right">
+                            <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
                                 <b>Indicator</b>
                             </lightning-layout-item>
-                            <lightning-layout-item padding="around-small" size="4" class="slds-border_top slds-border_bottom slds-border_left slds-border_right">
+                            <lightning-layout-item padding="around-small" size="4" class="slds-border_bottom">
                                 <b>Description</b>
                             </lightning-layout-item>
                             <template lwc:if={isManageEnabled}>
-                                <lightning-layout-item padding="around-small" size="1" class="slds-border_top slds-border_bottom slds-border_left slds-border_right">
-                                    <b>Priority</b>
+                                <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
+                                    <b>Priority </b>
+                                    <span style="position:relative; top:-4px;"> 
+                                        <lightning-helptext content="Priority determines which indicator is shown when multiple criteria are met."></lightning-helptext>
+                                    </span>
                                 </lightning-layout-item>
-                                <lightning-layout-item padding="around-small" size="1" class="slds-border_top slds-border_bottom slds-border_left slds-border_right">
-                                    <b>Fill Type</b>
+                                <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
+                                    <b>Fill Type </b>
+                                    <span style="position:relative; top:-4px;"> 
+                                        <lightning-helptext content="Fill Type indicates if the indicator using a Lightning icon display's static text over an icon, the field's value over an icon, or only the icon."></lightning-helptext>
+                                    </span>
                                 </lightning-layout-item>
                             </template>
-                            <lightning-layout-item padding="around-small" size="2" class="slds-border_top slds-border_bottom slds-border_left slds-border_right">
-                                <b>Hover Value</b>
+                            <lightning-layout-item padding="around-small" size="2" class="slds-border_bottom">
+                                <b>Hover Value </b>
+                                <span style="position:relative; top:-4px;"> 
+                                    <lightning-helptext content="When the cursor hovers over the indicator, the text shown can be static text or the field's value."></lightning-helptext>
+                                </span>
                             </lightning-layout-item>
-                            <lightning-layout-item padding="around-small" size="2" class="slds-border_top slds-border_bottom slds-border_left slds-border_right">
-                                <b>Extension Logic</b>
+                            <lightning-layout-item padding="around-small" size="2" class="slds-border_bottom">
+                                <b>Display Criteria</b>
                             </lightning-layout-item>
-                            <template lwf:if={isManageEnabled}>
-                                <lightning-layout-item padding="around-small" size="1" class="slds-border_top slds-border_bottom slds-border_left slds-border_right">
+                            <template lwc:if={isManageEnabled}>
+                                <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
                                     &nbsp;
                                 </lightning-layout-item>
                             </template>
@@ -132,8 +141,15 @@
     <lightning-modal-footer>
         <lightning-layout>
             <lightning-layout-item size="6" class="slds-text-align_left">
-                <lightning-button variant="base" label="Expand All" onclick={handleExpandAll} icon-name="utility:expand_all" class="slds-m-left_x-small"></lightning-button>
-                <lightning-button variant="base" label="Collapse All" onclick={handleCollapseAll} icon-name="utility:collapse_all" class="slds-m-left_x-small"></lightning-button>     
+                <lightning-button-stateful
+                    label-when-off="Collapse All"
+                    label-when-on="Expand All"
+                    icon-name-when-off="utility:collapse_all"
+                    icon-name-when-on="utility:expand_all"
+                    variant="brand"
+                    selected={isOpen}
+                    onclick={handleState}>
+                </lightning-button-stateful>
             </lightning-layout-item>
             <lightning-layout-item size="6" class="slds-text-align_right">
                 <lightning-button label="Close" onclick={handleOkay} class="slds-m-left_medium"></lightning-button>

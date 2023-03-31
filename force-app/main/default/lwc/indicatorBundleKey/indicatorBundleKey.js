@@ -13,6 +13,8 @@ export default class IndicatorBundleKey extends LightningModal {
     activeSections = [];
     allSections = [];
 
+    isOpen = false;
+
     connectedCallback(){
         // this.indicatorItems = this.bundle.Items;
 
@@ -43,7 +45,7 @@ export default class IndicatorBundleKey extends LightningModal {
                         Priority: 'Final',
                         ExtensionLogic: '',
                         FillType: item.TextValue ? 'Static Text' : item.EmptyStaticBehavior,
-                        Description: 'Displays when the field has a value (and does not meet match extensions)'
+                        Description: 'Displays when the field has a value (and does not meet any display criteria)'
                     };
                     if(item.EmptyStaticBehavior == 'Use Field Value'){
                         normalIcon.TextValue = '...';
@@ -59,7 +61,7 @@ export default class IndicatorBundleKey extends LightningModal {
                         IconName: item.FalseIcon ? item.FalseIcon : '', 
                         TextValue: item.FalseTextValue ? item.FalseTextValue : '', 
                         ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '', 
-                        HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field Value',
+                        HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field\'s Value',
                         Priority: 'First (Inverse)',
                         ExtensionLogic: '',
                         FillType: item.FalseTextValue ? 'Static Text' : 'Icon/Image',
@@ -87,13 +89,11 @@ export default class IndicatorBundleKey extends LightningModal {
                             };
 
                             if(ext.ContainsText) {
-                                extensionIcon.ExtensionLogic = 'Field value contains text: \"' + ext.ContainsText + '\"';
+                                extensionIcon.ExtensionLogic = item.FieldLabel + ' contains: \"' + ext.ContainsText + '\"';
                             } else if (ext.Minimum) {
-                                let range;
+                                let range = item.FieldLabel + ' greater than or equal to ' + ext.Minimum;
                                 if(ext.Maximum){
-                                   range = ext.Minimum+ ' <= Field value < ' + ext.Maximum;
-                                } else {
-                                   range = 'Field value >= ' + ext.Minimum
+                                   range += ' and less than ' + ext.Maximum;
                                 }
                                 extensionIcon.ExtensionLogic = range;
                             }
@@ -145,6 +145,15 @@ export default class IndicatorBundleKey extends LightningModal {
 
     get isManageEnabled() {
         return hasManagePermission;
+    }
+
+    handleState(){
+        this.isOpen = !this.isOpen;
+        if(this.isOpen){
+            this.handleCollapseAll();
+        } else {
+            this.handleExpandAll();
+        }
     }
 
     handleExpandAll() {
