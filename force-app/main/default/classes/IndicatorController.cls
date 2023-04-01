@@ -143,7 +143,7 @@ public with sharing class IndicatorController {
 
                         if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
                             item.FieldApiName = indicatorItem.Advanced_Field__c;
-                            item.FieldLabel = 'Related Field';
+                            item.FieldLabel = indicatorItem.Advanced_Field_Label__c;
                         } else {
                             item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
                             item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);

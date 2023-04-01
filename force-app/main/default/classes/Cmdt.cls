@@ -24,6 +24,7 @@ public with sharing class Cmdt {
         for( Indicator_Item__mdt item : [
             SELECT Id, DeveloperName, MasterLabel,
                 Advanced_Field__c,
+                Advanced_Field_Label__c,
                 Empty_Static_Text_Behavior__c,
                 Field__c, Field__r.QualifiedApiName,
                 Hover_Text__c,
