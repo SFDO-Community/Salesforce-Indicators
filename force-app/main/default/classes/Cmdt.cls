@@ -5,13 +5,16 @@ public with sharing class Cmdt {
         
         // Gather all active Bundles and put them into a Map (key: DeveloperName; Bundle)
         for( Indicator_Bundle__mdt bundle : [
-            SELECT DeveloperName, MasterLabel, Label,
+            SELECT Id, DeveloperName, MasterLabel, Label,
                 Active__c,
                 Card_Icon__c, 
                 Card_Icon_Background__c, 
                 Card_Icon_Foreground__c, 
                 Card_Text__c, 
                 Card_Title__c, 
+                Description__c, 
+                // Card_Icon_Background__c,
+                // Card_Icon_Foreground__c,
                 sObject__c, sObject__r.QualifiedApiName
             FROM Indicator_Bundle__mdt
             WHERE Active__c = TRUE
@@ -21,8 +24,9 @@ public with sharing class Cmdt {
 
         // Gather all active Items and put them into a Map (key: Developername; Item)
         for( Indicator_Item__mdt item : [
-            SELECT DeveloperName, MasterLabel,
+            SELECT Id, DeveloperName, MasterLabel,
                 Advanced_Field__c,
+                Advanced_Field_Label__c,
                 Empty_Static_Text_Behavior__c,
                 Field__c, Field__r.QualifiedApiName,
                 Hover_Text__c,
@@ -35,7 +39,12 @@ public with sharing class Cmdt {
                 Show_False_or_Blank__c,
                 sObject__c, sObject__r.QualifiedApiName,
                 Static_Text__c,
-                Zero_Behavior__c
+                Zero_Behavior__c,
+                // Background_Color__c,
+                // Foreground_Color__c,
+                // Inverse_Background_Color__c,
+                // Inverse_Foreground_Color__c,
+                Description__c
             FROM Indicator_Item__mdt
             WHERE Active__c = TRUE
         ]){
@@ -57,7 +66,7 @@ public with sharing class Cmdt {
 
         // Gather all active Item Extensions and put them into a Map (key: Indicator Item; List of Extensions)
         for(Indicator_Item_Extension__mdt itemExtension : [
-            SELECT Contains_Text__c,
+            SELECT Id, Contains_Text__c,
                 Hover_Text__c,
                 Icon_Value__c,
                 Image__c,
@@ -66,7 +75,10 @@ public with sharing class Cmdt {
                 Maximum__c,
                 Minimum__c,
                 Priority__c,
-                Static_Text__c
+                Static_Text__c,
+                // Background_Color__c,
+                // Foreground_Color__c,
+                Description__c
             FROM Indicator_Item_Extension__mdt
             WHERE Active__c = TRUE
             AND Indicator_Item__r.Active__c = TRUE

@@ -1,7 +1,17 @@
 <template>
     <template if:true={bundleActive}>
         <template if:false={errorOccurred}>
-            <lightning-card variant="narrow" >
+            <lightning-card variant="narrow" icon-name={card.icon} title={card.title}>
+                <lightning-button-icon
+                    variant="bare"
+                    icon-name="utility:info_alt"
+                    alternative-text="Indicator Value Key"
+                    class="slds-var-m-left_xx-small"
+                    title="Indicator Value Key"
+                    slot="actions"
+                    onclick={handleInfoKeyClick}
+                    aria-haspopup="dialog"
+                ></lightning-button-icon> 
                 <template if:true={showRefresh}>
                     <lightning-button-icon 
                         variant="bare"
