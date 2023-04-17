@@ -17,10 +17,10 @@ public with sharing class IndicatorController {
         public String BundleDescription {get; set;}
         @AuraEnabled
         public String BundleId {get; set;}
-        // @AuraEnabled
-        // public String BackgroundColor {get; set;}
-        // @AuraEnabled
-        // public String ForegroundColor {get; set;}
+        @AuraEnabled
+        public String BackgroundColor {get; set;}
+        @AuraEnabled
+        public String ForegroundColor {get; set;}
         @AuraEnabled
         public List<IndicatorItem> Items {get; set;}
     }
@@ -60,14 +60,14 @@ public with sharing class IndicatorController {
         public String IndicatorDescription {get; set;}
         @AuraEnabled
         public String IndicatorId {get; set;}
-        // @AuraEnabled
-        // public String BackgroundColor {get; set;}
-        // @AuraEnabled
-        // public String ForegroundColor {get; set;}
-        // @AuraEnabled
-        // public String InverseBackgroundColor {get; set;}
-        // @AuraEnabled
-        // public String InverseForegroundColor {get; set;}
+        @AuraEnabled
+        public String BackgroundColor {get; set;}
+        @AuraEnabled
+        public String ForegroundColor {get; set;}
+        @AuraEnabled
+        public String InverseBackgroundColor {get; set;}
+        @AuraEnabled
+        public String InverseForegroundColor {get; set;}
     }
 
     public class IndicatorExtension {
@@ -91,10 +91,10 @@ public with sharing class IndicatorController {
         public String ExtensionDescription {get; set;}
         @AuraEnabled
         public String ExtensionId {get; set;}
-        // @AuraEnabled
-        // public String BackgroundColor {get; set;}
-        // @AuraEnabled
-        // public String ForegroundColor {get; set;}
+        @AuraEnabled
+        public String BackgroundColor {get; set;}
+        @AuraEnabled
+        public String ForegroundColor {get; set;}
     }
     
     @AuraEnabled(cacheable=true)
@@ -133,8 +133,8 @@ public with sharing class IndicatorController {
             wrapper.CardTitle = bundle.Card_Title__c;
             wrapper.BundleDescription = bundle.Description__c;
             wrapper.BundleId = bundle.Id;
-            // wrapper.BackgroundColor = bundle.Card_Icon_Background__c;
-            // wrapper.ForegroundColor = bundle.Card_Icon_Foreground__c;
+            wrapper.BackgroundColor = bundle.Card_Icon_Background__c;
+            wrapper.ForegroundColor = bundle.Card_Icon_Foreground__c;
             wrapper.Items = new List<IndicatorItem>();
 
             if(!bundleItems.isEmpty()){     // TODO: Commenting out this check is a great way to test throwing an error in the LWC
@@ -168,10 +168,10 @@ public with sharing class IndicatorController {
                         item.FalseImageUrl = indicatorItem.Inverse_Image__c;
                         item.IndicatorDescription = indicatorItem.Description__c;
                         item.IndicatorId = indicatorItem.Id;
-                        // item.BackgroundColor = indicatorItem.Background_Color__c;
-                        // item.ForegroundColor = indicatorItem.Foreground_Color__c;
-                        // item.InverseBackgroundColor = indicatorItem.Inverse_Background_Color__c;
-                        // item.InverseForegroundColor = indicatorItem.Inverse_Foreground_Color__c;
+                        item.BackgroundColor = indicatorItem.Icon_Background__c;
+                        item.ForegroundColor = indicatorItem.Icon_Foreground__c;
+                        item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
+                        item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
                         
                         List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
 
@@ -191,8 +191,8 @@ public with sharing class IndicatorController {
                                 extension.PriorityOrder = itemExtension.Priority__c;
                                 extension.ExtensionDescription = itemExtension.Description__c;
                                 extension.ExtensionId = itemExtension.Id;
-                                // extension.BackgroundColor = itemExtension.Background_Color__c;
-                                // extension.ForegroundColor = itemExtension.Foreground_Color__c;
+                                extension.BackgroundColor = itemExtension.Icon_Background__c;
+                                extension.ForegroundColor = itemExtension.Icon_Foreground__c;
                 
                                 item.Extensions.add(extension);
                             }

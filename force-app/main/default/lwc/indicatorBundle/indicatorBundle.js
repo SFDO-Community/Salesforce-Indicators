@@ -54,18 +54,17 @@ export default class IndicatorBundle extends LightningElement {
     }
 
     initCSSVariables() {
-        // if(this.bundle.CardIconBackground != null){
-            console.log('Background Color: ', this.bundle.CardIconBackground);
-            this.template
-                .querySelector('.cardIcon')
-                .style.setProperty('--backgroundColor', this.bundle.CardIconBackground);
-        // }
-        // if(this.bundle.CardIconForeground != null){
-            console.log('Foreground Color: ', this.bundle.CardIconForeground);
-            this.template
-                .querySelector('.cardIcon')
-                .style.setProperty('--foregroundColor', this.bundle.CardIconForeground);
-        // }
+
+        console.log('Card Icon Background Color: ', this.bundle.CardIconBackground);
+        console.log('Card Icon Foreground Color: ', this.bundle.CardIconForeground);
+
+        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
+            var css = this.template.querySelector(".cardIcon").style;
+
+            css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
+            css.setProperty('--foregroundColor', this.bundle.CardIconForeground);
+        }
+
     }
 
     // Call the Apex Class to return the CMDT Bundle, Items, and Extensions wrapper.
@@ -101,7 +100,7 @@ export default class IndicatorBundle extends LightningElement {
                         this.hasHeader = true;
                     }
 
-                    if(this.bundle.CardIconBackground != null || this.bundle.CardIconCoreground != null){
+                    if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
                         this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
                     } else {
                         this.card.iconClass = 'slds-var-m-right_xx-small ';
@@ -234,7 +233,9 @@ export default class IndicatorBundle extends LightningElement {
                                         "TextValue" : extension.ExtensionTextValue,
                                         "ImageUrl" : extension.ExtensionImageUrl,
                                         "HoverValue" : extension.ExtensionHoverText,
-                                        "Priority" : extension.PriorityOrder
+                                        "Priority" : extension.PriorityOrder,
+                                        "IconBackground" : extension.BackgroundColor,
+                                        "IconForeground" : extension.ForegroundColor
                                     };
 
                                     console.dir(matchedExtension);
@@ -272,6 +273,16 @@ export default class IndicatorBundle extends LightningElement {
                                 fIconName : matchedExtension ? matchedExtension.IconName : item.IconName
                             } : {
                                 fIconName: item.DisplayFalse ? item.FalseIcon : ''
+                            },
+                        ...dataValue || dataValue === 0 ? {
+                                fIconBackground : matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor
+                            } : {
+                                fIconBackground: item.DisplayFalse? item.InverseBackgroundColor : item.BackgroundColor
+                            },
+                        ...dataValue || dataValue === 0 ? {
+                                fIconForeground : matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
+                            } : {
+                                fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
                             },
                         //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
                         //If the Icon Text is entered then show that

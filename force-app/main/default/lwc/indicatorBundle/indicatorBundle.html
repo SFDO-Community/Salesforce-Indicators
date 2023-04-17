@@ -1,7 +1,8 @@
 <template>
     <template if:true={bundleActive}>
         <template if:false={errorOccurred}>
-            <lightning-card variant="narrow" icon-name={card.icon} title={card.title}>
+            <!-- <lightning-card variant="narrow" icon-name={card.icon} title={card.title}> -->
+            <lightning-card variant="narrow">
                 <lightning-button-icon
                     variant="bare"
                     icon-name="utility:info_alt"
@@ -23,7 +24,7 @@
                         onclick={refreshCmdt}
                     ></lightning-button-icon>
                 </template>
-                <template if:true={hasHeader}>
+                <template lwc:if={hasHeader} class="cardIcon">
                     <h3 slot="title">
                         <lightning-icon 
                             icon-name={card.icon} 
@@ -45,7 +46,10 @@
                                 ind-shape={indsShape} 
                                 ind-hover-text={fld.fHoverValue}
                                 ind-icon={fld.fIconName}
-                                ind-image={fld.fImageURL}>
+                                ind-image={fld.fImageURL}
+                                ind-background-color={fld.fIconBackground}
+                                ind-foreground-color={fld.fIconForeground}
+                                >
                             </c-indicator-bundle-item>
                         </template>
                     </template>
