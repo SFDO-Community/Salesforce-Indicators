@@ -41,6 +41,10 @@
                 <behavior>Edit</behavior>
                 <field>Advanced_Field__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Advanced_Field_Label__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>

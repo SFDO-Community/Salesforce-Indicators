@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
+import KeyModal from 'c/indicatorBundleKey';
 
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
 
@@ -31,6 +32,20 @@ export default class IndicatorBundle extends LightningElement {
     errorMessage = '';
     showIllustration = false;
     illustration = {};
+
+    connectedCallback(){
+        if(!this.bundleName){
+            this.showIllustration=true;
+            this.illustration = {
+                heading : 'LOOK OUT!',
+                messageBody: 'Bundle not assigned... select one.',
+                imageName: 'misc:no_preview'
+            }
+        } else {
+            this.showIllustration=false;
+            this.illustration = {};
+        }
+    }
 
     // Call the Apex Class to return the CMDT Bundle, Items, and Extensions wrapper.
     @wire(getIndicatorConfig, {bundleDevName : '$bundleName'})
@@ -266,5 +281,18 @@ export default class IndicatorBundle extends LightningElement {
 
     }
 
+    async handleInfoKeyClick() {
+        const result = await KeyModal.open({
+            // `label` is not included here in this example.
+            // it is set on lightning-modal-header instead
+            size: 'medium',
+            description: 'Accessible description of modal\'s purpose',
+            bundleName: this.bundleName,
+            bundle: this.bundle,
+        });
+        // if modal closed with X button, promise returns result = 'undefined'
+        // if modal closed with OK button, promise returns result = 'okay'
+        console.log(result);
+    }
 
 }

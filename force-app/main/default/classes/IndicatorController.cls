@@ -10,10 +10,20 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String CardTitle {get; set;}
         @AuraEnabled
+        public String BundleDescription {get; set;}
+        @AuraEnabled
+        public String BundleId {get; set;}
+        // @AuraEnabled
+        // public String BackgroundColor {get; set;}
+        // @AuraEnabled
+        // public String ForegroundColor {get; set;}
+        @AuraEnabled
         public List<IndicatorItem> Items {get; set;}
     }
 
     public class IndicatorItem {
+        @AuraEnabled 
+        public String FieldLabel { get; set;}
         @AuraEnabled 
         public String FieldApiName { get; set;}
         @AuraEnabled
@@ -42,6 +52,18 @@ public with sharing class IndicatorController {
         public String EmptyStaticBehavior {get; set;}
         @AuraEnabled
         public String ZeroBehavior {get; set;}
+        @AuraEnabled
+        public String IndicatorDescription {get; set;}
+        @AuraEnabled
+        public String IndicatorId {get; set;}
+        // @AuraEnabled
+        // public String BackgroundColor {get; set;}
+        // @AuraEnabled
+        // public String ForegroundColor {get; set;}
+        // @AuraEnabled
+        // public String InverseBackgroundColor {get; set;}
+        // @AuraEnabled
+        // public String InverseForegroundColor {get; set;}
     }
 
     public class IndicatorExtension {
@@ -61,6 +83,14 @@ public with sharing class IndicatorController {
         public String ExtensionTextValue {get; set;}
         @AuraEnabled
         public Decimal PriorityOrder {get; set;}
+        @AuraEnabled
+        public String ExtensionDescription {get; set;}
+        @AuraEnabled
+        public String ExtensionId {get; set;}
+        // @AuraEnabled
+        // public String BackgroundColor {get; set;}
+        // @AuraEnabled
+        // public String ForegroundColor {get; set;}
     }
     
     @AuraEnabled(cacheable=true)
@@ -70,6 +100,7 @@ public with sharing class IndicatorController {
 
         Set<String> durableIds = new Set<String>();
         Map<String,String> fieldByDurableId = new Map<String,String>();
+        Map<String,String> labelByDurableId = new Map<String,String>();
 
         Indicator_Bundle__mdt bundle = Cmdt.getBundle(bundleDevName);
         if(bundle != null){
@@ -85,14 +116,19 @@ public with sharing class IndicatorController {
                 }
             }
 
-            for(EntityParticle particle : [SELECT DurableId,QualifiedApiName FROM EntityParticle WHERE DurableId = :durableIds]){
+            for(EntityParticle particle : [SELECT DurableId, QualifiedApiName, MasterLabel FROM EntityParticle WHERE DurableId = :durableIds]){
                 fieldByDurableId.put(particle.DurableId, particle.QualifiedApiName);
+                labelByDurableId.put(particle.DurableId, particle.MasterLabel);
             }
 
             wrapper.IsActive = bundle.Active__c;
             wrapper.CardIcon = bundle.Card_Icon__c;
             wrapper.CardText = bundle.Card_Text__c;
             wrapper.CardTitle = bundle.Card_Title__c;
+            wrapper.BundleDescription = bundle.Description__c;
+            wrapper.BundleId = bundle.Id;
+            // wrapper.BackgroundColor = bundle.Card_Icon_Background__c;
+            // wrapper.ForegroundColor = bundle.Card_Icon_Foreground__c;
             wrapper.Items = new List<IndicatorItem>();
 
             if(!bundleItems.isEmpty()){     // TODO: Commenting out this check is a great way to test throwing an error in the LWC
@@ -107,8 +143,10 @@ public with sharing class IndicatorController {
 
                         if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
                             item.FieldApiName = indicatorItem.Advanced_Field__c;
+                            item.FieldLabel = indicatorItem.Advanced_Field_Label__c;
                         } else {
                             item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
+                            item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);
                         }
             
                         item.IconName = indicatorItem.Icon_Value__c;
@@ -122,6 +160,12 @@ public with sharing class IndicatorController {
                         item.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
                         item.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
                         item.FalseImageUrl = indicatorItem.Inverse_Image__c;
+                        item.IndicatorDescription = indicatorItem.Description__c;
+                        item.IndicatorId = indicatorItem.Id;
+                        // item.BackgroundColor = indicatorItem.Background_Color__c;
+                        // item.ForegroundColor = indicatorItem.Foreground_Color__c;
+                        // item.InverseBackgroundColor = indicatorItem.Inverse_Background_Color__c;
+                        // item.InverseForegroundColor = indicatorItem.Inverse_Foreground_Color__c;
                         
                         List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
 
@@ -139,6 +183,10 @@ public with sharing class IndicatorController {
                                 extension.ExtensionImageUrl = itemExtension.Image__c;
                                 extension.ExtensionTextValue = itemExtension.Static_Text__c;
                                 extension.PriorityOrder = itemExtension.Priority__c;
+                                extension.ExtensionDescription = itemExtension.Description__c;
+                                extension.ExtensionId = itemExtension.Id;
+                                // extension.BackgroundColor = itemExtension.Background_Color__c;
+                                // extension.ForegroundColor = itemExtension.Foreground_Color__c;
                 
                                 item.Extensions.add(extension);
                             }

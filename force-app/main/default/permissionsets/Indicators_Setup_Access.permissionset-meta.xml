@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>Manage_Indicator_Key</name>
+    </customPermissions>
+    <description>Grants users access to setup Indicators in custom metadata and view management in the key.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Indicators Setup Access</label>
+</PermissionSet>
