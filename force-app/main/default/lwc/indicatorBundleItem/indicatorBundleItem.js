@@ -44,7 +44,6 @@ export default class IndicatorListItem extends LightningElement {
     
             css.setProperty('--backgroundColor', this.indBackgroundColor);
             css.setProperty('--foregroundColor', this.indForegroundColor);
-            // css.setProperty('--textColor', 'green');
         }
 
     }
