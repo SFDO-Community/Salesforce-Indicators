@@ -45,7 +45,9 @@ export default class IndicatorBundleKey extends LightningModal {
                         Priority: 'Final',
                         ExtensionLogic: '',
                         FillType: item.TextValue ? 'Static Text' : item.EmptyStaticBehavior,
-                        Description: 'Displays when the field has a value (and does not meet any display criteria)'
+                        Description: 'Displays when the field has a value (and does not meet any display criteria)',
+                        Background: item.BackgroundColor,
+                        Foreground: item.ForegroundColor
                     };
                     if(item.EmptyStaticBehavior == 'Use Field Value'){
                         normalIcon.TextValue = '...';
@@ -65,7 +67,9 @@ export default class IndicatorBundleKey extends LightningModal {
                         Priority: 'First (Inverse)',
                         ExtensionLogic: '',
                         FillType: item.FalseTextValue ? 'Static Text' : 'Icon/Image',
-                        Description: 'Displays when the field has no value or is false'
+                        Description: 'Displays when the field has no value or is false',
+                        Background: item.InverseBackgroundColor,
+                        Foreground: item.InverseForegroundColor
                     };
                     indicators.push(inverseIcon);
                     indicatorCount++;
@@ -85,7 +89,9 @@ export default class IndicatorBundleKey extends LightningModal {
                                 Priority: ext.PriorityOrder ? ext.PriorityOrder : 'No Priority',
                                 ExtensionLogic: '',
                                 FillType: ext.ExtensionTextValue ? 'Static Text' : 'Icon/Image',
-                                Description: ext.ExtensionDescription
+                                Description: ext.ExtensionDescription,
+                                Background: ext.BackgroundColor,
+                                Foreground: ext.ForegroundColor
                             };
 
                             if(ext.ContainsText) {

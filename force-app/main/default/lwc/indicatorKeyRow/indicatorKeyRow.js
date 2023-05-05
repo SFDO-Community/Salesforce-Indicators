@@ -12,6 +12,8 @@ export default class IndicatorKeyRow extends LightningElement {
     @api keyPriority = 'Priority ("Last" for Normal / "First" for Inverse)';
     @api keyExtensionLogic = 'Extension Logic (Contains Text or Within Range)';
     @api isManageEnabled = false;
+    @api keyBackground = '';
+    @api keyForeground = '';
 
     handleClick(event){
         console.log('Indicator Btn Click')
