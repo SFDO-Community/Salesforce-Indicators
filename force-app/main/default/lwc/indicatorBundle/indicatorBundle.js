@@ -11,6 +11,8 @@ export default class IndicatorBundle extends LightningElement {
     @api recordId;  // Record Id from the record page
     @api objectApiName; // sObject from the record page
     @api flexipageRegionWidth;  // Width of the container on record page
+    @api showDescription;
+    @api showTitle;
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false;
@@ -96,7 +98,7 @@ export default class IndicatorBundle extends LightningElement {
                         body: this.bundle.CardText
                     }
 
-                    if(this.bundle.CardTitle || this.bundle.CardIcon){
+                    if( this.showTitle || this.showDescription ){
                         this.hasHeader = true;
                     }
 
@@ -251,13 +253,13 @@ export default class IndicatorBundle extends LightningElement {
                     {
                         fName: item.FieldApiName,   // Retain for debug purposes
                         fTextValue: dataValue,      // Retain for debug purposes
-                        ...dataValue || dataValue === 0  ? {
+                        ...dataValue || dataValue === 0 ? {
                                 fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
                             } : {
                                 fImageURL: item.DisplayFalse ? item.FalseImageUrl : ''
                             },
                         // ! If value is false, the false hover will be set.
-                        ...dataValue || dataValue === 0  ? {
+                        ...dataValue || dataValue === 0 ? {
                                 fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
                             } : {
                                 fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
