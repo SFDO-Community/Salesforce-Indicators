@@ -42,15 +42,19 @@ export default class IndicatorBundleKey extends LightningModal {
                         TextValue: item.TextValue ? item.TextValue : '', 
                         ImageUrl: item.ImageUrl ? item.ImageUrl : '', 
                         HoverValue: item.HoverValue ? '\"' + item.HoverValue + '\"' : 'Field Value',
-                        Priority: 'Final',
-                        ExtensionLogic: '',
+                        Priority: '',
+                        ExtensionLogic: item.FieldLabel + ' has a value',
                         FillType: item.TextValue ? 'Static Text' : item.EmptyStaticBehavior,
-                        Description: 'Displays when the field has a value (and does not meet any display criteria)',
+                        Description: '',
                         Background: item.BackgroundColor,
                         Foreground: item.ForegroundColor
                     };
                     if(item.EmptyStaticBehavior == 'Use Field Value'){
-                        normalIcon.TextValue = '...';
+                        normalIcon.TextValue = '\xa0Abc\r\n\xa0123';
+                        normalIcon.Description = 'Displays the field\'s value inside the indicator';
+                    }
+                    if(item.Extensions){
+                        normalIcon.ExtensionLogic += ' and does not meet any display criteria below'
                     }
                     indicators.push(normalIcon);
                     indicatorCount++;
@@ -64,20 +68,30 @@ export default class IndicatorBundleKey extends LightningModal {
                         TextValue: item.FalseTextValue ? item.FalseTextValue : '', 
                         ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '', 
                         HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field\'s Value',
-                        Priority: 'First (Inverse)',
-                        ExtensionLogic: '',
+                        Priority: '',
+                        ExtensionLogic: item.FieldLabel + ' is false or blank',
                         FillType: item.FalseTextValue ? 'Static Text' : 'Icon/Image',
-                        Description: 'Displays when the field has no value or is false',
+                        Description: '',
                         Background: item.InverseBackgroundColor,
                         Foreground: item.InverseForegroundColor
                     };
+                    if(item.ZeroBehavior == 'Treat Zeroes as Blanks'){
+                        inverseIcon.ExtensionLogic += ' or zero'
+                    }
                     indicators.push(inverseIcon);
                     indicatorCount++;
                 }
 
                 if(item.Extensions) {
+
+                    let orderedExtensions = [];
+
+                    for(var i = item.Extensions.length - 1; i >= 0; i--){
+                        orderedExtensions.push(item.Extensions[i]);
+                    }
+
                     // Show / Iterate Extensions
-                    item.Extensions.forEach(
+                    orderedExtensions.forEach(
                         ext => 
                         {
                             let extensionIcon = {
@@ -86,7 +100,7 @@ export default class IndicatorBundleKey extends LightningModal {
                                 TextValue: ext.ExtensionTextValue ? ext.ExtensionTextValue : '',
                                 ImageUrl: ext.ExtensionImageUrl ? ext.ExtensionImageUrl : '',
                                 HoverValue: ext.ExtensionHoverText ? '\"' + ext.ExtensionHoverText + '\"' : 'Field Value',
-                                Priority: ext.PriorityOrder ? ext.PriorityOrder : 'No Priority',
+                                Priority: ext.PriorityOrder ? ext.PriorityOrder : '',
                                 ExtensionLogic: '',
                                 FillType: ext.ExtensionTextValue ? 'Static Text' : 'Icon/Image',
                                 Description: ext.ExtensionDescription,
