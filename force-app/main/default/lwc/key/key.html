@@ -1,0 +1,159 @@
+<template>
+    <lightning-card variant="narrow" class="slds-var-p-around_medium">
+        <template lwc:if={isSetup}>
+            <lightning-button-stateful
+                slot="actions"
+                label-when-off="Collapse All"
+                label-when-on="Expand All"
+                icon-name-when-off="utility:collapse_all"
+                icon-name-when-on="utility:expand_all"
+                variant="brand"
+                selected={isOpen}
+                onclick={handleState}>
+            </lightning-button-stateful>
+        </template>
+        <h3 slot="title">
+            <lightning-icon 
+                icon-name={bundleDetails.Icon} 
+                size="medium"
+                class={bundleDetails.IconClass}
+            >
+            </lightning-icon>
+            {bundleDetails.Title}
+        </h3>
+        <p class="slds-var-p-horizontal_medium">{bundleDetails.Body}</br></br></br></p>
+        <lightning-layout pull-to-boundary="small">
+            <lightning-layout-item padding="horizontal-small" size="10" class="slds-text-align_left">
+                <div class="slds-var-p-horizontal_medium slds-text-heading_small">
+                    <b>Bundle Description:</b> {bundleDetails.Description}
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="horizontal-small" size="2" class="slds-text-align_right">
+                <template lwc:if={isManageEnabled}>
+                    <lightning-button 
+                        name={bundleDetails.BundleId} 
+                        onclick={handleClick} 
+                        label="Edit Bundle" 
+                        title="Edit Bundle" 
+                        icon-name="utility:setup"
+                        class="slds-p-right_small"
+                    ></lightning-button>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-accordion allow-multiple-sections-open
+                        active-section-name={activeSections}
+                        onsectiontoggle={handleToggleSection}>
+            <template for:each={indicatorItems} for:item="indicatorItem">
+                <div key={indicatorItem.FieldApiName}>
+                    <lightning-accordion-section name={indicatorItem.IndicatorId} label={indicatorItem.FieldLabel}>
+                        
+                        <template lwc:if={isManageEnabled}>
+                            <div class="slds-text-heading_small slds-text-font_monospace slds-p-left_large slds-p-bottom_small">
+                                <p><b>Api Name:</b> {indicatorItem.FieldApiName}</p>
+                            </div>
+                        </template>
+                        <lightning-layout pull-to-boundary="small">
+                            <lightning-layout-item padding="horizontal-small" size="10" class="slds-text-align_left">
+                                    <p><b>Indicator Description:</b> {indicatorItem.Description}</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="horizontal-small" size="2" class="slds-text-align_right">
+                                <template lwc:if={isManageEnabled}>
+                                    <lightning-button name={indicatorItem.IndicatorId} onclick={handleClick} label="Edit Indicator" title="Edit Indicator" icon-name="utility:setup"></lightning-button>
+                                </template>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <template lwc:if={isManageEnabled}>
+                            <p><b>Display Inverse when false or empty:</b> 
+                                <template lwc:if={indicatorItem.DisplayFalse}>
+                                    <lightning-icon 
+                                        icon-name="utility:success" 
+                                        alternative-text="True" 
+                                        variant="success"
+                                        title="Display Inverse True"
+                                        size="x-small"
+                                        class="slds-p-left_small"
+                                    ></lightning-icon>
+                                </template>
+                                <template lwc:else>
+                                    <lightning-icon 
+                                        icon-name="utility:close" 
+                                        alternative-text="False" 
+                                        variant="error"
+                                        title="Display Inverse False"
+                                        size="x-small"
+                                        class="slds-p-left_small"
+                                    ></lightning-icon>
+                                </template>
+                            </p>
+                        </template>
+                        <template lwc:if={indicatorItem.DisplayZero}>
+                            <p><b>How are Zeros handled?</b> {indicatorItem.ZeroValueMode}</p>
+                        </template>
+                        <lightning-layout
+                            vertical-align="end"
+                            pull-to-boundary="small"
+                            class="slds-p-top_small"
+                        >
+                            <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
+                                <b>Indicator</b>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small" size="4" class="slds-border_bottom">
+                                <b>Description</b>
+                            </lightning-layout-item>
+                            <template lwc:if={isManageEnabled}>
+                                <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
+                                    <b>Priority </b>
+                                    <span style="position:relative; top:-4px;"> 
+                                        <lightning-helptext content="Priority determines which indicator is shown when multiple criteria are met."></lightning-helptext>
+                                    </span>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
+                                    <b>Fill Type </b>
+                                    <span style="position:relative; top:-4px;"> 
+                                        <lightning-helptext content="Fill Type indicates if the indicator using a Lightning icon display's static text over an icon, the field's value over an icon, or only the icon."></lightning-helptext>
+                                    </span>
+                                </lightning-layout-item>
+                            </template>
+                            <lightning-layout-item padding="around-small" size="2" class="slds-border_bottom">
+                                <b>Hover Value </b>
+                                <span style="position:relative; top:-4px;"> 
+                                    <lightning-helptext content="When the cursor hovers over the indicator, the text shown can be static text or the field's value."></lightning-helptext>
+                                </span>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small" size="2" class="slds-border_bottom">
+                                <b>Display Criteria</b>
+                            </lightning-layout-item>
+                            <template lwc:if={isManageEnabled}>
+                                <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
+                                    &nbsp;
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                        <template for:each={indicatorItem.Indicators} for:item="indicator">
+                            <div class="slds-border_bottom" key={indicator.IndicatorId}>
+                                <c-indicator-key-row
+                                    key-id={indicator.IndicatorId}
+                                    key-icon={indicator.IconName}
+                                    key-image={indicator.ImageUrl}
+                                    key-text={indicator.TextValue}
+                                    key-description={indicator.Description}
+                                    key-fill-type={indicator.FillType}
+                                    key-hover-value={indicator.HoverValue}
+                                    key-priority={indicator.Priority}
+                                    key-extension-logic={indicator.ExtensionLogic}
+                                    key-background={indicator.Background}
+                                    key-foreground={indicator.Foreground}
+                                    is-manage-enabled={isManageEnabled}
+                                ></c-indicator-key-row>
+                            </div>
+                        </template>
+                        <template lwc:if={indicatorItem.DisplayCollapse}>
+                            <lightning-button name={indicatorItem.IndicatorId} variant="base" label="Collapse Section" onclick={handleCollapseSection} icon-name="utility:chevronup" class="slds-m-left_x-small"></lightning-button>
+                        </template>
+                    </lightning-accordion-section>
+                </div>
+            </template>
+        </lightning-accordion>
+    </lightning-card>
+</template>
