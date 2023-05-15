@@ -1,5 +1,19 @@
 public with sharing class IndicatorController {
 
+    public class EntityDefList {
+        @AuraEnabled
+        public List<EntityDef> Entities {get; set;}
+    }
+
+    public class EntityDef {
+        @AuraEnabled
+        public String Name {get; set;}
+        @AuraEnabled
+        public String Label {get; set;}
+        @AuraEnabled
+        public String NewUrl {get; set;}
+    }
+
     public class IndicatorBundle {
         @AuraEnabled
         public Boolean IsActive {get; set;}
@@ -97,6 +111,33 @@ public with sharing class IndicatorController {
         public String ForegroundColor {get; set;}
     }
     
+    @AuraEnabled
+    public static EntityDefList getNewCmdtUrls(){
+
+        EntityDefList wrapper = new EntityDefList();
+        wrapper.Entities = new List<EntityDef>();
+
+        for(EntityDefinition ed : [
+            SELECT DeveloperName, Label, MasterLabel, KeyPrefix, DetailUrl, EditUrl, NewUrl 
+            FROM EntityDefinition 
+            WHERE QualifiedApiName IN (
+                'Indicator_Bundle__mdt', 
+                'Indicator_Bundle_Item__mdt', 
+                'Indicator_Item__mdt', 
+                'Indicator_Item_Extension__mdt'
+            )
+            ORDER BY MasterLabel ASC
+        ]){
+            EntityDef entity = new EntityDef();
+            entity.Name = ed.DeveloperName;
+            entity.Label = ed.MasterLabel;
+            entity.NewUrl = ed.NewUrl;
+            wrapper.Entities.add(entity);
+        }
+       
+        return wrapper;
+    }
+
     @AuraEnabled(cacheable=true)
     public static IndicatorBundle getIndicatorBundle(String bundleDevName){
 

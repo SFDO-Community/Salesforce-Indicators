@@ -21,6 +21,29 @@ global class IndicatorListBundleSelector extends VisualEditor.DynamicPickList {
             return valuePairs;
         }
     
+        @AuraEnabled(cacheable=true)
+        public static List<PicklistOption> getBundleOptions(){
+            List<PicklistOption> options = new List<PicklistOption>();
+
+            IndicatorListBundleSelector ilbs = new IndicatorListBundleSelector();
+            for(VisualEditor.DataRow row : ilbs.getValues().getDataRows()){
+                if(row.getValue() != null){
+                    PicklistOption o = new PicklistOption();
+                    o.label = row.getLabel();
+                    o.value = (String) row.getValue();
+                    options.add( o );    
+                }
+            }
+
+            return options;
+        }
+
+        public class PicklistOption {
+            @AuraEnabled
+            public String label {get; set;}
+            @AuraEnabled
+            public String value {get; set;}
+        }
     
     
     }
