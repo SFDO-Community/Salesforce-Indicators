@@ -36,9 +36,6 @@ export default class IndicatorListItem extends LightningElement {
 
     initCSSVariables() {
 
-        console.log('Indicator Background Color: ', this.indBackgroundColor);
-        console.log('Indicator Foreground Color: ', this.indForegroundColor);
-
         if(this.indBackgroundColor || this.indForegroundColor){
             var css = this.template.querySelector(".indicatorIcon").style;
     

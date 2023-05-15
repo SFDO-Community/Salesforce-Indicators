@@ -57,9 +57,6 @@ export default class IndicatorBundle extends LightningElement {
 
     initCSSVariables() {
 
-        console.log('Card Icon Background Color: ', this.bundle.CardIconBackground);
-        console.log('Card Icon Foreground Color: ', this.bundle.CardIconForeground);
-
         if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
             var css = this.template.querySelector(".cardIcon").style;
 
