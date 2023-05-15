@@ -167,6 +167,11 @@ export default class IndicatorBundleKey extends LightningModal {
         return hasManagePermission;
     }
 
+    handleState2(){
+        this.isOpen = !this.isOpen;
+        this.template.querySelector('c-key').handleState();
+    }
+
     handleState(){
         this.isOpen = !this.isOpen;
         if(this.isOpen){

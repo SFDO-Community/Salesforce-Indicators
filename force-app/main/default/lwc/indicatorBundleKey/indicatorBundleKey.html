@@ -1,7 +1,11 @@
 <template>
     <lightning-modal-header label={bundleDetails.Title}></lightning-modal-header>
     <lightning-modal-body>
-        <lightning-layout pull-to-boundary="small">
+        <c-key
+            bundle-name={bundleName}
+            bundle={bundle}
+        ></c-key>
+        <!-- <lightning-layout pull-to-boundary="small">
             <lightning-layout-item padding="horizontal-small" size="10" class="slds-text-align_left">
                 <div class="slds-text-heading_small">
                     <b>Bundle Description:</b> {bundleDetails.Description}
@@ -19,20 +23,20 @@
                     ></lightning-button>
                 </template>
             </lightning-layout-item>
-        </lightning-layout>
+        </lightning-layout> -->
         <!-- <c-navigation-button
                 source-id="m017x00000CHSsH"
                 icon="utility:setup"
                 label="Edit Bundle"
             ></c-navigation-button> -->
-        <lightning-accordion allow-multiple-sections-open
+        <!-- <lightning-accordion allow-multiple-sections-open
                         active-section-name={activeSections}
                         onsectiontoggle={handleToggleSection}>
             <template for:each={indicatorItems} for:item="indicatorItem">
                 <div key={indicatorItem.FieldApiName}>
-                    <lightning-accordion-section name={indicatorItem.IndicatorId} label={indicatorItem.FieldLabel}>
+                    <lightning-accordion-section name={indicatorItem.IndicatorId} label={indicatorItem.FieldLabel}> -->
                         <!-- <div class="slds-text-heading_medium">{indicatorItem.FieldLabel}</div> -->
-                        <template lwc:if={isManageEnabled}>
+                        <!-- <template lwc:if={isManageEnabled}>
                             <div class="slds-text-heading_small slds-text-font_monospace slds-p-left_large slds-p-bottom_small">
                                 <p><b>Api Name:</b> {indicatorItem.FieldApiName}</p>
                             </div>
@@ -115,8 +119,8 @@
                             </template>
                         </lightning-layout>
                         <template for:each={indicatorItem.Indicators} for:item="indicator">
-                            <div class="slds-border_bottom" key={indicator.IndicatorId}>
-                                <c-indicator-key-row
+                            <div class="slds-border_bottom" key={indicator.IndicatorId}> -->
+                                <!-- <c-indicator-key-row
                                     key-id={indicator.IndicatorId}
                                     key-icon={indicator.IconName}
                                     key-image={indicator.ImageUrl}
@@ -129,8 +133,8 @@
                                     key-background={indicator.Background}
                                     key-foreground={indicator.Foreground}
                                     is-manage-enabled={isManageEnabled}
-                                ></c-indicator-key-row>
-                            </div>
+                                ></c-indicator-key-row> -->
+                            <!-- </div>
                         </template>
                         <template lwc:if={indicatorItem.DisplayCollapse}>
                             <lightning-button name={indicatorItem.IndicatorId} variant="base" label="Collapse Section" onclick={handleCollapseSection} icon-name="utility:chevronup" class="slds-m-left_x-small"></lightning-button>
@@ -138,7 +142,7 @@
                     </lightning-accordion-section>
                 </div>
             </template>
-        </lightning-accordion>
+        </lightning-accordion> -->
     </lightning-modal-body>
     <lightning-modal-footer>
         <lightning-layout>
@@ -150,7 +154,7 @@
                     icon-name-when-on="utility:expand_all"
                     variant="brand"
                     selected={isOpen}
-                    onclick={handleState}>
+                    onclick={handleState2}>
                 </lightning-button-stateful>
             </lightning-layout-item>
             <lightning-layout-item size="6" class="slds-text-align_right">
