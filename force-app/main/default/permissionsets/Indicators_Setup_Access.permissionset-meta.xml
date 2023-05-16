@@ -7,4 +7,8 @@
     <description>Grants users access to setup Indicators in custom metadata and view management in the key.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Indicators Setup Access</label>
+    <tabSettings>
+        <tab>Indicators_Setup</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
 </PermissionSet>

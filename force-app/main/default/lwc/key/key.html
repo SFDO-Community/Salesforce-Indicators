@@ -1,13 +1,30 @@
 <template>
-    <lightning-modal-header label={bundleDetails.Title}></lightning-modal-header>
-    <lightning-modal-body>
-        <c-key
-            bundle-name={bundleName}
-            bundle={bundle}
-        ></c-key>
-        <!-- <lightning-layout pull-to-boundary="small">
+    <lightning-card variant="narrow" class="slds-var-p-around_medium">
+        <template lwc:if={isSetup}>
+            <lightning-button-stateful
+                slot="actions"
+                label-when-off="Collapse All"
+                label-when-on="Expand All"
+                icon-name-when-off="utility:collapse_all"
+                icon-name-when-on="utility:expand_all"
+                variant="brand"
+                selected={isOpen}
+                onclick={handleState}>
+            </lightning-button-stateful>
+        </template>
+        <h3 slot="title">
+            <lightning-icon 
+                icon-name={bundleDetails.Icon} 
+                size="medium"
+                class={bundleDetails.IconClass}
+            >
+            </lightning-icon>
+            {bundleDetails.Title}
+        </h3>
+        <p class="slds-var-p-horizontal_medium">{bundleDetails.Body}</br></br></br></p>
+        <lightning-layout pull-to-boundary="small">
             <lightning-layout-item padding="horizontal-small" size="10" class="slds-text-align_left">
-                <div class="slds-text-heading_small">
+                <div class="slds-var-p-horizontal_medium slds-text-heading_small">
                     <b>Bundle Description:</b> {bundleDetails.Description}
                 </div>
             </lightning-layout-item>
@@ -23,20 +40,15 @@
                     ></lightning-button>
                 </template>
             </lightning-layout-item>
-        </lightning-layout> -->
-        <!-- <c-navigation-button
-                source-id="m017x00000CHSsH"
-                icon="utility:setup"
-                label="Edit Bundle"
-            ></c-navigation-button> -->
-        <!-- <lightning-accordion allow-multiple-sections-open
+        </lightning-layout>
+        <lightning-accordion allow-multiple-sections-open
                         active-section-name={activeSections}
                         onsectiontoggle={handleToggleSection}>
             <template for:each={indicatorItems} for:item="indicatorItem">
                 <div key={indicatorItem.FieldApiName}>
-                    <lightning-accordion-section name={indicatorItem.IndicatorId} label={indicatorItem.FieldLabel}> -->
-                        <!-- <div class="slds-text-heading_medium">{indicatorItem.FieldLabel}</div> -->
-                        <!-- <template lwc:if={isManageEnabled}>
+                    <lightning-accordion-section name={indicatorItem.IndicatorId} label={indicatorItem.FieldLabel}>
+                        
+                        <template lwc:if={isManageEnabled}>
                             <div class="slds-text-heading_small slds-text-font_monospace slds-p-left_large slds-p-bottom_small">
                                 <p><b>Api Name:</b> {indicatorItem.FieldApiName}</p>
                             </div>
@@ -119,8 +131,8 @@
                             </template>
                         </lightning-layout>
                         <template for:each={indicatorItem.Indicators} for:item="indicator">
-                            <div class="slds-border_bottom" key={indicator.IndicatorId}> -->
-                                <!-- <c-indicator-key-row
+                            <div class="slds-border_bottom" key={indicator.IndicatorId}>
+                                <c-indicator-key-row
                                     key-id={indicator.IndicatorId}
                                     key-icon={indicator.IconName}
                                     key-image={indicator.ImageUrl}
@@ -133,8 +145,8 @@
                                     key-background={indicator.Background}
                                     key-foreground={indicator.Foreground}
                                     is-manage-enabled={isManageEnabled}
-                                ></c-indicator-key-row> -->
-                            <!-- </div>
+                                ></c-indicator-key-row>
+                            </div>
                         </template>
                         <template lwc:if={indicatorItem.DisplayCollapse}>
                             <lightning-button name={indicatorItem.IndicatorId} variant="base" label="Collapse Section" onclick={handleCollapseSection} icon-name="utility:chevronup" class="slds-m-left_x-small"></lightning-button>
@@ -142,24 +154,6 @@
                     </lightning-accordion-section>
                 </div>
             </template>
-        </lightning-accordion> -->
-    </lightning-modal-body>
-    <lightning-modal-footer>
-        <lightning-layout>
-            <lightning-layout-item size="6" class="slds-text-align_left">
-                <lightning-button-stateful
-                    label-when-off="Collapse All"
-                    label-when-on="Expand All"
-                    icon-name-when-off="utility:collapse_all"
-                    icon-name-when-on="utility:expand_all"
-                    variant="brand"
-                    selected={isOpen}
-                    onclick={handleState2}>
-                </lightning-button-stateful>
-            </lightning-layout-item>
-            <lightning-layout-item size="6" class="slds-text-align_right">
-                <lightning-button label="Close" onclick={handleOkay} class="slds-m-left_medium"></lightning-button>
-            </lightning-layout-item>
-        </lightning-layout>
-    </lightning-modal-footer>
+        </lightning-accordion>
+    </lightning-card>
 </template>

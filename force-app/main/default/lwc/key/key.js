@@ -1,12 +1,9 @@
-import { api, wire } from 'lwc';
-import LightningModal from 'lightning/modal';
-
+import { LightningElement, api } from 'lwc';
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 
-export default class IndicatorBundleKey extends LightningModal {
+export default class Key extends LightningElement {
 
-    @api bundleName;
-    @api bundle;
+    _bundle;
     bundleDetails = {};
     indicatorItems = [];
 
@@ -14,15 +11,49 @@ export default class IndicatorBundleKey extends LightningModal {
     allSections = [];
 
     isOpen = false;
+    @api isSetup = false;
+
+    @api
+    set bundle(value){
+        this._bundle = value;
+    }
+    get bundle(){
+        return this._bundle;
+    }
+
+    renderedCallback() { 
+        if(this.bundle){
+            this.initCSSVariables();
+        }
+    }
+
+    initCSSVariables() {
+
+        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
+            var css = this.template.querySelector(".cardIcon").style;
+
+            css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
+            css.setProperty('--foregroundColor', this.bundle.CardIconForeground);
+        }
+
+    }
 
     connectedCallback(){
+        
         // this.indicatorItems = this.bundle.Items;
 
         this.bundleDetails = {
             Title: this.bundle.CardTitle,
             Body: this.bundle.CardText,
+            Icon: this.bundle.CardIcon,
             Description: this.bundle.BundleDescription,
             BundleId: this.bundle.BundleId
+        }
+
+        if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
+            this.bundleDetails.IconClass = 'cardIcon slds-var-m-right_xx-small ';
+        } else {
+            this.bundleDetails.IconClass = 'slds-var-m-right_xx-small ';
         }
 
         // console.log(JSON.stringify(this.bundleDetails));
@@ -167,11 +198,7 @@ export default class IndicatorBundleKey extends LightningModal {
         return hasManagePermission;
     }
 
-    handleState2(){
-        this.isOpen = !this.isOpen;
-        this.template.querySelector('c-key').handleState();
-    }
-
+    @api
     handleState(){
         this.isOpen = !this.isOpen;
         if(this.isOpen){
@@ -189,7 +216,4 @@ export default class IndicatorBundleKey extends LightningModal {
         this.activeSections = [];
     }
 
-    handleOkay() {
-        this.close('okay');
-    }
 }

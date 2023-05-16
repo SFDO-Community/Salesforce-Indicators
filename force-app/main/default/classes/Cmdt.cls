@@ -11,8 +11,8 @@ public with sharing class Cmdt {
                 Card_Text__c, 
                 Card_Title__c, 
                 Description__c, 
-                // Card_Icon_Background__c,
-                // Card_Icon_Foreground__c,
+                Card_Icon_Background__c,
+                Card_Icon_Foreground__c,
                 sObject__c, sObject__r.QualifiedApiName
             FROM Indicator_Bundle__mdt
             WHERE Active__c = TRUE
@@ -38,10 +38,10 @@ public with sharing class Cmdt {
                 sObject__c, sObject__r.QualifiedApiName,
                 Static_Text__c,
                 Zero_Behavior__c,
-                // Background_Color__c,
-                // Foreground_Color__c,
-                // Inverse_Background_Color__c,
-                // Inverse_Foreground_Color__c,
+                Icon_Background__c,
+                Icon_Foreground__c,
+                Inverse_Icon_Background__c,
+                Inverse_Icon_Foreground__c,
                 Description__c
             FROM Indicator_Item__mdt
             WHERE Active__c = TRUE
@@ -74,8 +74,8 @@ public with sharing class Cmdt {
                 Minimum__c,
                 Priority__c,
                 Static_Text__c,
-                // Background_Color__c,
-                // Foreground_Color__c,
+                Icon_Background__c,
+                Icon_Foreground__c,
                 Description__c
             FROM Indicator_Item_Extension__mdt
             WHERE Active__c = TRUE

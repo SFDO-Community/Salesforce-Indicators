@@ -7,14 +7,14 @@ export default class IndicatorListItem extends LightningElement {
     @api indImage = '';
     @api indIcon = 'standard:marketing_actions';
     @api indHoverText = '';
-    // @api foregroundColor;
-    // @api backgroundColor;
+    @api indBackgroundColor;
+    @api indForegroundColor;
 
     get indClass() {
         let classValue = '';
-        // if(!this.foregroundColor || !this.backgroundColor){
-        //     classValue = 'indicator-icon ';
-        // }
+        if(this.indBackgroundColor || this.indForegroundColor){
+            classValue = 'indicatorIcon ';
+        }
         
         if(this.indSize == 'large'){
             classValue += 'slds-var-m-right_small slds-var-m-vertical_medium';
@@ -30,12 +30,18 @@ export default class IndicatorListItem extends LightningElement {
         return classValue;
     }
 
-    // renderedCallback() { 
-    //     this.initCSSVariables();
-    // }
+    renderedCallback() { 
+        this.initCSSVariables();
+    }
 
-    // initCSSVariables() {
-    //     this.template.querySelector('.indicator-icon').style.setProperty('--backgroundColor', this.backgroundColor);
-    //     this.template.querySelector('.indicator-icon').style.setProperty('--foregroundColor', this.foregroundColor);
-    // }
+    initCSSVariables() {
+
+        if(this.indBackgroundColor || this.indForegroundColor){
+            var css = this.template.querySelector(".indicatorIcon").style;
+    
+            css.setProperty('--backgroundColor', this.indBackgroundColor);
+            css.setProperty('--foregroundColor', this.indForegroundColor);
+        }
+
+    }
 }

@@ -10,8 +10,10 @@
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
             <property name="bundleName" type="String" label="Indicator Bundle" datasource="apex://IndicatorListBundleSelector" description="Choose the Indicator Bundle."/>
-            <property name="indsSize" type="String" label="Icon Size" placeholder="large" datasource="large,medium" description="Choose the Icon Size."/>
-            <property name="indsShape" type="String" label="Icon Shape" placeholder="base" datasource="base,circle" description="Choose the Icon Shape."/>
+            <property name="showTitle" type="Boolean" default="true" label="Display Title" description="Display the Indicator's Title on the component."/>
+            <property name="showDescription" type="Boolean" default="true" label="Display Description" description="Display the Indicator's Description on the component."/>
+            <property name="indsSize" type="String" label="Indicator Size" placeholder="large" datasource="large,medium" description="Choose the Indicator Size."/>
+            <property name="indsShape" type="String" label="Indicator Shape" placeholder="base" datasource="base,circle" description="Choose the Indicator Shape."/>
             <property name="showRefresh" type="Boolean" label="Show refresh button" description="Enable an admin button to refresh the values."/>
             <supportedFormFactors>
                 <supportedFormFactor type="Large" />

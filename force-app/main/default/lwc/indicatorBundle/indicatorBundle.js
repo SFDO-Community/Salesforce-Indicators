@@ -11,6 +11,8 @@ export default class IndicatorBundle extends LightningElement {
     @api recordId;  // Record Id from the record page
     @api objectApiName; // sObject from the record page
     @api flexipageRegionWidth;  // Width of the container on record page
+    @api showDescription;
+    @api showTitle;
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false;
@@ -47,6 +49,23 @@ export default class IndicatorBundle extends LightningElement {
         }
     }
 
+    renderedCallback() { 
+        if(this.bundle){
+            this.initCSSVariables();
+        }
+    }
+
+    initCSSVariables() {
+
+        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
+            var css = this.template.querySelector(".cardIcon").style;
+
+            css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
+            css.setProperty('--foregroundColor', this.bundle.CardIconForeground);
+        }
+
+    }
+
     // Call the Apex Class to return the CMDT Bundle, Items, and Extensions wrapper.
     @wire(getIndicatorConfig, {bundleDevName : '$bundleName'})
     bundleWire (result) {
@@ -76,9 +95,18 @@ export default class IndicatorBundle extends LightningElement {
                         body: this.bundle.CardText
                     }
 
-                    if(this.bundle.CardTitle || this.bundle.CardIcon){
+                    if( this.showTitle || this.showDescription ){
                         this.hasHeader = true;
                     }
+
+                    if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
+                        this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
+                    } else {
+                        this.card.iconClass = 'slds-var-m-right_xx-small ';
+                    }
+
+                    console.log('Card Data');
+                    console.dir(JSON.stringify(this.card));
 
                     // console.log(this.bundle.Items.length);
 
@@ -204,7 +232,9 @@ export default class IndicatorBundle extends LightningElement {
                                         "TextValue" : extension.ExtensionTextValue,
                                         "ImageUrl" : extension.ExtensionImageUrl,
                                         "HoverValue" : extension.ExtensionHoverText,
-                                        "Priority" : extension.PriorityOrder
+                                        "Priority" : extension.PriorityOrder,
+                                        "IconBackground" : extension.BackgroundColor,
+                                        "IconForeground" : extension.ForegroundColor
                                     };
 
                                     console.dir(matchedExtension);
@@ -220,13 +250,13 @@ export default class IndicatorBundle extends LightningElement {
                     {
                         fName: item.FieldApiName,   // Retain for debug purposes
                         fTextValue: dataValue,      // Retain for debug purposes
-                        ...dataValue || dataValue === 0  ? {
+                        ...dataValue || dataValue === 0 ? {
                                 fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
                             } : {
                                 fImageURL: item.DisplayFalse ? item.FalseImageUrl : ''
                             },
                         // ! If value is false, the false hover will be set.
-                        ...dataValue || dataValue === 0  ? {
+                        ...dataValue || dataValue === 0 ? {
                                 fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
                             } : {
                                 fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
@@ -242,6 +272,16 @@ export default class IndicatorBundle extends LightningElement {
                                 fIconName : matchedExtension ? matchedExtension.IconName : item.IconName
                             } : {
                                 fIconName: item.DisplayFalse ? item.FalseIcon : ''
+                            },
+                        ...dataValue || dataValue === 0 ? {
+                                fIconBackground : matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor
+                            } : {
+                                fIconBackground: item.DisplayFalse? item.InverseBackgroundColor : item.BackgroundColor
+                            },
+                        ...dataValue || dataValue === 0 ? {
+                                fIconForeground : matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
+                            } : {
+                                fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
                             },
                         //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
                         //If the Icon Text is entered then show that
@@ -275,8 +315,6 @@ export default class IndicatorBundle extends LightningElement {
             console.log('Error!');
             this.errorMessage = JSON.stringify(error);
             this.errorOccurred = true;
-        } else {
-            console.log('Just Else?!');
         }
 
     }
