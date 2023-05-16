@@ -2,7 +2,7 @@
 private class IndicatorListBundleSelectorTests {
 
     @isTest
-    private static void successfullyReturnDefault() {
+    static void successfullyReturnDefault() {
         // Test data setup
         IndicatorListBundleSelector selector = new IndicatorListBundleSelector();
 
@@ -17,7 +17,7 @@ private class IndicatorListBundleSelectorTests {
     }
 
     @isTest
-    private static void succesfullyReturnOptions() {
+    static void succesfullyReturnOptions() {
         // Test data setup
         Indicator_Bundle__mdt bundle = Build.aBundle().build();
         Cmdt.setBundle(bundle);
@@ -31,6 +31,22 @@ private class IndicatorListBundleSelectorTests {
     
         // Asserts
         Assert.areEqual(options.size(),2);
+    }
+
+    @isTest
+    static void successfullyReturnBundleOptions() {
+        Indicator_Bundle__mdt bundle = Build.aBundle().build();
+        Cmdt.setBundle(bundle);
+
+        // Actual test
+        Test.startTest();
+            List<IndicatorListBundleSelector.PicklistOption> options = IndicatorListBundleSelector.getBundleOptions();
+        Test.stopTest();
+    
+        // Asserts
+        Assert.areEqual(options.size(),1);
+        Assert.areEqual(bundle.Label, options[0].label);
+        Assert.areEqual(bundle.DeveloperName, options[0].value);
     }
 
 }
