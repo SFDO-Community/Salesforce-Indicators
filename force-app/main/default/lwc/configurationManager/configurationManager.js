@@ -19,7 +19,7 @@ export default class ConfigurationManager extends LightningElement {
     wiredData;
 
     connectedCallback(){
-        console.log('Picklist Wire call');
+        // console.log('Picklist Wire call');
         getBundleOptions()
             .then((result)=>{
                 this.options = result;
@@ -31,7 +31,7 @@ export default class ConfigurationManager extends LightningElement {
         getNewCmdtUrls()
             .then((result)=>{
                 this.newUrls = result.Entities;
-                console.dir(this.newUrls);
+                // console.dir(this.newUrls);
             })
             .catch((error)=>{
                 console.log('Error');
@@ -41,7 +41,7 @@ export default class ConfigurationManager extends LightningElement {
 
     @wire(getIndicatorConfig, {bundleDevName : '$bundleName'})
     bundleWire (result) {
-        console.log('Config Wire call');
+        // console.log('Config Wire call');
         this.wiredData = result;
         const { data, error } = result;
 
@@ -50,7 +50,7 @@ export default class ConfigurationManager extends LightningElement {
             this.error = undefined;
             this.bundle = data;
             console.log('Selected: ', this.bundleName);
-            console.dir(this.bundle);
+            // console.dir(this.bundle);
         } else if (error){
             this.showKey = false;
             this.error = error;
@@ -67,7 +67,7 @@ export default class ConfigurationManager extends LightningElement {
     }
 
     handleNewClick(event) {
-        console.dir(event);
+        // console.dir(event);
         window.open('/lightning/setup/CustomMetadata/page?address=' + event.target.value,'_blank');
     }
 
