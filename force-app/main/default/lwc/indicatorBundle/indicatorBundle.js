@@ -3,6 +3,7 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import KeyModal from 'c/indicatorBundleKey';
 
+import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
 
 export default class IndicatorBundle extends LightningElement {
@@ -37,7 +38,8 @@ export default class IndicatorBundle extends LightningElement {
 
     connectedCallback(){
         if(!this.bundleName){
-            this.showIllustration=true;
+            this.errorOccurred = true;
+            this.showIllustration = true;
             this.illustration = {
                 heading : 'LOOK OUT!',
                 messageBody: 'Bundle not assigned... select one.',
@@ -66,6 +68,10 @@ export default class IndicatorBundle extends LightningElement {
 
     }
 
+    get isManageEnabled() {
+        return hasManagePermission;
+    }
+
     // Call the Apex Class to return the CMDT Bundle, Items, and Extensions wrapper.
     @wire(getIndicatorConfig, {bundleDevName : '$bundleName'})
     bundleWire (result) {
@@ -73,7 +79,7 @@ export default class IndicatorBundle extends LightningElement {
         const { data, error } = result;
         if(data) {
             if(Object.keys(data).length) {  // Used to confirm that values were returned, rather than an empty object
-                console.dir(data);   // Retain for debug purposes
+                // console.dir(data);   // Retain for debug purposes
 
                 this.bundle = data;
                 this.bundleActive = true;
@@ -81,10 +87,12 @@ export default class IndicatorBundle extends LightningElement {
                 this.errorMessage = undefined;
 
                 if(!this.bundle.IsActive){
+                    this.errorOccurred = true;
+                    this.bundleActive = false;
                     this.showIllustration = true;
                     this.illustration = {
                         heading : 'Uh oh!',
-                        messageBody: 'Bundle not found. Check if it\'s active.',
+                        messageBody: 'Bundle (' + this.bundleName + ') not found. Check if it\'s active.',
                         imageName: 'error:no_access'
                     }
                 } else {
@@ -105,8 +113,8 @@ export default class IndicatorBundle extends LightningElement {
                         this.card.iconClass = 'slds-var-m-right_xx-small ';
                     }
 
-                    console.log('Card Data');
-                    console.dir(JSON.stringify(this.card));
+                    // console.log('Card Data');
+                    // console.dir(JSON.stringify(this.card));
 
                     // console.log(this.bundle.Items.length);
 
@@ -161,7 +169,7 @@ export default class IndicatorBundle extends LightningElement {
         const {error,data} = result;
         this.wiredData = result;
         if (data) {
-            console.dir(data);   // Retain for debug purposes
+            // console.dir(data);   // Retain for debug purposes
             let matchingFields = [];
             
             // Loop through the configured CMDT indicator items
@@ -237,7 +245,7 @@ export default class IndicatorBundle extends LightningElement {
                                         "IconForeground" : extension.ForegroundColor
                                     };
 
-                                    console.dir(matchedExtension);
+                                    // console.dir(matchedExtension);
                                 }
 
                             }
@@ -310,7 +318,7 @@ export default class IndicatorBundle extends LightningElement {
                     });
                 });
             this.results = matchingFields;
-            console.log('FieldValue => ', JSON.stringify(this.results));   // Retain for debug purposes
+            // console.log('FieldValue => ', JSON.stringify(this.results));   // Retain for debug purposes
         } else if (error) {
             console.log('Error!');
             this.errorMessage = JSON.stringify(error);

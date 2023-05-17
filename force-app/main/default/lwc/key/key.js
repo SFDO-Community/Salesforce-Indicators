@@ -11,6 +11,7 @@ export default class Key extends LightningElement {
     allSections = [];
 
     isOpen = false;
+    isBundle = false;
     @api isSetup = false;
 
     @api
@@ -47,7 +48,12 @@ export default class Key extends LightningElement {
             Body: this.bundle.CardText,
             Icon: this.bundle.CardIcon,
             Description: this.bundle.BundleDescription,
-            BundleId: this.bundle.BundleId
+            BundleId: this.bundle.BundleId,
+            IsActive: this.bundle.IsActive
+        }
+
+        if(this.bundle.BundleId){
+            this.isBundle = true;
         }
 
         if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
@@ -78,8 +84,14 @@ export default class Key extends LightningElement {
                         FillType: item.TextValue ? 'Static Text' : item.EmptyStaticBehavior,
                         Description: '',
                         Background: item.BackgroundColor,
-                        Foreground: item.ForegroundColor
+                        Foreground: item.ForegroundColor,
+                        IsActive: item.IsActive
                     };
+                    if(item.IsActive){
+                        normalIcon.showItem = true;
+                    } else {
+                        normalIcon.showItem = hasManagePermission;
+                    }
                     if(item.EmptyStaticBehavior == 'Use Field Value'){
                         normalIcon.TextValue = '\xa0Abc\r\n\xa0123';
                         normalIcon.Description = 'Displays the field\'s value inside the indicator';
@@ -104,8 +116,16 @@ export default class Key extends LightningElement {
                         FillType: item.FalseTextValue ? 'Static Text' : 'Icon/Image',
                         Description: '',
                         Background: item.InverseBackgroundColor,
-                        Foreground: item.InverseForegroundColor
+                        Foreground: item.InverseForegroundColor,
+                        IsActive: item.IsActive
                     };
+
+                    if(item.IsActive){
+                        inverseIcon.showItem = true;
+                    } else {
+                        inverseIcon.showItem = hasManagePermission;
+                    }
+
                     if(item.ZeroBehavior == 'Treat Zeroes as Blanks'){
                         inverseIcon.ExtensionLogic += ' or zero'
                     }
@@ -136,8 +156,15 @@ export default class Key extends LightningElement {
                                 FillType: ext.ExtensionTextValue ? 'Static Text' : 'Icon/Image',
                                 Description: ext.ExtensionDescription,
                                 Background: ext.BackgroundColor,
-                                Foreground: ext.ForegroundColor
+                                Foreground: ext.ForegroundColor,
+                                IsActive: ext.IsActive
                             };
+
+                            if(ext.IsActive){
+                                extensionIcon.showItem = true;
+                            } else {
+                                extensionIcon.showItem = hasManagePermission;
+                            }
 
                             if(ext.ContainsText) {
                                 extensionIcon.ExtensionLogic = item.FieldLabel + ' contains: \"' + ext.ContainsText + '\"';
@@ -163,8 +190,15 @@ export default class Key extends LightningElement {
                     DisplayZero: item.ZeroBehavior ? true : false,
                     Description: item.IndicatorDescription,
                     IndicatorId: item.IndicatorId,
-                    Indicators: indicators
+                    Indicators: indicators,
+                    IsActive: item.IsActive
                 };
+                
+                if(item.IsActive){
+                    bundleItem.showIndicator = true;
+                } else {
+                    bundleItem.showIndicator = hasManagePermission;
+                }
 
                 if(indicatorCount > 4){
                     bundleItem.DisplayCollapse = true;

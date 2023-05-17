@@ -14,6 +14,7 @@ export default class IndicatorKeyRow extends LightningElement {
     @api isManageEnabled = false;
     @api keyBackground = '';
     @api keyForeground = '';
+    @api keyIsActive = false;
 
     handleClick(event){
         console.log('Indicator Btn Click')
