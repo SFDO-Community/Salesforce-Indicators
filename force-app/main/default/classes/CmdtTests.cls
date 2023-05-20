@@ -2,7 +2,7 @@
 private class CmdtTests {
 
     @isTest
-    private static void successfullySetAndGetBundle() {
+    static void successfullySetAndGetBundle() {
         // Test data setup
         Indicator_Bundle__mdt bundle = 
             Build.aBundle()
@@ -25,7 +25,7 @@ private class CmdtTests {
     }
 
     @isTest
-    private static void successfullySetAndGetItem() {
+    static void successfullySetAndGetItem() {
         // Test data setup
         Indicator_Item__mdt item = 
             Build.anItem()
@@ -48,7 +48,7 @@ private class CmdtTests {
     }
 
     @isTest
-    private static void successfullySetAndGetBundleItem() {
+    static void successfullySetAndGetBundleItem() {
         // Test data setup
         Indicator_Bundle__mdt bundle = Build.aBundle().build();
         Cmdt.setBundle(bundle);
@@ -76,7 +76,7 @@ private class CmdtTests {
     }
 
     @isTest
-    private static void successfullySetAndGetExtension() {
+    static void successfullySetAndGetExtension() {
         // Test data setup
         Indicator_Item__mdt item = Build.anItem().build();
         Cmdt.setItem(item);
@@ -97,27 +97,79 @@ private class CmdtTests {
     }
 
     @isTest
-    private static void successfullyReturnEmptyResults() {
+    static void successfullyReturnEmptyResults() {
         // Test data setup
-    
+        
         // Actual test
         Test.startTest();
 
-        List<Indicator_Bundle__mdt> allActiveBundles = Cmdt.getAllActiveBundles();
-        Indicator_Bundle__mdt bundle = Cmdt.getBundle('Nonexistent_Bundle');
-        List<Indicator_Bundle_Item__mdt> bundleItems = Cmdt.getBundleItems('Nonexistent_Bundle');
+            List<Indicator_Bundle__mdt> allActiveBundles = Cmdt.getAllActiveBundles();
 
-        Indicator_Item__mdt item = Cmdt.getItem('Nonexistent_Item');
-        List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem('Nonexistent_Item');
+            Indicator_Bundle__mdt missingBundle = Cmdt.getBundle('Nonexistent_Bundle');
+            List<Indicator_Bundle_Item__mdt> missingBundleItems = Cmdt.getBundleItems('Nonexistent_Bundle');
+
+            Indicator_Item__mdt missingItem = Cmdt.getItem('Nonexistent_Item');
+            List<Indicator_Item_Extension__mdt> missingItemExtensions = Cmdt.getExtensionsForItem('Nonexistent_Item');
     
         Test.stopTest();
     
         // Asserts
         Assert.areEqual(allActiveBundles, new List<Indicator_Bundle__mdt>());
-        Assert.areEqual(bundle, new Indicator_Bundle__mdt());
-        Assert.areEqual(bundleItems, new List<Indicator_Bundle_Item__mdt>());
-        Assert.areEqual(item, new Indicator_Item__mdt());
-        Assert.areEqual(itemExtensions, new List<Indicator_Item_Extension__mdt>());
+        Assert.areEqual(missingBundle, new Indicator_Bundle__mdt());
+        Assert.areEqual(missingBundleItems, new List<Indicator_Bundle_Item__mdt>());
+        Assert.areEqual(missingItem, new Indicator_Item__mdt());
+        Assert.areEqual(missingItemExtensions, new List<Indicator_Item_Extension__mdt>());
+    }
+
+    @isTest
+    static void successfullyReturnOrphanItems() {
+        // Test data setup
+        Indicator_Bundle__mdt bundle = Build.aBundle().build();
+        Cmdt.setBundle(bundle);
+
+        Indicator_Item__mdt item = Build.anItem().build();
+        Cmdt.setItem(item);
+
+        Indicator_Item__mdt orphan = Build.anItem().build();
+        Cmdt.setItem(orphan);
+
+        Indicator_Bundle_Item__mdt bundleItem = Build.aBundleItem().withBundle(bundle).withItem(item).build();
+
+        // Actual test
+        Test.startTest();
+            List<Indicator_Item__mdt> orphanItems = Cmdt.getAllOrphanItems();
+        Test.stopTest();
+
+        // Asserts
+        Assert.areEqual(1,orphanItems.size());
+        Assert.areEqual(orphan,orphanItems[0]);
+    }
+
+    @isTest
+    static void successfullyReturnInactiveCmdt() {
+        // Test data setup
+        Indicator_Bundle__mdt inactiveBundle = Build.aBundle().asInactive().build();
+        Cmdt.setBundle(inactiveBundle);
+
+        // Indicator_Item__mdt inactiveItem = Build.anItem().asInactive().build();
+        // Cmdt.setItem(inactiveItem);
+
+        // Indicator_Item_Extension__mdt inactiveExtension = Build.anExtension().asInactive().withItem(inactiveItem).build();
+        // Cmdt.setItemExtension(inactiveExtension);
+
+        // Indicator_Bundle_Item__mdt inactiveBundleItem = Build.aBundleItem().withBundle(inactiveBundle).withItem(inactiveItem).build();
+        // Cmdt.setBundleItem(inactiveBundleItem);
+        
+        // Actual test
+        Test.startTest();
+
+            List<Indicator_Bundle__mdt> allBundles = Cmdt.getAllBundles();
+    
+        Test.stopTest();
+    
+        // Asserts
+        Assert.isNotNull(allBundles);
+        Assert.areEqual(inactiveBundle, allBundles[0]);
     }
 
 }

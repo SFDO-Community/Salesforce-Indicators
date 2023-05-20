@@ -194,9 +194,12 @@ public with sharing class Cmdt {
         initializeConfiguration();
         if(Test.isRunningTest()) {
             bundlesByName.clear();
+            activeBundlesByName.clear();
             itemsByName.clear();
+            activeItemsByName.clear();
             bundleItemsByBundle.clear();
             extensionsByItem.clear();
+            activeExtensionsByItem.clear();
         }
     }
 }

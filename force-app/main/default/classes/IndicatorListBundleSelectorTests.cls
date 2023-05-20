@@ -44,9 +44,13 @@ private class IndicatorListBundleSelectorTests {
         Test.stopTest();
     
         // Asserts
-        Assert.areEqual(options.size(),1);
+        Assert.areEqual(options.size(),2);
+
         Assert.areEqual(bundle.Label, options[0].label);
         Assert.areEqual(bundle.DeveloperName, options[0].value);
+
+        Assert.areEqual('** Unbundled Items **', options[1].label);
+        Assert.areEqual('-1', options[1].value);
     }
 
 }
