@@ -1,7 +1,7 @@
 # Salesforce Indicators
 
 # Status of Code
-We are in a bit of a transition phase at the moment and are in active development. 
+We are in a bit of a transition phase at the moment and are in active development, almost ready for release. 
 You can still use the older Indicators List Component and it will work fine, if you already have it installed.
 If you would like to test where we are at, install the managed package from the [Installation](../../wiki/Installing-Salesforce-Indicators) page and follow the steps to add the `Indicator Bundle` component to the page layout. 
 NOTE: Only test in a Scratch org, Developer org, or Sandbox at the moment whilst we are in active development.
@@ -18,8 +18,9 @@ We can't wait to get something stable that you can start to use in your producti
 ## Project Vertical
 This Component is a must-have for any Nonprofit org, but it works in any org and any vertical. 
 
-## Trailblazer Group or Slack Channel Link (access required)
-https://salesforce-external.slack.com/archives/C0476TZEAH3
+## Trailblazer Group or Slack Channel Link (access required)\
+https://trailhead.salesforce.com/trailblazer-community/groups/0F94S000000HEDASA4 - this is the place to ask any questions about the components or about the Salesforce Indicators project, or the Open Source Commons
+https://salesforce-external.slack.com/archives/C0476TZEAH3 - this is our Slack Community that anyone who has participated in a Sprint with us has access to. This is where we plan the upcoming improvements to the components.
 
 ## How to Contribute:
 - [Install the Component](../../wiki/Installing-Salesforce-Indicators)
@@ -34,5 +35,6 @@ Documentation can be found in the repository [wiki](../../wiki)
 # Project Acomplishments
 * Working on the rebuild to support Custom Metadata Types
 * Enhancements to the Indicator Component
+* The Indicator Key compoennt and Setup components to help build and understand the Indicators easily
 * New companion Components in progress
 * Working on the packaging and release
