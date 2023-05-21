@@ -30,7 +30,7 @@ private class IndicatorControllerTests {
         Assert.isNull(wrapper.BundleDescription);
         Assert.isNull(wrapper.BundleId);
         Assert.areEqual(2, wrapper.Items.size());
-        Assert.areEqual(wrapper.Items[10].Extensions.size(), 1);
+        Assert.areEqual(wrapper.Items[0].Extensions.size(), 1);
     }
     
     @isTest
@@ -78,6 +78,7 @@ private class IndicatorControllerTests {
     private static Indicator_Item_Extension__mdt anItemExtension;
     private static Indicator_Item_Extension__mdt anotherItemExtension;
     private static Indicator_Item_Extension__mdt anOrphanItemExtension;
+    // private static Indicator_Item_Extension__mdt anotherOrphanItemExtension;
 
     static {
         aBundle = Build.aBundle().withDevName('the_bundle').withCardTitle('Testing').withSOBject('Account').build();
@@ -90,6 +91,7 @@ private class IndicatorControllerTests {
         anItemExtension = Build.anExtension().withItem(anItem).withContainsText('ABC').build();
         anotherItemExtension = Build.anExtension().withItem(anItem).withContainsText('XYZ').build();
         anOrphanItemExtension = Build.anExtension().withItem(anOrphanItem).withContainsText('XYZ').build();
+        // anotherOrphanItemExtension = Build.anExtension().withItem(anotherOrphanItem).withContainsText('XYZ').build();
 
         Cmdt.setBundle(aBundle);
         Cmdt.setItem(anItem);
@@ -101,6 +103,7 @@ private class IndicatorControllerTests {
         Cmdt.setItemExtension(anItemExtension);
         Cmdt.setItemExtension(anotherItemExtension);
         Cmdt.setItemExtension(anOrphanItemExtension);
+        // Cmdt.setItemExtension(anotherOrphanItemExtension);
     }
 
 }
