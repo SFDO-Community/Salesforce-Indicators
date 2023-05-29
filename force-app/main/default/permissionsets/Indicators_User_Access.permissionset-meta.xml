@@ -4,10 +4,6 @@
         <apexClass>IndicatorController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>IndicatorListBundleSelector</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
         <name>Indicator_Bundle_Item__mdt</name>
@@ -24,15 +20,7 @@
         <enabled>true</enabled>
         <name>Indicator_Item__mdt</name>
     </customMetadataTypeAccesses>
-    <customPermissions>
-        <enabled>true</enabled>
-        <name>Manage_Indicator_Key</name>
-    </customPermissions>
-    <description>Grants users access to setup Indicators in custom metadata and view management in the key.</description>
+    <description>Minimal access for users to view indicators.</description>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Indicators Setup Access</label>
-    <tabSettings>
-        <tab>Indicators_Setup</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
+    <label>Indicators User Access</label>
 </PermissionSet>

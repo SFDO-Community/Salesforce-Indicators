@@ -11,13 +11,34 @@
                 ind-text={keyText}
                 ind-background-color={keyBackground}
                 ind-foreground-color={keyForeground}
-                >
-            </c-indicator-bundle-item>
+            ></c-indicator-bundle-item>
         </lightning-layout-item>
-        <lightning-layout-item padding="horizontal-small" size="4"  >
+        <lightning-layout-item padding="horizontal-small" size="3"  >
             {keyDescription}
         </lightning-layout-item>
         <template lwc:if={isManageEnabled}>
+            <lightning-layout-item padding="horizontal-small" size="1"  >
+                <template lwc:if={keyIsActive}>
+                    <lightning-icon 
+                        icon-name="utility:success" 
+                        alternative-text="True" 
+                        variant="success"
+                        title="Active Item"
+                        size="x-small"
+                        class="slds-p-left_small"
+                    ></lightning-icon>
+                </template>
+                <template lwc:else>
+                    <lightning-icon 
+                        icon-name="utility:close" 
+                        alternative-text="False" 
+                        variant="error"
+                        title="Inactive Item"
+                        size="x-small"
+                        class="slds-p-left_small"
+                    ></lightning-icon>
+                </template>
+            </lightning-layout-item>
             <lightning-layout-item padding="horizontal-small" size="1"  >
                 {keyPriority}
             </lightning-layout-item>

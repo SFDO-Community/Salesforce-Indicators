@@ -3,6 +3,7 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import KeyModal from 'c/indicatorBundleKey';
 
+import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
 
 export default class IndicatorBundle extends LightningElement {
@@ -37,7 +38,8 @@ export default class IndicatorBundle extends LightningElement {
 
     connectedCallback(){
         if(!this.bundleName){
-            this.showIllustration=true;
+            this.errorOccurred = true;
+            this.showIllustration = true;
             this.illustration = {
                 heading : 'LOOK OUT!',
                 messageBody: 'Bundle not assigned... select one.',
@@ -66,6 +68,10 @@ export default class IndicatorBundle extends LightningElement {
 
     }
 
+    get isManageEnabled() {
+        return hasManagePermission;
+    }
+
     // Call the Apex Class to return the CMDT Bundle, Items, and Extensions wrapper.
     @wire(getIndicatorConfig, {bundleDevName : '$bundleName'})
     bundleWire (result) {
@@ -73,7 +79,7 @@ export default class IndicatorBundle extends LightningElement {
         const { data, error } = result;
         if(data) {
             if(Object.keys(data).length) {  // Used to confirm that values were returned, rather than an empty object
-                console.dir(data);   // Retain for debug purposes
+                // console.dir(data);   // Retain for debug purposes
 
                 this.bundle = data;
                 this.bundleActive = true;
@@ -81,10 +87,12 @@ export default class IndicatorBundle extends LightningElement {
                 this.errorMessage = undefined;
 
                 if(!this.bundle.IsActive){
+                    this.errorOccurred = true;
+                    this.bundleActive = false;
                     this.showIllustration = true;
                     this.illustration = {
                         heading : 'Uh oh!',
-                        messageBody: 'Bundle not found. Check if it\'s active.',
+                        messageBody: 'Bundle (' + this.bundleName + ') not found. Check if it\'s active.',
                         imageName: 'error:no_access'
                     }
                 } else {
@@ -105,8 +113,8 @@ export default class IndicatorBundle extends LightningElement {
                         this.card.iconClass = 'slds-var-m-right_xx-small ';
                     }
 
-                    console.log('Card Data');
-                    console.dir(JSON.stringify(this.card));
+                    // console.log('Card Data');
+                    // console.dir(JSON.stringify(this.card));
 
                     // console.log(this.bundle.Items.length);
 
@@ -161,156 +169,161 @@ export default class IndicatorBundle extends LightningElement {
         const {error,data} = result;
         this.wiredData = result;
         if (data) {
-            console.dir(data);   // Retain for debug purposes
+            // console.dir(data);   // Retain for debug purposes
             let matchingFields = [];
             
             // Loop through the configured CMDT indicator items
             this.bundle.Items.forEach(
                 item => 
                 {
-                    // console.dir(item);   // Retain for debug purposes
-                                       
-                    let dataField = this.objectApiName + "." + item.FieldApiName;
-                    // console.log('DataField',dataField);   // Retain for debug purposes
-                    
-                    // Get the record's field value from the @wire using the current indicator item's field path
-                    let dataValue = getFieldValue(data, dataField); 
-
-                    if (item.ZeroBehavior === 'Treat Zeroes as Blanks' && dataValue === 0){
-                        dataValue = null;
-                    }
-                    // console.log('DataValue',dataValue);   // Retain for debug purposes
-                    
-                    let showDefault = false;
-                    if( item.HoverValue || item.TextValue || item.IconName || item.ImageUrl ){
-                        showDefault = true;
-                    }
-
-                    let assignedHoverValue = item.HoverValue ? item.HoverValue : dataValue;
-
-                    let matchedExtension;
-
-                    // If the record has a value and the CMDT indicator setting has extensions
-                    if((dataValue || dataValue === 0) && item.Extensions){
-      
-                        // Loop through each CMDT indicator setting extension
-                        item.Extensions.forEach(
-                            extension => 
-                            {
-                                let match = false;
-                                let stringValue = JSON.stringify(dataValue);
-
-                                // If the extension uses a String search, check if there is a match
-                                if(extension.ContainsText) {
-                                    // console.log('Value',dataValue + ' ' + extension.ContainsText);   // Retain for debug purposes
-                                    if(stringValue.includes(extension.ContainsText)){
-                                        match = true;
-                                    }
-                                } 
-                                // Else if the extension uses a Minimum boundary
-                                else if (extension.Minimum || extension.Minimum === 0 ) {
-                                    // console.log('Values',dataValue + ' ' + extension.Minimum + ' ' + extension.Maximum);   // Retain for debug purposes
-                                    // Check if there is a Maximum boundry and if the record's value falls within it.
-                                    if(extension.Maximum || extension.Maximum === 0) {
-                                        if(dataValue >= extension.Minimum && dataValue < extension.Maximum) {
-                                            match = true;
-                                        }
-                                    } 
-                                    // Else, check if the record's value is greater than the minimum
-                                    else {
-                                        if(dataValue >= extension.Minimum) {
-                                            match = true;
-                                        }
-                                    }
-                                }
-
-                                // console.log('Match Status', match);   // Retain for debug purposes
-                                if(match) {
-                                    // If there is a match for an Extension, assign the extension's override values
-                                    matchedExtension = {
-                                        "IconName" : extension.ExtensionIconValue,
-                                        "TextValue" : extension.ExtensionTextValue,
-                                        "ImageUrl" : extension.ExtensionImageUrl,
-                                        "HoverValue" : extension.ExtensionHoverText,
-                                        "Priority" : extension.PriorityOrder,
-                                        "IconBackground" : extension.BackgroundColor,
-                                        "IconForeground" : extension.ForegroundColor
-                                    };
-
-                                    console.dir(matchedExtension);
-                                }
-
-                            }
-                            
-                        )
+                    if(item.IsActive){
                         
-                    }
+                        // console.dir(item);   // Retain for debug purposes
+                                        
+                        let dataField = this.objectApiName + "." + item.FieldApiName;
+                        // console.log('DataField',dataField);   // Retain for debug purposes
+                        
+                        // Get the record's field value from the @wire using the current indicator item's field path
+                        let dataValue = getFieldValue(data, dataField); 
 
-                    matchingFields.push(
-                    {
-                        fName: item.FieldApiName,   // Retain for debug purposes
-                        fTextValue: dataValue,      // Retain for debug purposes
-                        ...dataValue || dataValue === 0 ? {
-                                fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
-                            } : {
-                                fImageURL: item.DisplayFalse ? item.FalseImageUrl : ''
-                            },
-                        // ! If value is false, the false hover will be set.
-                        ...dataValue || dataValue === 0 ? {
-                                fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
-                            } : {
-                                fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
-                            },
-                        //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
-                        ...dataValue || dataValue === 0 ? {
-                                fShowAvatar : matchedExtension ? true : showDefault
-                            } : {
-                                fShowAvatar: item.DisplayFalse
-                            },
-                        //If the value is false, the false icon will be set.
-                        ...dataValue || dataValue === 0 ? {
-                                fIconName : matchedExtension ? matchedExtension.IconName : item.IconName
-                            } : {
-                                fIconName: item.DisplayFalse ? item.FalseIcon : ''
-                            },
-                        ...dataValue || dataValue === 0 ? {
-                                fIconBackground : matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor
-                            } : {
-                                fIconBackground: item.DisplayFalse? item.InverseBackgroundColor : item.BackgroundColor
-                            },
-                        ...dataValue || dataValue === 0 ? {
-                                fIconForeground : matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
-                            } : {
-                                fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
-                            },
-                        //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
-                        //If the Icon Text is entered then show that
-                        //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
-                        ...dataValue || dataValue === 0 ? {
-                            ...matchedExtension ? {
-                                    fTextShown: matchedExtension.TextValue
-                                } : {
-                                ...dataValue && item.TextValue ? {
-                                        fTextShown : item.TextValue 
-                                    } : {
-                                        ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
-                                                fTextShown : '' 
-                                            } : {
-                                                fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).toUpperCase().substring(0,3)
+                        if (item.ZeroBehavior === 'Treat Zeroes as Blanks' && dataValue === 0){
+                            dataValue = null;
+                        }
+                        // console.log('DataValue',dataValue);   // Retain for debug purposes
+                        
+                        let showDefault = false;
+                        if( item.HoverValue || item.TextValue || item.IconName || item.ImageUrl ){
+                            showDefault = true;
+                        }
+
+                        let assignedHoverValue = item.HoverValue ? item.HoverValue : dataValue;
+
+                        let matchedExtension;
+
+                        // If the record has a value and the CMDT indicator setting has extensions
+                        if((dataValue || dataValue === 0) && item.Extensions){
+        
+                            // Loop through each CMDT indicator setting extension
+                            item.Extensions.forEach(
+                                extension => 
+                                {
+                                    if(extension.IsActive){
+
+                                        let match = false;
+                                        let stringValue = JSON.stringify(dataValue);
+
+                                        // If the extension uses a String search, check if there is a match
+                                        if(extension.ContainsText) {
+                                            // console.log('Value',dataValue + ' ' + extension.ContainsText);   // Retain for debug purposes
+                                            if(stringValue.includes(extension.ContainsText)){
+                                                match = true;
                                             }
+                                        } 
+                                        // Else if the extension uses a Minimum boundary
+                                        else if (extension.Minimum || extension.Minimum === 0 ) {
+                                            // console.log('Values',dataValue + ' ' + extension.Minimum + ' ' + extension.Maximum);   // Retain for debug purposes
+                                            // Check if there is a Maximum boundry and if the record's value falls within it.
+                                            if(extension.Maximum || extension.Maximum === 0) {
+                                                if(dataValue >= extension.Minimum && dataValue < extension.Maximum) {
+                                                    match = true;
+                                                }
+                                            } 
+                                            // Else, check if the record's value is greater than the minimum
+                                            else {
+                                                if(dataValue >= extension.Minimum) {
+                                                    match = true;
+                                                }
+                                            }
+                                        }
+
+                                        // console.log('Match Status', match);   // Retain for debug purposes
+                                        if(match) {
+                                            // If there is a match for an Extension, assign the extension's override values
+                                            matchedExtension = {
+                                                "IconName" : extension.ExtensionIconValue,
+                                                "TextValue" : extension.ExtensionTextValue,
+                                                "ImageUrl" : extension.ExtensionImageUrl,
+                                                "HoverValue" : extension.ExtensionHoverText,
+                                                "Priority" : extension.PriorityOrder,
+                                                "IconBackground" : extension.BackgroundColor,
+                                                "IconForeground" : extension.ForegroundColor
+                                            };
+
+                                            // console.dir(matchedExtension);
+                                        }
+                                    }   // End-If extension.IsActive
+                                }
+                                
+                            )
+                            
+                        }
+
+                        matchingFields.push(
+                        {
+                            fName: item.FieldApiName,   // Retain for debug purposes
+                            fTextValue: dataValue,      // Retain for debug purposes
+                            ...dataValue || dataValue === 0 ? {
+                                    fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
+                                } : {
+                                    fImageURL: item.DisplayFalse ? item.FalseImageUrl : ''
+                                },
+                            // ! If value is false, the false hover will be set.
+                            ...dataValue || dataValue === 0 ? {
+                                    fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
+                                } : {
+                                    fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
+                                },
+                            //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
+                            ...dataValue || dataValue === 0 ? {
+                                    fShowAvatar : matchedExtension ? true : showDefault
+                                } : {
+                                    fShowAvatar: item.DisplayFalse
+                                },
+                            //If the value is false, the false icon will be set.
+                            ...dataValue || dataValue === 0 ? {
+                                    fIconName : matchedExtension ? matchedExtension.IconName : item.IconName
+                                } : {
+                                    fIconName: item.DisplayFalse ? item.FalseIcon : ''
+                                },
+                            ...dataValue || dataValue === 0 ? {
+                                    fIconBackground : matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor
+                                } : {
+                                    fIconBackground: item.DisplayFalse? item.InverseBackgroundColor : item.BackgroundColor
+                                },
+                            ...dataValue || dataValue === 0 ? {
+                                    fIconForeground : matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
+                                } : {
+                                    fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
+                                },
+                            //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
+                            //If the Icon Text is entered then show that
+                            //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
+                            ...dataValue || dataValue === 0 ? {
+                                ...matchedExtension ? {
+                                        fTextShown: matchedExtension.TextValue
+                                    } : {
+                                    ...dataValue && item.TextValue ? {
+                                            fTextShown : item.TextValue 
+                                        } : {
+                                            ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
+                                                    fTextShown : '' 
+                                                } : {
+                                                    fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).toUpperCase().substring(0,3)
+                                                }
+                                        }
+                                    }
+                                } : {
+                                ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
+                                        fTextShown : item.FalseTextValue ? item.FalseTextValue : ''
+                                    } : {
+                                        fTextShown : '' 
                                     }
                                 }
-                            } : {
-                            ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                    fTextShown : item.FalseTextValue ? item.FalseTextValue : ''
-                                } : {
-                                    fTextShown : '' 
-                                }
-                            }
-                    });
+                        });
+                    }   // End-If item.IsActive
                 });
             this.results = matchingFields;
-            console.log('FieldValue => ', JSON.stringify(this.results));   // Retain for debug purposes
+            // console.log('FieldValue => ', JSON.stringify(this.results));   // Retain for debug purposes
         } else if (error) {
             console.log('Error!');
             this.errorMessage = JSON.stringify(error);

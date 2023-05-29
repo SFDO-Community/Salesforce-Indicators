@@ -25,15 +25,27 @@ global class IndicatorListBundleSelector extends VisualEditor.DynamicPickList {
     public static List<PicklistOption> getBundleOptions(){
         List<PicklistOption> options = new List<PicklistOption>();
 
-        IndicatorListBundleSelector ilbs = new IndicatorListBundleSelector();
-        for(VisualEditor.DataRow row : ilbs.getValues().getDataRows()){
-            if(row.getValue() != null){
-                PicklistOption o = new PicklistOption();
-                o.label = row.getLabel();
-                o.value = (String) row.getValue();
-                options.add( o );    
-            }
+        for(Indicator_Bundle__mdt bundle : Cmdt.getAllBundles()){
+            PicklistOption o = new PicklistOption();
+            o.label = bundle.Label; 
+            o.value = bundle.DeveloperName;
+            options.add( o );   
         }
+
+        PicklistOption x = new PicklistOption();
+        x.label = '** Unbundled Items **'; 
+        x.value = '-1';
+        options.add( x );
+
+        // IndicatorListBundleSelector ilbs = new IndicatorListBundleSelector();
+        // for(VisualEditor.DataRow row : ilbs.getValues().getDataRows()){
+        //     if(row.getValue() != null){
+        //         PicklistOption o = new PicklistOption();
+        //         o.label = row.getLabel();
+        //         o.value = (String) row.getValue();
+        //         options.add( o );    
+        //     }
+        // }
 
         return options;
     }

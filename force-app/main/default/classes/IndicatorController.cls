@@ -40,6 +40,8 @@ public with sharing class IndicatorController {
     }
 
     public class IndicatorItem {
+        @AuraEnabled
+        public Boolean IsActive {get; set;}
         @AuraEnabled 
         public String FieldLabel { get; set;}
         @AuraEnabled 
@@ -85,6 +87,8 @@ public with sharing class IndicatorController {
     }
 
     public class IndicatorExtension {
+        @AuraEnabled
+        public Boolean IsActive {get; set;}
         @AuraEnabled
         public String ContainsText {get; set;}
         @AuraEnabled
@@ -148,8 +152,91 @@ public with sharing class IndicatorController {
         Map<String,String> labelByDurableId = new Map<String,String>();
 
         Indicator_Bundle__mdt bundle = Cmdt.getBundle(bundleDevName);
-        if(bundle != null){
 
+        if (bundleDevName == '-1'){
+            wrapper.IsActive = null;
+            wrapper.CardIcon = 'action:question_post_action';
+            wrapper.CardIconBackground = null;
+            wrapper.CardIconForeground = null;
+            wrapper.CardText = 'These items are not associated with any bundle.';
+            wrapper.CardTitle = 'Unbundled Items';
+            wrapper.BundleDescription = null;
+            wrapper.BundleId = null;
+            wrapper.BackgroundColor = null;
+            wrapper.ForegroundColor = null;
+            wrapper.Items = new List<IndicatorItem>();
+
+            for(Indicator_Item__mdt indicatorItem : Cmdt.getAllOrphanItems()){
+                durableIds.add(indicatorItem.Field__c);
+            }
+
+            for(EntityParticle particle : [SELECT DurableId, QualifiedApiName, MasterLabel FROM EntityParticle WHERE DurableId = :durableIds]){
+                fieldByDurableId.put(particle.DurableId, particle.QualifiedApiName);
+                labelByDurableId.put(particle.DurableId, particle.MasterLabel);
+            }
+
+            for(Indicator_Item__mdt indicatorItem : Cmdt.getAllOrphanItems()){
+
+                IndicatorItem item = new IndicatorItem();
+
+                if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
+                    item.FieldApiName = indicatorItem.Advanced_Field__c;
+                    item.FieldLabel = indicatorItem.Advanced_Field_Label__c;
+                } else {
+                    item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
+                    item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);
+                }
+    
+                item.IsActive = indicatorItem.Active__c;
+                item.IconName = indicatorItem.Icon_Value__c;
+                item.TextValue = indicatorItem.Static_Text__c;
+                item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
+                item.ZeroBehavior = indicatorItem.Zero_Behavior__c;
+                item.ImageUrl  = indicatorItem.Image__c;
+                item.HoverValue = indicatorItem.Hover_Text__c;
+                item.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
+                item.FalseIcon = indicatorItem.Inverse_Icon_Value__c;
+                item.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
+                item.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
+                item.FalseImageUrl = indicatorItem.Inverse_Image__c;
+                item.IndicatorDescription = indicatorItem.Description__c;
+                item.IndicatorId = indicatorItem.Id;
+                item.BackgroundColor = indicatorItem.Icon_Background__c;
+                item.ForegroundColor = indicatorItem.Icon_Foreground__c;
+                item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
+                item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
+                
+                List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
+
+                if(!itemExtensions.isEmpty()){
+                    item.Extensions = new List<IndicatorExtension>();    
+
+                    for(Indicator_Item_Extension__mdt itemExtension : itemExtensions){
+                        IndicatorExtension extension = new IndicatorExtension();
+        
+                        extension.IsActive = itemExtension.Active__c;
+                        extension.ContainsText = itemExtension.Contains_Text__c;
+                        extension.Maximum = itemExtension.Maximum__c;
+                        extension.Minimum = itemExtension.Minimum__c;
+                        extension.ExtensionHoverText = itemExtension.Hover_Text__c;
+                        extension.ExtensionIconValue = itemExtension.Icon_Value__c;
+                        extension.ExtensionImageUrl = itemExtension.Image__c;
+                        extension.ExtensionTextValue = itemExtension.Static_Text__c;
+                        extension.PriorityOrder = itemExtension.Priority__c;
+                        extension.ExtensionDescription = itemExtension.Description__c;
+                        extension.ExtensionId = itemExtension.Id;
+                        extension.BackgroundColor = itemExtension.Icon_Background__c;
+                        extension.ForegroundColor = itemExtension.Icon_Foreground__c;
+        
+                        item.Extensions.add(extension);
+                    }
+
+                }
+
+                wrapper.Items.add(item);
+            }
+
+        } else if(bundle != null){
             List<Indicator_Bundle_Item__mdt> bundleItems = Cmdt.getBundleItems(bundleDevName);
 
             if(!bundleItems.isEmpty()){
@@ -196,6 +283,7 @@ public with sharing class IndicatorController {
                             item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);
                         }
             
+                        item.IsActive = indicatorItem.Active__c;
                         item.IconName = indicatorItem.Icon_Value__c;
                         item.TextValue = indicatorItem.Static_Text__c;
                         item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
@@ -222,6 +310,7 @@ public with sharing class IndicatorController {
                             for(Indicator_Item_Extension__mdt itemExtension : itemExtensions){
                                 IndicatorExtension extension = new IndicatorExtension();
                 
+                                extension.IsActive = itemExtension.Active__c;
                                 extension.ContainsText = itemExtension.Contains_Text__c;
                                 extension.Maximum = itemExtension.Maximum__c;
                                 extension.Minimum = itemExtension.Minimum__c;
@@ -243,7 +332,8 @@ public with sharing class IndicatorController {
                     wrapper.Items.add(item);
                 }
             }
-        }
+        } 
+
         return wrapper;
     }
 
