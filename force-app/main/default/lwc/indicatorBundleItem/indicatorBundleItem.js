@@ -3,7 +3,7 @@ import { LightningElement, api } from 'lwc';
 export default class IndicatorListItem extends LightningElement {
     @api indSize = 'large';
     @api indShape = 'base';
-    @api indText = '⛳';
+    @api indText = '';
     @api indImage = '';
     @api indIcon = 'standard:marketing_actions';
     @api indHoverText = '';

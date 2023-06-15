@@ -5,7 +5,7 @@ export default class IndicatorKeyRow extends LightningElement {
     @api keyId = '';
     @api keyIcon = 'custom:custom20';
     @api keyImage = '';
-    @api keyText = '🙃';
+    @api keyText = '';
     @api keyDescription = 'Description will go here (use same form Normal and Inverse)';
     @api keyFillType = 'Static Text || Icon Image || Field Value';
     @api keyHoverValue = 'Field Value || Hover Text';
