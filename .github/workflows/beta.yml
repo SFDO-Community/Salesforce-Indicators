@@ -1,0 +1,10 @@
+name: Upload Beta Release (2GP)
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  upload-beta:
+    uses: SFDO-Community/standard-workflows/.github/workflows/beta-2gp.yml@main
+    secrets:
+      dev-hub-auth-url: '${{ secrets.PACKAGING_ORG_AUTH_URL }}'
