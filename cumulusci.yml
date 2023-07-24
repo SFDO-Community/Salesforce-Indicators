@@ -3,7 +3,7 @@ project:
     name: Salesforce-Indicators
     package:
         name: Salesforce-Indicators
-        namespace: sfind
+        namespace: inds
         api_version: '55.0'
     git:
         default_branch: 'master'
