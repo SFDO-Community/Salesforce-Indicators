@@ -33,3 +33,23 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+flows:
+  customer_org:
+    steps:
+      1:
+        task: install_managed
+        options:
+          security_type: NONE
+
+plans:
+  install:
+    slug: install
+    title: Install Salesforce Indicators
+    tier: primary
+    is_listed: True
+    preflight_message: "This will install Salesforce Indicators into your org."
+    post_install_message: "Thanks for installing Salesforce Indicators. Please review the team’s Wiki page for next steps."
+    error_message: ""
+    steps:
+      1:
+        flow: customer_org
