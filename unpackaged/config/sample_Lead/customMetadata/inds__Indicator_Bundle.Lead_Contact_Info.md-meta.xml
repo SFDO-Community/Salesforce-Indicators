@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Lead Contact Info</label>
+    <protected>false</protected>
+    <values>
+        <field>inds__inds__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>inds__inds__Card_Icon__c</field>
+        <value xsi:type="xsd:string">standard:lead</value>
+    </values>
+    <values>
+        <field>inds__inds__Card_Text__c</field>
+        <value xsi:type="xsd:string">Please enter key contact details for this Lead</value>
+    </values>
+    <values>
+        <field>inds__inds__Card_Title__c</field>
+        <value xsi:type="xsd:string">Contact Details</value>
+    </values>
+    <values>
+        <field>inds__inds__Description__c</field>
+        <value xsi:type="xsd:string">Holds key details about the person behind the lead</value>
+    </values>
+    <values>
+        <field>inds__inds__sObject__c</field>
+        <value xsi:type="xsd:string">Lead</value>
+    </values>
+</CustomMetadata>

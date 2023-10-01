@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Account Rating</label>
+    <protected>false</protected>
+    <values>
+        <field>inds__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>inds__Advanced_Field_Label__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Advanced_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Empty_Static_Text_Behavior__c</field>
+        <value xsi:type="xsd:string">Use Icon Only</value>
+    </values>
+    <values>
+        <field>inds__Field__c</field>
+        <value xsi:type="xsd:string">Rating</value>
+    </values>
+    <values>
+        <field>inds__Hover_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Icon_Background__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Icon_Foreground__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Icon_Value__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Image__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Inverse_Hover_Text__c</field>
+        <value xsi:type="xsd:string">There is no Rating entered</value>
+    </values>
+    <values>
+        <field>inds__Inverse_Icon_Background__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Inverse_Icon_Foreground__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Inverse_Icon_Value__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Inverse_Image__c</field>
+        <value xsi:type="xsd:string">/logos/Custom/Temp_Grey/logo.png</value>
+    </values>
+    <values>
+        <field>inds__Inverse_Static_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Show_False_or_Blank__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>inds__Static_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__Zero_Behavior__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>inds__sObject__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+</CustomMetadata>

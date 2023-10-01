@@ -33,6 +33,21 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+
+    deploy_sample_indicators_account:
+        description: Salesforce Indicators - Sample Indicators for Leads
+        group: Salesforce Metadata
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/sample_Lead
+    
+    deploy_sample_indicators_account:
+        description: Salesforce Indicators - Sample Indicators for Accounts and Contacts
+        group: Salesforce Metadata
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/sample_AccountContact
+
 flows:
   customer_org:
     steps:
@@ -40,6 +55,14 @@ flows:
         task: install_managed
         options:
           security_type: NONE
+      2:
+        task: deploy_sample_indicators_lead
+        ui_options:
+            is_required: False
+      3:
+        task: deploy_sample_indicators_account_contact
+        ui_options:
+            is_required: False
 
 plans:
   install:
