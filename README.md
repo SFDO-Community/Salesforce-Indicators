@@ -3,13 +3,12 @@
 
 With Salesforce Indicators, you can visually highlight important data at a glance, making it easy to focus on what matters most. This Custom Metadata driven Lightning Web Component is all about making key details pop, and giving you lightning-quick insights at a glance on your Salesforce records. Features.
 
-Salesforce Indicators works for any Salesforce org already using Lightning Experience, and it works exceptionally well for Nonprofit orgs on NPSP or Nonprofit Cloud.
-
-Salesforce Indicators is part of the [Salesforce Open Source Commons](https://help.salesforce.com/s/articleView?id=sfdo.Innovate_with_OSC.htm&type=5).
-
 * Visualize your data - Display key details in a visually engaging and clutter-free manner, allowing users to quickly understand important information on the record, summarize related records, or highlight exceptions.
 * Make your data come alive - Add a mix of Salesforce and custom colors to match your branding to create visually appealing indicators for your Lightning pages giving your users a more engaging experience.
 * Customize your Indicators - Easily set up and customize Salesforce Indicators using deployable Custom Metadata Type records. No complex formulas or coding required. Group Indicators into bundles for different use-cases and users.
+  
+Salesforce Indicators works for any Salesforce org already using Lightning Experience, and it works exceptionally well for Nonprofit orgs on NPSP or Nonprofit Cloud.
+Salesforce Indicators is part of the [Salesforce Open Source Commons](https://help.salesforce.com/s/articleView?id=sfdo.Innovate_with_OSC.htm&type=5).
 
 ## Latest Release
 * [Install Salesforce Indicators](https://install.salesforce.org/products/indicators)
