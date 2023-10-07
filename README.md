@@ -1,8 +1,10 @@
 # Salesforce Indicators
 ![Salesforce Indicators Logo](https://github.com/SFDO-Community/Salesforce-Indicators/assets/2966583/e1857d0a-c725-4e17-9820-c8c3d7b920ab)
 
-With Salesforce Indicators, you can visually highlight important data at a glance, making it easy to focus on what matters most. This Custom Metadata driven Lightning Web Component is all about making key details pop, and giving you lightning-quick insights at a glance on your Salesforce records. Features.
+With Salesforce Indicators, you can visually highlight important data at a glance, making it easy to focus on what matters most. This Custom Metadata driven Lightning Web Component is all about making key details pop, and giving you lightning-quick insights at a glance on your Salesforce records. 
 
+
+Features:
 * Visualize your data - Display key details in a visually engaging and clutter-free manner, allowing users to quickly understand important information on the record, summarize related records, or highlight exceptions.
 * Make your data come alive - Add a mix of Salesforce and custom colors to match your branding to create visually appealing indicators for your Lightning pages giving your users a more engaging experience.
 * Customize your Indicators - Easily set up and customize Salesforce Indicators using deployable Custom Metadata Type records. No complex formulas or coding required. Group Indicators into bundles for different use-cases and users.
