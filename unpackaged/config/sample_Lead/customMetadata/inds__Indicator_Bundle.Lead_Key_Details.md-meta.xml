@@ -3,27 +3,27 @@
     <label>Lead Key Details</label>
     <protected>false</protected>
     <values>
-        <field>inds__inds__Active__c</field>
+        <field>%%%NAMESPACE%%%%%%NAMESPACE%%%Active__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
-        <field>inds__inds__Card_Icon__c</field>
+        <field>%%%NAMESPACE%%%%%%NAMESPACE%%%Card_Icon__c</field>
         <value xsi:type="xsd:string">standard:lead</value>
     </values>
     <values>
-        <field>inds__inds__Card_Text__c</field>
+        <field>%%%NAMESPACE%%%%%%NAMESPACE%%%Card_Text__c</field>
         <value xsi:type="xsd:string">Key details about the Lead</value>
     </values>
     <values>
-        <field>inds__inds__Card_Title__c</field>
+        <field>%%%NAMESPACE%%%%%%NAMESPACE%%%Card_Title__c</field>
         <value xsi:type="xsd:string">Lead Key Details</value>
     </values>
     <values>
-        <field>inds__inds__Description__c</field>
+        <field>%%%NAMESPACE%%%%%%NAMESPACE%%%Description__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>inds__inds__sObject__c</field>
+        <field>%%%NAMESPACE%%%%%%NAMESPACE%%%sObject__c</field>
         <value xsi:type="xsd:string">Lead</value>
     </values>
 </CustomMetadata>

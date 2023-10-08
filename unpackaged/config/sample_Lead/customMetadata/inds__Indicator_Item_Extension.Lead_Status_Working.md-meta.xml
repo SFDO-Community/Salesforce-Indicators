@@ -3,47 +3,47 @@
     <label>Lead Status Working</label>
     <protected>false</protected>
     <values>
-        <field>inds__Active__c</field>
+        <field>%%%NAMESPACE%%%Active__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
-        <field>inds__Contains_Text__c</field>
+        <field>%%%NAMESPACE%%%Contains_Text__c</field>
         <value xsi:type="xsd:string">Working</value>
     </values>
     <values>
-        <field>inds__Description__c</field>
+        <field>%%%NAMESPACE%%%Description__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>inds__Hover_Text__c</field>
+        <field>%%%NAMESPACE%%%Hover_Text__c</field>
         <value xsi:type="xsd:string">We are working on the Lead</value>
     </values>
     <values>
-        <field>inds__Icon_Value__c</field>
+        <field>%%%NAMESPACE%%%Icon_Value__c</field>
         <value xsi:type="xsd:string">custom:custom95</value>
     </values>
     <values>
-        <field>inds__Image__c</field>
+        <field>%%%NAMESPACE%%%Image__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>inds__Indicator_Item__c</field>
+        <field>%%%NAMESPACE%%%Indicator_Item__c</field>
         <value xsi:type="xsd:string">Lead_Status</value>
     </values>
     <values>
-        <field>inds__Maximum__c</field>
+        <field>%%%NAMESPACE%%%Maximum__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>inds__Minimum__c</field>
+        <field>%%%NAMESPACE%%%Minimum__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>inds__Priority__c</field>
+        <field>%%%NAMESPACE%%%Priority__c</field>
         <value xsi:type="xsd:double">1.0</value>
     </values>
     <values>
-        <field>inds__Static_Text__c</field>
+        <field>%%%NAMESPACE%%%Static_Text__c</field>
         <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

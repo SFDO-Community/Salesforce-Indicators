@@ -3,15 +3,15 @@
     <label>Lead Key-Lead Rating</label>
     <protected>false</protected>
     <values>
-        <field>inds__Indicator_Bundle__c</field>
+        <field>%%%NAMESPACE%%%Indicator_Bundle__c</field>
         <value xsi:type="xsd:string">Lead_Key_Details</value>
     </values>
     <values>
-        <field>inds__Indicator_Item__c</field>
+        <field>%%%NAMESPACE%%%Indicator_Item__c</field>
         <value xsi:type="xsd:string">Lead_Rating</value>
     </values>
     <values>
-        <field>inds__Order__c</field>
+        <field>%%%NAMESPACE%%%Order__c</field>
         <value xsi:type="xsd:double">10.0</value>
     </values>
 </CustomMetadata>

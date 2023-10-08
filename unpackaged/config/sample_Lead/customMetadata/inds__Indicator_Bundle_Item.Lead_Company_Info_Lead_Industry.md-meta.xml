@@ -3,15 +3,15 @@
     <label>Lead Company Info-Lead Industry</label>
     <protected>false</protected>
     <values>
-        <field>inds__Indicator_Bundle__c</field>
+        <field>%%%NAMESPACE%%%Indicator_Bundle__c</field>
         <value xsi:type="xsd:string">Lead_Company_Info</value>
     </values>
     <values>
-        <field>inds__Indicator_Item__c</field>
+        <field>%%%NAMESPACE%%%Indicator_Item__c</field>
         <value xsi:type="xsd:string">Lead_Industry</value>
     </values>
     <values>
-        <field>inds__Order__c</field>
+        <field>%%%NAMESPACE%%%Order__c</field>
         <value xsi:type="xsd:double">1.0</value>
     </values>
 </CustomMetadata>
