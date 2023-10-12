@@ -1,0 +1,322 @@
+## Salesforce Leads for Indicators App
+
+# To run this code:
+#
+# cci task run generate_and_load_from_yaml -o generator_yaml recipes\recipe.AccountsWithContacts.yml -o num_records 100 -o num_records_tablename Account --org dev
+
+- plugin: snowfakery.standard_plugins.datasets.Dataset
+
+# Using a plugin for querying Salesforce records (that existed PRIOR to recipe being used)
+- plugin: snowfakery.standard_plugins.Salesforce.SalesforceQuery
+- plugin: snowfakery.standard_plugins.Salesforce
+
+# Load the macros.
+- include_file: macros.activities.yml
+- include_file: macros.sf_standard.yml
+
+# Create an Account using the SF Standard Object macro loaded in the previous section.
+- object: Account
+  nickname: theAccount
+  count: 100
+  include: SFStandardAccount
+  fields:
+    AccountSource: 
+      random_choice: 
+        - Web
+        - Phone Inquiry
+        - Partner Referral
+        - Purchased List
+        - Other
+        - NULL
+    __country:
+      random_choice:
+        - choice: 
+            probability: 40%
+            pick: 'USA'
+        - choice:
+            probability: 40%
+            pick: 'CAN'
+        - choice:
+            probability: 10%
+            pick: 'UNK'
+        - choice:
+            probability: 10%
+            pick: NULL
+    BillingCountry:
+      if:
+        - choice:
+            when: ${{__country=='USA'}}
+            pick:
+              random_choice:
+                US: 50%
+                United States: 50%
+        - choice:
+            when: ${{__country=='CAN'}}
+            pick:
+              random_choice:
+                CA: 50%
+                Canada: 50%
+        - choice:
+            when: ${{__country=='UNK'}}
+            pick: Other
+        - choice:
+            pick: NULL
+    BillingState: 
+      if:
+        - choice:
+            when: ${{__country=='USA'}}
+            pick:
+              fake: StateAbbr
+        - choice:
+            when: ${{__country=='CAN'}}
+            pick:
+              random_choice:
+                NL: 5%
+                PE: 5%
+                NS: 5%
+                NB: 5%
+                QC: 5%
+                ON: 20%
+                MB: 5%
+                SK: 5%
+                AB: 10%
+                BC: 20%
+                YT: 5%
+                NT: 5%
+                NU: 5%
+        - choice:
+            pick: NULL
+    BillingPostalCode: 
+      if:
+        - choice:
+            when: ${{__country != NULL}}
+            pick:
+              if:
+                - choice:
+                    when: ${{__country == 'USA'}}
+                    pick: ${{fake.PostalcodeInState}}
+                    # pick: 
+                    #   fake.PostcodeInState: 
+                    #     state_abbr: ${{BillingState}}
+                - choice:
+                    when: ${{__country == 'CAN'}}
+                    pick: ${{fake.Word(ext_word_list=['K8N', 'V9A', 'B3K', 'K0H'])}} ${{fake.Word(ext_word_list=['5W6', '7N2', '5X5', '9Z0'])}}
+                - choice:
+                    when: ${{__country == 'UNK'}}
+                    pick:
+                      fake: Zipcode
+    BillingStreet: 
+      if:
+        - choice:
+            when: ${{BillingCountry != NULL}}
+            pick:
+              fake: StreetAddress
+    BillingCity: 
+      if:
+        - choice:
+            when: ${{BillingCountry != NULL}}
+            pick:
+              fake: City
+    Rating: 
+      random_choice:
+        - choice:
+            probability: 15%
+            pick: Hot
+        - choice:
+            probability: 50%
+            pick: Warm
+        - choice:
+            probability: 15%
+            pick: Cold
+        - choice:
+            probability: 20%
+            pick: NULL
+    AnnualRevenue: 
+        random_number:
+          min: 0
+          max: 10000000
+          step: 50000
+    NumberOfEmployees: 
+      random_number:
+        min: 0
+        max: 200000
+    __industry_null:
+      random_choice:
+        - choice: 
+            probability: 75%
+            pick: false
+        - choice:
+            probability: 25%
+            pick: true
+    Industry: 
+      if:
+        - choice:
+            when: ${{__industry_null=='false'}}
+            pick:
+              NULL
+        - choice:
+            pick:
+              random_choice:
+                Agriculture: 1
+                Apparel: 1
+                Banking: 1
+                Biotechnology: 1
+                Chemicals: 1
+                Communications: 1
+                Construction: 10
+                Consulting: 1
+                Education: 1
+                Electronics: 10
+                Energy: 10
+                Engineering: 10
+                Entertainment: 1
+                Environmental: 1
+                Finance: 1
+                Food & Beverage: 1
+                Government: 10
+                Healthcare: 1
+                Hospitality: 1
+                Insurance: 1
+                Machinery: 1
+                Manufacturing: 10
+                Media: 1
+                Not For Profit: 1
+                Recreation: 1
+                Retail: 1
+                Shipping: 1
+                Technology: 10
+                Telecommunications: 1
+                Transportation: 1
+                Utilities: 10
+                Other: 10
+    Website: 
+          fake: url
+    OwnerId: 
+      SalesforceQuery.random_record:
+        from: User
+        where: Profile.Name = 'System Administrator' AND IsActive = TRUE
+  friends:
+    - object: Contact # Add the contact to the account.
+      nickname: aContact
+      count:
+        random_number:
+          min: 1
+          max: 3
+      fields: 
+        AccountId:
+          reference: theAccount
+        FirstName:
+          fake: FirstNameNonBinary
+        LastName:
+          fake: LastName
+        Email: 
+          random_choice:
+            - choice: 
+                probability: 80%
+                pick: ${{FirstName}}.${{LastName}}@example.com
+            - choice:
+                probability: 20%
+                pick: NULL
+        Phone: 
+          random_choice:
+            - choice: 
+                probability: 75%
+                pick:
+                  fake: PhoneNumber
+            - choice:
+                probability: 25%
+                pick: NULL
+        HomePhone:
+          random_choice:
+            - choice: 
+                probability: 80%
+                pick:
+                  fake: PhoneNumber
+            - choice:
+                probability: 20%
+                pick: NULL
+        OtherPhone:
+          random_choice:
+            - choice: 
+                probability: 80%
+                pick:
+                  fake: PhoneNumber
+            - choice:
+                probability: 20%
+                pick: NULL
+        MobilePhone:
+          random_choice:
+            - choice: 
+                probability: 60%
+                pick:
+                  fake: PhoneNumber
+            - choice:
+                probability: 40%
+                pick: NULL
+        __title_from_csv:
+          Dataset.iterate:
+            dataset: static-values/titles.csv
+        Title:
+          random_choice:
+            - choice: 
+                probability: 75%
+                pick: ${{__title_from_csv.Title}}
+            - choice:
+                probability: 25%
+                pick: NULL
+        Department:
+          fake: bs
+        Birthdate:
+          date_between:
+            start_date: -80y
+            end_date: -15y
+        OwnerId: ${{Account.OwnerId}}
+      friends:
+        - object: Event
+          count:
+            random_number:
+              min: 1
+              max: 3
+          include: One-Hour Event
+          fields:
+            WhoId: 
+              reference: aContact
+            OwnerId: ${{Account.OwnerId}}
+        - object: Event
+          count: 1
+          include: All-Day Event
+          fields:
+            WhoId: 
+              reference: aContact
+            OwnerId: ${{Account.OwnerId}}
+        - object: Task
+          count: 
+              random_number:
+                min: 1
+                max: 3
+          include: Task
+          fields:
+            WhoId: 
+              reference: aContact
+            OwnerId: ${{Account.OwnerId}}
+        # - object: Opportunity
+        #   include: SFStandardOpportunity
+        #   fields:
+        #     Name: Opportunity relating to ${{Account.Name}}
+        #     OwnerId: ${{Account.OwnerId}}
+        #   friends:
+        #     - object: Task
+        #       count: 
+        #         random_number:
+        #           min: 1
+        #           max: 3
+        #       include: Task
+        #       fields:
+        #         WhoId: 
+        #           reference: aContact
+        #         WhatId: 
+        #           reference: Opportunity
+        #         OwnerId: 
+        #           SalesforceQuery.random_record:
+        #             from: User
+        #             where: Profile.Name = 'System Administrator' AND IsActive = TRUE

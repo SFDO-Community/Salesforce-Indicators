@@ -34,21 +34,48 @@ tasks:
         options:
             required_org_code_coverage_percent: 75
 
-    deploy_sample_indicators_account:
-        description: Salesforce Indicators - Sample Indicators for Leads
-        group: Salesforce Metadata
-        class_path: cumulusci.tasks.salesforce.Deploy
-        options:
-            path: unpackaged/config/sample_Lead
-    
-    deploy_sample_indicators_account:
-        description: Salesforce Indicators - Sample Indicators for Accounts and Contacts
+    deploy_sample_indicators:
+        description: Deploys - Sample Indicators
         group: Salesforce Metadata
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
             path: unpackaged/config/sample_AccountContact
+    
+    deploy_sample_indicators_layouts:
+        description: Deploys - Sample Indicators Layouts
+        group: Salesforce Metadata
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/sample_AccountContact_FlexiPages
+    
+    deploy_training_indicators:
+        description: Deploys - Example Indicators used for Training 
+        group: Salesforce Metadata
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/training_Indicators
+
+    generate_leads:
+        description: Snowfakery - Generate Leads
+        class_path: cumulusci.tasks.bulkdata.snowfakery.Snowfakery 
+        options: 
+            recipe: recipes/recipe.Leads.yml
+            run_until_records_loaded: Lead:100
+    
+    generate_accounts_and_contacts:
+        description: Snowfakery - Generate Accounts and Contacts
+        class_path: cumulusci.tasks.bulkdata.snowfakery.Snowfakery 
+        options: 
+            recipe: recipes/recipe.AccountsWithContacts.yml
+            run_until_records_loaded: Account:100
 
 flows:
+  sample_inds:
+    steps:
+        1:
+            task: deploy_sample_indicators
+        2:
+            task: deploy_sample_indicators_layouts
   customer_org:
     steps:
       1:
@@ -56,13 +83,15 @@ flows:
         options:
           security_type: NONE
       2:
-        task: deploy_sample_indicators_lead
+        flow: sample_inds
         ui_options:
-            is_required: False
-      3:
-        task: deploy_sample_indicators_account_contact
-        ui_options:
-            is_required: False
+          is_required: False
+  config_dev:
+    steps:
+        3:
+            task: generate_accounts_and_contacts
+        4:
+            flow: sample_inds
 
 plans:
   install:
