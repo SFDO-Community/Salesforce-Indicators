@@ -1,0 +1,7 @@
+.slds-vertical-tabs, .slds-vertical-tabs * {
+    overflow: visible;
+}
+
+.slds-vertical-tabs__content{
+    overflow: visible;
+}
