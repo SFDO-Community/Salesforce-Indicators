@@ -58,6 +58,7 @@ public with sharing class Cmdt {
         for(Indicator_Item_Extension__mdt itemExtension : [
             SELECT Id, Active__c,
                 Contains_Text__c,
+                Text_Operator__c,
                 Hover_Text__c,
                 Icon_Value__c,
                 Image__c,

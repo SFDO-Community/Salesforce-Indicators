@@ -189,7 +189,7 @@ export default class IndicatorBundle extends LightningElement {
                         if (item.ZeroBehavior === 'Treat Zeroes as Blanks' && dataValue === 0){
                             dataValue = null;
                         }
-                        // console.log('DataValue',dataValue);   // Retain for debug purposes
+                        console.log('DataValue',dataValue);   // Retain for debug purposes
                         
                         let showDefault = false;
                         if( item.HoverValue || item.TextValue || item.IconName || item.ImageUrl ){
@@ -210,13 +210,27 @@ export default class IndicatorBundle extends LightningElement {
                                     if(extension.IsActive){
 
                                         let match = false;
-                                        let stringValue = JSON.stringify(dataValue);
+                                        let fieldValue = dataValue.toLowerCase();
+                                        let compareValue = extension.ContainsText.toLowerCase();
 
                                         // If the extension uses a String search, check if there is a match
-                                        if(extension.ContainsText) {
-                                            // console.log('Value',dataValue + ' ' + extension.ContainsText);   // Retain for debug purposes
-                                            if(stringValue.includes(extension.ContainsText)){
-                                                match = true;
+                                        if(compareValue) {
+                                            // console.log('Value',dataValue + ' ' + extension.TextOperator + ' ' + compareValue);   // Retain for debug purposes
+                                            if(extension.TextOperator === 'Contains'){
+                                                match = fieldValue.includes(compareValue);
+                                                // console.log('Contains', fieldValue.includes(compareValue));
+                                            } else if (extension.TextOperator === 'Does Not Equal') {
+                                                match = fieldValue != compareValue;
+                                                // console.log('Not equal', fieldValue != compareValue);
+                                            } else if (extension.TextOperator === 'Equals') {
+                                                match = fieldValue === compareValue;
+                                                // console.log('Equal', fieldValue === compareValue);
+                                            } else if (extension.TextOperator === 'Starts With'){
+                                                match = fieldValue.startsWith(compareValue);
+                                                // console.log('Start with', fieldValue.startsWith(compareValue));
+                                            } else {
+                                                match = fieldValue.includes(compareValue);
+                                                // console.log('Else', fieldValue.includes(compareValue));
                                             }
                                         } 
                                         // Else if the extension uses a Minimum boundary

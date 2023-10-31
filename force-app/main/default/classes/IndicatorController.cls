@@ -92,6 +92,8 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String ContainsText {get; set;}
         @AuraEnabled
+        public String TextOperator {get; set;}
+        @AuraEnabled
         public Decimal Maximum {get; set;}
         @AuraEnabled
         public Decimal Minimum {get; set;}
@@ -216,6 +218,7 @@ public with sharing class IndicatorController {
         
                         extension.IsActive = itemExtension.Active__c;
                         extension.ContainsText = itemExtension.Contains_Text__c;
+                        extension.TextOperator = itemExtension.Text_Operator__c;
                         extension.Maximum = itemExtension.Maximum__c;
                         extension.Minimum = itemExtension.Minimum__c;
                         extension.ExtensionHoverText = itemExtension.Hover_Text__c;
@@ -312,6 +315,7 @@ public with sharing class IndicatorController {
                 
                                 extension.IsActive = itemExtension.Active__c;
                                 extension.ContainsText = itemExtension.Contains_Text__c;
+                                extension.TextOperator = itemExtension.Text_Operator__c;
                                 extension.Maximum = itemExtension.Maximum__c;
                                 extension.Minimum = itemExtension.Minimum__c;
                                 extension.ExtensionHoverText = itemExtension.Hover_Text__c;
