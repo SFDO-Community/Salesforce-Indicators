@@ -28,6 +28,7 @@
                     <template lwc:if={showTitle}>
                         <h3 slot="title">
                             <lightning-icon 
+                                lwc:if={card.icon}
                                 icon-name={card.icon} 
                                 size="medium"
                                 class={card.iconClass}

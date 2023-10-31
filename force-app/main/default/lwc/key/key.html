@@ -14,6 +14,7 @@
         </template>
         <h3 slot="title">
             <lightning-icon 
+                lwc:if={bundleDetails.Icon}
                 icon-name={bundleDetails.Icon} 
                 size="medium"
                 class={bundleDetails.IconClass}
