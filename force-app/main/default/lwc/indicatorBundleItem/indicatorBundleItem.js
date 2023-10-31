@@ -6,7 +6,7 @@ export default class IndicatorListItem extends LightningElement {
     // @api indText = '';
     // @api indImage = '';
     // @api indIcon = 'standard:all' ;
-    // @api indHoverText = '';
+    @api indHoverText = '';
 
     @api iconSource;
     @api sourceValue;
