@@ -5,6 +5,13 @@ import getNewCmdtUrls from '@salesforce/apex/IndicatorController.getNewCmdtUrls'
 import getBundleOptions from '@salesforce/apex/IndicatorListBundleSelector.getBundleOptions';
 import { refreshApex } from '@salesforce/apex';
 
+import IndicatorEditModal from "c/indicatorEditModal";
+
+import Indicator_Bundle from "@salesforce/schema/Indicator_Bundle__mdt";
+import Indicator_Item from "@salesforce/schema/Indicator_Item__mdt";
+import Indicator_Item_Extension from "@salesforce/schema/Indicator_Item_Extension__mdt";
+
+
 export default class ConfigurationManager extends LightningElement {
     bundleName = '';
     bundle;
@@ -67,8 +74,23 @@ export default class ConfigurationManager extends LightningElement {
     }
 
     handleNewClick(event) {
-        // console.dir(event);
-        window.open('/lightning/setup/CustomMetadata/page?address=' + event.target.value,'_blank');
+        const developerName = (event.currentTarget.dataset || {}).developerName;
+
+        /**This can be removed after proof of concept**/
+        switch (developerName) {
+            case Indicator_Bundle.objectApiName.replace('__c',''):
+                IndicatorEditModal.open({
+                    masterLabel:event.currentTarget.label,
+                    objectApiName:Indicator_Bundle.objectApiName,
+                    isNew:true,
+                    size:'full'
+                }).then((result) => {
+                    console.log(result);
+                });
+                break;
+            default:
+                window.open('/lightning/setup/CustomMetadata/page?address=' + event.target.value,'_blank');
+        }
     }
 
 }
