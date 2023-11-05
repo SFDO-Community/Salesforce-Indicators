@@ -49,7 +49,8 @@ export default class Key extends LightningElement {
             Icon: this.bundle.CardIcon,
             Description: this.bundle.BundleDescription,
             BundleId: this.bundle.BundleId,
-            IsActive: this.bundle.IsActive
+            IsActive: this.bundle.IsActive,
+            ObjectName: this.bundle.ObjectName
         }
 
         if(this.bundle.BundleId){
