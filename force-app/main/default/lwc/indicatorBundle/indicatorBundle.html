@@ -65,16 +65,6 @@
     <template if:true={errorOccurred}>
         <template lwc:if={isManageEnabled}>
             <lightning-card variant="base" title="Error" icon-name="utility:error">
-                <lightning-button-icon
-                    variant="bare"
-                    icon-name="utility:info_alt"
-                    alternative-text="Indicator Value Key"
-                    class="slds-var-m-left_xx-small"
-                    title="Indicator Value Key"
-                    slot="actions"
-                    onclick={handleInfoKeyClick}
-                    aria-haspopup="dialog"
-                ></lightning-button-icon>
                 <p>{errorMessage}</p>
                 <template if:true={showIllustration}>
                     <c-illustration
