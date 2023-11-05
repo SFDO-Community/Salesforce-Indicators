@@ -107,7 +107,7 @@ export default class IndicatorBundle extends LightningElement {
                         this.hasHeader = true;
                     }
 
-                    if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
+                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
                         this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
                     } else {
                         this.card.iconClass = 'slds-var-m-right_xx-small ';
@@ -210,8 +210,8 @@ export default class IndicatorBundle extends LightningElement {
                                     if(extension.IsActive){
 
                                         let match = false;
-                                        let fieldValue = dataValue.toLowerCase();
-                                        let compareValue = extension.ContainsText.toLowerCase();
+                                        let fieldValue = dataValue; // TODO: This fails for numeric: .toLowerCase();
+                                        let compareValue = extension.ContainsText; // .toLowerCase();
 
                                         // If the extension uses a String search, check if there is a match
                                         if(compareValue) {
