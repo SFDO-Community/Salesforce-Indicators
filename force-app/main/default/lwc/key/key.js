@@ -59,7 +59,8 @@ export default class Key extends LightningElement {
         if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
             this.bundleDetails.IconClass = 'cardIcon slds-var-m-right_xx-small ';
         } else {
-            this.bundleDetails.IconClass = 'slds-var-m-right_xx-small ';
+            // ! Was throwing error because it couldn't find this style 'cardIcon' to override... ?
+            this.bundleDetails.IconClass = 'cardIcon slds-var-m-right_xx-small ';
         }
 
         // console.log(JSON.stringify(this.bundleDetails));
