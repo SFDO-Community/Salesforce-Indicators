@@ -210,11 +210,13 @@ export default class IndicatorBundle extends LightningElement {
                                     if(extension.IsActive){
 
                                         let match = false;
-                                        let fieldValue = dataValue; // TODO: This fails for numeric: .toLowerCase();
-                                        let compareValue = extension.ContainsText; // .toLowerCase();
 
                                         // If the extension uses a String search, check if there is a match
-                                        if(compareValue) {
+                                        if(extension.ContainsText) {
+
+                                            let fieldValue = dataValue.toLowerCase();
+                                            let compareValue = extension.ContainsText.toLowerCase();
+
                                             // console.log('Value',dataValue + ' ' + extension.TextOperator + ' ' + compareValue);   // Retain for debug purposes
                                             if(extension.TextOperator === 'Contains'){
                                                 match = fieldValue.includes(compareValue);
