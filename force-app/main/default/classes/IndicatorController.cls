@@ -42,6 +42,8 @@ public with sharing class IndicatorController {
     public class IndicatorItem {
         @AuraEnabled
         public Boolean IsActive {get; set;}
+        @AuraEnabled
+        public Boolean DisplayMultiple {get; set;}
         @AuraEnabled 
         public String FieldLabel { get; set;}
         @AuraEnabled 
@@ -188,6 +190,7 @@ public with sharing class IndicatorController {
                 }
     
                 item.IsActive = indicatorItem.Active__c;
+                item.DisplayMultiple = indicatorItem.Display_Multiple__c;
                 item.IconName = indicatorItem.Icon_Value__c;
                 item.TextValue = indicatorItem.Static_Text__c;
                 item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
@@ -284,6 +287,7 @@ public with sharing class IndicatorController {
                         }
             
                         item.IsActive = indicatorItem.Active__c;
+                        item.DisplayMultiple = indicatorItem.Display_Multiple__c;
                         item.IconName = indicatorItem.Icon_Value__c;
                         item.TextValue = indicatorItem.Static_Text__c;
                         item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
