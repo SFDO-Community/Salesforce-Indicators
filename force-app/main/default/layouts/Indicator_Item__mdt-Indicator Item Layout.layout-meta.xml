@@ -138,6 +138,10 @@
                 <behavior>Edit</behavior>
                 <field>Inverse_Icon_Foreground__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Display_Multiple__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
