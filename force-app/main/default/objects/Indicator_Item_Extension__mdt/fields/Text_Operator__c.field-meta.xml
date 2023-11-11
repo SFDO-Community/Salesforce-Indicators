@@ -4,6 +4,7 @@
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
     <label>Text Operator</label>
+    <inlineHelpText>For "Contains Text" value, choose how to match the text. Defaults to Contains if no value entered.</inlineHelpText>
     <required>false</required>
     <type>Picklist</type>
     <valueSet>
