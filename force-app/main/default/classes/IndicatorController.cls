@@ -214,7 +214,7 @@ public with sharing class IndicatorController {
         
                         extension.IsActive = itemExtension.Active__c;
                         extension.ContainsText = itemExtension.Contains_Text__c;
-                        extension.TextOperator = itemExtension.Text_Operator__c;
+                        extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
                         extension.Maximum = itemExtension.Maximum__c;
                         extension.Minimum = itemExtension.Minimum__c;
                         extension.ExtensionHoverText = itemExtension.Hover_Text__c;
@@ -313,7 +313,7 @@ public with sharing class IndicatorController {
                 
                                 extension.IsActive = itemExtension.Active__c;
                                 extension.ContainsText = itemExtension.Contains_Text__c;
-                                extension.TextOperator = itemExtension.Text_Operator__c;
+                                extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
                                 extension.Maximum = itemExtension.Maximum__c;
                                 extension.Minimum = itemExtension.Minimum__c;
                                 extension.ExtensionHoverText = itemExtension.Hover_Text__c;
