@@ -86,6 +86,12 @@ flows:
         flow: sample_inds
         ui_options:
           is_required: False
+          is_recommended: False
+      3:
+        task: deploy_training_indicators
+        ui_options:
+          is_required: False
+          is_recommended: False
   config_dev:
     steps:
         3:
