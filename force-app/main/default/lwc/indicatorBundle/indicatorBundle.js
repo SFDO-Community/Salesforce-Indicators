@@ -309,10 +309,10 @@ export default class IndicatorBundle extends LightningElement {
                             //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
                             ...dataValue || dataValue === 0 ? {
                                 ...matchedExtension ? {
-                                        fTextShown: matchedExtension.TextValue
+                                        fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.toUpperCase().substring(0,3) : ''
                                     } : {
                                     ...dataValue && item.TextValue ? {
-                                            fTextShown : item.TextValue 
+                                            fTextShown : item.TextValue.toUpperCase().substring(0,3) 
                                         } : {
                                             ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
                                                     fTextShown : '' 
@@ -323,7 +323,7 @@ export default class IndicatorBundle extends LightningElement {
                                     }
                                 } : {
                                 ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                        fTextShown : item.FalseTextValue ? item.FalseTextValue : ''
+                                        fTextShown : item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : ''
                                     } : {
                                         fTextShown : '' 
                                     }

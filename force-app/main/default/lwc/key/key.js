@@ -95,7 +95,7 @@ export default class Key extends LightningElement {
                     let normalIcon = {
                         IndicatorId: item.IndicatorId,
                         IconName: item.IconName ? item.IconName : '', 
-                        TextValue: item.TextValue ? item.TextValue : '', 
+                        TextValue: item.TextValue ? item.TextValue.toUpperCase().substring(0,3) : '', 
                         ImageUrl: item.ImageUrl ? item.ImageUrl : '', 
                         HoverValue: item.HoverValue ? '\"' + item.HoverValue + '\"' : 'Field Value',
                         Priority: '',
@@ -112,7 +112,7 @@ export default class Key extends LightningElement {
                         normalIcon.showItem = hasManagePermission;
                     }
                     if(item.EmptyStaticBehavior == 'Use Field Value'){
-                        normalIcon.TextValue = '\xa0Abc\r\n\xa0123';
+                        normalIcon.TextValue = '\xa0ABC\r\n\xa0123';
                         normalIcon.Description = 'Displays the field\'s value inside the indicator';
                     }
                     if(item.Extensions){
@@ -140,7 +140,7 @@ export default class Key extends LightningElement {
                     let inverseIcon = {
                         IndicatorId: item.IndicatorId,
                         IconName: item.FalseIcon ? item.FalseIcon : '', 
-                        TextValue: item.FalseTextValue ? item.FalseTextValue : '', 
+                        TextValue: item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : '', 
                         ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '', 
                         HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field Value',
                         Priority: '',
@@ -197,7 +197,7 @@ export default class Key extends LightningElement {
                             let extensionIcon = {
                                 IndicatorId: ext.ExtensionId,
                                 IconName: ext.ExtensionIconValue ? ext.ExtensionIconValue : '',
-                                TextValue: ext.ExtensionTextValue ? ext.ExtensionTextValue : '',
+                                TextValue: ext.ExtensionTextValue ? ext.ExtensionTextValue.toUpperCase().substring(0,3) : '',
                                 ImageUrl: ext.ExtensionImageUrl ? ext.ExtensionImageUrl : '',
                                 HoverValue: ext.ExtensionHoverText ? '\"' + ext.ExtensionHoverText + '\"' : 'Field Value',
                                 Priority: ext.PriorityOrder ? ext.PriorityOrder : '',

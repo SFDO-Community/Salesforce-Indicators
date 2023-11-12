@@ -56,7 +56,7 @@ export default class IndicatorBundleKey extends LightningModal {
                     let normalIcon = {
                         IndicatorId: item.IndicatorId,
                         IconName: item.IconName ? item.IconName : '', 
-                        TextValue: item.TextValue ? item.TextValue : '', 
+                        TextValue: item.TextValue ? item.TextValue.toUpperCase().substring(0,3) : '', 
                         ImageUrl: item.ImageUrl ? item.ImageUrl : '', 
                         HoverValue: item.HoverValue ? '\"' + item.HoverValue + '\"' : 'Field Value',
                         Priority: '',
@@ -95,7 +95,7 @@ export default class IndicatorBundleKey extends LightningModal {
                     let inverseIcon = {
                         IndicatorId: item.IndicatorId,
                         IconName: item.FalseIcon ? item.FalseIcon : '', 
-                        TextValue: item.FalseTextValue ? item.FalseTextValue : '', 
+                        TextValue: item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : '', 
                         ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '', 
                         HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field Value',
                         Priority: '',
@@ -157,7 +157,7 @@ export default class IndicatorBundleKey extends LightningModal {
                             };
 
                             if(ext.ContainsText) {
-                                extensionIcon.ExtensionLogic = item.FieldLabel + ' ' + ext.Operator.toUpperCase() + ' \"' + ext.ContainsText + '\"';
+                                extensionIcon.ExtensionLogic = item.FieldLabel + ' ' + ext.TextOperator.toUpperCase() + ' \"' + ext.ContainsText + '\"';
                             } else if (ext.Minimum || ext.Minimum === 0) {
                                 let range = item.FieldLabel + ' greater than or equal to ' + ext.Minimum;
                                 if(ext.Maximum){
