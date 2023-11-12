@@ -40,7 +40,7 @@
     </values>
     <values>
         <field>%%%NAMESPACE%%%Icon_Value__c</field>
-        <value xsi:type="xsd:string">standard:custom26</value>
+        <value xsi:type="xsd:string">custom:custom26</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Image__c</field>
