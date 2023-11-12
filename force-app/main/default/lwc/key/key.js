@@ -75,6 +75,23 @@ export default class Key extends LightningElement {
                 // console.dir(JSON.parse(JSON.stringify(item)));
                 if(item.ImageUrl || item.IconName){
                     // Show Normal
+                    let fillDesc = '';
+                    if(item.TextValue || item.TextValue === 0){
+                        fillDesc = 'Static Text';
+                    } else if (item.EmptyStaticBehavior === 'Use Field Value'){
+                        fillDesc = 'Field Value';
+                    } else if (item.EmptyStaticBehavior === 'Use Icon Only'){
+                        if(item.ImageUrl && item.IconName) {
+                            fillDesc = 'Image/Fallback Icon';
+                        } else if(item.ImageUrl){
+                            fillDesc = 'Image';
+                        } else if(item.IconName){
+                            fillDesc = 'Icon';
+                        } else {
+                            fillDesc = '';
+                        }
+                    }
+
                     let normalIcon = {
                         IndicatorId: item.IndicatorId,
                         IconName: item.IconName ? item.IconName : '', 
@@ -83,7 +100,7 @@ export default class Key extends LightningElement {
                         HoverValue: item.HoverValue ? '\"' + item.HoverValue + '\"' : 'Field Value',
                         Priority: '',
                         ExtensionLogic: item.FieldLabel + ' has a value',
-                        FillType: item.TextValue ? 'Static Text' : item.EmptyStaticBehavior,
+                        FillType: fillDesc,
                         Description: '',
                         Background: item.BackgroundColor,
                         Foreground: item.ForegroundColor,
@@ -107,15 +124,28 @@ export default class Key extends LightningElement {
 
                 if(item.FalseImageUrl || item.FalseIcon){
                     // Show Inverse
+                    let fillDesc = '';
+                    if(item.FalseTextValue || item.FalseTextValue === 0){
+                        fillDesc = 'Static Text';
+                    } else if(item.FalseImageUrl && item.FalseIcon) {
+                        fillDesc = 'Image/Fallback Icon';
+                    } else if(item.FalseImageUrl){
+                        fillDesc = 'Image';
+                    } else if(item.FalseIcon){
+                        fillDesc = 'Icon';
+                    } else {
+                        fillDesc = '';
+                    }
+
                     let inverseIcon = {
                         IndicatorId: item.IndicatorId,
                         IconName: item.FalseIcon ? item.FalseIcon : '', 
                         TextValue: item.FalseTextValue ? item.FalseTextValue : '', 
                         ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '', 
-                        HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field\'s Value',
+                        HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field Value',
                         Priority: '',
                         ExtensionLogic: item.FieldLabel + ' is false or blank',
-                        FillType: item.FalseTextValue ? 'Static Text' : 'Icon/Image',
+                        FillType: fillDesc,
                         Description: '',
                         Background: item.InverseBackgroundColor,
                         Foreground: item.InverseForegroundColor,
@@ -147,6 +177,23 @@ export default class Key extends LightningElement {
                     orderedExtensions.forEach(
                         ext => 
                         {
+                            let fillDesc = '';
+                            if(ext.ExtensionTextValue || ext.ExtensionTextValue === 0){
+                                fillDesc = 'Static Text';
+                            } else if (item.EmptyStaticBehavior === 'Use Field Value'){
+                                fillDesc = 'Field Value';
+                            } else if (item.EmptyStaticBehavior === 'Use Icon Only'){
+                                if(ext.ExtensionImageUrl && ext.ExtensionIconValue) {
+                                    fillDesc = 'Image/Fallback Icon';
+                                } else if(ext.ExtensionImageUrl){
+                                    fillDesc = 'Image';
+                                } else if(ext.ExtensionIconValue){
+                                    fillDesc = 'Icon';
+                                } else {
+                                    fillDesc = '';
+                                }
+                            }
+
                             let extensionIcon = {
                                 IndicatorId: ext.ExtensionId,
                                 IconName: ext.ExtensionIconValue ? ext.ExtensionIconValue : '',
@@ -155,11 +202,12 @@ export default class Key extends LightningElement {
                                 HoverValue: ext.ExtensionHoverText ? '\"' + ext.ExtensionHoverText + '\"' : 'Field Value',
                                 Priority: ext.PriorityOrder ? ext.PriorityOrder : '',
                                 ExtensionLogic: '',
-                                FillType: ext.ExtensionTextValue ? 'Static Text' : 'Icon/Image',
+                                FillType: fillDesc,
                                 Description: ext.ExtensionDescription,
                                 Background: ext.BackgroundColor,
                                 Foreground: ext.ForegroundColor,
-                                IsActive: ext.IsActive
+                                IsActive: ext.IsActive,
+                                Operator: ext.TextOperator
                             };
 
                             if(ext.IsActive){
@@ -169,8 +217,8 @@ export default class Key extends LightningElement {
                             }
 
                             if(ext.ContainsText) {
-                                extensionIcon.ExtensionLogic = item.FieldLabel + ' contains: \"' + ext.ContainsText + '\"';
-                            } else if (ext.Minimum) {
+                                extensionIcon.ExtensionLogic = item.FieldLabel + ' ' + extensionIcon.Operator.toUpperCase() + ' \"' + ext.ContainsText + '\"';
+                            } else if (ext.Minimum || ext.Minimum === 0) {
                                 let range = item.FieldLabel + ' greater than or equal to ' + ext.Minimum;
                                 if(ext.Maximum){
                                    range += ' and less than ' + ext.Maximum;
