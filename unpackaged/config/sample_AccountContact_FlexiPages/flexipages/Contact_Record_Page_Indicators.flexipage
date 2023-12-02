@@ -260,7 +260,7 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Contact Record Page</masterLabel>
+    <masterLabel>Contact Record Page (Indicators)</masterLabel>
     <parentFlexiPage>sfa__Contact_rec_L</parentFlexiPage>
     <sobjectType>Contact</sobjectType>
     <template>
