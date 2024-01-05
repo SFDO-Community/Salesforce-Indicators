@@ -16,6 +16,8 @@ public with sharing class IndicatorController {
 
     public class IndicatorBundle {
         @AuraEnabled
+        public String ObjectName {get; set;}
+        @AuraEnabled
         public Boolean IsActive {get; set;}
         @AuraEnabled
         public String CardIcon {get; set;}
@@ -31,10 +33,6 @@ public with sharing class IndicatorController {
         public String BundleDescription {get; set;}
         @AuraEnabled
         public String BundleId {get; set;}
-        @AuraEnabled
-        public String BackgroundColor {get; set;}
-        @AuraEnabled
-        public String ForegroundColor {get; set;}
         @AuraEnabled
         public List<IndicatorItem> Items {get; set;}
     }
@@ -91,6 +89,8 @@ public with sharing class IndicatorController {
         public Boolean IsActive {get; set;}
         @AuraEnabled
         public String ContainsText {get; set;}
+        @AuraEnabled
+        public String TextOperator {get; set;}
         @AuraEnabled
         public Decimal Maximum {get; set;}
         @AuraEnabled
@@ -162,8 +162,6 @@ public with sharing class IndicatorController {
             wrapper.CardTitle = 'Unbundled Items';
             wrapper.BundleDescription = null;
             wrapper.BundleId = null;
-            wrapper.BackgroundColor = null;
-            wrapper.ForegroundColor = null;
             wrapper.Items = new List<IndicatorItem>();
 
             for(Indicator_Item__mdt indicatorItem : Cmdt.getAllOrphanItems()){
@@ -216,6 +214,7 @@ public with sharing class IndicatorController {
         
                         extension.IsActive = itemExtension.Active__c;
                         extension.ContainsText = itemExtension.Contains_Text__c;
+                        extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
                         extension.Maximum = itemExtension.Maximum__c;
                         extension.Minimum = itemExtension.Minimum__c;
                         extension.ExtensionHoverText = itemExtension.Hover_Text__c;
@@ -261,8 +260,10 @@ public with sharing class IndicatorController {
             wrapper.CardTitle = bundle.Card_Title__c;
             wrapper.BundleDescription = bundle.Description__c;
             wrapper.BundleId = bundle.Id;
-            wrapper.BackgroundColor = bundle.Card_Icon_Background__c;
-            wrapper.ForegroundColor = bundle.Card_Icon_Foreground__c;
+            wrapper.ObjectName = bundle.sObject__r.Label;
+            if(bundle.sObject__r.Label != bundle.sObject__r.QualifiedApiName){
+                wrapper.ObjectName += ' (' + bundle.sObject__r.QualifiedApiName + ')';
+            }
             wrapper.Items = new List<IndicatorItem>();
 
             if(!bundleItems.isEmpty()){     // TODO: Commenting out this check is a great way to test throwing an error in the LWC
@@ -312,6 +313,7 @@ public with sharing class IndicatorController {
                 
                                 extension.IsActive = itemExtension.Active__c;
                                 extension.ContainsText = itemExtension.Contains_Text__c;
+                                extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
                                 extension.Maximum = itemExtension.Maximum__c;
                                 extension.Minimum = itemExtension.Minimum__c;
                                 extension.ExtensionHoverText = itemExtension.Hover_Text__c;

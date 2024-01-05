@@ -3,7 +3,7 @@
 }
 
 .indicatorIcon {
-    --sds-c-icon-color-foreground: var(--foregroundColor);
-    --sds-c-icon-color-background: var(--backgroundColor);
+    --slds-c-icon-color-foreground: var(--foregroundColor);
+    --slds-c-icon-color-background: var(--backgroundColor);
     --slds-c-avatar-text-color: var(--foregroundColor);
 }
