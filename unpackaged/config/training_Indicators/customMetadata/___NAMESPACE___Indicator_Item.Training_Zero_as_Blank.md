@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Training: Zero as Blank</label>
+    <protected>false</protected>
+    <values>
+        <field>%%%NAMESPACE%%%Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Advanced_Field_Label__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Advanced_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Description__c</field>
+        <value xsi:type="xsd:string">This indicator shows the configuration of a field (Number of Employees) with Treat Zeros as Blank.  In this case, the zero will be ignored and not display any indicator, only a value other than zero will display an indicator.</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Empty_Static_Text_Behavior__c</field>
+        <value xsi:type="xsd:string">Use Icon Only</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Field__c</field>
+        <value xsi:type="xsd:string">NumberOfEmployees</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Hover_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Background__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Foreground__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Value__c</field>
+        <value xsi:type="xsd:string">standard:employee</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Image__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Hover_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Icon_Background__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Icon_Foreground__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Icon_Value__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Image__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Static_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Show_False_or_Blank__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Static_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Zero_Behavior__c</field>
+        <value xsi:type="xsd:string">Treat Zeroes as Blanks</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%sObject__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+</CustomMetadata>

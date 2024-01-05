@@ -1,0 +1,224 @@
+## Salesforce Leads for Indicators App
+
+# To run this code:
+#
+# cci task run generate_and_load_from_yaml -o generator_yaml recipe.Leads.yml -o num_records 300 -o num_records_tablename Lead --org dev
+
+- plugin: snowfakery.standard_plugins.datasets.Dataset
+
+# every standard field
+- object: Lead
+  fields:
+    FirstName:
+      fake: FirstNameNonBinary
+    LastName:
+      fake: LastName
+    Street: 
+      fake: StreetAddress
+    City: 
+      fake: City
+    State: 
+      fake: StateAbbr
+    PostalCode: 
+      fake: ZipcodePlus4
+    Country: 
+      random_choice:
+        - choice:
+            probability: 20%
+            pick: US
+        - choice:
+            probability: 20%
+            pick: United States
+        - choice:
+            probability: 20%
+            pick: CA 
+        - choice:
+            probability: 20%
+            pick: Canada
+        - choice:
+            probability: 10%
+            pick: Other
+        - choice:
+            probability: 10%
+            pick: NULL
+    AnnualRevenue: 
+      random_number:
+        min: 0
+        max: 10000000
+        step: 100000
+    CleanStatus:
+      random_choice:
+        - Matched
+        - Different
+        - Acknowledged
+        - NotFound
+        - Inactive
+        - Pending
+        # - SelectMatch  # causes problems sometimes
+        - Skipped
+    Company: 
+      fake: company
+    CompanyDunsNumber: 
+      fake.text:
+        max_nb_chars: 9
+    # DandbCompanyId: 
+    Jigsaw:
+      fake.text:
+        max_nb_chars: 20
+    Description: 
+      fake: catch_phrase
+    # DoNotCall: ${{fake.Boolean(chance_of_getting_true=90)}}
+    Email: 
+      random_choice:
+        - choice: 
+            probability: 80%
+            pick: ${{FirstName}}.${{LastName}}@example.com
+        - choice:
+            probability: 20%
+            pick: NULL
+    # HasOptedOutOfEmail: ${{fake.Boolean(chance_of_getting_true=90)}}
+    Fax: 
+      random_choice:
+        - choice: 
+            probability: 80%
+            pick:
+              fake: PhoneNumber
+        - choice:
+            probability: 20%
+            pick: NULL
+    # HasOptedOutOfFax: ${{fake.Boolean(chance_of_getting_true=90)}}
+    # GenderIdentity: 
+    #   random_choice:
+    #     - Male
+    #     - Female
+    #     - Nonbinary
+    #     - Not Listed
+    __industry_null:
+      random_choice:
+        - choice: 
+            probability: 75%
+            pick: false
+        - choice:
+            probability: 25%
+            pick: true
+    Industry: 
+      if:
+        - choice:
+            when: ${{__industry_null=='false'}}
+            pick:
+              NULL
+        - choice:
+            pick:
+              random_choice:
+                Agriculture: 1
+                Apparel: 1
+                Banking: 1
+                Biotechnology: 1
+                Chemicals: 1
+                Communications: 1
+                Construction: 10
+                Consulting: 1
+                Education: 1
+                Electronics: 10
+                Energy: 10
+                Engineering: 10
+                Entertainment: 1
+                Environmental: 1
+                Finance: 1
+                Food & Beverage: 1
+                Government: 10
+                Healthcare: 1
+                Hospitality: 1
+                Insurance: 1
+                Machinery: 1
+                Manufacturing: 10
+                Media: 1
+                Not For Profit: 1
+                Recreation: 1
+                Retail: 1
+                Shipping: 1
+                Technology: 10
+                Telecommunications: 1
+                Transportation: 1
+                Utilities: 10
+                Other: 10
+        
+    # OwnerId: 
+    LeadSource: 
+      random_choice: 
+        - Web
+        - Phone Inquiry
+        - Partner Referral
+        - Purchased List
+        - Other
+        - NULL
+    Rating: 
+      random_choice:
+        Hot: 20%
+        Warm: 60%
+        Cold: 20%
+    Status: 
+      if: 
+        - choice:
+            when: ${{Rating=='Hot'}}
+            pick:
+              random_choice: 
+                Open - Not Contacted: 40%
+                Working - Contacted: 60%
+        - choice:
+            when: ${{Rating=='Warm'}}
+            pick:
+              random_choice: 
+                Open - Not Contacted: 60%
+                Working - Contacted: 40%
+        - choice:
+            when: ${{Rating=='Cold'}}
+            pick:
+              random_choice: 
+                Open - Not Contacted: 30%
+                Working - Contacted: 40%
+                Closed - Converted: 0%
+                Closed - Not Converted: 30%
+    MobilePhone:
+      random_choice:
+          - choice: 
+              probability: 60%
+              pick:
+                fake: PhoneNumber
+          - choice:
+              probability: 40%
+              pick: NULL
+    NumberOfEmployees: 
+      random_number:
+        min: 0
+        max: 200000
+    Phone: 
+      random_choice:
+          - choice: 
+              probability: 75%
+              pick:
+                fake: PhoneNumber
+          - choice:
+              probability: 25%
+              pick: NULL
+    # Pronouns: 
+    #   random_choice: 
+    #     - He/Him
+    #     - She/Her
+    #     - They/Them
+    #     - He/They
+    #     - She/They
+    #     - Not Listed
+    __title_from_csv:
+      Dataset.iterate:
+        dataset: static-values/titles.csv
+    Title: 
+      random_choice:
+        - choice: 
+            probability: 75%
+            pick: ${{__title_from_csv.Title}}
+        - choice:
+            probability: 25%
+            pick: NULL
+    Website: 
+      fake: url

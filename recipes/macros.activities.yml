@@ -1,0 +1,67 @@
+# This macro file provides shortcuts central to additions of npsp
+
+- macro: One-Hour Event
+  fields: 
+    EventSubtype: Event
+    Location: ${{fake.Company}} (${{fake.City}}, ${{fake.State}})
+    Subject: ${{fake.CatchPhrase}} Meeting
+    ActivityDateTime: ${{fake.DateThisYear}}T${{fake.time}}Z
+    DurationInMinutes: 60
+    Description: ${{fake.Sentence(nb_words=10)}}
+
+- macro: All-Day Event
+  fields: 
+    EventSubtype: Event
+    Location: ${{fake.Company}} (${{fake.City}}, ${{fake.State}})
+    Subject: ${{fake.CatchPhrase}} Meeting
+    StartDateTime: ${{fake.DateThisYear}}T${{fake.time}}Z
+    DurationInMinutes: 0
+    IsAllDayEvent: true
+    Description: ${{fake.Sentence(nb_words=10)}}
+
+- macro: Task
+  fields: 
+    TaskSubtype: 
+      random_choice:
+        - Call
+        - Email
+        - Task
+    Subject: 
+      if:
+        - choice: 
+            when: ${{TaskSubtype=='Call'}}
+            pick: "Call: ${{fake.CatchPhrase}}"
+
+        - choice: 
+            when: ${{TaskSubtype=='Task'}}
+            pick: "Task: ${{fake.CatchPhrase}}"
+          
+        - choice: 
+            when: ${{TaskSubtype=='Task'}}
+            pick: "Email: ${{fake.CatchPhrase}}"
+    ActivityDate: 
+      date_between:
+        start_date: -12M
+        end_date: +6M
+    Description: ${{fake.Sentence(nb_words=10)}}
+    Priority: 
+      random_choice:
+        High: 5%
+        Normal: 85% 
+        Low: 10%
+    Status: 
+      if:
+        - choice: 
+            when: ${{ActivityDate < today - relativedelta(days=7)}}
+            pick: Completed
+
+        - choice: 
+            when: ${{ActivityDate < today}}
+            pick: In Progress
+
+        - choice: 
+            pick:
+              random_choice:
+                - Not Started
+                - Waiting on someone else
+                - Deferred
