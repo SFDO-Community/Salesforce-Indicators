@@ -107,7 +107,7 @@ export default class IndicatorBundle extends LightningElement {
                         this.hasHeader = true;
                     }
 
-                    if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
+                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
                         this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
                     } else {
                         this.card.iconClass = 'slds-var-m-right_xx-small ';
@@ -211,13 +211,24 @@ export default class IndicatorBundle extends LightningElement {
                                     if(extension.IsActive){
 
                                         let match = false;
-                                        let stringValue = JSON.stringify(dataValue);
 
                                         // If the extension uses a String search, check if there is a match
                                         if(extension.ContainsText) {
                                             // console.log('Value',dataValue + ' ' + extension.ContainsText);   // Retain for debug purposes
-                                            if(stringValue.includes(extension.ContainsText)){
-                                                match = true;
+                                            let fieldValue = dataValue.toLowerCase();
+                                            let compareValue = extension.ContainsText.toLowerCase();
+                                            
+                                            // console.log('Value',dataValue + ' ' + extension.TextOperator + ' ' + compareValue);   // Retain for debug purposes
+                                            if(extension.TextOperator === 'Contains'){
+                                                match = fieldValue.includes(compareValue);
+                                            } else if (extension.TextOperator === 'Does Not Equal') {
+                                                match = fieldValue != compareValue;
+                                            } else if (extension.TextOperator === 'Equals') {
+                                                match = fieldValue === compareValue;
+                                            } else if (extension.TextOperator === 'Starts With'){
+                                                match = fieldValue.startsWith(compareValue);
+                                            } else {
+                                                match = fieldValue.includes(compareValue);
                                             }
                                         } 
                                         // Else if the extension uses a Minimum boundary
@@ -239,7 +250,7 @@ export default class IndicatorBundle extends LightningElement {
 
                                         // console.log('Match Status', match);   // Retain for debug purposes
                                         if(match) {
-                                            // If there is a match for an Extension, assign the extension's override values
+                                            // If there is a match for an Extension, assign the extension's override values and these will be used later
                                             matchedExtension = {
                                                 "IconName" : extension.ExtensionIconValue,
                                                 "TextValue" : extension.ExtensionTextValue,
@@ -250,6 +261,7 @@ export default class IndicatorBundle extends LightningElement {
                                                 "IconForeground" : extension.ForegroundColor
                                             };
 
+                                            // However, if multiple matching is enabled, immediately assign the Extension for use in the Bundle.
                                             if(item.DisplayMultiple){
                                                 anyMatch = true;
                                                 matchingFields.push(
@@ -276,6 +288,9 @@ export default class IndicatorBundle extends LightningElement {
                             
                         }
                         
+                        // If multiple matching is enabled and did not find a single match
+                        // or if multiple matching is not enabled
+                        // proceed to assign the indicator properties based on Indicator Item values
                         if (anyMatch != true || item.DisplayMultiple != true) {
 
                             matchingFields.push(
@@ -320,10 +335,10 @@ export default class IndicatorBundle extends LightningElement {
                                 //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
                                 ...dataValue || dataValue === 0 ? {
                                     ...matchedExtension ? {
-                                            fTextShown: matchedExtension.TextValue
+                                            fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.toUpperCase().substring(0,3) : ''
                                         } : {
                                         ...dataValue && item.TextValue ? {
-                                                fTextShown : item.TextValue 
+                                                fTextShown : item.TextValueitem.TextValue.toUpperCase().substring(0,3) 
                                             } : {
                                                 ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
                                                         fTextShown : '' 
@@ -334,7 +349,7 @@ export default class IndicatorBundle extends LightningElement {
                                         }
                                     } : {
                                     ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                            fTextShown : item.FalseTextValue ? item.FalseTextValue : ''
+                                            fTextShown : item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : ''
                                         } : {
                                             fTextShown : '' 
                                         }
