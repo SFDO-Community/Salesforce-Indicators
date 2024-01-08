@@ -108,7 +108,6 @@ export default class IndicatorBundle extends LightningElement {
                     }
 
                     if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
-                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
                         this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
                     } else {
                         this.card.iconClass = 'slds-var-m-right_xx-small ';
