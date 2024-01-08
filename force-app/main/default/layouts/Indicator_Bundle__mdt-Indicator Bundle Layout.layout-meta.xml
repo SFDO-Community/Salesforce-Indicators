@@ -28,11 +28,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Card_Icon_Foreground__c</field>
+                <field>Card_Icon_Background__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Card_Icon_Background__c</field>
+                <field>Card_Icon_Foreground__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

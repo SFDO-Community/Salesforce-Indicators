@@ -108,6 +108,7 @@ export default class IndicatorBundle extends LightningElement {
                     }
 
                     if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
+                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
                         this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
                     } else {
                         this.card.iconClass = 'slds-var-m-right_xx-small ';
@@ -214,10 +215,10 @@ export default class IndicatorBundle extends LightningElement {
 
                                         // If the extension uses a String search, check if there is a match
                                         if(extension.ContainsText) {
-                                            // console.log('Value',dataValue + ' ' + extension.ContainsText);   // Retain for debug purposes
+
                                             let fieldValue = dataValue.toLowerCase();
                                             let compareValue = extension.ContainsText.toLowerCase();
-                                            
+
                                             // console.log('Value',dataValue + ' ' + extension.TextOperator + ' ' + compareValue);   // Retain for debug purposes
                                             if(extension.TextOperator === 'Contains'){
                                                 match = fieldValue.includes(compareValue);
@@ -338,7 +339,7 @@ export default class IndicatorBundle extends LightningElement {
                                             fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.toUpperCase().substring(0,3) : ''
                                         } : {
                                         ...dataValue && item.TextValue ? {
-                                                fTextShown : item.TextValueitem.TextValue.toUpperCase().substring(0,3) 
+                                                fTextShown : item.TextValue.toUpperCase().substring(0,3) 
                                             } : {
                                                 ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
                                                         fTextShown : '' 

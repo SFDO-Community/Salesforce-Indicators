@@ -8,7 +8,7 @@ assignees:
 ---
 
 **Have you shared this feature idea request in the Trailblazer Community?**
-Please first share your thought in the Summit Events App Trailblazer Community for additional support on your idea as well as some initial requirement gathering. 
+Please first share your thought in the Salesforce Indicators Trailblazer Community for additional support on your idea as well as some initial requirement gathering. 
 
 If you have shared, please provide a link to your post.
 

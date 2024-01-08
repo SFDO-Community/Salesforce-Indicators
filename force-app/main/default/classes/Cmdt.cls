@@ -4,7 +4,20 @@ public with sharing class Cmdt {
     public static void initializeConfiguration() {
         
         // Gather all active Bundles and put them into a Map (key: DeveloperName; Bundle)
-        for( Indicator_Bundle__mdt bundle : Indicator_Bundle__mdt.getAll().values() ) {
+        for( Indicator_Bundle__mdt bundle : [
+            SELECT Id, DeveloperName, MasterLabel, Label,
+                Active__c, 
+                Card_Icon__c, 
+                Card_Icon_Background__c, 
+                Card_Icon_Foreground__c, 
+                Card_Text__c, 
+                Card_Title__c, 
+                Description__c,
+                sObject__c, 
+                sObject__r.QualifiedApiName, 
+                sObject__r.Label
+            FROM Indicator_Bundle__mdt
+        ] ) {
             setBundle(bundle);
         }
 
@@ -59,6 +72,7 @@ public with sharing class Cmdt {
         for(Indicator_Item_Extension__mdt itemExtension : [
             SELECT Id, Active__c,
                 Contains_Text__c,
+                Text_Operator__c,
                 Hover_Text__c,
                 Icon_Value__c,
                 Image__c,
