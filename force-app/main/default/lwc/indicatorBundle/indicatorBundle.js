@@ -176,6 +176,7 @@ export default class IndicatorBundle extends LightningElement {
             this.bundle.Items.forEach(
                 item => 
                 {
+                    let anyMatch = false;
                     if(item.IsActive){
                         
                         // console.dir(item);   // Retain for debug purposes
@@ -249,7 +250,7 @@ export default class IndicatorBundle extends LightningElement {
 
                                         // console.log('Match Status', match);   // Retain for debug purposes
                                         if(match) {
-                                            // If there is a match for an Extension, assign the extension's override values
+                                            // If there is a match for an Extension, assign the extension's override values and these will be used later
                                             matchedExtension = {
                                                 "IconName" : extension.ExtensionIconValue,
                                                 "TextValue" : extension.ExtensionTextValue,
@@ -259,6 +260,26 @@ export default class IndicatorBundle extends LightningElement {
                                                 "IconBackground" : extension.BackgroundColor,
                                                 "IconForeground" : extension.ForegroundColor
                                             };
+
+                                            // However, if multiple matching is enabled, immediately assign the Extension for use in the Bundle.
+                                            if(item.DisplayMultiple){
+                                                anyMatch = true;
+                                                matchingFields.push(
+                                                    {
+                                                        fName: item.FieldApiName,
+                                                        fTextValue: dataValue,
+                                                        fImageURL: matchedExtension.ImageUrl,
+                                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue,
+                                                        fShowAvatar: true,
+                                                        fIconName : matchedExtension.IconName,
+                                                        fIconBackground : matchedExtension.IconBackground,
+                                                        fIconForeground : matchedExtension.IconForeground,
+                                                        fTextShown: matchedExtension.TextValue
+                                                    }
+                                                );
+                                            }
+
+                                            // console.dir(matchedExtension);
                                         }
                                     }   // End-If extension.IsActive
                                 }
@@ -266,69 +287,75 @@ export default class IndicatorBundle extends LightningElement {
                             )
                             
                         }
+                        
+                        // If multiple matching is enabled and did not find a single match
+                        // or if multiple matching is not enabled
+                        // proceed to assign the indicator properties based on Indicator Item values
+                        if (anyMatch != true || item.DisplayMultiple != true) {
 
-                        matchingFields.push(
-                        {
-                            fName: item.FieldApiName,   // Retain for debug purposes
-                            fTextValue: dataValue,      // Retain for debug purposes
-                            ...dataValue || dataValue === 0 ? {
-                                    fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
-                                } : {
-                                    fImageURL: item.DisplayFalse ? item.FalseImageUrl : ''
-                                },
-                            // ! If value is false, the false hover will be set.
-                            ...dataValue || dataValue === 0 ? {
-                                    fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
-                                } : {
-                                    fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
-                                },
-                            //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
-                            ...dataValue || dataValue === 0 ? {
-                                    fShowAvatar : matchedExtension ? true : showDefault
-                                } : {
-                                    fShowAvatar: item.DisplayFalse
-                                },
-                            //If the value is false, the false icon will be set.
-                            ...dataValue || dataValue === 0 ? {
-                                    fIconName : matchedExtension ? matchedExtension.IconName : item.IconName
-                                } : {
-                                    fIconName: item.DisplayFalse ? item.FalseIcon : ''
-                                },
-                            ...dataValue || dataValue === 0 ? {
-                                    fIconBackground : matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor
-                                } : {
-                                    fIconBackground: item.DisplayFalse? item.InverseBackgroundColor : item.BackgroundColor
-                                },
-                            ...dataValue || dataValue === 0 ? {
-                                    fIconForeground : matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
-                                } : {
-                                    fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
-                                },
-                            //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
-                            //If the Icon Text is entered then show that
-                            //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
-                            ...dataValue || dataValue === 0 ? {
-                                ...matchedExtension ? {
-                                        fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.toUpperCase().substring(0,3) : ''
+                            matchingFields.push(
+                            {
+                                fName: item.FieldApiName,   // Retain for debug purposes
+                                fTextValue: dataValue,      // Retain for debug purposes
+                                ...dataValue || dataValue === 0 ? {
+                                        fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
                                     } : {
-                                    ...dataValue && item.TextValue ? {
-                                            fTextShown : item.TextValue.toUpperCase().substring(0,3) 
+                                        fImageURL: item.DisplayFalse ? item.FalseImageUrl : ''
+                                    },
+                                // ! If value is false, the false hover will be set.
+                                ...dataValue || dataValue === 0 ? {
+                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
+                                    } : {
+                                        fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
+                                    },
+                                //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
+                                ...dataValue || dataValue === 0 ? {
+                                        fShowAvatar : matchedExtension ? true : showDefault
+                                    } : {
+                                        fShowAvatar: item.DisplayFalse
+                                    },
+                                //If the value is false, the false icon will be set.
+                                ...dataValue || dataValue === 0 ? {
+                                        fIconName : matchedExtension ? matchedExtension.IconName : item.IconName
+                                    } : {
+                                        fIconName: item.DisplayFalse ? item.FalseIcon : ''
+                                    },
+                                ...dataValue || dataValue === 0 ? {
+                                        fIconBackground : matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor
+                                    } : {
+                                        fIconBackground: item.DisplayFalse? item.InverseBackgroundColor : item.BackgroundColor
+                                    },
+                                ...dataValue || dataValue === 0 ? {
+                                        fIconForeground : matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
+                                    } : {
+                                        fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
+                                    },
+                                //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
+                                //If the Icon Text is entered then show that
+                                //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
+                                ...dataValue || dataValue === 0 ? {
+                                    ...matchedExtension ? {
+                                            fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.toUpperCase().substring(0,3) : ''
                                         } : {
-                                            ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
-                                                    fTextShown : '' 
-                                                } : {
-                                                    fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).toUpperCase().substring(0,3)
-                                                }
+                                        ...dataValue && item.TextValue ? {
+                                                fTextShown : item.TextValue.toUpperCase().substring(0,3) 
+                                            } : {
+                                                ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
+                                                        fTextShown : '' 
+                                                    } : {
+                                                        fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).toUpperCase().substring(0,3)
+                                                    }
+                                            }
+                                        }
+                                    } : {
+                                    ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
+                                            fTextShown : item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : ''
+                                        } : {
+                                            fTextShown : '' 
                                         }
                                     }
-                                } : {
-                                ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                        fTextShown : item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : ''
-                                    } : {
-                                        fTextShown : '' 
-                                    }
-                                }
-                        });
+                            });
+                        }
                     }   // End-If item.IsActive
                 });
             this.results = matchingFields;

@@ -28,6 +28,7 @@ public with sharing class Cmdt {
                 Active__c,
                 Advanced_Field__c,
                 Advanced_Field_Label__c,
+                Display_Multiple__c,
                 Empty_Static_Text_Behavior__c,
                 Field__c, Field__r.QualifiedApiName,
                 Hover_Text__c,

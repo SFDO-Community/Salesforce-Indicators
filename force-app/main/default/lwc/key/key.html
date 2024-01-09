@@ -198,7 +198,16 @@
                                     </span>
                                 </lightning-layout-item>
                                 <lightning-layout-item padding="around-small" size="2" class="slds-border_bottom">
-                                    <b>Display Criteria</b>
+                                    <b>Display Criteria </b>
+                                    <template lwc:if={indicatorItem.DisplayMultiple}>
+                                        <span style="position:relative; top:-4px;"> 
+                                            <lightning-helptext 
+                                                icon-name="utility:tile_card_list"
+                                                alternative-text="Display Multiple Enabled"
+                                                icon-variant="warning"
+                                                content="Display Multiple has been enabled. Any criteria met will display that indicator."></lightning-helptext>
+                                        </span>
+                                    </template>
                                 </lightning-layout-item>
                                 <template lwc:if={isManageEnabled}>
                                     <lightning-layout-item padding="around-small" size="1" class="slds-border_bottom">
