@@ -238,6 +238,7 @@ export default class Key extends LightningElement {
                     DisplayFalse: item.DisplayFalse,
                     ZeroValueMode: item.ZeroBehavior ? item.ZeroBehavior : '',
                     DisplayZero: item.ZeroBehavior ? true : false,
+                    DisplayMultiple: item.DisplayMultiple,
                     Description: item.IndicatorDescription,
                     IndicatorId: item.IndicatorId,
                     Indicators: indicators,

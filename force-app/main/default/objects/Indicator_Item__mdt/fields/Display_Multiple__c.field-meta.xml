@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Display_Multiple__c</fullName>
+    <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Display multiple Extensions when matched, helpful with multi-select picklists.</inlineHelpText>
+    <label>Display Multiple</label>
+    <type>Checkbox</type>
+</CustomField>
