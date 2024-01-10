@@ -27,7 +27,7 @@
         <value xsi:type="xsd:string">White</value>
     </values>
     <values>
-        <field>Icon_Value__c</field>
+        <field>%%%NAMESPACE%%%Icon_Value__c</field>
         <value xsi:type="xsd:string">custom:custom97</value>
     </values>
     <values>
