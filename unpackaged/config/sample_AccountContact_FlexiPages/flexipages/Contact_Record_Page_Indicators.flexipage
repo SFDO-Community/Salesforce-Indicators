@@ -242,8 +242,8 @@
                     <name>showTitle</name>
                     <value>true</value>
                 </componentInstanceProperties>
-                <componentName>indicatorBundle</componentName>
-                <identifier>c_indicatorBundle</identifier>
+                <componentName>%%%NAMESPACE_OR_C%%%:indicatorBundle</componentName>
+                <identifier>%%%NAMESPACE_OR_C%%%_indicatorBundle</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
