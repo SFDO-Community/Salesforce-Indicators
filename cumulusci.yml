@@ -17,6 +17,11 @@ orgs:
             config_file: orgs/dev.json
             days: 30
             namespaced: True
+    scratch:
+        demo:
+            config_file: orgs/demo.json
+            days: 15
+            namespaced: false
 
 tasks:
     robot:
@@ -74,8 +79,14 @@ flows:
     steps:
         1:
             task: deploy_sample_indicators
+            ui_options:
+              is_required: False
+              is_recommended: False
         2:
             task: deploy_sample_indicators_layouts
+            ui_options:
+              is_required: False
+              is_recommended: False
   customer_org:
     steps:
       1:
@@ -84,9 +95,6 @@ flows:
           security_type: NONE
       2:
         flow: sample_inds
-        ui_options:
-          is_required: False
-          is_recommended: False
       3:
         task: deploy_training_indicators
         ui_options:
@@ -98,6 +106,16 @@ flows:
             task: generate_accounts_and_contacts
         4:
             flow: sample_inds
+  config_demo:
+    steps:
+      1:
+        flow: install_prod
+      2:
+        flow: sample_inds
+      3:
+        task: deploy_training_indicators
+      4:
+        task: generate_accounts_and_contacts
 
 plans:
   install:
