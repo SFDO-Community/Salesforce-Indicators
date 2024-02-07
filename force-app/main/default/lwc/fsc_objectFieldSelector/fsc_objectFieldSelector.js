@@ -6,6 +6,7 @@ import { setValuesFromMultipleInput, setValuesFromSingularInput } from 'c/fsc_co
 
 export default class Fsc_objectFieldSelector extends LightningElement {
     availableObjectOptions = transformConstantObject(AVAILABLE_OBJECT_OPTIONS);
+    displayTypeOptions = transformConstantObject(DISPLAY_TYPE_OPTIONS);
 
     @api name;
     @api masterLabel;
@@ -18,6 +19,7 @@ export default class Fsc_objectFieldSelector extends LightningElement {
     @api hideFieldPicklist = false;
     @api objectAllowMultiselect = false;
     @api fieldAllowMultiselect = false;
+    @api allowReferenceLookups = false;
     @api required = false;
 
     @api availableObjectSelection = this.availableObjectOptions.default?.value;
@@ -27,6 +29,8 @@ export default class Fsc_objectFieldSelector extends LightningElement {
     @api lockDefaultObject;
     @api defaultToNameField;
     @api layout = LAYOUT_OPTIONS.VERTICAL.value;
+
+    @track fieldData; // used to retain all data from each seleted field, such as field data type
 
     @api
     get builderContext() {
@@ -53,8 +57,6 @@ export default class Fsc_objectFieldSelector extends LightningElement {
         return this.objectValues.join(this.valueDelimiter);
     }
     set objectValue(value) {
-        console.log('in set objectValue');
-        console.log(value);
         this.objectValues = setValuesFromSingularInput(value, this.valueDelimiter, this.objectAllowMultiselect);
     }
 
@@ -89,6 +91,7 @@ export default class Fsc_objectFieldSelector extends LightningElement {
             this.hideFieldPicklist = true;
         }
     }
+    _displayType = this.displayTypeOptions.default?.value;
 
     @api
     reportValidity() {
@@ -117,7 +120,7 @@ export default class Fsc_objectFieldSelector extends LightningElement {
         // if (this.fieldSelector && this.fieldSelector.validate().errorMessage) {
         //     errorMessages.push(this.fieldSelector.validate().errorMessage)
         // }
-        console.log('in ofsValidate, errorMessages = ' + errorMessages);
+        // console.log('in ofsValidate, errorMessages = ' + errorMessages);
         if (errorMessages.length) {
             return {
                 isValid: false,
@@ -158,6 +161,8 @@ export default class Fsc_objectFieldSelector extends LightningElement {
 
     handleFieldChange(event) {
         this.fieldValue = event.detail.value;
+        this.fieldData = event.detail.fieldData;
+        // console.log(`fieldData = ${JSON.stringify(this.fieldData)}`);
         const attributeChangeEvent = new FlowAttributeChangeEvent(
             'fieldValue',
             this.fieldValue
@@ -172,7 +177,9 @@ export default class Fsc_objectFieldSelector extends LightningElement {
                 objectValue: this.objectValue,
                 objectValues: this.objectValues,
                 fieldValue: this.fieldValue,
-                fieldValues: this.fieldValues
+                fieldValues: this.fieldValues,
+                fieldData: this.fieldData
+
             }
         }));
     }
