@@ -6,44 +6,45 @@
                     <lightning-button-menu alternative-text="Toggle menu" menu-alignment="auto" nubbin label="New">
                         <template for:each={newUrls} for:item="entity">
                             <lightning-menu-item
-                                key={entity.Name}
-                                label={entity.Label}
-                                value={entity.NewUrl}
-                                onclick={handleNewClick}
+                                    data-developer-name={entity.Name}
+                                    key={entity.Name}
+                                    label={entity.Label}
+                                    value={entity.NewUrl}
+                                    onclick={handleNewClick}
                             ></lightning-menu-item>
                         </template>
                     </lightning-button-menu>
                 </div>
                 <p class="slds-p-horizontal_small">Review existing Indicators or create new custom metadata records.<br/></p>
                 <!-- <lightning-layout pull-to-boundary="small"> -->
-                    <!-- <lightning-layout-item size="3" padding="around-small"> -->
-                        <lightning-combobox
-                            name="bundleSearch"
-                            label="Indicator Bundle"
-                            value={bundleName}
-                            placeholder="Select a Bundle"
-                            options={options}
-                            onchange={handleChange}
-                            class="slds-p-horizontal_small"
-                        ></lightning-combobox>
-                    <!-- </lightning-layout-item> -->
+                <!-- <lightning-layout-item size="3" padding="around-small"> -->
+                <lightning-combobox
+                        name="bundleSearch"
+                        label="Indicator Bundle"
+                        value={bundleName}
+                        placeholder="Select a Bundle"
+                        options={options}
+                        onchange={handleChange}
+                        class="slds-p-horizontal_small"
+                ></lightning-combobox>
+                <!-- </lightning-layout-item> -->
                 <!-- </lightning-layout> -->
             </lightning-card>
         </lightning-layout-item>
     </lightning-layout>
     <template lwc:if={showSpinner}>
-        <lightning-spinner 
-            alternative-text="Loading"
-            variant="brand"
-            size="large"
+        <lightning-spinner
+                alternative-text="Loading"
+                variant="brand"
+                size="large"
         ></lightning-spinner>
     </template>
     <template lwc:elseif={showKey}>
         <lightning-layout pull-to-boundary="small">
             <lightning-layout-item size="12" padding="horizontal-small">
                 <c-key
-                    bundle={bundle}
-                    is-setup="true"
+                        bundle={bundle}
+                        is-setup="true"
                 ></c-key>
             </lightning-layout-item>
         </lightning-layout>
