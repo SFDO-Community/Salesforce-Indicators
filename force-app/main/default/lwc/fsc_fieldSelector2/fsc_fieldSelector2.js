@@ -45,7 +45,11 @@ export default class Fsc_fieldSelector2 extends LightningElement {
     @api hidePills = false; // If true, list of selected pills in multiselect mode will not be displayed (generally because a parent component wants to display them differently).
     @api excludeSublabelInFilter = false;   // If true, the 'sublabel' text of an option is not included when determining if an option is a match for a given search text.
     @api includeValueInFilter = false;  // If true, the 'value' text of an option is included when determining if an option is a match for a given search text.
+<<<<<<< HEAD
     @api allowReferenceLookups = false;
+=======
+    @api allowReferenceLookups = false; 
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     @track fields = [];
     @track _values = [];
     @track _availableFieldTypes = [];
@@ -199,7 +203,11 @@ export default class Fsc_fieldSelector2 extends LightningElement {
                 fields = fields.filter(field => !field.referenceToInfos.length || field.referenceToInfos.some(ref => includesIgnoreCase(this.availableReferenceTypes, ref.apiName)));
             }
         }
+<<<<<<< HEAD
         this.fields = fields.map(field => this.newField(field.label, field.apiName, field.apiName, field.dataType, this.hideIcons ? null : this.getIconFromDataType(field.dataType)));
+=======
+        this.fields = fields.map(field => this.newField(field.label, field.apiName, field.apiName, this.hideIcons ? null : this.getIconFromDataType(field.dataType)));
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
         this.fields.sort((a, b) => {
             return a.label.toLowerCase() > b.label.toLowerCase() ? 1 : -1;
         });
@@ -216,6 +224,7 @@ export default class Fsc_fieldSelector2 extends LightningElement {
     }
 
     dispatchFields() {
+<<<<<<< HEAD
         let fieldData;
         if (this.values.length) {
             fieldData = this.fields.filter(field => this.values.includes(field.value));
@@ -230,6 +239,14 @@ export default class Fsc_fieldSelector2 extends LightningElement {
         }
         this.dispatchEvent(new CustomEvent('change', { detail }));
     }
+=======
+        let detail = {
+            value: this.value,
+            values: this.values,
+        }
+        this.dispatchEvent(new CustomEvent('change', { detail }));
+    }    
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
 
     /* UTILITY FUNCTIONS */
     getIconFromDataType(type) {
@@ -237,7 +254,12 @@ export default class Fsc_fieldSelector2 extends LightningElement {
         return matchingType?.icon || DEFAULT_ICON;
     }
 
+<<<<<<< HEAD
     newField(label, sublabel, value, dataType, icon) {
         return { label, sublabel, value, dataType, icon }
+=======
+    newField(label, sublabel, value, icon) {
+        return { label, sublabel, value, icon }
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     }
 }

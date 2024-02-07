@@ -7,6 +7,10 @@
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
+<<<<<<< HEAD
+=======
+        <!-- <targetConfig targets="lightning__FlowScreen" configurationEditor="c-fsc_object-field-selector-cpe"> -->
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
         <targetConfig targets="lightning__FlowScreen">
             <property name="masterLabel" label="Component Label" type="String" />
             <property name="objectLabel" label="Object Label" type="String" />

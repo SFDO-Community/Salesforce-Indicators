@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { LightningElement, api, track, wire } from 'lwc';
 import { /* FIELD_TYPES ,*/ transformConstantObject } from 'c/fsc_objectFieldSelectorUtils';
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
@@ -59,6 +60,26 @@ export default class IndicatorBuilder extends LightningElement {
         return this.objectApiName && this.fieldApiName;
     }
 
+=======
+import { LightningElement, api, track } from 'lwc';
+
+export default class IndicatorBuilder extends LightningElement {
+    indSize = 'large';
+    @api indShape = 'base';
+    @api indText = '';
+    @api indImage = '';
+    indIcon = 'standard:marketing_actions';
+    @api indHoverText = '';
+    indBackgroundColor;
+    indForegroundColor;
+
+    showMatch = {};
+    iconSource = {}
+    showTextMatch = false;
+    showNumberMatch = false;
+    overrideColours = false;
+    
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     get activeVariantTabIndex() {
         return this._activeVariantTabIndex;
     }
@@ -71,6 +92,7 @@ export default class IndicatorBuilder extends LightningElement {
     }
     _activeVariantTabIndex = 0;
 
+<<<<<<< HEAD
     get categorizedFieldType() {
         let type = this.fieldTypes.options.find(fieldType => fieldType.dataTypes && fieldType.dataTypes.includes(this.fieldType));
         if (type) {
@@ -105,10 +127,17 @@ export default class IndicatorBuilder extends LightningElement {
     // { label: 'Default Indicator' }
     // this.newIndicatorVariant('Default Indicator')
 
+=======
+    @track itemVariants = [];
+        // { label: 'Default Indicator' }
+        // this.newIndicatorVariant('Default Indicator')
+    
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
 
     whenToDisplayOptions = [
         { label: 'Is not blank', value: 'notBlank' },
         { label: 'Is blank', value: 'isBlank' },
+<<<<<<< HEAD
         { label: 'Contains text', value: 'containsText', dataTypes: [FIELD_TYPES.TEXT.value], showMatch: 'text' },
         { label: 'Equals text', value: 'equalsText', dataTypes: [FIELD_TYPES.TEXT.value], showMatch: 'text' },
         { label: 'Starts with text', value: 'startsWithText', dataTypes: [FIELD_TYPES.TEXT.value], showMatch: 'text' },
@@ -118,6 +147,16 @@ export default class IndicatorBuilder extends LightningElement {
         { label: 'Is within range', value: 'inRange', dataTypes: [FIELD_TYPES.NUMBER.value], showMatch: 'numericRange' },
         // { label: 'Custom formula', value: 'customFormula' },
         // { label: 'Custom exception', value: 'customException' },
+=======
+        { label: 'Contains text', value: 'containsText', showMatch: 'text' },
+        { label: 'Equals text', value: 'equalsText', showMatch: 'text' },
+        { label: 'Equals number', value: 'equalsNumber', showMatch: 'number' },
+        { label: 'Is greater than', value: 'greaterThan', showMatch: 'number' },
+        { label: 'Is less than', value: 'lessThan', showMatch: 'number' },
+        { label: 'Is within range', value: 'inRange', showMatch: 'numericRange' },
+        { label: 'Custom formula', value: 'customFormula' },
+        { label: 'Custom exception', value: 'customException' },
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     ];
 
     iconSourceOptions = [
@@ -138,6 +177,7 @@ export default class IndicatorBuilder extends LightningElement {
         { label: 'Hide field label', value: 'hide' },
         { label: 'Show standard label', value: 'standard' },
         { label: 'Show custom label', value: 'custom' },
+<<<<<<< HEAD
     ];
 
     displayModeOptions = [
@@ -190,6 +230,25 @@ export default class IndicatorBuilder extends LightningElement {
             this.fieldType = event.detail.fieldData[0].dataType;
         }
 
+=======
+    ]
+
+    get showColourOption() {
+        return this.iconSource.sldsIcon || this.iconSource.staticText;
+    }
+
+    get showColourSelectors() {
+        return this.showColourOption && this.overrideColours;
+    }
+
+    connectedCallback() {
+        if (this.itemVariants.length === 0) {
+            console.log(`adding default variants`);
+            this.addNewVariant('When field has value', 'notBlank');
+            this.addNewVariant('When field is blank', 'isBlank');
+            this.activeVariantTabIndex = 0;
+        }
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     }
 
     handleWhenToDisplayChange(event) {
@@ -217,6 +276,7 @@ export default class IndicatorBuilder extends LightningElement {
         this.indText = event.target.value;
     }
 
+<<<<<<< HEAD
     handleForegroundColorChange(event) {
         this.indForegroundColor = event.target.value;
     }
@@ -227,6 +287,18 @@ export default class IndicatorBuilder extends LightningElement {
 
     handleOverideColorsChange(event) {
         this.overrideColors = event.target.checked;
+=======
+    handleForegroundColourChange(event) {
+        this.indForegroundColor = event.target.value;
+    }
+
+    handleBackgroundColourChange(event) {
+        this.indBackgroundColor = event.target.value;
+    }
+    
+    handleOverideColoursChange(event) {
+        this.overrideColours = event.target.checked;
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     }
 
     handleAddVariantClick() {
@@ -241,6 +313,7 @@ export default class IndicatorBuilder extends LightningElement {
         console.log(`activeVariantTabIndex = ${this.activeVariantTabIndex}`);
     }
 
+<<<<<<< HEAD
     // handleDisplayModeChange(event) {
     //     this.displayMode = event.detail.value;
     //     this.showVariantLogic = this.displayMode == 'customLogic';
@@ -257,6 +330,8 @@ export default class IndicatorBuilder extends LightningElement {
         }
     }
 
+=======
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     handleVariantPropertyChange(event) {
         if (event.currentTarget.dataset.property) {
             let target = event.currentTarget;
@@ -293,16 +368,23 @@ export default class IndicatorBuilder extends LightningElement {
 
     newIndicatorVariant(label, whenToDisplay, isActive = true, iconSource = 'sldsIcon') {
         let whenToDisplayOptions = this.whenToDisplayOptions;
+<<<<<<< HEAD
         let index = this.itemVariants.length;
+=======
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
 
         let newVariant = {
             label,
             whenToDisplay,
             isActive,
             iconSource,
+<<<<<<< HEAD
             index,
             hoverText: '',
             overrideColors: false,
+=======
+            hoverText: '',
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
             get iconSourceIs() {
                 return { [this.iconSource]: true }
             },
@@ -314,6 +396,7 @@ export default class IndicatorBuilder extends LightningElement {
                 return 'slds-vertical-tabs__nav-item' + (this.isActive ? ' slds-is-active' : '');
             },
             get tabPaneClass() {
+<<<<<<< HEAD
                 return 'slds-vertical-tabs__content slds-col ' + (this.isActive ? 'slds-show' : 'slds-hide');
             },
             get showColorOption() {
@@ -322,6 +405,16 @@ export default class IndicatorBuilder extends LightningElement {
             get showColorSelectors() {
                 return this.iconSourceIs.staticText || (this.showColorOption && this.overrideColors);
             }
+=======
+                return 'slds-vertical-tabs__content ' + (this.isActive ? 'slds-show' : 'slds-hide');
+            },
+            get showColourOption() {
+                return this.iconSourceIs.sldsIcon;
+            },
+            get showColourSelectors() {
+                return this.iconSourceIs.staticText || (this.showColourOption && this.overrideColours);
+            }        
+>>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
         }
         console.log(`newVariant = ${JSON.stringify(newVariant)}`);
         return newVariant;
