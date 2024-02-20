@@ -21,7 +21,7 @@ Salesforce Indicators is part of the [Salesforce Open Source Commons](https://he
 
 ## Ask Questions and Get Help
 * Salesforce Indicators is a community built and maintained Salesforce package, please help support this project and share your experiences in the [Trailblazer Community Group](https://trailhead.salesforce.com/trailblazer-community/groups/0F94S000000HEDASA4?tab=discussion). Ask any questions about the Salesforce Indicators project, or the Open Source Commons.
-* If you have any enhancements or issue you can [Log an Issue](https://github.com/SFDO-Community/Salesforce-Indicators/issues)
+* If you have any enhancements or issue you can [Log an Issue](https://github.com/SFDO-Community/Salesforce-Indicators/issues)..
 
 ## Vision & Goals
 * Enhance the current Indicators Bundle Component to improve the experience for Admins and Users.
@@ -35,9 +35,9 @@ Salesforce Indicators is part of the [Salesforce Open Source Commons](https://he
 - [Install Salesforce Indicators](https://install.salesforce.org/products/indicators)
 - [Set up Salesforce Indicators](https://sfdo-community-sprints.github.io/indicators-documentation/docs/setup-salesforce-indicators/)
 - Ask any questions on our [Trailblazer Community Group](https://trailhead.salesforce.com/trailblazer-community/groups/0F94S000000HEDASA4?tab=discussion)
-- Add your own [Recipes](https://github.com/SFDO-Community/Salesforce-Indicators/wiki/Cookbook) to our documentation
+- Add your own [Recipes](https://sfdo-community-sprints.github.io/indicators-documentation/docs/recipes/) to our documentation
 - Add reviews of any [similar or competitor components](https://sfdo-community-sprints.github.io/indicators-documentation/docs/components/other-solutions/)
-- [Volunteer](https://github.com/SFDO-Community/Salesforce-Indicators/wiki/How-to-Volunteer) to enhance the code
+- [Volunteer](https://sfdo-community-sprints.github.io/indicators-documentation/docs/getting-involved/how-to-volunteer/) to enhance the app
 - [Log an Issue](https://github.com/SFDO-Community/Salesforce-Indicators/issues)
 - Join us at an upcoming [Salesforce Commons Community Sprint](https://trailhead.salesforce.com/trailblazer-community/groups/0F94S000000GwVK?tab=discussion)
 
