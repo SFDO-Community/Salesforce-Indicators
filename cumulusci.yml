@@ -41,6 +41,7 @@ tasks:
 
     deploy_sample_indicators:
         description: Deploys - Sample Indicators
+        name: Deploy Sample Indicators
         group: Salesforce Metadata
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
@@ -48,6 +49,7 @@ tasks:
     
     deploy_sample_indicators_layouts:
         description: Deploys - Sample Indicators Layouts
+        name: Deploy Page Layouts for Sample Indicators
         group: Salesforce Metadata
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
@@ -55,6 +57,7 @@ tasks:
     
     deploy_training_indicators:
         description: Deploys - Example Indicators used for Training 
+        name: Deploy Training Indicators
         group: Salesforce Metadata
         class_path: cumulusci.tasks.salesforce.Deploy
         options:

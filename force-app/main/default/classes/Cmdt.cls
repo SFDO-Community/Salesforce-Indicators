@@ -17,6 +17,7 @@ public with sharing class Cmdt {
                 sObject__r.QualifiedApiName, 
                 sObject__r.Label
             FROM Indicator_Bundle__mdt
+            ORDER BY Label
         ] ) {
             setBundle(bundle);
         }
