@@ -58,9 +58,13 @@ export default class IndicatorBundle extends LightningElement {
         }
     }
 
+    get isStandardUsage(){
+        return this.pageUsage == 'standard';
+    }
+
     initCSSVariables() {
 
-        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
+        if(this.showTitle && this.isStandardUsage && (this.bundle.CardIconBackground || this.bundle.CardIconForeground)) {
             var css = this.template.querySelector(".cardIcon").style;
 
             css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
@@ -102,10 +106,6 @@ export default class IndicatorBundle extends LightningElement {
                         title : this.bundle.CardTitle,
                         icon: this.bundle.CardIcon,
                         body: this.bundle.CardText
-                    }
-
-                    if( this.pageUsage == 'standard'){
-                        this.isStandardUsage = true;
                     }
 
                     if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
