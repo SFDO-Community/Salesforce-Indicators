@@ -27,16 +27,18 @@
                         </div>
                     </template> 
                 </template>
-                <template lwc:else>  
+                <template lwc:else>
+                    <div class="slds-card__body slds-card__body_inner">  
                     <template lwc:if={showTitle}>
-                        <div class={sectionHeaderClass}>
-                            <h3 slot="title" class="label slds-section__title slds-truncate slds-p-top_xx-small slds-p-bottom_xx-small slds-theme_shade">
-                                <span class="slds-var-m-left_medium" title="Section Title">{card.title}</span>
+                        <div class="section-layout-container slds-section slds-is-open slds-button slds-section__title-action slds-theme_shade">
+                            <h3 slot="title" class="slds-truncate slds-p-around_xx-small">
+                                <span class="slds-text-heading_small" title="Section Title">{card.title}</span>
                             </h3>
                         </div>
-                    </template>      
+                    </template>  
+                    </div>    
                 </template>
-                <div class="slds-grid grid-wrap slds-card__body">
+                <div class={sectionBodyClass}>
                     <div class="slds-col slds-grid slds-grid_vertical">                 
                         <div class="slds-col">
                             <template lwc:if={showDescription}>

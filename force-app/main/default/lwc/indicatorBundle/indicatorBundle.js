@@ -115,10 +115,10 @@ export default class IndicatorBundle extends LightningElement {
                     }
 
                     if(this.flexipageRegionWidth == 'SMALL'){
-                        this.sectionHeaderClass = 'slds-section slds-is-open slds-var-p-horizontal_medium';
+                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
                     } else {
-                        this.card.iconClass = 'slds-var-m-right_xx-small ';
-                        this.sectionHeaderClass = 'slds-section slds-is-open';
+                        this.card.iconClass = 'slds-media__figure slds-var-m-right_xx-small';
+                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
                     }
 
                     // console.log('Card Data');
