@@ -14,7 +14,7 @@ export default class IndicatorBundle extends LightningElement {
     @api flexipageRegionWidth;  // Width of the container on record page
     @api showDescription;
     @api showTitle;
-    @api pageUsage = 'standard';
+    @api titleStyle = 'Lightning Card';
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false;
@@ -59,7 +59,7 @@ export default class IndicatorBundle extends LightningElement {
     }
 
     get isStandardUsage(){
-        return this.pageUsage == 'standard';
+        return this.titleStyle == 'Lightning Card';
     }
 
     initCSSVariables() {
