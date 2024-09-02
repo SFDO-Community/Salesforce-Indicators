@@ -118,11 +118,11 @@ export default class IndicatorBundle extends LightningElement {
                         this.card.iconClass = 'slds-var-m-right_x-small ';
                     }
                     
-                    if(this.flexipageRegionWidth == 'SMALL'){
-                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
-                    } else {
-                        this.card.iconClass = 'slds-media__figure slds-var-m-right_xx-small';
+                    if(this.isStandardUsage != true){
                         this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
+                    } else {
+                        this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small';
+                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
                     }
 
                     // console.log('Card Data');
