@@ -3,15 +3,11 @@
     <apiVersion>54.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Object and Field Selector</masterLabel>
-    <targets>
+    <!-- <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
-<<<<<<< HEAD
-=======
-        <!-- <targetConfig targets="lightning__FlowScreen" configurationEditor="c-fsc_object-field-selector-cpe"> -->
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
-        <targetConfig targets="lightning__FlowScreen">
+        <targetConfig targets="lightning__FlowScreen" configurationEditor="c-fsc_object-field-selector-cpe">
             <property name="masterLabel" label="Component Label" type="String" />
             <property name="objectLabel" label="Object Label" type="String" />
             <property name="fieldLabel" label="Field Label" type="String" />
@@ -29,7 +25,6 @@
             <property name="fieldValue" label="Selected Field (string)" type="String" />
             <property name="objectValues" label="Selected Objects" type="String[]" />
             <property name="fieldValues" label="Selected Fields" type="String[]" />
-             <!-- <property name="masterLabel" label="Component Label" type="String" /> -->
             </targetConfig>
-    </targetConfigs>
+    </targetConfigs> -->
 </LightningComponentBundle>

@@ -90,12 +90,14 @@ public with sharing class ObjectFieldSelectorController {
         @AuraEnabled public String apiName;
         @AuraEnabled public String label;
         @AuraEnabled public String dataType;
+        @AuraEnabled public boolean nameField;
         @AuraEnabled public List<ReferenceToInfo> referenceToInfos;
 
         public FieldResult(Schema.DescribeFieldResult fieldResult) {
             this.apiName = fieldResult.getName();
             this.label = fieldResult.getLabel();
             this.dataType = fieldResult.getType().name();
+            this.nameField = fieldResult.isNameField();
             List<ReferenceToInfo> refToInfos = new List<ReferenceToInfo>();
             for (Schema.sObjectType objType : fieldResult.getReferenceTo()) {
                 refToInfos.add(new ReferenceToInfo(objType.getDescribe().getName()));

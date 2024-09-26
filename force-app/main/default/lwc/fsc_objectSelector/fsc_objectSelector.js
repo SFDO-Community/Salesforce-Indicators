@@ -1,9 +1,10 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import getObjects from '@salesforce/apex/ObjectFieldSelectorController.getObjects';
 import { DISPLAY_TYPE_OPTIONS, AVAILABLE_OBJECT_OPTIONS, FIELD_TYPES, LAYOUT_OPTIONS, transformConstantObject } from 'c/fsc_objectFieldSelectorUtils';
-import { setValuesFromMultipleInput, setValuesFromSingularInput } from 'c/fsc_comboboxUtils';
+import { setValuesFromMultipleInput, setValuesFromSingularInput, CLEAR_REQUEST_EVENT_NAME } from 'c/fsc_comboboxUtils';
 
 const ANCILLARY_SUFFIXES = ['Feed', 'Tag', 'Share', 'ChangeEvent', 'History'];
+const COMBOBOX_COMPONENT_NAME = 'c-fsc_combobox';
 export default class Fsc_objectSelector extends LightningElement {
     availableObjectOptions = transformConstantObject(AVAILABLE_OBJECT_OPTIONS);
 
@@ -24,6 +25,7 @@ export default class Fsc_objectSelector extends LightningElement {
     @api hidePills = false; // If true, list of selected pills in multiselect mode will not be displayed (generally because a parent component wants to display them differently).
     @api excludeSublabelInFilter = false;   // If true, the 'sublabel' text of an option is not included when determining if an option is a match for a given search text.
     @api includeValueInFilter = false;  // If true, the 'value' text of an option is included when determining if an option is a match for a given search text.    
+    @api notifyOnClear = false;
     // @api availableObjectSelection = this.availableObjectOptions.default?.value;
     @api availableObjects = [];
     
@@ -55,7 +57,7 @@ export default class Fsc_objectSelector extends LightningElement {
         return this._availableObjectSelection;
     }
     set availableObjectSelection(value) {
-        console.log(' in set availableObjectSelection to ' + value);
+        // console.log(' in set availableObjectSelection to ' + value);
         this._availableObjectSelection = value;
         if (this.hasConnected && this.values.length) {
             this.values = [];
@@ -79,6 +81,10 @@ export default class Fsc_objectSelector extends LightningElement {
 
     get computedPlaceholder() {
         return this.isLoading ? 'Loading...' : this.placeholder;
+    }
+
+    get combobox() {
+        return this.template.querySelector(COMBOBOX_COMPONENT_NAME);
     }
 
     // @api
@@ -107,28 +113,36 @@ export default class Fsc_objectSelector extends LightningElement {
     }
 
     loadObjectCategory(category) {
-        if (!this.value) {
-            this.isLoading = true;
-        }
+        // if (!this.value) {
+        //     this.isLoading = true;
+        // }
         getObjects({ selectionType: category })
             .then(result => {
                 this.addObjectOptions(result.objects, category);
-                this.isLoading = false;
+                if (!this.value || this.objectOptions.find(option => option.value == this.value)) {
+                    this.isLoading = false;
+                }
             });
     }
 
     @api
     reportValidity() {
-        return this.template.querySelector('c-fsc_combobox').reportValidity();
+        return this.combobox.reportValidity();
     }
 
     @api
     validate() {
-        return this.template.querySelector('c-fsc_combobox').validate();
+        return this.combobox.validate();
+    }
+
+    @api
+    clearSelection() {
+        this.combobox.clearSelection();
     }
 
     connectedCallback() {
         this.hasConnected = true;
+        this.isLoading = true;
         let initialLoadCategories = [AVAILABLE_OBJECT_OPTIONS.STANDARD.value, AVAILABLE_OBJECT_OPTIONS.CUSTOM.value, AVAILABLE_OBJECT_OPTIONS.ANCILLARY.value];
         initialLoadCategories.forEach(category => {
             this.loadObjectCategory(category);
@@ -140,12 +154,16 @@ export default class Fsc_objectSelector extends LightningElement {
         this.dispatchObjects();
     }
 
+    handleClearRequest() {
+        console.log(`in objectSelector handleClearRequest`);
+        this.dispatchEvent(new CustomEvent(CLEAR_REQUEST_EVENT_NAME));
+    }
+
     dispatchObjects() {
         let detail = {
             value: this.value,
             values: this.values,
         }
-        console.log('dispatching objects', JSON.stringify(detail));
         this.dispatchEvent(new CustomEvent('change', { detail }));
     }
 

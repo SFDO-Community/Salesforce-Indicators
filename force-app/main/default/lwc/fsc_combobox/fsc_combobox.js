@@ -1,6 +1,6 @@
 // Style from: https://www.lightningdesignsystem.com/components/combobox
 import { LightningElement, api, track } from 'lwc';
-import { KEYS, setValuesFromMultipleInput, setValuesFromSingularInput, includesIgnoreCase } from 'c/fsc_comboboxUtils';
+import { KEYS, setValuesFromMultipleInput, setValuesFromSingularInput, includesIgnoreCase, CLEAR_REQUEST_EVENT_NAME } from 'c/fsc_comboboxUtils';
 
 const VARIANTS = {
     BASE: 'base',
@@ -37,6 +37,7 @@ export default class OptionSelector extends LightningElement {
     @api includeValueInFilter = false;  // If true, the 'value' text of an option is included when determining if an option is a match for a given search text.
     @api filterActions = false; // If true, action items will be filtered along with selection items. By default, action items are always visible
     @api showSelectedCount = false; // If true, when allowMultiselect is true, the component label will show the number of selected values in parentheses
+    @api notifyOnClear = false; // If true, clicking the clear button will not automatically clear the selection. Instead it will dispatch a notification event so that the parent component can implement any logic before clearing
     @api hideSelectedValues = false;    // Reserved for future use
 
     @api builderContext;
@@ -175,7 +176,7 @@ export default class OptionSelector extends LightningElement {
     /* PUBLIC FUNCTIONS */
     @api
     reportValidity() {
-        if (!this.required || this.selectedOptions.length) {            
+        if (!this.required || this.selectedOptions.length) {
             this.setCustomValidity();
         } else {
             this.setCustomValidity(this.messageWhenValueMissing);
@@ -198,6 +199,11 @@ export default class OptionSelector extends LightningElement {
     @api
     setCustomValidity(errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    @api
+    focus() {
+        this.onRender.inputFocus = true;
     }
 
     /* LIFECYCLE HOOKS */
@@ -254,7 +260,8 @@ export default class OptionSelector extends LightningElement {
     }
 
     get isInputDisabled() {
-        return this.disabled || this.isLoading;
+        // 5/6/2024: Removing isLoading as a disabling factor because it was interfering with the lookup component
+        return this.disabled;// || this.isLoading;
     }
 
     get noMatchFound() {
@@ -278,7 +285,7 @@ export default class OptionSelector extends LightningElement {
     }
 
     get showLabel() {
-        return this.variant !== VARIANTS.LABEL_HIDDEN;
+        return this.label && this.variant !== VARIANTS.LABEL_HIDDEN;
     }
 
     /* COMPUTED CSS CLASS STRINGS */
@@ -316,8 +323,9 @@ export default class OptionSelector extends LightningElement {
         this.showList = false;
         this.highlightedOptionIndex = undefined;
         this.numOptionsDisplayed = LOAD_COUNT;
-        if (this.listboxElement)
+        if (this.listboxElement) {
             this.listboxElement.scrollTop = 0;
+        }
     }
 
     resetSearch() {
@@ -363,12 +371,12 @@ export default class OptionSelector extends LightningElement {
         // console.log('selecting '+ JSON.stringify(selectedOption));
         // console.log('value before adding: '+ this.value);
         // console.log('values before adding: '+ JSON.stringify(this.values) +', length: '+ this.values.length);
-        if (!selectedOption) {
+        if (!selectedOption || selectedOption.isGrouping) {
             return;
         }
         if (selectedOption.isAction) {
             this.dispatchEvent(new CustomEvent('customaction', { detail: selectedOption.value }));
-        } else {            
+        } else {
             this.values.push(selectedOption.value);
             this.values = this.values;
             // this.values = [...this.values, selectedOption.value];   // using spread instead of values.push to trigger the setter
@@ -412,6 +420,13 @@ export default class OptionSelector extends LightningElement {
         } else {
             this.highlightOption(startIndex);
         }
+    }
+
+    @api
+    clearSelection() {
+        this.values = [];
+        this.dispatchOptions();
+        this.openList();
     }
 
     highlightOption(index) {
@@ -515,11 +530,23 @@ export default class OptionSelector extends LightningElement {
         this.highlightedOptionIndex = undefined;
     }
 
-    handleClearClick() {
+    handleClearClick(event) {
+        // I don't know why, but without the preventDefault/stopPropagation, clicking this button sometimes passed URL parameters to the page with refreshed the page
+        event.preventDefault();
+        event.stopPropagation();
         if (!this.disabled) {
-            this.values = [];
-            this.dispatchOptions();
-            this.openList();    
+            if (this.notifyOnClear) {
+                this.dispatchEvent(new CustomEvent(CLEAR_REQUEST_EVENT_NAME));
+                /*
+                this.dispatchEvent(new CustomEvent(
+                    'clearrequest',
+                    // { bubbles: true, }
+                    { bubbles: true, composed: true }
+                ));
+                */
+            } else {
+                this.clearSelection();
+            }
         }
     }
 

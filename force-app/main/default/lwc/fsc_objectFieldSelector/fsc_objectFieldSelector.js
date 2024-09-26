@@ -1,15 +1,11 @@
 import { LightningElement, api, track } from 'lwc';
-import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
+// import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 
 import { DISPLAY_TYPE_OPTIONS, AVAILABLE_OBJECT_OPTIONS, FIELD_TYPES, LAYOUT_OPTIONS, transformConstantObject } from 'c/fsc_objectFieldSelectorUtils';
 import { setValuesFromMultipleInput, setValuesFromSingularInput } from 'c/fsc_comboboxUtils';
 
 export default class Fsc_objectFieldSelector extends LightningElement {
     availableObjectOptions = transformConstantObject(AVAILABLE_OBJECT_OPTIONS);
-<<<<<<< HEAD
-    displayTypeOptions = transformConstantObject(DISPLAY_TYPE_OPTIONS);
-=======
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
 
     @api name;
     @api masterLabel;
@@ -17,30 +13,24 @@ export default class Fsc_objectFieldSelector extends LightningElement {
     @api fieldLabel = 'Select Field';
     @api valueDelimiter = ',';
 
+    @api disabled;
     @api disableObjectPicklist = false;
+    @api disableFieldPicklist = false;
     @api hideObjectPicklist = false;
     @api hideFieldPicklist = false;
     @api objectAllowMultiselect = false;
     @api fieldAllowMultiselect = false;
-<<<<<<< HEAD
-    @api allowReferenceLookups = false;
-=======
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     @api required = false;
+    @api notifyOnClear = false;
 
     @api availableObjectSelection = this.availableObjectOptions.default?.value;
     @api availableObjects;
     @api availableFieldTypes;
     @api availableReferenceTypes;
-    @api lockDefaultObject;
+    // @api lockDefaultObject;  Redundant, same as disableObjectPicklist
     @api defaultToNameField;
     @api layout = LAYOUT_OPTIONS.VERTICAL.value;
 
-<<<<<<< HEAD
-    @track fieldData; // used to retain all data from each seleted field, such as field data type
-
-=======
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
     @api
     get builderContext() {
         return this._builderContext;
@@ -66,11 +56,6 @@ export default class Fsc_objectFieldSelector extends LightningElement {
         return this.objectValues.join(this.valueDelimiter);
     }
     set objectValue(value) {
-<<<<<<< HEAD
-=======
-        console.log('in set objectValue');
-        console.log(value);
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
         this.objectValues = setValuesFromSingularInput(value, this.valueDelimiter, this.objectAllowMultiselect);
     }
 
@@ -105,10 +90,6 @@ export default class Fsc_objectFieldSelector extends LightningElement {
             this.hideFieldPicklist = true;
         }
     }
-<<<<<<< HEAD
-    _displayType = this.displayTypeOptions.default?.value;
-=======
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
 
     @api
     reportValidity() {
@@ -137,11 +118,7 @@ export default class Fsc_objectFieldSelector extends LightningElement {
         // if (this.fieldSelector && this.fieldSelector.validate().errorMessage) {
         //     errorMessages.push(this.fieldSelector.validate().errorMessage)
         // }
-<<<<<<< HEAD
-        // console.log('in ofsValidate, errorMessages = ' + errorMessages);
-=======
         console.log('in ofsValidate, errorMessages = ' + errorMessages);
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
         if (errorMessages.length) {
             return {
                 isValid: false,
@@ -150,6 +127,16 @@ export default class Fsc_objectFieldSelector extends LightningElement {
         } else {
             return { isValid: true };
         }
+    }
+
+    @api
+    clearFieldSelection() {
+        this.fieldSelector.clearSelection();
+    }
+
+    @api
+    clearObjectSelection() {
+        this.objectSelector.clearSelection();
     }
 
     get computedColClass() {
@@ -170,46 +157,52 @@ export default class Fsc_objectFieldSelector extends LightningElement {
         return this.template.querySelector('c-fsc_field-selector2');
     }
 
+    get objectPicklistIsDisabled() {
+        return this.disableObjectPicklist || this.disabled;
+    }
+
+    get fieldPicklistIsDisabled() {
+        return this.disableFieldPicklist || this.disabled;
+    }
+
     handleObjectChange(event) {
         this.objectValue = event.detail.value;
-        const attributeChangeEvent = new FlowAttributeChangeEvent(
-            'objectValue',
-            this.objectValue
-        );
-        this.dispatchEvent(attributeChangeEvent);
+        // const attributeChangeEvent = new FlowAttributeChangeEvent(
+        //     'objectValue',
+        //     this.objectValue
+        // );
+        // this.dispatchEvent(attributeChangeEvent);
         this.dispatchValues();
     }
 
     handleFieldChange(event) {
         this.fieldValue = event.detail.value;
-<<<<<<< HEAD
-        this.fieldData = event.detail.fieldData;
-        // console.log(`fieldData = ${JSON.stringify(this.fieldData)}`);
-=======
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
-        const attributeChangeEvent = new FlowAttributeChangeEvent(
-            'fieldValue',
-            this.fieldValue
-        );
-        this.dispatchEvent(attributeChangeEvent);
+        // const attributeChangeEvent = new FlowAttributeChangeEvent(
+        //     'fieldValue',
+        //     this.fieldValue
+        // );
+        // this.dispatchEvent(attributeChangeEvent);
         this.dispatchValues();
     }
 
-    dispatchValues() {
-        this.dispatchEvent(new CustomEvent('change', {
-            detail: {
-                objectValue: this.objectValue,
-                objectValues: this.objectValues,
-                fieldValue: this.fieldValue,
-<<<<<<< HEAD
-                fieldValues: this.fieldValues,
-                fieldData: this.fieldData
+    handleFieldClearRequest() {
+        console.log(`in objectFieldSelector handleFieldClearRequest`);
+        this.dispatchEvent(new CustomEvent('fieldclearrequest'));
+    }
 
-=======
-                fieldValues: this.fieldValues
->>>>>>> 73e5f784ff3ef05a4d7d8281abdb8191f0999bef
-            }
-        }));
+    handleObjectClearRequest() {
+        console.log(`in objectFieldSelector handleObjectClearRequest`);
+        this.dispatchEvent(new CustomEvent('objectclearrequest'));
+    }
+
+    dispatchValues() {
+        let detail = {
+            objectValue: this.objectValue,
+            objectValues: this.objectValues,
+            fieldValue: this.fieldValue,
+            fieldValues: this.fieldValues
+        }
+        this.dispatchEvent(new CustomEvent('change', { detail }));
     }
 
 

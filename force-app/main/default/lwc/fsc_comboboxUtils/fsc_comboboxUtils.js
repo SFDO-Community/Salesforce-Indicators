@@ -5,6 +5,8 @@ const KEYS = {
     ENTER: 'Enter'
 }
 
+const CLEAR_REQUEST_EVENT_NAME = 'clearrequest';
+
 const setValuesFromMultipleInput = (values) => {
     if (!values) {
         return [];
@@ -27,7 +29,6 @@ const includesIgnoreCase = (valueToSearch, valueToSearchFor) => {
     } else {
         return valueToSearch.toLowerCase().includes(valueToSearchFor.toLowerCase());
     }
-    
 }
 
-export { KEYS, setValuesFromMultipleInput, setValuesFromSingularInput, includesIgnoreCase }
+export { KEYS, setValuesFromMultipleInput, setValuesFromSingularInput, includesIgnoreCase, CLEAR_REQUEST_EVENT_NAME }
