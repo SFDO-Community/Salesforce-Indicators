@@ -3,7 +3,8 @@
 // TODO: fix lag on combobox load
 // TODO: add re-ordering of variants (drag/drop or arrows)
 
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
+import getSldsIcons from '@salesforce/apex/SldsIconController.getIconOptions';
 
 // Icons last updated 9/24/2024
 const ICONS = {
@@ -83,7 +84,7 @@ export default class IndicatorBuilder extends LightningElement {
 
     /* LIFECYCLE HOOKS */
     connectedCallback() {
-        this.processIconOptions();
+        // this.processIconOptions();
         if (this.itemVariants.length === 0) {
             console.log(`adding default variants`);
             this.addNewVariant('When field has value', 'notBlank');
@@ -193,6 +194,22 @@ export default class IndicatorBuilder extends LightningElement {
         }
         console.log(`newVariant = ${JSON.stringify(newVariant)}`);
         return newVariant;
+    }
+
+    /* WIRE FUNCTIONS */
+    @wire(getSldsIcons, {})
+    iconOptions({ error, data }){
+        if(data){
+            this.iconOptions = data;
+        } else if (error){
+            console.log('Get SLDS Icons Error: ', error);
+            this.hasErrors = true;
+            if(error.body.message == 'List has no rows for assignment to SObject'){
+                this.errorMsg = 'Unable to locate SLDS Icons file.';
+            } else {
+                this.errorMsg = error;
+            }
+        }
     }
 
     /* UTILITY FUNCTIONS */
