@@ -26,6 +26,7 @@ export default class Fsc_objectSelector extends LightningElement {
     @api excludeSublabelInFilter = false;   // If true, the 'sublabel' text of an option is not included when determining if an option is a match for a given search text.
     @api includeValueInFilter = false;  // If true, the 'value' text of an option is included when determining if an option is a match for a given search text.    
     @api notifyOnClear = false;
+    @api includeFullDetails = false;
     // @api availableObjectSelection = this.availableObjectOptions.default?.value;
     @api availableObjects = [];
     
@@ -163,6 +164,9 @@ export default class Fsc_objectSelector extends LightningElement {
         let detail = {
             value: this.value,
             values: this.values,
+        }
+        if (this.includeFullDetails) {
+            detail.selectedObjects = this.objectOptions.filter(object => this.values.includes(object.value));
         }
         this.dispatchEvent(new CustomEvent('change', { detail }));
     }

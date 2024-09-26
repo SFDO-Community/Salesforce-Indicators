@@ -22,6 +22,7 @@ export default class Fsc_objectFieldSelector extends LightningElement {
     @api fieldAllowMultiselect = false;
     @api required = false;
     @api notifyOnClear = false;
+    @api includeFullDetails = false;
 
     @api availableObjectSelection = this.availableObjectOptions.default?.value;
     @api availableObjects;
@@ -30,6 +31,10 @@ export default class Fsc_objectFieldSelector extends LightningElement {
     // @api lockDefaultObject;  Redundant, same as disableObjectPicklist
     @api defaultToNameField;
     @api layout = LAYOUT_OPTIONS.VERTICAL.value;
+
+    @track selectedObjects = [];
+    @track selectedFields = [];
+
 
     @api
     get builderContext() {
@@ -112,12 +117,6 @@ export default class Fsc_objectFieldSelector extends LightningElement {
                 errorMessages.push(cmp.validate().errorMessage)
             }
         })
-        // if (this.objectSelector && this.objectSelector.validate().errorMessage) {
-        //     errorMessages.push(this.objectSelector.validate().errorMessage)
-        // }
-        // if (this.fieldSelector && this.fieldSelector.validate().errorMessage) {
-        //     errorMessages.push(this.fieldSelector.validate().errorMessage)
-        // }
         console.log('in ofsValidate, errorMessages = ' + errorMessages);
         if (errorMessages.length) {
             return {
@@ -167,21 +166,13 @@ export default class Fsc_objectFieldSelector extends LightningElement {
 
     handleObjectChange(event) {
         this.objectValue = event.detail.value;
-        // const attributeChangeEvent = new FlowAttributeChangeEvent(
-        //     'objectValue',
-        //     this.objectValue
-        // );
-        // this.dispatchEvent(attributeChangeEvent);
+        this.selectedObjects = event.detail.selectedObjects;
         this.dispatchValues();
     }
 
     handleFieldChange(event) {
         this.fieldValue = event.detail.value;
-        // const attributeChangeEvent = new FlowAttributeChangeEvent(
-        //     'fieldValue',
-        //     this.fieldValue
-        // );
-        // this.dispatchEvent(attributeChangeEvent);
+        this.selectedFields = event.detail.selectedFields;
         this.dispatchValues();
     }
 
@@ -202,16 +193,12 @@ export default class Fsc_objectFieldSelector extends LightningElement {
             fieldValue: this.fieldValue,
             fieldValues: this.fieldValues
         }
+        if (this.includeFullDetails) {
+            detail.selectedObjects = this.selectedObjects;
+            detail.selectedFields = this.selectedFields;
+        }
+        console.log(`in objectFieldSelector dispatchValues: detail.selection lengths = ${detail.selectedObjects.length},${detail.selectedFields.length}`);
+      
         this.dispatchEvent(new CustomEvent('change', { detail }));
-    }
-
-
-    connectedCallback() {
-        // console.log('displayType = ' + this.displayType);
-        // console.log('objectValue = ' + this.objectValue);
-        // console.log('availableFieldTypes = ' + this.availableFieldTypes);
-        // console.log('availableReferenceTypes = ' + this.availableReferenceTypes);
-        // console.log('hideObjectPicklist = ' + this.hideObjectPicklist);
-        // console.log('hideFieldPicklist = ' + this.hideFieldPicklist);
     }
 }

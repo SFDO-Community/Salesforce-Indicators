@@ -50,10 +50,11 @@ export default class Fsc_fieldSelector2 extends LightningElement {
     @api allowReferenceLookups = false; 
     @api defaultToNameField = false;
     @api notifyOnClear = false;
+    @api includeFullDetails = false;
     @track fields = [];
     @track _values = [];
     @track _availableFieldTypes = [];
-    @track _availableReferenceTypes = [];
+    @track _availableReferenceTypes = []; 
 
     @api builderContext;
 
@@ -152,7 +153,7 @@ export default class Fsc_fieldSelector2 extends LightningElement {
     get combobox() {
         return this.template.querySelector(COMBOBOX_COMPONENT_NAME);
     }
-
+    
     @wire(getObjectInfo, { objectApiName: '$objectName' })
     handleGetObjectInfo({ error, data }) {
         if (error) {
@@ -215,7 +216,7 @@ export default class Fsc_fieldSelector2 extends LightningElement {
                 fields = fields.filter(field => !field.referenceToInfos.length || field.referenceToInfos.some(ref => includesIgnoreCase(this.availableReferenceTypes, ref.apiName)));
             }
         }
-        this.fields = fields.map(field => this.newField(field.label, field.apiName, field.apiName, this.hideIcons ? null : this.getIconFromDataType(field.dataType), field.nameField));
+        this.fields = fields.map(field => this.newField(field.label, field.apiName, field.apiName, this.hideIcons ? null : this.getIconFromDataType(field.dataType), field.nameField, field.dataType));
         this.fields.sort((a, b) => {
             return a.label.toLowerCase() > b.label.toLowerCase() ? 1 : -1;
         });
@@ -244,6 +245,9 @@ export default class Fsc_fieldSelector2 extends LightningElement {
             value: this.value,
             values: this.values,
         }
+        if (this.includeFullDetails) {
+            detail.selectedFields = this.fields.filter(field => this.values.includes(field.value));
+        }
         this.dispatchEvent(new CustomEvent('change', { detail }));
     }    
 
@@ -253,7 +257,7 @@ export default class Fsc_fieldSelector2 extends LightningElement {
         return matchingType?.icon || DEFAULT_ICON;
     }
 
-    newField(label, sublabel, value, icon, nameField) {
-        return { label, sublabel, value, icon, nameField };
+    newField(label, sublabel, value, icon, nameField, dataType) {
+        return { label, sublabel, value, icon, nameField, dataType };
     }
 }
