@@ -14,7 +14,8 @@
                     <lightning-input label="Indicator Item API Name" required></lightning-input>
                 </div>
                 <div class="slds-col slds-size_1-of-1">
-                    <c-fsc_object-field-selector required layout="horizontal" object-value={indicator.sObject__c} field-value={indicator.Field__c}></c-fsc_object-field-selector>
+                    <c-fsc_object-field-selector required layout="horizontal" object-value={indicator.sObject__c}
+                        field-value={indicator.Field__c}></c-fsc_object-field-selector>
                 </div>
                 <div class="slds-col slds-size_1-of-1">
                     <lightning-textarea label="Description" value={indicator.Description__c}></lightning-textarea>
@@ -39,8 +40,8 @@
                             </c-indicator-bundle-item>
                             <!-- </span> -->
                             <span class="slds-truncate" title={variant.label}>{variant.label}</span>
-                            <lightning-button-icon icon-name="utility:delete" variant="bare" class="deleteVariantButton" data-index={index}
-                                onclick={handleVariantDeleteClick}></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:delete" variant="bare" class="deleteVariantButton"
+                                data-index={index} onclick={handleVariantDeleteClick}></lightning-button-icon>
                         </a>
                     </li>
                 </template>
@@ -48,242 +49,94 @@
                     onclick={handleAddVariantClick}></lightning-button>
             </ul>
 
-            <template lwc:if={activeVariant}>
-                <template lwc:if={showActiveVariant}>
-                    <div class="slds-vertical-tabs__content slds-show tabSet" role="tabpanel">
-                        <div class="slds-grid slds-gutters">
-                            <div class="slds-col slds-size_3-of-4 slds-grid slds-wrap slds-border_right">
-                                <div class="variantDesign slds-col slds-size_1-of-1 slds-p-bottom_x-small">
-                                    <p class="slds-text-heading_small">Variant Design</p>
-                                    <lightning-input label="Indicator Label" value={activeVariant.label}
-                                        data-index={index} data-property="label"
-                                        oncommit={handleVariantPropertyChange}></lightning-input>
-                                    <lightning-combobox label="Select Icon Source" options={iconSourceOptions}
-                                        value={activeVariant.iconSource} dropdown-alignment="auto" data-index={index}
-                                        data-property="iconSource"
-                                        onchange={handleVariantPropertyChange}></lightning-combobox>
-                                    <div class="iconSourceInputs">
-                                        <template lwc:if={activeVariant.iconSourceIs.sldsIcon}>
-                                            <c-fsc_combobox label="Select Icon" options={iconOptions} icon-size="small"
-                                                value={activeVariant.sourceValue} data-property="sourceValue"
-                                                onchange={handleVariantPropertyChange}></c-fsc_combobox>
-                                            <!-- <c-icon-selector label="Select Icon" icon-name={activeVariant.sourceValue}
-                                            data-index={index} data-property="sourceValue"
-                                            oniconselection={handleVariantPropertyChange}></c-icon-selector> -->
-                                        </template>
-                                        <template lwc:elseif={activeVariant.iconSourceIs.url}>
-                                            <lightning-input label="Enter URL" value={activeVariant.sourceValue}
-                                                data-index={index} data-property="sourceValue"
-                                                onchange={handleVariantPropertyChange}></lightning-input>
-                                        </template>
-                                        <template lwc:elseif={activeVariant.iconSourceIs.staticResource}>
-                                            <lightning-input label="Select Static Resource"
-                                                value={activeVariant.sourceValue} data-index={index}
-                                                data-property="sourceValue"
-                                                onchange={handleVariantPropertyChange}></lightning-input>
-                                        </template>
-                                        <template lwc:elseif={activeVariant.iconSourceIs.staticText}>
-                                            <lightning-input label="Enter Static Text" value={activeVariant.sourceValue}
-                                                class="slds-p-top_xxx-small" data-index={index}
-                                                data-property="sourceValue"
-                                                onchange={handleVariantPropertyChange}></lightning-input>
-                                        </template>
-                                        <lightning-input label="Hover Text" value={activeVariant.hoverText}
-                                            data-index={index} data-property="hoverText"
-                                            onchange={handleVariantPropertyChange}></lightning-input>
-                                        <!-- <lightning-combobox label="Field Label" options={fieldLabelOptions} data-index={index} data-property="fieldLabelDisplay" onchange={handleVariantPropertyChange} dropdown-alignment="auto"></lightning-combobox> -->
-                                        <template lwc:if={activeVariant.showColourOption}>
-                                            <lightning-input label="Override Colours" type="checkbox" data-index={index}
-                                                data-property="overrideColours" checked={activeVariant.overrideColours}
-                                                onchange={handleVariantPropertyChange}></lightning-input>
-                                        </template>
-                                        <template lwc:if={activeVariant.showColourSelectors}>
-                                            <lightning-input label="Select Foreground Colour" type="color"
-                                                data-index={index} data-property="foregroundColour"
-                                                onchange={handleVariantPropertyChange}></lightning-input>
-                                            <lightning-input label="Select Background Colour" type="color"
-                                                data-index={index} data-property="backgroundColour"
-                                                onchange={handleVariantPropertyChange}></lightning-input>
-                                        </template>
-
-                                    </div>
-                                </div>
-                                <div class="variantLogic slds-col slds-size_1-of-1 slds-p-top_x-small">
-                                    <p class="slds-text-heading_small">Variant Logic</p>
-                                    <lightning-combobox label="Show When Field:" options={whenToDisplayOptions}
-                                        value={activeVariant.whenToDisplay} data-index={index}
-                                        data-property="whenToDisplay" onchange={handleVariantPropertyChange}
-                                        dropdown-alignment="auto"></lightning-combobox>
-                                    <template lwc:if={activeVariant.filterTypeIs.text}>
-                                        <lightning-input label="Text"></lightning-input>
-                                    </template>
-                                    <template lwc:elseif={activeVariant.filterTypeIs.number}>
-                                        <lightning-input label="Number" type="number"></lightning-input>
-                                    </template>
-                                    <template lwc:elseif={activeVariant.filterTypeIs.numericRange}>
-                                        <lightning-input label="Greater Than or Equal To"
-                                            type="number"></lightning-input>
-                                        <lightning-input label="Less Than" type="number"></lightning-input>
-                                    </template>
-                                </div>
-                            </div>
-                            <!-- <div class="slds-col slds-size_1-of-4 slds-grid slds-grid_vertical slds-grid_vertical-align-start slds-grid_align-center"> -->
-                            <div>
-                                <h2 class="slds-text-heading_small slds-col">Preview</h2>
-                                <div class="slds-col">
-                                    <c-indicator-bundle-item icon-source={activeVariant.iconSource}
-                                        source-value={activeVariant.sourceValue} ind-size="large"
-                                        ind-foreground-color={activeVariant.foregroundColour}
-                                        ind-background-color={activeVariant.backgroundColour}
-                                        ind-hover-text={activeVariant.hoverText}>
-                                    </c-indicator-bundle-item>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </template>
-            <template lwc:else>
-                false
-                <template for:each={itemVariants} for:item="variant" for:index="index">
-                    <div class={variant.tabPaneClass} id="slds-vertical-tabs-0" role="tabpanel"
-                        aria-labelledby="slds-vertical-tabs-0__nav" key={variant.label}>
-                        <div class="slds-grid slds-gutters">
-                            <div class="slds-col slds-size_3-of-4">
-                                <lightning-input label="Indicator Label" value={variant.label} data-index={index}
+            <template lwc:if={showActiveVariant}>
+                <div class="slds-vertical-tabs__content slds-show tabSet" role="tabpanel">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_3-of-4 slds-grid slds-wrap slds-border_right">
+                            <div class="variantDesign slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                                <p class="slds-text-heading_small">Variant Design</p>
+                                <lightning-input label="Indicator Label" value={activeVariant.label} data-index={index}
                                     data-property="label" oncommit={handleVariantPropertyChange}></lightning-input>
                                 <lightning-combobox label="Select Icon Source" options={iconSourceOptions}
-                                    value={variant.iconSource} dropdown-alignment="auto" data-index={index}
+                                    value={activeVariant.iconSource} dropdown-alignment="auto" data-index={index}
                                     data-property="iconSource"
                                     onchange={handleVariantPropertyChange}></lightning-combobox>
                                 <div class="iconSourceInputs">
-                                    <template lwc:if={variant.iconSourceIs.sldsIcon}>
-                                        <c-icon-selector label="Select Icon" icon-name={variant.sourceValue}
+                                    <template lwc:if={activeVariant.iconSourceIs.sldsIcon}>
+                                        <c-fsc_combobox label="Select Icon" options={iconOptions} icon-size="small"
+                                            value={activeVariant.sourceValue} data-property="sourceValue"
+                                            onchange={handleVariantPropertyChange}></c-fsc_combobox>
+                                        <!-- <c-icon-selector label="Select Icon" icon-name={activeVariant.sourceValue}
                                             data-index={index} data-property="sourceValue"
-                                            oniconselection={handleVariantPropertyChange}></c-icon-selector>
+                                            oniconselection={handleVariantPropertyChange}></c-icon-selector> -->
                                     </template>
-                                    <template lwc:elseif={variant.iconSourceIs.url}>
-                                        <lightning-input label="Enter URL" value={variant.sourceValue}
-                                            data-index={index} data-property="sourceValue"
-                                            onchange={handleVariantPropertyChange}></lightning-input>
-                                    </template>
-                                    <template lwc:elseif={variant.iconSourceIs.staticResource}>
-                                        <lightning-input label="Select Static Resource" value={variant.sourceValue}
+                                    <template lwc:elseif={activeVariant.iconSourceIs.url}>
+                                        <lightning-input label="Enter URL" value={activeVariant.sourceValue}
                                             data-index={index} data-property="sourceValue"
                                             onchange={handleVariantPropertyChange}></lightning-input>
                                     </template>
-                                    <template lwc:elseif={variant.iconSourceIs.staticText}>
-                                        <lightning-input label="Enter Static Text" value={variant.sourceValue}
+                                    <template lwc:elseif={activeVariant.iconSourceIs.staticResource}>
+                                        <lightning-input label="Select Static Resource"
+                                            value={activeVariant.sourceValue} data-index={index}
+                                            data-property="sourceValue"
+                                            onchange={handleVariantPropertyChange}></lightning-input>
+                                    </template>
+                                    <template lwc:elseif={activeVariant.iconSourceIs.staticText}>
+                                        <lightning-input label="Enter Static Text" value={activeVariant.sourceValue}
                                             class="slds-p-top_xxx-small" data-index={index} data-property="sourceValue"
                                             onchange={handleVariantPropertyChange}></lightning-input>
                                     </template>
+                                    <lightning-input label="Hover Text" value={activeVariant.hoverText}
+                                        data-index={index} data-property="hoverText"
+                                        onchange={handleVariantPropertyChange}></lightning-input>
+                                    <template lwc:if={activeVariant.showColourOption}>
+                                        <lightning-input label="Override Colours" type="checkbox" data-index={index}
+                                            data-property="overrideColours" checked={activeVariant.overrideColours}
+                                            onchange={handleVariantPropertyChange}></lightning-input>
+                                    </template>
+                                    <template lwc:if={activeVariant.showColourSelectors}>
+                                        <lightning-input label="Select Foreground Colour" type="color"
+                                            data-index={index} data-property="foregroundColour"
+                                            onchange={handleVariantPropertyChange}></lightning-input>
+                                        <lightning-input label="Select Background Colour" type="color"
+                                            data-index={index} data-property="backgroundColour"
+                                            onchange={handleVariantPropertyChange}></lightning-input>
+                                    </template>
+
                                 </div>
+                            </div>
+                            <div class="variantLogic slds-col slds-size_1-of-1 slds-p-top_x-small">
+                                <p class="slds-text-heading_small">Variant Logic</p>
                                 <lightning-combobox label="Show When Field:" options={whenToDisplayOptions}
-                                    value={variant.whenToDisplay} data-index={index} data-property="whenToDisplay"
+                                    value={activeVariant.whenToDisplay} data-index={index} data-property="whenToDisplay"
                                     onchange={handleVariantPropertyChange}
                                     dropdown-alignment="auto"></lightning-combobox>
-                                <template lwc:if={variant.filterTypeIs.text}>
+                                <template lwc:if={activeVariant.filterTypeIs.text}>
                                     <lightning-input label="Text"></lightning-input>
                                 </template>
-                                <template lwc:elseif={variant.filterTypeIs.number}>
+                                <template lwc:elseif={activeVariant.filterTypeIs.number}>
                                     <lightning-input label="Number" type="number"></lightning-input>
                                 </template>
-                                <template lwc:elseif={variant.filterTypeIs.numericRange}>
+                                <template lwc:elseif={activeVariant.filterTypeIs.numericRange}>
                                     <lightning-input label="Greater Than or Equal To" type="number"></lightning-input>
                                     <lightning-input label="Less Than" type="number"></lightning-input>
                                 </template>
-
-
-                                <lightning-input label="Hover Text" value={variant.hoverText} data-index={index}
-                                    data-property="hoverText" onchange={handleVariantPropertyChange}></lightning-input>
-                                <!-- <lightning-combobox label="Field Label" options={fieldLabelOptions} data-index={index} data-property="fieldLabelDisplay" onchange={handleVariantPropertyChange} dropdown-alignment="auto"></lightning-combobox> -->
-                                <template lwc:if={variant.showColourOption}>
-                                    <lightning-input label="Override Colours" type="checkbox" data-index={index}
-                                        data-property="overrideColours"
-                                        onchange={handleVariantPropertyChange}></lightning-input>
-                                </template>
-                                <template lwc:if={variant.showColourSelectors}>
-                                    <lightning-input label="Select Foreground Colour" type="color" data-index={index}
-                                        data-property="foregroundColour"
-                                        onchange={handleVariantPropertyChange}></lightning-input>
-                                    <lightning-input label="Select Background Colour" type="color" data-index={index}
-                                        data-property="backgroundColour"
-                                        onchange={handleVariantPropertyChange}></lightning-input>
-                                </template>
                             </div>
-                            <!-- <div class="slds-col slds-size_1-of-4 slds-grid slds-grid_vertical slds-grid_vertical-align-start slds-grid_align-center"> -->
-                            <div>
-                                <h2 class="slds-text-heading_medium slds-col">Preview</h2>
-                                <div class="slds-col">
-                                    <c-indicator-bundle-item icon-source={variant.iconSource}
-                                        source-value={variant.sourceValue} ind-size="large"
-                                        ind-foreground-color={variant.foregroundColour}
-                                        ind-background-color={variant.backgroundColour}
-                                        ind-hover-text={variant.hoverText}>
-                                    </c-indicator-bundle-item>
-                                </div>
+                        </div>
+                        <div>
+                            <h2 class="slds-text-heading_small slds-col">Preview</h2>
+                            <div class="slds-col">
+                                <c-indicator-bundle-item icon-source={activeVariant.iconSource}
+                                    source-value={activeVariant.sourceValue} ind-size="large"
+                                    ind-foreground-color={activeVariant.foregroundColour}
+                                    ind-background-color={activeVariant.backgroundColour}
+                                    ind-hover-text={activeVariant.hoverText}>
+                                </c-indicator-bundle-item>
                             </div>
                         </div>
                     </div>
-                </template>
+                </div>
             </template>
         </div>
-
-        <!-- <lightning-tabset variant="vertical">
-            <template for:each={itemVariants} for:item="variant">
-                <lightning-tab label={variant.label} key={variant.label}>
-                    <lightning-input label=""
-                </lightning-tab>
-            </template>
-            
-        </lightning-tabset> -->
-        <!-- <div class="slds-card__body slds-card__body_inner slds-grid slds-wrap slds-gutters">
-            <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">
-                <c-indicator-bundle-item
-                    ind-shape={indShape}
-                    ind-text={indText}
-                    src={indImage} 
-                    ind-icon={indIcon}
-                    ind-hover-text={indHoverText}>
-                </c-indicator-bundle-item>
-            </div>
-            <div class="slds-col slds-size_1-of-2 slds-p-vertical_small">
-                <p class="slds-text-heading_small">Indicator Source</p>
-                <c-fsc_object-field-selector master-label="Select Field"></c-fsc_object-field-selector>
-                <lightning-combobox label="Show When Field:" options={whenToDisplayOptions} onchange={handleWhenToDisplayChange}></lightning-combobox>
-                <template lwc:if={showMatch.text}>
-                    <lightning-input label="Text"></lightning-input>
-                </template>
-                <template lwc:elseif={showMatch.number}>
-                    <lightning-input label="Number" type="number"></lightning-input>
-                </template>
-            </div>
-            <div class="slds-col slds-size_1-of-2 slds-p-vertical_small">
-                <p class="slds-text-heading_small">Indicator Style</p>
-                <lightning-combobox label="Select Icon Source" options={iconSourceOptions} onchange={handleIconSourceChange}></lightning-combobox>
-                <template lwc:if={iconSource.sldsIcon}>
-                    <c-icon-selector label="Select Icon" oniconselection={handleIconSelection}></c-icon-selector>
-                </template>
-                <template lwc:elseif={iconSource.url}>
-                    <lightning-input label="Enter URL"></lightning-input>
-                </template>
-                <template lwc:elseif={iconSource.staticResource}>
-                    <lightning-combobox label="Select Static Resource" options={}></lightning-combobox>
-                </template>
-                <template lwc:elseif={iconSource.staticText}>
-                    <lightning-input label="Enter Static Text" onchange={handleStaticTextChange} class="slds-p-top_xxx-small"></lightning-input>
-                </template>
-                <template lwc:if={showColourOption}>
-                    <lightning-input label="Override Colours" type="checkbox" onchange={handleOverideColoursChange}></lightning-input>
-                    <template lwc:if={showColourSelectors}>
-                        <lightning-input label="Select Foreground Colour" type="color" onchange={handleForegroundColourChange}></lightning-input>
-                        <lightning-input label="Select Background Colour" type="color" onchange={handleBackgroundColourChange}></lightning-input>
-                    </template>
-                </template>
-            </div>
-        </div> -->
-        <!-- </div> -->
-
     </article>
-
 </template>

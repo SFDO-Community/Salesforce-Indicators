@@ -21,18 +21,6 @@ const FIELD_TYPES = {
 }
 
 export default class IndicatorBuilder extends LightningElement {
-    /* NOT IN USE */
-    /*
-    indSize = 'large';
-    @api indShape = 'base';
-    @api indText = '';
-    @api indImage = '';
-    indIcon = 'standard:marketing_actions';
-    @api indHoverText = '';
-    indBackgroundColor;
-    indForegroundColor;
-    */
-
     @api indicator = {};
 
     showMatch = {};
@@ -65,9 +53,6 @@ export default class IndicatorBuilder extends LightningElement {
     @track itemVariants = [];
 
     @track iconOptions = [];
-        // { label: 'Default Indicator' }
-        // this.newIndicatorVariant('Default Indicator')
-    
 
     whenToDisplayOptions = [
         { label: 'Is not blank', value: 'notBlank' },
@@ -96,20 +81,6 @@ export default class IndicatorBuilder extends LightningElement {
         { label: 'large', value: 'large' },
     ];
 
-    fieldLabelOptions = [
-        { label: 'Hide field label', value: 'hide' },
-        { label: 'Show standard label', value: 'standard' },
-        { label: 'Show custom label', value: 'custom' },
-    ]
-
-    get showColourOption() {
-        return this.iconSource.sldsIcon || this.iconSource.staticText;
-    }
-
-    get showColourSelectors() {
-        return this.showColourOption && this.overrideColours;
-    }
-
     /* LIFECYCLE HOOKS */
     connectedCallback() {
         this.processIconOptions();
@@ -133,17 +104,11 @@ export default class IndicatorBuilder extends LightningElement {
 
     /* EVENT HANDLERS */
     handleAddVariantClick() {
-        // this.itemVariants.push({ label: `Indicator Variant ${(this.itemVariants.length + 1)}`});
-        // this.itemVariants.push(this.newIndicatorVariant(`Indicator Variant ${(this.itemVariants.length + 1)}`));        
-        // this.startTime = Date.now();
-        // console.log(`startTime: ${this.startTime}`);        
         this.addNewVariant(`Indicator Variant ${(this.itemVariants.length + 1)}`);
     }
 
     handleTabAnchorClick(event) {
-        console.log(`in handleTabAnchorClick`);
         this.activeVariantTabIndex = event.currentTarget.dataset.index;
-        console.log(`activeVariantTabIndex = ${this.activeVariantTabIndex}`);
     }
 
     handleVariantPropertyChange(event) {
@@ -190,9 +155,6 @@ export default class IndicatorBuilder extends LightningElement {
     addNewVariant(label, whenToDisplay) {
         this.itemVariants.push(this.newIndicatorVariant(label, whenToDisplay));
         this.activeVariantTabIndex = this.itemVariants.length - 1;
-        this.endTime = Date.now();
-        console.log(`endTime: ${this.endTime}`);
-        console.log(`this took ${this.endTime - this.startTime}`);
     }
 
     newIndicatorVariant(label, whenToDisplay, isActive = true, iconSource = 'sldsIcon') {
@@ -251,43 +213,4 @@ export default class IndicatorBuilder extends LightningElement {
         this.iconOptions = iconOptions;
         // this.iconOptions.length = 50;
     }
-
-    /*
-    handleWhenToDisplayChange(event) {
-        let value = event.detail.value;
-        let matchingOption = this.whenToDisplayOptions.find(option => option.value == value);
-        if (matchingOption) {
-            this.showMatch = { [matchingOption.showMatch]: true };
-        }
-    }
-
-    handleIconSourceChange(event) {
-        let value = event.detail.value;
-        let variantToUpdate = this.itemVariants[target.dataset.index];
-        console.log(`value = ${value}`);
-        // this.iconSource = { [value]: true };
-        variantToUpdate.iconSource = { [value]: true };
-    }
-
-    handleIconSelection(event) {
-        console.log(JSON.stringify(event.detail));
-        this.indIcon = event.detail;
-    }
-
-    handleStaticTextChange(event) {
-        this.indText = event.target.value;
-    }
-
-    handleForegroundColourChange(event) {
-        this.indForegroundColor = event.target.value;
-    }
-
-    handleBackgroundColourChange(event) {
-        this.indBackgroundColor = event.target.value;
-    }
-    
-    handleOverideColoursChange(event) {
-        this.overrideColours = event.target.checked;
-    }
-    */
 }
