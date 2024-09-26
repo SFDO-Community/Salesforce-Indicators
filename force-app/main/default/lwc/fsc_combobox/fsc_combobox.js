@@ -38,6 +38,7 @@ export default class OptionSelector extends LightningElement {
     @api filterActions = false; // If true, action items will be filtered along with selection items. By default, action items are always visible
     @api showSelectedCount = false; // If true, when allowMultiselect is true, the component label will show the number of selected values in parentheses
     @api notifyOnClear = false; // If true, clicking the clear button will not automatically clear the selection. Instead it will dispatch a notification event so that the parent component can implement any logic before clearing
+    @api includeFullDetails = false; // If true, include all of the details of all selectedOptions when dispatching changes, not just the values
     @api hideSelectedValues = false;    // Reserved for future use
 
     @api builderContext;
@@ -159,6 +160,8 @@ export default class OptionSelector extends LightningElement {
 
     @api
     get selectedOptions() {
+        return this.options.filter(option => this.values.includes(option.value));
+        /* I think the above line of code does the same thing as the following paragraph?
         let selectedOptions = [];
         this.values.forEach(value => {
             const option = this.options.find(option => option.value === value);
@@ -167,6 +170,7 @@ export default class OptionSelector extends LightningElement {
             }
         });
         return selectedOptions;
+        */
     }
 
     get selectedOption() {
@@ -396,6 +400,9 @@ export default class OptionSelector extends LightningElement {
             value: this.value,
             values: this.values,
             //selectedOptions: this.selectedOptions
+        }
+        if (this.includeFullDetails) {
+            detail.selectedOptions = this.selectedOptions;
         }
         this.dispatchEvent(new CustomEvent('change', { detail }));
     }
