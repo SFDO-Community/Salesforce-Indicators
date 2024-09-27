@@ -8,22 +8,12 @@ const FIELD_TYPE_CATEGORIES = {
 }
 
 export default class IndicatorBuilderExtension extends LightningElement {
-    // @api indicator = {};
-    @api
-    get indicator() {
-        return this._indicator;
-    }
-    set indicator(value) {
-        console.log(`indicator = ${JSON.stringify(value)}`);
-        this._indicator = value;
-    }
-    _indicator;
+    @api indicator = {};
     @api activeVariant = {};
     @api iconOptions = [];
 
-
-    get indicatorString() {
-        return JSON.stringify(this.indicator);
+    get activeVariantString() {
+        return JSON.stringify(this.activeVariant);
     }
 
     get iconSourceIs() {
@@ -86,7 +76,6 @@ export default class IndicatorBuilderExtension extends LightningElement {
 
             let variant = { ...this.activeVariant };
 
-
             variant[target.dataset.property] = value;
             if (target.dataset.property === 'iconSource') {
                 variant.sourceValue = null;
@@ -95,45 +84,4 @@ export default class IndicatorBuilderExtension extends LightningElement {
             this.dispatchEvent(new CustomEvent('variantchange', { detail: variant }));
         }
     }
-
-    /*
-    newIndicatorVariant(label, whenToDisplay, isActive = true, iconSource = 'sldsIcon') {
-        let whenToDisplayOptions = this.whenToDisplayOptions;
-
-        let newVariant = {
-            label,
-            whenToDisplay,
-            isActive,
-            iconSource,
-            hoverText: '',
-            sourceValue: null,
-            // iconSourceIs: {},
-            // filterTypeIs: {},
-
-            get iconSourceIs() {
-                return { [this.iconSource]: true }
-            },
-            get filterTypeIs() {
-                let matchingOption = whenToDisplayOptions.find(option => option.value == this.whenToDisplay);
-                return matchingOption ? { [matchingOption.showMatch]: true } : {};
-            },
-            get tabAnchorClass() {
-                return 'slds-vertical-tabs__nav-item' + (this.isActive ? ' slds-is-active' : '');
-            },
-            get tabPaneClass() {
-                return 'slds-vertical-tabs__content ' + (this.isActive ? 'slds-show' : 'slds-hide');
-            },
-            get showColourOption() {
-                return this.iconSourceIs.sldsIcon;
-            },
-            get showColourSelectors() {
-                return this.iconSourceIs.staticText || (this.showColourOption && this.overrideColours);
-            }        
-                
-        }
-        console.log(`newVariant = ${JSON.stringify(newVariant)}`);
-        return newVariant;
-    }
-    */
-
 }

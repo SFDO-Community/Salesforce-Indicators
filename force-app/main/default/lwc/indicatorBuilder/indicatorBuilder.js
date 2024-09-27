@@ -1,23 +1,10 @@
-// TODO: set "display logic" to only show appropriate filters based on field type
 // TODO: incorporate all data from saved Indicator Item metadata
 // TODO: fix lag on combobox load
 // TODO: add re-ordering of variants (drag/drop or arrows)
+// TODO (complete): set "display logic" to only show appropriate filters based on field type
 
 import { LightningElement, api, track, wire } from 'lwc';
 import getSldsIcons from '@salesforce/apex/SldsIconController.getIconOptions';
-import { FIELD_TYPES } from 'c/fsc_objectFieldSelectorUtils';
-
-const FIELD_TYPE_CATEGORIES = {
-    // TEXT: Object.values(FIELD_TYPES).filter(fieldType => fieldType.value !== FIELD_TYPES.CHECKBOX.value),   // Everything but boolean
-    // TEXT: [FIELD_TYPES.REFERENCE, FIELD_TYPES.ADDRESS, FIELD_TYPES.EMAIL, FIELD_TYPES.LOCATION, FIELD_TYPES.PHONE, FIELD_TYPES.PICKLIST, FIELD_TYPES.MULTIPICKLIST, FIELD_TYPES.TEXT, FIELD_TYPES.TEXTAREA, FIELD_TYPES.TEXTENCRYPTED, FIELD_TYPES.URL],
-    // NUMERIC: [FIELD_TYPES.CURRENCY, FIELD_TYPES.NUMBER, FIELD_TYPES.PERCENT],
-    // DATE: [FIELD_TYPES.DATE, FIELD_TYPES.DATETIME, FIELD_TYPES.TIME],
-    // BOOLEAN: [FIELD_TYPES.CHECKBOX],
-    TEXT: ['Reference', 'Address', 'Email', 'Location', 'Phone', 'Picklist', 'ComboBox', 'MultiPicklist', 'String', 'TextArea', 'EncryptedString', 'URL'],
-    NUMERIC: ['Currency', 'Number', 'Percent', 'Integer', 'Double', 'Int', 'Long'],
-    DATE: ['Date', 'DateTime', 'Time'],
-    BOOLEAN: ['Boolean'],
-}
 
 const ICONS = {
     utility: 'activity,ad_set,add_above,add_below,add_source,add,adduser,adjust_value,advanced_function,advertising,agent_home,agent_session,aggregate,aggregation_policy,alert,all,anchor,angle,animal_and_nature,announcement,answer,answered_twice,anywhere_alert,anywhere_chat,apex_alt,apex_plugin,apex,app_web_messaging,approval,apps,archive,array,arrow_bottom,arrow_left,arrow_right,arrow_top,arrowdown,arrowup,asset_audit,asset_object,asset_repossessed,asset_warranty,assignment,attach,automate,away,back,ban,block_visitor,bold,bookmark_alt,bookmark_stroke,bookmark,bottom_align,bottom_group_alignment,breadcrumbs,broadcast,brush,bucket,budget_category_value,budget_period,bug,builder,bundle_config,bundle_policy,button_choice,buyer_group_qualifier,calculated_insights,call,campaign,cancel_file_request,cancel_transfer,cant_sync,capacity_plan,capslock,captions,card_details,cart,case,cases,center_align_text,center_align,center_group_alignment,change_owner,change_record_type,change_request,chart,chat,check,checkin,checkout,chevrondown,chevronleft,chevronright,chevronup,choice,circle,classic_interface,clear,clock,close,cms,collapse_all,collection_alt,collection_variable,collection,color_swatch,columns,comments,company,component_customization,connected_apps,constant,contact_request,contact,contactless_pay,contract_alt,contract_doc,contract_line_outcome_data,contract_line_outcome,contract_payment,contract,copy_to_clipboard,copy,coupon_codes,crossfilter,currency_input,currency,custom_apps,customer_workspace,customer,cut,dash,data_cloud,data_graph,data_mapping,data_model,data_transforms,database,datadotcom,date_input,date_time,dayview,delete,deprecate,description,desktop_and_phone,desktop_console,desktop,detach,dialing,diamond,discounts,dislike,display_rich_text,display_text,dock_panel,document_preview,down,download,drag_and_drop,drag,duration_downscale,dynamic_record_choice,edit_form,edit_gpt,edit,education,einstein_alt,einstein,email_open,email,emoji,end_call,end_chat,end_messaging_session,engage,enter,entitlement,erect_window,error,event_ext,event,events,expand_all,expand_alt,expand,expired,fallback,favorite_alt,favorite,feed,field_sales,file,filter_criteria_rule,filter_criteria,filter,filterList,flow_alt,flow,food_and_drink,form,format,formula,forward_up,forward,freeze_column,frozen,fulfillment_order,full_width_view,fully_synced,funding_award_adjustment,funding_requirement,global_constant,graph,groups,guidance,hazmat_equipment,heart,height,help_center,help_doc_ext,help,hide_mobile,hide,hierarchy,high_velocity_sales,highlight,holiday_operating_hours,home,hourglass,http,identity,image,in_app_assistant,inbox,incident,incoming_call,indicator_performance_period,info_alt,info,inner_join,insert_tag_field,insert_template,inspector_panel,integration,internal_share,italic,join,jump_to_bottom,jump_to_left,jump_to_right,jump_to_top,justify_text,kanban,key_dates,key,keyboard_dismiss,keypad,knowledge_base,knowledge_smart_link,label,labels,layers,layout_banner,layout_card,layout_overlap,layout_tile,layout,lead,leave_conference,left_align_text,left_align,left_join,left,level_down,level_up,light_bulb,lightning_extension,lightning_inspector,like,line_chart,link,linked,list,listen,live_message,location_permit,location,lock,locked_with_additions,locker_service_api_viewer,locker_service_console,log_a_call,logout,loop,lower_flag,macros,magicwand,maintenance_plan,mark_all_as_read,market,matrix,meet_content_source,meet_focus_content,meet_focus_equal,meet_focus_presenter,meet_present_panel,merge_field,merge,metrics,middle_align,minimize_window,missed_call,mixed_sources_mapping,money,moneybag,monthlyview,more,move,mulesoft,multi_picklist,multi_select_checkbox,muted,new_direct_message,new_window,new,news,no_return,not_in_sync,not_saved,note,notebook,notification_off,notification_snoozed,notification,number_input,office365,offline_briefcase,offline_cached,offline,omni_channel,open_folder,open,opened_folder,opportunity,orchestrator,orders,org_chart,outbound_call,outcome,outer_join,output,overflow,package_org_beta,package_org,package,page_structure,page,palette,password,paste,path_experiment,pause_alt,pause,payment_deferred,payment_gateway,pdf_ext,people,percent,phone_landscape,phone_portrait,photo,picklist_choice,picklist_type,picklist,pin,pinned,plane,planning_poker,play,podcast_webinar,pop_in,power,preview,price_book_entries,price_books,pricing_workspace,print,priority,privately_shared,problem,process,product_consumed_state,product_quantity_rules,product_service_campaign_item,product_service_campaign,product_transfer_state,product_transfer,product_warranty_term,product_workspace,product,products,profile_alt,profile,program_cohort_member,program_cohort,promotion_segments,promotion_tiers,promotions_workspace,promotions,prompt_builder,prompt_edit,prompt,propagation_policy,proposition,push,puzzle,qualifications,question_mark,question,questions_and_answers,queue,quick_text,quip,quotation_marks,quote,radio_button,rating,real_time,reassign,recipe,record_alt,record_collection,record_consent,record_create,record_delete,record_lookup,record_update,record,recurring_exception,recycle_bin_empty,recycle_bin_full,redo,refresh,relate,reminder,remove_formatting,remove_link,replace,replay,reply_all,reply,report_issue,reset_password,resource_absence,resource_capacity,resource_territory,restriction_policy,retail_execution,retweet,ribbon,richtextbulletedlist,richtextindent,richtextnumberedlist,richtextoutdent,right_align_text,right_align,right_join,right,robot,rotate,routing_offline,rows,rules,salesforce_page,salesforce1,save,scan,screen,search,section,segments,send_log,send,sender_email,sentiment_negative,sentiment_neutral,serialized_product_transaction,serialized_product,service_appointment,service_contract,service_report,service_territory_policy,settings,setup_assistant_guide,setup_modal,setup,share_file,share_mobile,share_post,share,shield,shift_pattern_entry,shift_pattern,shift_scheduling_operation,shift_ui,shopping_bag,shortcuts,side_list,signature,signpost,skill,skip_back,skip_forward,skip,slack_conversations,slack,slider,smiley_and_people,sms,snippet,sobject_collection,sobject,socialshare,sort_ascending,sort_policy,sort,spacer,sparkle,sparkles,spinner,stage_collection,stage,standard_objects,steps,stop,store,strategy,strikethrough,success,summary,summarydetail,survey,swarm_request,swarm_session,switch,symbols,sync_in_progress,sync,system_and_global_variable,table_settings,table,tableau,tablet_landscape,tablet_portrait,tabset,talent_development,target_mode,target,task,tax_policy,tax_rate,tax_treatment,text_background_color,text_color,text_template,text,textarea,textbox,threedots_vertical,threedots,thunder,tile_card_list,toggle_off,toggle_on,toggle_panel_bottom,toggle_panel_left,toggle_panel_right,toggle_panel_top,toggle,tollways,top_align,top_group_alignment,topic,topic2,touch_action,tour_check,tour,tracker,trail,trailblazer_ext,trailhead_alt,trailhead_ext,trailhead,transparent,transport_bicycle,transport_heavy_truck,transport_light_truck,transport_walking,travel_and_places,trending,truck,turn_off_notifications,type_tool,type,undelete,undeprecate,underline,undo,unlinked,unlock,unmuted,up,upload,user_role,user,variable,variation_attribute_setup,variation_products,video_off,video,visibility_rule_assigned,voicemail_drop,volume_high,volume_low,volume_off,waits,walkthroughs,warning,warranty_term,watchlist,water,weeklyview,wellness,width,wifi,work_forecast,work_order_type,work_queue,workforce_engagement,world,your_account,yubi_key,zoomin,zoomout',
@@ -38,14 +25,12 @@ export default class IndicatorBuilder extends LightningElement {
     startTime;
     endTime;
 
-    showActiveVariant = false;
     showSpinner = false;
     
     get activeVariantTabIndex() {
         return this._activeVariantTabIndex;
     }
     set activeVariantTabIndex(value) {
-        this.showActiveVariant = false;
         this._activeVariantTabIndex = value;
         this.itemVariants = this.itemVariants.map((variant, index) => {
             variant.isActive = index == this.activeVariantTabIndex;
@@ -75,29 +60,6 @@ export default class IndicatorBuilder extends LightningElement {
 
     @track fieldTypeCategories = {};
 
-    whenToDisplayOptions = [
-        { label: 'Is not blank', value: 'notBlank', fieldTypes: [...FIELD_TYPE_CATEGORIES.TEXT, ...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE] },
-        { label: 'Is blank', value: 'isBlank', fieldTypes: [...FIELD_TYPE_CATEGORIES.TEXT, ...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE] },
-        { label: 'Contains text', value: 'containsText', fieldTypes: FIELD_TYPE_CATEGORIES.TEXT, showMatch: 'text' },
-        { label: 'Equals', value: 'equalsText', fieldTypes: FIELD_TYPE_CATEGORIES.TEXT, showMatch: 'text' },
-        { label: 'Equals', value: 'equalsNumber', fieldTypes: [...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE], showMatch: 'number' },
-        { label: 'Is greater than', value: 'greaterThan', fieldTypes: [...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE], showMatch: 'number' },
-        { label: 'Is less than', value: 'lessThan', fieldTypes: [...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE], showMatch: 'number' },
-        { label: 'Is within range', value: 'inRange', fieldTypes: [...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE], showMatch: 'numericRange' },
-        { label: 'Is true', value: 'isTrue', fieldTypes: FIELD_TYPE_CATEGORIES.BOOLEAN, showMatch: 'boolean' },
-        { label: 'Is false', value: 'isFalse', fieldTypes: FIELD_TYPE_CATEGORIES.BOOLEAN, showMatch: 'boolean' },
-        // { label: 'Custom formula', value: 'customFormula' },
-        // { label: 'Custom expression', value: 'customExpression' },
-    ];
-    // @track whenToDisplayOptions = [];
-
-    iconSourceOptions = [
-        { label: 'Lightning Icon', value: 'sldsIcon' },
-        { label: 'Static Text', value: 'staticText' },
-        { label: 'URL', value: 'url' },
-        { label: 'Static Resource', value: 'staticResource' },
-    ];
-
     iconSizeOptions = [
         { label: 'x-small', value: 'x-small' },
         { label: 'small', value: 'small' },
@@ -105,44 +67,13 @@ export default class IndicatorBuilder extends LightningElement {
         { label: 'large', value: 'large' },
     ];
 
-    get activeWhenToDisplayOptions() {
-        // if (!this.indicator.fieldType) {
-        //     return [this.whenToDisplayOptions;]
-        // }
-        return this.whenToDisplayOptions.filter(option => option.fieldTypes.includes(this.indicator.fieldType));
-    }
-
     /* LIFECYCLE HOOKS */
     connectedCallback() {
         this.processIconOptions();
         if (this.itemVariants.length === 0) {
-            console.log(`adding default variants`);
             this.addNewVariant('Indicator', 'notBlank', false);
             this.addNewVariant('Indicator Inverse', 'isBlank', false);
             this.activeVariantTabIndex = 0;
-        }
-
-        // Object.entries(FIELD_TYPE_CATEGORIES).forEach(([category, fieldTypes]) => {
-        //     console.log(`${category} = ${JSON.stringify(fieldTypes)}`);
-        //     let categories = [];
-        //     fieldTypes.forEach(fieldType => {
-        //         categories.push(...fieldType.value.split(';'));
-        //     })
-        //     this.fieldTypeCategories[category] = categories;
-        // });
-        // this.fieldTypeCategories = this.fieldTypeCategories;
-        // console.log(JSON.stringify(this.fieldTypeCategories));
-
-        // this.populateWhenToDisplayOptions();
-    }
-
-    renderedCallback() {
-        if (this.endTime) {
-            console.log(`elapsed time on render = ${this.endTime - this.startTime}`);
-            this.endTime = null;
-        }
-        if (!this.showActiveVariant) {
-            this.showActiveVariant = true;
         }
     }
 
@@ -156,52 +87,17 @@ export default class IndicatorBuilder extends LightningElement {
     }
 
     handleObjectFieldSelectorChange(event) {
-        console.log(JSON.stringify(event.detail));
         this.indicator.objectName = event.detail.objectValue;
         this.indicator.fieldName = event.detail.fieldValue;
         if (event.detail.selectedFields?.length > 0) {
             this.indicator.fieldType = event.detail.selectedFields[0].dataType;
         }
-        this.indicator = this.indicator;
-        console.log(`indicator = ${this.indicator}`);
-    }
-
-    handleVariantPropertyChange(event) {
-        if (event.currentTarget.dataset.property) {
-            let target = event.currentTarget;
-            let tagName = target.tagName.toLowerCase();
-            let value;
-            if (tagName === 'c-icon-selector') {
-                value = event.detail;
-            } else if (target.type === 'checkbox') {
-                value = target.checked;
-            } else if (tagName === 'lightning-combobox') {
-                value = event.detail.value;
-            } else {
-                value = target.value;
-            }
-
-            console.log(`index is ${target.dataset.index}, value is ${value}, property name is ${target.dataset.property}`);
-
-            // let variantToUpdate = this.itemVariants[target.dataset.index];
-            let variantToUpdate = this.activeVariant;
-            if (variantToUpdate) {
-                variantToUpdate[target.dataset.property] = value;
-                if (target.dataset.property === 'iconSource') {
-                    variantToUpdate.sourceValue = null;
-                }
-                this.itemVariants = [...this.itemVariants];
-                console.log(`updated variant value = ${JSON.stringify(variantToUpdate)}`);
-            }
-        }
+        this.indicator = {...this.indicator};
     }
 
     handleActiveVariantChange(event) {
-        console.log(`in handleActiveVariantChange`);
-        console.log(JSON.stringify(event.detail));
         this.itemVariants[this.activeVariantTabIndex] = event.detail;
         this.itemVariants = [...this.itemVariants];
-        console.log(JSON.stringify(this.itemVariants));
     }
 
     handleVariantDeleteClick(event) {
@@ -209,9 +105,6 @@ export default class IndicatorBuilder extends LightningElement {
         event.stopPropagation();
         let index = event.target.dataset.index;
         this.itemVariants.splice(index, 1);
-        // if (this.itemVariants.length === 0) {
-        //     this.addNewVariant('Indicator Variant 1');
-        // }        
         if (index <= this.activeVariantTabIndex) {
             this.activeVariantTabIndex--;
         }
@@ -224,8 +117,6 @@ export default class IndicatorBuilder extends LightningElement {
     }
 
     newIndicatorVariant(label, whenToDisplay, isExtension = true, isActive = true, iconSource = 'sldsIcon') {
-        let whenToDisplayOptions = this.whenToDisplayOptions;
-
         let newVariant = {
             label,
             whenToDisplay,
@@ -234,31 +125,9 @@ export default class IndicatorBuilder extends LightningElement {
             iconSource,
             hoverText: '',
             sourceValue: null,
-            // iconSourceIs: {},
-            // filterTypeIs: {},
-
-            // get iconSourceIs() {
-            //     return { [this.iconSource]: true }
-            // },
-            // get filterTypeIs() {
-            //     let matchingOption = whenToDisplayOptions.find(option => option.value == this.whenToDisplay);
-            //     return matchingOption ? { [matchingOption.showMatch]: true } : {};
-            // },
-            // get tabAnchorClass() {
-            //     return 'slds-vertical-tabs__nav-item' + (this.isActive ? ' slds-is-active' : '');
-            // },
-            // get tabPaneClass() {
-            //     return 'slds-vertical-tabs__content ' + (this.isActive ? 'slds-show' : 'slds-hide');
-            // },
-            // get showColourOption() {
-            //     return this.iconSourceIs.sldsIcon;
-            // },
-            // get showColourSelectors() {
-            //     return this.iconSourceIs.staticText || (this.showColourOption && this.overrideColours);
-            // }        
-                
+            backgroundColour: '',
+            foregroundColour: ''
         }
-        console.log(`newVariant = ${JSON.stringify(newVariant)}`);
         return newVariant;
     }
 
@@ -297,25 +166,4 @@ export default class IndicatorBuilder extends LightningElement {
         this.iconOptions = iconOptions;
         // this.iconOptions.length = 50;
     }
-
-    // processFieldTypeCategories() {
-    //     Object.entries(FIELD_TYPE_CATEGORIES)
-    // }
-
-    // populateWhenToDisplayOptions() {
-    //     this.whenToDisplayOptions = [
-    //         { label: 'Is not blank', value: 'notBlank', fieldTypes: [...this.fieldTypeCategories.TEXT, ...this.fieldTypeCategories.NUMERIC, ...this.fieldTypeCategories.DATE] },
-    //         { label: 'Is blank', value: 'isBlank', fieldTypes: [...this.fieldTypeCategories.TEXT, ...this.fieldTypeCategories.NUMERIC, ...this.fieldTypeCategories.DATE] },
-    //         { label: 'Contains text', value: 'containsText', fieldTypes: this.fieldTypeCategories.TEXT, showMatch: 'text' },
-    //         { label: 'Equals', value: 'equalsText', fieldTypes: this.fieldTypeCategories.TEXT, showMatch: 'text' },
-    //         { label: 'Equals', value: 'equalsNumber', fieldTypes: [...this.fieldTypeCategories.NUMERIC, ...this.fieldTypeCategories.DATE], showMatch: 'number' },
-    //         { label: 'Is greater than', value: 'greaterThan', fieldTypes: [...this.fieldTypeCategories.NUMERIC, ...this.fieldTypeCategories.DATE], showMatch: 'number' },
-    //         { label: 'Is less than', value: 'lessThan', fieldTypes: [...this.fieldTypeCategories.NUMERIC, ...this.fieldTypeCategories.DATE], showMatch: 'number' },
-    //         { label: 'Is within range', value: 'inRange', fieldTypes: [...this.fieldTypeCategories.NUMERIC, ...this.fieldTypeCategories.DATE], showMatch: 'numericRange' },
-    //         { label: 'Is true', value: 'isTrue', fieldTypes: this.fieldTypeCategories.BOOLEAN, showMatch: 'boolean' },
-    //         { label: 'Is false', value: 'isFalse', fieldTypes: this.fieldTypeCategories.BOOLEAN, showMatch: 'boolean' },
-    //         // { label: 'Custom formula', value: 'customFormula' },
-    //         // { label: 'Custom expression', value: 'customExpression' },
-    //     ];
-    // }
 }
