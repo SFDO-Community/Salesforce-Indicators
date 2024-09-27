@@ -6,6 +6,7 @@
     <description>Display at-a-glance visual representations of status, values, and key details about a record.</description>
     <targets>
         <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
@@ -19,6 +20,16 @@
                 <supportedFormFactor type="Large" />
                 <supportedFormFactor type="Small" />
             </supportedFormFactors>
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="objectApiName" type="String" label="Object Api Name" description="Object Type of the record" required="true" role="inputOnly"/>
+            <property name="recordId" type="String" label="Record Id" description="Id of Record to display Indicator's Bundle" required="true" role="inputOnly"/>
+            <property name="bundleName" type="String" label="Indicator Bundle" description="Choose the Indicator Bundle." role="inputOnly"/>
+            <property name="showTitle" type="Boolean" default="true" label="Display Title" description="Display the Indicator's Title on the component." role="inputOnly" />
+            <property name="showDescription" type="Boolean" default="true" label="Display Description" description="Display the Indicator's Description on the component." role="inputOnly"/>
+            <property name="indsSize" type="String" label="Indicator Size" placeholder="large" datasource="large,medium" description="Choose the Indicator Size." role="inputOnly"/>
+            <property name="indsShape" type="String" label="Indicator Shape" placeholder="base" datasource="base,circle" description="Choose the Indicator Shape." role="inputOnly"/>
+            <!-- <property name="showRefresh" type="Boolean" label="Show refresh button" description="Enable an admin button to refresh the values."/> -->
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

@@ -36,6 +36,9 @@ export default class IndicatorBundle extends LightningElement {
     showIllustration = false;
     illustration = {};
 
+    flowCheck1 = false;
+    flowCheck2 = false;
+
     connectedCallback(){
         if(!this.bundleName){
             this.errorOccurred = true;
@@ -147,11 +150,16 @@ export default class IndicatorBundle extends LightningElement {
                 this.bundleActive = false;
             }
         } else if (error) {
-            console.log('Error querying Bundle');
-            this.bundle = undefined;
-            this.bundleActive = false;
-            this.errorOccurred = true;
-            this.errorMessage = JSON.stringify(error);
+            if(!this.flowCheck1){
+                console.log('FLOW CHECK 1');
+                this.flowCheck1 = true;
+            } else {
+                console.log('Error querying Bundle');
+                this.bundle = undefined;
+                this.bundleActive = false;
+                this.errorOccurred = true;
+                this.errorMessage = JSON.stringify(error);
+            }
         }
     }
 
@@ -361,9 +369,15 @@ export default class IndicatorBundle extends LightningElement {
             this.results = matchingFields;
             // console.log('FieldValue => ', JSON.stringify(this.results));   // Retain for debug purposes
         } else if (error) {
-            console.log('Error!');
-            this.errorMessage = JSON.stringify(error);
-            this.errorOccurred = true;
+            if(!this.flowCheck2){
+                console.log('FLOW CHECK 2');
+                console.log(JSON.stringify(error));
+                this.flowCheck2 = true;
+            } else {
+                console.log('Error!');
+                this.errorMessage = JSON.stringify(error);
+                this.errorOccurred = true;    
+            }
         }
 
     }
