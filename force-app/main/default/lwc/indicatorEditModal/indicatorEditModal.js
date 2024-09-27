@@ -10,7 +10,7 @@ import Indicator_Item from "@salesforce/schema/Indicator_Item__mdt";
 import Indicator_Item_Extension from "@salesforce/schema/Indicator_Item_Extension__mdt";
 
 export default class IndicatorEditModal extends LightningModal {
-    componentConstructor;
+    /*componentConstructor;
     componentProperties = {};
 
     @api masterLabel;
@@ -35,6 +35,6 @@ export default class IndicatorEditModal extends LightningModal {
         import(`${this.componentToRender}`)
             .then(({ default: ctor }) => (this.componentConstructor = ctor))
             .catch((err) => console.log("Error importing component"));
-    }
+    }*/
 
 }

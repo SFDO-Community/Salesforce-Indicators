@@ -343,4 +343,9 @@ public with sharing class IndicatorController {
         return wrapper;
     }
 
+    @AuraEnabled(Cacheable=true)
+    public static MetadataUtility.indicatorBundle getIndicatorBundleWrapper(String QualifiedApiName) {
+        return new MetadataUtility.indicatorBundle(QualifiedApiName);
+    }
+
 }
