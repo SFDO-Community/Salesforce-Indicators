@@ -95,6 +95,7 @@ export default class Fsc_objectFieldSelector extends LightningElement {
             this.hideFieldPicklist = true;
         }
     }
+    _displayType = DISPLAY_TYPE_OPTIONS.BOTH.value;
 
     @api
     reportValidity() {
@@ -177,12 +178,10 @@ export default class Fsc_objectFieldSelector extends LightningElement {
     }
 
     handleFieldClearRequest() {
-        console.log(`in objectFieldSelector handleFieldClearRequest`);
         this.dispatchEvent(new CustomEvent('fieldclearrequest'));
     }
 
     handleObjectClearRequest() {
-        console.log(`in objectFieldSelector handleObjectClearRequest`);
         this.dispatchEvent(new CustomEvent('objectclearrequest'));
     }
 
@@ -197,8 +196,6 @@ export default class Fsc_objectFieldSelector extends LightningElement {
             detail.selectedObjects = this.selectedObjects;
             detail.selectedFields = this.selectedFields;
         }
-        console.log(`in objectFieldSelector dispatchValues: detail.selection lengths = ${detail.selectedObjects.length},${detail.selectedFields.length}`);
-      
         this.dispatchEvent(new CustomEvent('change', { detail }));
     }
 }
