@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>55.0</apiVersion>
-    <isExposed>false</isExposed>
+    <isExposed>true</isExposed>
+    <masterLabel>Indicator Item</masterLabel>
+    <description>Display at-a-glance visual representations of status, values, and key details about a record.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="indSize" type="String" label="Indicator Size" description="medium or large" default="large" role="inputOnly" />
+            <property name="indShape" type="String" label="Indicator Shape" description="base or circle" default="base" role="inputOnly" />
+            <property name="indText" type="String" label="Static Text" description="" role="inputOnly" />
+            <property name="indImage" type="String" label="Image" description="" role="inputOnly" />
+            <property name="indIcon" type="String" label="Icon" description="" role="inputOnly" />
+            <property name="indHoverText" type="String" label="Hover Text" description="" role="inputOnly" />
+            <property name="indBackgroundColor" type="String" label="Background Color" description="" role="inputOnly" />
+            <property name="indForegroundColor" type="String" label="Foreground Color" description="" role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>
