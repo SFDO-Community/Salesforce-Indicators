@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Indicator Bundle (from Field Value)</masterLabel>
+    <description>Display at-a-glance visual representations of status, values, and key details about a record.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="bundleName" type="String" label="Indicator Bundle" datasource="apex://IndicatorListBundleSelector" description="Choose the Indicator Bundle."/>
+            <property name="showTitle" type="Boolean" default="true" label="Display Title" description="Display the Indicator's Title on the component."/>
+            <property name="showDescription" type="Boolean" default="true" label="Display Description" description="Display the Indicator's Description on the component."/>
+            <property name="indsSize" type="String" label="Indicator Size" placeholder="large" datasource="large,medium" description="Choose the Indicator Size."/>
+            <property name="indsShape" type="String" label="Indicator Shape" placeholder="base" datasource="base,circle" description="Choose the Indicator Shape."/>
+            <property name="showRefresh" type="Boolean" label="Show refresh button" description="Enable an admin button to refresh the values."/>
+            <property name="mappedField" type="String" label="Mapped Id Field" description="Field API Name which holds a Record Id or Relationship Id" placeholder="Example: Source_Id__c, ParentId, or AccountId" required="true" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

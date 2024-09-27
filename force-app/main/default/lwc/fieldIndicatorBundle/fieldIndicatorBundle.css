@@ -1,0 +1,7 @@
+.fieldValueCard {
+    --slds-c-card-color-background: GhostWhite;
+    --slds-c-card-color-border: red;
+    --slds-c-card-footer-color-border: orange;
+    --slds-c-card-footer-sizing-border: 2px;
+    --slds-c-card-sizing-border: 5px; 
+}

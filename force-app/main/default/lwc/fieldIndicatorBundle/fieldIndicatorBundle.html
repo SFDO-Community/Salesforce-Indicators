@@ -1,0 +1,19 @@
+<template>
+    <lightning-card hide-header="true" class="fieldValueCard">
+        <c-indicator-bundle
+            bundle-name={bundleName}
+            record-id={targetIdValue}
+            object-api-name={objectApiName}
+            flexipage-region-width={flexipageRegionWidth}
+            show-description={showDescription}
+            show-title={showTitle}
+            inds-size={indsSize}
+            inds-shape={indsShape}
+            show-refresh={showRefresh}
+        ></c-indicator-bundle>
+        <div slot="footer">
+            <lightning-badge label="Based on field value"></lightning-badge>
+            <lightning-helptext content="This Indicator Bundle uses data from a value on this record."></lightning-helptext>
+        </div>
+    </lightning-card>
+</template>
