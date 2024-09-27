@@ -27,33 +27,39 @@
                     <lightning-spinner></lightning-spinner>
                 </template> -->
                 <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
-                    <template for:each={itemVariants} for:item="variant" for:index="index">
-                        <li class={variant.tabAnchorClass} title={variant.label} role="presentation" key={variant.label}
+                    <template for:each={tabs} for:item="tab" for:index="index">
+                        <li class={tab.tabClass} title={tab.variant.label} role="presentation" key={tab.index}
                             data-index={index} onclick={handleTabAnchorClick}>
                             <a class="slds-vertical-tabs__link slds-is-relative tabLink" href="#" role="tab"
                                 tabindex="0" aria-selected="true">
                                 <!-- <span class="slds-vertical-tabs__left-icon"> -->
 
-                                <c-indicator-bundle-item icon-source={variant.iconSource}
-                                    source-value={variant.sourceValue} ind-size="x-small"
-                                    ind-foreground-color={variant.foregroundColour}
-                                    ind-background-color={variant.backgroundColour} ind-hover-text={variant.hoverText}>
+                                <c-indicator-bundle-item icon-source={tab.variant.iconSource}
+                                    source-value={tab.variant.sourceValue} ind-size="x-small"
+                                    ind-foreground-color={tab.variant.foregroundColour}
+                                    ind-background-color={tab.variant.backgroundColour}
+                                    ind-hover-text={tab.variant.hoverText}>
                                 </c-indicator-bundle-item>
                                 <!-- </span> -->
-                                <span class="slds-truncate" title={variant.label}>{variant.label}</span>
-                                <lightning-button-icon icon-name="utility:delete" variant="bare"
-                                    class="deleteVariantButton" data-index={index}
-                                    onclick={handleVariantDeleteClick}></lightning-button-icon>
+                                <span class="slds-truncate" title={tab.variant.label}>{tab.variant.label}</span>
+                                <template lwc:if={tab.variant.isExtension}>
+                                    <lightning-button-icon icon-name="utility:delete" variant="bare"
+                                        class="deleteVariantButton" data-index={index}
+                                        onclick={handleVariantDeleteClick}></lightning-button-icon>
+                                </template>
                             </a>
                         </li>
                     </template>
-                    <lightning-button label="Add variant" icon-name="utility:add" variant="base" stretch
+                    <lightning-button label="Add extension" icon-name="utility:add" variant="base" stretch
                         onclick={handleAddVariantClick}></lightning-button>
                 </ul>
 
                 <template lwc:if={showActiveVariant}>
                     <div class="slds-vertical-tabs__content slds-show tabSet" role="tabpanel">
-                        <div class="slds-grid slds-gutters">
+                        <c-indicator-builder-extension indicator={indicator} active-variant={activeVariant}
+                            icon-options={iconOptions}
+                            onvariantchange={handleActiveVariantChange}></c-indicator-builder-extension>
+                        <!-- <div class="slds-grid slds-gutters">
                             <div class="slds-col slds-size_3-of-4 slds-grid slds-wrap slds-border_right">
                                 <div class="variantDesign slds-col slds-size_1-of-1 slds-p-bottom_x-small">
                                     <p class="slds-text-heading_small">Variant Design</p>
@@ -69,9 +75,6 @@
                                             <c-fsc_combobox label="Select Icon" options={iconOptions} icon-size="small"
                                                 value={activeVariant.sourceValue} data-property="sourceValue"
                                                 onchange={handleVariantPropertyChange}></c-fsc_combobox>
-                                            <!-- <c-icon-selector label="Select Icon" icon-name={activeVariant.sourceValue}
-                                            data-index={index} data-property="sourceValue"
-                                            oniconselection={handleVariantPropertyChange}></c-icon-selector> -->
                                         </template>
                                         <template lwc:elseif={activeVariant.iconSourceIs.url}>
                                             <lightning-input label="Enter URL" value={activeVariant.sourceValue}
@@ -139,7 +142,7 @@
                                     </c-indicator-bundle-item>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </template>
             </div>
