@@ -14,6 +14,7 @@ export default class IndicatorBundle extends LightningElement {
     @api flexipageRegionWidth;  // Width of the container on record page
     @api showDescription;
     @api showTitle;
+    @api titleStyle = 'Lightning Card';
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false;
@@ -58,6 +59,10 @@ export default class IndicatorBundle extends LightningElement {
         if(this.bundle){
             this.initCSSVariables();
         }
+    }
+
+    get isStandardUsage(){
+        return this.titleStyle == 'Lightning Card';
     }
 
     initCSSVariables() {
@@ -111,9 +116,16 @@ export default class IndicatorBundle extends LightningElement {
                     }
 
                     if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
-                        this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
+                        this.card.iconClass = 'cardIcon slds-var-m-right_x-small ';
                     } else {
                         this.card.iconClass = 'slds-var-m-right_x-small ';
+                    }
+                    
+                    if(this.isStandardUsage != true){
+                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
+                    } else {
+                        this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small';
+                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
                     }
 
                     // console.log('Card Data');
