@@ -67,7 +67,7 @@ export default class IndicatorBundle extends LightningElement {
 
     initCSSVariables() {
 
-        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
+        if(this.showTitle && this.isStandardUsage && (this.bundle.CardIconBackground || this.bundle.CardIconForeground)) {
             var css = this.template.querySelector(".cardIcon").style;
 
             css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
@@ -111,16 +111,12 @@ export default class IndicatorBundle extends LightningElement {
                         body: this.bundle.CardText
                     }
 
-                    if( this.showTitle || this.showDescription ){
-                        this.hasHeader = true;
+                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
+                        this.card.iconClass = 'cardIcon slds-media__figure slds-var-m-right_x-small ';
+                    } else {
+                        this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small ';
                     }
 
-                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
-                        this.card.iconClass = 'cardIcon slds-var-m-right_x-small ';
-                    } else {
-                        this.card.iconClass = 'slds-var-m-right_x-small ';
-                    }
-                    
                     if(this.isStandardUsage != true){
                         this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
                     } else {
