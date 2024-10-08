@@ -19,3 +19,6 @@ package.xml
 **/Contact/**
 
 **/unpackaged/**
+**/tsconfig.json
+
+**/*.ts
