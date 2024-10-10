@@ -92,6 +92,12 @@
                         </div>
                     </div>
                 </div>
+                <template lwc:if={displayFooter}>
+                    <footer class="slds-card__footer">
+                        <lightning-badge label={mappedField}></lightning-badge>
+                        <lightning-helptext content={targetMessage}></lightning-helptext>
+                    </footer>
+                </template>
             </article>
         </template>
     </template>
