@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>55.0</apiVersion>
-    <isExposed>false</isExposed>
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Indicator Item</masterLabel>
+    <description>Display at-a-glance visual representations of status, values, and key details about a record.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="indSize" type="String" label="Indicator Size" description="Enter size:  medium or large" default="large" role="inputOnly" required="true"/>
+            <property name="indShape" type="String" label="Indicator Shape" description="Enter shape:  base or circle" default="base" role="inputOnly" required="true"/>
+            <property name="indText" type="String" label="Static Text" description="(Optional) The Static Text used when being used instead of Field, Icon, or Image URL. NOTE: Displays first 3 characters / emojis" role="inputOnly" />
+            <property name="indImage" type="String" label="Image" description="(Optional) The URL to the image of the Indicator when being used instead of Field, Text, or Icon." role="inputOnly" />
+            <property name="indIcon" type="String" label="Icon" description="(Optional) The Lightning Design System icon from https://lightningdesignsystem.com/icons/ when being used instead of Field, Text, or Image URL." role="inputOnly" />
+            <property name="indHoverText" type="String" label="Hover Text" description="The hover text of the Indicator." role="inputOnly" />
+            <property name="indBackgroundColor" type="String" label="Background Color" description="(Optional) Override the default background of the Indicator's Salesforce Icon." role="inputOnly" />
+            <property name="indForegroundColor" type="String" label="Foreground Color" description="(Optional) Override the default foreground of the Indicator's Salesforce Icon." role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>
