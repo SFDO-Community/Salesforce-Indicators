@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>56.0</apiVersion>
-    <description>Indicator Builder</description>
-    <isExposed>false</isExposed>
-    <masterLabel>Indicator Builder</masterLabel>
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__Tab</target>
+    </targets>
 </LightningComponentBundle>
