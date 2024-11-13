@@ -54,4 +54,8 @@
         <field>%%%NAMESPACE%%%Static_Text__c</field>
         <value xsi:type="xsd:string">US</value>
     </values>
+    <values>
+        <field>%%%NAMESPACE%%%Text_Operator__c</field>
+        <value xsi:type="xsd:string">Equals</value>
+    </values>
 </CustomMetadata>

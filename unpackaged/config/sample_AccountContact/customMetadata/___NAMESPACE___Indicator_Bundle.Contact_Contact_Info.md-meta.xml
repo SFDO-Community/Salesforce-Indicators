@@ -24,7 +24,7 @@
     </values>
     <values>
         <field>%%%NAMESPACE%%%Card_Title__c</field>
-        <value xsi:type="xsd:string">Contact Key Details</value>
+        <value xsi:type="xsd:string">Contact Missing Key Details</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Description__c</field>
