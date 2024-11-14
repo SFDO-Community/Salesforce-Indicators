@@ -131,4 +131,10 @@ export default class ConfigurationManager extends LightningElement {
         this.openModal(event.detail);
     }
 
+    handleEditBundle(event) {
+        editIndicatorBundleModal.open().then((result) => {
+                    console.log(result);
+                });
+    }
+
 }
