@@ -30,15 +30,10 @@
                 </lightning-layout-item>
 
                 <lightning-layout-item padding="horizontal-small" size=12>
-                    <lightning-input
-                            data-field-api-name={bundleInfo.sObject_FIELD.fieldApiName}
-                            required={bundleInfo.sObject_FIELD.required}
-                            type={bundleInfo.sObject_FIELD.dataType}
-                            label={bundleInfo.sObject_FIELD.label}
-                            value={bundleInfo.sObject_FIELD.value}
-                            field-level-help={bundleInfo.sObject_FIELD.inlineHelpText}
-                            onchange={handleChange}>
-                    </lightning-input>
+                    <c-fsc_object-selector
+                    onchange={handleChange}
+                    data-field-api-name={bundleInfo.sObject_FIELD.fieldApiName}>
+                    </c-fsc_object-selector>
                 </lightning-layout-item>
 
                 <lightning-layout-item padding="horizontal-small" size=4>
