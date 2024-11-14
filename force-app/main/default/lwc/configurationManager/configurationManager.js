@@ -7,8 +7,8 @@ import getIndicatorBundleWrapper from '@salesforce/apex/IndicatorController.getI
 
 import { refreshApex } from '@salesforce/apex';
 
-import IndicatorEditModal from "c/indicatorEditModal";
 import indicatorBuilderModal from 'c/indicatorBuilderModal';
+import editIndicatorBundleModal from 'c/editIndicatorBundleModal';
 
 import Indicator_Bundle from "@salesforce/schema/Indicator_Bundle__mdt";
 import Indicator_Item from "@salesforce/schema/Indicator_Item__mdt";
@@ -95,16 +95,12 @@ export default class ConfigurationManager extends LightningElement {
 
     handleNewClick(event) {
         const developerName = (event.currentTarget.dataset || {}).developerName;
-
+        console.log(developerName);
         /**This can be removed after proof of concept**/
         switch (developerName) {
-            case Indicator_Bundle.objectApiName.replace('__c',''):
-                IndicatorEditModal.open({
-                    masterLabel:event.currentTarget.label,
-                    objectApiName:Indicator_Bundle.objectApiName,
-                    isNew:true,
-                    size:'full'
-                }).then((result) => {
+            case Indicator_Bundle.objectApiName.replace('__c', ''):
+                console.log('here');
+                editIndicatorBundleModal.open().then((result) => {
                     console.log(result);
                 });
                 break;
