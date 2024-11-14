@@ -177,9 +177,9 @@ export default class EditIndicatorBundle extends LightningElement {
 
 
     saveMetaDataRecord() {
-        deployIndicatorBundles({wrapper: [this.indicator_Bundle]})
+        deployIndicatorBundles({ wrapper: JSON.stringify({ 'indicatorBundle': this.indicator_Bundle }) })
             .then(result => {
-                console.log('deploymentId = result');
+                console.log('deploymentId = ' + result);
             })
             .catch(error => {
                 console.log(error);

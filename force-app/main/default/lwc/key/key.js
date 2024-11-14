@@ -278,11 +278,9 @@ export default class Key extends LightningElement {
     }
 
     handleClick(event){
-        console.log(event.target.name);
-        const editindicatorEvent = new CustomEvent('editindicator', {
+        this.dispatchEvent(new CustomEvent(event.target.dataset.eventType, {
             detail: event.target.name
-        });
-        this.dispatchEvent(editindicatorEvent);
+        }));
         //window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
     }
 
