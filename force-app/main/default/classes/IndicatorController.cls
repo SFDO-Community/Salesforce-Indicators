@@ -92,6 +92,8 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String ContainsText {get; set;}
         @AuraEnabled
+        public Date DateToCompare {get; set;}
+        @AuraEnabled
         public String TextOperator {get; set;}
         @AuraEnabled
         public Decimal Maximum {get; set;}
@@ -229,6 +231,11 @@ public with sharing class IndicatorController {
                         extension.ExtensionId = itemExtension.Id;
                         extension.BackgroundColor = itemExtension.Icon_Background__c;
                         extension.ForegroundColor = itemExtension.Icon_Foreground__c;
+                        try {
+                            if (String.isNotBlank(itemExtension.Contains_Text__c)) {
+                                extension.DateToCompare = DateUtility.convertRelativeDate(itemExtension.Contains_Text__c);
+                            }
+                        } catch (DateUtility.DateConversionException e) {/**Reaching here just means contains text is not a relative date**/}
         
                         item.Extensions.add(extension);
                     }
@@ -329,6 +336,12 @@ public with sharing class IndicatorController {
                                 extension.ExtensionId = itemExtension.Id;
                                 extension.BackgroundColor = itemExtension.Icon_Background__c;
                                 extension.ForegroundColor = itemExtension.Icon_Foreground__c;
+                                try {
+                                    if (String.isNotBlank(itemExtension.Contains_Text__c)) {
+                                        extension.DateToCompare = DateUtility.convertRelativeDate(itemExtension.Contains_Text__c);
+                                    }
+                                } catch (DateUtility.DateConversionException e) {/**Reaching here just means contains text is not a relative date**/}
+                
                 
                                 item.Extensions.add(extension);
                             }
