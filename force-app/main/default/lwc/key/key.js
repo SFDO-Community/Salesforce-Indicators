@@ -43,8 +43,6 @@ export default class Key extends LightningElement {
         
         // this.indicatorItems = this.bundle.Items;
 
-        console.log(JSON.parse(JSON.stringify(this.indicatorItems)));
-
         this.bundleDetails = {
             Title: this.bundle.CardTitle,
             Body: this.bundle.CardText,
@@ -278,12 +276,7 @@ export default class Key extends LightningElement {
     }
 
     handleClick(event){
-        console.log(event.target.name);
-        const editindicatorEvent = new CustomEvent('editindicator', {
-            detail: event.target.name
-        });
-        this.dispatchEvent(editindicatorEvent);
-        //window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
+        window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
     }
 
     get isManageEnabled() {

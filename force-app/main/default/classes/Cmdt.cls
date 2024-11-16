@@ -5,19 +5,19 @@ public with sharing class Cmdt {
         
         // Gather all active Bundles and put them into a Map (key: DeveloperName; Bundle)
         for( Indicator_Bundle__mdt bundle : [
-                SELECT Id, DeveloperName, MasterLabel, Label, QualifiedApiName,
-                        Active__c,
-                        Card_Icon__c,
-                        Card_Icon_Background__c,
-                        Card_Icon_Foreground__c,
-                        Card_Text__c,
-                        Card_Title__c,
-                        Description__c,
-                        sObject__c,
-                        sObject__r.QualifiedApiName,
-                        sObject__r.Label
-                FROM Indicator_Bundle__mdt
-                WHERE Delete__c != TRUE
+            SELECT Id, DeveloperName, MasterLabel, Label,
+                Active__c, 
+                Card_Icon__c, 
+                Card_Icon_Background__c, 
+                Card_Icon_Foreground__c, 
+                Card_Text__c, 
+                Card_Title__c, 
+                Description__c,
+                sObject__c, 
+                sObject__r.QualifiedApiName, 
+                sObject__r.Label
+            FROM Indicator_Bundle__mdt
+            ORDER BY Label
         ] ) {
             setBundle(bundle);
         }
@@ -25,32 +25,31 @@ public with sharing class Cmdt {
         // Gather all active Items and put them into a Map (key: Developername; Item)
         // Using SOQL because of parent-related values AND Advanced_Field__c is long text.
         for( Indicator_Item__mdt item : [
-                SELECT Id, DeveloperName, MasterLabel, Label, QualifiedApiName,
-                        Active__c,
-                        Advanced_Field__c,
-                        Advanced_Field_Label__c,
-                        Display_Multiple__c,
-                        Empty_Static_Text_Behavior__c,
-                        Field__c, Field__r.QualifiedApiName,
-                        Hover_Text__c,
-                        Icon_Value__c,
-                        Image__c,
-                        Inverse_Hover_Text__c,
-                        Inverse_Icon_Value__c,
-                        Inverse_Image__c,
-                        Inverse_Static_Text__c,
-                        Show_False_or_Blank__c,
-                        sObject__c, sObject__r.QualifiedApiName,
-                        Static_Text__c,
-                        Zero_Behavior__c,
-                        Icon_Background__c,
-                        Icon_Foreground__c,
-                        Inverse_Icon_Background__c,
-                        Inverse_Icon_Foreground__c,
-                        Description__c
-                FROM Indicator_Item__mdt
-                WHERE Delete__c != TRUE
-                // WHERE Active__c = TRUE
+            SELECT Id, DeveloperName, MasterLabel,
+                Active__c,
+                Advanced_Field__c,
+                Advanced_Field_Label__c,
+                Display_Multiple__c,
+                Empty_Static_Text_Behavior__c,
+                Field__c, Field__r.QualifiedApiName,
+                Hover_Text__c,
+                Icon_Value__c,
+                Image__c,
+                Inverse_Hover_Text__c,
+                Inverse_Icon_Value__c,
+                Inverse_Image__c,
+                Inverse_Static_Text__c,
+                Show_False_or_Blank__c,
+                sObject__c, sObject__r.QualifiedApiName,
+                Static_Text__c,
+                Zero_Behavior__c,
+                Icon_Background__c,
+                Icon_Foreground__c,
+                Inverse_Icon_Background__c,
+                Inverse_Icon_Foreground__c,
+                Description__c
+            FROM Indicator_Item__mdt
+            // WHERE Active__c = TRUE
         ]){
             setItem(item);
         }
@@ -58,15 +57,13 @@ public with sharing class Cmdt {
         // Gather all active Bundle Items (Bundle and Item are active) and put them into a Map (key: Bundle DeveloperName; List of BundleItems)
         // Using SOQL because of the Order By clause rather than creating a custom sort method.
         for( Indicator_Bundle_Item__mdt bundleItem : [
-                SELECT Id, DeveloperName, QualifiedApiName, MasterLabel, Label,
-                        Indicator_Bundle__c, Indicator_Bundle__r.DeveloperName, Indicator_Bundle__r.QualifiedApiName,
-                        Indicator_Item__c, Indicator_Item__r.DeveloperName, Indicator_Item__r.QualifiedApiName,
-                        Order__c
-                FROM Indicator_Bundle_Item__mdt
-                WHERE Delete__c != TRUE
-                // WHERE Indicator_Bundle__r.Active__c = TRUE
-                // AND Indicator_Item__r.Active__c = TRUE
-                ORDER BY Order__c
+            SELECT Indicator_Bundle__c, Indicator_Bundle__r.DeveloperName,
+                Indicator_Item__c, Indicator_Item__r.DeveloperName,
+                Order__c
+            FROM Indicator_Bundle_Item__mdt
+            // WHERE Indicator_Bundle__r.Active__c = TRUE
+            // AND Indicator_Item__r.Active__c = TRUE
+            ORDER BY Order__c
         ]){
             setBundleItem(bundleItem);
         }
@@ -74,28 +71,25 @@ public with sharing class Cmdt {
         // Gather all active Item Extensions and put them into a Map (key: Indicator Item; List of Extensions)
         // Using SOQL because of the Order By clause rather than creating a custom sort method.
         for(Indicator_Item_Extension__mdt itemExtension : [
-                SELECT Id, DeveloperName, QualifiedApiName, Label, MasterLabel,
-                        Active__c,
-                        Contains_Text__c,
-                        Text_Operator__c,
-                        Hover_Text__c,
-                        Icon_Value__c,
-                        Image__c,
-                        Indicator_Item__c,
-                        Indicator_Item__r.DeveloperName,
-                        Indicator_Item__r.QualifiedApiName,
-                        Maximum__c,
-                        Minimum__c,
-                        Priority__c,
-                        Static_Text__c,
-                        Icon_Background__c,
-                        Icon_Foreground__c,
-                        Description__c
-                FROM Indicator_Item_Extension__mdt
-                WHERE Delete__c != TRUE
-                // WHERE Active__c = TRUE
-                // AND Indicator_Item__r.Active__c = TRUE
-                ORDER BY Indicator_Item__c, Priority__c DESC, MasterLabel
+            SELECT Id, Active__c,
+                Contains_Text__c,
+                Text_Operator__c,
+                Hover_Text__c,
+                Icon_Value__c,
+                Image__c,
+                Indicator_Item__c,
+                Indicator_Item__r.DeveloperName,
+                Maximum__c,
+                Minimum__c,
+                Priority__c,
+                Static_Text__c,
+                Icon_Background__c,
+                Icon_Foreground__c,
+                Description__c
+            FROM Indicator_Item_Extension__mdt
+            // WHERE Active__c = TRUE
+            // AND Indicator_Item__r.Active__c = TRUE
+            ORDER BY Indicator_Item__c, Priority__c DESC, MasterLabel
         ]){
             setItemExtension(itemExtension);
         }
@@ -150,7 +144,7 @@ public with sharing class Cmdt {
     }
 
     public static List<Indicator_Item__mdt> getAllOrphanItems(){
-
+        
         List<Indicator_Item__mdt> orphanItems = new List<Indicator_Item__mdt>();
 
         for(String itemName : itemsByName.keyset()){
@@ -166,28 +160,28 @@ public with sharing class Cmdt {
         if(bundlesByName.containsKey(bundleDevName))
             return bundlesByName.get(bundleDevName);
         else
-                return new Indicator_Bundle__mdt();
+            return new Indicator_Bundle__mdt();
     }
 
     public static Indicator_Item__mdt getItem(String itemDevName){
         if(itemsByName.containsKey(itemDevName))
             return itemsByName.get(itemDevName);
         else
-                return new Indicator_Item__mdt();
+            return new Indicator_Item__mdt();
     }
 
     public static List<Indicator_Bundle_Item__mdt> getBundleItems(String bundleDevName){
         if(bundleItemsByBundle.containsKey(bundleDevname))
             return bundleItemsByBundle.get(bundleDevName);
-        else
-                return new List<Indicator_Bundle_Item__mdt>();
+        else 
+            return new List<Indicator_Bundle_Item__mdt>();
     }
 
     public static List<Indicator_Item_Extension__mdt> getExtensionsForItem(String itemDevName){
         if(extensionsByItem.containsKey(itemDevName))
             return extensionsByItem.get(itemDevName);
         else
-                return new List<Indicator_Item_Extension__mdt>();
+            return new List<Indicator_Item_Extension__mdt>();
     }
 
     // Static variables used across methods.

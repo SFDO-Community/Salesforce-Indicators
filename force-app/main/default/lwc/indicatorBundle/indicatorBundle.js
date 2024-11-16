@@ -1,5 +1,6 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { refreshApex } from '@salesforce/apex';
 import KeyModal from 'c/indicatorBundleKey';
 
@@ -14,9 +15,17 @@ export default class IndicatorBundle extends LightningElement {
     @api flexipageRegionWidth;  // Width of the container on record page
     @api showDescription;
     @api showTitle;
+    @api titleStyle = 'Lightning Card';
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false;
+    @api mappedField = ''; // API Field Name for the record
+    @api showFooter = false;
+
+    targetIdField;     // Syntax of template field:  sObject.Field_Name__c
+    targetIdValue;
+    targetMessage;
+
     bundleActive = true;    // Set default active status
     hasHeader = false;      // Hide header by default
 
@@ -34,9 +43,16 @@ export default class IndicatorBundle extends LightningElement {
     errorOccurred = false;
     errorMessage = '';
     showIllustration = false;
-    illustration = {};
+    @track illustration = {};
 
     connectedCallback(){
+        if(this.mappedField == null || this.mappedField.trim() == ""){
+            this.targetIdValue = this.recordId;
+        } else {
+            this.targetIdField = this.objectApiName + '.' + this.mappedField;
+            console.log(this.targetIdField);
+        }
+
         if(!this.bundleName){
             this.errorOccurred = true;
             this.showIllustration = true;
@@ -47,7 +63,37 @@ export default class IndicatorBundle extends LightningElement {
             }
         } else {
             this.showIllustration=false;
-            this.illustration = {};
+            // this.illustration = {};
+        }
+    }
+
+    // Check the record for an existing field value in order to initialize it.
+    @wire(getRecord, { recordId: '$recordId', fields: '', optionalFields: '$targetIdField' }) 
+    record ({error, data}) {
+        if(error) {
+            console.log('ERROR');
+            this.errorOccurred = true;
+            this.showIllustration = true;
+            this.illustration = {
+                heading : 'Errors Using the Mapped Field',
+                messageBody: 'Check the API Name for the custom field API name: ' + this.mappedField,
+                imageName: 'custom:setup'
+            }
+        } else if (data) {
+            if( JSON.stringify(data.fields) === '{}' ) {
+                this.errorOccurred = true;
+                this.showIllustration = true;
+                this.illustration = {
+                    heading : 'Problem Using Mapped Field',
+                    messageBody: 'Check the case-sensitive API Name for the mapped field API name: ' + this.mappedField,
+                    imageName: 'custom:setup'
+                };
+            } else {
+                this.targetMessage = 'This Indicator Bundle displays indicators based on the record id (' + data.fields[this.mappedField].value + ') in the mapped field \"' + this.mappedField + '\" from the ' + data.apiName + ' object.';
+                this.targetIdValue = getFieldValue(data, this.targetIdField);
+                this.showIllustration=false;
+                this.illustration = {};
+            }
         }
     }
 
@@ -57,9 +103,17 @@ export default class IndicatorBundle extends LightningElement {
         }
     }
 
+    get isStandardUsage(){
+        return this.titleStyle == 'Lightning Card';
+    }
+
+    get displayFooter() {
+        return this.showFooter && (this.mappedField != null && this.mappedField.trim() != "");
+    }
+
     initCSSVariables() {
 
-        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
+        if(this.showTitle && this.isStandardUsage && (this.bundle.CardIconBackground || this.bundle.CardIconForeground)) {
             var css = this.template.querySelector(".cardIcon").style;
 
             css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
@@ -103,14 +157,17 @@ export default class IndicatorBundle extends LightningElement {
                         body: this.bundle.CardText
                     }
 
-                    if( this.showTitle || this.showDescription ){
-                        this.hasHeader = true;
+                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
+                        this.card.iconClass = 'cardIcon slds-media__figure slds-var-m-right_x-small ';
+                    } else {
+                        this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small ';
                     }
 
-                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
-                        this.card.iconClass = 'cardIcon slds-var-m-right_xx-small ';
+                    if(this.isStandardUsage != true){
+                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
                     } else {
-                        this.card.iconClass = 'slds-var-m-right_x-small ';
+                        this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small';
+                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
                     }
 
                     // console.log('Card Data');
@@ -161,9 +218,10 @@ export default class IndicatorBundle extends LightningElement {
         refreshApex(this.wiredData);
     }
  
-    // Get the field values for the current record based on the configured fields in CMDT
+    // Get the field values for the target record based on the configured fields in CMDT
     // Using 'optionalFields' ensures that if a user does not have access to a field, the indicator will not show.
-    @wire(getRecord, { recordId: '$recordId', optionalFields: '$apiFieldnameDefinitions' })
+    // TODO: Add fields parameter to retrieve the record name for use when the targetIdValue is for another record.
+    @wire(getRecord, { recordId: '$targetIdValue', optionalFields: '$apiFieldnameDefinitions' })
     wiredRecord(result) {
 
         const {error,data} = result;
@@ -335,21 +393,21 @@ export default class IndicatorBundle extends LightningElement {
                                 //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
                                 ...dataValue || dataValue === 0 ? {
                                     ...matchedExtension ? {
-                                            fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.toUpperCase().substring(0,3) : ''
+                                            fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.substring(0,3) : ''
                                         } : {
                                         ...dataValue && item.TextValue ? {
-                                                fTextShown : item.TextValue.toUpperCase().substring(0,3) 
+                                                fTextShown : item.TextValue.substring(0,3) 
                                             } : {
                                                 ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
                                                         fTextShown : '' 
                                                     } : {
-                                                        fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).toUpperCase().substring(0,3)
+                                                        fTextShown : typeof(dataValue) === 'boolean' ? '' : String(dataValue).substring(0,3)
                                                     }
                                             }
                                         }
                                     } : {
                                     ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                            fTextShown : item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : ''
+                                            fTextShown : item.FalseTextValue ? item.FalseTextValue.substring(0,3) : ''
                                         } : {
                                             fTextShown : '' 
                                         }

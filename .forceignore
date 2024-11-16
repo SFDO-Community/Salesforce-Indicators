@@ -17,3 +17,8 @@ package.xml
 **/settings/**
 **/Account/**
 **/Contact/**
+
+**/unpackaged/**
+**/tsconfig.json
+
+**/*.ts

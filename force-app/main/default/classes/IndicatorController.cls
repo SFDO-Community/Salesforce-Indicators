@@ -342,7 +342,6 @@ public with sharing class IndicatorController {
                                     }
                                 } catch (DateUtility.DateConversionException e) {/**Reaching here just means contains text is not a relative date**/}
                 
-                
                                 item.Extensions.add(extension);
                             }
 
@@ -354,11 +353,6 @@ public with sharing class IndicatorController {
         } 
 
         return wrapper;
-    }
-
-    @AuraEnabled(Cacheable=true)
-    public static MetadataUtility.indicatorBundle getIndicatorBundleWrapper(String QualifiedApiName) {
-        return new MetadataUtility.indicatorBundle(QualifiedApiName);
     }
 
 }
