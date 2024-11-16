@@ -254,7 +254,7 @@ private class DateUtilityTests {
             String dayStr = String.valueOf(dayCount);
             Date lastN = DateUtility.convertAltRelativeDate('LAST_N_DAYS:' + dayStr);
             Date nextN = DateUtility.convertAltRelativeDate('NEXT_N_DAYS:' + dayStr);
-            Date nAgo = DateUtility.convertAltRelativeDate('N_DAYS_AGO' + dayStr);
+            Date nAgo = DateUtility.convertAltRelativeDate('N_DAYS_AGO:' + dayStr);
 
             System.Assert.areEqual(Date.today().addDays(dayCount * -1), lastN);
             System.Assert.areEqual(Date.today().addDays(dayCount), nextN);
