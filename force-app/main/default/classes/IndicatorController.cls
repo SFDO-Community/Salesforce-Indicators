@@ -84,6 +84,14 @@ public with sharing class IndicatorController {
         public String InverseBackgroundColor {get; set;}
         @AuraEnabled
         public String InverseForegroundColor {get; set;}
+        @AuraEnabled
+        public String BadgeTextColor {get; set;}
+        @AuraEnabled
+        public String BadgeIconPosition {get; set;}
+        @AuraEnabled
+        public String FalseBadgeTextColor {get; set;}
+        @AuraEnabled
+        public String FalseBadgeIconPosition {get; set;}
     }
 
     public class IndicatorExtension {
@@ -115,6 +123,10 @@ public with sharing class IndicatorController {
         public String BackgroundColor {get; set;}
         @AuraEnabled
         public String ForegroundColor {get; set;}
+        @AuraEnabled
+        public String BadgeTextColor {get; set;}
+        @AuraEnabled
+        public String BadgeIconPosition {get; set;}
     }
     
     @AuraEnabled
@@ -206,6 +218,10 @@ public with sharing class IndicatorController {
                 item.ForegroundColor = indicatorItem.Icon_Foreground__c;
                 item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
                 item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
+                item.BadgeTextColor = indicatorItem.Badge_Text_Color__c;
+                item.BadgeIconPosition = indicatorItem.Badge_Icon_Position__c;
+                item.FalseBadgeTextColor = indicatorItem.Inverse_Badge_Text_Color__c;
+                item.FalseBadgeIconPosition = indicatorItem.Inverse_Badge_Icon_Position__c;
                 
                 List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
 
@@ -229,7 +245,8 @@ public with sharing class IndicatorController {
                         extension.ExtensionId = itemExtension.Id;
                         extension.BackgroundColor = itemExtension.Icon_Background__c;
                         extension.ForegroundColor = itemExtension.Icon_Foreground__c;
-        
+                        extension.BadgeTextColor = itemExtension.Badge_Text_Color__c;
+                        extension.BadgeIconPosition = itemExtension.Badge_Icon_Position__c;
                         item.Extensions.add(extension);
                     }
 
@@ -306,6 +323,10 @@ public with sharing class IndicatorController {
                         item.ForegroundColor = indicatorItem.Icon_Foreground__c;
                         item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
                         item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
+                        item.BadgeTextColor = indicatorItem.Badge_Text_Color__c;
+                        item.BadgeIconPosition = indicatorItem.Badge_Icon_Position__c;
+                        item.FalseBadgeTextColor = indicatorItem.Inverse_Badge_Text_Color__c;
+                        item.FalseBadgeIconPosition = indicatorItem.Inverse_Badge_Icon_Position__c;
                         
                         List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
 
@@ -329,6 +350,8 @@ public with sharing class IndicatorController {
                                 extension.ExtensionId = itemExtension.Id;
                                 extension.BackgroundColor = itemExtension.Icon_Background__c;
                                 extension.ForegroundColor = itemExtension.Icon_Foreground__c;
+                                extension.BadgeTextColor = itemExtension.Badge_Text_Color__c;
+                                extension.BadgeIconPosition = itemExtension.Badge_Icon_Position__c;
                 
                                 item.Extensions.add(extension);
                             }

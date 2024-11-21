@@ -16,6 +16,7 @@ export default class IndicatorBundle extends LightningElement {
     @api showDescription;
     @api showTitle;
     @api titleStyle = 'Lightning Card';
+    @api indsStyle = 'avatar';
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false;
@@ -133,7 +134,7 @@ export default class IndicatorBundle extends LightningElement {
         const { data, error } = result;
         if(data) {
             if(Object.keys(data).length) {  // Used to confirm that values were returned, rather than an empty object
-                // console.dir(data);   // Retain for debug purposes
+                console.dir(data);   // Retain for debug purposes
 
                 this.bundle = data;
                 this.bundleActive = true;
@@ -237,7 +238,7 @@ export default class IndicatorBundle extends LightningElement {
                     let anyMatch = false;
                     if(item.IsActive){
                         
-                        // console.dir(item);   // Retain for debug purposes
+                        console.dir(item);   // Retain for debug purposes
                                         
                         let dataField = this.objectApiName + "." + item.FieldApiName;
                         // console.log('DataField',dataField);   // Retain for debug purposes
@@ -388,6 +389,16 @@ export default class IndicatorBundle extends LightningElement {
                                     } : {
                                         fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
                                     },
+                                ...dataValue || dataValue === 0 ? {
+                                        fTextColor : matchedExtension ? matchedExtension.BadgeTextColor : item.BadgeTextColor
+                                    } : {
+                                        fTextColor: item.DisplayFalse? item.FalseBadgeTextColor : item.BadgeTextColor
+                                    },
+                                ...dataValue || dataValue === 0 ? {
+                                        fIconPosition : matchedExtension ? matchedExtension.BadgeIconPosition : item.BadgeIconPosition
+                                    } : {
+                                        fIconPosition: item.DisplayFalse? item.FalseBadgeIconPosition : item.BadgeIconPosition
+                                    },
                                 //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
                                 //If the Icon Text is entered then show that
                                 //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
@@ -396,7 +407,7 @@ export default class IndicatorBundle extends LightningElement {
                                             fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.substring(0,3) : ''
                                         } : {
                                         ...dataValue && item.TextValue ? {
-                                                fTextShown : item.TextValue.substring(0,3) 
+                                                fTextShown : this.indsStyle === 'avatar' ? item.TextValue.substring(0,3) : item.TextValue
                                             } : {
                                                 ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
                                                         fTextShown : '' 
@@ -407,7 +418,7 @@ export default class IndicatorBundle extends LightningElement {
                                         }
                                     } : {
                                     ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                            fTextShown : item.FalseTextValue ? item.FalseTextValue.substring(0,3) : ''
+                                            fTextShown : item.FalseTextValue ? this.indsStyle === 'avatar' ? item.FalseTextValue.substring(0,3) : item.FalseTextValue : ''
                                         } : {
                                             fTextShown : '' 
                                         }
@@ -438,6 +449,14 @@ export default class IndicatorBundle extends LightningElement {
         // if modal closed with X button, promise returns result = 'undefined'
         // if modal closed with OK button, promise returns result = 'okay'
         console.log(result);
+    }
+
+    get showAvatarStyle(){
+        return this.indsStyle === 'avatar';
+    }
+
+    get showBadgeStyle(){
+        return this.indsStyle === 'badge';
     }
 
 }

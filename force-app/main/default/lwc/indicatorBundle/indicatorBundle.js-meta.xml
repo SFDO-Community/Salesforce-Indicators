@@ -9,12 +9,13 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
-            <property name="bundleName" type="String" label="Indicator Bundle" datasource="apex://inds.IndicatorListBundleSelector" description="Choose the Indicator Bundle."/>
+            <property name="bundleName" type="String" label="Indicator Bundle" datasource="apex://IndicatorListBundleSelector" description="Choose the Indicator Bundle."/>
             <property name="titleStyle" type="String" label="Title Style" placeholder="Lightning Card" datasource="Lightning Card,Dynamic Forms" description="Choose the Title Style: Standard Lightning Card or a style to match Dynamic Forms."/>
             <property name="showTitle" type="Boolean" default="true" label="Display Title" description="Display the Indicator's Title on the component."/>
             <property name="showDescription" type="Boolean" default="true" label="Display Description" description="Display the Indicator's Description on the component."/>
-            <property name="indsSize" type="String" label="Indicator Size" placeholder="large" datasource="large,medium" description="Choose the Indicator Size."/>
-            <property name="indsShape" type="String" label="Indicator Shape" placeholder="base" datasource="base,circle" description="Choose the Indicator Shape."/>
+            <property name="indsStyle" type="String" label="Indicator Style" placeholder="avatar" datasource="avatar,badge" description="Choose the Indicators Style."/>
+            <property name="indsSize" type="String" label="Avatar Indicator Size" placeholder="large" datasource="large,medium" description="Choose the Indicator Size."/>
+            <property name="indsShape" type="String" label="Avatar Indicator Shape" placeholder="base" datasource="base,circle" description="Choose the Indicator Shape."/>
             <property name="showRefresh" type="Boolean" label="Show refresh button" description="Enable an admin button to refresh the values."/>
             <property name="mappedField" type="String" label="(Optional) Mapped Id Field" description="(Optional) Instead of using the current Record Id, provide the API Name of a field (Case Sensitive) on this object which holds a Record Id or Relationship Id to use that value." placeholder="Example: Source_Id__c, ParentId, or AccountId" />
             <property name="showFooter" type="Boolean" label="Show footer when using Mapped Id Field" description="Enable a footer to show what mapped field is being used."/>
