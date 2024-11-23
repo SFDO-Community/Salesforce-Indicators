@@ -27,10 +27,10 @@ export default class IndicatorBundleBadge extends LightningElement {
 
         if(this.indBackgroundColor || this.indForegroundColor || this.indTextColor){
             var css = this.template.querySelector(".indicatorBadge").style;
-    
-            css.setProperty('--backgroundColor', this.indBackgroundColor);
-            css.setProperty('--foregroundColor', this.indForegroundColor);
-            css.setProperty('--textColor', this.indTextColor);
+
+            css.setProperty('--backgroundColor', this.indBackgroundColor ? this.indBackgroundColor : '#f3f3f3');
+            css.setProperty('--foregroundColor', this.indForegroundColor ? this.indForegroundColor : '#747474');
+            css.setProperty('--textColor', this.indTextColor ? this.indText : '#181818');
         }
 
     }

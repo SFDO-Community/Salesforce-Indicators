@@ -317,7 +317,9 @@ export default class IndicatorBundle extends LightningElement {
                                                 "HoverValue" : extension.ExtensionHoverText,
                                                 "Priority" : extension.PriorityOrder,
                                                 "IconBackground" : extension.BackgroundColor,
-                                                "IconForeground" : extension.ForegroundColor
+                                                "IconForeground" : extension.ForegroundColor,
+                                                "BadgeTextColor" : extension.BadgeTextColor,
+                                                "BadgeIconPosition" : extension.BadgeIconPosition
                                             };
 
                                             // However, if multiple matching is enabled, immediately assign the Extension for use in the Bundle.
@@ -328,12 +330,14 @@ export default class IndicatorBundle extends LightningElement {
                                                         fName: item.FieldApiName,
                                                         fTextValue: dataValue,
                                                         fImageURL: matchedExtension.ImageUrl,
-                                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue,
+                                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue,
                                                         fShowAvatar: true,
                                                         fIconName : matchedExtension.IconName,
                                                         fIconBackground : matchedExtension.IconBackground,
                                                         fIconForeground : matchedExtension.IconForeground,
-                                                        fTextShown: matchedExtension.TextValue
+                                                        fTextShown: matchedExtension.TextValue,
+                                                        fTextColor: matchedExtension.BadgeTextColor,
+                                                        fIconPosition: matchedExtension.BadgeIconPosition
                                                     }
                                                 );
                                             }
@@ -363,7 +367,7 @@ export default class IndicatorBundle extends LightningElement {
                                     },
                                 // ! If value is false, the false hover will be set.
                                 ...dataValue || dataValue === 0 ? {
-                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
+                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue
                                     } : {
                                         fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
                                     },
