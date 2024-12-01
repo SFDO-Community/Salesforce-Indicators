@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText></inlineHelpText>
-    <label>Inerse Badge Text Color</label>
+    <label>Inverse Badge Text Color</label>
     <length>255</length>
     <required>false</required>
     <type>Text</type>
