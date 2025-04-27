@@ -1,0 +1,95 @@
+<template>
+    <lightning-card>
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class={card.iconClass}>
+                    <lightning-icon icon-name={card.icon} size="small"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">{card.title}</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        
+        <div class={sectionBodyClass}>
+            <template if:true={showIllustration}>
+                <c-illustration
+                    heading =  {illustration.heading}
+                    message-body = {illustration.messageBody}
+                    image-name = {illustration.imageName}
+                    image-size = {flexipageRegionWidth}
+                    class="slds-illustration slds-illustration_small"
+                ></c-illustration>
+            </template>
+            
+            <template if:true={showError}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <h2>{errorMessage}</h2>
+                </div>
+            </template>
+            
+            <template if:true={hasIndicators}>
+                <div class="slds-table_header-fixed_container slds-scrollable_x">
+                    <div class="slds-table_header-fixed_container-inner">
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_striped slds-table_fixed-layout">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="slds-text-title_caps" scope="col" style="width: 3rem;">
+                                        <!-- <div class="slds-truncate" title="Status">Status</div> -->
+                                    </th>
+                                    <th class="slds-text-title_caps" scope="col">
+                                        <div class="slds-truncate" title="Field">Field</div>
+                                    </th>
+                                    <th class="slds-text-title_caps" scope="col">
+                                        <div class="slds-truncate" title="Value">Value</div>
+                                    </th>
+                                    <th class="slds-text-title_caps" scope="col">
+                                        <div class="slds-truncate" title="Message">Message</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={indicators} for:item="indicator">
+                                    <tr key={indicator.fieldApiName} class="slds-hint-parent">
+                                        <td data-label="Status">
+                                            <span class="slds-avatar slds-avatar_x-small">
+                                                <lightning-icon 
+                                                    icon-name={indicator.iconName} 
+                                                    size="x-small" 
+                                                    class={indicator.avatarClass}>
+                                                </lightning-icon>
+                                            </span>
+                                        </td>
+                                        <td data-label="Field">
+                                            <div class="slds-truncate" title={indicator.fieldLabel}>
+                                                {indicator.fieldLabel}
+                                            </div>
+                                        </td>
+                                        <td data-label="Value">
+                                            <div class="slds-truncate" title={indicator.fieldValue}>
+                                                <template if:true={indicator.fieldValue}>
+                                                    {indicator.fieldValue}
+                                                </template>
+                                                <template if:false={indicator.fieldValue}>
+                                                    <em class="slds-text-color_weak">Empty</em>
+                                                </template>
+                                            </div>
+                                        </td>
+                                        <td data-label="Message">
+                                            <div class="slds-truncate slds-text-body_small" title={indicator.message}>
+                                                {indicator.message}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Indicators Grid</masterLabel>
+    <description>Displays a grid of indicators with their classifications</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="bundleName" type="String" label="Indicator Bundle Name" description="API Name of the Indicator Bundle custom metadata record" required="true"/>
+            <property name="columns" type="Integer" label="Number of Columns" description="Number of columns to display in the grid" default="1" min="1" max="3"/>
+            <property name="isStandardUsage" type="Boolean" label="Standard Usage" description="Use standard styling" default="false"/>
+            <property name="templateId" type="String" label="Template Number" description="Enter Template Number to render using it" default="1"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,16 @@
+.active-filter {
+    background-color: #f3f3f3;
+    font-weight: bold;
+}
+.slds-icon-text-success {
+    --slds-c-icon-color-foreground: #2e844a;
+}
+.slds-icon-text-warning {
+    --slds-c-icon-color-foreground: #dd7a01;
+}
+.slds-icon-text-error {
+    --slds-c-icon-color-foreground: #ea001e;
+}
+.slds-icon-text-info {
+    --slds-c-icon-color-foreground: #0176d3;
+}

@@ -1,0 +1,151 @@
+<template>
+    <lightning-card>
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class={card.iconClass}>
+                    <lightning-icon icon-name={card.icon} size="small"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">{card.title}</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        
+        <!-- <div class={sectionBodyClass}> -->
+            <template if:true={showIllustration}>
+                <c-illustration
+                    heading =  {illustration.heading}
+                    message-body = {illustration.messageBody}
+                    image-name = {illustration.imageName}
+                    image-size = {flexipageRegionWidth}
+                    class="slds-illustration slds-illustration_small"
+                ></c-illustration>
+            </template>
+            
+            <template if:true={showError}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <h2>{errorMessage}</h2>
+                </div>
+            </template>
+            
+            <template if:true={hasIndicators}>
+                <!-- Filter Section -->
+                <lightning-layout>
+                    <lightning-layout-item padding="horizontal-small">
+                    <!-- Filter Label and Count -->
+                        <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_x-small">
+                            <div class="slds-col">
+                                <span class="slds-text-title">Filter by classification:</span>
+                            </div>
+                            <div class="slds-col slds-text-align_right">
+                                <span class="slds-badge slds-badge_lightest">Total: {indicators.length}</span>
+                            </div>
+                        </div>
+                    <!-- Filter Buttons -->
+                        <div class="slds-grid slds-grid_align-center slds-m-bottom_small">
+                            <lightning-button-group>
+                                <lightning-button-stateful
+                                    label-when-off="All"
+                                    label-when-on="All"
+                                    icon-name-when-off="utility:list"
+                                    icon-name-when-on="utility:filterList"
+                                    variant={filterAllVariant}
+                                    selected={isSelectedAll}
+                                    onclick={handleFilterClick}
+                                    lwc:ref="filterAll"
+                                ></lightning-button-stateful>
+                                <lightning-button variant="neutral" label="Success" title="Filter to success only" icon-name="utility:success" class="slds-icon-text-success"></lightning-button>
+                                <lightning-button variant="neutral" label="Warning" title="Filter to success only" icon-name="utility:warning" class="slds-icon-text-warning"></lightning-button>
+                                <lightning-button variant="neutral" label="Error" title="Filter to error only" icon-name="utility:error" class="slds-icon-text-error"></lightning-button>
+                                <lightning-button variant="neutral" label="Info" title="Filter to info only" icon-name="utility:info" class="slds-icon-text-default"></lightning-button>
+                            </lightning-button-group>
+                        </div>
+
+                    <!-- Filter Counter -->
+                        <!-- <div class="slds-text-align_center slds-m-bottom_small filter-counter" style="display: none;">
+                            <span class="slds-text-body_small">Showing <span class="filter-count">0</span> of {indicators.length} indicators</span>
+                        </div> -->
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item padding="vertical-small">
+                <!-- Table -->
+                        <!-- <div class="slds-table_header-fixed_container slds-scrollable_x"> -->
+                            <!-- <div class="slds-table_header-fixed_container-inner"> -->
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_striped slds-table_fixed-layout">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="slds-text-title_caps" scope="col" style="width: 3rem;">
+                                                <!-- <div class="slds-truncate" title="Status">Status</div> -->
+                                            </th>
+                                            <th class="slds-text-title_caps" scope="col">
+                                                <div class="slds-truncate" title="Field">Field</div>
+                                            </th>
+                                            <th class="slds-text-title_caps" scope="col">
+                                                <div class="slds-truncate" title="Value">Value</div>
+                                            </th>
+                                            <th class="slds-text-title_caps" scope="col">
+                                                <div class="slds-truncate" title="Message">Message</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={indicators} for:item="indicator">
+                                            <tr key={indicator.fieldApiName} class="slds-hint-parent indicator-row" data-classification={indicator.classification}>
+                                                <td data-label="Status">
+                                                    <span class="slds-avatar slds-avatar_x-small">
+                                                        <lightning-icon 
+                                                            icon-name={indicator.iconName} 
+                                                            size="x-small" 
+                                                            variant={indicator.iconVariant}>
+                                                        </lightning-icon>
+                                                    </span>
+                                                </td>
+                                                <td data-label="Field">
+                                                    <div class="slds-truncate" title={indicator.fieldLabel}>
+                                                        {indicator.fieldLabel}
+                                                    </div>
+                                                </td>
+                                                <td data-label="Value">
+                                                    <div class="slds-truncate" title={indicator.fieldValue}>
+                                                        <template if:true={indicator.fieldValue}>
+                                                            {indicator.fieldValue}
+                                                        </template>
+                                                        <template if:false={indicator.fieldValue}>
+                                                            <em class="slds-text-color_weak">Empty</em>
+                                                        </template>
+                                                    </div>
+                                                </td>
+                                                <td data-label="Message">
+                                                    <div class="slds-truncate slds-text-body_small" title={indicator.message}>
+                                                        {indicator.message}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            <!-- </div> -->
+                        <!-- </div> -->
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!-- No Results Message (shown when filter returns no results) -->
+                <div class="slds-illustration slds-illustration_small no-filter-results" style="display: none;">
+                    <template if:true={showIllustration}>
+                        <c-illustration
+                            heading =  "No matching indicators"
+                            message-body = "Try selecting a different filter"
+                            image-name = "misc:no_content"
+                            image-size = {flexipageRegionWidth}
+                            class="slds-illustration slds-illustration_small"
+                        ></c-illustration>
+                    </template>
+                </div>
+            </template>
+
+        <!-- </div> -->
+    </lightning-card>
+</template>
