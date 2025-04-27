@@ -4,7 +4,7 @@ project:
     package:
         name: Salesforce-Indicators
         namespace: inds
-        api_version: '55.0'
+        api_version: '63.0'
     git:
         default_branch: 'master'
     test:
@@ -17,7 +17,6 @@ orgs:
             config_file: orgs/dev.json
             days: 30
             namespaced: True
-    scratch:
         demo:
             config_file: orgs/demo.json
             days: 15

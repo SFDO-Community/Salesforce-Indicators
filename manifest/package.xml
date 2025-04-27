@@ -15,15 +15,21 @@
 		<members>Indicator_Bundle_Item__mdt.Indicator_Item__c</members>
 		<members>Indicator_Bundle_Item__mdt.Order__c</members>
 		<members>Indicator_Bundle__mdt.Active__c</members>
+		<members>Indicator_Bundle__mdt.Card_Icon_Background__c</members>
+		<members>Indicator_Bundle__mdt.Card_Icon_Foreground__c</members>
 		<members>Indicator_Bundle__mdt.Card_Icon__c</members>
 		<members>Indicator_Bundle__mdt.Card_Text__c</members>
 		<members>Indicator_Bundle__mdt.Card_Title__c</members>
 		<members>Indicator_Bundle__mdt.Description__c</members>
 		<members>Indicator_Bundle__mdt.sObject__c</members>
 		<members>Indicator_Item_Extension__mdt.Active__c</members>
+		<members>Indicator_Item_Extension__mdt.Classification__c</members>
 		<members>Indicator_Item_Extension__mdt.Contains_Text__c</members>
 		<members>Indicator_Item_Extension__mdt.Description__c</members>
+		<members>Indicator_Item_Extension__mdt.Display_Text__c</members>
 		<members>Indicator_Item_Extension__mdt.Hover_Text__c</members>
+		<members>Indicator_Item_Extension__mdt.Icon_Background__c</members>
+		<members>Indicator_Item_Extension__mdt.Icon_Foreground__c</members>
 		<members>Indicator_Item_Extension__mdt.Icon_Value__c</members>
 		<members>Indicator_Item_Extension__mdt.Image__c</members>
 		<members>Indicator_Item_Extension__mdt.Indicator_Item__c</members>
@@ -31,15 +37,26 @@
 		<members>Indicator_Item_Extension__mdt.Minimum__c</members>
 		<members>Indicator_Item_Extension__mdt.Priority__c</members>
 		<members>Indicator_Item_Extension__mdt.Static_Text__c</members>
+		<members>Indicator_Item_Extension__mdt.Text_Operator__c</members>
 		<members>Indicator_Item__mdt.Active__c</members>
+		<members>Indicator_Item__mdt.Advanced_Field_Label__c</members>
 		<members>Indicator_Item__mdt.Advanced_Field__c</members>
+		<members>Indicator_Item__mdt.Classification__c</members>
 		<members>Indicator_Item__mdt.Description__c</members>
+		<members>Indicator_Item__mdt.Display_Multiple__c</members>
+		<members>Indicator_Item__mdt.Display_Text__c</members>
 		<members>Indicator_Item__mdt.Empty_Static_Text_Behavior__c</members>
 		<members>Indicator_Item__mdt.Field__c</members>
 		<members>Indicator_Item__mdt.Hover_Text__c</members>
+		<members>Indicator_Item__mdt.Icon_Background__c</members>
+		<members>Indicator_Item__mdt.Icon_Foreground__c</members>
 		<members>Indicator_Item__mdt.Icon_Value__c</members>
 		<members>Indicator_Item__mdt.Image__c</members>
+		<members>Indicator_Item__mdt.Inverse_Classification__c</members>
+		<members>Indicator_Item__mdt.Inverse_Display_Text__c</members>
 		<members>Indicator_Item__mdt.Inverse_Hover_Text__c</members>
+		<members>Indicator_Item__mdt.Inverse_Icon_Background__c</members>
+		<members>Indicator_Item__mdt.Inverse_Icon_Foreground__c</members>
 		<members>Indicator_Item__mdt.Inverse_Icon_Value__c</members>
 		<members>Indicator_Item__mdt.Inverse_Image__c</members>
 		<members>Indicator_Item__mdt.Inverse_Static_Text__c</members>
@@ -53,10 +70,6 @@
 		<members>*</members>
 		<name>CustomMetadata</name>
 	</types>
-    <types>
-        <members>Indicators_Setup</members>
-        <name>CustomTab</name>
-    </types>
 	<types>
 		<members>Indicator_Bundle_Item__mdt</members>
 		<members>Indicator_Bundle__mdt</members>
@@ -64,10 +77,14 @@
 		<members>Indicator_Item__mdt</members>
 		<name>CustomObject</name>
 	</types>
-    <types>
-        <members>Indicators</members>
-        <name>Flow</name>
-    </types>
+	<types>
+		<members>Indicators_Setup</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>Indicators</members>
+		<name>Flow</name>
+	</types>
 	<types>
 		<members>Indicator_Bundle_Item__mdt-Indicator Bundle Item Layout</members>
 		<members>Indicator_Bundle__mdt-Indicator Bundle Layout</members>
@@ -80,21 +97,21 @@
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
-        <members>Indicator_Bundle_Item__mdt.All_with_Details</members>
+		<members>Indicator_Bundle_Item__mdt.All_with_Details</members>
 		<members>Indicator_Bundle__mdt.All_with_Details</members>
 		<members>Indicator_Item_Extension__mdt.All_with_Details</members>
 		<members>Indicator_Item__mdt.All_with_Details</members>
 		<name>ListView</name>
 	</types>
 	<types>
-        <members>Indicators</members>
-        <name>PermissionSet</name>
-    </types>
+		<members>Indicators</members>
+		<name>PermissionSet</name>
+	</types>
 	<types>
 		<members>Indicator_Bundle_Item__mdt.Bundle_and_Item_Different_sObjects</members>
 		<members>Indicator_Item_Extension__mdt.Numeric_Missing_Minimum</members>
 		<members>Indicator_Item_Extension__mdt.String_Missing_Contains_Text</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>55.0</version>
+	<version>63.0</version>
 </Package>
