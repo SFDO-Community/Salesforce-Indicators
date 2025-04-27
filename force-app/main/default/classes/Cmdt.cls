@@ -47,6 +47,10 @@ public with sharing class Cmdt {
                 Icon_Foreground__c,
                 Inverse_Icon_Background__c,
                 Inverse_Icon_Foreground__c,
+                Classification__c,
+                Display_Text__c,
+                Inverse_Classification__c,
+                Inverse_Display_Text__c,
                 Description__c
             FROM Indicator_Item__mdt
             // WHERE Active__c = TRUE
@@ -85,6 +89,8 @@ public with sharing class Cmdt {
                 Static_Text__c,
                 Icon_Background__c,
                 Icon_Foreground__c,
+                Classification__c,
+                Display_Text__c,
                 Description__c
             FROM Indicator_Item_Extension__mdt
             // WHERE Active__c = TRUE

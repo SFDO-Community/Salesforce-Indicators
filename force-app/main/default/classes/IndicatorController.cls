@@ -84,6 +84,14 @@ public with sharing class IndicatorController {
         public String InverseBackgroundColor {get; set;}
         @AuraEnabled
         public String InverseForegroundColor {get; set;}
+        @AuraEnabled
+        public String Classification {get; set;}
+        @AuraEnabled
+        public String DisplayText {get; set;}
+        @AuraEnabled
+        public String InverseClassification {get; set;}
+        @AuraEnabled
+        public String InverseDisplayText {get; set;}
     }
 
     public class IndicatorExtension {
@@ -115,6 +123,10 @@ public with sharing class IndicatorController {
         public String BackgroundColor {get; set;}
         @AuraEnabled
         public String ForegroundColor {get; set;}
+        @AuraEnabled
+        public String Classification {get; set;}
+        @AuraEnabled
+        public String DisplayText {get; set;}
     }
     
     @AuraEnabled
@@ -206,6 +218,10 @@ public with sharing class IndicatorController {
                 item.ForegroundColor = indicatorItem.Icon_Foreground__c;
                 item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
                 item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
+                item.Classification = indicatorItem.Classification__c;
+                item.DisplayText = indicatorItem.Display_Text__c;
+                item.InverseClassification = indicatorItem.Inverse_Classification__c;
+                item.InverseDisplayText = indicatorItem.Inverse_Display_Text__c;
                 
                 List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
 
@@ -229,6 +245,8 @@ public with sharing class IndicatorController {
                         extension.ExtensionId = itemExtension.Id;
                         extension.BackgroundColor = itemExtension.Icon_Background__c;
                         extension.ForegroundColor = itemExtension.Icon_Foreground__c;
+                        extension.Classification = itemExtension.Classification__c;
+                        extension.DisplayText = itemExtension.Display_Text__c;
         
                         item.Extensions.add(extension);
                     }
@@ -306,6 +324,10 @@ public with sharing class IndicatorController {
                         item.ForegroundColor = indicatorItem.Icon_Foreground__c;
                         item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
                         item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
+                        item.Classification = indicatorItem.Classification__c;
+                        item.DisplayText = indicatorItem.Display_Text__c;
+                        item.InverseClassification = indicatorItem.Inverse_Classification__c;
+                        item.InverseDisplayText = indicatorItem.Inverse_Display_Text__c;
                         
                         List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
 
@@ -329,6 +351,8 @@ public with sharing class IndicatorController {
                                 extension.ExtensionId = itemExtension.Id;
                                 extension.BackgroundColor = itemExtension.Icon_Background__c;
                                 extension.ForegroundColor = itemExtension.Icon_Foreground__c;
+                                extension.Classification = itemExtension.Classification__c;
+                                extension.DisplayText = itemExtension.Display_Text__c;
                 
                                 item.Extensions.add(extension);
                             }

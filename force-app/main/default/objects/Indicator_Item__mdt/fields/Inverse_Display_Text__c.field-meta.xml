@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inverse_Display_Text__c</fullName>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Inverse Display Text</label>
+    <required>false</required>
+    <type>TextArea</type>
+</CustomField>
