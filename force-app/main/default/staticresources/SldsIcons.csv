@@ -9,6 +9,7 @@ utility:adduser,add plus user
 utility:adjust_value,adjust edit value money currency pencil
 utility:advanced_function,
 utility:advertising,
+utility:agent_astro,
 utility:agent_home,
 utility:agent_session,
 utility:aggregate,
