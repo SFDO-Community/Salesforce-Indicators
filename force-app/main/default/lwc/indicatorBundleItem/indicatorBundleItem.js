@@ -1,11 +1,14 @@
 import { LightningElement, api } from 'lwc';
 
+const VALID_ICON_PREFIXES = new Set(['action','custom','doctype','standard','utility']);
+
 export default class IndicatorListItem extends LightningElement {
     @api indSize = 'large';
     @api indShape = 'base';
-    @api indText = '';
-    @api indImage = '';
-    @api indIcon = 'standard:all' ;
+    // Backing fields for backward compatibility
+    _indText = '';
+    _indImage = '';
+    _indIcon = '';
     @api indHoverText = '';
 
     @api iconSource;
@@ -16,12 +19,6 @@ export default class IndicatorListItem extends LightningElement {
     };
     set indBackgroundColor(value) {
         this._indBackgroundColor = value;
-        if (this.iconElement) {
-            this.iconElement.style.setProperty('--backgroundColor', this.indBackgroundColor);
-            console.log(`setting background colour to ${this.indBackgroundColor}`);
-        } else {
-            console.log(`iconElement not found`);
-        }
     }
     _indBackgroundColor;
     @api get indForegroundColor() {
@@ -29,14 +26,45 @@ export default class IndicatorListItem extends LightningElement {
     };
     set indForegroundColor(value) {
         this._indForegroundColor = value;
-        if (this.iconElement) {
-            this.iconElement.style.setProperty('--foregroundColor', this.indForegroundColor);
-            console.log(`setting foreground colour to ${this.indForegroundColor}`);
-        } else {
-            console.log(`iconElement not found`);
-        }
     }
     _indForegroundColor;
+
+    // Backwards compatible setters/getters when parent passes values directly
+    @api get indText() {
+        // If controlled by iconSource/staticText mode, prefer computed
+        if (this.iconSource === 'staticText') {
+            return this.sourceValue || ' ';
+        }
+        return this._indText;
+    }
+    set indText(value) {
+        this._indText = value || '';
+    }
+
+    @api get indImage() {
+        if (this.iconSource === 'url' || this.iconSource === 'staticResource') {
+            return this.sourceValue || '';
+        }
+        return this._indImage;
+    }
+    set indImage(value) {
+        this._indImage = value || '';
+    }
+
+    @api get indIcon() {
+        if (this.iconSource === 'sldsIcon') {
+            return this.sanitizeIcon(this.sourceValue);
+        } else if (this.iconSource === 'staticText') {
+            return 'standard:empty';
+        } else if (this.iconSource === 'url' || this.iconSource === 'staticResource') {
+            return '';
+        }
+        // Honor parent-specified icon exactly unless empty
+        return this.sanitizeIcon(this._indIcon);
+    }
+    set indIcon(value) {
+        this._indIcon = value || '';
+    }
 
     get indClass() {
         let classValue = ['indicatorIcon'];
@@ -57,26 +85,39 @@ export default class IndicatorListItem extends LightningElement {
         return classValue.join(' ');
     }
 
-    get iconElement() {
-        return this.template.querySelector(".indicatorIcon");
-    }
 
-    get indText() {
-        return (this.iconSource === 'staticText') ? (this.sourceValue || ' ') : '';
-    }
 
     get indUrl() {
         return (this.iconSource === 'url' || this.iconSource === 'staticResource') ? this.sourceValue : '';
     }
-    
-    get indIcon() {
-        if (this.iconSource === 'sldsIcon') {
-            return this.sourceValue;
-        } else if (this.iconSource === 'staticText') {
-            return 'standard:empty';
-        } else {
+
+    get avatarStyle() {
+        let styles = [];
+        if (this.indBackgroundColor) {
+            styles.push(`--slds-c-avatar-color-background: ${this.indBackgroundColor}`);
+        }
+        if (this.indForegroundColor) {
+            styles.push(`--slds-c-avatar-text-color: ${this.indForegroundColor}`);
+        }
+        return styles.length > 0 ? styles.join('; ') : '';
+    }
+
+    sanitizeIcon(name) {
+        // Do not force a default. If a value is provided, validate minimal structure.
+        if (!name || typeof name !== 'string') {
             return '';
         }
+        const trimmed = name.trim();
+        const parts = trimmed.split(':');
+        if (parts.length !== 2) {
+            return trimmed; // preserve as provided; avoids overriding valid metadata
+        }
+        const prefix = parts[0].toLowerCase();
+        const icon = parts[1];
+        if (!VALID_ICON_PREFIXES.has(prefix) || !icon) {
+            return trimmed; // preserve provided string instead of substituting
+        }
+        return `${prefix}:${icon}`;
     }
 
     /* No longer need to set CSS on renderedCallback because it's controlled in setters for colors
