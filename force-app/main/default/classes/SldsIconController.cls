@@ -34,20 +34,33 @@ public with sharing class SldsIconController {
 
             String content = sr.Body.toString();
 
-            List<String> rows = content.split(NEWLINE);
+            // Handle both Unix (\n) and Windows (\r\n) line endings
+            List<String> rows = content.split('\\r?\\n');
             for( Integer i = 1; i < rows.size(); i++ ){
+                String row = rows[i].trim();
+                if (String.isBlank(row)) {
+                    continue; // Skip empty rows
+                }
+                
                 Option option = new Option();
-                List<String> columns = rows[i].split(COMMA);
-                option.label = columns[0].trim();
-                option.value = columns[0].trim();
-                option.icon = columns[0].trim();
-                columns.remove(0);
-
-                options.add(option);
+                List<String> columns = row.split(COMMA);
+                
+                if (columns.size() >= 1) {
+                    option.label = columns[0].trim();
+                    option.value = columns[0].trim();
+                    option.icon = columns[0].trim();
+                    
+                    // Use the second column as description/search text if available
+                    if (columns.size() >= 2 && String.isNotBlank(columns[1].trim())) {
+                        option.label = columns[0].trim() + ' (' + columns[1].trim() + ')';
+                    }
+                    
+                    options.add(option);
+                }
             }
         } catch (Exception e) {
             AuraHandledException ahe = new AuraHandledException(e.getMessage());
-            ahe.setMessage('Aura Handled Exception thrown.');
+            ahe.setMessage('Error loading SLDS Icons: ' + e.getMessage());
             throw ahe;
         }
 
