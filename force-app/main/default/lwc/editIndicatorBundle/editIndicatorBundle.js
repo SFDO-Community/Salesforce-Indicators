@@ -34,10 +34,7 @@ export default class EditIndicatorBundle extends LightningElement {
             } else if (typeof error.body.message === 'string') {
                 message = error.body.message;
             }
-            console.log(message);
         } else if (data) {
-            console.log(data);
-            console.log(JSON.parse(JSON.stringify(data)));
             this.objectInfo = data;
         }
     };

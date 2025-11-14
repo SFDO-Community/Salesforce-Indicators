@@ -134,19 +134,26 @@
                                 <div class="variantLogic slds-col slds-size_1-of-1 slds-p-top_x-small">
                                     <p class="slds-text-heading_small">Variant Logic</p>
                                     <lightning-combobox label="Show When Field:" options={activeWhenToDisplayOptions}
-                                                        value={activeVariant.whenToDisplay} data-index={index}
+                                                        value={activeVariantWhenToDisplay} data-index={index}
                                                         data-property="whenToDisplay" onchange={handleVariantPropertyChange}
                                                         dropdown-alignment="auto"></lightning-combobox>
                                     <template lwc:if={activeVariant.filterTypeIs.text}>
-                                        <lightning-input label="Text"></lightning-input>
+                                        <lightning-input label="Contains Text" value={activeVariant.ContainsText} 
+                                                        data-index={index} data-property="ContainsText" 
+                                                        onchange={handleVariantPropertyChange}></lightning-input>
                                     </template>
                                     <template lwc:elseif={activeVariant.filterTypeIs.number}>
-                                        <lightning-input label="Number" type="number"></lightning-input>
+                                        <lightning-input label="Number" type="number" value={activeVariant.ContainsText}
+                                                        data-index={index} data-property="ContainsText" 
+                                                        onchange={handleVariantPropertyChange}></lightning-input>
                                     </template>
                                     <template lwc:elseif={activeVariant.filterTypeIs.numericRange}>
-                                        <lightning-input label="Greater Than or Equal To"
-                                                         type="number"></lightning-input>
-                                        <lightning-input label="Less Than" type="number"></lightning-input>
+                                        <lightning-input label="Greater Than or Equal To" type="number" 
+                                                        value={activeVariant.Minimum} data-index={index} 
+                                                        data-property="Minimum" onchange={handleVariantPropertyChange}></lightning-input>
+                                        <lightning-input label="Less Than" type="number" value={activeVariant.Maximum}
+                                                        data-index={index} data-property="Maximum" 
+                                                        onchange={handleVariantPropertyChange}></lightning-input>
                                     </template>
                                 </div>
                             </div>
@@ -164,6 +171,19 @@
                         </div>
                     </div>
                 </template>
+            </div>
+            
+            <div class="slds-p-top_medium" style="border-top: 1px solid #dddbda;">
+                <lightning-layout horizontal-align="end">
+                    <lightning-button
+                        disabled={saveInProgress}
+                        variant="brand"
+                        name="Save Changes"
+                        label="Save"
+                        onclick={handleSaveIndicator}>
+                    </lightning-button>
+                </lightning-layout>
+                <lightning-spinner lwc:if={saveInProgress}></lightning-spinner>
             </div>
         </div>
     </article>

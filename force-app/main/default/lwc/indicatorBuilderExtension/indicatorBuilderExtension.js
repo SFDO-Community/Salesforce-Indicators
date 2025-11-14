@@ -21,7 +21,7 @@ export default class IndicatorBuilderExtension extends LightningElement {
     }
 
     get filterTypeIs() {
-        let matchingOption = this.whenToDisplayOptions.find(option => option.value == this.activeVariant.whenToDisplay);
+        let matchingOption = this.whenToDisplayOptions.find(option => option.value == this.computedWhenToDisplay);
         return matchingOption ? { [matchingOption.showMatch]: true } : {};
     }
 
@@ -34,6 +34,41 @@ export default class IndicatorBuilderExtension extends LightningElement {
 
     get activeWhenToDisplayOptions() {
         return this.whenToDisplayOptions.filter(option => option.fieldTypes.includes(this.indicator.fieldType));
+    }
+
+    // Convert TextOperator to whenToDisplay value for the dropdown
+    get computedWhenToDisplay() {
+        if (!this.activeVariant || !this.activeVariant.TextOperator) {
+            return this.activeVariant?.whenToDisplay;
+        }
+
+        const operator = this.activeVariant.TextOperator;
+        const fieldType = this.indicator.fieldType;
+        
+        // Map TextOperator values to whenToDisplay values based on field type
+        if (FIELD_TYPE_CATEGORIES.TEXT.includes(fieldType)) {
+            switch (operator) {
+                case 'Contains': return 'containsText';
+                case 'Equals': return 'equalsText';
+                default: return 'containsText';
+            }
+        } else if ([...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE].includes(fieldType)) {
+            switch (operator) {
+                case 'Equals': return 'equalsNumber';
+                case 'Greater Than': return 'greaterThan';
+                case 'Less Than': return 'lessThan';
+                case 'Range': return 'inRange';
+                default: return 'equalsNumber';
+            }
+        } else if (FIELD_TYPE_CATEGORIES.BOOLEAN.includes(fieldType)) {
+            switch (operator) {
+                case 'True': return 'isTrue';
+                case 'False': return 'isFalse';
+                default: return 'isTrue';
+            }
+        }
+        
+        return this.activeVariant?.whenToDisplay;
     }
 
     iconSourceOptions = [
@@ -77,6 +112,34 @@ export default class IndicatorBuilderExtension extends LightningElement {
             let variant = { ...this.activeVariant };
 
             variant[target.dataset.property] = value;
+            
+            // Special handling for whenToDisplay - convert back to TextOperator
+            if (target.dataset.property === 'whenToDisplay') {
+                const fieldType = this.indicator.fieldType;
+                
+                if (FIELD_TYPE_CATEGORIES.TEXT.includes(fieldType)) {
+                    switch (value) {
+                        case 'containsText': variant.TextOperator = 'Contains'; break;
+                        case 'equalsText': variant.TextOperator = 'Equals'; break;
+                        default: variant.TextOperator = 'Contains'; break;
+                    }
+                } else if ([...FIELD_TYPE_CATEGORIES.NUMERIC, ...FIELD_TYPE_CATEGORIES.DATE].includes(fieldType)) {
+                    switch (value) {
+                        case 'equalsNumber': variant.TextOperator = 'Equals'; break;
+                        case 'greaterThan': variant.TextOperator = 'Greater Than'; break;
+                        case 'lessThan': variant.TextOperator = 'Less Than'; break;
+                        case 'inRange': variant.TextOperator = 'Range'; break;
+                        default: variant.TextOperator = 'Equals'; break;
+                    }
+                } else if (FIELD_TYPE_CATEGORIES.BOOLEAN.includes(fieldType)) {
+                    switch (value) {
+                        case 'isTrue': variant.TextOperator = 'True'; break;
+                        case 'isFalse': variant.TextOperator = 'False'; break;
+                        default: variant.TextOperator = 'True'; break;
+                    }
+                }
+            }
+            
             if (target.dataset.property === 'iconSource') {
                 variant.sourceValue = null;
             }

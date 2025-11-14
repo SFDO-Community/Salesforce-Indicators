@@ -50,17 +50,21 @@
                     <div class="variantLogic slds-col slds-size_1-of-1 slds-p-top_x-small">
                         <p class="slds-text-heading_small">Extension Logic</p>
                         <lightning-combobox label="Show When Field:" options={activeWhenToDisplayOptions}
-                            value={activeVariant.whenToDisplay} data-property="whenToDisplay"
+                            value={computedWhenToDisplay} data-property="whenToDisplay"
                             onchange={handleVariantPropertyChange} dropdown-alignment="auto"></lightning-combobox>
                         <template lwc:if={filterTypeIs.text}>
-                            <lightning-input label="Text"></lightning-input>
+                            <lightning-input label="Contains Text" value={activeVariant.ContainsText} 
+                                data-property="ContainsText" onchange={handleVariantPropertyChange}></lightning-input>
                         </template>
                         <template lwc:elseif={filterTypeIs.number}>
-                            <lightning-input label="Number" type="number"></lightning-input>
+                            <lightning-input label="Number" type="number" value={activeVariant.ContainsText}
+                                data-property="ContainsText" onchange={handleVariantPropertyChange}></lightning-input>
                         </template>
                         <template lwc:elseif={filterTypeIs.numericRange}>
-                            <lightning-input label="Greater Than or Equal To" type="number"></lightning-input>
-                            <lightning-input label="Less Than" type="number"></lightning-input>
+                            <lightning-input label="Greater Than or Equal To" type="number" value={activeVariant.Minimum}
+                                data-property="Minimum" onchange={handleVariantPropertyChange}></lightning-input>
+                            <lightning-input label="Less Than" type="number" value={activeVariant.Maximum}
+                                data-property="Maximum" onchange={handleVariantPropertyChange}></lightning-input>
                         </template>
                     </div>
                 </template>
