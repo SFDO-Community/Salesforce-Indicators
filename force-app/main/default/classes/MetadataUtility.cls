@@ -10,7 +10,8 @@ public with sharing class MetadataUtility {
     private static final Set<DescribeFieldResult> entityRelationshipFields = new Set<DescribeFieldResult>{
             Indicator_Bundle__mdt.sObject__c.getDescribe(),
             Indicator_Item__mdt.Field__c.getDescribe(),
-            Indicator_Item__mdt.sObject__c.getDescribe()
+            Indicator_Item__mdt.sObject__c.getDescribe(),
+            Indicator_Item_Extension__mdt.Indicator_Item__c.getDescribe()
     };
 
     private static Metadata.DeployContainer deployContainer;
@@ -92,7 +93,6 @@ public with sharing class MetadataUtility {
     }
 
     private static void processCustomMetadataFieldValues(Metadata.CustomMetadata customMetadata,Schema.SObjectField sObjectField) {
-
         if(sObjectField == null) return; /**Return if sObjectField not found**/
         DescribeFieldResult fieldResult = sObjectField.getDescribe();
         if(!fieldResult.isCustom()) return; /**Return If Standard Field**/
@@ -103,30 +103,35 @@ public with sharing class MetadataUtility {
 
         Object value = null;
 
-        /*if(isReference || isEntityRelationshipField) {
-            SObject relatedRecord;
-            Map<String,Object> relatedRecordPopulatedFieldMap;
-            String relationshipName = (isEntityRelationshipField) ? fieldName.removeEnd('__c')+'__r' : fieldResult.getRelationshipName(); *//**We replace __c with __r to resolve Entity Relationship non reference**//*
-            if(populatedFieldsMap.containsKey(relationshipName)) {
-                try{
-                    relatedRecord = (SObject) populatedFieldsMap.get(relationshipName);
-                    relatedRecordPopulatedFieldMap = relatedRecord.getPopulatedFieldsAsMap();
-                } catch(Exception ex) {
-                    System.debug(ex.getMessage());
+        if(isReference || isEntityRelationshipField) {
+            if(isEntityRelationshipField) {
+                Object rawValue = populatedFieldsMap.get(fieldName);
+                value = rawValue != null ? String.valueOf(rawValue) : null;
+            } else {
+                SObject relatedRecord;
+                Map<String,Object> relatedRecordPopulatedFieldMap;
+                String relationshipName = fieldResult.getRelationshipName();
+                if(populatedFieldsMap.containsKey(relationshipName)) {
+                    try{
+                        relatedRecord = (SObject) populatedFieldsMap.get(relationshipName);
+                        relatedRecordPopulatedFieldMap = relatedRecord.getPopulatedFieldsAsMap();
+                    } catch(Exception ex) {
+                        System.debug(ex.getMessage());
+                    }
+                }
+                if(relatedRecordPopulatedFieldMap != null && relatedRecordPopulatedFieldMap.containsKey('QualifiedApiName')) {
+                    value = (String) relatedRecordPopulatedFieldMap.get('QualifiedApiName');
                 }
             }
-            if(relatedRecordPopulatedFieldMap != null && relatedRecordPopulatedFieldMap.containsKey(QualifiedApiName_Field)) value = (String) relatedRecordPopulatedFieldMap.get(QualifiedApiName_Field);
-
-        } else if(populatedFieldsMap.containsKey(fieldName)) value = populatedFieldsMap.get(fieldName);*/
-
-        value = populatedFieldsMap.get(fieldName);
+        } else if(populatedFieldsMap.containsKey(fieldName)) {
+            value = populatedFieldsMap.get(fieldName);
+        }
         if(value == null || value == '' && fieldResult.defaultValue != null) value = fieldResult.defaultValue;
         else if(value == null || value == '' && fieldResult.defaultValueFormula != null) value = fieldResult.defaultValueFormula.removeEnd('\'').removeEnd('"').removeStart('\'').removeStart('"');
 
         Metadata.CustomMetadataValue metadataField = new Metadata.CustomMetadataValue();
         metadataField.field = fieldName;
         metadataField.value = value;
-
 
         System.debug(fieldName+' : '+value);
 
