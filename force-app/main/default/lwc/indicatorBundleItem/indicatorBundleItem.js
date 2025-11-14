@@ -2,10 +2,10 @@ import { LightningElement, api } from 'lwc';
 
 export default class IndicatorListItem extends LightningElement {
     @api indSize = 'large';
-    // @api indShape = 'base';
-    // @api indText = '';
-    // @api indImage = '';
-    // @api indIcon = 'standard:all' ;
+    @api indShape = 'base';
+    @api indText = '';
+    @api indImage = '';
+    @api indIcon = 'standard:all' ;
     @api indHoverText = '';
 
     @api iconSource;
