@@ -34,12 +34,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>cooper:companyInsightTeaserCard</componentName>
-                <identifier>cooper_companyInsightTeaserCard</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>displayOption</name>
                     <value>BOTH</value>
