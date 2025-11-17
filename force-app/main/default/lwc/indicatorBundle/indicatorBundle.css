@@ -6,3 +6,7 @@
     --slds-c-avatar-text-color-hover:  var(--foregroundColor);
     --slds-c-avatar-text-color: var(--foregroundColor);
 }
+
+.clickable {
+    cursor: pointer;
+}

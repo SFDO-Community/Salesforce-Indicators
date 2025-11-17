@@ -42,9 +42,9 @@ public with sharing class IndicatorController {
         public Boolean IsActive {get; set;}
         @AuraEnabled
         public Boolean DisplayMultiple {get; set;}
-        @AuraEnabled 
+        @AuraEnabled
         public String FieldLabel { get; set;}
-        @AuraEnabled 
+        @AuraEnabled
         public String FieldApiName { get; set;}
         @AuraEnabled
         public String IconName {get; set;}
@@ -84,6 +84,8 @@ public with sharing class IndicatorController {
         public String InverseBackgroundColor {get; set;}
         @AuraEnabled
         public String InverseForegroundColor {get; set;}
+        @AuraEnabled
+        public String ActionTarget {get; set;}
     }
 
     public class IndicatorExtension {
@@ -116,7 +118,7 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String ForegroundColor {get; set;}
     }
-    
+
     @AuraEnabled
     public static EntityDefList getNewCmdtUrls(){
 
@@ -124,12 +126,12 @@ public with sharing class IndicatorController {
         wrapper.Entities = new List<EntityDef>();
 
         for(EntityDefinition ed : [
-            SELECT DeveloperName, Label, MasterLabel, KeyPrefix, DetailUrl, EditUrl, NewUrl 
-            FROM EntityDefinition 
+            SELECT DeveloperName, Label, MasterLabel, KeyPrefix, DetailUrl, EditUrl, NewUrl
+            FROM EntityDefinition
             WHERE QualifiedApiName IN (
-                'Indicator_Bundle__mdt', 
-                'Indicator_Bundle_Item__mdt', 
-                'Indicator_Item__mdt', 
+                'Indicator_Bundle__mdt',
+                'Indicator_Bundle_Item__mdt',
+                'Indicator_Item__mdt',
                 'Indicator_Item_Extension__mdt'
             )
             ORDER BY MasterLabel ASC
@@ -140,7 +142,7 @@ public with sharing class IndicatorController {
             entity.NewUrl = ed.NewUrl;
             wrapper.Entities.add(entity);
         }
-       
+
         return wrapper;
     }
 
@@ -179,61 +181,7 @@ public with sharing class IndicatorController {
 
                 IndicatorItem item = new IndicatorItem();
 
-                if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
-                    item.FieldApiName = indicatorItem.Advanced_Field__c;
-                    item.FieldLabel = indicatorItem.Advanced_Field_Label__c;
-                } else {
-                    item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
-                    item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);
-                }
-    
-                item.IsActive = indicatorItem.Active__c;
-                item.DisplayMultiple = indicatorItem.Display_Multiple__c;
-                item.IconName = indicatorItem.Icon_Value__c;
-                item.TextValue = indicatorItem.Static_Text__c;
-                item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
-                item.ZeroBehavior = indicatorItem.Zero_Behavior__c;
-                item.ImageUrl  = indicatorItem.Image__c;
-                item.HoverValue = indicatorItem.Hover_Text__c;
-                item.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
-                item.FalseIcon = indicatorItem.Inverse_Icon_Value__c;
-                item.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
-                item.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
-                item.FalseImageUrl = indicatorItem.Inverse_Image__c;
-                item.IndicatorDescription = indicatorItem.Description__c;
-                item.IndicatorId = indicatorItem.Id;
-                item.BackgroundColor = indicatorItem.Icon_Background__c;
-                item.ForegroundColor = indicatorItem.Icon_Foreground__c;
-                item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
-                item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
-                
-                List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
-
-                if(!itemExtensions.isEmpty()){
-                    item.Extensions = new List<IndicatorExtension>();    
-
-                    for(Indicator_Item_Extension__mdt itemExtension : itemExtensions){
-                        IndicatorExtension extension = new IndicatorExtension();
-        
-                        extension.IsActive = itemExtension.Active__c;
-                        extension.ContainsText = itemExtension.Contains_Text__c;
-                        extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
-                        extension.Maximum = itemExtension.Maximum__c;
-                        extension.Minimum = itemExtension.Minimum__c;
-                        extension.ExtensionHoverText = itemExtension.Hover_Text__c;
-                        extension.ExtensionIconValue = itemExtension.Icon_Value__c;
-                        extension.ExtensionImageUrl = itemExtension.Image__c;
-                        extension.ExtensionTextValue = itemExtension.Static_Text__c;
-                        extension.PriorityOrder = itemExtension.Priority__c;
-                        extension.ExtensionDescription = itemExtension.Description__c;
-                        extension.ExtensionId = itemExtension.Id;
-                        extension.BackgroundColor = itemExtension.Icon_Background__c;
-                        extension.ForegroundColor = itemExtension.Icon_Foreground__c;
-        
-                        item.Extensions.add(extension);
-                    }
-
-                }
+                item = itemWithSettingsInfo(item, indicatorItem, fieldByDurableId, labelByDurableId);
 
                 wrapper.Items.add(item);
             }
@@ -271,76 +219,82 @@ public with sharing class IndicatorController {
 
             if(!bundleItems.isEmpty()){     // TODO: Commenting out this check is a great way to test throwing an error in the LWC
                 for(Indicator_Bundle_Item__mdt bundleItem : Cmdt.getBundleItems(bundleDevName)){
-                    
+
                     IndicatorItem item = new IndicatorItem();
 
                     item.SortOrder = bundleItem.Order__c;
-    
+                    item.ActionTarget = bundleItem.Action_Target__c;
+
                     Indicator_Item__mdt indicatorItem = Cmdt.getItem(bundleItem.Indicator_Item__r.DeveloperName);
                     if(indicatorItem != null){
-
-                        if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
-                            item.FieldApiName = indicatorItem.Advanced_Field__c;
-                            item.FieldLabel = indicatorItem.Advanced_Field_Label__c;
-                        } else {
-                            item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
-                            item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);
-                        }
-            
-                        item.IsActive = indicatorItem.Active__c;
-                        item.DisplayMultiple = indicatorItem.Display_Multiple__c;
-                        item.IconName = indicatorItem.Icon_Value__c;
-                        item.TextValue = indicatorItem.Static_Text__c;
-                        item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
-                        item.ZeroBehavior = indicatorItem.Zero_Behavior__c;
-                        item.ImageUrl  = indicatorItem.Image__c;
-                        item.HoverValue = indicatorItem.Hover_Text__c;
-                        item.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
-                        item.FalseIcon = indicatorItem.Inverse_Icon_Value__c;
-                        item.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
-                        item.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
-                        item.FalseImageUrl = indicatorItem.Inverse_Image__c;
-                        item.IndicatorDescription = indicatorItem.Description__c;
-                        item.IndicatorId = indicatorItem.Id;
-                        item.BackgroundColor = indicatorItem.Icon_Background__c;
-                        item.ForegroundColor = indicatorItem.Icon_Foreground__c;
-                        item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
-                        item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
-                        
-                        List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
-
-                        if(!itemExtensions.isEmpty()){
-                            item.Extensions = new List<IndicatorExtension>();    
-
-                            for(Indicator_Item_Extension__mdt itemExtension : itemExtensions){
-                                IndicatorExtension extension = new IndicatorExtension();
-                
-                                extension.IsActive = itemExtension.Active__c;
-                                extension.ContainsText = itemExtension.Contains_Text__c;
-                                extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
-                                extension.Maximum = itemExtension.Maximum__c;
-                                extension.Minimum = itemExtension.Minimum__c;
-                                extension.ExtensionHoverText = itemExtension.Hover_Text__c;
-                                extension.ExtensionIconValue = itemExtension.Icon_Value__c;
-                                extension.ExtensionImageUrl = itemExtension.Image__c;
-                                extension.ExtensionTextValue = itemExtension.Static_Text__c;
-                                extension.PriorityOrder = itemExtension.Priority__c;
-                                extension.ExtensionDescription = itemExtension.Description__c;
-                                extension.ExtensionId = itemExtension.Id;
-                                extension.BackgroundColor = itemExtension.Icon_Background__c;
-                                extension.ForegroundColor = itemExtension.Icon_Foreground__c;
-                
-                                item.Extensions.add(extension);
-                            }
-
-                        }
+                        item = itemWithSettingsInfo(item, indicatorItem, fieldByDurableId, labelByDurableId);
                     }
+
                     wrapper.Items.add(item);
                 }
             }
-        } 
+        }
 
         return wrapper;
     }
 
+    private static IndicatorItem itemWithSettingsInfo(IndicatorItem item, Indicator_Item__mdt indicatorItem, Map<String,String> fieldByDurableId, Map<String,String> labelByDurableId) {
+        if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
+            item.FieldApiName = indicatorItem.Advanced_Field__c;
+            item.FieldLabel = indicatorItem.Advanced_Field_Label__c;
+        } else {
+            item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
+            item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);
+        }
+
+        item.IsActive = indicatorItem.Active__c;
+        item.DisplayMultiple = indicatorItem.Display_Multiple__c;
+        item.IconName = indicatorItem.Icon_Value__c;
+        item.TextValue = indicatorItem.Static_Text__c;
+        item.EmptyStaticBehavior = indicatorItem.Empty_Static_Text_Behavior__c;
+        item.ZeroBehavior = indicatorItem.Zero_Behavior__c;
+        item.ImageUrl  = indicatorItem.Image__c;
+        item.HoverValue = indicatorItem.Hover_Text__c;
+        item.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
+        item.FalseIcon = indicatorItem.Inverse_Icon_Value__c;
+        item.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
+        item.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
+        item.FalseImageUrl = indicatorItem.Inverse_Image__c;
+        item.IndicatorDescription = indicatorItem.Description__c;
+        item.IndicatorId = indicatorItem.Id;
+        item.BackgroundColor = indicatorItem.Icon_Background__c;
+        item.ForegroundColor = indicatorItem.Icon_Foreground__c;
+        item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
+        item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
+
+        List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
+
+        if(!itemExtensions.isEmpty()){
+            item.Extensions = new List<IndicatorExtension>();
+
+            for(Indicator_Item_Extension__mdt itemExtension : itemExtensions){
+                IndicatorExtension extension = new IndicatorExtension();
+
+                extension.IsActive = itemExtension.Active__c;
+                extension.ContainsText = itemExtension.Contains_Text__c;
+                extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
+                extension.Maximum = itemExtension.Maximum__c;
+                extension.Minimum = itemExtension.Minimum__c;
+                extension.ExtensionHoverText = itemExtension.Hover_Text__c;
+                extension.ExtensionIconValue = itemExtension.Icon_Value__c;
+                extension.ExtensionImageUrl = itemExtension.Image__c;
+                extension.ExtensionTextValue = itemExtension.Static_Text__c;
+                extension.PriorityOrder = itemExtension.Priority__c;
+                extension.ExtensionDescription = itemExtension.Description__c;
+                extension.ExtensionId = itemExtension.Id;
+                extension.BackgroundColor = itemExtension.Icon_Background__c;
+                extension.ForegroundColor = itemExtension.Icon_Foreground__c;
+
+                item.Extensions.add(extension);
+            }
+
+        }
+
+        return item;
+    }
 }

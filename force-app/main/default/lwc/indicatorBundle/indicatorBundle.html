@@ -10,9 +10,9 @@
                                 <header class="slds-media slds-media_center slds-has-flexi-truncate">
                                     <div class="slds-media__body">
                                         <h2 class="slds-card__header-title">
-                                            <lightning-icon 
+                                            <lightning-icon
                                                 lwc:if={card.icon}
-                                                icon-name={card.icon} 
+                                                icon-name={card.icon}
                                                 size="small"
                                                 class={card.iconClass}
                                             >
@@ -25,26 +25,26 @@
                                 </header>
                             </div>
                         </div>
-                    </template> 
+                    </template>
                 </template>
                 <template lwc:else>
-                    <div class="slds-card__body slds-card__body_inner">  
+                    <div class="slds-card__body slds-card__body_inner">
                     <template lwc:if={showTitle}>
                         <div class="section-layout-container slds-section slds-is-open slds-button slds-section__title-action slds-theme_shade">
                             <h3 slot="title" class="slds-truncate slds-p-around_xx-small">
                                 <span class="slds-text-heading_small" title="Section Title">{card.title}</span>
                             </h3>
                         </div>
-                    </template>  
-                    </div>    
+                    </template>
+                    </div>
                 </template>
                 <div class={sectionBodyClass}>
-                    <div class="slds-col slds-grid slds-grid_vertical">                 
+                    <div class="slds-col slds-grid slds-grid_vertical">
                         <div class="slds-col">
                             <template lwc:if={showDescription}>
                                 <p class="slds-var-p-left_medium slds-var-p-right_x-small slds-var-p-bottom_small">{card.body}</p>
                             </template>
-                        </div>   
+                        </div>
                         <div class="slds-col">
                         <!-- TODO: Do we put this in a Layout which would be responsive to the container, this could allow for empty slots too -->
                         <div class="slds-var-m-left_medium slds-clearfix">
@@ -53,12 +53,14 @@
                                     <c-indicator-bundle-item if:true={fld.fShowAvatar} key={fld.fName}
                                         ind-text={fld.fTextShown}
                                         ind-size={indsSize}
-                                        ind-shape={indsShape} 
+                                        ind-shape={indsShape}
                                         ind-hover-text={fld.fHoverValue}
                                         ind-icon={fld.fIconName}
                                         ind-image={fld.fImageURL}
                                         ind-background-color={fld.fIconBackground}
                                         ind-foreground-color={fld.fIconForeground}
+                                        data-id={fld.fId}
+                                        onclick={handleIndicatorClick}
                                         >
                                     </c-indicator-bundle-item>
                                 </template>
@@ -77,9 +79,9 @@
                                 slot="actions"
                                 onclick={handleInfoKeyClick}
                                 aria-haspopup="dialog"
-                            ></lightning-button-icon> 
+                            ></lightning-button-icon>
                             <template if:true={showRefresh}>
-                                <lightning-button-icon 
+                                <lightning-button-icon
                                     variant="base"
                                     icon-name="utility:refresh"
                                     alternative-text="Refresh"

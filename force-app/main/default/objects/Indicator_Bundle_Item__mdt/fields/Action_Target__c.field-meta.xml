@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action_Target__c</fullName>
+    <description>The target destination of the selected action when the Indicator is clicked.  Currently, only a standard webpage is supported.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The target destination of the selected action when the Indicator is clicked.</inlineHelpText>
+    <label>Action Target</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

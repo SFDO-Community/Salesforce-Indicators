@@ -1,20 +1,20 @@
 public with sharing class Cmdt {
-    
+
     // Initialize the static variables with CMDT values that exist in the org
     public static void initializeConfiguration() {
-        
+
         // Gather all active Bundles and put them into a Map (key: DeveloperName; Bundle)
         for( Indicator_Bundle__mdt bundle : [
             SELECT Id, DeveloperName, MasterLabel, Label,
-                Active__c, 
-                Card_Icon__c, 
-                Card_Icon_Background__c, 
-                Card_Icon_Foreground__c, 
-                Card_Text__c, 
-                Card_Title__c, 
+                Active__c,
+                Card_Icon__c,
+                Card_Icon_Background__c,
+                Card_Icon_Foreground__c,
+                Card_Text__c,
+                Card_Title__c,
                 Description__c,
-                sObject__c, 
-                sObject__r.QualifiedApiName, 
+                sObject__c,
+                sObject__r.QualifiedApiName,
                 sObject__r.Label
             FROM Indicator_Bundle__mdt
             ORDER BY Label
@@ -59,7 +59,8 @@ public with sharing class Cmdt {
         for( Indicator_Bundle_Item__mdt bundleItem : [
             SELECT Indicator_Bundle__c, Indicator_Bundle__r.DeveloperName,
                 Indicator_Item__c, Indicator_Item__r.DeveloperName,
-                Order__c
+                Order__c,
+                Action_Target__c
             FROM Indicator_Bundle_Item__mdt
             // WHERE Indicator_Bundle__r.Active__c = TRUE
             // AND Indicator_Item__r.Active__c = TRUE
@@ -144,7 +145,7 @@ public with sharing class Cmdt {
     }
 
     public static List<Indicator_Item__mdt> getAllOrphanItems(){
-        
+
         List<Indicator_Item__mdt> orphanItems = new List<Indicator_Item__mdt>();
 
         for(String itemName : itemsByName.keyset()){
@@ -173,7 +174,7 @@ public with sharing class Cmdt {
     public static List<Indicator_Bundle_Item__mdt> getBundleItems(String bundleDevName){
         if(bundleItemsByBundle.containsKey(bundleDevname))
             return bundleItemsByBundle.get(bundleDevName);
-        else 
+        else
             return new List<Indicator_Bundle_Item__mdt>();
     }
 
