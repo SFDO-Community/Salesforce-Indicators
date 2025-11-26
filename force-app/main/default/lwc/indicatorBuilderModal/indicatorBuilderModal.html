@@ -13,7 +13,8 @@
         <div class="slds-is-relative slds-container_fluid">
             <c-indicator-builder
                     indicator={indicator}
-                    onindicatorvaluechange={handleIndicatorValueChange}>
+                    onindicatorvaluechange={handleIndicatorValueChange}
+                    oncancel={handleCancel}>
             </c-indicator-builder>
             <lightning-spinner lwc:if={saveInProgress}></lightning-spinner>
         </div>

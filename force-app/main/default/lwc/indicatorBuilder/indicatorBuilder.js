@@ -69,7 +69,8 @@ export default class IndicatorBuilder extends LightningElement {
                         ContainsText: extension.ContainsText,
                         Minimum: extension.Minimum,
                         Maximum: extension.Maximum,
-                        isActive: extension.IsActive !== false,
+                        isActive: false, // This is for UI tab state
+                        isExtensionActive: extension.IsActive !== false, // This is for metadata Active__c
                         iconSource: iconSource,
                         sourceValue: sourceValue,
                         hoverText: extension.ExtensionHoverText || '',
@@ -421,7 +422,8 @@ export default class IndicatorBuilder extends LightningElement {
         let newVariant = {
             label,
             whenToDisplay,
-            isActive,
+            isActive, // This is for UI tab state
+            isExtensionActive: true, // This is for metadata Active__c - default to true
             iconSource,
             hoverText: '',
             sourceValue: null,
@@ -556,6 +558,11 @@ export default class IndicatorBuilder extends LightningElement {
     }
 
     /* SAVE FUNCTIONS */
+    handleCancel() {
+        // Dispatch event to close modal
+        this.dispatchEvent(new CustomEvent('cancel'));
+    }
+    
     handleSaveIndicator() {
         this.saveInProgress = true;
         
@@ -586,7 +593,7 @@ export default class IndicatorBuilder extends LightningElement {
                     QualifiedApiName: extensionApiName,
                     Label: variant.label || `Extension ${index + 1}`,
                     Indicator_Item__c: baseApiName, // Use indicator item QualifiedApiName for Custom Metadata deployment
-                    Active__c: variant.isActive !== false,
+                    Active__c: variant.isExtensionActive !== false,
                     Priority__c: index + 1,
                     Description__c: variant.label || `Extension ${index + 1}`
                 };

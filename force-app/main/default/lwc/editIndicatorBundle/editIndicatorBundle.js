@@ -2,7 +2,7 @@
  * Created by robertwright on 10/31/23.
  */
 
-import {LightningElement, wire, track} from 'lwc';
+import {LightningElement, api, wire, track} from 'lwc';
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import deployIndicatorBundles from '@salesforce/apex/MetadataUtility.deployIndicatorBundles';
 
@@ -21,6 +21,11 @@ import {NavigationMixin} from "lightning/navigation";
 export default class EditIndicatorBundle extends LightningElement {
 
     showSpinner = false;
+    
+    get modalTitle() {
+        return this.indicator_Bundle.Label || 'Edit Bundle';
+    }
+    
     get indicatorBundleObjectApiName() {
         return Indicator_Bundle.objectApiName.replace('__c','__mdt')
     }
@@ -41,6 +46,23 @@ export default class EditIndicatorBundle extends LightningElement {
 
 
     @track indicator_Bundle = {};
+    
+    @api get bundle() {
+        return this.indicator_Bundle;
+    }
+    
+    set bundle(value) {
+        if (value) {
+            console.log('🔧 EditIndicatorBundle: bundle setter called with:', value);
+            console.log('🔧 EditIndicatorBundle: bundle value type:', typeof value);
+            console.log('🔧 EditIndicatorBundle: bundle stringified:', JSON.stringify(value, null, 2));
+            this.indicator_Bundle = { ...value };
+            console.log('🔧 EditIndicatorBundle: indicator_Bundle after assignment:', this.indicator_Bundle);
+        } else {
+            console.log('🔧 EditIndicatorBundle: bundle setter called with null/undefined');
+            this.indicator_Bundle = {};
+        }
+    }
     getdataType(fieldApiName) {
         const fieldObject = this.objectInfo?.fields[fieldApiName] || {};
         switch (fieldObject.dataType) {
@@ -51,7 +73,7 @@ export default class EditIndicatorBundle extends LightningElement {
         }
     }
     get bundleInfo() {
-        return {
+        const result = {
             Label : {
                 fieldApiName : 'Label',
                 label: 'Label',
@@ -128,7 +150,8 @@ export default class EditIndicatorBundle extends LightningElement {
                 dataType: this.getdataType(sObject_FIELD.fieldApiName),
                 required: this.objectInfo?.fields[sObject_FIELD.fieldApiName]?.required
             }
-        }
+        };
+        return result;
     }
 
 
@@ -166,7 +189,14 @@ export default class EditIndicatorBundle extends LightningElement {
         const fieldName = (event.target.dataset || {}).fieldApiName;
         this.indicator_Bundle[fieldName] = value;
     }
+    handleCancel() {
+        // Dispatch event to close modal
+        this.dispatchEvent(new CustomEvent('cancel'));
+    }
+    
     handleSave(event) {
+        console.log('🔧 EditIndicatorBundle: handleSave called');
+        console.log('🔧 EditIndicatorBundle: indicator_Bundle data:', JSON.stringify(this.indicator_Bundle, null, 2));
         this.showSpinner = true;
         this.saveMetaDataRecord();
     }
@@ -174,14 +204,34 @@ export default class EditIndicatorBundle extends LightningElement {
 
 
     saveMetaDataRecord() {
-        deployIndicatorBundles({ wrapper: JSON.stringify({ 'indicatorBundle': this.indicator_Bundle }) })
+        console.log('🔧 EditIndicatorBundle: saveMetaDataRecord called');
+        
+        // Create a clean bundle object with only the editable fields
+        const bundleToSave = {
+            Id: this.indicator_Bundle.Id,
+            QualifiedApiName: this.indicator_Bundle.QualifiedApiName,
+            Label: this.indicator_Bundle.Label,
+            Active__c: this.indicator_Bundle.Active__c,
+            Card_Icon__c: this.indicator_Bundle.Card_Icon__c,
+            Card_Title__c: this.indicator_Bundle.Card_Title__c,
+            Description__c: this.indicator_Bundle.Description__c,
+            sObject__c: this.indicator_Bundle.sObject__c,
+            Delete__c: false
+        };
+        
+        console.log('🔧 EditIndicatorBundle: Clean bundle object to save:', JSON.stringify({ 'indicatorBundle': bundleToSave }, null, 2));
+        
+        deployIndicatorBundles({ wrapper: JSON.stringify({ 'indicatorBundle': bundleToSave }) })
             .then(result => {
-                console.log('deploymentId = ' + result);
+                console.log('🔧 EditIndicatorBundle: Deploy success, deploymentId =', result);
+                // Dispatch event to close modal with success
+                this.dispatchEvent(new CustomEvent('save', { detail: result }));
             })
             .catch(error => {
-                console.log(error);
+                console.error('🔧 EditIndicatorBundle: Deploy error:', error);
             })
             .finally(() => {
+                console.log('🔧 EditIndicatorBundle: Deploy completed, hiding spinner');
                 this.showSpinner = false;
             });
     }

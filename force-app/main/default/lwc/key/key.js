@@ -278,9 +278,22 @@ export default class Key extends LightningElement {
     }
 
     handleClick(event){
-        this.dispatchEvent(new CustomEvent(event.target.dataset.eventType, {
-            detail: event.target.name
-        }));
+        
+        const eventType = event.target.dataset.eventType;
+        const targetName = event.target.name;
+        
+        if (!eventType) {
+            console.error('❌ No eventType found in dataset');
+            return;
+        }
+        
+        try {
+            this.dispatchEvent(new CustomEvent(eventType, {
+                detail: targetName
+            }));
+        } catch (error) {
+            console.error('Error dispatching event: ', error);
+        }
         //window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
     }
 

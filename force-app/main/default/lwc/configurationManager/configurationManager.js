@@ -158,9 +158,51 @@ export default class ConfigurationManager extends LightningElement {
     }
 
     handleEditBundle(event) {
-        editIndicatorBundleModal.open().then((result) => {
-            // Handle result if needed
-        });
+        console.log('🔧 Edit Bundle event received:', event.detail);
+        console.log('🔧 Available bundle data:', this.bundle);
+        console.log('🔧 Available indicator bundle:', this.indicatorBundle);
+        console.log('🔧 Available bundleName:', this.bundleName);
+        
+        try {
+            const bundleId = event.detail;
+            
+            // Use the current bundle data or find from indicatorBundle
+            let bundleData = this.bundle;
+            if (this.indicatorBundle?.bundle) {
+                bundleData = this.indicatorBundle.bundle;
+                console.log('🔧 Using indicatorBundle.bundle:', bundleData);
+            } else if (this.bundle) {
+                console.log('🔧 Using this.bundle:', bundleData);
+            }
+            
+            // If we don't have bundle data, try to create it from available info
+            if (!bundleData && this.bundleName) {
+                bundleData = {
+                    QualifiedApiName: this.bundleName,
+                    Label: this.bundleName
+                };
+                console.log('🔧 Created minimal bundle data:', bundleData);
+            }
+            
+            console.log('🔧 Final bundle data to pass:', bundleData);
+            
+            if (bundleData) {
+                console.log('🔧 Opening modal with bundleData:', JSON.stringify(bundleData, null, 2));
+                
+                editIndicatorBundleModal.open({
+                    size: 'large',
+                    bundle: bundleData
+                }).then((result) => {
+                    console.log('🔧 Edit Bundle modal result:', result);
+                }).catch((error) => {
+                    console.error('🔧 Modal open error:', error);
+                });
+            } else {
+                console.error('🔧 No bundle data available');
+            }
+        } catch (error) {
+            console.error('🔧 handleEditBundle error:', error);
+        }
     }
 
 }

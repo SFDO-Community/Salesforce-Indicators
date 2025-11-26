@@ -82,6 +82,10 @@
                                     <lightning-input label="Indicator Label" value={activeVariant.label}
                                                      data-index={index} data-property="label"
                                                      oncommit={handleVariantPropertyChange}></lightning-input>
+                                    <lightning-input label="Active" type="toggle" checked={activeVariant.isExtensionActive}
+                                                     data-index={index} data-property="isExtensionActive"
+                                                     onchange={handleVariantPropertyChange}
+                                                     field-level-help="When enabled, this variant will be evaluated and displayed if conditions are met"></lightning-input>
                                     <lightning-combobox label="Select Icon Source" options={iconSourceOptions}
                                                         value={activeVariant.iconSource} dropdown-alignment="auto" data-index={index}
                                                         data-property="iconSource"
@@ -176,11 +180,16 @@
             <div class="slds-p-top_medium" style="border-top: 1px solid #dddbda;">
                 <lightning-layout horizontal-align="end">
                     <lightning-button
+                        label="Cancel"
+                        onclick={handleCancel}>
+                    </lightning-button>
+                    <lightning-button
                         disabled={saveInProgress}
                         variant="brand"
                         name="Save Changes"
                         label="Save"
-                        onclick={handleSaveIndicator}>
+                        onclick={handleSaveIndicator}
+                        class="slds-m-left_x-small">
                     </lightning-button>
                 </lightning-layout>
                 <lightning-spinner lwc:if={saveInProgress}></lightning-spinner>

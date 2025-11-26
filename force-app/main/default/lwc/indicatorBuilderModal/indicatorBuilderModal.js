@@ -60,6 +60,10 @@ export default class IndicatorBuilderModal extends LightningModal {
             this.hasChanges = true;
         }
     }
+    handleCancel() {
+        this.close();
+    }
+    
     handleSaveIndicatorMetadata(event) {
         this.saveInProgress = true;
         this.deployMetaData();

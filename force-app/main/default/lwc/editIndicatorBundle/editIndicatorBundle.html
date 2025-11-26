@@ -2,92 +2,98 @@
  - Created by robertwright on 10/31/23.
  -->
 
-<!-- Edit Indicator Bundle -->
 <template>
-    <div class="slds-container_fluid slds-is-relative" style="min-height: 500px">
-        <template if:true={objectInfo.apiName}>
-            <lightning-layout class="slds-container_fluid" multiple-rows >
-                <lightning-layout-item padding="horizontal-small" size=6>
+    <template lwc:if={objectInfo.apiName}>
+        <div class="slds-p-around_medium">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
                     <lightning-input
-                            required
-                            data-field-api-name={bundleInfo.Label.fieldApiName}
-                            type={bundleInfo.Label.dataType}
-                            label={bundleInfo.Label.label}
-                            value={bundleInfo.Label.value}
-                            field-level-help={bundleInfo.Label.inlineHelpText}
-                            onchange={handleLabelChange}>
+                        required
+                        data-field-api-name={bundleInfo.Label.fieldApiName}
+                        type={bundleInfo.Label.dataType}
+                        label={bundleInfo.Label.label}
+                        value={bundleInfo.Label.value}
+                        field-level-help={bundleInfo.Label.inlineHelpText}
+                        onchange={handleLabelChange}>
                     </lightning-input>
-                </lightning-layout-item>
-                <lightning-layout-item padding="horizontal-small" size=6>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
                     <lightning-input
-                            disabled
-                            data-field-api-name={bundleInfo.QualifiedApiName.fieldApiName}
-                            type={bundleInfo.QualifiedApiName.dataType}
-                            label={bundleInfo.QualifiedApiName.label}
-                            value={bundleInfo.QualifiedApiName.value}
-                            field-level-help={bundleInfo.QualifiedApiName.inlineHelpText}>
+                        disabled
+                        data-field-api-name={bundleInfo.QualifiedApiName.fieldApiName}
+                        type={bundleInfo.QualifiedApiName.dataType}
+                        label={bundleInfo.QualifiedApiName.label}
+                        value={bundleInfo.QualifiedApiName.value}
+                        field-level-help={bundleInfo.QualifiedApiName.inlineHelpText}>
                     </lightning-input>
-                </lightning-layout-item>
-
-                <lightning-layout-item padding="horizontal-small" size=12>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
                     <c-fsc_object-selector
-                    onchange={handleChange}
-                    data-field-api-name={bundleInfo.sObject_FIELD.fieldApiName}>
+                        onchange={handleChange}
+                        data-field-api-name={bundleInfo.sObject_FIELD.fieldApiName}>
                     </c-fsc_object-selector>
-                </lightning-layout-item>
-
-                <lightning-layout-item padding="horizontal-small" size=4>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
                     <lightning-input
-                            data-field-api-name={bundleInfo.Card_Title_FIELD.fieldApiName}
-                            required={bundleInfo.Card_Title_FIELD.required}
-                            type={bundleInfo.Card_Title_FIELD.dataType}
-                            label={bundleInfo.Card_Title_FIELD.label}
-                            value={bundleInfo.Card_Title_FIELD.value}
-                            field-level-help={bundleInfo.Card_Title_FIELD.inlineHelpText}
-                            onchange={handleChange}>
+                        data-field-api-name={bundleInfo.Card_Title_FIELD.fieldApiName}
+                        required={bundleInfo.Card_Title_FIELD.required}
+                        type={bundleInfo.Card_Title_FIELD.dataType}
+                        label={bundleInfo.Card_Title_FIELD.label}
+                        value={bundleInfo.Card_Title_FIELD.value}
+                        field-level-help={bundleInfo.Card_Title_FIELD.inlineHelpText}
+                        onchange={handleChange}>
                     </lightning-input>
-                </lightning-layout-item>
-                <lightning-layout-item padding="horizontal-small" size=4>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
                     <lightning-input
-                            data-field-api-name={bundleInfo.Card_Text_FIELD.fieldApiName}
-                            required={bundleInfo.Card_Text_FIELD.required}
-                            type={bundleInfo.Card_Text_FIELD.dataType}
-                            label={bundleInfo.Card_Text_FIELD.label}
-                            value={bundleInfo.Card_Text_FIELD.value}
-                            field-level-help={bundleInfo.Card_Text_FIELD.inlineHelpText}
-                            onchange={handleChange}>
+                        data-field-api-name={bundleInfo.Card_Text_FIELD.fieldApiName}
+                        required={bundleInfo.Card_Text_FIELD.required}
+                        type={bundleInfo.Card_Text_FIELD.dataType}
+                        label={bundleInfo.Card_Text_FIELD.label}
+                        value={bundleInfo.Card_Text_FIELD.value}
+                        field-level-help={bundleInfo.Card_Text_FIELD.inlineHelpText}
+                        onchange={handleChange}>
                     </lightning-input>
-                </lightning-layout-item>
-                <lightning-layout-item padding="horizontal-small" size=4>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
                     <lightning-input
-                            data-field-api-name={bundleInfo.Card_Icon_FIELD.fieldApiName}
-                            required={bundleInfo.Card_Icon_FIELD.required}
-                            type={bundleInfo.Card_Icon_FIELD.dataType}
-                            label={bundleInfo.Card_Icon_FIELD.label}
-                            value={bundleInfo.Card_Icon_FIELD.value}
-                            field-level-help={bundleInfo.Card_Icon_FIELD.inlineHelpText}
-                            onchange={handleChange}>
+                        data-field-api-name={bundleInfo.Card_Icon_FIELD.fieldApiName}
+                        required={bundleInfo.Card_Icon_FIELD.required}
+                        type={bundleInfo.Card_Icon_FIELD.dataType}
+                        label={bundleInfo.Card_Icon_FIELD.label}
+                        value={bundleInfo.Card_Icon_FIELD.value}
+                        field-level-help={bundleInfo.Card_Icon_FIELD.inlineHelpText}
+                        onchange={handleChange}>
                     </lightning-input>
-                </lightning-layout-item>
-                <lightning-layout-item padding="horizontal-small" size=12>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
                     <lightning-input
-                            data-field-api-name={bundleInfo.Description_FIELD.fieldApiName}
-                            required={bundleInfo.Description_FIELD.required}
-                            type={bundleInfo.Description_FIELD.dataType}
-                            label={bundleInfo.Description_FIELD.label}
-                            value={bundleInfo.Description_FIELD.value}
-                            field-level-help={bundleInfo.Description_FIELD.inlineHelpText}
-                            onchange={handleChange}>
+                        data-field-api-name={bundleInfo.Description_FIELD.fieldApiName}
+                        required={bundleInfo.Description_FIELD.required}
+                        type={bundleInfo.Description_FIELD.dataType}
+                        label={bundleInfo.Description_FIELD.label}
+                        value={bundleInfo.Description_FIELD.value}
+                        field-level-help={bundleInfo.Description_FIELD.inlineHelpText}
+                        onchange={handleChange}>
                     </lightning-input>
-                </lightning-layout-item>
-
-                <lightning-layout class="slds-container_fluid slds-p-around_small slds-margin-top_small" horizontal-align="end">
-                    <lightning-button label="Save" value="Save" variant="brand" onclick={handleSave} ></lightning-button>
-                </lightning-layout>
-
-            </lightning-layout>
-        </template>
-
-        <lightning-spinner if:true={showSpinner} variant="brand" size="large"></lightning-spinner>
-    </div>
+                </div>
+            </div>
+            
+            <div class="slds-p-top_large slds-text-align_right">
+                <lightning-button 
+                    label="Cancel" 
+                    onclick={handleCancel}>
+                </lightning-button>
+                <lightning-button 
+                    label="Save" 
+                    variant="brand" 
+                    disabled={showSpinner}
+                    onclick={handleSave}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+        </div>
+    </template>
+    
+    <lightning-spinner lwc:if={showSpinner}></lightning-spinner>
 </template>
