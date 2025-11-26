@@ -1,0 +1,17 @@
+<template>
+    <lightning-modal-header label={modalTitle}>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="slds-is-relative slds-container_fluid">
+            <c-edit-indicator-bundle 
+                bundle={bundle}
+                oncancel={handleCancel}
+                onsave={handleSave}>
+            </c-edit-indicator-bundle>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+    </lightning-modal-footer>
+</template>

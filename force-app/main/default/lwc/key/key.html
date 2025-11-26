@@ -70,6 +70,7 @@
                     <template lwc:if={isBundle}>
                         <lightning-button 
                             name={bundleDetails.BundleId} 
+                            data-event-type="editbundle"
                             onclick={handleClick} 
                             label="Edit Bundle" 
                             title="Edit Bundle" 
@@ -132,7 +133,7 @@
                                 </lightning-layout-item>
                                 <lightning-layout-item padding="horizontal-small" size="2" class="slds-text-align_right">
                                     <template lwc:if={isManageEnabled}>
-                                        <lightning-button name={indicatorItem.IndicatorId} onclick={handleClick} label="Edit Indicator" title="Edit Indicator" icon-name="utility:setup"></lightning-button>
+                                        <lightning-button name={indicatorItem.IndicatorId} onclick={handleClick} data-event-type="editindicator" label="Edit Indicator" title="Edit Indicator" icon-name="utility:setup"></lightning-button>
                                     </template>
                                 </lightning-layout-item>
                             </lightning-layout>

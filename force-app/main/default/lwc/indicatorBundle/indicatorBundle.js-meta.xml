@@ -9,7 +9,7 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
-            <property name="bundleName" type="String" label="Indicator Bundle" datasource="apex://inds.IndicatorListBundleSelector" description="Choose the Indicator Bundle."/>
+            <property name="bundleName" type="String" label="Indicator Bundle" datasource="apex://IndicatorListBundleSelector" description="Choose the Indicator Bundle."/>
             <property name="titleStyle" type="String" label="Title Style" placeholder="Lightning Card" datasource="Lightning Card,Dynamic Forms" description="Choose the Title Style: Standard Lightning Card or a style to match Dynamic Forms."/>
             <property name="showTitle" type="Boolean" default="true" label="Display Title" description="Display the Indicator's Title on the component."/>
             <property name="showDescription" type="Boolean" default="true" label="Display Description" description="Display the Indicator's Description on the component."/>

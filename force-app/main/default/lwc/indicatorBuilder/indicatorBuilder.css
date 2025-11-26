@@ -1,0 +1,18 @@
+/* .slds-vertical-tabs, .slds-vertical-tabs * { */
+    /* overflow: visible; */
+/* } */
+/* , .slds-vertical-tabs__content, .slds-vertical-tabs__content * { */
+.slds-vertical-tabs {
+    overflow: visible;
+}
+
+.deleteVariantButton {
+    position: absolute;
+    right: 0.25em;
+    opacity: 0;
+    transition: 0.15s ease-in-out;
+}
+
+.tabLink:hover .deleteVariantButton {
+    opacity: 1;
+}

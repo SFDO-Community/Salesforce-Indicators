@@ -52,17 +52,5 @@
         <lightning-layout-item padding="horizontal-small" size="2"  >
             {keyExtensionLogic}
         </lightning-layout-item>
-        <template lwc:if={isManageEnabled}>
-            <lightning-layout-item padding="horizontal-small" size="1" class="slds-text-align_right">
-                <lightning-button-icon 
-                    name={keyId} 
-                    title="Edit Indicator" 
-                    alternative-text="Edit Indicator" 
-                    icon-name="utility:setup" 
-                    class="slds-m-left_xx-small"
-                    onclick={handleClick}
-                ></lightning-button-icon>
-            </lightning-layout-item>
-        </template>
     </lightning-layout>
 </template>
