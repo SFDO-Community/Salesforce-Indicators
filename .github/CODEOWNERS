@@ -6,5 +6,9 @@
 /tasks/               @SFDO-Community/sfdo-release-engineers
 
 # Actions
-/.github              @SFDO-Community/sfdo-release-engineers
-/scripts              @SFDO-Community/sfdo-release-engineers
+/.github                @SFDO-Community/sfdo-release-engineers
+/scripts                @SFDO-Community/sfdo-release-engineers
+
+
+#ECCN:Open Source
+#GUSINFO:Open Source,Open Source Workflow
