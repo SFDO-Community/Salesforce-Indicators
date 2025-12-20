@@ -130,8 +130,10 @@ flows:
       3:
         task: deploy_sample_indicators_objects
       4:
-        task: deploy_training_indicators
+        task: deploy_sample_indicators_layouts
       5:
+        task: deploy_training_indicators
+      6:
         task: generate_accounts_and_contacts
 
 plans:
