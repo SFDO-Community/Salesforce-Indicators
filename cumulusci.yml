@@ -4,9 +4,9 @@ project:
     package:
         name: Salesforce-Indicators
         namespace: inds
-        api_version: '55.0'
+        api_version: '65.0'
     git:
-        default_branch: 'master'
+        default_branch: 'main'
     test:
         name_match: '%Tests'
     source_format: sfdx
@@ -16,8 +16,7 @@ orgs:
         dev:
             config_file: orgs/dev.json
             days: 30
-            namespaced: True
-    scratch:
+            namespaced: false
         demo:
             config_file: orgs/demo.json
             days: 15
@@ -45,7 +44,7 @@ tasks:
         group: Salesforce Metadata
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
-            path: unpackaged/config/sample_AccountContact
+            path: unpackaged/config/sample_AccountContact/Part_1
     
     deploy_sample_indicators_layouts:
         description: Deploys - Sample Indicators Layouts
@@ -53,7 +52,15 @@ tasks:
         group: Salesforce Metadata
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
-            path: unpackaged/config/sample_AccountContact_FlexiPages
+            path: unpackaged/config/sample_AccountContact/Part_2
+    
+    deploy_sample_indicators_objects:
+        description: Deploys - Sample Indicators Assigning Layouts to Objects
+        name: Deploy Page Layouts for Sample Indicators
+        group: Salesforce Metadata
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/sample_AccountContact/Part_3
     
     deploy_training_indicators:
         description: Deploys - Example Indicators used for Training 
@@ -80,16 +87,17 @@ tasks:
 flows:
   sample_inds:
     steps:
-        1:
-            task: deploy_sample_indicators
-            ui_options:
-              is_required: False
-              is_recommended: False
-        2:
-            task: deploy_sample_indicators_layouts
-            ui_options:
-              is_required: False
-              is_recommended: False
+      1:
+        task: deploy_sample_indicators
+        ui_options:
+          is_required: False
+          is_recommended: False
+      2:
+        task: deploy_sample_indicators_layouts
+        ui_options:
+          is_required: False
+          is_recommended: False
+  
   customer_org:
     steps:
       1:
@@ -103,12 +111,16 @@ flows:
         ui_options:
           is_required: False
           is_recommended: False
+  
   config_dev:
     steps:
-        3:
-            task: generate_accounts_and_contacts
-        4:
-            flow: sample_inds
+      3:
+        task: generate_accounts_and_contacts
+      4:
+        flow: sample_inds
+      5:
+        task: deploy_sample_indicators_objects
+  
   config_demo:
     steps:
       1:
@@ -116,8 +128,10 @@ flows:
       2:
         flow: sample_inds
       3:
-        task: deploy_training_indicators
+        task: deploy_sample_indicators_objects
       4:
+        task: deploy_training_indicators
+      5:
         task: generate_accounts_and_contacts
 
 plans:
