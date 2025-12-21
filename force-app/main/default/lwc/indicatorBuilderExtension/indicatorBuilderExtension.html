@@ -1,0 +1,84 @@
+<template>
+    <template lwc:if={activeVariant}>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_3-of-4 slds-grid slds-wrap slds-border_right">
+                <div class="variantDesign slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                    <p class="slds-text-heading_small">Design</p>
+                    <lightning-input label="Indicator Label" value={activeVariant.label} data-property="label"
+                        oncommit={handleVariantPropertyChange}></lightning-input>
+                    <lightning-combobox label="Select Icon Source" options={iconSourceOptions}
+                        value={activeVariant.iconSource} dropdown-alignment="auto" data-property="iconSource"
+                        onchange={handleVariantPropertyChange}></lightning-combobox>
+                    <div class="iconSourceInputs">
+                        <template lwc:if={iconSourceIs.sldsIcon}>
+                            <c-fsc_combobox label="Select Icon" options={iconOptions} icon-size="small"
+                                value={activeVariant.sourceValue} data-property="sourceValue"
+                                onchange={handleVariantPropertyChange}></c-fsc_combobox>
+                        </template>
+                        <template lwc:elseif={iconSourceIs.url}>
+                            <lightning-input label="Enter URL" value={activeVariant.sourceValue}
+                                data-property="sourceValue" onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+                        <template lwc:elseif={iconSourceIs.staticResource}>
+                            <lightning-input label="Select Static Resource" value={activeVariant.sourceValue}
+                                data-property="sourceValue" onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+                        <template lwc:elseif={iconSourceIs.staticText}>
+                            <lightning-input label="Enter Static Text" value={activeVariant.sourceValue}
+                                class="slds-p-top_xxx-small" data-property="sourceValue"
+                                onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+                        <lightning-input label="Hover Text" value={activeVariant.hoverText} data-property="hoverText"
+                            onchange={handleVariantPropertyChange}></lightning-input>
+                        <template lwc:if={showColourOption}>
+                            <lightning-input label="Override Colours" type="checkbox" data-property="overrideColours"
+                                checked={activeVariant.overrideColours}
+                                onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+                        <template lwc:if={showColourSelectors}>
+                            <lightning-input label="Select Foreground Colour" type="color"
+                                data-property="foregroundColour" value={activeVariant.foregroundColour}
+                                onchange={handleVariantPropertyChange}></lightning-input>
+                            <lightning-input label="Select Background Colour" type="color"
+                                data-property="backgroundColour" value={activeVariant.backgroundColour}
+                                onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+
+                    </div>
+                </div>
+                <template lwc:if={activeVariant.isExtension}>
+                    <div class="variantLogic slds-col slds-size_1-of-1 slds-p-top_x-small">
+                        <p class="slds-text-heading_small">Extension Logic</p>
+                        <lightning-combobox label="Show When Field:" options={activeWhenToDisplayOptions}
+                            value={computedWhenToDisplay} data-property="whenToDisplay"
+                            onchange={handleVariantPropertyChange} dropdown-alignment="auto"></lightning-combobox>
+                        <template lwc:if={filterTypeIs.text}>
+                            <lightning-input label="Contains Text" value={activeVariant.ContainsText} 
+                                data-property="ContainsText" onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+                        <template lwc:elseif={filterTypeIs.number}>
+                            <lightning-input label="Number" type="number" value={activeVariant.ContainsText}
+                                data-property="ContainsText" onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+                        <template lwc:elseif={filterTypeIs.numericRange}>
+                            <lightning-input label="Greater Than or Equal To" type="number" value={activeVariant.Minimum}
+                                data-property="Minimum" onchange={handleVariantPropertyChange}></lightning-input>
+                            <lightning-input label="Less Than" type="number" value={activeVariant.Maximum}
+                                data-property="Maximum" onchange={handleVariantPropertyChange}></lightning-input>
+                        </template>
+                    </div>
+                </template>
+            </div>
+            <div>
+                <h2 class="slds-text-heading_small slds-col">Preview</h2>
+                <div class="slds-col">
+                    <c-indicator-bundle-item icon-source={activeVariant.iconSource}
+                        source-value={activeVariant.sourceValue} ind-size="large"
+                        ind-foreground-color={activeVariant.foregroundColour}
+                        ind-background-color={activeVariant.backgroundColour} ind-hover-text={activeVariant.hoverText}>
+                    </c-indicator-bundle-item>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

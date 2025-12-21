@@ -43,6 +43,8 @@ export default class Key extends LightningElement {
         
         // this.indicatorItems = this.bundle.Items;
 
+        console.log(JSON.parse(JSON.stringify(this.indicatorItems)));
+
         this.bundleDetails = {
             Title: this.bundle.CardTitle,
             Body: this.bundle.CardText,
@@ -276,7 +278,23 @@ export default class Key extends LightningElement {
     }
 
     handleClick(event){
-        window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
+        
+        const eventType = event.target.dataset.eventType;
+        const targetName = event.target.name;
+        
+        if (!eventType) {
+            console.error('❌ No eventType found in dataset');
+            return;
+        }
+        
+        try {
+            this.dispatchEvent(new CustomEvent(eventType, {
+                detail: targetName
+            }));
+        } catch (error) {
+            console.error('Error dispatching event: ', error);
+        }
+        //window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
     }
 
     get isManageEnabled() {
