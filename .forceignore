@@ -15,10 +15,7 @@ package.xml
 **profile
 **/profiles/**
 **/settings/**
-**/Account/**
-**/Contact/**
 
-**/unpackaged/**
 **/tsconfig.json
 
 **/*.ts

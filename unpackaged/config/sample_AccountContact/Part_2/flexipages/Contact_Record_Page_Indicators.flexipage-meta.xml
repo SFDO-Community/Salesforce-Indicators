@@ -195,7 +195,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>bundleName</name>
-                    <value>Account_Company_Info</value>
+                    <value>Contact_Contact_Info</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>indsShape</name>
@@ -208,6 +208,10 @@
                 <componentInstanceProperties>
                     <name>showDescription</name>
                     <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showFooter</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showRefresh</name>
@@ -224,6 +228,48 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>bundleName</name>
+                    <value>Account_Company_Info</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>indsShape</name>
+                    <value>circle</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>indsSize</name>
+                    <value>medium</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>mappedField</name>
+                    <value>AccountId</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showDescription</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showFooter</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showRefresh</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTitle</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>titleStyle</name>
+                    <value>Lightning Card</value>
+                </componentInstanceProperties>
+                <componentName>%%%NAMESPACE_OR_C%%%:indicatorBundle</componentName>
+                <identifier>%%%NAMESPACE_OR_C%%%_indicatorBundle2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>tabs</name>
                     <value>sidebartabs</value>
                 </componentInstanceProperties>
@@ -235,9 +281,9 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Account Record Page (Indicators)</masterLabel>
-    <parentFlexiPage>sfa__Account_rec_L</parentFlexiPage>
-    <sobjectType>Account</sobjectType>
+    <masterLabel>Contact Record Page (Indicators)</masterLabel>
+    <parentFlexiPage>sfa__Contact_rec_L</parentFlexiPage>
+    <sobjectType>Contact</sobjectType>
     <template>
         <name>flexipage:recordHomeTemplateDesktop</name>
     </template>
