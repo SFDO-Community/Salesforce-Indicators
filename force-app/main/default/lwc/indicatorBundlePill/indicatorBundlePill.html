@@ -1,0 +1,20 @@
+<template>
+    <span class="slds-pill slds-pill_link">
+        <span class="slds-pill__icon_container">
+            <c-indicator-bundle-item if:true={fld.fShowAvatar} key={fld.fName}
+                ind-text={fld.fTextShown}
+                ind-size={indsSize} 
+                ind-shape={indsShape} 
+                ind-hover-text={fld.fHoverValue}
+                ind-icon={fld.fIconName}
+                ind-image={fld.fImageURL}
+                ind-background-color={fld.fIconBackground}
+                ind-foreground-color={fld.fIconForeground}
+            >
+            </c-indicator-bundle-item>
+        </span>
+        <div class="slds-pill__action" title={fld.fHoverValue}>
+            <span class="slds-pill__label">{fld.fHoverValue}</span>
+        </div>
+    </span>
+</template>
