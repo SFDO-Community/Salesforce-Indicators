@@ -13,6 +13,7 @@
             <property name="titleStyle" type="String" label="Title Style" placeholder="Lightning Card" datasource="Lightning Card,Dynamic Forms" description="Choose the Title Style: Standard Lightning Card or a style to match Dynamic Forms."/>
             <property name="showTitle" type="Boolean" default="true" label="Display Title" description="Display the Indicator's Title on the component."/>
             <property name="showDescription" type="Boolean" default="true" label="Display Description" description="Display the Indicator's Description on the component."/>
+            <property name="indsStyle" type="String" label="Indicator Style" placeholder="avatar" datasource="avatar,pill" description="Choose the Indicators Style."/>
             <property name="indsSize" type="String" label="Indicator Size" placeholder="large" datasource="large,medium" description="Choose the Indicator Size."/>
             <property name="indsShape" type="String" label="Indicator Shape" placeholder="base" datasource="base,circle" description="Choose the Indicator Shape."/>
             <property name="showRefresh" type="Boolean" label="Show refresh button" description="Enable an admin button to refresh the values."/>

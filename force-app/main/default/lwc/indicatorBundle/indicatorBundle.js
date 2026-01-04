@@ -16,6 +16,7 @@ export default class IndicatorBundle extends LightningElement {
     @api showDescription;
     @api showTitle;
     @api titleStyle = 'Lightning Card';
+    @api indsStyle = 'avatar';
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false;
@@ -133,7 +134,7 @@ export default class IndicatorBundle extends LightningElement {
         const { data, error } = result;
         if(data) {
             if(Object.keys(data).length) {  // Used to confirm that values were returned, rather than an empty object
-                // console.dir(data);   // Retain for debug purposes
+                console.dir(data);   // Retain for debug purposes
 
                 this.bundle = data;
                 this.bundleActive = true;
@@ -237,7 +238,7 @@ export default class IndicatorBundle extends LightningElement {
                     let anyMatch = false;
                     if(item.IsActive){
                         
-                        // console.dir(item);   // Retain for debug purposes
+                        console.dir(item);   // Retain for debug purposes
                                         
                         let dataField = this.objectApiName + "." + item.FieldApiName;
                         // console.log('DataField',dataField);   // Retain for debug purposes
@@ -327,7 +328,7 @@ export default class IndicatorBundle extends LightningElement {
                                                         fName: item.FieldApiName,
                                                         fTextValue: dataValue,
                                                         fImageURL: matchedExtension.ImageUrl,
-                                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue,
+                                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue,
                                                         fShowAvatar: true,
                                                         fIconName : matchedExtension.IconName,
                                                         fIconBackground : matchedExtension.IconBackground,
@@ -362,7 +363,7 @@ export default class IndicatorBundle extends LightningElement {
                                     },
                                 // ! If value is false, the false hover will be set.
                                 ...dataValue || dataValue === 0 ? {
-                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : assignedHoverValue
+                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue
                                     } : {
                                         fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
                                     },
@@ -396,7 +397,7 @@ export default class IndicatorBundle extends LightningElement {
                                             fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.substring(0,3) : ''
                                         } : {
                                         ...dataValue && item.TextValue ? {
-                                                fTextShown : item.TextValue.substring(0,3) 
+                                                fTextShown : this.indsStyle === 'avatar' ? item.TextValue.substring(0,3) : item.TextValue
                                             } : {
                                                 ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
                                                         fTextShown : '' 
@@ -407,7 +408,7 @@ export default class IndicatorBundle extends LightningElement {
                                         }
                                     } : {
                                     ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                            fTextShown : item.FalseTextValue ? item.FalseTextValue.substring(0,3) : ''
+                                            fTextShown : item.FalseTextValue ? this.indsStyle === 'avatar' ? item.FalseTextValue.substring(0,3) : item.FalseTextValue : ''
                                         } : {
                                             fTextShown : '' 
                                         }
@@ -438,6 +439,14 @@ export default class IndicatorBundle extends LightningElement {
         // if modal closed with X button, promise returns result = 'undefined'
         // if modal closed with OK button, promise returns result = 'okay'
         console.log(result);
+    }
+
+    get showAvatarStyle(){
+        return this.indsStyle === 'avatar';
+    }
+
+    get showPillStyle(){
+        return this.indsStyle === 'pill';
     }
 
 }
