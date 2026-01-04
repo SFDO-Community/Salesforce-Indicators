@@ -30,7 +30,7 @@ export default class IndicatorBundleBadge extends LightningElement {
 
             css.setProperty('--backgroundColor', this.indBackgroundColor ? this.indBackgroundColor : '#f3f3f3');
             css.setProperty('--foregroundColor', this.indForegroundColor ? this.indForegroundColor : '#747474');
-            css.setProperty('--textColor', this.indTextColor ? this.indText : '#181818');
+            css.setProperty('--textColor', this.indTextColor ? this.indTextColor : '#181818');
         }
 
     }
