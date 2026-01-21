@@ -6,7 +6,7 @@ project:
         namespace: inds
         api_version: '55.0'
     git:
-        default_branch: 'master'
+        default_branch: 'main'
     test:
         name_match: '%Tests'
     source_format: sfdx
@@ -17,7 +17,6 @@ orgs:
             config_file: orgs/dev.json
             days: 30
             namespaced: True
-    scratch:
         demo:
             config_file: orgs/demo.json
             days: 15
