@@ -4,7 +4,7 @@ project:
     package:
         name: Salesforce-Indicators
         namespace: inds
-        api_version: '55.0'
+        api_version: '65.0'
     git:
         default_branch: 'main'
     test:
@@ -16,7 +16,7 @@ orgs:
         dev:
             config_file: orgs/dev.json
             days: 30
-            namespaced: True
+            namespaced: false
         demo:
             config_file: orgs/demo.json
             days: 15
@@ -80,15 +80,16 @@ flows:
   sample_inds:
     steps:
         1:
-            task: deploy_sample_indicators
-            ui_options:
-              is_required: False
-              is_recommended: False
+          task: deploy_sample_indicators
+          ui_options:
+            is_required: False
+            is_recommended: False
         2:
-            task: deploy_sample_indicators_layouts
-            ui_options:
-              is_required: False
-              is_recommended: False
+          task: deploy_sample_indicators_layouts
+          ui_options:
+            is_required: False
+            is_recommended: False
+
   customer_org:
     steps:
       1:
@@ -105,9 +106,11 @@ flows:
   config_dev:
     steps:
         3:
-            task: generate_accounts_and_contacts
+          task: generate_accounts_and_contacts
         4:
-            flow: sample_inds
+          flow: sample_inds
+        5:
+          task: deploy_sample_indicators_objects
   config_demo:
     steps:
       1:
