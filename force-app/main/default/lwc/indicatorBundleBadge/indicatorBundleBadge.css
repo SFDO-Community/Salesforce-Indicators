@@ -1,0 +1,5 @@
+.indicatorBadge {
+    --slds-c-badge-color-background: var(--backgroundColor);
+    --slds-c-badge-icon-color-foreground: var(--foregroundColor);
+    --slds-c-badge-text-color: var(--textColor);
+}

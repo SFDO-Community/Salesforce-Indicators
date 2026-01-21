@@ -50,17 +50,32 @@
                         <div class="slds-var-m-left_medium slds-clearfix">
                             <template if:true={results}>
                                 <template for:each={results} for:item="fld">
-                                    <c-indicator-bundle-item if:true={fld.fShowAvatar} key={fld.fName}
-                                        ind-text={fld.fTextShown}
-                                        ind-size={indsSize}
-                                        ind-shape={indsShape} 
-                                        ind-hover-text={fld.fHoverValue}
-                                        ind-icon={fld.fIconName}
-                                        ind-image={fld.fImageURL}
-                                        ind-background-color={fld.fIconBackground}
-                                        ind-foreground-color={fld.fIconForeground}
+                                    <template lwc:if={showAvatarStyle}>
+                                        <c-indicator-bundle-item if:true={fld.fShowAvatar} key={fld.fName}
+                                            ind-text={fld.fTextShown}
+                                            ind-size={indsSize}
+                                            ind-shape={indsShape} 
+                                            ind-hover-text={fld.fHoverValue}
+                                            ind-icon={fld.fIconName}
+                                            ind-image={fld.fImageURL}
+                                            ind-background-color={fld.fIconBackground}
+                                            ind-foreground-color={fld.fIconForeground}
+                                            >
+                                        </c-indicator-bundle-item>
+                                    </template>
+                                    <template lwc:if={showBadgeStyle}>
+                                        <c-indicator-bundle-badge if:true={fld.fShowAvatar} key={fld.fName}
+                                            ind-text={fld.fHoverValue} 
+
+                                            ind-icon={fld.fIconName}
+                                            ind-icon-position={fld.fIconPosition}
+                                            ind-background-color={fld.fIconBackground}
+                                            ind-foreground-color={fld.fIconForeground}
+                                            ind-text-color={fld.fTextColor}
                                         >
-                                    </c-indicator-bundle-item>
+                                            <!-- ind-hover-text={fld.fHoverValue} -->
+                                        </c-indicator-bundle-badge>
+                                    </template>
                                 </template>
                             </template>
                         </div>
