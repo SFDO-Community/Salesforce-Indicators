@@ -109,8 +109,7 @@ flows:
           task: generate_accounts_and_contacts
         4:
           flow: sample_inds
-        5:
-          task: deploy_sample_indicators_objects
+
   config_demo:
     steps:
       1:
