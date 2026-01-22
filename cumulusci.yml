@@ -115,26 +115,33 @@ flows:
   config_dev:
     steps:
       3:
-        task: generate_accounts_and_contacts
+        task: assign_permission_sets
+        options:
+          api_names: Indicators_Setup_Access
       4:
-        flow: sample_inds
+        task: generate_accounts_and_contacts
       5:
+        flow: sample_inds
+      6:
         task: deploy_sample_indicators_objects
+
   
   config_demo:
     steps:
       1:
         flow: install_prod
       2:
-        flow: sample_inds
+        task: assign_permission_sets
+        options:
+          api_names: Indicators_Setup_Access
       3:
-        task: deploy_sample_indicators_objects
-      4:
-        task: deploy_sample_indicators_layouts
-      5:
-        task: deploy_training_indicators
-      6:
         task: generate_accounts_and_contacts
+      4:
+        flow: sample_inds
+      5:
+        task: deploy_sample_indicators_objects
+      6:
+        task: deploy_training_indicators
 
 plans:
   install:
