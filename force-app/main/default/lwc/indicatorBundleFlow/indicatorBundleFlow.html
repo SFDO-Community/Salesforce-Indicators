@@ -1,0 +1,14 @@
+<template>
+    <!-- Thin wrapper to host indicatorBundle in Screen Flow context -->
+    <c-indicator-bundle
+        lwc:if={resolvedRecordId}
+        bundle-name={bundleName}
+        title-style={titleStyle}
+        show-title={showTitle}
+        show-description={showDescription}
+        inds-size={indsSize}
+        inds-shape={indsShape}
+        show-refresh={showRefresh}
+        record-id={resolvedRecordId}
+    ></c-indicator-bundle>
+</template>

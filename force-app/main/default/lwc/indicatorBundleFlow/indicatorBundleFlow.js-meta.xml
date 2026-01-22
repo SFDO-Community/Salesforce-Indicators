@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Indicator Bundle for Flow</masterLabel>
+    <description>Display at-a-glance visual representations of status, values, and key details about a record.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="bundleName" type="String" label="Indicator Bundle" description="Choose the Indicator Bundle." required="true"/>
+            <property name="recordId" type="String" label="Record Id" description="RecordId of the record to use with the Indicator Bundle." required="true"/>
+            <property name="titleStyle" type="String" label="Title Style"  description="Choose the Title Style: 'Lightning Card' or 'Dynamic Forms'." default="Lightning Card"/>
+            <property name="showTitle" type="Boolean" label="Display Title" description="Display the Indicator's Title on the component." default="true"/>
+            <property name="showDescription" type="Boolean" label="Display Description" description="Display the Indicator's Description on the component." default="true"/>
+            <property name="indsSize" type="String" label="Indicator Size" description="Choose the Indicator Size: 'large' or 'medium'" default="large"/>
+            <property name="indsShape" type="String" label="Indicator Shape" description="Choose the Indicator Shape: 'base' or 'circle'." default="base"/>
+            <property name="showRefresh" type="Boolean" label="Show refresh button" description="Enable an admin button to refresh the values." default="false"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
