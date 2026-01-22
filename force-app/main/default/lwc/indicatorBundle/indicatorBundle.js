@@ -3,6 +3,7 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { refreshApex } from '@salesforce/apex';
 import KeyModal from 'c/indicatorBundleKey';
+import { reduceErrors } from 'c/ldsUtils';
 
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
@@ -89,8 +90,8 @@ export default class IndicatorBundle extends LightningElement {
                     imageName: 'custom:setup'
                 };
             } else {
-                this.targetMessage = 'This Indicator Bundle displays indicators based on the record id (' + data.fields[this.mappedField].value + ') in the mapped field \"' + this.mappedField + '\" from the ' + data.apiName + ' object.';
                 this.targetIdValue = getFieldValue(data, this.targetIdField);
+                this.targetMessage = 'This Indicator Bundle displays indicators based on the record id (' + this.targetIdValue + ') in the mapped field \"' + this.mappedField + '\" from the ' + this.objectApiName + ' object.';
                 this.showIllustration=false;
                 this.illustration = {};
             }
@@ -208,7 +209,7 @@ export default class IndicatorBundle extends LightningElement {
             this.bundle = undefined;
             this.bundleActive = false;
             this.errorOccurred = true;
-            this.errorMessage = JSON.stringify(error);
+            this.errorMessage = reduceErrors(error).join(', '); //JSON.stringify(error);
         }
     }
 
@@ -420,7 +421,7 @@ export default class IndicatorBundle extends LightningElement {
             // console.log('FieldValue => ', JSON.stringify(this.results));   // Retain for debug purposes
         } else if (error) {
             console.log('Error!');
-            this.errorMessage = JSON.stringify(error);
+            this.errorMessage = reduceErrors(error).join(', ');//JSON.stringify(error);
             this.errorOccurred = true;
         }
 
