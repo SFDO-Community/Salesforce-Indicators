@@ -10,3 +10,14 @@
     --slds-c-avatar-text-color-hover:  var(--foregroundColor);
     --slds-c-avatar-text-color: var(--foregroundColor);
 }
+
+.clickable {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Prevent avatar from stealing hover */
+.clickable lightning-avatar {
+    pointer-events: none;
+}

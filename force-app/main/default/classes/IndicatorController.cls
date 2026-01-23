@@ -85,6 +85,8 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String InverseForegroundColor {get; set;}
         @AuraEnabled
+        public String ActionType {get; set;}
+        @AuraEnabled
         public String ActionTarget {get; set;}
     }
 
@@ -223,6 +225,7 @@ public with sharing class IndicatorController {
                     IndicatorItem item = new IndicatorItem();
 
                     item.SortOrder = bundleItem.Order__c;
+                    item.ActionType = bundleItem.Action_Type__c;
                     item.ActionTarget = bundleItem.Action_Target__c;
 
                     Indicator_Item__mdt indicatorItem = Cmdt.getItem(bundleItem.Indicator_Item__r.DeveloperName);

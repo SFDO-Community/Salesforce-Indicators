@@ -1,9 +1,10 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import { getRecord, getFieldValue, notifyRecordUpdateAvailable } from 'lightning/uiRecordApi';
 import { NavigationMixin } from 'lightning/navigation';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { refreshApex } from '@salesforce/apex';
 import KeyModal from 'c/indicatorBundleKey';
+import FlowModal from 'c/flowModal';
 
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
@@ -484,11 +485,46 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     handleIndicatorClick(event) {
         if (event.target.dataset?.id) {
             let item = this.itemsById[event.target.dataset.id];
-            this.clickAction(item.ActionTarget);
+            console.log('Indicator Clicked: ', JSON.stringify(item, null, 4));
+            if(item.ActionType === 'URL'){
+                this.urlAction(item.ActionTarget);
+            } else if (item.ActionType === 'Flow Modal'){
+                this.openFlowModal(item.ActionTarget);
+            }
         }
     }
 
-        clickAction(target) {
+    lastInterviewId = null; // This is the Flow Interview Id, if it's exited early.
+
+    async openFlowModal(target) {
+        console.log('FLOW API NAME: ', target);
+        console.log('Id: ', this.targetIdValue);
+        try {
+            const result = await FlowModal.open({
+                size: 'large',
+                description: 'Indicator Flow Launcher',
+                flowApiName: target,
+                interviewId: this.lastInterviewId,
+                recordId: this.targetIdValue,
+                // inputVariables: this.inputVariables, // Hardcoded in FlowModal right now
+                modalTitle: 'Indicator Flow Launcher'
+            });
+            // result may be { status: 'FINISHED'|'PAUSED'|'CLOSED'|..., interviewId }
+            if (result) {
+                const { status, interviewId } = result;
+                if (status === 'PAUSED' && interviewId) {
+                    this.lastInterviewId = interviewId;
+                } else if (status === 'FINISHED') {
+                    this.lastInterviewId = null;
+                    await notifyRecordUpdateAvailable([{recordId: this.targetIdValue}]);
+                }
+            }
+        } catch (e) {
+            // no-op; LightningModal.open rejects on unexpected errors
+        }
+    }
+
+    urlAction(target) {
         if (target) {
             // let typeMap = {"Record Page": "standard__recordPage", "Web Page": "standard__webPage"};
             let type   = 'standard__webPage';

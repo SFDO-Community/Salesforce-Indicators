@@ -60,7 +60,7 @@ public with sharing class Cmdt {
             SELECT Indicator_Bundle__c, Indicator_Bundle__r.DeveloperName,
                 Indicator_Item__c, Indicator_Item__r.DeveloperName,
                 Order__c,
-                Action_Target__c
+                Action_Type__c, Action_Target__c
             FROM Indicator_Bundle_Item__mdt
             // WHERE Indicator_Bundle__r.Active__c = TRUE
             // AND Indicator_Item__r.Active__c = TRUE

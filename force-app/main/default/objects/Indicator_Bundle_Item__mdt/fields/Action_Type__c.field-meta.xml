@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action_Type__c</fullName>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The type of action to perform when an indicator is clicked.</inlineHelpText>
+    <label>Action Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Flow Modal</fullName>
+                <default>true</default>
+                <label>Flow Modal</label>
+            </value>
+            <value>
+                <fullName>URL</fullName>
+                <default>false</default>
+                <label>URL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

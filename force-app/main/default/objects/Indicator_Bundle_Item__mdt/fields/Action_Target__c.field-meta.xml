@@ -4,7 +4,7 @@
     <description>The target destination of the selected action when the Indicator is clicked.  Currently, only a standard webpage is supported.</description>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>The target destination of the selected action when the Indicator is clicked.</inlineHelpText>
+    <inlineHelpText>The target destination of the selected action when the Indicator is clicked.  This can be a URL or the API name of a Screen Flow.</inlineHelpText>
     <label>Action Target</label>
     <length>255</length>
     <required>false</required>
