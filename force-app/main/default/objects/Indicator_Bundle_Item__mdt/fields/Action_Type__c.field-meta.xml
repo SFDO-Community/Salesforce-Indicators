@@ -12,7 +12,7 @@
             <sorted>true</sorted>
             <value>
                 <fullName>Flow Modal</fullName>
-                <default>true</default>
+                <default>false</default>
                 <label>Flow Modal</label>
             </value>
             <value>
