@@ -134,7 +134,7 @@ export default class IndicatorBundle extends LightningElement {
         const { data, error } = result;
         if(data) {
             if(Object.keys(data).length) {  // Used to confirm that values were returned, rather than an empty object
-                // console.dir(data);   // Retain for debug purposes
+                console.dir(data);   // Retain for debug purposes
 
                 this.bundle = data;
                 this.bundleActive = true;
@@ -238,7 +238,7 @@ export default class IndicatorBundle extends LightningElement {
                     let anyMatch = false;
                     if(item.IsActive){
                         
-                        // console.dir(item);   // Retain for debug purposes
+                        console.dir(item);   // Retain for debug purposes
                                         
                         let dataField = this.objectApiName + "." + item.FieldApiName;
                         // console.log('DataField',dataField);   // Retain for debug purposes
@@ -422,7 +422,7 @@ export default class IndicatorBundle extends LightningElement {
                                         }
                                     } : {
                                     ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                            fTextShown : item.FalseTextValue ? item.FalseTextValue.substring(0,3) : ''
+                                            fTextShown : item.FalseTextValue ? this.indsStyle === 'avatar' ? item.FalseTextValue.substring(0,3) : item.FalseTextValue : ''
                                         } : {
                                             fTextShown : '' 
                                         }
@@ -457,6 +457,10 @@ export default class IndicatorBundle extends LightningElement {
 
     get showAvatarStyle(){
         return this.indsStyle === 'avatar';
+    }
+
+    get showPillStyle(){
+        return this.indsStyle === 'pill';
     }
 
     get showBadgeStyle(){
