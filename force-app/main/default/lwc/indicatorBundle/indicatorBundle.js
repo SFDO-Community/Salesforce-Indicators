@@ -361,7 +361,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                                         fIconBackground : matchedExtension.IconBackground,
                                                         fIconForeground : matchedExtension.IconForeground,
                                                         fTextShown: matchedExtension.TextValue,
-                                                        fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : ''
+                                                        fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : '',
                                                         fTextColor: matchedExtension.BadgeTextColor,
                                                         fIconPosition: matchedExtension.BadgeIconPosition
                                                     }
