@@ -1,13 +1,15 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import { getRecord, getFieldValue, notifyRecordUpdateAvailable } from 'lightning/uiRecordApi';
+import { NavigationMixin } from 'lightning/navigation';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { refreshApex } from '@salesforce/apex';
 import KeyModal from 'c/indicatorBundleKey';
+import FlowModal from 'c/flowModal';
 
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
 
-export default class IndicatorBundle extends LightningElement {
+export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
     @api bundleName;    // Value assigned by the property editor
     @api recordId;  // Record Id from the record page
@@ -31,6 +33,7 @@ export default class IndicatorBundle extends LightningElement {
     hasHeader = false;      // Hide header by default
 
     bundle;     // Stores CMDT Bundle, Items, and Extensions wrapper data
+    itemsById = {};
     card = {};  // Stores the details about the bundle's card to be displayed
 
     apiFieldnameDefinitions = [];   //Holds the Field Name and Object Name to use in the Wire Service
@@ -51,7 +54,7 @@ export default class IndicatorBundle extends LightningElement {
             this.targetIdValue = this.recordId;
         } else {
             this.targetIdField = this.objectApiName + '.' + this.mappedField;
-            console.log(this.targetIdField);
+            // console.log(this.targetIdField);
         }
 
         if(!this.bundleName){
@@ -69,7 +72,7 @@ export default class IndicatorBundle extends LightningElement {
     }
 
     // Check the record for an existing field value in order to initialize it.
-    @wire(getRecord, { recordId: '$recordId', fields: '', optionalFields: '$targetIdField' }) 
+    @wire(getRecord, { recordId: '$recordId', fields: '', optionalFields: '$targetIdField' })
     record ({error, data}) {
         if(error) {
             console.log('ERROR');
@@ -98,7 +101,7 @@ export default class IndicatorBundle extends LightningElement {
         }
     }
 
-    renderedCallback() { 
+    renderedCallback() {
         if(this.bundle){
             this.initCSSVariables();
         }
@@ -184,17 +187,25 @@ export default class IndicatorBundle extends LightningElement {
                             imageName: 'misc:no_content'
                         }
                     }
-                    
+
                     // Loop through the returned CMDT indicator settings and assign the Api Fields which should be queried
                     for( let i = 0; i < this.bundle.Items.length; i++){
-                        let apiFieldSyntax = '' + this.objectApiName + '.' + this.bundle.Items[i].FieldApiName;
+                        let item = this.bundle.Items[i];
+
+                        let apiFieldSyntax = '' + this.objectApiName + '.' + item.FieldApiName;
                         // console.log('fieldSyntax',apiFieldSyntax); // Retain for debug purposes
-                        this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax];
+                        let targetMergeFields = this.targetMergeFields(item);
+                        this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax, ...targetMergeFields];
+
+                        this.itemsById[item.IndicatorId] = JSON.parse(JSON.stringify(item)); // add a copy of the item to an object for easy access and extensibility later
+                        if (targetMergeFields) {  // Add to items to be used when merging the fields with actual values
+                            this.itemsById[item.IndicatorId].TargetMergeFields = targetMergeFields;
+                        }
                     }
 
                 }
 
-         
+
             } else {
                 console.log('No such Bundle');
                 this.card = {
@@ -213,12 +224,26 @@ export default class IndicatorBundle extends LightningElement {
         }
     }
 
+    targetMergeFieldRegex = /{.*?}/g;
+    
+    targetMergeFields(item) {
+        let mergeFieldsWithObjectName = [];
+
+        if (item.ActionTarget) {
+            let matches = new Set(item.ActionTarget.match(this.targetMergeFieldRegex)); // match() returns an array. We force uniqueness by converting to a Set
+
+            mergeFieldsWithObjectName = [...matches].map(match => this.objectApiName + '.' + match.substring(1, match.length - 1));
+        }
+
+        return mergeFieldsWithObjectName;
+    }
+
     refreshCmdt(){
         console.log('Refresh');
         refreshApex(this.wiredCmdt);
         refreshApex(this.wiredData);
     }
- 
+
     // Get the field values for the target record based on the configured fields in CMDT
     // Using 'optionalFields' ensures that if a user does not have access to a field, the indicator will not show.
     // TODO: Add fields parameter to retrieve the record name for use when the targetIdValue is for another record.
@@ -230,27 +255,27 @@ export default class IndicatorBundle extends LightningElement {
         if (data) {
             // console.dir(data);   // Retain for debug purposes
             let matchingFields = [];
-            
+
             // Loop through the configured CMDT indicator items
             this.bundle.Items.forEach(
-                item => 
+                item =>
                 {
                     let anyMatch = false;
                     if(item.IsActive){
-                        
-                        console.dir(item);   // Retain for debug purposes
-                                        
+
+                        // console.dir(item);   // Retain for debug purposes
+
                         let dataField = this.objectApiName + "." + item.FieldApiName;
                         // console.log('DataField',dataField);   // Retain for debug purposes
-                        
+
                         // Get the record's field value from the @wire using the current indicator item's field path
-                        let dataValue = getFieldValue(data, dataField); 
+                        let dataValue = getFieldValue(data, dataField);
 
                         if (item.ZeroBehavior === 'Treat Zeroes as Blanks' && dataValue === 0){
                             dataValue = null;
                         }
                         // console.log('DataValue',dataValue);   // Retain for debug purposes
-                        
+
                         let showDefault = false;
                         if( item.HoverValue || item.TextValue || item.IconName || item.ImageUrl ){
                             showDefault = true;
@@ -262,10 +287,10 @@ export default class IndicatorBundle extends LightningElement {
 
                         // If the record has a value and the CMDT indicator setting has extensions
                         if((dataValue || dataValue === 0) && item.Extensions){
-        
+
                             // Loop through each CMDT indicator setting extension
                             item.Extensions.forEach(
-                                extension => 
+                                extension =>
                                 {
                                     if(extension.IsActive){
 
@@ -289,7 +314,7 @@ export default class IndicatorBundle extends LightningElement {
                                             } else {
                                                 match = fieldValue.includes(compareValue);
                                             }
-                                        } 
+                                        }
                                         // Else if the extension uses a Minimum boundary
                                         else if (extension.Minimum || extension.Minimum === 0 ) {
                                             // console.log('Values',dataValue + ' ' + extension.Minimum + ' ' + extension.Maximum);   // Retain for debug purposes
@@ -298,7 +323,7 @@ export default class IndicatorBundle extends LightningElement {
                                                 if(dataValue >= extension.Minimum && dataValue < extension.Maximum) {
                                                     match = true;
                                                 }
-                                            } 
+                                            }
                                             // Else, check if the record's value is greater than the minimum
                                             else {
                                                 if(dataValue >= extension.Minimum) {
@@ -336,6 +361,7 @@ export default class IndicatorBundle extends LightningElement {
                                                         fIconBackground : matchedExtension.IconBackground,
                                                         fIconForeground : matchedExtension.IconForeground,
                                                         fTextShown: matchedExtension.TextValue,
+                                                        fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : '',
                                                         fTextColor: matchedExtension.BadgeTextColor,
                                                         fIconPosition: matchedExtension.BadgeIconPosition
                                                     }
@@ -346,11 +372,11 @@ export default class IndicatorBundle extends LightningElement {
                                         }
                                     }   // End-If extension.IsActive
                                 }
-                                
+
                             )
-                            
+
                         }
-                        
+
                         // If multiple matching is enabled and did not find a single match
                         // or if multiple matching is not enabled
                         // proceed to assign the indicator properties based on Indicator Item values
@@ -359,6 +385,7 @@ export default class IndicatorBundle extends LightningElement {
                             matchingFields.push(
                             {
                                 fName: item.FieldApiName,   // Retain for debug purposes
+                                fId: item.IndicatorId,      // Used to generate resultsById which is used in click handling
                                 fTextValue: dataValue,      // Retain for debug purposes
                                 ...dataValue || dataValue === 0 ? {
                                         fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
@@ -405,7 +432,7 @@ export default class IndicatorBundle extends LightningElement {
                                     },
                                 //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
                                 //If the Icon Text is entered then show that
-                                //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value    
+                                //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value
                                 ...dataValue || dataValue === 0 ? {
                                     ...matchedExtension ? {
                                             fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.substring(0,3) : ''
@@ -413,8 +440,8 @@ export default class IndicatorBundle extends LightningElement {
                                         ...dataValue && item.TextValue ? {
                                                 fTextShown : this.indsStyle === 'avatar' ? item.TextValue.substring(0,3) : item.TextValue
                                             } : {
-                                                ...item.EmptyStaticBehavior === 'Use Icon Only' ? { 
-                                                        fTextShown : '' 
+                                                ...item.EmptyStaticBehavior === 'Use Icon Only' ? {
+                                                        fTextShown : ''
                                                     } : {
                                                         fTextShown : item.FalseTextValue ? this.indsStyle === 'avatar' ? item.FalseTextValue.substring(0,3) : item.FalseTextValue : ''
                                                     }
@@ -424,11 +451,14 @@ export default class IndicatorBundle extends LightningElement {
                                     ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
                                             fTextShown : item.FalseTextValue ? this.indsStyle === 'avatar' ? item.FalseTextValue.substring(0,3) : item.FalseTextValue : ''
                                         } : {
-                                            fTextShown : '' 
+                                            fTextShown : ''
                                         }
-                                    }
+                                    },
+                                fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : ''
                             });
                         }
+
+                        this.mergeValuesIntoTarget(item, data);
                     }   // End-If item.IsActive
                 });
             this.results = matchingFields;
@@ -439,6 +469,18 @@ export default class IndicatorBundle extends LightningElement {
             this.errorOccurred = true;
         }
 
+    }
+
+    mergeValuesIntoTarget(item, data) {
+        let itemWithMergeFields = this.itemsById[item.IndicatorId];
+        if (itemWithMergeFields.TargetMergeFields) {
+            itemWithMergeFields.TargetMergeFields.forEach(mergeField => {
+                let dataFieldWithoutObjectName = mergeField.substring(mergeField.indexOf('.') + 1);
+                let dataValue = getFieldValue(data, mergeField) ?? '';
+
+                itemWithMergeFields.ActionTarget = itemWithMergeFields.ActionTarget.replaceAll('{' + dataFieldWithoutObjectName + '}', dataValue);
+            });
+        }
     }
 
     async handleInfoKeyClick() {
@@ -453,6 +495,64 @@ export default class IndicatorBundle extends LightningElement {
         // if modal closed with X button, promise returns result = 'undefined'
         // if modal closed with OK button, promise returns result = 'okay'
         console.log(result);
+    }
+
+    handleIndicatorClick(event) {
+        if (event.target.dataset?.id) {
+            let item = this.itemsById[event.target.dataset.id];
+            console.log('Indicator Clicked: ', JSON.stringify(item, null, 4));
+            if(item.ActionType === 'URL'){
+                this.urlAction(item.ActionTarget);
+            } else if (item.ActionType === 'Flow Modal'){
+                this.openFlowModal(item.ActionTarget);
+            }
+        }
+    }
+
+    lastInterviewId = null; // This is the Flow Interview Id, if it's exited early.
+
+    async openFlowModal(target) {
+        console.log('FLOW API NAME: ', target);
+        console.log('Id: ', this.targetIdValue);
+        try {
+            const result = await FlowModal.open({
+                size: 'large',
+                description: 'Indicator Flow Launcher',
+                flowApiName: target,
+                interviewId: this.lastInterviewId,
+                recordId: this.targetIdValue,
+                // inputVariables: this.inputVariables, // Hardcoded in FlowModal right now
+                modalTitle: 'Indicator Flow Launcher'
+            });
+            // result may be { status: 'FINISHED'|'PAUSED'|'CLOSED'|..., interviewId }
+            if (result) {
+                const { status, interviewId } = result;
+                if (status === 'PAUSED' && interviewId) {
+                    this.lastInterviewId = interviewId;
+                } else if (status === 'FINISHED') {
+                    this.lastInterviewId = null;
+                    await notifyRecordUpdateAvailable([{recordId: this.targetIdValue}]);
+                }
+            }
+        } catch (e) {
+            // no-op; LightningModal.open rejects on unexpected errors
+        }
+    }
+
+    urlAction(target) {
+        if (target) {
+            // let typeMap = {"Record Page": "standard__recordPage", "Web Page": "standard__webPage"};
+            let type   = 'standard__webPage';
+
+            let settings;
+            switch(type) {
+                case 'standard__webPage':
+                    settings = {type: type, attributes: {url: target}};
+                    this[NavigationMixin.Navigate](settings);
+                    break;
+            }
+        }
+
     }
 
     get showAvatarStyle(){

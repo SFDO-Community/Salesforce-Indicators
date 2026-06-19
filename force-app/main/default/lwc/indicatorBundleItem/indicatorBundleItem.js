@@ -9,6 +9,7 @@ export default class IndicatorListItem extends LightningElement {
     @api indHoverText = '';
     @api indBackgroundColor;
     @api indForegroundColor;
+    @api indClickable;
 
     get indClass() {
         let classValue = '';

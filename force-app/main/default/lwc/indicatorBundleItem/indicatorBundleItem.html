@@ -1,13 +1,16 @@
 <template>
     <div class="slds-var-m-bottom_x-small slds-float_left">
-        <lightning-avatar 
-            size={indSize}
-            variant={indShape}
-            initials={indText}
-            src={indImage} 
-            fallback-icon-name={indIcon}
-            alternative-text={indHoverText} 
-            class={indClass}>
-        </lightning-avatar>
+        <div class={indClass}>
+            <div class={indClickable}>
+                <lightning-avatar 
+                    size={indSize}
+                    variant={indShape}
+                    initials={indText}
+                    src={indImage} 
+                    fallback-icon-name={indIcon}
+                    alternative-text={indHoverText} 
+                ></lightning-avatar>
+            </div>
+        </div>
     </div>
 </template>
