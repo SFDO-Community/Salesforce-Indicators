@@ -47,7 +47,11 @@ public with sharing class Cmdt {
                 Icon_Foreground__c,
                 Inverse_Icon_Background__c,
                 Inverse_Icon_Foreground__c,
-                Description__c
+                Description__c,
+                Badge_Text_Color__c,
+                Badge_Icon_Position__c,
+                Inverse_Badge_Text_Color__c,
+                Inverse_Badge_Icon_Position__c
             FROM Indicator_Item__mdt
             // WHERE Active__c = TRUE
         ]){
@@ -85,7 +89,9 @@ public with sharing class Cmdt {
                 Static_Text__c,
                 Icon_Background__c,
                 Icon_Foreground__c,
-                Description__c
+                Description__c,
+                Badge_Text_Color__c,
+                Badge_Icon_Position__c
             FROM Indicator_Item_Extension__mdt
             // WHERE Active__c = TRUE
             // AND Indicator_Item__r.Active__c = TRUE
