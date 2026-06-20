@@ -12,6 +12,8 @@ deploy-options.json
 .cci
 /src.orig
 /src
+test_results.json
+test_results.xml
 
 # Python
 *.pyc
