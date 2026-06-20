@@ -215,92 +215,80 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         this.wiredCmdt = result;
         const { data, error } = result;
         if(data) {
-            if(Object.keys(data).length) {  // Used to confirm that values were returned, rather than an empty object
-                // console.dir(data);   // Retain for debug purposes
+            // Note: Cmdt.getBundle() (called from IndicatorController.getIndicatorBundle) never
+            // returns null - an unknown bundleDevName comes back as a wrapper with IsActive: null
+            // instead, so "not found" is handled by the !IsActive branch below.
+            this.bundle = data;
+            this.bundleActive = true;
+            this.errorOccurred = false;
+            this.errorMessage = undefined;
 
-                this.bundle = data;
-                this.bundleActive = true;
-                this.errorOccurred = false;
-                this.errorMessage = undefined;
+            // Rebuilt from scratch below - this wire re-fires on refreshApex() (e.g. the Refresh
+            // button), and these would otherwise keep accumulating stale/duplicate entries instead
+            // of reflecting only the current bundle's items.
+            this.apiFieldnameDefinitions = [];
+            this.itemsById = {};
 
-                // Rebuilt from scratch below - this wire re-fires on refreshApex() (e.g. the Refresh
-                // button), and these would otherwise keep accumulating stale/duplicate entries instead
-                // of reflecting only the current bundle's items.
-                this.apiFieldnameDefinitions = [];
-                this.itemsById = {};
+            if(!this.bundle.IsActive){
+                this.errorOccurred = true;
+                this.bundleActive = false;
+                this.showIllustration = true;
+                this.illustration = {
+                    heading : 'Uh oh!',
+                    messageBody: 'Bundle (' + this.bundleName + ') not found. Check if it\'s active.',
+                    imageName: 'error:no_access'
+                }
+            } else {
+                // Assign the values to the card
+                this.card = {
+                    title : this.bundle.CardTitle,
+                    icon: this.bundle.CardIcon,
+                    body: this.bundle.CardText
+                }
 
-                if(!this.bundle.IsActive){
-                    this.errorOccurred = true;
-                    this.bundleActive = false;
+                if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
+                    this.card.iconClass = 'cardIcon slds-media__figure slds-var-m-right_x-small ';
+                } else {
+                    this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small ';
+                }
+
+                if(this.isStandardUsage != true){
+                    this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
+                } else {
+                    this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small';
+                    this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
+                }
+
+                // console.log('Card Data');
+                // console.dir(JSON.stringify(this.card));
+
+                // console.log(this.bundle.Items.length);
+
+                if(this.bundle.Items.length === 0){
                     this.showIllustration = true;
                     this.illustration = {
-                        heading : 'Uh oh!',
-                        messageBody: 'Bundle (' + this.bundleName + ') not found. Check if it\'s active.',
-                        imageName: 'error:no_access'
+                        heading : 'Bundle has no items!',
+                        messageBody: 'Better assign some Indicator Items to this Bundle.',
+                        imageName: 'misc:no_content'
                     }
-                } else {
-                    // Assign the values to the card
-                    this.card = {
-                        title : this.bundle.CardTitle,
-                        icon: this.bundle.CardIcon,
-                        body: this.bundle.CardText
-                    }
-
-                    if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
-                        this.card.iconClass = 'cardIcon slds-media__figure slds-var-m-right_x-small ';
-                    } else {
-                        this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small ';
-                    }
-
-                    if(this.isStandardUsage != true){
-                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
-                    } else {
-                        this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small';
-                        this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
-                    }
-
-                    // console.log('Card Data');
-                    // console.dir(JSON.stringify(this.card));
-
-                    // console.log(this.bundle.Items.length);
-
-                    if(this.bundle.Items.length === 0){
-                        this.showIllustration = true;
-                        this.illustration = {
-                            heading : 'Bundle has no items!',
-                            messageBody: 'Better assign some Indicator Items to this Bundle.',
-                            imageName: 'misc:no_content'
-                        }
-                    }
-
-                    // Loop through the returned CMDT indicator settings and assign the Api Fields which should be queried
-                    for( let i = 0; i < this.bundle.Items.length; i++){
-                        let item = this.bundle.Items[i];
-
-                        let apiFieldSyntax = '' + this.objectApiName + '.' + item.FieldApiName;
-                        // console.log('fieldSyntax',apiFieldSyntax); // Retain for debug purposes
-                        let targetMergeFields = this.targetMergeFields(item);
-                        this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax, ...targetMergeFields];
-
-                        // Deep-cloned (not just spread) because mergeValuesIntoTarget() below mutates
-                        // ActionTarget on this copy in place, and must not corrupt the wired Apex data.
-                        this.itemsById[item.IndicatorId] = JSON.parse(JSON.stringify(item));
-                        if (targetMergeFields) {  // Add to items to be used when merging the fields with actual values
-                            this.itemsById[item.IndicatorId].TargetMergeFields = targetMergeFields;
-                        }
-                    }
-
                 }
 
+                // Loop through the returned CMDT indicator settings and assign the Api Fields which should be queried
+                for( let i = 0; i < this.bundle.Items.length; i++){
+                    let item = this.bundle.Items[i];
 
-            } else {
-                // console.log('No such Bundle');
-                this.card = {
-                    title : 'Uh Oh!',
-                    icon: 'utility:error',
-                    body: 'No results were found for the assigned indicator bundle.'
+                    let apiFieldSyntax = '' + this.objectApiName + '.' + item.FieldApiName;
+                    // console.log('fieldSyntax',apiFieldSyntax); // Retain for debug purposes
+                    let targetMergeFields = this.targetMergeFields(item);
+                    this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax, ...targetMergeFields];
+
+                    // Deep-cloned (not just spread) because mergeValuesIntoTarget() below mutates
+                    // ActionTarget on this copy in place, and must not corrupt the wired Apex data.
+                    this.itemsById[item.IndicatorId] = JSON.parse(JSON.stringify(item));
+                    if (targetMergeFields) {  // Add to items to be used when merging the fields with actual values
+                        this.itemsById[item.IndicatorId].TargetMergeFields = targetMergeFields;
+                    }
                 }
-                this.bundleActive = false;
             }
         } else if (error) {
             console.log('Error querying Bundle');
