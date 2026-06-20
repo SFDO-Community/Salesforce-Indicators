@@ -31,8 +31,28 @@
             </lightning-card>
         </lightning-layout-item>
     </lightning-layout>
+    <template lwc:if={errorMessage}>
+        <div
+            class="slds-notify slds-notify_alert slds-theme_alert-texture slds-alert_error slds-m-top_small"
+            role="alert"
+        >
+            <span class="slds-assistive-text">Alert</span>
+            <span
+                class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+                title="Error"
+            >
+                <lightning-icon
+                    icon-name="utility:error"
+                    alternative-text="error icon"
+                    variant="inverse"
+                    size="x-small"
+                ></lightning-icon>
+            </span>
+            <h2>{errorMessage}</h2>
+        </div>
+    </template>
     <template lwc:if={showSpinner}>
-        <lightning-spinner 
+        <lightning-spinner
             alternative-text="Loading"
             variant="brand"
             size="large"

@@ -13,6 +13,7 @@ export default class ConfigurationManager extends LightningElement {
     options = [];
     newUrls = [];
     error;
+    errorMessage;
 
     // Used for refreshing Apex
     wiredCmdt;
@@ -25,8 +26,8 @@ export default class ConfigurationManager extends LightningElement {
                 this.options = result;
             })
             .catch((error)=>{
-                console.log('Error');
-                console.dir(JSON.parse(JSON.stringify(error)));
+                console.error(error);
+                this.errorMessage = 'Unable to load the list of Indicator Bundles.';
             });
         getNewCmdtUrls()
             .then((result)=>{
@@ -34,8 +35,8 @@ export default class ConfigurationManager extends LightningElement {
                 // console.dir(this.newUrls);
             })
             .catch((error)=>{
-                console.log('Error');
-                console.dir(JSON.parse(JSON.stringify(error)));
+                console.error(error);
+                this.errorMessage = 'Unable to load the New Custom Metadata menu.';
             });
     }
 
@@ -48,12 +49,14 @@ export default class ConfigurationManager extends LightningElement {
         if (data){
             this.showKey = this.bundleName ? true : false;
             this.error = undefined;
+            this.errorMessage = undefined;
             this.bundle = data;
             // console.log('Selected: ', this.bundleName);
             // console.dir(this.bundle);
         } else if (error){
             this.showKey = false;
             this.error = error;
+            this.errorMessage = 'Unable to load the selected Indicator Bundle.';
             this.bundle = undefined;
         }
 
