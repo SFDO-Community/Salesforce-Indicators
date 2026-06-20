@@ -178,7 +178,7 @@ public with sharing class Cmdt {
     }
 
     public static List<Indicator_Bundle_Item__mdt> getBundleItems(String bundleDevName){
-        if(bundleItemsByBundle.containsKey(bundleDevname))
+        if(bundleItemsByBundle.containsKey(bundleDevName))
             return bundleItemsByBundle.get(bundleDevName);
         else
             return new List<Indicator_Bundle_Item__mdt>();
@@ -213,16 +213,9 @@ public with sharing class Cmdt {
         extensionsByItem = new Map<String,List<Indicator_Item_Extension__mdt>>();
         activeExtensionsByItem = new Map<String,List<Indicator_Item_Extension__mdt>>();
 
-        // When NOT running a test - initialize the static variables with data that exists in the org.
-        initializeConfiguration();
-        if(Test.isRunningTest()) {
-            bundlesByName.clear();
-            activeBundlesByName.clear();
-            itemsByName.clear();
-            activeItemsByName.clear();
-            bundleItemsByBundle.clear();
-            extensionsByItem.clear();
-            activeExtensionsByItem.clear();
+        // Tests build up their own CMDT state via setBundle/setItem/etc., so skip querying the org's real CMDT data.
+        if(!Test.isRunningTest()) {
+            initializeConfiguration();
         }
     }
 }

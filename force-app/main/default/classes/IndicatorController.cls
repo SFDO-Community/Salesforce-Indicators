@@ -182,7 +182,9 @@ public with sharing class IndicatorController {
             wrapper.BundleId = null;
             wrapper.Items = new List<IndicatorItem>();
 
-            for(Indicator_Item__mdt indicatorItem : Cmdt.getAllOrphanItems()){
+            List<Indicator_Item__mdt> orphanItems = Cmdt.getAllOrphanItems();
+
+            for(Indicator_Item__mdt indicatorItem : orphanItems){
                 durableIds.add(indicatorItem.Field__c);
             }
 
@@ -191,7 +193,7 @@ public with sharing class IndicatorController {
                 labelByDurableId.put(particle.DurableId, particle.MasterLabel);
             }
 
-            for(Indicator_Item__mdt indicatorItem : Cmdt.getAllOrphanItems()){
+            for(Indicator_Item__mdt indicatorItem : orphanItems){
 
                 IndicatorItem item = new IndicatorItem();
                 item = itemWithSettingsInfo(item, indicatorItem, fieldByDurableId, labelByDurableId);
@@ -202,7 +204,7 @@ public with sharing class IndicatorController {
             List<Indicator_Bundle_Item__mdt> bundleItems = Cmdt.getBundleItems(bundleDevName);
 
             if(!bundleItems.isEmpty()){
-                for(Indicator_Bundle_Item__mdt bundleItem : Cmdt.getBundleItems(bundleDevName)){
+                for(Indicator_Bundle_Item__mdt bundleItem : bundleItems){
                     Indicator_Item__mdt indicatorItem = Cmdt.getItem(bundleItem.Indicator_Item__r.DeveloperName);
                     if(indicatorItem != null){
                         durableIds.add(indicatorItem.Field__c);
@@ -230,7 +232,7 @@ public with sharing class IndicatorController {
             wrapper.Items = new List<IndicatorItem>();
 
             if(!bundleItems.isEmpty()){     // TODO: Commenting out this check is a great way to test throwing an error in the LWC
-                for(Indicator_Bundle_Item__mdt bundleItem : Cmdt.getBundleItems(bundleDevName)){
+                for(Indicator_Bundle_Item__mdt bundleItem : bundleItems){
 
                     IndicatorItem item = new IndicatorItem();
 
