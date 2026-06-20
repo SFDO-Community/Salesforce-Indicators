@@ -137,7 +137,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         const { data, error } = result;
         if(data) {
             if(Object.keys(data).length) {  // Used to confirm that values were returned, rather than an empty object
-                console.dir(data);   // Retain for debug purposes
+                // console.dir(data);   // Retain for debug purposes
 
                 this.bundle = data;
                 this.bundleActive = true;
@@ -207,7 +207,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
 
             } else {
-                console.log('No such Bundle');
+                // console.log('No such Bundle');
                 this.card = {
                     title : 'Uh Oh!',
                     icon: 'utility:error',
@@ -239,7 +239,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     }
 
     refreshCmdt(){
-        console.log('Refresh');
+        // console.log('Refresh');
         refreshApex(this.wiredCmdt);
         refreshApex(this.wiredData);
     }
@@ -494,13 +494,13 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         });
         // if modal closed with X button, promise returns result = 'undefined'
         // if modal closed with OK button, promise returns result = 'okay'
-        console.log(result);
+        // console.log(result);
     }
 
     handleIndicatorClick(event) {
         if (event.target.dataset?.id) {
             let item = this.itemsById[event.target.dataset.id];
-            console.log('Indicator Clicked: ', JSON.stringify(item, null, 4));
+            // console.log('Indicator Clicked: ', JSON.stringify(item, null, 4));
             if(item.ActionType === 'URL'){
                 this.urlAction(item.ActionTarget);
             } else if (item.ActionType === 'Flow Modal'){
@@ -512,8 +512,8 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     lastInterviewId = null; // This is the Flow Interview Id, if it's exited early.
 
     async openFlowModal(target) {
-        console.log('FLOW API NAME: ', target);
-        console.log('Id: ', this.targetIdValue);
+        // console.log('FLOW API NAME: ', target);
+        // console.log('Id: ', this.targetIdValue);
         try {
             const result = await FlowModal.open({
                 size: 'large',

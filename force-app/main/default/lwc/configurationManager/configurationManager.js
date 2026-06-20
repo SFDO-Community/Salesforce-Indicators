@@ -49,7 +49,7 @@ export default class ConfigurationManager extends LightningElement {
             this.showKey = this.bundleName ? true : false;
             this.error = undefined;
             this.bundle = data;
-            console.log('Selected: ', this.bundleName);
+            // console.log('Selected: ', this.bundleName);
             // console.dir(this.bundle);
         } else if (error){
             this.showKey = false;

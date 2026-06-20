@@ -17,7 +17,7 @@ export default class IndicatorKeyRow extends LightningElement {
     @api keyIsActive = false;
 
     handleClick(event){
-        console.log('Indicator Btn Click')
+        // console.log('Indicator Btn Click')
         window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
     }
 
