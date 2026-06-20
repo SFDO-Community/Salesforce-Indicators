@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
+import { applyColorVars } from 'c/indicatorCssVars';
 
 export default class Key extends LightningElement {
 
@@ -29,14 +30,10 @@ export default class Key extends LightningElement {
     }
 
     initCSSVariables() {
-
-        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
-            var css = this.template.querySelector(".cardIcon").style;
-
-            css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
-            css.setProperty('--foregroundColor', this.bundle.CardIconForeground);
-        }
-
+        applyColorVars(this, '.cardIcon', {
+            backgroundColor: this.bundle.CardIconBackground,
+            foregroundColor: this.bundle.CardIconForeground
+        });
     }
 
     connectedCallback(){

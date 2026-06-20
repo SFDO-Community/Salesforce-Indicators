@@ -1,4 +1,5 @@
 import { LightningElement, api } from 'lwc';
+import { applyColorVars } from 'c/indicatorCssVars';
 
 export default class IndicatorListItem extends LightningElement {
     @api indSize = 'large';
@@ -36,13 +37,9 @@ export default class IndicatorListItem extends LightningElement {
     }
 
     initCSSVariables() {
-
-        if(this.indBackgroundColor || this.indForegroundColor){
-            var css = this.template.querySelector(".indicatorIcon").style;
-    
-            css.setProperty('--backgroundColor', this.indBackgroundColor);
-            css.setProperty('--foregroundColor', this.indForegroundColor);
-        }
-
+        applyColorVars(this, '.indicatorIcon', {
+            backgroundColor: this.indBackgroundColor,
+            foregroundColor: this.indForegroundColor
+        });
     }
 }
