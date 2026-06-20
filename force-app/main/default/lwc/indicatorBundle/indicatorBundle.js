@@ -5,9 +5,90 @@ import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { refreshApex } from '@salesforce/apex';
 import KeyModal from 'c/indicatorBundleKey';
 import FlowModal from 'c/flowModal';
+import { applyColorVars } from 'c/indicatorCssVars';
 
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
+
+// Pure helpers used by wiredRecord() to resolve one indicator's display values from the
+// record's field value, falling back to the item's "false/blank" (inverse) values when there
+// isn't one, and to a matched Extension's override values when one applies.
+function hasValue(dataValue) {
+    return dataValue || dataValue === 0;
+}
+
+function resolveImage(item, dataValue, matchedExtension) {
+    return hasValue(dataValue)
+        ? { fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl }
+        : { fImageURL: item.DisplayFalse ? item.FalseImageUrl : '' };
+}
+
+function resolveHoverValue(item, dataValue, matchedExtension) {
+    return hasValue(dataValue)
+        ? { fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue }
+        : { fHoverValue: item.DisplayFalse ? item.FalseHoverValue : '' };
+}
+
+function resolveShowAvatar(item, dataValue, matchedExtension, showDefault) {
+    return hasValue(dataValue)
+        ? { fShowAvatar: matchedExtension ? true : showDefault }
+        : { fShowAvatar: item.DisplayFalse };
+}
+
+function resolveIconName(item, dataValue, matchedExtension) {
+    return hasValue(dataValue)
+        ? { fIconName: matchedExtension ? matchedExtension.IconName : item.IconName }
+        : { fIconName: item.DisplayFalse ? item.FalseIcon : '' };
+}
+
+function resolveIconColors(item, dataValue, matchedExtension) {
+    return hasValue(dataValue)
+        ? {
+            fIconBackground: matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor,
+            fIconForeground: matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
+        }
+        : {
+            fIconBackground: item.DisplayFalse ? item.InverseBackgroundColor : item.BackgroundColor,
+            fIconForeground: item.DisplayFalse ? item.InverseForegroundColor : item.ForegroundColor
+        };
+}
+
+function resolveBadgeStyle(item, dataValue, matchedExtension) {
+    return hasValue(dataValue)
+        ? {
+            fTextColor: matchedExtension ? matchedExtension.BadgeTextColor : item.BadgeTextColor,
+            fIconPosition: matchedExtension ? matchedExtension.BadgeIconPosition : item.BadgeIconPosition
+        }
+        : {
+            fTextColor: item.DisplayFalse ? item.FalseBadgeTextColor : item.BadgeTextColor,
+            fIconPosition: item.DisplayFalse ? item.FalseBadgeIconPosition : item.BadgeIconPosition
+        };
+}
+
+// If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
+// If the Icon Text is entered then show that
+// If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value
+function resolveTextShown(item, dataValue, matchedExtension, indsStyle) {
+    const truncate = (text) => (indsStyle === 'avatar' ? text.substring(0, 3) : text);
+
+    if (hasValue(dataValue)) {
+        if (matchedExtension) {
+            return { fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.substring(0, 3) : '' };
+        }
+        if (dataValue && item.TextValue) {
+            return { fTextShown: truncate(item.TextValue) };
+        }
+        if (item.EmptyStaticBehavior === 'Use Icon Only') {
+            return { fTextShown: '' };
+        }
+        return { fTextShown: item.FalseTextValue ? truncate(item.FalseTextValue) : '' };
+    }
+
+    if ((dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse) {
+        return { fTextShown: item.FalseTextValue ? truncate(item.FalseTextValue) : '' };
+    }
+    return { fTextShown: '' };
+}
 
 export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
@@ -116,14 +197,12 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     }
 
     initCSSVariables() {
-
-        if(this.showTitle && this.isStandardUsage && (this.bundle.CardIconBackground || this.bundle.CardIconForeground)) {
-            var css = this.template.querySelector(".cardIcon").style;
-
-            css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
-            css.setProperty('--foregroundColor', this.bundle.CardIconForeground);
+        if(this.showTitle && this.isStandardUsage) {
+            applyColorVars(this, '.cardIcon', {
+                backgroundColor: this.bundle.CardIconBackground,
+                foregroundColor: this.bundle.CardIconForeground
+            });
         }
-
     }
 
     get isManageEnabled() {
@@ -143,6 +222,12 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                 this.bundleActive = true;
                 this.errorOccurred = false;
                 this.errorMessage = undefined;
+
+                // Rebuilt from scratch below - this wire re-fires on refreshApex() (e.g. the Refresh
+                // button), and these would otherwise keep accumulating stale/duplicate entries instead
+                // of reflecting only the current bundle's items.
+                this.apiFieldnameDefinitions = [];
+                this.itemsById = {};
 
                 if(!this.bundle.IsActive){
                     this.errorOccurred = true;
@@ -197,7 +282,9 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                         let targetMergeFields = this.targetMergeFields(item);
                         this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax, ...targetMergeFields];
 
-                        this.itemsById[item.IndicatorId] = JSON.parse(JSON.stringify(item)); // add a copy of the item to an object for easy access and extensibility later
+                        // Deep-cloned (not just spread) because mergeValuesIntoTarget() below mutates
+                        // ActionTarget on this copy in place, and must not corrupt the wired Apex data.
+                        this.itemsById[item.IndicatorId] = JSON.parse(JSON.stringify(item));
                         if (targetMergeFields) {  // Add to items to be used when merging the fields with actual values
                             this.itemsById[item.IndicatorId].TargetMergeFields = targetMergeFields;
                         }
@@ -387,73 +474,13 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                 fName: item.FieldApiName,   // Retain for debug purposes
                                 fId: item.IndicatorId,      // Used to generate resultsById which is used in click handling
                                 fTextValue: dataValue,      // Retain for debug purposes
-                                ...dataValue || dataValue === 0 ? {
-                                        fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl
-                                    } : {
-                                        fImageURL: item.DisplayFalse ? item.FalseImageUrl : ''
-                                    },
-                                // ! If value is false, the false hover will be set.
-                                ...dataValue || dataValue === 0 ? {
-                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue
-                                    } : {
-                                        fHoverValue: item.DisplayFalse ? item.FalseHoverValue : ''
-                                    },
-                                //If False Icon is not entered AND the boolean value is False or text value is empty, then do not display the Avatar
-                                ...dataValue || dataValue === 0 ? {
-                                        fShowAvatar : matchedExtension ? true : showDefault
-                                    } : {
-                                        fShowAvatar: item.DisplayFalse
-                                    },
-                                //If the value is false, the false icon will be set.
-                                ...dataValue || dataValue === 0 ? {
-                                        fIconName : matchedExtension ? matchedExtension.IconName : item.IconName
-                                    } : {
-                                        fIconName: item.DisplayFalse ? item.FalseIcon : ''
-                                    },
-                                ...dataValue || dataValue === 0 ? {
-                                        fIconBackground : matchedExtension ? matchedExtension.IconBackground : item.BackgroundColor
-                                    } : {
-                                        fIconBackground: item.DisplayFalse? item.InverseBackgroundColor : item.BackgroundColor
-                                    },
-                                ...dataValue || dataValue === 0 ? {
-                                        fIconForeground : matchedExtension ? matchedExtension.IconForeground : item.ForegroundColor
-                                    } : {
-                                        fIconForeground: item.DisplayFalse? item.InverseForegroundColor : item.ForegroundColor
-                                    },
-                                ...dataValue || dataValue === 0 ? {
-                                        fTextColor : matchedExtension ? matchedExtension.BadgeTextColor : item.BadgeTextColor
-                                    } : {
-                                        fTextColor: item.DisplayFalse? item.FalseBadgeTextColor : item.BadgeTextColor
-                                    },
-                                ...dataValue || dataValue === 0 ? {
-                                        fIconPosition : matchedExtension ? matchedExtension.BadgeIconPosition : item.BadgeIconPosition
-                                    } : {
-                                        fIconPosition: item.DisplayFalse? item.FalseBadgeIconPosition : item.BadgeIconPosition
-                                    },
-                                //If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
-                                //If the Icon Text is entered then show that
-                                //If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value
-                                ...dataValue || dataValue === 0 ? {
-                                    ...matchedExtension ? {
-                                            fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.substring(0,3) : ''
-                                        } : {
-                                        ...dataValue && item.TextValue ? {
-                                                fTextShown : this.indsStyle === 'avatar' ? item.TextValue.substring(0,3) : item.TextValue
-                                            } : {
-                                                ...item.EmptyStaticBehavior === 'Use Icon Only' ? {
-                                                        fTextShown : ''
-                                                    } : {
-                                                        fTextShown : item.FalseTextValue ? this.indsStyle === 'avatar' ? item.FalseTextValue.substring(0,3) : item.FalseTextValue : ''
-                                                    }
-                                            }
-                                        }
-                                    } : {
-                                    ...(dataValue === false || dataValue === null || dataValue === '') && item.DisplayFalse ? {
-                                            fTextShown : item.FalseTextValue ? this.indsStyle === 'avatar' ? item.FalseTextValue.substring(0,3) : item.FalseTextValue : ''
-                                        } : {
-                                            fTextShown : ''
-                                        }
-                                    },
+                                ...resolveImage(item, dataValue, matchedExtension),
+                                ...resolveHoverValue(item, dataValue, matchedExtension),
+                                ...resolveShowAvatar(item, dataValue, matchedExtension, showDefault),
+                                ...resolveIconName(item, dataValue, matchedExtension),
+                                ...resolveIconColors(item, dataValue, matchedExtension),
+                                ...resolveBadgeStyle(item, dataValue, matchedExtension),
+                                ...resolveTextShown(item, dataValue, matchedExtension, this.indsStyle),
                                 fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : ''
                             });
                         }
