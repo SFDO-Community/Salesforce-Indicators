@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>55.0</apiVersion>
+    <apiVersion>65.0</apiVersion>
     <description>An image and inline text that work in tandem to communicate a state in a more friendly way. Use within other components, such as cards, to express the state of the component.</description>
     <isExposed>false</isExposed>
     <masterLabel>Illustration</masterLabel>
