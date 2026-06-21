@@ -6,3 +6,9 @@
     --slds-c-avatar-text-color-hover:  var(--foregroundColor);
     --slds-c-avatar-text-color: var(--foregroundColor);
 }
+
+.indicator-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
