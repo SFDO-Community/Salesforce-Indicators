@@ -273,7 +273,11 @@ export default class Key extends LightningElement {
     }
 
     handleClick(event){
-        window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
+        // window.open() is distorted by Lightning Web Security for Setup pages;
+        // a real anchor click uses native browser navigation instead. See docs/sdd/0002-window-open.md.
+        const link = this.refs.cmdtLink;
+        link.href = '/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name;
+        link.click();
     }
 
     get isManageEnabled() {
