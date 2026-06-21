@@ -3,3 +3,7 @@
     --slds-c-badge-icon-color-foreground: var(--foregroundColor);
     --slds-c-badge-text-color: var(--textColor);
 }
+
+.clickable {
+    cursor: pointer;
+}

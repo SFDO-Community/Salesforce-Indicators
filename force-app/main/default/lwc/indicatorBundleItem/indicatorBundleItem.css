@@ -17,7 +17,7 @@
     align-items: center;
 }
 
-/* Prevent avatar from stealing hover */
+/* lightning-avatar's initials render as <abbr title>, which SLDS forces to cursor:help; this lets the wrapping div's pointer cursor and title tooltip win instead */
 .clickable lightning-avatar {
     pointer-events: none;
 }

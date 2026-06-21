@@ -10,11 +10,15 @@ export default class IndicatorBundleBadge extends LightningElement {
     @api indBackgroundColor;
     @api indForegroundColor;
     @api indTextColor;
+    @api indClickable;
 
     get indClass() {
         let classValue = '';
         if(this.indBackgroundColor || this.indForegroundColor || this.indTextColor){
             classValue = 'indicatorBadge ';
+        }
+        if(this.indClickable){
+            classValue += 'clickable';
         }
 
         return classValue;
