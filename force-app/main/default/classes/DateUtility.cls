@@ -200,4 +200,22 @@ public with sharing class DateUtility {
     public static Date convertRelativeDate(String relativeDate) {
         return convertRelativeDate(relativeDate, Date.today());
     }
+
+    /**
+     * @description       : Parses a definite ISO 8601 date string (YYYY-MM-DD) into a DateRange where StartDate is the
+     *                                  parsed date and EndDate is the following day (exclusive), matching the exclusive-end
+     *                                  convention used throughout this framework.
+     * @author            : tschug
+     * @created date      : 06/27/26
+     * @param isoDate A date string in YYYY-MM-DD format.
+     * @return A DateRange with StartDate = the parsed date and EndDate = StartDate + 1 day.
+     */
+    public static DateRange convertDefiniteDate(String isoDate) {
+        try {
+            Date d = Date.valueOf(isoDate.trim());
+            return new DateRange(d, d.addDays(1));
+        } catch (Exception e) {
+            throw new DateConversionException('Invalid date format: expected YYYY-MM-DD');
+        }
+    }
 }

@@ -316,7 +316,13 @@ public with sharing class IndicatorController {
                         extension.StartDate = range.StartDate;
                         extension.EndDate = range.EndDate;
                     } catch (DateUtility.DateConversionException e) {
-                        // Not a relative date literal — StartDate/EndDate remain null
+                        try {
+                            DateUtility.DateRange range = DateUtility.convertDefiniteDate(itemExtension.Contains_Text__c);
+                            extension.StartDate = range.StartDate;
+                            extension.EndDate = range.EndDate;
+                        } catch (DateUtility.DateConversionException e2) {
+                            // Not a relative or definite date — StartDate/EndDate remain null
+                        }
                     }
                 }
                 extension.Maximum = itemExtension.Maximum__c;

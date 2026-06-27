@@ -578,4 +578,34 @@ private class DateUtilityTests {
         System.Assert.areEqual(currentYear.addYears(-1), yearsAgo.EndDate, 'Expected N YEARS AGO to span a single year');
     }
     // ======================== DATE RANGE TESTS <end>
+
+    // ======================== DEFINITE DATE TESTS <start>
+    @isTest
+    static void testConvertDefiniteDate() {
+        DateUtility.DateRange range = DateUtility.convertDefiniteDate('2025-01-01');
+        System.Assert.areEqual(Date.newInstance(2025, 1, 1), range.StartDate, 'Expected StartDate to equal the parsed date');
+        System.Assert.areEqual(Date.newInstance(2025, 1, 2), range.EndDate, 'Expected EndDate to be the day after (exclusive)');
+
+        DateUtility.DateRange leapDay = DateUtility.convertDefiniteDate('2024-02-29');
+        System.Assert.areEqual(Date.newInstance(2024, 2, 29), leapDay.StartDate);
+        System.Assert.areEqual(Date.newInstance(2024, 3, 1), leapDay.EndDate);
+
+        DateUtility.DateRange withSpaces = DateUtility.convertDefiniteDate('  2030-12-31  ');
+        System.Assert.areEqual(Date.newInstance(2030, 12, 31), withSpaces.StartDate, 'Expected leading/trailing whitespace to be trimmed');
+
+        try {
+            DateUtility.convertDefiniteDate('01/01/2025');
+            System.Assert.fail('Expected non-ISO date format to throw DateConversionException');
+        } catch (DateUtility.DateConversionException e) {
+            System.Assert.areEqual('DateUtility.DateConversionException', e.getTypeName());
+        }
+
+        try {
+            DateUtility.convertDefiniteDate('not a date');
+            System.Assert.fail('Expected invalid string to throw DateConversionException');
+        } catch (DateUtility.DateConversionException e) {
+            System.Assert.areEqual('DateUtility.DateConversionException', e.getTypeName());
+        }
+    }
+    // ======================== DEFINITE DATE TESTS <end>
 }
