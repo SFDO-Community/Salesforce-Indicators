@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
     <label>Text Operator</label>
-    <inlineHelpText>For "Contains Text" value, choose how to match the text. Defaults to Contains if no value entered.</inlineHelpText>
+    <inlineHelpText>For "Contains Text" value, choose how to match the text. Defaults to Contains if no value entered. Use Before or After when Contains Text holds a relative date literal (e.g. TODAY, NEXT 30 DAYS) and the target field is a Date or DateTime field.</inlineHelpText>
     <required>false</required>
     <type>Picklist</type>
     <valueSet>
@@ -30,6 +30,26 @@
                 <fullName>Starts With</fullName>
                 <default>false</default>
                 <label>Starts With</label>
+            </value>
+            <value>
+                <fullName>Before Start</fullName>
+                <default>false</default>
+                <label>Before Start</label>
+            </value>
+            <value>
+                <fullName>After End</fullName>
+                <default>false</default>
+                <label>After End</label>
+            </value>
+            <value>
+                <fullName>Before End</fullName>
+                <default>false</default>
+                <label>Before End</label>
+            </value>
+            <value>
+                <fullName>After Start</fullName>
+                <default>false</default>
+                <label>After Start</label>
             </value>
         </valueSetDefinition>
     </valueSet>
