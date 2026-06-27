@@ -164,14 +164,7 @@ export default class Key extends LightningElement {
 
                 if(item.Extensions) {
 
-                    let orderedExtensions = [];
-
-                    for(var i = item.Extensions.length - 1; i >= 0; i--){
-                        orderedExtensions.push(item.Extensions[i]);
-                    }
-
-                    // Show / Iterate Extensions
-                    orderedExtensions.forEach(
+                    item.Extensions.forEach(
                         ext => 
                         {
                             let fillDesc = '';
