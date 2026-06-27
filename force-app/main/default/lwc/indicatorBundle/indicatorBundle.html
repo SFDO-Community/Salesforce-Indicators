@@ -51,56 +51,150 @@
                             <template if:true={results}>
                                 <template for:each={results} for:item="fld">
                                     <template lwc:if={showAvatarStyle}>
-                                        <c-indicator-bundle-item if:true={fld.fShowAvatar} key={fld.fName}
-                                            ind-text={fld.fTextShown}
-                                            ind-size={indsSize}
-                                            ind-shape={indsShape}
-                                            ind-hover-text={fld.fHoverValue}
-                                            ind-icon={fld.fIconName}
-                                            ind-image={fld.fImageURL}
-                                            ind-background-color={fld.fIconBackground}
-                                            ind-foreground-color={fld.fIconForeground}
-                                            ind-clickable={fld.fItemClass}
-                                            ind-compact
+                                        <div key={fld.fName}
+                                            if:true={fld.fShowAvatar}
+                                            class="slds-is-relative ind-popover-container"
                                             data-id={fld.fId}
-                                            onclick={handleIndicatorClick}
-                                            >
-                                        </c-indicator-bundle-item>
+                                            onmouseenter={handlePopoverEnter}
+                                            onmouseleave={handlePopoverLeave}>
+                                            <c-indicator-bundle-item
+                                                ind-text={fld.fTextShown}
+                                                ind-size={indsSize}
+                                                ind-shape={indsShape}
+                                                ind-hover-text={fld.fHoverValue}
+                                                ind-icon={fld.fIconName}
+                                                ind-image={fld.fImageURL}
+                                                ind-background-color={fld.fIconBackground}
+                                                ind-foreground-color={fld.fIconForeground}
+                                                ind-clickable={fld.fItemClass}
+                                                ind-alt-text={fld.fFieldLabel}
+                                                ind-compact
+                                                data-id={fld.fId}
+                                                onclick={handleIndicatorClick}>
+                                            </c-indicator-bundle-item>
+                                            <template lwc:if={fld.fShowPopover}>
+                                                <section
+                                                    class="slds-popover slds-popover_small slds-nubbin_top-left ind-popover"
+                                                    role="dialog"
+                                                    aria-label={fld.fFieldLabel}>
+                                                    <!-- HEADER PLACEHOLDER: To add a visible popover title, insert slds-popover__header here -->
+                                                    <template lwc:if={fld.fPopoverBody}>
+                                                        <div class="slds-popover__body">
+                                                            <p>{fld.fPopoverBody}</p>
+                                                        </div>
+                                                    </template>
+                                                    <template lwc:if={fld.fActionType}>
+                                                        <footer class="slds-popover__footer">
+                                                            <button
+                                                                class="slds-button slds-button_neutral"
+                                                                data-id={fld.fId}
+                                                                onclick={handlePopoverAction}>
+                                                                {fld.fResolvedActionButtonLabel}
+                                                            </button>
+                                                            <template lwc:if={fld.fActionHelpText}>
+                                                                <lightning-helptext
+                                                                    content={fld.fActionHelpText}>
+                                                                </lightning-helptext>
+                                                            </template>
+                                                        </footer>
+                                                    </template>
+                                                </section>
+                                            </template>
+                                        </div>
                                     </template>
                                     <template lwc:if={showPillStyle}>
-                                        <c-indicator-bundle-pill if:true={fld.fShowAvatar} key={fld.fName}
-                                            fld={fld}
-                                            inds-size="x-small"
-                                            inds-shape={indsShape}
-                                            ind-clickable={fld.fItemClass}
+                                        <div key={fld.fName}
+                                            if:true={fld.fShowAvatar}
+                                            class="slds-is-relative ind-popover-container"
                                             data-id={fld.fId}
-                                            onclick={handleIndicatorClick}
-                                        >
-                                        <!-- ind-text={fld.fHoverValue} 
-
-                                            ind-icon={fld.fIconName}
-                                            ind-icon-position={fld.fIconPosition}
-                                            ind-background-color={fld.fIconBackground}
-                                            ind-foreground-color={fld.fIconForeground}
-                                            ind-text-color={fld.fTextColor} -->
-                                            <!-- ind-hover-text={fld.fHoverValue} -->
-                                        </c-indicator-bundle-pill>
+                                            onmouseenter={handlePopoverEnter}
+                                            onmouseleave={handlePopoverLeave}>
+                                            <c-indicator-bundle-pill
+                                                fld={fld}
+                                                inds-size="x-small"
+                                                inds-shape={indsShape}
+                                                ind-clickable={fld.fItemClass}
+                                                data-id={fld.fId}
+                                                onclick={handleIndicatorClick}>
+                                            </c-indicator-bundle-pill>
+                                            <template lwc:if={fld.fShowPopover}>
+                                                <section
+                                                    class="slds-popover slds-popover_small slds-nubbin_top-left ind-popover"
+                                                    role="dialog"
+                                                    aria-label={fld.fFieldLabel}>
+                                                    <!-- HEADER PLACEHOLDER: To add a visible popover title, insert slds-popover__header here -->
+                                                    <template lwc:if={fld.fPopoverBody}>
+                                                        <div class="slds-popover__body">
+                                                            <p>{fld.fPopoverBody}</p>
+                                                        </div>
+                                                    </template>
+                                                    <template lwc:if={fld.fActionType}>
+                                                        <footer class="slds-popover__footer">
+                                                            <button
+                                                                class="slds-button slds-button_neutral"
+                                                                data-id={fld.fId}
+                                                                onclick={handlePopoverAction}>
+                                                                {fld.fResolvedActionButtonLabel}
+                                                            </button>
+                                                            <template lwc:if={fld.fActionHelpText}>
+                                                                <lightning-helptext
+                                                                    content={fld.fActionHelpText}>
+                                                                </lightning-helptext>
+                                                            </template>
+                                                        </footer>
+                                                    </template>
+                                                </section>
+                                            </template>
+                                        </div>
                                     </template>
                                     <template lwc:if={showBadgeStyle}>
-                                        <c-indicator-bundle-badge if:true={fld.fShowAvatar} key={fld.fName}
-                                            ind-text={fld.fHoverValue} 
-
-                                            ind-icon={fld.fIconName}
-                                            ind-icon-position={fld.fIconPosition}
-                                            ind-background-color={fld.fIconBackground}
-                                            ind-foreground-color={fld.fIconForeground}
-                                            ind-text-color={fld.fTextColor}
-                                            ind-clickable={fld.fItemClass}
+                                        <div key={fld.fName}
+                                            if:true={fld.fShowAvatar}
+                                            class="slds-is-relative ind-popover-container"
                                             data-id={fld.fId}
-                                            onclick={handleIndicatorClick}
-                                        >
-                                            <!-- ind-hover-text={fld.fHoverValue} -->
-                                        </c-indicator-bundle-badge>
+                                            onmouseenter={handlePopoverEnter}
+                                            onmouseleave={handlePopoverLeave}>
+                                            <c-indicator-bundle-badge
+                                                ind-text={fld.fHoverValue}
+                                                ind-icon={fld.fIconName}
+                                                ind-icon-position={fld.fIconPosition}
+                                                ind-background-color={fld.fIconBackground}
+                                                ind-foreground-color={fld.fIconForeground}
+                                                ind-text-color={fld.fTextColor}
+                                                ind-alt-text={fld.fFieldLabel}
+                                                ind-clickable={fld.fItemClass}
+                                                data-id={fld.fId}
+                                                onclick={handleIndicatorClick}>
+                                            </c-indicator-bundle-badge>
+                                            <template lwc:if={fld.fShowPopover}>
+                                                <section
+                                                    class="slds-popover slds-popover_small slds-nubbin_top-left ind-popover"
+                                                    role="dialog"
+                                                    aria-label={fld.fFieldLabel}>
+                                                    <!-- HEADER PLACEHOLDER: To add a visible popover title, insert slds-popover__header here -->
+                                                    <template lwc:if={fld.fPopoverBody}>
+                                                        <div class="slds-popover__body">
+                                                            <p>{fld.fPopoverBody}</p>
+                                                        </div>
+                                                    </template>
+                                                    <template lwc:if={fld.fActionType}>
+                                                        <footer class="slds-popover__footer">
+                                                            <button
+                                                                class="slds-button slds-button_neutral"
+                                                                data-id={fld.fId}
+                                                                onclick={handlePopoverAction}>
+                                                                {fld.fResolvedActionButtonLabel}
+                                                            </button>
+                                                            <template lwc:if={fld.fActionHelpText}>
+                                                                <lightning-helptext
+                                                                    content={fld.fActionHelpText}>
+                                                                </lightning-helptext>
+                                                            </template>
+                                                        </footer>
+                                                    </template>
+                                                </section>
+                                            </template>
+                                        </div>
                                     </template>
                                 </template>
                             </template>

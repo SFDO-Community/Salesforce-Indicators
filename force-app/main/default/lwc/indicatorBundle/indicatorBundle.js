@@ -17,6 +17,15 @@ function hasValue(dataValue) {
     return dataValue || dataValue === 0;
 }
 
+// Returns true when a value from getFieldValue looks like a Date or DateTime (YYYY-MM-DD[T...]).
+// Used to decide whether to do date comparison vs. string comparison for relative-date extensions.
+const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}(T|$)/;
+function isDateValue(v) { return v != null && ISO_DATE_RE.test(String(v)); }
+
+// Normalises Date ("2026-06-26") and DateTime ("2026-06-26T12:34:56.000Z") to "YYYY-MM-DD"
+// for lexicographic comparison against Apex-serialised StartDate/EndDate strings.
+function toDateKey(v) { return String(v).substring(0, 10); }
+
 function resolveImage(item, dataValue, matchedExtension) {
     return hasValue(dataValue)
         ? { fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl }
@@ -302,15 +311,10 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     targetMergeFieldRegex = /{.*?}/g;
     
     targetMergeFields(item) {
-        let mergeFieldsWithObjectName = [];
-
-        if (item.ActionTarget) {
-            let matches = new Set(item.ActionTarget.match(this.targetMergeFieldRegex)); // match() returns an array. We force uniqueness by converting to a Set
-
-            mergeFieldsWithObjectName = [...matches].map(match => this.objectApiName + '.' + match.substring(1, match.length - 1));
-        }
-
-        return mergeFieldsWithObjectName;
+        const allMatches = new Set();
+        (item.ActionTarget?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
+        (item.HoverValue?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
+        return [...allMatches].map(match => this.objectApiName + '.' + match.substring(1, match.length - 1));
     }
 
     refreshCmdt(){
@@ -356,111 +360,133 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                             showDefault = true;
                         }
 
-                        let assignedHoverValue = item.HoverValue ? item.HoverValue : dataValue;
-
                         let matchedExtension;
 
                         // If the record has a value and the CMDT indicator setting has extensions
                         if((dataValue || dataValue === 0) && item.Extensions){
 
-                            // Loop through each CMDT indicator setting extension
-                            item.Extensions.forEach(
-                                extension =>
-                                {
-                                    if(extension.IsActive){
+                            // Extensions arrive lowest-priority-first (Priority__c ASC from Apex).
+                            // For single-match mode, break on the first hit so priority 1 wins over 5.
+                            for (let extIdx = 0; extIdx < item.Extensions.length; extIdx++) {
+                                const extension = item.Extensions[extIdx];
+                                if(extension.IsActive){
 
-                                        let match = false;
+                                    let match = false;
 
-                                        // If the extension uses a String search, check if there is a match
-                                        if(extension.ContainsText) {
+                                    // Date comparison — ContainsText holds a relative date literal
+                                    // parsed by Apex into StartDate/EndDate; field value must look like a date.
+                                    if (extension.StartDate && isDateValue(dataValue)) {
+                                        const fieldKey = toDateKey(dataValue);
+                                        const inRange = fieldKey >= extension.StartDate && fieldKey < extension.EndDate;
+                                        if (extension.TextOperator === 'Equals') {
+                                            match = inRange;
+                                        } else if (extension.TextOperator === 'Does Not Equal') {
+                                            match = !inRange;
+                                        } else if (extension.TextOperator === 'Before Start') {
+                                            match = fieldKey < extension.StartDate;
+                                        } else if (extension.TextOperator === 'After End') {
+                                            match = fieldKey >= extension.EndDate;
+                                        } else if (extension.TextOperator === 'Before End') {
+                                            match = fieldKey < extension.EndDate;
+                                        } else if (extension.TextOperator === 'After Start') {
+                                            match = fieldKey >= extension.StartDate;
+                                        }
+                                    }
+                                    // String comparison — ContainsText holds a plain text value to match.
+                                    else if(extension.ContainsText) {
 
-                                            let fieldValue = dataValue.toLowerCase();
-                                            let compareValue = extension.ContainsText.toLowerCase();
+                                        let fieldValue = dataValue.toLowerCase();
+                                        let compareValue = extension.ContainsText.toLowerCase();
 
-                                            // console.log('Value',dataValue + ' ' + extension.TextOperator + ' ' + compareValue);   // Retain for debug purposes
-                                            if(extension.TextOperator === 'Contains'){
-                                                match = fieldValue.includes(compareValue);
-                                            } else if (extension.TextOperator === 'Does Not Equal') {
-                                                match = fieldValue != compareValue;
-                                            } else if (extension.TextOperator === 'Equals') {
-                                                match = fieldValue === compareValue;
-                                            } else if (extension.TextOperator === 'Starts With'){
-                                                match = fieldValue.startsWith(compareValue);
-                                            } else {
-                                                match = fieldValue.includes(compareValue);
+                                        // console.log('Value',dataValue + ' ' + extension.TextOperator + ' ' + compareValue);   // Retain for debug purposes
+                                        if(extension.TextOperator === 'Contains'){
+                                            match = fieldValue.includes(compareValue);
+                                        } else if (extension.TextOperator === 'Does Not Equal') {
+                                            match = fieldValue != compareValue;
+                                        } else if (extension.TextOperator === 'Equals') {
+                                            match = fieldValue === compareValue;
+                                        } else if (extension.TextOperator === 'Starts With'){
+                                            match = fieldValue.startsWith(compareValue);
+                                        } else {
+                                            match = fieldValue.includes(compareValue);
+                                        }
+                                    }
+                                    // Numeric range — uses Minimum/Maximum boundaries.
+                                    else if (extension.Minimum || extension.Minimum === 0 ) {
+                                        // console.log('Values',dataValue + ' ' + extension.Minimum + ' ' + extension.Maximum);   // Retain for debug purposes
+                                        // Check if there is a Maximum boundry and if the record's value falls within it.
+                                        if(extension.Maximum || extension.Maximum === 0) {
+                                            if(dataValue >= extension.Minimum && dataValue < extension.Maximum) {
+                                                match = true;
                                             }
                                         }
-                                        // Else if the extension uses a Minimum boundary
-                                        else if (extension.Minimum || extension.Minimum === 0 ) {
-                                            // console.log('Values',dataValue + ' ' + extension.Minimum + ' ' + extension.Maximum);   // Retain for debug purposes
-                                            // Check if there is a Maximum boundry and if the record's value falls within it.
-                                            if(extension.Maximum || extension.Maximum === 0) {
-                                                if(dataValue >= extension.Minimum && dataValue < extension.Maximum) {
-                                                    match = true;
+                                        // Else, check if the record's value is greater than the minimum
+                                        else {
+                                            if(dataValue >= extension.Minimum) {
+                                                match = true;
+                                            }
+                                        }
+                                    }
+
+                                    // console.log('Match Status', match);   // Retain for debug purposes
+                                    if(match) {
+                                        // If there is a match for an Extension, assign the extension's override values and these will be used later
+                                        matchedExtension = {
+                                            "IconName" : extension.ExtensionIconValue,
+                                            "TextValue" : extension.ExtensionTextValue,
+                                            "ImageUrl" : extension.ExtensionImageUrl,
+                                            "HoverValue" : extension.ExtensionHoverText,
+                                            "Priority" : extension.PriorityOrder,
+                                            "IconBackground" : extension.BackgroundColor,
+                                            "IconForeground" : extension.ForegroundColor,
+                                            "BadgeTextColor" : extension.BadgeTextColor,
+                                            "BadgeIconPosition" : extension.BadgeIconPosition
+                                        };
+
+                                        if(item.DisplayMultiple){
+                                            // Multiple matching: collect every hit.
+                                            anyMatch = true;
+                                            matchingFields.push(
+                                                {
+                                                    fName: item.FieldApiName,
+                                                    fTextValue: dataValue,
+                                                    fImageURL: matchedExtension.ImageUrl,
+                                                    fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue,
+                                                    fShowAvatar: true,
+                                                    fIconName : matchedExtension.IconName,
+                                                    fIconBackground : matchedExtension.IconBackground,
+                                                    fIconForeground : matchedExtension.IconForeground,
+                                                    fTextShown: matchedExtension.TextValue,
+                                                    fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : '',
+                                                    fTextColor: matchedExtension.BadgeTextColor,
+                                                    fIconPosition: matchedExtension.BadgeIconPosition
                                                 }
-                                            }
-                                            // Else, check if the record's value is greater than the minimum
-                                            else {
-                                                if(dataValue >= extension.Minimum) {
-                                                    match = true;
-                                                }
-                                            }
+                                            );
+                                        } else {
+                                            break;  // Single-match: priority 1 wins; stop here.
                                         }
 
-                                        // console.log('Match Status', match);   // Retain for debug purposes
-                                        if(match) {
-                                            // If there is a match for an Extension, assign the extension's override values and these will be used later
-                                            matchedExtension = {
-                                                "IconName" : extension.ExtensionIconValue,
-                                                "TextValue" : extension.ExtensionTextValue,
-                                                "ImageUrl" : extension.ExtensionImageUrl,
-                                                "HoverValue" : extension.ExtensionHoverText,
-                                                "Priority" : extension.PriorityOrder,
-                                                "IconBackground" : extension.BackgroundColor,
-                                                "IconForeground" : extension.ForegroundColor,
-                                                "BadgeTextColor" : extension.BadgeTextColor,
-                                                "BadgeIconPosition" : extension.BadgeIconPosition
-                                            };
-
-                                            // However, if multiple matching is enabled, immediately assign the Extension for use in the Bundle.
-                                            if(item.DisplayMultiple){
-                                                anyMatch = true;
-                                                matchingFields.push(
-                                                    {
-                                                        fName: item.FieldApiName,
-                                                        fTextValue: dataValue,
-                                                        fImageURL: matchedExtension.ImageUrl,
-                                                        fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue,
-                                                        fShowAvatar: true,
-                                                        fIconName : matchedExtension.IconName,
-                                                        fIconBackground : matchedExtension.IconBackground,
-                                                        fIconForeground : matchedExtension.IconForeground,
-                                                        fTextShown: matchedExtension.TextValue,
-                                                        fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : '',
-                                                        fTextColor: matchedExtension.BadgeTextColor,
-                                                        fIconPosition: matchedExtension.BadgeIconPosition
-                                                    }
-                                                );
-                                            }
-
-                                            // console.dir(matchedExtension);
-                                        }
-                                    }   // End-If extension.IsActive
-                                }
-
-                            )
+                                        // console.dir(matchedExtension);
+                                    }
+                                }   // End-If extension.IsActive
+                            }
 
                         }
+
+                        // Resolve merge tokens in ActionTarget and HoverValue before building fld
+                        // so fPopoverBody can read the already-resolved HoverValue from itemsById.
+                        this.mergeValuesIntoTarget(item, data);
 
                         // If multiple matching is enabled and did not find a single match
                         // or if multiple matching is not enabled
                         // proceed to assign the indicator properties based on Indicator Item values
                         if (anyMatch != true || item.DisplayMultiple != true) {
-
+                            const iid = item.IndicatorId;
+                            const ibi = this.itemsById[iid];
                             matchingFields.push(
                             {
                                 fName: item.FieldApiName,   // Retain for debug purposes
-                                fId: item.IndicatorId,      // Used to generate resultsById which is used in click handling
+                                fId: iid,                   // Used to generate resultsById which is used in click handling
                                 fTextValue: dataValue,      // Retain for debug purposes
                                 ...resolveImage(item, dataValue, matchedExtension),
                                 ...resolveHoverValue(item, dataValue, matchedExtension),
@@ -469,11 +495,19 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                 ...resolveIconColors(item, dataValue, matchedExtension),
                                 ...resolveBadgeStyle(item, dataValue, matchedExtension),
                                 ...resolveTextShown(item, dataValue, matchedExtension, this.indsStyle),
-                                fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : ''
+                                fItemClass: (ibi && ibi.ActionTarget) ? 'clickable' : '',
+                                fFieldLabel: item.FieldLabel ?? '',
+                                fPopoverBody: matchedExtension ? (matchedExtension.HoverValue || '') : (ibi?.HoverValue || ''),
+                                fActionType: item.ActionType ?? '',
+                                fActionButtonLabel: item.ActionButtonLabel ?? '',
+                                fActionHelpText: item.ActionHelpText ?? '',
+                                fActionConfirmRequired: item.ActionConfirmRequired ?? false,
+                                fResolvedActionButtonLabel: item.ActionButtonLabel
+                                    ? item.ActionButtonLabel
+                                    : (item.ActionType === 'Flow Modal' ? 'Launch' : 'Open'),
+                                fShowPopover: false,
                             });
                         }
-
-                        this.mergeValuesIntoTarget(item, data);
                     }   // End-If item.IsActive
                 });
             this.results = matchingFields;
@@ -493,7 +527,12 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                 let dataFieldWithoutObjectName = mergeField.substring(mergeField.indexOf('.') + 1);
                 let dataValue = getFieldValue(data, mergeField) ?? '';
 
-                itemWithMergeFields.ActionTarget = itemWithMergeFields.ActionTarget.replaceAll('{' + dataFieldWithoutObjectName + '}', dataValue);
+                if (itemWithMergeFields.ActionTarget) {
+                    itemWithMergeFields.ActionTarget = itemWithMergeFields.ActionTarget.replaceAll('{' + dataFieldWithoutObjectName + '}', dataValue);
+                }
+                if (itemWithMergeFields.HoverValue) {
+                    itemWithMergeFields.HoverValue = itemWithMergeFields.HoverValue.replaceAll('{' + dataFieldWithoutObjectName + '}', dataValue);
+                }
             });
         }
     }
@@ -516,11 +555,40 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         if (event.target.dataset?.id) {
             let item = this.itemsById[event.target.dataset.id];
             // console.log('Indicator Clicked: ', JSON.stringify(item, null, 4));
+            if (item?.ActionConfirmRequired) return;
             if(item.ActionType === 'URL'){
                 this.urlAction(item.ActionTarget);
             } else if (item.ActionType === 'Flow Modal'){
                 this.openFlowModal(item.ActionTarget);
             }
+        }
+    }
+
+    handlePopoverEnter(event) {
+        const id = event.currentTarget.dataset.id;
+        if (!id) return;
+        this.results = this.results.map(f =>
+            f.fId === id ? { ...f, fShowPopover: !!(f.fPopoverBody || f.fActionType) } : f
+        );
+    }
+
+    handlePopoverLeave(event) {
+        const id = event.currentTarget.dataset.id;
+        if (!id) return;
+        this.results = this.results.map(f =>
+            f.fId === id ? { ...f, fShowPopover: false } : f
+        );
+    }
+
+    handlePopoverAction(event) {
+        const id = event.currentTarget.dataset.id;
+        if (!id) return;
+        const item = this.itemsById[id];
+        if (!item) return;
+        if (item.ActionType === 'URL') {
+            this.urlAction(item.ActionTarget);
+        } else if (item.ActionType === 'Flow Modal') {
+            this.openFlowModal(item.ActionTarget);
         }
     }
 

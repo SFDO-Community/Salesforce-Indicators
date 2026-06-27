@@ -6,6 +6,7 @@ export default class IndicatorBundleBadge extends LightningElement {
     @api indText = '';
     @api indIcon = 'standard:marketing_actions';
     @api indHoverText = '';
+    @api indAltText = '';
     @api indIconPosition = 'start';
     @api indBackgroundColor;
     @api indForegroundColor;

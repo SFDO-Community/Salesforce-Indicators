@@ -12,3 +12,15 @@
     flex-wrap: wrap;
     gap: 0.5rem;
 }
+
+.ind-popover-container {
+    position: relative;
+}
+
+.ind-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 9000;
+    min-width: 15rem;
+}
