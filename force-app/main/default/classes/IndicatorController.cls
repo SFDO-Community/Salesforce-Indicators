@@ -89,6 +89,12 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String ActionTarget {get; set;}
         @AuraEnabled
+        public String ActionButtonLabel {get; set;}
+        @AuraEnabled
+        public String ActionHelpText {get; set;}
+        @AuraEnabled
+        public Boolean ActionConfirmRequired {get; set;}
+        @AuraEnabled
         public String BadgeTextColor {get; set;}
         @AuraEnabled
         public String BadgeIconPosition {get; set;}
@@ -105,6 +111,10 @@ public with sharing class IndicatorController {
         public String ContainsText {get; set;}
         @AuraEnabled
         public String TextOperator {get; set;}
+        @AuraEnabled
+        public Date StartDate {get; set;}
+        @AuraEnabled
+        public Date EndDate {get; set;}
         @AuraEnabled
         public Decimal Maximum {get; set;}
         @AuraEnabled
@@ -239,6 +249,9 @@ public with sharing class IndicatorController {
                     item.SortOrder = bundleItem.Order__c;
                     item.ActionType = bundleItem.Action_Type__c;
                     item.ActionTarget = bundleItem.Action_Target__c;
+                    item.ActionButtonLabel = bundleItem.Action_Button_Label__c;
+                    item.ActionHelpText = bundleItem.Action_Help_Text__c;
+                    item.ActionConfirmRequired = bundleItem.Action_Confirm_Required__c;
 
                     Indicator_Item__mdt indicatorItem = Cmdt.getItem(bundleItem.Indicator_Item__r.DeveloperName);
                     if(indicatorItem != null){
@@ -297,6 +310,15 @@ public with sharing class IndicatorController {
                 extension.IsActive = itemExtension.Active__c;
                 extension.ContainsText = itemExtension.Contains_Text__c;
                 extension.TextOperator = String.isNotBlank(itemExtension.Text_Operator__c) ? itemExtension.Text_Operator__c : 'Contains';
+                if (String.isNotBlank(itemExtension.Contains_Text__c)) {
+                    try {
+                        DateUtility.DateRange range = DateUtility.convertRelativeDateRange(itemExtension.Contains_Text__c);
+                        extension.StartDate = range.StartDate;
+                        extension.EndDate = range.EndDate;
+                    } catch (DateUtility.DateConversionException e) {
+                        // Not a relative date literal — StartDate/EndDate remain null
+                    }
+                }
                 extension.Maximum = itemExtension.Maximum__c;
                 extension.Minimum = itemExtension.Minimum__c;
                 extension.ExtensionHoverText = itemExtension.Hover_Text__c;

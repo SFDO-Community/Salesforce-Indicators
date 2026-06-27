@@ -246,6 +246,24 @@ public class Build {
     }
     private Decimal order;
 
+    public BundleItemBuilder withActionButtonLabel(String actionButtonLabel) {
+      this.actionButtonLabel = actionButtonLabel;
+      return this;
+    }
+    private String actionButtonLabel;
+
+    public BundleItemBuilder withActionHelpText(String actionHelpText) {
+      this.actionHelpText = actionHelpText;
+      return this;
+    }
+    private String actionHelpText;
+
+    public BundleItemBuilder withActionConfirmRequired(Boolean actionConfirmRequired) {
+      this.actionConfirmRequired = actionConfirmRequired;
+      return this;
+    }
+    private Boolean actionConfirmRequired = false;
+
     public Indicator_Bundle_Item__mdt build() {
       return new Indicator_Bundle_Item__mdt(
         //objectApi = withVariable
@@ -253,7 +271,10 @@ public class Build {
         MasterLabel = devname,
         Indicator_Bundle__r = bundle,
         Indicator_Item__r = item,
-        Order__c = order
+        Order__c = order,
+        Action_Button_Label__c = actionButtonLabel,
+        Action_Help_Text__c = actionHelpText,
+        Action_Confirm_Required__c = actionConfirmRequired
       );
     }
   } // End BundleItem Builder
@@ -329,6 +350,13 @@ public class Build {
       return this;
     }
     private String staticText;
+
+    public ExtensionBuilder withTextOperator(String textOperator) {
+      this.textOperator = textOperator;
+      return this;
+    }
+    private String textOperator;
+
     public Indicator_Item_Extension__mdt build() {
       return new Indicator_Item_Extension__mdt(
         //objectApi = withVariable
@@ -343,7 +371,8 @@ public class Build {
         Maximum__c = maximum,
         Minimum__c = minimum,
         Priority__c = priority,
-        Static_Text__c = staticText
+        Static_Text__c = staticText,
+        Text_Operator__c = textOperator
       );
     }
   } // End Extension Builder
