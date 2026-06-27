@@ -1,4 +1,4 @@
-import { LightningElement, wire, track } from 'lwc';
+import { LightningElement, wire, track, api } from 'lwc';
 
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
 import getNewCmdtUrls from '@salesforce/apex/IndicatorController.getNewCmdtUrls';
@@ -6,6 +6,7 @@ import getBundleOptions from '@salesforce/apex/IndicatorListBundleSelector.getBu
 import { refreshApex } from '@salesforce/apex';
 
 export default class ConfigurationManager extends LightningElement {
+    @api flexipageRegionWidth;
     bundleName = '';
     bundle;
     showKey = false;
@@ -79,6 +80,12 @@ export default class ConfigurationManager extends LightningElement {
         const link = this.refs.cmdtLink;
         link.href = url;
         link.click();
+    }
+
+    get selectorSize() {
+        if (this.flexipageRegionWidth === 'SMALL') return 12;
+        if (this.flexipageRegionWidth === 'MEDIUM') return 6;
+        return 3;
     }
 
 }
