@@ -13,6 +13,15 @@
                 onclick={handleState}>
             </lightning-button-stateful>
         </template>
+        <template lwc:if={showRefresh}>
+            <lightning-button-icon
+                slot="actions"
+                icon-name="utility:refresh"
+                alternative-text="Refresh"
+                title="Refresh"
+                onclick={handleRefresh}
+            ></lightning-button-icon>
+        </template>
         <h3 slot="title">
             <lightning-icon 
                 lwc:if={bundleDetails.Icon}
@@ -23,6 +32,10 @@
             </lightning-icon>
             {bundleDetails.Title}
         </h3>
+        <div class="slds-is-relative">
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Refreshing" size="small" variant="brand"></lightning-spinner>
+        </template>
         <p class="slds-var-p-horizontal_medium">{bundleDetails.Body}</br></br></br></p>
         <lightning-layout pull-to-boundary="small">
             <lightning-layout-item padding="horizontal-small" size="10" class="slds-text-align_left">
@@ -245,5 +258,6 @@
                 </template>
             </template>
         </lightning-accordion>
+        </div>
     </lightning-card>
 </template>

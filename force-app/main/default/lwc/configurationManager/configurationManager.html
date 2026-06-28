@@ -65,6 +65,9 @@
                 <c-key
                     bundle={bundle}
                     is-setup="true"
+                    show-refresh="true"
+                    is-loading={isKeyLoading}
+                    onrefreshkey={handleRefreshKey}
                 ></c-key>
             </lightning-layout-item>
         </lightning-layout>

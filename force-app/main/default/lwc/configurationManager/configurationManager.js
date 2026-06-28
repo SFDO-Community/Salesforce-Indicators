@@ -11,6 +11,7 @@ export default class ConfigurationManager extends LightningElement {
     bundle;
     showKey = false;
     showSpinner = false;
+    isKeyLoading = false;
     options = [];
     newUrls = [];
     error;
@@ -61,6 +62,7 @@ export default class ConfigurationManager extends LightningElement {
             this.bundle = undefined;
         }
 
+        if (data || error) this.isKeyLoading = false;
         this.showSpinner = false;
     }
 
@@ -72,6 +74,13 @@ export default class ConfigurationManager extends LightningElement {
 
     handleNewClick(event) {
         this.navigateToCmdt('/lightning/setup/CustomMetadata/page?address=' + event.target.value);
+    }
+
+    handleRefreshKey() {
+        this.isKeyLoading = true;
+        refreshApex(this.wiredData)
+            .then(() => { this.isKeyLoading = false; })
+            .catch(() => { this.isKeyLoading = false; });
     }
 
     navigateToCmdt(url) {

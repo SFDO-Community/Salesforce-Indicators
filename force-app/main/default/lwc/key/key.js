@@ -14,16 +14,19 @@ export default class Key extends LightningElement {
     isOpen = false;
     isBundle = false;
     @api isSetup = false;
+    @api showRefresh = false;
+    @api isLoading = false;
 
     @api
     set bundle(value){
         this._bundle = value;
+        if (value) this._processBundle(value);
     }
     get bundle(){
         return this._bundle;
     }
 
-    renderedCallback() { 
+    renderedCallback() {
         if(this.bundle){
             this.initCSSVariables();
         }
@@ -36,25 +39,29 @@ export default class Key extends LightningElement {
         });
     }
 
-    connectedCallback(){
-        
-        // this.indicatorItems = this.bundle.Items;
+    handleRefresh() {
+        this.dispatchEvent(new CustomEvent('refreshkey'));
+    }
+
+    _processBundle(bundle){
+
+        this.indicatorItems = [];
+        this.activeSections = [];
+        this.allSections = [];
 
         this.bundleDetails = {
-            Title: this.bundle.CardTitle,
-            Body: this.bundle.CardText,
-            Icon: this.bundle.CardIcon,
-            Description: this.bundle.BundleDescription,
-            BundleId: this.bundle.BundleId,
-            IsActive: this.bundle.IsActive,
-            ObjectName: this.bundle.ObjectName
+            Title: bundle.CardTitle,
+            Body: bundle.CardText,
+            Icon: bundle.CardIcon,
+            Description: bundle.BundleDescription,
+            BundleId: bundle.BundleId,
+            IsActive: bundle.IsActive,
+            ObjectName: bundle.ObjectName
         }
 
-        if(this.bundle.BundleId){
-            this.isBundle = true;
-        }
+        this.isBundle = !!bundle.BundleId;
 
-        if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
+        if(bundle.CardIconBackground || bundle.CardIconCoreground ){
             this.bundleDetails.IconClass = 'cardIcon slds-var-m-right_xx-small ';
         } else {
             // ! Was throwing error because it couldn't find this style 'cardIcon' to override... ?
@@ -63,8 +70,8 @@ export default class Key extends LightningElement {
 
         // console.log(JSON.stringify(this.bundleDetails));
 
-        this.bundle.Items.forEach(
-            item => 
+        bundle.Items.forEach(
+            item =>
             {
                 let indicators = [];
                 let indicatorCount = 0;
@@ -91,9 +98,9 @@ export default class Key extends LightningElement {
 
                     let normalIcon = {
                         IndicatorId: item.IndicatorId,
-                        IconName: item.IconName ? item.IconName : '', 
-                        TextValue: item.TextValue ? item.TextValue.toUpperCase().substring(0,3) : '', 
-                        ImageUrl: item.ImageUrl ? item.ImageUrl : '', 
+                        IconName: item.IconName ? item.IconName : '',
+                        TextValue: item.TextValue ? item.TextValue.toUpperCase().substring(0,3) : '',
+                        ImageUrl: item.ImageUrl ? item.ImageUrl : '',
                         HoverValue: item.HoverValue ? '\"' + item.HoverValue + '\"' : 'Field Value',
                         Priority: '',
                         ExtensionLogic: item.FieldLabel + ' has a value',
@@ -136,9 +143,9 @@ export default class Key extends LightningElement {
 
                     let inverseIcon = {
                         IndicatorId: item.IndicatorId,
-                        IconName: item.FalseIcon ? item.FalseIcon : '', 
-                        TextValue: item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : '', 
-                        ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '', 
+                        IconName: item.FalseIcon ? item.FalseIcon : '',
+                        TextValue: item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : '',
+                        ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '',
                         HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field Value',
                         Priority: '',
                         ExtensionLogic: item.FieldLabel + ' is false or blank',
@@ -165,7 +172,7 @@ export default class Key extends LightningElement {
                 if(item.Extensions) {
 
                     item.Extensions.forEach(
-                        ext => 
+                        ext =>
                         {
                             let fillDesc = '';
                             if(ext.ExtensionTextValue || ext.ExtensionTextValue === 0){
@@ -234,7 +241,7 @@ export default class Key extends LightningElement {
                     Indicators: indicators,
                     IsActive: item.IsActive
                 };
-                
+
                 if(item.IsActive){
                     bundleItem.showIndicator = true;
                 } else {

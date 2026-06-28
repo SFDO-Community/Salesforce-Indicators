@@ -3,7 +3,8 @@
     <lightning-modal-body>
         <c-key
             bundle-name={bundleName}
-            bundle={bundle}
+            bundle={displayBundle}
+            is-loading={isKeyLoading}
         ></c-key>
     </lightning-modal-body>
     <lightning-modal-footer>
@@ -18,6 +19,13 @@
                     selected={isOpen}
                     onclick={handleState2}>
                 </lightning-button-stateful>
+                <lightning-button-icon
+                    icon-name="utility:refresh"
+                    alternative-text="Refresh"
+                    title="Refresh"
+                    class="slds-m-left_small"
+                    onclick={handleRefreshKey}>
+                </lightning-button-icon>
             </lightning-layout-item>
             <lightning-layout-item size="6" class="slds-text-align_right">
                 <lightning-button label="Close" onclick={handleOkay} class="slds-m-left_medium"></lightning-button>

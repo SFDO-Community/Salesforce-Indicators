@@ -545,6 +545,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
             description: 'Accessible description of modal\'s purpose',
             bundleName: this.bundleName,
             bundle: this.bundle,
+            showRefresh: this.showRefresh,
         });
         // if modal closed with X button, promise returns result = 'undefined'
         // if modal closed with OK button, promise returns result = 'okay'
