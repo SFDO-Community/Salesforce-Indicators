@@ -8,6 +8,7 @@ export default class IndicatorBundleKey extends LightningModal {
     @api bundleName;
     @api bundle;
     @api showRefresh = false;
+    @api suppressedItemIds = [];
 
     _bundle;
     wiredBundleResult;

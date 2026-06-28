@@ -97,7 +97,7 @@
         <lightning-accordion allow-multiple-sections-open
                         active-section-name={activeSections}
                         onsectiontoggle={handleToggleSection}>
-            <template for:each={indicatorItems} for:item="indicatorItem">
+            <template for:each={filteredIndicatorItems} for:item="indicatorItem">
                 <template lwc:if={indicatorItem.showIndicator}>
                     <div key={indicatorItem.FieldApiName}>
                         

@@ -128,6 +128,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
     apiFieldnameDefinitions = [];   //Holds the Field Name and Object Name to use in the Wire Service
     results = [];   // stores the indicator results after performing logic check
+    suppressedItemIds = [];   // IndicatorIds skipped because the user lacks FLS access to the field
 
     // Used for refreshing Apex
     wiredCmdt;
@@ -324,7 +325,8 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     }
 
     // Get the field values for the target record based on the configured fields in CMDT
-    // Using 'optionalFields' ensures that if a user does not have access to a field, the indicator will not show.
+    // Using 'optionalFields' so getRecord doesn't error when a user lacks FLS access to a field.
+    // Fields the user can't read return undefined from getFieldValue; those items are skipped below.
     // TODO: Add fields parameter to retrieve the record name for use when the targetIdValue is for another record.
     @wire(getRecord, { recordId: '$targetIdValue', optionalFields: '$apiFieldnameDefinitions' })
     wiredRecord(result) {
@@ -334,6 +336,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         if (data) {
             // console.dir(data);   // Retain for debug purposes
             let matchingFields = [];
+            let suppressedItemIds = [];
 
             // Loop through the configured CMDT indicator items
             this.bundle.Items.forEach(
@@ -349,6 +352,12 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
                         // Get the record's field value from the @wire using the current indicator item's field path
                         let dataValue = getFieldValue(data, dataField);
+
+                        // undefined means the user lacks FLS access to this field — skip it entirely
+                        if (dataValue === undefined) {
+                            suppressedItemIds.push(item.IndicatorId);
+                            return;
+                        }
 
                         if (item.ZeroBehavior === 'Treat Zeroes as Blanks' && dataValue === 0){
                             dataValue = null;
@@ -511,6 +520,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                     }   // End-If item.IsActive
                 });
             this.results = matchingFields;
+            this.suppressedItemIds = suppressedItemIds;
             // console.log('FieldValue => ', JSON.stringify(this.results));   // Retain for debug purposes
         } else if (error) {
             console.log('Error!');
@@ -546,6 +556,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
             bundleName: this.bundleName,
             bundle: this.bundle,
             showRefresh: this.showRefresh,
+            suppressedItemIds: this.suppressedItemIds,
         });
         // if modal closed with X button, promise returns result = 'undefined'
         // if modal closed with OK button, promise returns result = 'okay'

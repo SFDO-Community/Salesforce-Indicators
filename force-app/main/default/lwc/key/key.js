@@ -16,6 +16,7 @@ export default class Key extends LightningElement {
     @api isSetup = false;
     @api showRefresh = false;
     @api isLoading = false;
+    @api suppressedItemIds = [];
 
     @api
     set bundle(value){
@@ -278,6 +279,12 @@ export default class Key extends LightningElement {
         const link = this.refs.cmdtLink;
         link.href = '/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name;
         link.click();
+    }
+
+    get filteredIndicatorItems() {
+        if (!this.suppressedItemIds?.length) return this.indicatorItems;
+        const suppressed = new Set(this.suppressedItemIds);
+        return this.indicatorItems.filter(i => !suppressed.has(i.IndicatorId));
     }
 
     get isManageEnabled() {
