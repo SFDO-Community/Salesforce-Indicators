@@ -90,6 +90,9 @@ function resolveTextShown(item, dataValue, matchedExtension, indsStyle) {
         if (item.EmptyStaticBehavior === 'Use Icon Only') {
             return { fTextShown: '' };
         }
+        if (item.EmptyStaticBehavior === 'Use Field Value') {
+            return { fTextShown: truncate(String(dataValue)) };
+        }
         return { fTextShown: item.FalseTextValue ? truncate(item.FalseTextValue) : '' };
     }
 
