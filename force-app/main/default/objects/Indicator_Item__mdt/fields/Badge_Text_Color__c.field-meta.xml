@@ -3,7 +3,7 @@
     <fullName>Badge_Text_Color__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText></inlineHelpText>
+    <inlineHelpText>CSS color value (e.g. #ffffff or white) for the badge label text. Leave blank to use the default.</inlineHelpText>
     <label>Badge Text Color</label>
     <length>255</length>
     <required>false</required>

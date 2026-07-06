@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Inverse_Badge_Icon_Position__c</fullName>
-    <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Where the icon appears relative to the badge text in the inverse (false/blank) state. Start places it before the text; End places it after.</inlineHelpText>
     <label>Inverse Badge Icon Position</label>
     <required>false</required>
     <type>Picklist</type>

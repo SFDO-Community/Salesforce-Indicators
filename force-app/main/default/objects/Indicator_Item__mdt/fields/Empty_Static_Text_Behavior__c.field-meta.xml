@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Empty_Static_Text_Behavior__c</fullName>
-    <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Controls what shows when Static Text is blank. Use Icon Only (default) shows only the icon; Use Field Value shows the raw field value instead.</inlineHelpText>
     <label>Empty Static Text Behavior</label>
     <required>false</required>
     <type>Picklist</type>

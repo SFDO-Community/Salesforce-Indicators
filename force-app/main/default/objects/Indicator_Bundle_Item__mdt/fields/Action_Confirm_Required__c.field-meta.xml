@@ -5,6 +5,5 @@
     <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>When checked, clicking the indicator directly does not fire the action. The user must click the action button inside the hover popover instead. Useful as a safeguard against accidental Flow launches.</inlineHelpText>
     <label>Action Confirm Required</label>
-    <required>false</required>
     <type>Checkbox</type>
 </CustomField>

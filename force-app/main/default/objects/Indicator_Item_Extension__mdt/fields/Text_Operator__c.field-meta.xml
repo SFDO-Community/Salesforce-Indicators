@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Text_Operator__c</fullName>
-    <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <label>Text Operator</label>
-    <inlineHelpText>For "Contains Text" value, choose how to match the text. Defaults to Contains if no value entered. Use Before or After when Contains Text holds a relative date literal (e.g. TODAY, NEXT 30 DAYS) and the target field is a Date or DateTime field.</inlineHelpText>
+    <inlineHelpText>How to compare the field value against the match value. Text options: Contains (default), Equals, Does Not Equal, Starts With. Date/DateTime options: Before Start, After Start, Before End, After End — relative to the range boundaries.</inlineHelpText>
+    <label>Match Operator</label>
     <required>false</required>
     <type>Picklist</type>
     <valueSet>
@@ -50,6 +49,18 @@
                 <fullName>After Start</fullName>
                 <default>false</default>
                 <label>After Start</label>
+            </value>
+            <value>
+                <fullName>After</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>After</label>
+            </value>
+            <value>
+                <fullName>Before</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Before</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Action_Button_Label__c</fullName>
+    <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>Label shown on the action button in the hover popover. Defaults to "Open" for URL actions and "Launch" for Flow actions when blank.</inlineHelpText>
+    <inlineHelpText>Label shown on the action button in the hover popover. Defaults to &quot;Open&quot; for URL actions and &quot;Launch&quot; for Flow actions when blank.</inlineHelpText>
     <label>Action Button Label</label>
     <length>255</length>
     <required>false</required>

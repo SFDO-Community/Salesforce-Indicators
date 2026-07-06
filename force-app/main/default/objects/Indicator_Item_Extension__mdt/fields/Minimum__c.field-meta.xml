@@ -3,6 +3,7 @@
     <fullName>Minimum__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Lower bound of the numeric range (inclusive: field value must be greater than or equal to this number). Leave blank for no lower limit.</inlineHelpText>
     <label>Minimum ( &gt;= )</label>
     <precision>18</precision>
     <required>false</required>
