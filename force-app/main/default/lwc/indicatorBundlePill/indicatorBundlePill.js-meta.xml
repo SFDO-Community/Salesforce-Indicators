@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>65.0</apiVersion>
-    <isExposed>false</isExposed>
+    <isExposed>true</isExposed>
+    <masterLabel>Indicator Pill</masterLabel>
+    <description>Display an at-a-glance pill indicator with an avatar and label for use on record pages or in flows.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="indsShape" type="String" label="Indicator Shape" description="Enter shape: base or circle." default="base" role="inputOnly" required="true" />
+            <property name="indText" type="String" label="Static Text" description="(Optional) Text shown on the indicator avatar. NOTE: Displays first 3 characters / emojis." role="inputOnly" />
+            <property name="indIcon" type="String" label="Icon" description="(Optional) The Lightning Design System icon from https://lightningdesignsystem.com/icons/ when being used instead of Text or Image URL." role="inputOnly" />
+            <property name="indImage" type="String" label="Image" description="(Optional) The URL to the image for the indicator avatar." role="inputOnly" />
+            <property name="indHoverText" type="String" label="Pill Label" description="The text shown as the pill label." role="inputOnly" />
+            <property name="indAltText" type="String" label="Alternative Text" description="Accessible alternative text for the indicator avatar icon." role="inputOnly" />
+            <property name="indBackgroundColor" type="String" label="Background Color" description="(Optional) Override the background color of the indicator avatar." role="inputOnly" />
+            <property name="indForegroundColor" type="String" label="Foreground Color" description="(Optional) Override the foreground color of the indicator avatar icon." role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

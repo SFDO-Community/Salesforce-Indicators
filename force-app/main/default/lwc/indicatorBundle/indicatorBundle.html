@@ -110,7 +110,13 @@
                                             onmouseenter={handlePopoverEnter}
                                             onmouseleave={handlePopoverLeave}>
                                             <c-indicator-bundle-pill
-                                                fld={fld}
+                                                ind-text={fld.fTextShown}
+                                                ind-icon={fld.fIconName}
+                                                ind-image={fld.fImageURL}
+                                                ind-hover-text={fld.fHoverValue}
+                                                ind-alt-text={fld.fFieldLabel}
+                                                ind-background-color={fld.fIconBackground}
+                                                ind-foreground-color={fld.fIconForeground}
                                                 inds-size="x-small"
                                                 inds-shape={indsShape}
                                                 ind-clickable={fld.fItemClass}

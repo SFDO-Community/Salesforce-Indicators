@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>65.0</apiVersion>
-    <isExposed>false</isExposed>
+    <isExposed>true</isExposed>
+    <masterLabel>Indicator Badge</masterLabel>
+    <description>Display an at-a-glance badge with an icon and label for use on record pages or in flows.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="indText" type="String" label="Label Text" description="The text label displayed on the badge." role="inputOnly" />
+            <property name="indIcon" type="String" label="Icon" description="(Optional) The Lightning Design System icon from https://lightningdesignsystem.com/icons/." role="inputOnly" />
+            <property name="indAltText" type="String" label="Icon Alternative Text" description="Alternative text for the badge icon for accessibility." role="inputOnly" />
+            <property name="indIconPosition" type="String" label="Icon Position" description="Position of the icon relative to the label text: start or end." default="start" role="inputOnly" />
+            <property name="indBackgroundColor" type="String" label="Background Color" description="(Optional) Override the badge background color." role="inputOnly" />
+            <property name="indForegroundColor" type="String" label="Foreground Color" description="(Optional) Override the badge icon foreground color." role="inputOnly" />
+            <property name="indTextColor" type="String" label="Text Color" description="(Optional) Override the badge label text color." role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

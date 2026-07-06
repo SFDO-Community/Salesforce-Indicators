@@ -290,7 +290,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                 for( let i = 0; i < this.bundle.Items.length; i++){
                     let item = this.bundle.Items[i];
 
-                    let apiFieldSyntax = '' + this.objectApiName + '.' + item.FieldApiName;
+                    let apiFieldSyntax = '' + this.bundle.ObjectName + '.' + item.FieldApiName;
                     // console.log('fieldSyntax',apiFieldSyntax); // Retain for debug purposes
                     let targetMergeFields = this.targetMergeFields(item);
                     this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax, ...targetMergeFields];
@@ -318,7 +318,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         const allMatches = new Set();
         (item.ActionTarget?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
         (item.HoverValue?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
-        return [...allMatches].map(match => this.objectApiName + '.' + match.substring(1, match.length - 1));
+        return [...allMatches].map(match => this.bundle.ObjectName + '.' + match.substring(1, match.length - 1));
     }
 
     refreshCmdt(){
@@ -350,7 +350,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
                         // console.dir(item);   // Retain for debug purposes
 
-                        let dataField = this.objectApiName + "." + item.FieldApiName;
+                        let dataField = this.bundle.ObjectName + "." + item.FieldApiName;
                         // console.log('DataField',dataField);   // Retain for debug purposes
 
                         // Get the record's field value from the @wire using the current indicator item's field path

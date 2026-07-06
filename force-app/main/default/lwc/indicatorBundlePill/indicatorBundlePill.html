@@ -1,23 +1,23 @@
 <template>
     <span class={pillClass}>
         <span class="slds-pill__icon_container">
-            <c-indicator-bundle-item if:true={fld.fShowAvatar} key={fld.fName}
-                ind-text={fld.fTextShown}
+            <c-indicator-bundle-item
+                ind-text={indText}
                 ind-size={indsSize}
                 ind-shape={indsShape}
-                ind-hover-text={fld.fHoverValue}
-                ind-icon={fld.fIconName}
-                ind-image={fld.fImageURL}
-                ind-background-color={fld.fIconBackground}
-                ind-foreground-color={fld.fIconForeground}
-                ind-alt-text={fld.fFieldLabel}
+                ind-hover-text={indHoverText}
+                ind-icon={indIcon}
+                ind-image={indImage}
+                ind-background-color={indBackgroundColor}
+                ind-foreground-color={indForegroundColor}
+                ind-alt-text={indAltText}
                 ind-clickable={indClickable}
                 ind-compact
             >
             </c-indicator-bundle-item>
         </span>
         <div class="slds-pill__action">
-            <span class="slds-pill__label">{fld.fHoverValue}</span>
+            <span class="slds-pill__label">{indHoverText}</span>
         </div>
     </span>
 </template>
