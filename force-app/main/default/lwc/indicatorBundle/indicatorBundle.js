@@ -27,6 +27,13 @@ function isDateValue(v) { return v != null && ISO_DATE_RE.test(String(v)); }
 // for lexicographic comparison against Apex-serialised StartDate/EndDate strings.
 function toDateKey(v) { return String(v).substring(0, 10); }
 
+// Matches {!Field_Api_Name} merge tokens in ActionTarget/HoverValue/CardText templates.
+const TARGET_MERGE_FIELD_RE = /{!.*?}/g;
+
+// Matches the "type:" prefix (e.g. "standard:", "custom:") of an SLDS icon-name so it can be
+// forced to "utility:" for contexts (like the SLDS2 section header) that require utility icons.
+const UTILITY_ICON_PREFIX_RE = /^[^:]+:/;
+
 function resolveImage(item, dataValue, matchedExtension) {
     return hasValue(dataValue)
         ? { fImageURL: matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl }
@@ -129,6 +136,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     bundle;     // Stores CMDT Bundle, Items, and Extensions wrapper data
     itemsById = {};
     card = {};  // Stores the details about the bundle's card to be displayed
+    cardBodyMergeFields = [];  // {!Field_Api_Name} tokens found in the bundle's CardText, resolved once record data loads
 
     apiFieldnameDefinitions = [];   //Holds the Field Name and Object Name to use in the Wire Service
     results = [];   // stores the indicator results after performing logic check
@@ -260,6 +268,11 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                     body: this.bundle.CardText
                 }
 
+                // Body may contain {!Field_Api_Name} merge tokens - queue them up for the record
+                // wire and re-resolve them against fresh data below in wiredRecord().
+                this.cardBodyMergeFields = this.extractMergeFields(this.bundle.CardText);
+                this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, ...this.cardBodyMergeFields];
+
                 if(this.bundle.CardIconBackground || this.bundle.CardIconForeground ){
                     this.card.iconClass = 'cardIcon slds-media__figure slds-var-m-right_x-small ';
                 } else {
@@ -313,13 +326,29 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         }
     }
 
-    targetMergeFieldRegex = /{!.*?}/g;
+    // Scans any number of template strings for {!Field_Api_Name} tokens and returns the
+    // deduped list of fully-qualified (Object.Field) paths to add to apiFieldnameDefinitions.
+    extractMergeFields(...templates) {
+        const allMatches = new Set();
+        templates.forEach(template =>
+            (template?.match(TARGET_MERGE_FIELD_RE) ?? []).forEach(m => allMatches.add(m))
+        );
+        return [...allMatches].map(match => this.bundle.ObjectName + '.' + match.substring(2, match.length - 1));
+    }
 
     targetMergeFields(item) {
-        const allMatches = new Set();
-        (item.ActionTarget?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
-        (item.HoverValue?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
-        return [...allMatches].map(match => this.bundle.ObjectName + '.' + match.substring(2, match.length - 1));
+        return this.extractMergeFields(item.ActionTarget, item.HoverValue);
+    }
+
+    // Replaces every {!Field_Api_Name} token in template with the resolved field value from data.
+    mergeTemplate(template, mergeFields, data) {
+        let result = template;
+        mergeFields.forEach(mergeField => {
+            let dataFieldWithoutObjectName = mergeField.substring(mergeField.indexOf('.') + 1);
+            let dataValue = getFieldValue(data, mergeField) ?? '';
+            result = result.replaceAll('{!' + dataFieldWithoutObjectName + '}', dataValue);
+        });
+        return result;
     }
 
     refreshCmdt(){
@@ -341,6 +370,11 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
             // console.dir(data);   // Retain for debug purposes
             let matchingFields = [];
             let suppressedItemIds = [];
+
+            // Resolve any {!Field_Api_Name} tokens in the card's body against the freshly wired record.
+            if (this.card && this.cardBodyMergeFields.length) {
+                this.card = { ...this.card, body: this.mergeTemplate(this.bundle.CardText, this.cardBodyMergeFields, data) };
+            }
 
             // Loop through the configured CMDT indicator items
             this.bundle.Items.forEach(
@@ -537,17 +571,12 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     mergeValuesIntoTarget(item, data) {
         let itemWithMergeFields = this.itemsById[item.IndicatorId];
         if (itemWithMergeFields.TargetMergeFields) {
-            itemWithMergeFields.TargetMergeFields.forEach(mergeField => {
-                let dataFieldWithoutObjectName = mergeField.substring(mergeField.indexOf('.') + 1);
-                let dataValue = getFieldValue(data, mergeField) ?? '';
-
-                if (itemWithMergeFields.ActionTarget) {
-                    itemWithMergeFields.ActionTarget = itemWithMergeFields.ActionTarget.replaceAll('{!' + dataFieldWithoutObjectName + '}', dataValue);
-                }
-                if (itemWithMergeFields.HoverValue) {
-                    itemWithMergeFields.HoverValue = itemWithMergeFields.HoverValue.replaceAll('{!' + dataFieldWithoutObjectName + '}', dataValue);
-                }
-            });
+            if (itemWithMergeFields.ActionTarget) {
+                itemWithMergeFields.ActionTarget = this.mergeTemplate(itemWithMergeFields.ActionTarget, itemWithMergeFields.TargetMergeFields, data);
+            }
+            if (itemWithMergeFields.HoverValue) {
+                itemWithMergeFields.HoverValue = this.mergeTemplate(itemWithMergeFields.HoverValue, itemWithMergeFields.TargetMergeFields, data);
+            }
         }
     }
 
@@ -664,6 +693,10 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
     get showBadgeStyle(){
         return this.indsStyle === 'badge';
+    }
+
+    get utilityCardIcon(){
+        return this.card?.icon?.replace(UTILITY_ICON_PREFIX_RE, "utility:");
     }
     
 }

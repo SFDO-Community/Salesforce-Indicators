@@ -34,7 +34,8 @@
                             <h3 class="slds-section__title slds-theme_shade">
                                 <span class="slds-section__title-action">
                                     <lightning-icon
-                                        icon-name="utility:all"
+                                        lwc:if={card.icon}
+                                        icon-name={utilityCardIcon}
                                         size="x-small"
                                         class="slds-section__title-action-icon slds-button__icon_left slds-icon_container"
                                     ></lightning-icon>
