@@ -313,22 +313,13 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         }
     }
 
-    targetMergeFieldRegex = /{.*?}/g;
-    
-    targetMergeFields(item) {
-        const allMatches = new Set();
-        (item.ActionTarget?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
-        (item.HoverValue?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
-        return [...allMatches].map(match => this.bundle.ObjectName + '.' + match.substring(1, match.length - 1));
-    }
+    targetMergeFieldRegex = /{!.*?}/g;
 
-    targetMergeFieldRegex = /{.*?}/g;
-    
     targetMergeFields(item) {
         const allMatches = new Set();
         (item.ActionTarget?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
         (item.HoverValue?.match(this.targetMergeFieldRegex) ?? []).forEach(m => allMatches.add(m));
-        return [...allMatches].map(match => this.bundle.ObjectName + '.' + match.substring(1, match.length - 1));
+        return [...allMatches].map(match => this.bundle.ObjectName + '.' + match.substring(2, match.length - 1));
     }
 
     refreshCmdt(){
@@ -551,10 +542,10 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                 let dataValue = getFieldValue(data, mergeField) ?? '';
 
                 if (itemWithMergeFields.ActionTarget) {
-                    itemWithMergeFields.ActionTarget = itemWithMergeFields.ActionTarget.replaceAll('{' + dataFieldWithoutObjectName + '}', dataValue);
+                    itemWithMergeFields.ActionTarget = itemWithMergeFields.ActionTarget.replaceAll('{!' + dataFieldWithoutObjectName + '}', dataValue);
                 }
                 if (itemWithMergeFields.HoverValue) {
-                    itemWithMergeFields.HoverValue = itemWithMergeFields.HoverValue.replaceAll('{' + dataFieldWithoutObjectName + '}', dataValue);
+                    itemWithMergeFields.HoverValue = itemWithMergeFields.HoverValue.replaceAll('{!' + dataFieldWithoutObjectName + '}', dataValue);
                 }
             });
         }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Action_Target__c</fullName>
-    <description>The destination when the indicator is clicked: a URL or a Screen Flow API name. Both support {Field_API_Name} merge tokens resolved from the current record at click time.</description>
+    <description>The destination when the indicator is clicked: a URL or a Screen Flow API name. Both support {!Field_API_Name} merge tokens resolved from the current record at click time.</description>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>A URL (for URL action type) or Screen Flow API name (for Flow Modal). Supports {Field_API_Name} merge tokens replaced at click time with the record&apos;s field values (e.g. /{AccountId}/view).</inlineHelpText>
+    <inlineHelpText>A URL (for URL action type) or Screen Flow API name (for Flow Modal). Supports {!Field_API_Name} merge tokens replaced at click time with the record&apos;s field values (e.g. /{!AccountId}/view).</inlineHelpText>
     <label>Action Target</label>
     <length>255</length>
     <required>false</required>
