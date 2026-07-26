@@ -24,3 +24,8 @@
     z-index: 9000;
     min-width: 15rem;
 }
+
+.section-layout-container .slds-section__title-action {
+    cursor: default;
+    pointer-events: none;
+}
