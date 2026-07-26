@@ -3,7 +3,7 @@
     <fullName>Priority__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>Priority of this rule.  If an field&apos;s value first multiple extension rules, the lowest priority will be used.</inlineHelpText>
+    <inlineHelpText>Priority of this rule.  If multiple extension rules apply and Indicator Item's "Display Multiple" is set to false, then the extension with the lowest priority will be used.</inlineHelpText>
     <label>Priority</label>
     <precision>4</precision>
     <required>false</required>
