@@ -15,6 +15,7 @@
             <property name="titleStyle" type="String" label="Title Style" placeholder="Lightning Card" datasource="Lightning Card,Dynamic Forms"/>
             <property name="showTitle" type="Boolean" label="Display Title"/>
             <property name="showDescription" type="Boolean" label="Display Description"/>
+            <property name="indsStyle" type="String" label="Indicator Style" placeholder="avatar" datasource="avatar,badge,pill"/>
             <property name="indsSize" type="String" label="Indicator Size" placeholder="large" datasource="large,medium"/>
             <property name="indsShape" type="String" label="Indicator Shape" placeholder="base" datasource="base,circle"/>
             <property name="mappedField" type="String" label="(Optional) Mapped Id Field" description="Provide the API name of a field on this object which holds a Record Id or Relationship Id." placeholder="Example: Source_Id__c, ParentId, or AccountId"/>
