@@ -13,6 +13,12 @@ export default class IndicatorBundlePill extends LightningElement {
     @api indClickable;
 
     get pillClass() {
-        return this.indClickable ? 'slds-pill slds-pill_link clickable' : 'slds-pill slds-pill_link';
+        return this.indClickable ? 'slds-pill slds-pill_link clickable' : 'slds-pill';
+    }
+
+    // Matches SLDS's own pill example: the anchor exists for link styling/semantics only,
+    // not real navigation - actual click handling happens on the parent's data-id listener.
+    handleActionClick(event) {
+        event.preventDefault();
     }
 }

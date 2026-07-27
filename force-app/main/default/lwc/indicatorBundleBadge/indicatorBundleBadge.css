@@ -6,4 +6,5 @@
 
 .clickable {
     cursor: pointer;
+    --slds-c-badge-color-border: #747474;
 }
