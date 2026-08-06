@@ -15,6 +15,34 @@
 
 .ind-popover-container {
     position: relative;
+    /* Don't let flex stretch this to the row's tallest sibling - keeps the has-popover
+       dotted underline (below) snug under this item's own content, not the row's full height. */
+    align-self: flex-start;
+}
+
+/* Wraps only the indicator itself (avatar/pill/badge), not the popover - the popover (including
+   its own action button) is a sibling of this, not a descendant, specifically so a tap on the
+   button can never re-trigger this wrapper's mouseenter/mouseleave and toggle the popover closed
+   out from under that same tap. display:inline-flex keeps the same visual footprint the
+   indicator had before this wrapper was introduced. */
+.ind-indicator-wrapper {
+    display: inline-flex;
+    align-items: center;
+    /* Without this, some mobile browsers/webviews delay dispatching click ~300ms while waiting
+       to see if a second tap is coming (double-tap-to-zoom disambiguation), and can drop the
+       click for a rapid subsequent tap entirely - this tells the browser to skip that wait. */
+    touch-action: manipulation;
+}
+
+/* Cursor changes have no effect on touch, and hover-only items (no action) never got a
+   permanent affordance like clickable pills/badges did - this signals "there's more info here"
+   on touch regardless of whether the item also has an action. */
+@media (hover: none) {
+    .has-popover {
+        padding-bottom: 4px;
+        /* Wider border-width spaces the dots out more - 1px rendered as an almost-solid line. */
+        border-bottom: 2px dotted #0176d3;
+    }
 }
 
 .ind-popover {
@@ -23,6 +51,12 @@
     left: 0;
     z-index: 9000;
     min-width: 15rem;
+}
+
+.ind-popover .slds-popover__footer button {
+    /* Same rationale as .ind-popover-container - explicit here too since this button firing
+       reliably is the one thing on touch that must actually work every time. */
+    touch-action: manipulation;
 }
 
 .section-layout-container .slds-section__title-action {

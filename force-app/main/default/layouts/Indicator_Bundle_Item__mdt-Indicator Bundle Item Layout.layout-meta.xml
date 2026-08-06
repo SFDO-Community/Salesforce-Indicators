@@ -49,6 +49,10 @@
                 <behavior>Edit</behavior>
                 <field>Action_Confirm_Required__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Show_False_or_Blank_Action__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

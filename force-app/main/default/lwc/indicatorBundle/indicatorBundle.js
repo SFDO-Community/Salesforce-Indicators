@@ -10,6 +10,7 @@ import { reduceErrors } from 'c/ldsUtils';
 
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
+import FORM_FACTOR from '@salesforce/client/formFactor';
 
 // Pure helpers used by wiredRecord() to resolve one indicator's display values from the
 // record's field value, falling back to the item's "false/blank" (inverse) values when there
@@ -151,6 +152,10 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     errorMessage = '';
     showIllustration = false;
     @track illustration = {};
+
+    // Small/Medium (phone/tablet) get the tap-reveal-popover flow; Large (desktop) keeps
+    // hover/click as-is - see handleIndicatorClick.
+    isTouchDevice = FORM_FACTOR !== 'Large';
 
     connectedCallback(){
         if(this.mappedField == null || this.mappedField.trim() == ""){
@@ -309,11 +314,21 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                     let targetMergeFields = this.targetMergeFields(item);
                     this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax, ...targetMergeFields];
 
-                    // Deep-cloned (not just spread) because mergeValuesIntoTarget() below mutates
-                    // ActionTarget on this copy in place, and must not corrupt the wired Apex data.
-                    this.itemsById[item.IndicatorId] = JSON.parse(JSON.stringify(item));
-                    if (targetMergeFields) {  // Add to items to be used when merging the fields with actual values
-                        this.itemsById[item.IndicatorId].TargetMergeFields = targetMergeFields;
+                    // Deep-cloned (not just spread) because mergeValuesIntoTarget() below writes the
+                    // merged ActionTarget/HoverValue/FalseHoverValue onto this copy, and must not
+                    // corrupt the wired Apex data.
+                    const clonedItem = JSON.parse(JSON.stringify(item));
+                    this.itemsById[item.IndicatorId] = clonedItem;
+                    if (targetMergeFields.length) {  // Add to items to be used when merging the fields with actual values
+                        clonedItem.TargetMergeFields = targetMergeFields;
+                        // Templates are kept separate from the *Template-less fields above, which
+                        // mergeValuesIntoTarget() overwrites with resolved values on every record
+                        // wire re-fire - re-merging straight from those (instead of these untouched
+                        // templates) would find no {!Field} tokens left to replace after the first
+                        // merge, silently freezing the popover on its initial value.
+                        clonedItem.ActionTargetTemplate = item.ActionTarget;
+                        clonedItem.HoverValueTemplate = item.HoverValue;
+                        clonedItem.FalseHoverValueTemplate = item.FalseHoverValue;
                     }
                 }
             }
@@ -337,7 +352,8 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     }
 
     targetMergeFields(item) {
-        return this.extractMergeFields(item.ActionTarget, item.HoverValue);
+        const extensionHoverTexts = (item.Extensions || []).map(ext => ext.ExtensionHoverText);
+        return this.extractMergeFields(item.ActionTarget, item.HoverValue, item.FalseHoverValue, ...extensionHoverTexts);
     }
 
     // Replaces every {!Field_Api_Name} token in template with the resolved field value from data.
@@ -490,6 +506,15 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                             "BadgeIconPosition" : extension.BadgeIconPosition
                                         };
 
+                                        // Extension hover text can carry the same {!Field_Api_Name}
+                                        // tokens as the item's own HoverValue - resolve them here
+                                        // against the item's merge-field list (targetMergeFields()
+                                        // scans Extensions' ExtensionHoverText too, see above).
+                                        const extMergeFields = this.itemsById[item.IndicatorId]?.TargetMergeFields;
+                                        if (matchedExtension.HoverValue && extMergeFields?.length) {
+                                            matchedExtension.HoverValue = this.mergeTemplate(matchedExtension.HoverValue, extMergeFields, data);
+                                        }
+
                                         if(item.DisplayMultiple){
                                             // Multiple matching: collect every hit.
                                             anyMatch = true;
@@ -505,6 +530,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                                     fIconForeground : matchedExtension.IconForeground,
                                                     fTextShown: matchedExtension.TextValue,
                                                     fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : '',
+                                                    fContainerClass: 'slds-is-relative ind-popover-container',
                                                     fTextColor: matchedExtension.BadgeTextColor,
                                                     fIconPosition: matchedExtension.BadgeIconPosition
                                                 }
@@ -520,8 +546,9 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
                         }
 
-                        // Resolve merge tokens in ActionTarget and HoverValue before building fld
-                        // so fPopoverBody can read the already-resolved HoverValue from itemsById.
+                        // Resolve merge tokens in ActionTarget, HoverValue, and FalseHoverValue
+                        // before building fld so fPopoverBody can read the already-resolved values
+                        // from itemsById.
                         this.mergeValuesIntoTarget(item, data);
 
                         // If multiple matching is enabled and did not find a single match
@@ -530,6 +557,29 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                         if (anyMatch != true || item.DisplayMultiple != true) {
                             const iid = item.IndicatorId;
                             const ibi = this.itemsById[iid];
+                            // Mirrors resolveHoverValue()'s hasValue/DisplayFalse fallback so the
+                            // popover shows the same false/blank hover text the indicator itself
+                            // switches to, instead of always reading the "true" HoverValue (which
+                            // is often empty when the field is blank).
+                            const fPopoverBody = matchedExtension
+                                ? (matchedExtension.HoverValue || '')
+                                : hasValue(dataValue)
+                                    ? (ibi?.HoverValue || '')
+                                    : (item.DisplayFalse ? (ibi?.FalseHoverValue || '') : '');
+                            // The action stays available in the false/blank state only when the
+                            // bundle item opts in via Show_False_or_Blank_Action__c; otherwise it's
+                            // suppressed along with the rest of the "true" appearance. Stored on
+                            // itemsById so handleIndicatorClick/handlePopoverAction (which look the
+                            // item up by id, not through fld) can also honor it.
+                            const fActionAllowed = hasValue(dataValue) || !!item.DisplayFalseAction;
+                            if (ibi) {
+                                ibi.ActionAllowed = fActionAllowed;
+                            }
+                            const fActionType = fActionAllowed ? (item.ActionType ?? '') : '';
+                            // Has hover text and/or an action - independent of fItemClass, which is only
+                            // set when there's an action. Drives the touch dotted-underline hint (see
+                            // fContainerClass/indicatorBundle.css) so popover-only items get it too.
+                            const fHasPopover = !!(fPopoverBody || fActionType);
                             matchingFields.push(
                             {
                                 fName: item.FieldApiName,   // Retain for debug purposes
@@ -542,10 +592,12 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                 ...resolveIconColors(item, dataValue, matchedExtension),
                                 ...resolveBadgeStyle(item, dataValue, matchedExtension),
                                 ...resolveTextShown(item, dataValue, matchedExtension, this.indsStyle),
-                                fItemClass: (ibi && ibi.ActionTarget) ? 'clickable' : '',
+                                fItemClass: (ibi && ibi.ActionTarget && fActionType) ? 'clickable' : '',
+                                fContainerClass: 'slds-is-relative ind-popover-container' + (fHasPopover ? ' has-popover' : ''),
                                 fFieldLabel: item.FieldLabel ?? '',
-                                fPopoverBody: matchedExtension ? (matchedExtension.HoverValue || '') : (ibi?.HoverValue || ''),
-                                fActionType: item.ActionType ?? '',
+                                fPopoverBody,
+                                fActionType,
+                                fHasPopover,
                                 fActionButtonLabel: item.ActionButtonLabel ?? '',
                                 fActionHelpText: item.ActionHelpText ?? '',
                                 fActionConfirmRequired: item.ActionConfirmRequired ?? false,
@@ -571,11 +623,14 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     mergeValuesIntoTarget(item, data) {
         let itemWithMergeFields = this.itemsById[item.IndicatorId];
         if (itemWithMergeFields.TargetMergeFields) {
-            if (itemWithMergeFields.ActionTarget) {
-                itemWithMergeFields.ActionTarget = this.mergeTemplate(itemWithMergeFields.ActionTarget, itemWithMergeFields.TargetMergeFields, data);
+            if (itemWithMergeFields.ActionTargetTemplate) {
+                itemWithMergeFields.ActionTarget = this.mergeTemplate(itemWithMergeFields.ActionTargetTemplate, itemWithMergeFields.TargetMergeFields, data);
             }
-            if (itemWithMergeFields.HoverValue) {
-                itemWithMergeFields.HoverValue = this.mergeTemplate(itemWithMergeFields.HoverValue, itemWithMergeFields.TargetMergeFields, data);
+            if (itemWithMergeFields.HoverValueTemplate) {
+                itemWithMergeFields.HoverValue = this.mergeTemplate(itemWithMergeFields.HoverValueTemplate, itemWithMergeFields.TargetMergeFields, data);
+            }
+            if (itemWithMergeFields.FalseHoverValueTemplate) {
+                itemWithMergeFields.FalseHoverValue = this.mergeTemplate(itemWithMergeFields.FalseHoverValueTemplate, itemWithMergeFields.TargetMergeFields, data);
             }
         }
     }
@@ -596,33 +651,117 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         // console.log(result);
     }
 
-    handleIndicatorClick(event) {
-        if (event.target.dataset?.id) {
-            let item = this.itemsById[event.target.dataset.id];
-            // console.log('Indicator Clicked: ', JSON.stringify(item, null, 4));
-            if (item?.ActionConfirmRequired) return;
-            if(item.ActionType === 'URL'){
-                this.urlAction(item.ActionTarget);
-            } else if (item.ActionType === 'Flow Modal'){
-                this.openFlowModal(item.ActionTarget);
-            }
+    // Shared by the direct-click path and the popover's own action button. Guards against firing
+    // when the field is currently blank/false and Show_False_or_Blank_Action__c isn't set - the
+    // template already hides the affordance (fItemClass/fActionType), but the click handlers look
+    // items up by id from itemsById rather than through fld, so they need their own check too.
+    fireAction(item) {
+        if (item.ActionAllowed === false) return;
+        if (item.ActionType === 'URL') {
+            this.urlAction(item.ActionTarget);
+        } else if (item.ActionType === 'Flow Modal') {
+            this.openFlowModal(item.ActionTarget);
         }
+    }
+
+    setPopoverVisible(id, visible) {
+        this.results = this.results.map(f =>
+            f.fId === id ? { ...f, fShowPopover: visible && !!f.fHasPopover } : f
+        );
+    }
+
+    // On touch, neither mouseenter nor click is reliable in isolation across every indicator
+    // style: avatar/badge only ever reliably fire mouseenter (click device-tested as often
+    // dropped there); pill (a real <a> element) only fires mouseenter on the *first* tap of a
+    // given anchor - real links retain the browser's hover/focus state, so it isn't re-fired on
+    // repeat taps of the same anchor - but click fires reliably every tap once touch-action:
+    // manipulation is in place. So both handlers are allowed to drive the same open/close toggle,
+    // de-duplicated via lastTouchToggle so that when a single tap fires both (as pill's first tap
+    // does), the second one doesn't just undo what the first one did. Window is short and
+    // deliberately so: it only needs to bridge the gap between a single tap's own paired events
+    // (fired within the same or an adjacent task), not distinguish anything about human tap
+    // cadence - a window long enough to matter for that would risk swallowing a genuinely
+    // separate, fast second tap intended to actually re-toggle.
+    TOUCH_TOGGLE_DEDUP_WINDOW_MS = 150;
+    lastTouchToggle = null; // { id, time } - see TOUCH_TOGGLE_DEDUP_WINDOW_MS above.
+
+    toggleGuardedByRecentEvent(id) {
+        return !!(this.lastTouchToggle
+            && this.lastTouchToggle.id === id
+            && (Date.now() - this.lastTouchToggle.time) < this.TOUCH_TOGGLE_DEDUP_WINDOW_MS);
+    }
+
+    toggleTouchPopover(id) {
+        const fld = this.results.find(f => f.fId === id);
+        const opening = !fld?.fShowPopover;
+        this.lastTouchToggle = { id, time: Date.now() };
+        this.setPopoverVisible(id, opening);
+    }
+
+    // Tapping the indicator itself never fires the action on touch, regardless of which event
+    // ends up driving the toggle above - only the popover's own button (handlePopoverAction)
+    // does. Desktop behavior (ActionConfirmRequired gate, direct fire) is unchanged.
+    handleIndicatorClick(event) {
+        const id = event.target.dataset?.id;
+        if (!id) return;
+        const item = this.itemsById[id];
+        if (!item) return;
+
+        if (this.isTouchDevice) {
+            if (this.toggleGuardedByRecentEvent(id)) return;
+            this.toggleTouchPopover(id);
+            return;
+        }
+
+        if (item.ActionConfirmRequired) return;
+
+        this.setPopoverVisible(id, false);
+        this.fireAction(item);
+    }
+
+    // Touch and desktop need mouseenter/mouseleave bound to DIFFERENT-sized regions, which is why
+    // both handlers below are bound to two different elements in indicatorBundle.html and check
+    // which one actually fired:
+    // - Touch needs the narrow region (.ind-indicator-wrapper, indicator only, NOT the popover) -
+    //   otherwise a tap on the popover's own button re-triggers this and closes the popover out
+    //   from under that same tap before its click can fire.
+    // - Desktop needs the wide region (.ind-popover-container, indicator AND popover together) -
+    //   otherwise moving the mouse from the indicator down into the popover crosses outside the
+    //   narrow region first, firing mouseleave and closing the popover before the pointer ever
+    //   reaches the button (a real regression the narrow region introduced for desktop hover).
+    isDesktopHoverScope(event) {
+        return event.currentTarget.classList.contains('ind-popover-container');
     }
 
     handlePopoverEnter(event) {
         const id = event.currentTarget.dataset.id;
         if (!id) return;
-        this.results = this.results.map(f =>
-            f.fId === id ? { ...f, fShowPopover: !!(f.fPopoverBody || f.fActionType) } : f
-        );
+        const isDesktopScope = this.isDesktopHoverScope(event);
+
+        if (this.isTouchDevice) {
+            if (isDesktopScope) return; // touch only acts on the narrow (indicator-only) region
+            if (this.toggleGuardedByRecentEvent(id)) return;
+            this.toggleTouchPopover(id);
+            return;
+        }
+
+        if (!isDesktopScope) return; // desktop only acts on the wide (indicator+popover) region
+        this.setPopoverVisible(id, true);
     }
 
     handlePopoverLeave(event) {
+        const isDesktopScope = this.isDesktopHoverScope(event);
+
+        if (this.isTouchDevice) {
+            if (isDesktopScope) return;
+            // The synthetic mouseleave that follows mouseenter on the same tap would immediately
+            // undo the toggle handlePopoverEnter just made - ignore it entirely on touch.
+            return;
+        }
+
+        if (!isDesktopScope) return;
         const id = event.currentTarget.dataset.id;
-        if (!id) return;
-        this.results = this.results.map(f =>
-            f.fId === id ? { ...f, fShowPopover: false } : f
-        );
+        if (id) this.setPopoverVisible(id, false);
     }
 
     handlePopoverAction(event) {
@@ -630,11 +769,8 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         if (!id) return;
         const item = this.itemsById[id];
         if (!item) return;
-        if (item.ActionType === 'URL') {
-            this.urlAction(item.ActionTarget);
-        } else if (item.ActionType === 'Flow Modal') {
-            this.openFlowModal(item.ActionTarget);
-        }
+        this.setPopoverVisible(id, false);
+        this.fireAction(item);
     }
 
     lastInterviewId = null; // This is the Flow Interview Id, if it's exited early.

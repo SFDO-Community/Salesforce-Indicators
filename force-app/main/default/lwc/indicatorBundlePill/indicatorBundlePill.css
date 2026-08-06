@@ -1,3 +1,23 @@
 .clickable {
     cursor: pointer;
 }
+
+/* SLDS's .slds-pill_link variant takes the icon out of normal flow (position:absolute;
+   top:50%;transform:translateY(-50%)) and manually centers it - math that assumes a specific
+   plain-icon/svg height. Our icon is actually a lightning-avatar (a different base component),
+   whose real rendered size doesn't necessarily match that assumption, which showed up on mobile
+   as the icon sitting noticeably left- and/or vertically-offset from where it should be.
+   Reverting to normal flow lets .slds-pill's own flex/align-items:center (already the base pill's
+   layout) center it correctly regardless of the icon's real size - the same "trust flexbox, not
+   SLDS's assumed absolute-position math" approach used for the avatar-group sizing fix. */
+.slds-pill_link .slds-pill__icon_container {
+    position: static;
+    transform: none;
+}
+
+.slds-pill_link .slds-pill__icon_container ~ .slds-pill__action {
+    /* SLDS's own padding-left reserves space for the icon assuming it's absolutely positioned
+       and overlapping - now that it's back in normal flow (with its own margin-right pushing the
+       label over), that reserved space would just double up as an extra gap. */
+    padding-left: 0;
+}

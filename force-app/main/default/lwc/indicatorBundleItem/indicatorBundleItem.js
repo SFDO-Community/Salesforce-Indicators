@@ -13,6 +13,15 @@ export default class IndicatorListItem extends LightningElement {
     @api indForegroundColor;
     @api indClickable;
     @api indCompact = false;
+    @api indShowActionBadge = false; // Avatar rows only - the pill's compact reuse of this component never sets this, so it never doubles up with the pill's own blue-link affordance.
+
+    // Only rendered (see .html) when indShowActionBadge is true, so this never affects the pill's
+    // reuse of this component. width/height are overridden to auto in CSS so this box always hugs
+    // whatever lightning-avatar actually renders, rather than trusting SLDS's assumed pixel sizing
+    // for a raw .slds-avatar (a different, non-base-component element) to match.
+    get avatarGroupClass() {
+        return 'slds-avatar-group ' + (this.indSize === 'large' ? 'slds-avatar-group_large' : 'slds-avatar-group_medium');
+    }
 
     get indClass() {
         let classValue = '';

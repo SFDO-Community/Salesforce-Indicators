@@ -264,6 +264,12 @@ public class Build {
     }
     private Boolean actionConfirmRequired = false;
 
+    public BundleItemBuilder withShowFalseOrBlankAction(Boolean showFalseOrBlankAction) {
+      this.showFalseOrBlankAction = showFalseOrBlankAction;
+      return this;
+    }
+    private Boolean showFalseOrBlankAction = false;
+
     public Indicator_Bundle_Item__mdt build() {
       return new Indicator_Bundle_Item__mdt(
         //objectApi = withVariable
@@ -274,7 +280,8 @@ public class Build {
         Order__c = order,
         Action_Button_Label__c = actionButtonLabel,
         Action_Help_Text__c = actionHelpText,
-        Action_Confirm_Required__c = actionConfirmRequired
+        Action_Confirm_Required__c = actionConfirmRequired,
+        Show_False_or_Blank_Action__c = showFalseOrBlankAction
       );
     }
   } // End BundleItem Builder

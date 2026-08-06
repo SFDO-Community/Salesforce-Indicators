@@ -1,3 +1,5 @@
+https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_dateformats.htm
+
 # Date Formats and Date Literals in WHERE
 
 You can specify date values or date literals in `WHERE` clauses to filter SOQL query results. Dates represent a specific day or time, while date literals represent a relative range of time, such as last month, this week, or next year.

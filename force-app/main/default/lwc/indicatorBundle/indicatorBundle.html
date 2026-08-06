@@ -61,25 +61,31 @@
                                     <template lwc:if={showAvatarStyle}>
                                         <div key={fld.fName}
                                             if:true={fld.fShowAvatar}
-                                            class="slds-is-relative ind-popover-container"
+                                            class={fld.fContainerClass}
                                             data-id={fld.fId}
                                             onmouseenter={handlePopoverEnter}
                                             onmouseleave={handlePopoverLeave}>
-                                            <c-indicator-bundle-item
-                                                ind-text={fld.fTextShown}
-                                                ind-size={indsSize}
-                                                ind-shape={indsShape}
-                                                ind-hover-text={fld.fHoverValue}
-                                                ind-icon={fld.fIconName}
-                                                ind-image={fld.fImageURL}
-                                                ind-background-color={fld.fIconBackground}
-                                                ind-foreground-color={fld.fIconForeground}
-                                                ind-clickable={fld.fItemClass}
-                                                ind-alt-text={fld.fFieldLabel}
-                                                ind-compact
+                                            <div class="ind-indicator-wrapper"
                                                 data-id={fld.fId}
-                                                onclick={handleIndicatorClick}>
-                                            </c-indicator-bundle-item>
+                                                onmouseenter={handlePopoverEnter}
+                                                onmouseleave={handlePopoverLeave}>
+                                                <c-indicator-bundle-item
+                                                    ind-text={fld.fTextShown}
+                                                    ind-size={indsSize}
+                                                    ind-shape={indsShape}
+                                                    ind-hover-text={fld.fHoverValue}
+                                                    ind-icon={fld.fIconName}
+                                                    ind-image={fld.fImageURL}
+                                                    ind-background-color={fld.fIconBackground}
+                                                    ind-foreground-color={fld.fIconForeground}
+                                                    ind-clickable={fld.fItemClass}
+                                                    ind-show-action-badge={fld.fActionType}
+                                                    ind-alt-text={fld.fFieldLabel}
+                                                    ind-compact
+                                                    data-id={fld.fId}
+                                                    onclick={handleIndicatorClick}>
+                                                </c-indicator-bundle-item>
+                                            </div>
                                             <template lwc:if={fld.fShowPopover}>
                                                 <section
                                                     class="slds-popover slds-popover_small slds-nubbin_top-left ind-popover"
@@ -113,24 +119,30 @@
                                     <template lwc:if={showPillStyle}>
                                         <div key={fld.fName}
                                             if:true={fld.fShowAvatar}
-                                            class="slds-is-relative ind-popover-container"
+                                            class={fld.fContainerClass}
                                             data-id={fld.fId}
                                             onmouseenter={handlePopoverEnter}
                                             onmouseleave={handlePopoverLeave}>
-                                            <c-indicator-bundle-pill
-                                                ind-text={fld.fTextShown}
-                                                ind-icon={fld.fIconName}
-                                                ind-image={fld.fImageURL}
-                                                ind-hover-text={fld.fHoverValue}
-                                                ind-alt-text={fld.fFieldLabel}
-                                                ind-background-color={fld.fIconBackground}
-                                                ind-foreground-color={fld.fIconForeground}
-                                                inds-size="x-small"
-                                                inds-shape={indsShape}
-                                                ind-clickable={fld.fItemClass}
+                                            <div class="ind-indicator-wrapper"
                                                 data-id={fld.fId}
-                                                onclick={handleIndicatorClick}>
-                                            </c-indicator-bundle-pill>
+                                                onmouseenter={handlePopoverEnter}
+                                                onmouseleave={handlePopoverLeave}>
+                                                <c-indicator-bundle-pill
+                                                    ind-text={fld.fTextShown}
+                                                    ind-icon={fld.fIconName}
+                                                    ind-image={fld.fImageURL}
+                                                    ind-hover-text={fld.fHoverValue}
+                                                    ind-alt-text={fld.fFieldLabel}
+                                                    ind-background-color={fld.fIconBackground}
+                                                    ind-foreground-color={fld.fIconForeground}
+                                                    inds-size="x-small"
+                                                    inds-shape={indsShape}
+                                                    ind-clickable={fld.fItemClass}
+                                                    ind-is-touch={isTouchDevice}
+                                                    data-id={fld.fId}
+                                                    onclick={handleIndicatorClick}>
+                                                </c-indicator-bundle-pill>
+                                            </div>
                                             <template lwc:if={fld.fShowPopover}>
                                                 <section
                                                     class="slds-popover slds-popover_small slds-nubbin_top-left ind-popover"
@@ -164,22 +176,27 @@
                                     <template lwc:if={showBadgeStyle}>
                                         <div key={fld.fName}
                                             if:true={fld.fShowAvatar}
-                                            class="slds-is-relative ind-popover-container"
+                                            class={fld.fContainerClass}
                                             data-id={fld.fId}
                                             onmouseenter={handlePopoverEnter}
                                             onmouseleave={handlePopoverLeave}>
-                                            <c-indicator-bundle-badge
-                                                ind-text={fld.fHoverValue}
-                                                ind-icon={fld.fIconName}
-                                                ind-icon-position={fld.fIconPosition}
-                                                ind-background-color={fld.fIconBackground}
-                                                ind-foreground-color={fld.fIconForeground}
-                                                ind-text-color={fld.fTextColor}
-                                                ind-alt-text={fld.fFieldLabel}
-                                                ind-clickable={fld.fItemClass}
+                                            <div class="ind-indicator-wrapper"
                                                 data-id={fld.fId}
-                                                onclick={handleIndicatorClick}>
-                                            </c-indicator-bundle-badge>
+                                                onmouseenter={handlePopoverEnter}
+                                                onmouseleave={handlePopoverLeave}>
+                                                <c-indicator-bundle-badge
+                                                    ind-text={fld.fHoverValue}
+                                                    ind-icon={fld.fIconName}
+                                                    ind-icon-position={fld.fIconPosition}
+                                                    ind-background-color={fld.fIconBackground}
+                                                    ind-foreground-color={fld.fIconForeground}
+                                                    ind-text-color={fld.fTextColor}
+                                                    ind-alt-text={fld.fFieldLabel}
+                                                    ind-clickable={fld.fItemClass}
+                                                    data-id={fld.fId}
+                                                    onclick={handleIndicatorClick}>
+                                                </c-indicator-bundle-badge>
+                                            </div>
                                             <template lwc:if={fld.fShowPopover}>
                                                 <section
                                                     class="slds-popover slds-popover_small slds-nubbin_top-left ind-popover"

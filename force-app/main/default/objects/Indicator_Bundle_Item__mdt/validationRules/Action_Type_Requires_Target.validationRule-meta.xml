@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action_Type_Requires_Target</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(TEXT(Action_Type__c))) &amp;&amp; ISBLANK(Action_Target__c)</errorConditionFormula>
+    <errorMessage>Action Target is required when an Action Type is selected. To disable the action while keeping Action Target configured, clear Action Type instead of Action Target.</errorMessage>
+</ValidationRule>

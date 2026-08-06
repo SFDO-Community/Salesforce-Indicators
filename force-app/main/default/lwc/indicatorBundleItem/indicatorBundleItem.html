@@ -1,14 +1,31 @@
 <template>
     <div class={indClass}>
         <div class={indClickable}>
-            <lightning-avatar
-                size={indSize}
-                variant={indShape}
-                initials={indText}
-                src={indImage}
-                fallback-icon-name={indIcon}
-                alternative-text={indAltText}
-            ></lightning-avatar>
+            <template lwc:if={indShowActionBadge}>
+                <span class={avatarGroupClass}>
+                    <lightning-avatar
+                        size={indSize}
+                        variant={indShape}
+                        initials={indText}
+                        src={indImage}
+                        fallback-icon-name={indIcon}
+                        alternative-text={indAltText}
+                    ></lightning-avatar>
+                    <span class="slds-avatar-grouped__secondary slds-avatar-grouped__icon">
+                        <lightning-icon icon-name="utility:touch_action" size="xx-small" alternative-text="Has an action" class="touch-action-icon" ></lightning-icon>
+                    </span>
+                </span>
+            </template>
+            <template lwc:else>
+                <lightning-avatar
+                    size={indSize}
+                    variant={indShape}
+                    initials={indText}
+                    src={indImage}
+                    fallback-icon-name={indIcon}
+                    alternative-text={indAltText}
+                ></lightning-avatar>
+            </template>
         </div>
     </div>
 </template>

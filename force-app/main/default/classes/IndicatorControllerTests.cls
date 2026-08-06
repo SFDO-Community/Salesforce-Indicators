@@ -105,6 +105,7 @@ private class IndicatorControllerTests {
         Assert.areEqual('View Details', item.ActionButtonLabel);
         Assert.areEqual('Opens the record', item.ActionHelpText);
         Assert.isTrue(item.ActionConfirmRequired);
+        Assert.isTrue(item.DisplayFalseAction);
     }
 
     private static Indicator_Bundle__mdt aBundle;
@@ -146,6 +147,7 @@ private class IndicatorControllerTests {
             .withActionButtonLabel('View Details')
             .withActionHelpText('Opens the record')
             .withActionConfirmRequired(true)
+            .withShowFalseOrBlankAction(true)
             .build();
 
         Cmdt.setBundle(aBundle);

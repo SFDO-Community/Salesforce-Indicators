@@ -95,6 +95,8 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public Boolean ActionConfirmRequired {get; set;}
         @AuraEnabled
+        public Boolean DisplayFalseAction {get; set;}
+        @AuraEnabled
         public String BadgeTextColor {get; set;}
         @AuraEnabled
         public String BadgeIconPosition {get; set;}
@@ -252,6 +254,7 @@ public with sharing class IndicatorController {
                     item.ActionButtonLabel = bundleItem.Action_Button_Label__c;
                     item.ActionHelpText = bundleItem.Action_Help_Text__c;
                     item.ActionConfirmRequired = bundleItem.Action_Confirm_Required__c;
+                    item.DisplayFalseAction = bundleItem.Show_False_or_Blank_Action__c;
 
                     Indicator_Item__mdt indicatorItem = Cmdt.getItem(bundleItem.Indicator_Item__r.DeveloperName);
                     if(indicatorItem != null){

@@ -65,7 +65,8 @@ public with sharing class Cmdt {
                 Indicator_Item__c, Indicator_Item__r.DeveloperName,
                 Order__c,
                 Action_Type__c, Action_Target__c,
-                Action_Button_Label__c, Action_Help_Text__c, Action_Confirm_Required__c
+                Action_Button_Label__c, Action_Help_Text__c, Action_Confirm_Required__c,
+                Show_False_or_Blank_Action__c
             FROM Indicator_Bundle_Item__mdt
             // WHERE Indicator_Bundle__r.Active__c = TRUE
             // AND Indicator_Item__r.Active__c = TRUE
