@@ -1,27 +1,43 @@
 <template>
     <span class={pillClass}>
-        <span class="slds-pill__icon_container">
-            <c-indicator-bundle-item
-                ind-text={indText}
-                ind-size={indsSize}
-                ind-shape={indsShape}
-                ind-hover-text={indHoverText}
-                ind-icon={indIcon}
-                ind-image={indImage}
-                ind-background-color={indBackgroundColor}
-                ind-foreground-color={indForegroundColor}
-                ind-alt-text={indAltText}
-                ind-clickable={indClickable}
-                ind-compact
-            >
-            </c-indicator-bundle-item>
-        </span>
         <template lwc:if={indClickable}>
             <a class="slds-pill__action" href="#" onclick={handleActionClick}>
+                <span class="slds-pill__icon_container">
+                    <c-indicator-bundle-item
+                        ind-text={indText}
+                        ind-size={indsSize}
+                        ind-shape={indsShape}
+                        ind-hover-text={indHoverText}
+                        ind-icon={indIcon}
+                        ind-image={indImage}
+                        ind-background-color={indBackgroundColor}
+                        ind-foreground-color={indForegroundColor}
+                        ind-alt-text={indAltText}
+                        ind-clickable={indClickable}
+                        ind-compact
+                    >
+                    </c-indicator-bundle-item>
+                </span>
                 <span class="slds-pill__label">{indHoverText}</span>
             </a>
         </template>
         <template lwc:else>
+            <span class="slds-pill__icon_container">
+                <c-indicator-bundle-item
+                    ind-text={indText}
+                    ind-size={indsSize}
+                    ind-shape={indsShape}
+                    ind-hover-text={indHoverText}
+                    ind-icon={indIcon}
+                    ind-image={indImage}
+                    ind-background-color={indBackgroundColor}
+                    ind-foreground-color={indForegroundColor}
+                    ind-alt-text={indAltText}
+                    ind-clickable={indClickable}
+                    ind-compact
+                >
+                </c-indicator-bundle-item>
+            </span>
             <span class="slds-pill__label slds-var-p-right_small">{indHoverText}</span>
         </template>
     </span>

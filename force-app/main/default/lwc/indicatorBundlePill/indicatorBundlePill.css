@@ -7,17 +7,33 @@
    plain-icon/svg height. Our icon is actually a lightning-avatar (a different base component),
    whose real rendered size doesn't necessarily match that assumption, which showed up on mobile
    as the icon sitting noticeably left- and/or vertically-offset from where it should be.
-   Reverting to normal flow lets .slds-pill's own flex/align-items:center (already the base pill's
-   layout) center it correctly regardless of the icon's real size - the same "trust flexbox, not
-   SLDS's assumed absolute-position math" approach used for the avatar-group sizing fix. */
+   Reverting to normal flow lets flexbox center it correctly regardless of the icon's real size -
+   the same "trust flexbox, not SLDS's assumed absolute-position math" approach used for the
+   avatar-group sizing fix.
+
+   The icon_container now lives *inside* <a class="slds-pill__action"> (see .html) rather than as
+   its sibling - .slds-pill_link strips .slds-pill's own border/background and draws the visible
+   oval on the anchor instead, and only keeps that working via the absolute overlay above. Nesting
+   the icon inside the anchor means its real, already-correct border/radius/background (whatever
+   this org's SLDS version actually resolves them to) just wraps around both children naturally,
+   with nothing here hardcoding or re-guessing those values. */
 .slds-pill_link .slds-pill__icon_container {
     position: static;
     transform: none;
+    /* Defensive: some platform SLDS versions resolve .slds-pill_link's align-items to `stretch`
+       instead of .slds-pill's own `center`. A flex item with a non-auto cross-size doesn't
+       actually stretch under that - it falls back to flex-start (top) - so pin this back to
+       center explicitly rather than depend on which align-items value happens to win. */
+    align-self: center;
 }
 
-.slds-pill_link .slds-pill__icon_container ~ .slds-pill__action {
-    /* SLDS's own padding-left reserves space for the icon assuming it's absolutely positioned
-       and overlapping - now that it's back in normal flow (with its own margin-right pushing the
-       label over), that reserved space would just double up as an extra gap. */
-    padding-left: 0;
+.slds-pill_link .slds-pill__action {
+    /* The icon_container and label are now real children of this anchor rather than its
+       siblings - lay them out in a row regardless of whether SLDS's own base rule already does,
+       so we don't depend on that assumption holding across versions. SLDS's own padding-left on
+       the anchor was originally sized to reserve space for the icon when it was absolutely
+       positioned and overlapping from outside; now that the icon is a real in-flow child, that
+       same padding just serves as the row's natural left inset instead - no override needed. */
+    display: flex;
+    align-items: center;
 }
