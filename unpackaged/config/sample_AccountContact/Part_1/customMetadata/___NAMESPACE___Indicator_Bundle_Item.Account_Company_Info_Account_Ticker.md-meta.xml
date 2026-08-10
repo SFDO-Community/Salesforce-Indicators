@@ -4,7 +4,7 @@
     <protected>false</protected>
     <values>
         <field>%%%NAMESPACE%%%Action_Target__c</field>
-        <value xsi:type="xsd:string">https://finance.yahoo.com/quote/{TickerSymbol}</value>
+        <value xsi:type="xsd:string">https://finance.yahoo.com/quote/{!TickerSymbol}</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Action_Type__c</field>
