@@ -19,6 +19,7 @@
             <property name="showRefresh" type="Boolean" label="Show refresh button" description="Enable an admin button to refresh the values."/>
             <property name="mappedField" type="String" label="(Optional) Mapped Id Field" description="(Optional) Instead of using the current Record Id, provide the API Name of a field (Case Sensitive) on this object which holds a Record Id or Relationship Id to use that value." placeholder="Example: Source_Id__c, ParentId, or AccountId" />
             <property name="showFooter" type="Boolean" label="Show footer when using Mapped Id Field" description="Enable a footer to show what mapped field is being used."/>
+            <property name="showFieldValueAsHoverFallback" type="Boolean" label="Show field value in popover when Hover Text is blank" description="When an indicator has no configured Hover Text, show the record's field value in the popover instead of leaving it empty. This gives every such indicator a popover, which changes mobile tap behavior."/>
             <supportedFormFactors>
                 <supportedFormFactor type="Large" />
                 <supportedFormFactor type="Small" />

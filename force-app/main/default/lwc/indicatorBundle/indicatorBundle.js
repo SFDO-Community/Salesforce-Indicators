@@ -1,5 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import { getRecord, getFieldValue, notifyRecordUpdateAvailable } from 'lightning/uiRecordApi';
+import { getRecord, getFieldValue, getFieldDisplayValue, notifyRecordUpdateAvailable } from 'lightning/uiRecordApi';
 import { NavigationMixin } from 'lightning/navigation';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { refreshApex } from '@salesforce/apex';
@@ -41,10 +41,18 @@ function resolveImage(item, dataValue, matchedExtension) {
         : { fImageURL: item.DisplayFalse ? item.FalseImageUrl : '' };
 }
 
-function resolveHoverValue(item, dataValue, matchedExtension) {
-    return hasValue(dataValue)
-        ? { fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue }
-        : { fHoverValue: item.DisplayFalse ? item.FalseHoverValue : '' };
+// The visible Badge/Pill label - deliberately separate from Hover Text (which only ever feeds
+// the popover body, built inline in wiredRecord()) so the two don't end up showing the same
+// configured value twice. displayValue is the field's locale-formatted display value, used only
+// when Badge_Pill_Text__c itself is blank.
+function resolveBadgePillText(item, dataValue, matchedExtension, displayValue) {
+    if (hasValue(dataValue)) {
+        if (matchedExtension) {
+            return { fBadgePillText: matchedExtension.BadgePillText || displayValue || '' };
+        }
+        return { fBadgePillText: item.BadgePillText || displayValue || '' };
+    }
+    return { fBadgePillText: item.DisplayFalse ? item.FalseBadgePillText : '' };
 }
 
 function resolveShowAvatar(item, dataValue, matchedExtension, showDefault) {
@@ -53,10 +61,38 @@ function resolveShowAvatar(item, dataValue, matchedExtension, showDefault) {
         : { fShowAvatar: item.DisplayFalse };
 }
 
-function resolveIconName(item, dataValue, matchedExtension) {
-    return hasValue(dataValue)
-        ? { fIconName: matchedExtension ? matchedExtension.IconName : item.IconName }
-        : { fIconName: item.DisplayFalse ? item.FalseIcon : '' };
+// Badge (unlike Avatar/Pill, both backed by lightning-avatar) has no image support at all -
+// lightning-badge only takes icon-name, so an Image-only item needs an icon substitute (utility:info)
+// or it'd collapse to an empty badge shape.
+//
+// Beyond that, an item can end up with no Icon, Image, or Text at all and still be shown (e.g.
+// Hover-Text-only items, or Empty_Static_Text_Behavior__c left as "Use Icon Only" with no Icon set)
+// - see resolveShowAvatar/showDefault, which already treats those as valid, intentionally-rendered
+// indicators. Without a fallback here, that renders a fully blank lightning-avatar/badge/pill: the
+// container still takes up its layout slot (so hover text/click actions keep working) but nothing is
+// visible in it. DEFAULT_FALLBACK_ICON fills that slot. This has to be decided here rather than left
+// to indicatorBundleItem/Pill/Badge's own class-field default - indicatorBundle always sets ind-icon
+// explicitly (even to '' or undefined), so those child defaults never actually apply when driven from
+// here; they only matter for those components' standalone Flow Screen usage.
+const DEFAULT_FALLBACK_ICON = 'standard:default';
+
+function resolveIconName(item, dataValue, matchedExtension, indsStyle) {
+    const iconName = hasValue(dataValue)
+        ? (matchedExtension ? matchedExtension.IconName : item.IconName)
+        : (item.DisplayFalse ? item.FalseIcon : '');
+    if (iconName) {
+        return { fIconName: iconName };
+    }
+
+    const imageUrl = hasValue(dataValue)
+        ? (matchedExtension ? matchedExtension.ImageUrl : item.ImageUrl)
+        : (item.DisplayFalse ? item.FalseImageUrl : '');
+    if (imageUrl) {
+        return { fIconName: indsStyle === 'badge' ? 'utility:info' : '' };
+    }
+
+    const { fTextShown } = resolveTextShown(item, dataValue, matchedExtension, indsStyle);
+    return { fIconName: fTextShown ? '' : DEFAULT_FALLBACK_ICON };
 }
 
 function resolveIconColors(item, dataValue, matchedExtension) {
@@ -74,11 +110,11 @@ function resolveIconColors(item, dataValue, matchedExtension) {
 function resolveBadgeStyle(item, dataValue, matchedExtension) {
     return hasValue(dataValue)
         ? {
-            fTextColor: matchedExtension ? matchedExtension.BadgeTextColor : item.BadgeTextColor,
+            fTextColor: matchedExtension ? matchedExtension.BadgePillTextColor : item.BadgePillTextColor,
             fIconPosition: matchedExtension ? matchedExtension.BadgeIconPosition : item.BadgeIconPosition
         }
         : {
-            fTextColor: item.DisplayFalse ? item.FalseBadgeTextColor : item.BadgeTextColor,
+            fTextColor: item.DisplayFalse ? item.FalseBadgePillTextColor : item.BadgePillTextColor,
             fIconPosition: item.DisplayFalse ? item.FalseBadgeIconPosition : item.BadgeIconPosition
         };
 }
@@ -126,6 +162,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     @api showRefresh = false;
     @api mappedField = ''; // API Field Name for the record
     @api showFooter = false;
+    @api showFieldValueAsHoverFallback = false; // Popover-only fallback - see fPopoverBody in wiredRecord().
 
     targetIdField;     // Syntax of template field:  sObject.Field_Name__c
     targetIdValue;
@@ -287,7 +324,6 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                 if(this.isStandardUsage != true){
                     this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body slds-card__body_inner';
                 } else {
-                    this.card.iconClass = 'slds-media__figure slds-var-m-right_x-small';
                     this.sectionBodyClass = 'slds-grid grid-wrap slds-card__body';
                 }
 
@@ -315,8 +351,8 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                     this.apiFieldnameDefinitions = [...this.apiFieldnameDefinitions, apiFieldSyntax, ...targetMergeFields];
 
                     // Deep-cloned (not just spread) because mergeValuesIntoTarget() below writes the
-                    // merged ActionTarget/HoverValue/FalseHoverValue onto this copy, and must not
-                    // corrupt the wired Apex data.
+                    // merged ActionTarget/HoverValue/FalseHoverValue/BadgePillText/FalseBadgePillText
+                    // onto this copy, and must not corrupt the wired Apex data.
                     const clonedItem = JSON.parse(JSON.stringify(item));
                     this.itemsById[item.IndicatorId] = clonedItem;
                     if (targetMergeFields.length) {  // Add to items to be used when merging the fields with actual values
@@ -329,6 +365,8 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                         clonedItem.ActionTargetTemplate = item.ActionTarget;
                         clonedItem.HoverValueTemplate = item.HoverValue;
                         clonedItem.FalseHoverValueTemplate = item.FalseHoverValue;
+                        clonedItem.BadgePillTextTemplate = item.BadgePillText;
+                        clonedItem.FalseBadgePillTextTemplate = item.FalseBadgePillText;
                     }
                 }
             }
@@ -353,15 +391,27 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
 
     targetMergeFields(item) {
         const extensionHoverTexts = (item.Extensions || []).map(ext => ext.ExtensionHoverText);
-        return this.extractMergeFields(item.ActionTarget, item.HoverValue, item.FalseHoverValue, ...extensionHoverTexts);
+        const extensionBadgePillTexts = (item.Extensions || []).map(ext => ext.ExtensionBadgePillText);
+        return this.extractMergeFields(
+            item.ActionTarget, item.HoverValue, item.FalseHoverValue,
+            item.BadgePillText, item.FalseBadgePillText,
+            ...extensionHoverTexts, ...extensionBadgePillTexts
+        );
     }
 
     // Replaces every {!Field_Api_Name} token in template with the resolved field value from data.
-    mergeTemplate(template, mergeFields, data) {
+    // useDisplayValue reads the locale-formatted display value (right for text the user reads, like
+    // Hover Text/Badge/Pill Text) rather than the raw value (right for ActionTarget, which builds
+    // URLs/Flow inputs that need the actual field value, e.g. an Id, not a formatted string).
+    // getFieldDisplayValue only returns something for field types that actually have a distinct
+    // formatted representation (Currency, Date/DateTime, Percent, ...) - it's undefined for plain
+    // Text/Picklist/Checkbox fields, where raw already *is* the display value, so it falls back to
+    // getFieldValue rather than going straight to '' and rendering blank.
+    mergeTemplate(template, mergeFields, data, useDisplayValue = true) {
         let result = template;
         mergeFields.forEach(mergeField => {
             let dataFieldWithoutObjectName = mergeField.substring(mergeField.indexOf('.') + 1);
-            let dataValue = getFieldValue(data, mergeField) ?? '';
+            let dataValue = (useDisplayValue ? getFieldDisplayValue(data, mergeField) : null) ?? getFieldValue(data, mergeField) ?? '';
             result = result.replaceAll('{!' + dataFieldWithoutObjectName + '}', dataValue);
         });
         return result;
@@ -418,8 +468,16 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                         }
                         // console.log('DataValue',dataValue);   // Retain for debug purposes
 
+                        // Locale-formatted display value, used only as a fallback when Badge/Pill
+                        // Text isn't configured - getFieldValue() above stays raw for extension match
+                        // comparisons (string/numeric/date), which must not run against formatted text.
+                        // getFieldDisplayValue is undefined for field types with no distinct formatted
+                        // representation (Text, Picklist, Checkbox, ...) - raw already *is* the display
+                        // value for those, so fall back to dataValue rather than rendering blank.
+                        let displayValue = getFieldDisplayValue(data, dataField) ?? dataValue ?? '';
+
                         let showDefault = false;
-                        if( item.HoverValue || item.TextValue || item.IconName || item.ImageUrl ){
+                        if( item.HoverValue || item.BadgePillText || item.TextValue || item.IconName || item.ImageUrl ){
                             showDefault = true;
                         }
 
@@ -499,20 +557,24 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                             "TextValue" : extension.ExtensionTextValue,
                                             "ImageUrl" : extension.ExtensionImageUrl,
                                             "HoverValue" : extension.ExtensionHoverText,
+                                            "BadgePillText" : extension.ExtensionBadgePillText,
                                             "Priority" : extension.PriorityOrder,
                                             "IconBackground" : extension.BackgroundColor,
                                             "IconForeground" : extension.ForegroundColor,
-                                            "BadgeTextColor" : extension.BadgeTextColor,
+                                            "BadgePillTextColor" : extension.BadgePillTextColor,
                                             "BadgeIconPosition" : extension.BadgeIconPosition
                                         };
 
-                                        // Extension hover text can carry the same {!Field_Api_Name}
-                                        // tokens as the item's own HoverValue - resolve them here
-                                        // against the item's merge-field list (targetMergeFields()
-                                        // scans Extensions' ExtensionHoverText too, see above).
+                                        // Extension hover text/badge-pill text can carry the same
+                                        // {!Field_Api_Name} tokens as the item's own HoverValue -
+                                        // resolve them here against the item's merge-field list
+                                        // (targetMergeFields() scans both Extension fields, see above).
                                         const extMergeFields = this.itemsById[item.IndicatorId]?.TargetMergeFields;
                                         if (matchedExtension.HoverValue && extMergeFields?.length) {
                                             matchedExtension.HoverValue = this.mergeTemplate(matchedExtension.HoverValue, extMergeFields, data);
+                                        }
+                                        if (matchedExtension.BadgePillText && extMergeFields?.length) {
+                                            matchedExtension.BadgePillText = this.mergeTemplate(matchedExtension.BadgePillText, extMergeFields, data);
                                         }
 
                                         if(item.DisplayMultiple){
@@ -523,7 +585,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                                     fName: item.FieldApiName,
                                                     fTextValue: dataValue,
                                                     fImageURL: matchedExtension.ImageUrl,
-                                                    fHoverValue: (matchedExtension && matchedExtension.HoverValue) ? matchedExtension.HoverValue : dataValue,
+                                                    fBadgePillText: matchedExtension.BadgePillText || displayValue || '',
                                                     fShowAvatar: true,
                                                     fIconName : matchedExtension.IconName,
                                                     fIconBackground : matchedExtension.IconBackground,
@@ -531,7 +593,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                                     fTextShown: matchedExtension.TextValue,
                                                     fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : '',
                                                     fContainerClass: 'slds-is-relative ind-popover-container',
-                                                    fTextColor: matchedExtension.BadgeTextColor,
+                                                    fTextColor: matchedExtension.BadgePillTextColor,
                                                     fIconPosition: matchedExtension.BadgeIconPosition
                                                 }
                                             );
@@ -557,15 +619,21 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                         if (anyMatch != true || item.DisplayMultiple != true) {
                             const iid = item.IndicatorId;
                             const ibi = this.itemsById[iid];
-                            // Mirrors resolveHoverValue()'s hasValue/DisplayFalse fallback so the
+                            // Mirrors resolveTextShown()'s hasValue/DisplayFalse fallback so the
                             // popover shows the same false/blank hover text the indicator itself
                             // switches to, instead of always reading the "true" HoverValue (which
                             // is often empty when the field is blank).
-                            const fPopoverBody = matchedExtension
+                            const resolvedHoverValue = matchedExtension
                                 ? (matchedExtension.HoverValue || '')
                                 : hasValue(dataValue)
                                     ? (ibi?.HoverValue || '')
                                     : (item.DisplayFalse ? (ibi?.FalseHoverValue || '') : '');
+                            // Opt-in (page/flow property, not CMDT) - when there's no configured
+                            // Hover Text for the "true" state, show the field's display value in the
+                            // popover instead of leaving it empty. Off by default since it means
+                            // every indicator gets a popover, changing mobile tap behavior.
+                            const fPopoverBody = resolvedHoverValue
+                                || (this.showFieldValueAsHoverFallback && hasValue(dataValue) ? displayValue : '');
                             // The action stays available in the false/blank state only when the
                             // bundle item opts in via Show_False_or_Blank_Action__c; otherwise it's
                             // suppressed along with the rest of the "true" appearance. Stored on
@@ -586,15 +654,15 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                 fId: iid,                   // Used to generate resultsById which is used in click handling
                                 fTextValue: dataValue,      // Retain for debug purposes
                                 ...resolveImage(item, dataValue, matchedExtension),
-                                ...resolveHoverValue(item, dataValue, matchedExtension),
+                                ...resolveBadgePillText(item, dataValue, matchedExtension, displayValue),
                                 ...resolveShowAvatar(item, dataValue, matchedExtension, showDefault),
-                                ...resolveIconName(item, dataValue, matchedExtension),
+                                ...resolveIconName(item, dataValue, matchedExtension, this.indsStyle),
                                 ...resolveIconColors(item, dataValue, matchedExtension),
                                 ...resolveBadgeStyle(item, dataValue, matchedExtension),
                                 ...resolveTextShown(item, dataValue, matchedExtension, this.indsStyle),
                                 fItemClass: (ibi && ibi.ActionTarget && fActionType) ? 'clickable' : '',
                                 fContainerClass: 'slds-is-relative ind-popover-container' + (fHasPopover ? ' has-popover' : ''),
-                                fFieldLabel: item.FieldLabel ?? '',
+                                fFieldLabel: item.FieldLabel ? item.FieldLabel + ' indicator' : '',
                                 fPopoverBody,
                                 fActionType,
                                 fHasPopover,
@@ -624,13 +692,19 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
         let itemWithMergeFields = this.itemsById[item.IndicatorId];
         if (itemWithMergeFields.TargetMergeFields) {
             if (itemWithMergeFields.ActionTargetTemplate) {
-                itemWithMergeFields.ActionTarget = this.mergeTemplate(itemWithMergeFields.ActionTargetTemplate, itemWithMergeFields.TargetMergeFields, data);
+                itemWithMergeFields.ActionTarget = this.mergeTemplate(itemWithMergeFields.ActionTargetTemplate, itemWithMergeFields.TargetMergeFields, data, false);
             }
             if (itemWithMergeFields.HoverValueTemplate) {
                 itemWithMergeFields.HoverValue = this.mergeTemplate(itemWithMergeFields.HoverValueTemplate, itemWithMergeFields.TargetMergeFields, data);
             }
             if (itemWithMergeFields.FalseHoverValueTemplate) {
                 itemWithMergeFields.FalseHoverValue = this.mergeTemplate(itemWithMergeFields.FalseHoverValueTemplate, itemWithMergeFields.TargetMergeFields, data);
+            }
+            if (itemWithMergeFields.BadgePillTextTemplate) {
+                itemWithMergeFields.BadgePillText = this.mergeTemplate(itemWithMergeFields.BadgePillTextTemplate, itemWithMergeFields.TargetMergeFields, data);
+            }
+            if (itemWithMergeFields.FalseBadgePillTextTemplate) {
+                itemWithMergeFields.FalseBadgePillText = this.mergeTemplate(itemWithMergeFields.FalseBadgePillTextTemplate, itemWithMergeFields.TargetMergeFields, data);
             }
         }
     }

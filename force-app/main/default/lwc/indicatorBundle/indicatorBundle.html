@@ -73,7 +73,6 @@
                                                     ind-text={fld.fTextShown}
                                                     ind-size={indsSize}
                                                     ind-shape={indsShape}
-                                                    ind-hover-text={fld.fHoverValue}
                                                     ind-icon={fld.fIconName}
                                                     ind-image={fld.fImageURL}
                                                     ind-background-color={fld.fIconBackground}
@@ -131,10 +130,11 @@
                                                     ind-text={fld.fTextShown}
                                                     ind-icon={fld.fIconName}
                                                     ind-image={fld.fImageURL}
-                                                    ind-hover-text={fld.fHoverValue}
+                                                    ind-badge-pill-text={fld.fBadgePillText}
                                                     ind-alt-text={fld.fFieldLabel}
                                                     ind-background-color={fld.fIconBackground}
                                                     ind-foreground-color={fld.fIconForeground}
+                                                    ind-text-color={fld.fTextColor}
                                                     inds-size="x-small"
                                                     inds-shape={indsShape}
                                                     ind-clickable={fld.fItemClass}
@@ -185,7 +185,7 @@
                                                 onmouseenter={handlePopoverEnter}
                                                 onmouseleave={handlePopoverLeave}>
                                                 <c-indicator-bundle-badge
-                                                    ind-text={fld.fHoverValue}
+                                                    ind-text={fld.fBadgePillText}
                                                     ind-icon={fld.fIconName}
                                                     ind-icon-position={fld.fIconPosition}
                                                     ind-background-color={fld.fIconBackground}
