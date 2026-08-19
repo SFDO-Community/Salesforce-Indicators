@@ -54,9 +54,9 @@
         <lightning-layout-item padding="horizontal-small" size="2"  >
             {keyExtensionLogic}
         </lightning-layout-item>
-        <template lwc:if={isManageEnabled}>
+        <template lwc:if={showEditButton}>
             <lightning-layout-item padding="horizontal-small" size="1" class="slds-text-align_right">
-                <lightning-button-icon 
+                <lightning-button-icon
                     name={keyId} 
                     title="Edit Indicator" 
                     alternative-text="Edit Indicator" 

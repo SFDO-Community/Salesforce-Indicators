@@ -1,5 +1,12 @@
 <template>
     <a lwc:ref="cmdtLink" href="" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+    <div class="slds-var-p-horizontal_small slds-var-p-bottom_small slds-text-align_right">
+        <lightning-button
+            label="Preview a Recipe"
+            icon-name="utility:preview"
+            onclick={handlePreviewClick}
+        ></lightning-button>
+    </div>
     <lightning-layout pull-to-boundary="small">
         <lightning-layout-item size="12" large-device-size={selectorSize} padding="horizontal-small">
             <lightning-card title="Indicator Settings" icon-name="standard:all">

@@ -1,11 +1,12 @@
 import { LightningElement, wire, track, api } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 
 import getIndicatorConfig from '@salesforce/apex/IndicatorController.getIndicatorBundle';
 import getNewCmdtUrls from '@salesforce/apex/IndicatorController.getNewCmdtUrls';
 import getBundleOptions from '@salesforce/apex/IndicatorListBundleSelector.getBundleOptions';
 import { refreshApex } from '@salesforce/apex';
 
-export default class ConfigurationManager extends LightningElement {
+export default class ConfigurationManager extends NavigationMixin(LightningElement) {
     @api flexipageRegionWidth;
     bundleName = '';
     bundle;
@@ -81,6 +82,15 @@ export default class ConfigurationManager extends LightningElement {
         refreshApex(this.wiredData)
             .then(() => { this.isKeyLoading = false; })
             .catch(() => { this.isKeyLoading = false; });
+    }
+
+    handlePreviewClick() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__recipePreviewer'
+            }
+        });
     }
 
     navigateToCmdt(url) {

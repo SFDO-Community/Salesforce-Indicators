@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>Preview a shared Indicators JSON recipe before importing it, and re-export it as CSV.</description>
+    <masterLabel>Recipe Previewer</masterLabel>
+    <targets>
+        <target>lightning__UrlAddressable</target>
+    </targets>
+</LightningComponentBundle>

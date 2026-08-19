@@ -15,6 +15,14 @@ export default class IndicatorKeyRow extends LightningElement {
     @api keyBackground = '';
     @api keyForeground = '';
     @api keyIsActive = false;
+    // See key.js's suppressEditLinks: keyId holds a DeveloperName instead of a real
+    // record Id when this row is rendered from a previewed JSON recipe, so the Setup
+    // deep-link this row's Edit button builds would be broken/misleading there.
+    @api suppressEditLinks = false;
+
+    get showEditButton() {
+        return this.isManageEnabled && !this.suppressEditLinks;
+    }
 
     handleClick(event){
         // window.open() is distorted by Lightning Web Security for Setup pages;

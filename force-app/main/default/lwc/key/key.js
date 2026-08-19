@@ -1,6 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
 import { applyColorVars } from 'c/indicatorCssVars';
+import RecipeExportModal from 'c/recipeExportModal';
 
 export default class Key extends LightningElement {
 
@@ -17,6 +18,15 @@ export default class Key extends LightningElement {
     @api showRefresh = false;
     @api isLoading = false;
     @api suppressedItemIds = [];
+    // The Edit Bundle/Edit Indicator buttons build a Setup deep-link from
+    // BundleId/IndicatorId. When bundle data comes from a previewed JSON recipe
+    // instead of a live wire, those slots hold DeveloperNames, not real record Ids —
+    // set this so the Previewer can hide those links rather than send a manage-
+    // permission user to a broken/misleading Setup URL.
+    @api suppressEditLinks = false;
+    // Set by the Previewer: re-exporting a recipe you just loaded as JSON again is a
+    // pointless extra decision, so skip the format choice and go straight to CSV.
+    @api forceCsvExport = false;
 
     @api
     set bundle(value){
@@ -42,6 +52,15 @@ export default class Key extends LightningElement {
 
     handleRefresh() {
         this.dispatchEvent(new CustomEvent('refreshkey'));
+    }
+
+    async handleExport() {
+        await RecipeExportModal.open({
+            size: 'medium',
+            description: 'Select which items to export, and in what format.',
+            bundle: this.bundle,
+            forceCsvOnly: this.forceCsvExport
+        });
     }
 
     _processBundle(bundle){
@@ -289,6 +308,10 @@ export default class Key extends LightningElement {
 
     get isManageEnabled() {
         return hasManagePermission;
+    }
+
+    get showEditLinks() {
+        return hasManagePermission && !this.suppressEditLinks;
     }
 
     @api

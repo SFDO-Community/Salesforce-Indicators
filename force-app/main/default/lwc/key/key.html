@@ -22,6 +22,15 @@
                 onclick={handleRefresh}
             ></lightning-button-icon>
         </template>
+        <template lwc:if={isManageEnabled}>
+            <lightning-button-icon
+                slot="actions"
+                icon-name="utility:download"
+                alternative-text="Export"
+                title="Export as JSON recipe or CSV"
+                onclick={handleExport}
+            ></lightning-button-icon>
+        </template>
         <h3 slot="title">
             <lightning-icon 
                 lwc:if={bundleDetails.Icon}
@@ -80,10 +89,10 @@
                 </template>
             </lightning-layout-item>
             <lightning-layout-item padding="horizontal-small" size="2" class="slds-text-align_right">
-                <template lwc:if={isManageEnabled}>
+                <template lwc:if={showEditLinks}>
                     <template lwc:if={isBundle}>
-                        <lightning-button 
-                            name={bundleDetails.BundleId} 
+                        <lightning-button
+                            name={bundleDetails.BundleId}
                             onclick={handleClick} 
                             label="Edit Bundle" 
                             title="Edit Bundle" 
@@ -145,7 +154,7 @@
                                     </template>
                                 </lightning-layout-item>
                                 <lightning-layout-item padding="horizontal-small" size="2" class="slds-text-align_right">
-                                    <template lwc:if={isManageEnabled}>
+                                    <template lwc:if={showEditLinks}>
                                         <lightning-button name={indicatorItem.IndicatorId} onclick={handleClick} label="Edit Indicator" title="Edit Indicator" icon-name="utility:setup"></lightning-button>
                                     </template>
                                 </lightning-layout-item>
@@ -246,6 +255,7 @@
                                             key-foreground={indicator.Foreground}
                                             key-is-active={indicator.IsActive}
                                             is-manage-enabled={isManageEnabled}
+                                            suppress-edit-links={suppressEditLinks}
                                         ></c-indicator-key-row>
                                     </template>
                                 </div>
