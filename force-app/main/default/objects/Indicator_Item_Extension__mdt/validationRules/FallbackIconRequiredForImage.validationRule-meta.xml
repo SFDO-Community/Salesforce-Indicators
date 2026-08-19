@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FallbackIconRequiredForImage</fullName>
+    <active>true</active>
+    <description>If an image source fails to load, a fallback icon should be assigned to prevent UI issues.</description>
+    <errorConditionFormula>NOT( ISBLANK( Image__c ) ) &amp;&amp; ISBLANK( Icon_Value__c )</errorConditionFormula>
+    <errorDisplayField>Icon_Value__c</errorDisplayField>
+    <errorMessage>Assign a fallback icon incase the image source fails to load.</errorMessage>
+</ValidationRule>
