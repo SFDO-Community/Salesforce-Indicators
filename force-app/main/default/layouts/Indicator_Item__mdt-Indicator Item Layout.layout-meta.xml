@@ -146,11 +146,15 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Badges</label>
+        <label>Badges/Pills</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Badge_Text_Color__c</field>
+                <field>Badge_Pill_Text__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Badge_Pill_Text_Color__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -160,7 +164,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Inverse_Badge_Text_Color__c</field>
+                <field>Inverse_Badge_Pill_Text__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Inverse_Badge_Pill_Text_Color__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -234,7 +242,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hQL00000Ggnxc</masterLabel>
+        <masterLabel>00hEi00000ErG6e</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
