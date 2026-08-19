@@ -6,5 +6,5 @@
 
 .clickable {
     cursor: pointer;
-    --slds-c-badge-color-border: #747474;
+    --slds-c-badge-color-border: var(--slds-g-color-border-accent-3);
 }

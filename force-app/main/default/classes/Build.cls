@@ -134,6 +134,12 @@ public class Build {
     }
     private String hoverText;
 
+    public ItemBuilder withBadgePillText(String badgePillText) {
+      this.badgePillText = badgePillText;
+      return this;
+    }
+    private String badgePillText;
+
     public ItemBuilder withIconValue(String iconValue) {
       this.iconValue = iconValue;
       return this;
@@ -157,6 +163,12 @@ public class Build {
       return this;
     }
     private String inverseHoverText;
+
+    public ItemBuilder withInverseBadgePillText(String inverseBadgePillText) {
+      this.inverseBadgePillText = inverseBadgePillText;
+      return this;
+    }
+    private String inverseBadgePillText;
 
     public ItemBuilder withInverseIconValue(String inverseIconValue) {
       this.inverseIconValue = inverseIconValue;
@@ -202,9 +214,11 @@ public class Build {
         Empty_Static_Text_Behavior__c = emptyStaticBehavior,
         Field__c = field,
         Hover_Text__c = hoverText,
+        Badge_Pill_Text__c = badgePillText,
         Icon_Value__c = iconValue,
         Image__c = imageUrl,
         Inverse_Hover_Text__c = inverseHoverText,
+        Inverse_Badge_Pill_Text__c = inverseBadgePillText,
         Inverse_Icon_Value__c = inverseIconValue,
         Inverse_Image__c = inverseImageUrl,
         Inverse_Static_Text__c = inverseStaticText,
@@ -316,6 +330,12 @@ public class Build {
     }
     private String hoverText;
 
+    public ExtensionBuilder withBadgePillText(String badgePillText) {
+      this.badgePillText = badgePillText;
+      return this;
+    }
+    private String badgePillText;
+
     public ExtensionBuilder withIconValue(String iconValue) {
       this.iconValue = iconValue;
       return this;
@@ -372,6 +392,7 @@ public class Build {
         Active__c = isActive,
         Contains_Text__c = containsText,
         Hover_Text__c = hoverText,
+        Badge_Pill_Text__c = badgePillText,
         Icon_Value__c = iconValue,
         Image__c = imageUrl,
         Indicator_Item__r = item,

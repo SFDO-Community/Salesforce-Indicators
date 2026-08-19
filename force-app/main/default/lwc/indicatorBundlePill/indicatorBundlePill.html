@@ -7,7 +7,6 @@
                         ind-text={indText}
                         ind-size={indsSize}
                         ind-shape={indsShape}
-                        ind-hover-text={indHoverText}
                         ind-icon={indIcon}
                         ind-image={indImage}
                         ind-background-color={indBackgroundColor}
@@ -18,7 +17,7 @@
                     >
                     </c-indicator-bundle-item>
                 </span>
-                <span class="slds-pill__label">{indHoverText}</span>
+                <span class="slds-pill__label">{indBadgePillText}</span>
             </a>
         </template>
         <template lwc:else>
@@ -27,7 +26,6 @@
                     ind-text={indText}
                     ind-size={indsSize}
                     ind-shape={indsShape}
-                    ind-hover-text={indHoverText}
                     ind-icon={indIcon}
                     ind-image={indImage}
                     ind-background-color={indBackgroundColor}
@@ -38,7 +36,7 @@
                 >
                 </c-indicator-bundle-item>
             </span>
-            <span class="slds-pill__label slds-var-p-right_small">{indHoverText}</span>
+            <span class="slds-pill__label slds-var-p-right_small">{indBadgePillText}</span>
         </template>
     </span>
 </template>

@@ -2,6 +2,12 @@
     cursor: pointer;
 }
 
+/* Only set on the non-clickable label (see .js) - clickable pills never get --textColor set, so
+   this falls back to the inherited color (SLDS's link-blue on the anchor) instead. */
+.slds-pill__label {
+    color: var(--textColor);
+}
+
 /* SLDS's .slds-pill_link variant takes the icon out of normal flow (position:absolute;
    top:50%;transform:translateY(-50%)) and manually centers it - math that assumes a specific
    plain-icon/svg height. Our icon is actually a lightning-avatar (a different base component),

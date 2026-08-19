@@ -29,12 +29,14 @@ public with sharing class Cmdt {
                 Active__c,
                 Advanced_Field__c,
                 Advanced_Field_Label__c,
+                Badge_Pill_Text__c,
                 Display_Multiple__c,
                 Empty_Static_Text_Behavior__c,
                 Field__c, Field__r.QualifiedApiName,
                 Hover_Text__c,
                 Icon_Value__c,
                 Image__c,
+                Inverse_Badge_Pill_Text__c,
                 Inverse_Hover_Text__c,
                 Inverse_Icon_Value__c,
                 Inverse_Image__c,
@@ -48,9 +50,9 @@ public with sharing class Cmdt {
                 Inverse_Icon_Background__c,
                 Inverse_Icon_Foreground__c,
                 Description__c,
-                Badge_Text_Color__c,
+                Badge_Pill_Text_Color__c,
                 Badge_Icon_Position__c,
-                Inverse_Badge_Text_Color__c,
+                Inverse_Badge_Pill_Text_Color__c,
                 Inverse_Badge_Icon_Position__c
             FROM Indicator_Item__mdt
             // WHERE Active__c = TRUE
@@ -78,7 +80,8 @@ public with sharing class Cmdt {
         // Gather all active Item Extensions and put them into a Map (key: Indicator Item; List of Extensions)
         // Using SOQL because of the Order By clause rather than creating a custom sort method.
         for(Indicator_Item_Extension__mdt itemExtension : [
-            SELECT Id, Active__c,
+            SELECT Id, DeveloperName, MasterLabel, Active__c,
+                Badge_Pill_Text__c,
                 Contains_Text__c,
                 Text_Operator__c,
                 Hover_Text__c,
@@ -93,7 +96,7 @@ public with sharing class Cmdt {
                 Icon_Background__c,
                 Icon_Foreground__c,
                 Description__c,
-                Badge_Text_Color__c,
+                Badge_Pill_Text_Color__c,
                 Badge_Icon_Position__c
             FROM Indicator_Item_Extension__mdt
             // WHERE Active__c = TRUE

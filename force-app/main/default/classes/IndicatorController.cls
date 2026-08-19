@@ -18,6 +18,8 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String ObjectName {get; set;}
         @AuraEnabled
+        public String ObjectApiName {get; set;}
+        @AuraEnabled
         public Boolean IsActive {get; set;}
         @AuraEnabled
         public String CardIcon {get; set;}
@@ -34,6 +36,10 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String BundleId {get; set;}
         @AuraEnabled
+        public String DeveloperName {get; set;}
+        @AuraEnabled
+        public String MasterLabel {get; set;}
+        @AuraEnabled
         public List<IndicatorItem> Items {get; set;}
     }
 
@@ -41,11 +47,15 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public Boolean IsActive {get; set;}
         @AuraEnabled
+        public String ObjectApiName {get; set;}
+        @AuraEnabled
         public Boolean DisplayMultiple {get; set;}
         @AuraEnabled
         public String FieldLabel { get; set;}
         @AuraEnabled
         public String FieldApiName { get; set;}
+        @AuraEnabled
+        public String AdvancedField { get; set;}
         @AuraEnabled
         public String IconName {get; set;}
         @AuraEnabled
@@ -55,6 +65,8 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String HoverValue {get; set;}
         @AuraEnabled
+        public String BadgePillText {get; set;}
+        @AuraEnabled
         public Boolean DisplayFalse {get; set;}
         @AuraEnabled
         public String FalseIcon {get; set;}
@@ -62,6 +74,8 @@ public with sharing class IndicatorController {
         public String FalseTextValue {get; set;}
         @AuraEnabled
         public String FalseHoverValue {get; set;}
+        @AuraEnabled
+        public String FalseBadgePillText {get; set;}
         @AuraEnabled
         public String FalseImageUrl {get; set;}
         @AuraEnabled
@@ -76,6 +90,10 @@ public with sharing class IndicatorController {
         public String IndicatorDescription {get; set;}
         @AuraEnabled
         public String IndicatorId {get; set;}
+        @AuraEnabled
+        public String DeveloperName {get; set;}
+        @AuraEnabled
+        public String MasterLabel {get; set;}
         @AuraEnabled
         public String BackgroundColor {get; set;}
         @AuraEnabled
@@ -97,11 +115,11 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public Boolean DisplayFalseAction {get; set;}
         @AuraEnabled
-        public String BadgeTextColor {get; set;}
+        public String BadgePillTextColor {get; set;}
         @AuraEnabled
         public String BadgeIconPosition {get; set;}
         @AuraEnabled
-        public String FalseBadgeTextColor {get; set;}
+        public String FalseBadgePillTextColor {get; set;}
         @AuraEnabled
         public String FalseBadgeIconPosition {get; set;}
     }
@@ -130,17 +148,23 @@ public with sharing class IndicatorController {
         @AuraEnabled
         public String ExtensionTextValue {get; set;}
         @AuraEnabled
+        public String ExtensionBadgePillText {get; set;}
+        @AuraEnabled
         public Decimal PriorityOrder {get; set;}
         @AuraEnabled
         public String ExtensionDescription {get; set;}
         @AuraEnabled
         public String ExtensionId {get; set;}
         @AuraEnabled
+        public String DeveloperName {get; set;}
+        @AuraEnabled
+        public String MasterLabel {get; set;}
+        @AuraEnabled
         public String BackgroundColor {get; set;}
         @AuraEnabled
         public String ForegroundColor {get; set;}
         @AuraEnabled
-        public String BadgeTextColor {get; set;}
+        public String BadgePillTextColor {get; set;}
         @AuraEnabled
         public String BadgeIconPosition {get; set;}
     }
@@ -237,6 +261,9 @@ public with sharing class IndicatorController {
             wrapper.CardTitle = bundle.Card_Title__c;
             wrapper.BundleDescription = bundle.Description__c;
             wrapper.BundleId = bundle.Id;
+            wrapper.DeveloperName = bundle.DeveloperName;
+            wrapper.MasterLabel = bundle.MasterLabel;
+            wrapper.ObjectApiName = bundle.sObject__c;
             wrapper.ObjectName = bundle.sObject__r.Label;
             if(bundle.sObject__r.Label != bundle.sObject__r.QualifiedApiName){
                 wrapper.ObjectName += ' (' + bundle.sObject__r.QualifiedApiName + ')';
@@ -273,12 +300,14 @@ public with sharing class IndicatorController {
         if(String.isNotBlank(indicatorItem.Advanced_Field__c)){
             item.FieldApiName = indicatorItem.Advanced_Field__c;
             item.FieldLabel = indicatorItem.Advanced_Field_Label__c;
+            item.AdvancedField = indicatorItem.Advanced_Field__c;
         } else {
             item.FieldApiName = fieldByDurableId.get(indicatorItem.Field__c);
             item.FieldLabel = labelByDurableId.get(indicatorItem.Field__c);
         }
 
         item.IsActive = indicatorItem.Active__c;
+        item.ObjectApiName = indicatorItem.sObject__c;
         item.DisplayMultiple = indicatorItem.Display_Multiple__c;
         item.IconName = indicatorItem.Icon_Value__c;
         item.TextValue = indicatorItem.Static_Text__c;
@@ -286,20 +315,24 @@ public with sharing class IndicatorController {
         item.ZeroBehavior = indicatorItem.Zero_Behavior__c;
         item.ImageUrl  = indicatorItem.Image__c;
         item.HoverValue = indicatorItem.Hover_Text__c;
+        item.BadgePillText = indicatorItem.Badge_Pill_Text__c;
         item.DisplayFalse  = indicatorItem.Show_False_or_Blank__c;
         item.FalseIcon = indicatorItem.Inverse_Icon_Value__c;
         item.FalseTextValue = indicatorItem.Inverse_Static_Text__c;
         item.FalseHoverValue = indicatorItem.Inverse_Hover_Text__c;
+        item.FalseBadgePillText = indicatorItem.Inverse_Badge_Pill_Text__c;
         item.FalseImageUrl = indicatorItem.Inverse_Image__c;
         item.IndicatorDescription = indicatorItem.Description__c;
         item.IndicatorId = indicatorItem.Id;
+        item.DeveloperName = indicatorItem.DeveloperName;
+        item.MasterLabel = indicatorItem.MasterLabel;
         item.BackgroundColor = indicatorItem.Icon_Background__c;
         item.ForegroundColor = indicatorItem.Icon_Foreground__c;
         item.InverseBackgroundColor = indicatorItem.Inverse_Icon_Background__c;
         item.InverseForegroundColor = indicatorItem.Inverse_Icon_Foreground__c;
-        item.BadgeTextColor = indicatorItem.Badge_Text_Color__c;
+        item.BadgePillTextColor = indicatorItem.Badge_Pill_Text_Color__c;
         item.BadgeIconPosition = indicatorItem.Badge_Icon_Position__c;
-        item.FalseBadgeTextColor = indicatorItem.Inverse_Badge_Text_Color__c;
+        item.FalseBadgePillTextColor = indicatorItem.Inverse_Badge_Pill_Text_Color__c;
         item.FalseBadgeIconPosition = indicatorItem.Inverse_Badge_Icon_Position__c;
 
         List<Indicator_Item_Extension__mdt> itemExtensions = Cmdt.getExtensionsForItem(indicatorItem.DeveloperName);
@@ -334,12 +367,15 @@ public with sharing class IndicatorController {
                 extension.ExtensionIconValue = itemExtension.Icon_Value__c;
                 extension.ExtensionImageUrl = itemExtension.Image__c;
                 extension.ExtensionTextValue = itemExtension.Static_Text__c;
+                extension.ExtensionBadgePillText = itemExtension.Badge_Pill_Text__c;
                 extension.PriorityOrder = itemExtension.Priority__c;
                 extension.ExtensionDescription = itemExtension.Description__c;
                 extension.ExtensionId = itemExtension.Id;
+                extension.DeveloperName = itemExtension.DeveloperName;
+                extension.MasterLabel = itemExtension.MasterLabel;
                 extension.BackgroundColor = itemExtension.Icon_Background__c;
                 extension.ForegroundColor = itemExtension.Icon_Foreground__c;
-                extension.BadgeTextColor = itemExtension.Badge_Text_Color__c;
+                extension.BadgePillTextColor = itemExtension.Badge_Pill_Text_Color__c;
                 extension.BadgeIconPosition = itemExtension.Badge_Icon_Position__c;
 
                 item.Extensions.add(extension);

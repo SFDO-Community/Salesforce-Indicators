@@ -23,4 +23,9 @@
 .touch-action-icon {
   --slds-c-icon-color-foreground-default: var(--slds-g-color-neutral-base-80);
   --slds-c-icon-color-foreground: var(--slds-g-color-neutral-base-80);
+  /* Reset background separately from foreground - this is a real lightning-icon (unlike
+     lightning-avatar), so it legitimately inherits --slds-c-icon-color-background from the
+     ancestor .indicatorIcon and would otherwise pick up the item's configured color, making the
+     "has an action" indicator look like it's semantically tied to the item's color config. */
+  --slds-c-icon-color-background: transparent;
 }
