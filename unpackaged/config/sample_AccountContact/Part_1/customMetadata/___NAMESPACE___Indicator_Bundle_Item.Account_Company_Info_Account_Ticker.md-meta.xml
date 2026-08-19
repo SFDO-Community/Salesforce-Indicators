@@ -3,6 +3,18 @@
     <label>Account Company Info-Account Ticker</label>
     <protected>false</protected>
     <values>
+        <field>%%%NAMESPACE%%%Action_Button_Label__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Action_Confirm_Required__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Action_Help_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>%%%NAMESPACE%%%Action_Target__c</field>
         <value xsi:type="xsd:string">https://finance.yahoo.com/quote/{!TickerSymbol}</value>
     </values>
@@ -21,5 +33,9 @@
     <values>
         <field>%%%NAMESPACE%%%Order__c</field>
         <value xsi:type="xsd:double">0.01</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Show_False_or_Blank_Action__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
 </CustomMetadata>
