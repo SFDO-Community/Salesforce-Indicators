@@ -1,0 +1,9 @@
+﻿record_id,sobject,Name,AccountNumber,TickerSymbol,Rating,NumberOfEmployees,AnnualRevenue,Description
+ACC-01,Account,Regression Blank,,,,,,Archetype: every field null
+ACC-02,Account,Regression Zero,Alpha,Alpha,Hot,0,0,Archetype: zeros; text rule match 'alp'
+ACC-03,Account,Regression Neg,Gold,ALPHA,Warm,-5,99.99,Negative count; Gold combo match; case variant
+ACC-04,Account,Regression Five,Silver,alphabet,Cold,5,100.00,Silver; contains/starts-with but not equals; currency at min
+ACC-05,Account,Regression Ten,other,Beta,,10,100.01,Numeric min boundary; no rating; currency inside range
+ACC-06,Account,Regression Fifteen,,xyz,Hot,15,200.50,Null AccountNumber; inside 10-20; currency at max
+ACC-07,Account,Regression Twenty,Gold,,Warm,20,,Numeric max boundary (exclusive); null ticker and revenue
+ACC-08,Account,Regression TwentyFive,Alpha,Beta,Cold,25,150.00,Above range; Alpha in TXT-1

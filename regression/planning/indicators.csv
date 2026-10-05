@@ -1,0 +1,136 @@
+﻿item_id,bundle,group,levels,field_slot,sobject,field_api,field_type,default_content,default_colors,zero_behavior,empty_static_behavior,show_missing,missing_content,missing_colors,display_multiple,extension_count,env,verifies,states_needed
+A00,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,0,both,"Nothing configured: no fallback, nothing renders",value; null
+A-icon,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,icon,,,Use Icon Only,,,,,0,both,Icon renders,value; null
+A-text,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,text,,,,,,,,0,both,Initials render,value; null
+A-icon-text,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,icon+text,,,,,,,,0,both,Initials win over icon,value; null
+A-img-icon,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-valid+icon,,,Use Icon Only,,,,,0,both,Image wins,value; null
+A-img-icon-text,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-valid+icon+text,,,,,,,,0,both,Image wins over text and icon,value; null
+A-badimg-icon-text,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-bad+icon+text,,,,,,,,0,both,Broken image falls back to initials on icon background,value; null
+A-badimg-icon,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-bad+icon,,,Use Icon Only,,,,,0,both,Broken image falls back to icon,value; null
+A-hover-only,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,hover,,,Use Icon Only,,,,,0,both,How hover-only renders (avatar or nothing),value; null
+A-icon-colors,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,icon,custom,,Use Icon Only,,,,,0,both,Custom background/foreground,value; null
+A-text-colors,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,text,custom,,,,,,,0,both,Custom colors on initials,value; null
+A-icon-hover,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,icon+hover,,,Use Icon Only,,,,,0,both,Icon with hover; hover popover shot,value; null
+A-img-hover,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-valid+icon+hover,,,Use Icon Only,,,,,0,both,Image with hover; hover popover shot,value; null
+A-img-only,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-valid,,,Use Icon Only,,,,,0,prod-only,Image with no fallback icon (dev validation blocks),value; null
+A-badimg-only,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-bad,,,Use Icon Only,,,,,0,prod-only,Broken image with no fallback icon (dev validation blocks),value; null
+B00,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,,,,0,both,Show=Y but nothing configured: nothing renders,true; false
+B-off,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,,icon+text,,,0,both,Content populated but Show unchecked: nothing renders,true; false
+B-icon,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,icon,,,0,both,Icon renders (Missing),true; false
+B-text,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,text,,,0,both,Initials render (Missing),true; false
+B-icon-text,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,icon+text,,,0,both,Initials win over icon (Missing),true; false
+B-img-icon,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,img-valid+icon,,,0,both,Image wins (Missing),true; false
+B-img-icon-text,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,img-valid+icon+text,,,0,both,Image wins over text and icon (Missing),true; false
+B-badimg-icon-text,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,img-bad+icon+text,,,0,both,Broken image falls back to initials on icon background (Missing),true; false
+B-badimg-icon,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,img-bad+icon,,,0,both,Broken image falls back to icon (Missing),true; false
+B-hover-only,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,hover,,,0,both,How hover-only renders (avatar or nothing) (Missing),true; false
+B-icon-colors,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,icon,custom,,0,both,Custom background/foreground (Missing),true; false
+B-text-colors,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,text,custom,,0,both,Custom colors on initials (Missing),true; false
+B-icon-hover,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,icon+hover,,,0,both,Icon with hover; hover popover shot (Missing),true; false
+B-img-hover,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,img-valid+icon+hover,,,0,both,Image with hover; hover popover shot (Missing),true; false
+B-img-only,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,img-valid,,,0,prod-only,Image with no fallback icon (dev validation blocks) (Missing),true; false
+B-badimg-only,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,img-bad,,,0,prod-only,Broken image with no fallback icon (dev validation blocks) (Missing),true; false
+B-text-field,B02 Missing content (Account),B,M,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,Y,icon,,,0,both,Missing fires for null text,null; value
+C00,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Rule matched but extension content blank,rule-match; null
+C-icon,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Icon renders (Extension),rule-match; no-match; null
+C-text,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Initials render (Extension),rule-match; no-match; null
+C-icon-text,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Initials win over icon (Extension),rule-match; no-match; null
+C-img-icon,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Image wins (Extension),rule-match; no-match; null
+C-img-icon-text,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Image wins over text and icon (Extension),rule-match; no-match; null
+C-badimg-icon-text,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Broken image falls back to initials on icon background (Extension),rule-match; no-match; null
+C-badimg-icon,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Broken image falls back to icon (Extension),rule-match; no-match; null
+C-hover-only,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,How hover-only renders (avatar or nothing) (Extension),rule-match; no-match; null
+C-icon-colors,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Custom background/foreground (Extension),rule-match; no-match; null
+C-text-colors,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Custom colors on initials (Extension),rule-match; no-match; null
+C-icon-hover,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Icon with hover; hover popover shot (Extension),rule-match; no-match; null
+C-img-hover,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Image with hover; hover popover shot (Extension),rule-match; no-match; null
+C-img-only,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Image with no fallback icon (dev validation blocks) (Extension),rule-match; no-match; null
+C-badimg-only,B03 Value-Rule content (Account),C,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Broken image with no fallback icon (dev validation blocks) (Extension),rule-match; no-match; null
+D-zero-Unset-D,B04 Zero handling (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon,,,Use Icon Only,,,,,0,both,Zero setting Unset with level D,null; 0; positive
+D-zero-Unset-M,B04 Zero handling (Account),D,M,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,Y,icon,,,0,both,Zero setting Unset with level M,null; 0; positive
+D-zero-Unset-DM,B04 Zero handling (Account),D,DM,NUM-1,Account,NumberOfEmployees,Number,icon,,,Use Icon Only,Y,icon,,,0,both,Zero setting Unset with level DM,null; 0; positive
+D-zero-Numbers-D,B04 Zero handling (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon,,Treat Zeroes as Numbers,Use Icon Only,,,,,0,both,Zero setting Numbers with level D,null; 0; positive
+D-zero-Numbers-M,B04 Zero handling (Account),D,M,NUM-1,Account,NumberOfEmployees,Number,,,Treat Zeroes as Numbers,Use Icon Only,Y,icon,,,0,both,Zero setting Numbers with level M,null; 0; positive
+D-zero-Numbers-DM,B04 Zero handling (Account),D,DM,NUM-1,Account,NumberOfEmployees,Number,icon,,Treat Zeroes as Numbers,Use Icon Only,Y,icon,,,0,both,Zero setting Numbers with level DM,null; 0; positive
+D-zero-Blanks-D,B04 Zero handling (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon,,Treat Zeroes as Blanks,Use Icon Only,,,,,0,both,Zero setting Blanks with level D,null; 0; positive
+D-zero-Blanks-M,B04 Zero handling (Account),D,M,NUM-1,Account,NumberOfEmployees,Number,,,Treat Zeroes as Blanks,Use Icon Only,Y,icon,,,0,both,Zero setting Blanks with level M,null; 0; positive
+D-zero-Blanks-DM,B04 Zero handling (Account),D,DM,NUM-1,Account,NumberOfEmployees,Number,icon,,Treat Zeroes as Blanks,Use Icon Only,Y,icon,,,0,both,Zero setting Blanks with level DM,null; 0; positive
+D-est-Text-blank-Unset,B05 Empty Static Text (Account),D,D,TXT-1,Account,AccountNumber,Text,icon,,,,,,,,0,both,"Text, static text blank, behavior Unset (blank deploys as the default Use Icon Only)",value; null
+D-est-Text-blank-UseIconOnly,B05 Empty Static Text (Account),D,D,TXT-1,Account,AccountNumber,Text,icon,,,Use Icon Only,,,,,0,both,"Text, static text blank, behavior Use Icon Only",value; null
+D-est-Text-blank-UseFieldValue,B05 Empty Static Text (Account),D,D,TXT-1,Account,AccountNumber,Text,icon,,,Use Field Value,,,,,0,both,"Text, static text blank, behavior Use Field Value",value; null
+D-est-Text-pop-Unset,B05 Empty Static Text (Account),D,D,TXT-1,Account,AccountNumber,Text,icon+text,,,,,,,,0,both,"Text, static text pop, behavior Unset",value; null
+D-est-Text-pop-UseIconOnly,B05 Empty Static Text (Account),D,D,TXT-1,Account,AccountNumber,Text,icon+text,,,Use Icon Only,,,,,0,both,"Text, static text pop, behavior Use Icon Only",value; null
+D-est-Text-pop-UseFieldValue,B05 Empty Static Text (Account),D,D,TXT-1,Account,AccountNumber,Text,icon+text,,,Use Field Value,,,,,0,both,"Text, static text pop, behavior Use Field Value",value; null
+D-est-Number-blank-Unset,B05 Empty Static Text (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon,,,,,,,,0,both,"Number, static text blank, behavior Unset (blank deploys as the default Use Icon Only)",value; null
+D-est-Number-blank-UseIconOnly,B05 Empty Static Text (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon,,,Use Icon Only,,,,,0,both,"Number, static text blank, behavior Use Icon Only",value; null
+D-est-Number-blank-UseFieldValue,B05 Empty Static Text (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon,,,Use Field Value,,,,,0,both,"Number, static text blank, behavior Use Field Value",value; null
+D-est-Number-pop-Unset,B05 Empty Static Text (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon+text,,,,,,,,0,both,"Number, static text pop, behavior Unset",value; null
+D-est-Number-pop-UseIconOnly,B05 Empty Static Text (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon+text,,,Use Icon Only,,,,,0,both,"Number, static text pop, behavior Use Icon Only",value; null
+D-est-Number-pop-UseFieldValue,B05 Empty Static Text (Account),D,D,NUM-1,Account,NumberOfEmployees,Number,icon+text,,,Use Field Value,,,,,0,both,"Number, static text pop, behavior Use Field Value",value; null
+D-est-Checkbox-blank-Unset,B05 Empty Static Text (Contact),D,D,CHK-1,Contact,DoNotCall,Checkbox,icon,,,,,,,,0,both,"Checkbox, static text blank, behavior Unset (blank deploys as the default Use Icon Only)",value; null
+D-est-Checkbox-blank-UseIconOnly,B05 Empty Static Text (Contact),D,D,CHK-1,Contact,DoNotCall,Checkbox,icon,,,Use Icon Only,,,,,0,both,"Checkbox, static text blank, behavior Use Icon Only",value; null
+D-est-Checkbox-blank-UseFieldValue,B05 Empty Static Text (Contact),D,D,CHK-1,Contact,DoNotCall,Checkbox,icon,,,Use Field Value,,,,,0,both,"Checkbox, static text blank, behavior Use Field Value",value; null
+D-est-Checkbox-pop-Unset,B05 Empty Static Text (Contact),D,D,CHK-1,Contact,DoNotCall,Checkbox,icon+text,,,,,,,,0,both,"Checkbox, static text pop, behavior Unset",value; null
+D-est-Checkbox-pop-UseIconOnly,B05 Empty Static Text (Contact),D,D,CHK-1,Contact,DoNotCall,Checkbox,icon+text,,,Use Icon Only,,,,,0,both,"Checkbox, static text pop, behavior Use Icon Only",value; null
+D-est-Checkbox-pop-UseFieldValue,B05 Empty Static Text (Contact),D,D,CHK-1,Contact,DoNotCall,Checkbox,icon+text,,,Use Field Value,,,,,0,both,"Checkbox, static text pop, behavior Use Field Value",value; null
+E-num-min,B06 Numeric rules (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,Minimum only (>=),-5; 0; 5; 10; 15; 20; 25; null
+E-num-max,B06 Numeric rules (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,Maximum only never matches (dev requires Minimum),-5; 0; 5; 10; 15; 20; 25; null
+E-num-range,B06 Numeric rules (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,"Min inclusive, max exclusive",-5; 0; 5; 10; 15; 20; 25; null
+E-num-min0,B06 Numeric rules (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,Minimum of 0 is honored,-5; 0; 5; 10; 15; 20; 25; null
+E-num-neg,B06 Numeric rules (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,Negative range,-5; 0; 5; 10; 15; 20; 25; null
+E-num-adjacent,B06 Numeric rules (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,2,both,Adjacent ranges: boundary value lands in second,-5; 0; 5; 10; 15; 20; 25; null
+E-num-open,B06 Numeric rules (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,2,both,Bounded plus open-ended,-5; 0; 5; 10; 15; 20; 25; null
+E-cur-decimal,B06 Numeric rules (Account),E,V,CUR-1,Account,AnnualRevenue,Currency,,,,Use Icon Only,,,,,1,both,Decimal boundaries,99.99; 100.00; 100.01; 200.50; null
+E-txt-equals,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Equals,Alpha; ALPHA; alphabet; Beta; xyz; null
+E-txt-dne,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Does Not Equal (null excluded: rules need a value),Alpha; ALPHA; alphabet; Beta; xyz; null
+E-txt-contains,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Contains,Alpha; ALPHA; alphabet; Beta; xyz; null
+E-txt-starts,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Starts With,Alpha; ALPHA; alphabet; Beta; xyz; null
+E-txt-case,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Case-insensitive: rule configured upper-case,Alpha; ALPHA; alphabet; Beta; xyz; null
+E-txt-blankop,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Blank operator behaves as Contains (dev validation blocks),Alpha; ALPHA; alphabet; Beta; xyz; null
+E-pck-equals,B07 Text rules (Account),E,V,PCK-1,Account,Rating,Picklist,,,,Use Icon Only,,,,,1,both,Picklist Equals,Hot; Warm; Cold; null
+E-pck-contains,B07 Text rules (Account),E,V,PCK-1,Account,Rating,Picklist,,,,Use Icon Only,,,,,1,both,Picklist Contains,Hot; Warm; Cold; null
+E-txt-both,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Text rule wins when numeric also set (documented behavior),Alpha; Beta; null
+E-num-on-text,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Numeric rule on text field (dev validation blocks),Alpha; null
+E-norule,B07 Text rules (Account),E,V,TXT-2,Account,TickerSymbol,Text,,,,Use Icon Only,,,,,1,both,Extension with no criteria matches nothing (dev validation blocks),Alpha; null
+E-m-off-one,B08 Multiple and Priority (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,"Multiple off, one match",5; 15; 25; null
+E-m-off-two,B08 Multiple and Priority (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,2,both,"Multiple off, two overlapping matches, no priority (prod: last wins)",5; 15; 25; null
+E-m-off-pri,B08 Multiple and Priority (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,2,both,"Multiple off, overlapping with Priority (dev: lowest priority wins; prod differs)",5; 15; 25; null
+E-m-on-two,B08 Multiple and Priority (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,Y,2,both,"Multiple on, two matches",5; 15; 25; null
+E-m-on-three,B08 Multiple and Priority (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,Y,3,both,"Multiple on, three matches",5; 15; 25; null
+E-m-on-none,B08 Multiple and Priority (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,Y,1,both,"Multiple on, no match, no Default: nothing",5; 15; 25; null
+E-m-on-none-def,B08 Multiple and Priority (Account),E,VD,NUM-1,Account,NumberOfEmployees,Number,icon+text,,,,,,,Y,1,both,"Multiple on, no match, Default falls back",5; 15; 25; null
+E-m-off-none-def,B08 Multiple and Priority (Account),E,VD,NUM-1,Account,NumberOfEmployees,Number,icon+text,,,,,,,,1,both,"Multiple off, no match, Default falls back",5; 15; 25; null
+E-m-on-null,B08 Multiple and Priority (Account),E,VM,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,Y,icon,,Y,1,both,"Multiple on, null value shows Missing",5; 15; 25; null
+E-inactive,B08 Multiple and Priority (Account),E,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,Inactive extension is ignored,5; 15; 25; null
+F-tex-D,B09 Level combos: Text (Account),F,D,TXT-1,Account,AccountNumber,Text,sig-D,,,Use Icon Only,,,,,0,both,Levels D: distinct signature per level shows which fired,null; Gold; Silver; other
+F-tex-M,B09 Level combos: Text (Account),F,M,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,Y,sig-M,,,0,both,Levels M: distinct signature per level shows which fired,null; Gold; Silver; other
+F-tex-V,B09 Level combos: Text (Account),F,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,Levels V: distinct signature per level shows which fired,null; Gold; Silver; other
+F-tex-DM,B09 Level combos: Text (Account),F,DM,TXT-1,Account,AccountNumber,Text,sig-D,,,Use Icon Only,Y,sig-M,,,0,both,Levels DM: distinct signature per level shows which fired,null; Gold; Silver; other
+F-tex-DV,B09 Level combos: Text (Account),F,DV,TXT-1,Account,AccountNumber,Text,sig-D,,,Use Icon Only,,,,,1,both,Levels DV: distinct signature per level shows which fired,null; Gold; Silver; other
+F-tex-MV,B09 Level combos: Text (Account),F,MV,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,Y,sig-M,,,1,both,Levels MV: distinct signature per level shows which fired,null; Gold; Silver; other
+F-tex-DMV,B09 Level combos: Text (Account),F,DMV,TXT-1,Account,AccountNumber,Text,sig-D,,,Use Icon Only,Y,sig-M,,,1,both,Levels DMV: distinct signature per level shows which fired,null; Gold; Silver; other
+F-num-D,B10 Level combos: Number (Account),F,D,NUM-1,Account,NumberOfEmployees,Number,sig-D,,,Use Icon Only,,,,,0,both,Levels D: distinct signature per level shows which fired,null; 0; 15; other
+F-num-M,B10 Level combos: Number (Account),F,M,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,Y,sig-M,,,0,both,Levels M: distinct signature per level shows which fired,null; 0; 15; other
+F-num-V,B10 Level combos: Number (Account),F,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,Levels V: distinct signature per level shows which fired,null; 0; 15; other
+F-num-DM,B10 Level combos: Number (Account),F,DM,NUM-1,Account,NumberOfEmployees,Number,sig-D,,,Use Icon Only,Y,sig-M,,,0,both,Levels DM: distinct signature per level shows which fired,null; 0; 15; other
+F-num-DV,B10 Level combos: Number (Account),F,DV,NUM-1,Account,NumberOfEmployees,Number,sig-D,,,Use Icon Only,,,,,1,both,Levels DV: distinct signature per level shows which fired,null; 0; 15; other
+F-num-MV,B10 Level combos: Number (Account),F,MV,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,Y,sig-M,,,1,both,Levels MV: distinct signature per level shows which fired,null; 0; 15; other
+F-num-DMV,B10 Level combos: Number (Account),F,DMV,NUM-1,Account,NumberOfEmployees,Number,sig-D,,,Use Icon Only,Y,sig-M,,,1,both,Levels DMV: distinct signature per level shows which fired,null; 0; 15; other
+F-num-M-zero,B10 Level combos: Number (Account),F,M,NUM-1,Account,NumberOfEmployees,Number,,,Treat Zeroes as Blanks,Use Icon Only,Y,sig-M,,,0,both,"Levels M: distinct signature per level shows which fired, zero as blank",null; 0; 15; other
+F-num-DM-zero,B10 Level combos: Number (Account),F,DM,NUM-1,Account,NumberOfEmployees,Number,sig-D,,Treat Zeroes as Blanks,Use Icon Only,Y,sig-M,,,0,both,"Levels DM: distinct signature per level shows which fired, zero as blank",null; 0; 15; other
+F-num-MV-zero,B10 Level combos: Number (Account),F,MV,NUM-1,Account,NumberOfEmployees,Number,,,Treat Zeroes as Blanks,Use Icon Only,Y,sig-M,,,1,both,"Levels MV: distinct signature per level shows which fired, zero as blank",null; 0; 15; other
+F-num-DMV-zero,B10 Level combos: Number (Account),F,DMV,NUM-1,Account,NumberOfEmployees,Number,sig-D,,Treat Zeroes as Blanks,Use Icon Only,Y,sig-M,,,1,both,"Levels DMV: distinct signature per level shows which fired, zero as blank",null; 0; 15; other
+F-che-D,B11 Level combos: Checkbox (Contact),F,D,CHK-1,Contact,DoNotCall,Checkbox,sig-D,,,Use Icon Only,,,,,0,both,Levels D: distinct signature per level shows which fired,true; false
+F-che-M,B11 Level combos: Checkbox (Contact),F,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,sig-M,,,0,both,Levels M: distinct signature per level shows which fired,true; false
+F-che-DM,B11 Level combos: Checkbox (Contact),F,DM,CHK-1,Contact,DoNotCall,Checkbox,sig-D,,,Use Icon Only,Y,sig-M,,,0,both,Levels DM: distinct signature per level shows which fired,true; false
+G-inactive,B12 Bundle and Item level (Account),G,D,TXT-1,Account,AccountNumber,Text,icon,,,Use Icon Only,,,,,0,both,Inactive item is not rendered,value
+G-samefield-1,B12 Bundle and Item level (Account),G,D,TXT-1,Account,AccountNumber,Text,icon,,,Use Icon Only,,,,,0,both,"Two items on one field, both render",value
+G-samefield-2,B12 Bundle and Item level (Account),G,D,TXT-1,Account,AccountNumber,Text,text,,,,,,,,0,both,"Two items on one field, both render",value
+G-adv-valid,B12 Bundle and Item level (Contact),G,D,ADV-1,Contact,Account.AccountNumber,Advanced Field,icon,,,Use Icon Only,,,,,0,both,Parent path resolves,parent populated; parent blank
+G-adv-blank,B12 Bundle and Item level (Contact),G,M,ADV-1,Contact,Account.AccountNumber,Advanced Field,,,,Use Icon Only,Y,icon,,,0,both,Parent blank triggers Missing,parent populated; parent blank
+G-adv-rule,B12 Bundle and Item level (Contact),G,V,ADV-1,Contact,Account.AccountNumber,Advanced Field,,,,Use Icon Only,,,,,1,both,Value-Rule over parent path,parent match; no match; blank
+K-txtrule-num,B13a Known Issues: text rule on number (Account),K,V,NUM-1,Account,NumberOfEmployees,Number,,,,Use Icon Only,,,,,1,both,KNOWN: text rule on number field throws and blanks the bundle,5; null
+K-txtrule-chk,B13b Known Issues: text rule on checkbox (Contact),K,V,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,,,,,1,both,KNOWN: text rule on checkbox field throws and blanks the bundle,true; false
+K-zero-static,B13c Known Issues: other (Account),K,D,NUM-1,Account,NumberOfEmployees,Number,text,,Treat Zeroes as Numbers,,,,,,0,both,KNOWN: static text with value 0 shows 0,0; 5
+K-ext-est-icon,B13c Known Issues: other (Account),K,V,TXT-1,Account,AccountNumber,Text,,,,Use Icon Only,,,,,1,both,KNOWN GAP: Empty Static Text Behavior not applied to extensions,rule-match
+K-ext-est-value,B13c Known Issues: other (Account),K,V,TXT-1,Account,AccountNumber,Text,,,,Use Field Value,,,,,1,both,KNOWN GAP: Use Field Value ignored by extensions (shows no text),rule-match

@@ -4,7 +4,7 @@ project:
     package:
         name: Salesforce-Indicators
         namespace: inds
-        api_version: '65.0'
+        api_version: '67.0'
     git:
         default_branch: 'main'
     test:
@@ -20,6 +20,10 @@ orgs:
         demo:
             config_file: orgs/demo.json
             days: 15
+            namespaced: false
+        regression:
+            config_file: orgs/regression.json
+            days: 5
             namespaced: false
 
 tasks:
@@ -83,6 +87,11 @@ tasks:
         options: 
             recipe: recipes/recipe.AccountsWithContacts.yml
             run_until_records_loaded: Account:100
+    
+    set_user_preference:
+        description: Create or update a UserPreference through the Salesforce REST API
+        class_path: tasks.user_preference.SetUserPreference
+        group: regression
 
 flows:
   sample_inds:
@@ -124,7 +133,6 @@ flows:
         flow: sample_inds
       6:
         task: deploy_sample_indicators_objects
-
   
   config_demo:
     steps:
@@ -142,6 +150,143 @@ flows:
         task: deploy_sample_indicators_objects
       6:
         task: deploy_training_indicators
+
+  # Regression test data SHOULD deploy because of the same name dataset when using `regression` org
+  config_regression:
+    group: regression
+    steps:
+      1:
+        task: assign_permission_sets
+        options:
+          api_names: Indicators_Setup_Access
+      2:
+        task: deploy
+        description: Deploys - Regression Test Metadata Records
+        options:
+            path: regression/customMetadata
+      3:
+        task: deploy
+        description: Deploys - Regression Test Themes
+        options:
+            path: regression/branding-themes
+
+  regression_prod:
+    group: regression
+    steps:
+      1:
+        flow: install_prod
+      2:
+        flow: config_regression
+      3:
+        task: deploy
+        description: Deploys - Regression Test Layouts
+        options:
+            path: regression/flexipages
+            namespace_inject: inds
+      4:
+        task: deploy
+        description: Deploys - Regression Test Objects
+        options:
+            path: regression/objects
+      5:
+        task: deploy
+        description: Deploys - Regression v0.4-only
+        options:
+            path: regression/prod_only
+  
+  regression_prod_slds1:
+    group: regression
+    steps:
+      1:
+        flow: regression_prod
+      2:
+        task: deploy
+        options:
+            path: regression/settings-slds1
+
+  regression_prod_light:
+    group: regression
+    steps:
+      1:
+        flow: regression_prod
+      2:
+        task: deploy
+        options:
+            path: regression/settings-slds2
+      3:
+        task: set_user_preference
+        options:
+            preference: "Color Scheme"  # or '113' from https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_userpreference.htm
+            value: "LIGHT" # Trial and error showed options are: DARK, LIGHT, SYSTEM
+
+  regression_prod_dark:
+    group: regression
+    steps:
+      1:
+        flow: regression_prod
+      2:
+        task: deploy
+        options:
+            path: regression/settings-slds2
+      3:
+        task: set_user_preference
+        options:
+            preference: "Color Scheme"  # or '113' from https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_userpreference.htm
+            value: "DARK" # Trial and error showed options are: DARK, LIGHT, SYSTEM
+  
+  regression_dev:
+    group: regression
+    steps:
+      1:
+        flow: deploy_unmanaged
+      2:
+        task: deploy_post
+        options:
+            path: unpackaged/post
+      3:
+        task: update_admin_profile
+      4:
+        flow: config_regression
+      5:
+        task: deploy
+        description: Deploys - Regression Test Layouts
+        options:
+            path: regression/flexipages
+            namespace_inject: false
+      6:
+        task: deploy
+        description: Deploys - Regression Test Objects
+        options:
+            path: regression/objects
+      7:
+        task: load_sample_data
+      8:
+        task: snapshot_changes
+
+  regression_dev_slds1:
+    group: regression
+    steps:
+      1:
+        flow: regression_dev
+      2:
+        task: deploy
+        options:
+            path: regression/settings-slds1
+  
+  regression_dev_dark:
+    group: regression
+    steps:
+      1:
+        flow: regression_dev
+      2:
+        task: deploy
+        options:
+            path: regression/settings-slds2
+      3:
+        task: set_user_preference
+        options:
+            preference: "Color Scheme"  # or '113' from https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_userpreference.htm
+            value: "DARK" # Trial and error showed options are: DARK, LIGHT, SYSTEM
 
 plans:
   install:

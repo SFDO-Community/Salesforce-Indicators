@@ -1,0 +1,6 @@
+﻿record_id,sobject,LastName,DoNotCall,Account_record_id,Title
+CON-01,Contact,Regression Contact 1,true,ACC-03,DoNotCall true; parent AccountNumber Gold (Advanced Field match)
+CON-02,Contact,Regression Contact 2,false,ACC-04,DoNotCall false; parent Silver (no match)
+CON-03,Contact,Regression Contact 3,true,,DoNotCall true; no Account (parent blank)
+CON-04,Contact,Regression Contact 4,false,,DoNotCall false; no Account
+CON-05,Contact,Regression Contact 5,false,ACC-06,DoNotCall false; parent AccountNumber null

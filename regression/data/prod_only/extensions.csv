@@ -1,0 +1,7 @@
+"Active__c","Contains_Text__c","Description__c","Hover_Text__c","Icon_Background__c","Icon_Foreground__c","Icon_Value__c","Image__c","Indicator_Item__c","MasterLabel","Maximum__c","Minimum__c","Priority__c","Static_Text__c","Text_Operator__c"
+"true","alp","Image with no fallback icon (dev validation blocks) (Extension) (rule 1)","","","","","https://login.salesforce.com/logos/Custom/Building_Grey/logo.png","C_img_only","C-img-only-X1","","","","","Contains"
+"true","alp","Broken image with no fallback icon (dev validation blocks) (Extension) (rule 1)","","","","","https://login.salesforce.com/logos/Custom/DoesNotExist_Regression/logo.png","C_badimg_only","C-badimg-only-X1","","","","","Contains"
+"true","lph","Blank operator behaves as Contains (dev validation blocks) (rule 1)","","","","standard:task","","E_txt_blankop","E-txt-blankop-X1","","","","",""
+"true","alpha","Text rule wins when numeric also set (documented behavior) (rule 1)","","","","standard:task","","E_txt_both","E-txt-both-X1","10","0","","","Equals"
+"true","","Extension with no criteria matches nothing (dev validation blocks) (rule 1)","","","","standard:task","","E_norule","E-norule-X1","","","","",""
+"true","5","KNOWN: text rule on number field throws and blanks the bundle (rule 1)","","","","standard:task","","K_txtrule_num","K-txtrule-num-X1","10","0","","","Equals"

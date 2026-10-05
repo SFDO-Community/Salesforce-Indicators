@@ -1,0 +1,40 @@
+# Editing this file is usually not recommended because it will
+# be overwritten the next time you re-capture this data.
+#
+# You can change this file's contents permanently by creating a
+# .load.yml file and re-capturing:
+#
+#  https://cumulusci.readthedocs.io/en/stable/data.html#extracting-and-loading-sample-datasets
+Insert Account:
+  sf_object: Account
+  table: Account
+  fields:
+  - Name
+  - AccountNumber
+  - TickerSymbol
+  - Rating
+  - NumberOfEmployees
+  - AnnualRevenue
+  - Description
+  - Site
+  lookups:
+    ParentId:
+      table:
+      - Account
+      key_field: ParentId
+      after: Insert Account
+  select_options: {}
+Insert Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+  - FirstName
+  - LastName
+  - DoNotCall
+  - Title
+  lookups:
+    AccountId:
+      table:
+      - Account
+      key_field: AccountId
+  select_options: {}

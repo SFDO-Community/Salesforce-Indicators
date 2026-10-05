@@ -14,7 +14,7 @@ package.xml
 # Profile
 **profile
 **/profiles/**
-**/settings/**
+
 
 **/tsconfig.json
 

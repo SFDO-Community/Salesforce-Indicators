@@ -1,0 +1,674 @@
+<!--
+  Checklist artifact template — the reusable HTML/CSS/JS scaffold for the
+  regression checklist, extracted from the original hand-authored
+  "Indicators Sprint Regression Plan" artifact. SKILL.md fills in every
+  {{PLACEHOLDER}} and {{#each ...}} block described inline below; nothing in
+  the CSS or the persistence script needs to change per run.
+
+  Placeholders:
+    {{TITLE}}                 - <title> text, also used for the kicker/h1 area
+    {{KICKER}}                - small eyebrow label, e.g. "Volunteer Sprint · Manual Regression"
+                                 or "Seasonal Regression Pass"
+    {{H1}}                    - main heading
+    {{LEDE}}                  - one paragraph explaining scope (diff summary or seasonal-pass note)
+    {{META_CHIPS}}            - zero or more <span class="meta-chip">...</span>, e.g. base/compare
+                                 branches, files changed, area count
+    {{CI_FACT}}                - from regression/before-you-start.yaml
+    {{MANUAL_SETUP_ITEMS}}     - <li> per item from regression/before-you-start.yaml's
+                                 sprint_manual_setup_steps (a --diff run) or
+                                 seasonal_manual_setup_steps (a --seasonal run) — these differ
+                                 because a sprint checklist targets dev_org against the branch
+                                 under test, while a seasonal pass targets config_demo against
+                                 main's released package; see that file's header comment for why
+    {{#each AREA}}             - one block per selected regression/catalog/<area>.yaml file, in
+                                  catalog order unless the run is diff-scoped (then order by
+                                  first-touched-file order is fine)
+      {{AREA_INDEX}}            - 1-based position in this run (not a permanent id — areas can be
+                                   omitted on a diff-scoped run, so don't reuse across runs)
+      {{AREA_TITLE}}
+      {{AREA_SUMMARY}}          - area_summary, omit the <p class="context"> entirely if absent
+      {{AREA_SETUP}}            - area_setup, omit the .setup-box entirely if absent
+      {{AREA_RISK_CLASS}}       - risk-high | risk-med | risk-low (area_risk, or highest-risk
+                                   scenario in the area if scenario risk overrides differ)
+      {{AREA_RISK_LABEL}}       - "High risk" | "Medium risk" | "Low risk"
+      {{#each SCENARIO}}        - one <li> per active, selected scenario in this area
+        {{ACTION}}
+        {{MANUAL_TAG}}          - only when automation: manual-only — render
+                                   <span class="manual-tag">Manual only — {{manual_only_reason}}</span>
+        {{EXPECT}}
+      {{/each}}
+    {{/each}}
+    {{CLOSING_NOTE}}           - from regression/before-you-start.yaml
+
+  Second-person voice throughout: write {{ACTION}}/{{EXPECT}} text as neutral
+  imperative ("Set the value to...", "Confirm..."), matching how scenarios are
+  already authored in the catalog — this template does not need a "you" to be
+  inserted anywhere, because imperative mood already reads as addressed to the
+  reader.
+-->
+<title>{{TITLE}}</title>
+<style>
+  :root {
+    --bg: #f4f5f8;
+    --bg-raised: #ffffff;
+    --ink: #1a1e27;
+    --ink-soft: #4b5566;
+    --ink-faint: #7c869a;
+    --line: #dde1ea;
+    --line-soft: #e8eaf1;
+    --accent: #3450c7;
+    --accent-ink: #ffffff;
+    --accent-soft: #e8ecfb;
+    --accent-soft-line: #c7d0f4;
+    --risk-high-bg: #fdeceb;
+    --risk-high-ink: #a3271b;
+    --risk-high-line: #f3c6c0;
+    --risk-med-bg: #fdf3e3;
+    --risk-med-ink: #8a5a10;
+    --risk-med-line: #f1ddb0;
+    --risk-low-bg: #eaf3ee;
+    --risk-low-ink: #276648;
+    --risk-low-line: #c8e2d3;
+    --manual-bg: #f0f1f5;
+    --manual-ink: #565f70;
+    --manual-line: #d7dae2;
+    --code-bg: #eef0f6;
+    --focus: #3450c7;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg: #12141a;
+    --bg-raised: #191c24;
+    --ink: #e9ebf2;
+    --ink-soft: #b0b7c7;
+    --ink-faint: #7d8496;
+    --line: #2a2e3a;
+    --line-soft: #232733;
+    --accent: #7a8cf0;
+    --accent-ink: #10131c;
+    --accent-soft: #1c2036;
+    --accent-soft-line: #333d68;
+    --risk-high-bg: #2c1a1a;
+    --risk-high-ink: #f3a89e;
+    --risk-high-line: #4a2624;
+    --risk-med-bg: #2c2415;
+    --risk-med-ink: #f0c67f;
+    --risk-med-line: #4a3b1e;
+    --risk-low-bg: #16261e;
+    --risk-low-ink: #8fd1ac;
+    --risk-low-line: #234233;
+    --manual-bg: #1e2129;
+    --manual-ink: #a7afc0;
+    --manual-line: #333847;
+    --code-bg: #1d212c;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12141a;
+      --bg-raised: #191c24;
+      --ink: #e9ebf2;
+      --ink-soft: #b0b7c7;
+      --ink-faint: #7d8496;
+      --line: #2a2e3a;
+      --line-soft: #232733;
+      --accent: #7a8cf0;
+      --accent-ink: #10131c;
+      --accent-soft: #1c2036;
+      --accent-soft-line: #333d68;
+      --risk-high-bg: #2c1a1a;
+      --risk-high-ink: #f3a89e;
+      --risk-high-line: #4a2624;
+      --risk-med-bg: #2c2415;
+      --risk-med-ink: #f0c67f;
+      --risk-med-line: #4a3b1e;
+      --risk-low-bg: #16261e;
+      --risk-low-ink: #8fd1ac;
+      --risk-low-line: #234233;
+      --manual-bg: #1e2129;
+      --manual-ink: #a7afc0;
+      --manual-line: #333847;
+      --code-bg: #1d212c;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+  }
+  body { overflow-x: hidden; }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  @media (max-width: 880px) {
+    .shell { grid-template-columns: 1fr; }
+    .toc { position: static !important; height: auto !important; order: 2; }
+  }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 28px 18px 28px 24px;
+    border-right: 1px solid var(--line);
+  }
+  .toc-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .toc-progress {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+  .toc-progress .num {
+    font-size: 26px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .toc-progress .label {
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+  .toc-bar {
+    margin-top: 10px;
+    height: 6px;
+    border-radius: 4px;
+    background: var(--line-soft);
+    overflow: hidden;
+  }
+  .toc-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 0.25s ease;
+  }
+  .toc nav ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: toc;
+  }
+  .toc nav li { margin: 0; }
+  .toc nav a {
+    counter-increment: toc;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 13.2px;
+    line-height: 1.35;
+  }
+  .toc nav a:hover, .toc nav a:focus-visible { background: var(--accent-soft); color: var(--ink); }
+  .toc nav a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-faint);
+    font-size: 11px;
+    padding-top: 2px;
+  }
+  .toc nav a .toc-count {
+    margin-left: auto;
+    font-size: 10.5px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- MAIN ---------- */
+  main { padding: 40px 40px 90px; min-width: 0; }
+  @media (max-width: 620px) { main { padding: 28px 18px 70px; } }
+
+  header.page-head { margin-bottom: 36px; }
+  .kicker {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+    font-weight: 700;
+  }
+  .lede {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 20px;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .meta-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .meta-chip b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  code.inline {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    padding: 0.1em 0.42em;
+    border-radius: 5px;
+    font-size: 0.88em;
+  }
+
+  .callout {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-soft-line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 28px 0 8px;
+  }
+  .callout h2 {
+    font-size: 14px;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+  }
+  .callout p { font-size: 14.5px; line-height: 1.6; margin: 0 0 10px; }
+  .callout ol, .callout ul { margin: 0; padding-left: 20px; }
+  .callout li { margin-bottom: 5px; font-size: 14.5px; line-height: 1.55; }
+  .callout li:last-child { margin-bottom: 0; }
+
+  /* ---------- Sections ---------- */
+  section.area {
+    border-top: 1px solid var(--line);
+    padding: 40px 0 8px;
+    scroll-margin-top: 18px;
+  }
+  section.area:first-of-type { border-top: none; }
+
+  .area-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .area-num {
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-faint);
+    padding-top: 4px;
+    min-width: 22px;
+  }
+  .area-title-wrap { flex: 1; min-width: 0; }
+  h2.area-title {
+    font-size: 21px;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .area-sub { font-size: 13.5px; color: var(--ink-faint); }
+
+  .risk {
+    align-self: flex-start;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 5px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+  .risk-high { background: var(--risk-high-bg); color: var(--risk-high-ink); border: 1px solid var(--risk-high-line); }
+  .risk-med  { background: var(--risk-med-bg);  color: var(--risk-med-ink);  border: 1px solid var(--risk-med-line); }
+  .risk-low  { background: var(--risk-low-bg);  color: var(--risk-low-ink);  border: 1px solid var(--risk-low-line); }
+
+  .area-body { padding-left: 36px; }
+  @media (max-width: 480px) { .area-body { padding-left: 0; } }
+
+  p.context {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 68ch;
+    margin: 10px 0 16px;
+  }
+
+  .setup-box {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin-bottom: 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .setup-box .setup-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  ul.steps { list-style: none; margin: 0 0 8px; padding: 0; }
+  ul.steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 9px 4px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  ul.steps li:last-child { border-bottom: none; }
+
+  input.step-check {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 19px;
+    height: 19px;
+    min-width: 19px;
+    margin-top: 2px;
+    border: 1.5px solid var(--ink-faint);
+    border-radius: 5px;
+    background: var(--bg-raised);
+    cursor: pointer;
+    position: relative;
+  }
+  input.step-check:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  input.step-check:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px; top: 1.5px;
+    width: 5px; height: 9px;
+    border: solid var(--accent-ink);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  input.step-check:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  ul.steps label {
+    font-size: 14.5px;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+  ul.steps li.checked label { color: var(--ink-faint); text-decoration: line-through; text-decoration-color: var(--line); }
+
+  .expect {
+    display: block;
+    margin-top: 3px;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+  .expect b { color: var(--ink-soft); font-weight: 600; }
+
+  .manual-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: var(--manual-bg);
+    color: var(--manual-ink);
+    border: 1px solid var(--manual-line);
+    vertical-align: middle;
+  }
+
+  .area-progress {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    margin-top: 2px;
+  }
+  .area-progress .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+  .area-progress.done .dot { background: var(--risk-low-ink); }
+
+  .freetext-block { margin-top: 20px; }
+  .freetext-block .setup-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 6px;
+  }
+  textarea.freetext-input {
+    width: 100%;
+    min-height: 64px;
+    resize: vertical;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  textarea.freetext-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+  footer.close {
+    border-top: 1px solid var(--line);
+    margin-top: 44px;
+    padding-top: 26px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  footer.close h2 { font-size: 16px; margin: 0 0 8px; }
+  footer.close .freetext-block { margin-top: 24px; }
+
+  ::selection { background: var(--accent-soft-line); }
+</style>
+
+<div class="shell">
+  <aside class="toc">
+    <p class="toc-eyebrow">On this page</p>
+    <div class="toc-progress">
+      <div class="num" id="overallNum">0%</div>
+      <div class="label" id="overallLabel">0 of 0 checks complete</div>
+      <div class="toc-bar"><div class="toc-bar-fill" id="overallBar"></div></div>
+    </div>
+    <nav>
+      <ol id="tocList"></ol>
+    </nav>
+  </aside>
+
+  <main>
+    <header class="page-head">
+      <p class="kicker">{{KICKER}}</p>
+      <h1>{{H1}}</h1>
+      <p class="lede">{{LEDE}}</p>
+      <div class="meta-row">
+        {{META_CHIPS}}
+      </div>
+    </header>
+
+    <div class="callout">
+      <h2>Before you start</h2>
+      <p>{{CI_FACT}}</p>
+      <ol>
+        {{MANUAL_SETUP_ITEMS}}
+      </ol>
+    </div>
+
+    <!-- {{#each AREA}} -->
+    <section class="area" id="s{{AREA_INDEX}}" data-title="{{AREA_TITLE}}">
+      <div class="area-head">
+        <span class="area-num">{{AREA_INDEX}}</span>
+        <div class="area-title-wrap">
+          <h2 class="area-title">{{AREA_TITLE}}</h2>
+          <span class="area-sub">{{AREA_SUBTITLE}}</span>
+        </div>
+        <span class="risk {{AREA_RISK_CLASS}}">{{AREA_RISK_LABEL}}</span>
+      </div>
+      <div class="area-body">
+        <!-- omit entirely if AREA_SUMMARY is absent -->
+        <p class="context">{{AREA_SUMMARY}}</p>
+        <!-- omit entirely if AREA_SETUP is absent -->
+        <div class="setup-box">
+          <span class="setup-label">Setup</span>
+          {{AREA_SETUP}}
+        </div>
+        <ul class="steps">
+          <!-- {{#each SCENARIO}} -->
+          <li>
+            <input type="checkbox" class="step-check">
+            <label>
+              {{ACTION}}{{MANUAL_TAG}}
+              <span class="expect"><b>Expect:</b> {{EXPECT}}</span>
+            </label>
+          </li>
+          <!-- {{/each SCENARIO}} -->
+        </ul>
+        <div class="freetext-block">
+          <span class="setup-label">Your own tests</span>
+          <textarea class="freetext-input" data-key="s{{AREA_INDEX}}-own-tests" placeholder="Record any additional tests you ran for this section..."></textarea>
+        </div>
+        <div class="freetext-block">
+          <span class="setup-label">Scenario ideas for training/marketing</span>
+          <textarea class="freetext-input" data-key="s{{AREA_INDEX}}-ideas" placeholder="Interesting examples worth turning into demo or training content..."></textarea>
+        </div>
+      </div>
+    </section>
+    <!-- {{/each AREA}} -->
+
+    <footer class="close">
+      <h2>Wrapping up</h2>
+      <p>{{CLOSING_NOTE}}</p>
+      <div class="freetext-block">
+        <span class="setup-label">Your own tests — general</span>
+        <textarea class="freetext-input" data-key="global-own-tests" placeholder="Anything you tested that didn't fit a specific section above..."></textarea>
+      </div>
+      <div class="freetext-block">
+        <span class="setup-label">Scenario ideas for training/marketing — general</span>
+        <textarea class="freetext-input" data-key="global-ideas" placeholder="Anything you tested that didn't fit a specific section above..."></textarea>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = "inds-regression-plan-v1";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { state = {}; }
+  if (!state.checks) state.checks = {};
+  if (!state.notes) state.notes = {};
+
+  var sections = Array.prototype.slice.call(document.querySelectorAll("section.area"));
+  var tocList = document.getElementById("tocList");
+
+  function checkboxesFor(section) {
+    return Array.prototype.slice.call(section.querySelectorAll("input.step-check"));
+  }
+
+  function idFor(section, index) {
+    return section.id + "-" + index;
+  }
+
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function updateOverall() {
+    var total = 0, done = 0;
+    sections.forEach(function (s) {
+      var boxes = checkboxesFor(s);
+      total += boxes.length;
+      boxes.forEach(function (b) { if (b.checked) done++; });
+    });
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById("overallNum").textContent = pct + "%";
+    document.getElementById("overallLabel").textContent = done + " of " + total + " checks complete";
+    document.getElementById("overallBar").style.width = pct + "%";
+  }
+
+  sections.forEach(function (section, si) {
+    var boxes = checkboxesFor(section);
+
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    a.href = "#" + section.id;
+    a.innerHTML = "<span>" + section.dataset.title + "</span><span class=\"toc-count\" data-toc-count></span>";
+    li.appendChild(a);
+    tocList.appendChild(li);
+    var tocCount = a.querySelector("[data-toc-count]");
+
+    function updateSectionCount() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      tocCount.textContent = done + "/" + boxes.length;
+    }
+
+    boxes.forEach(function (box, bi) {
+      var key = idFor(section, bi);
+      box.checked = !!state.checks[key];
+      var li2 = box.closest("li");
+      if (box.checked && li2) li2.classList.add("checked");
+
+      box.addEventListener("change", function () {
+        state.checks[key] = box.checked;
+        saveState();
+        if (li2) li2.classList.toggle("checked", box.checked);
+        updateSectionCount();
+        updateOverall();
+      });
+    });
+
+    updateSectionCount();
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll("textarea.freetext-input")).forEach(function (ta) {
+    var key = ta.dataset.key;
+    if (state.notes[key]) ta.value = state.notes[key];
+    ta.addEventListener("input", function () {
+      state.notes[key] = ta.value;
+      saveState();
+    });
+  });
+
+  updateOverall();
+})();
+</script>

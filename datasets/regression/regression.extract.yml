@@ -1,0 +1,20 @@
+
+extract:
+    Account:
+        fields:
+            - Name
+            - ParentId
+            - AccountNumber
+            - TickerSymbol
+            - Rating
+            - NumberOfEmployees
+            - AnnualRevenue
+            - Description
+            - Site
+    Contact:
+        fields:
+            - FirstName
+            - LastName
+            - DoNotCall
+            - AccountId
+            - Title

@@ -1,0 +1,1002 @@
+﻿bundle,item,item_order,record_id,field_value,value_state,level_fired,expected_avatars,expected_hover,basis,notes
+RB01_AnyValue_Acct,A00,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_text,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon_text,4,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_icon,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_hover_only,9,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_text_colors,11,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_hover,13,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_only,14,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A00,1,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB01_AnyValue_Acct,A_icon,2,ACC-02,Alpha,present,default,icon standard:approval,,spec,
+RB01_AnyValue_Acct,A_text,3,ACC-02,Alpha,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_icon_text,4,ACC-02,Alpha,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_img_icon,5,ACC-02,Alpha,present,default,image,,spec,
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-02,Alpha,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-02,Alpha,present,default,initials 'DEF' (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-02,Alpha,present,default,icon standard:approval (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_hover_only,9,ACC-02,Alpha,present,default,none,Hover D,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-02,Alpha,present,default,icon standard:approval bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_text_colors,11,ACC-02,Alpha,present,default,initials 'DEF' bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-02,Alpha,present,default,icon standard:approval,Hover D,spec,
+RB01_AnyValue_Acct,A_img_hover,13,ACC-02,Alpha,present,default,image,Hover D,spec,
+RB01_AnyValue_Acct,A_img_only,14,ACC-02,Alpha,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-02,Alpha,present,default,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB01_AnyValue_Acct,A00,1,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB01_AnyValue_Acct,A_icon,2,ACC-03,Gold,present,default,icon standard:approval,,spec,
+RB01_AnyValue_Acct,A_text,3,ACC-03,Gold,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_icon_text,4,ACC-03,Gold,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_img_icon,5,ACC-03,Gold,present,default,image,,spec,
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-03,Gold,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-03,Gold,present,default,initials 'DEF' (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-03,Gold,present,default,icon standard:approval (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_hover_only,9,ACC-03,Gold,present,default,none,Hover D,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-03,Gold,present,default,icon standard:approval bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_text_colors,11,ACC-03,Gold,present,default,initials 'DEF' bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-03,Gold,present,default,icon standard:approval,Hover D,spec,
+RB01_AnyValue_Acct,A_img_hover,13,ACC-03,Gold,present,default,image,Hover D,spec,
+RB01_AnyValue_Acct,A_img_only,14,ACC-03,Gold,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-03,Gold,present,default,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB01_AnyValue_Acct,A00,1,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB01_AnyValue_Acct,A_icon,2,ACC-04,Silver,present,default,icon standard:approval,,spec,
+RB01_AnyValue_Acct,A_text,3,ACC-04,Silver,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_icon_text,4,ACC-04,Silver,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_img_icon,5,ACC-04,Silver,present,default,image,,spec,
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-04,Silver,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-04,Silver,present,default,initials 'DEF' (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-04,Silver,present,default,icon standard:approval (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_hover_only,9,ACC-04,Silver,present,default,none,Hover D,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-04,Silver,present,default,icon standard:approval bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_text_colors,11,ACC-04,Silver,present,default,initials 'DEF' bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-04,Silver,present,default,icon standard:approval,Hover D,spec,
+RB01_AnyValue_Acct,A_img_hover,13,ACC-04,Silver,present,default,image,Hover D,spec,
+RB01_AnyValue_Acct,A_img_only,14,ACC-04,Silver,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-04,Silver,present,default,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB01_AnyValue_Acct,A00,1,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB01_AnyValue_Acct,A_icon,2,ACC-05,other,present,default,icon standard:approval,,spec,
+RB01_AnyValue_Acct,A_text,3,ACC-05,other,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_icon_text,4,ACC-05,other,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_img_icon,5,ACC-05,other,present,default,image,,spec,
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-05,other,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-05,other,present,default,initials 'DEF' (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-05,other,present,default,icon standard:approval (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_hover_only,9,ACC-05,other,present,default,none,Hover D,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-05,other,present,default,icon standard:approval bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_text_colors,11,ACC-05,other,present,default,initials 'DEF' bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-05,other,present,default,icon standard:approval,Hover D,spec,
+RB01_AnyValue_Acct,A_img_hover,13,ACC-05,other,present,default,image,Hover D,spec,
+RB01_AnyValue_Acct,A_img_only,14,ACC-05,other,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-05,other,present,default,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB01_AnyValue_Acct,A00,1,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon,2,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_text,3,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon_text,4,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_icon,5,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_hover_only,9,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_text_colors,11,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_hover,13,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_img_only,14,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB01_AnyValue_Acct,A00,1,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB01_AnyValue_Acct,A_icon,2,ACC-07,Gold,present,default,icon standard:approval,,spec,
+RB01_AnyValue_Acct,A_text,3,ACC-07,Gold,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_icon_text,4,ACC-07,Gold,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_img_icon,5,ACC-07,Gold,present,default,image,,spec,
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-07,Gold,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-07,Gold,present,default,initials 'DEF' (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-07,Gold,present,default,icon standard:approval (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_hover_only,9,ACC-07,Gold,present,default,none,Hover D,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-07,Gold,present,default,icon standard:approval bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_text_colors,11,ACC-07,Gold,present,default,initials 'DEF' bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-07,Gold,present,default,icon standard:approval,Hover D,spec,
+RB01_AnyValue_Acct,A_img_hover,13,ACC-07,Gold,present,default,image,Hover D,spec,
+RB01_AnyValue_Acct,A_img_only,14,ACC-07,Gold,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-07,Gold,present,default,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB01_AnyValue_Acct,A00,1,ACC-08,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB01_AnyValue_Acct,A_icon,2,ACC-08,Alpha,present,default,icon standard:approval,,spec,
+RB01_AnyValue_Acct,A_text,3,ACC-08,Alpha,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_icon_text,4,ACC-08,Alpha,present,default,initials 'DEF',,spec,
+RB01_AnyValue_Acct,A_img_icon,5,ACC-08,Alpha,present,default,image,,spec,
+RB01_AnyValue_Acct,A_img_icon_text,6,ACC-08,Alpha,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_icon_text,7,ACC-08,Alpha,present,default,initials 'DEF' (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_badimg_icon,8,ACC-08,Alpha,present,default,icon standard:approval (broken image fallback),,spec,
+RB01_AnyValue_Acct,A_hover_only,9,ACC-08,Alpha,present,default,none,Hover D,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB01_AnyValue_Acct,A_icon_colors,10,ACC-08,Alpha,present,default,icon standard:approval bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_text_colors,11,ACC-08,Alpha,present,default,initials 'DEF' bg=#B34A00,,spec,
+RB01_AnyValue_Acct,A_icon_hover,12,ACC-08,Alpha,present,default,icon standard:approval,Hover D,spec,
+RB01_AnyValue_Acct,A_img_hover,13,ACC-08,Alpha,present,default,image,Hover D,spec,
+RB01_AnyValue_Acct,A_img_only,14,ACC-08,Alpha,present,default,image,,spec,
+RB01_AnyValue_Acct,A_badimg_only,15,ACC-08,Alpha,present,default,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB02a_Missing_Acct,B_text_field,1,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB02a_Missing_Acct,B_text_field,1,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB02a_Missing_Acct,B_text_field,1,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB02a_Missing_Acct,B_text_field,1,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB02a_Missing_Acct,B_text_field,1,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB02a_Missing_Acct,B_text_field,1,ACC-06,,missing,missing,icon standard:incident,,spec,
+RB02a_Missing_Acct,B_text_field,1,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB02a_Missing_Acct,B_text_field,1,ACC-08,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B00,1,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_off,2,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon,3,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_text,4,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon_text,5,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_icon,6,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_icon_text,7,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_badimg_icon_text,8,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_badimg_icon,9,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_hover_only,10,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon_colors,11,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_text_colors,12,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon_hover,13,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_hover,14,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_only,15,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_badimg_only,16,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B00,1,CON-02,false,missing,none,none,,known-issue,Missing enabled but no content: nothing should render (current release suspected to leave an empty slot)
+RB02c_Missing_Cont,B_off,2,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
+RB02c_Missing_Cont,B_icon,3,CON-02,false,missing,missing,icon standard:incident,,spec,
+RB02c_Missing_Cont,B_text,4,CON-02,false,missing,missing,initials 'MIS',,spec,
+RB02c_Missing_Cont,B_icon_text,5,CON-02,false,missing,missing,initials 'MIS',,spec,
+RB02c_Missing_Cont,B_img_icon,6,CON-02,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_img_icon_text,7,CON-02,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_badimg_icon_text,8,CON-02,false,missing,missing,initials 'MIS' (broken image fallback),,spec,
+RB02c_Missing_Cont,B_badimg_icon,9,CON-02,false,missing,missing,icon standard:incident (broken image fallback),,spec,
+RB02c_Missing_Cont,B_hover_only,10,CON-02,false,missing,missing,none,Hover M,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB02c_Missing_Cont,B_icon_colors,11,CON-02,false,missing,missing,icon standard:incident bg=#B34A00,,spec,
+RB02c_Missing_Cont,B_text_colors,12,CON-02,false,missing,missing,initials 'MIS' bg=#B34A00,,spec,
+RB02c_Missing_Cont,B_icon_hover,13,CON-02,false,missing,missing,icon standard:incident,Hover M,spec,
+RB02c_Missing_Cont,B_img_hover,14,CON-02,false,missing,missing,image,Hover M,spec,
+RB02c_Missing_Cont,B_img_only,15,CON-02,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_badimg_only,16,CON-02,false,missing,missing,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB02c_Missing_Cont,B00,1,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_off,2,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon,3,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_text,4,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon_text,5,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_icon,6,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_icon_text,7,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_badimg_icon_text,8,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_badimg_icon,9,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_hover_only,10,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon_colors,11,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_text_colors,12,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_icon_hover,13,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_hover,14,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_img_only,15,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B_badimg_only,16,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB02c_Missing_Cont,B00,1,CON-04,false,missing,none,none,,known-issue,Missing enabled but no content: nothing should render (current release suspected to leave an empty slot)
+RB02c_Missing_Cont,B_off,2,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
+RB02c_Missing_Cont,B_icon,3,CON-04,false,missing,missing,icon standard:incident,,spec,
+RB02c_Missing_Cont,B_text,4,CON-04,false,missing,missing,initials 'MIS',,spec,
+RB02c_Missing_Cont,B_icon_text,5,CON-04,false,missing,missing,initials 'MIS',,spec,
+RB02c_Missing_Cont,B_img_icon,6,CON-04,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_img_icon_text,7,CON-04,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_badimg_icon_text,8,CON-04,false,missing,missing,initials 'MIS' (broken image fallback),,spec,
+RB02c_Missing_Cont,B_badimg_icon,9,CON-04,false,missing,missing,icon standard:incident (broken image fallback),,spec,
+RB02c_Missing_Cont,B_hover_only,10,CON-04,false,missing,missing,none,Hover M,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB02c_Missing_Cont,B_icon_colors,11,CON-04,false,missing,missing,icon standard:incident bg=#B34A00,,spec,
+RB02c_Missing_Cont,B_text_colors,12,CON-04,false,missing,missing,initials 'MIS' bg=#B34A00,,spec,
+RB02c_Missing_Cont,B_icon_hover,13,CON-04,false,missing,missing,icon standard:incident,Hover M,spec,
+RB02c_Missing_Cont,B_img_hover,14,CON-04,false,missing,missing,image,Hover M,spec,
+RB02c_Missing_Cont,B_img_only,15,CON-04,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_badimg_only,16,CON-04,false,missing,missing,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB02c_Missing_Cont,B00,1,CON-05,false,missing,none,none,,known-issue,Missing enabled but no content: nothing should render (current release suspected to leave an empty slot)
+RB02c_Missing_Cont,B_off,2,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
+RB02c_Missing_Cont,B_icon,3,CON-05,false,missing,missing,icon standard:incident,,spec,
+RB02c_Missing_Cont,B_text,4,CON-05,false,missing,missing,initials 'MIS',,spec,
+RB02c_Missing_Cont,B_icon_text,5,CON-05,false,missing,missing,initials 'MIS',,spec,
+RB02c_Missing_Cont,B_img_icon,6,CON-05,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_img_icon_text,7,CON-05,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_badimg_icon_text,8,CON-05,false,missing,missing,initials 'MIS' (broken image fallback),,spec,
+RB02c_Missing_Cont,B_badimg_icon,9,CON-05,false,missing,missing,icon standard:incident (broken image fallback),,spec,
+RB02c_Missing_Cont,B_hover_only,10,CON-05,false,missing,missing,none,Hover M,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB02c_Missing_Cont,B_icon_colors,11,CON-05,false,missing,missing,icon standard:incident bg=#B34A00,,spec,
+RB02c_Missing_Cont,B_text_colors,12,CON-05,false,missing,missing,initials 'MIS' bg=#B34A00,,spec,
+RB02c_Missing_Cont,B_icon_hover,13,CON-05,false,missing,missing,icon standard:incident,Hover M,spec,
+RB02c_Missing_Cont,B_img_hover,14,CON-05,false,missing,missing,image,Hover M,spec,
+RB02c_Missing_Cont,B_img_only,15,CON-05,false,missing,missing,image,,spec,
+RB02c_Missing_Cont,B_badimg_only,16,CON-05,false,missing,missing,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB03_ValueRule_Acct,C00,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_text,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon_text,4,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_icon,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_hover_only,9,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_text_colors,11,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_hover,13,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_only,14,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C00,1,ACC-02,Alpha,present,rule,none,,known-issue,a rule with no content should be prevented; observed: blank avatar
+RB03_ValueRule_Acct,C_icon,2,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB03_ValueRule_Acct,C_text,3,ACC-02,Alpha,present,rule,initials 'R1',,spec,
+RB03_ValueRule_Acct,C_icon_text,4,ACC-02,Alpha,present,rule,initials 'R1',,spec,
+RB03_ValueRule_Acct,C_img_icon,5,ACC-02,Alpha,present,rule,image,,spec,
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-02,Alpha,present,rule,image,,spec,
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-02,Alpha,present,rule,initials 'R1' (broken image fallback),,spec,
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-02,Alpha,present,rule,icon standard:task (broken image fallback),,spec,
+RB03_ValueRule_Acct,C_hover_only,9,ACC-02,Alpha,present,rule,none,Hover R1,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-02,Alpha,present,rule,icon standard:task bg=#B34A00,,spec,
+RB03_ValueRule_Acct,C_text_colors,11,ACC-02,Alpha,present,rule,initials 'R1' bg=#B34A00,,spec,
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-02,Alpha,present,rule,icon standard:task,Hover R1,spec,
+RB03_ValueRule_Acct,C_img_hover,13,ACC-02,Alpha,present,rule,image,Hover R1,spec,
+RB03_ValueRule_Acct,C_img_only,14,ACC-02,Alpha,present,rule,image,,spec,
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-02,Alpha,present,rule,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB03_ValueRule_Acct,C00,1,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon,2,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text,3,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_text,4,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon,5,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_hover_only,9,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text_colors,11,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_hover,13,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_only,14,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C00,1,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon,2,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text,3,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_text,4,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon,5,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_hover_only,9,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text_colors,11,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_hover,13,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_only,14,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C00,1,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon,2,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text,3,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_text,4,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon,5,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_hover_only,9,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text_colors,11,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_hover,13,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_only,14,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C00,1,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon,2,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_text,3,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon_text,4,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_icon,5,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_hover_only,9,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_text_colors,11,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_hover,13,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_img_only,14,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB03_ValueRule_Acct,C00,1,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon,2,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text,3,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_text,4,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon,5,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_hover_only,9,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_text_colors,11,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_hover,13,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_img_only,14,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB03_ValueRule_Acct,C00,1,ACC-08,Alpha,present,rule,none,,known-issue,a rule with no content should be prevented; observed: blank avatar
+RB03_ValueRule_Acct,C_icon,2,ACC-08,Alpha,present,rule,icon standard:task,,spec,
+RB03_ValueRule_Acct,C_text,3,ACC-08,Alpha,present,rule,initials 'R1',,spec,
+RB03_ValueRule_Acct,C_icon_text,4,ACC-08,Alpha,present,rule,initials 'R1',,spec,
+RB03_ValueRule_Acct,C_img_icon,5,ACC-08,Alpha,present,rule,image,,spec,
+RB03_ValueRule_Acct,C_img_icon_text,6,ACC-08,Alpha,present,rule,image,,spec,
+RB03_ValueRule_Acct,C_badimg_icon_text,7,ACC-08,Alpha,present,rule,initials 'R1' (broken image fallback),,spec,
+RB03_ValueRule_Acct,C_badimg_icon,8,ACC-08,Alpha,present,rule,icon standard:task (broken image fallback),,spec,
+RB03_ValueRule_Acct,C_hover_only,9,ACC-08,Alpha,present,rule,none,Hover R1,known-issue,hover text alone should not render an avatar (current release is expected to render one)
+RB03_ValueRule_Acct,C_icon_colors,10,ACC-08,Alpha,present,rule,icon standard:task bg=#B34A00,,spec,
+RB03_ValueRule_Acct,C_text_colors,11,ACC-08,Alpha,present,rule,initials 'R1' bg=#B34A00,,spec,
+RB03_ValueRule_Acct,C_icon_hover,12,ACC-08,Alpha,present,rule,icon standard:task,Hover R1,spec,
+RB03_ValueRule_Acct,C_img_hover,13,ACC-08,Alpha,present,rule,image,Hover R1,spec,
+RB03_ValueRule_Acct,C_img_only,14,ACC-08,Alpha,present,rule,image,,spec,
+RB03_ValueRule_Acct,C_badimg_only,15,ACC-08,Alpha,present,rule,"empty slot (broken image, no fallback)",,known-issue,prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-02,0,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-02,0,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-02,0,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-02,0,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-02,0,zero-as-missing,none,none,,spec,Show when false or blank is cleared
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-02,0,zero-as-missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-02,0,zero-as-missing,missing,icon standard:incident,,spec,
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-03,-5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-03,-5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-03,-5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-03,-5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-03,-5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-03,-5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-04,5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-04,5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-04,5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-04,5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-04,5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-04,5,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-05,10,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-05,10,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-05,10,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-05,10,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-05,10,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-05,10,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-06,15,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-06,15,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-06,15,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-06,15,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-06,15,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-06,15,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-07,20,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-07,20,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-07,20,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-07,20,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-07,20,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-07,20,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_D,1,ACC-08,25,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Unset_M,2,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Unset_DM,3,ACC-08,25,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_D,4,ACC-08,25,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Numbers_M,5,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Numbers_DM,6,ACC-08,25,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_D,7,ACC-08,25,present,default,icon standard:approval,,spec,
+RB04_Zero_Acct,D_zero_Blanks_M,8,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB04_Zero_Acct,D_zero_Blanks_DM,9,ACC-08,25,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-02,Alpha,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-02,Alpha,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-02,Alpha,present,default,initials 'Alp',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-02,Alpha,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-02,Alpha,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-02,Alpha,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-02,0,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-02,0,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-02,0,present,default,initials '0',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-02,0,present,default,initials 'DEF',,known-issue,"a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only); behavior cell blank: a metadata deploy applies the default 'Use Icon Only'"
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-02,0,present,default,initials 'DEF',,known-issue,"a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only)"
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-02,0,present,default,initials 'DEF',,known-issue,"a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only)"
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-03,Gold,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-03,Gold,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-03,Gold,present,default,initials 'Gol',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-03,Gold,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-03,Gold,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-03,Gold,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-03,-5,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-03,-5,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-03,-5,present,default,initials '-5',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-03,-5,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-03,-5,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-03,-5,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-04,Silver,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-04,Silver,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-04,Silver,present,default,initials 'Sil',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-04,Silver,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-04,Silver,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-04,Silver,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-04,5,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-04,5,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-04,5,present,default,initials '5',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-04,5,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-04,5,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-04,5,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-05,other,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-05,other,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-05,other,present,default,initials 'oth',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-05,other,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-05,other,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-05,other,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-05,10,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-05,10,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-05,10,present,default,initials '10',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-05,10,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-05,10,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-05,10,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-06,15,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-06,15,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-06,15,present,default,initials '15',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-06,15,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-06,15,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-06,15,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-07,Gold,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-07,Gold,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-07,Gold,present,default,initials 'Gol',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-07,Gold,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-07,Gold,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-07,Gold,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-07,20,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-07,20,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-07,20,present,default,initials '20',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-07,20,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-07,20,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-07,20,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_Unset,1,ACC-08,Alpha,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseIconOnly,2,ACC-08,Alpha,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_blank_UseFieldValue,3,ACC-08,Alpha,present,default,initials 'Alp',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_Unset,4,ACC-08,Alpha,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseIconOnly,5,ACC-08,Alpha,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Text_pop_UseFieldValue,6,ACC-08,Alpha,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_Unset,7,ACC-08,25,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseIconOnly,8,ACC-08,25,present,default,icon standard:approval,,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_blank_UseFieldValue,9,ACC-08,25,present,default,initials '25',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_Unset,10,ACC-08,25,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-08,25,present,default,initials 'DEF',,spec,
+RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-08,25,present,default,initials 'DEF',,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_Unset,1,CON-01,true,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseIconOnly,2,CON-01,true,present,default,icon standard:approval,,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-01,true,present,default,icon standard:approval,,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_Unset,4,CON-01,true,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-01,true,present,default,initials 'DEF',,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-01,true,present,default,initials 'DEF',,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_Unset,1,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseIconOnly,2,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_Unset,4,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_Unset,1,CON-03,true,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseIconOnly,2,CON-03,true,present,default,icon standard:approval,,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-03,true,present,default,icon standard:approval,,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_Unset,4,CON-03,true,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-03,true,present,default,initials 'DEF',,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-03,true,present,default,initials 'DEF',,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_Unset,1,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseIconOnly,2,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_Unset,4,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_Unset,1,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseIconOnly,2,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_Unset,4,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared; behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
+RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_min,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_max,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_range,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_min0,4,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_neg,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_open,7,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_min,1,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_max,2,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_range,3,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min0,4,ACC-02,0,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_neg,5,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-02,0,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_open,7,ACC-02,0,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min,1,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_max,2,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_range,3,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min0,4,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_neg,5,ACC-03,-5,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_open,7,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-03,99.99,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min,1,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_max,2,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_range,3,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min0,4,ACC-04,5,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_neg,5,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-04,5,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_open,7,ACC-04,5,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-04,100,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_min,1,ACC-05,10,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_max,2,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_range,3,ACC-05,10,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_min0,4,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_neg,5,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-05,10,present,rule,initials 'R2',,spec,
+RB06_NumericRules_Acct,E_num_open,7,ACC-05,10,present,rule,initials 'R2',,spec,
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-05,100.01,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_min,1,ACC-06,15,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_max,2,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_range,3,ACC-06,15,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_min0,4,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_neg,5,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-06,15,present,rule,initials 'R2',,spec,
+RB06_NumericRules_Acct,E_num_open,7,ACC-06,15,present,rule,initials 'R2',,spec,
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-06,200.5,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min,1,ACC-07,20,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_max,2,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_range,3,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min0,4,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_neg,5,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_open,7,ACC-07,20,present,rule,initials 'R2',,spec,
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB06_NumericRules_Acct,E_num_min,1,ACC-08,25,present,rule,icon standard:task,,spec,
+RB06_NumericRules_Acct,E_num_max,2,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_range,3,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_min0,4,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_neg,5,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_adjacent,6,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB06_NumericRules_Acct,E_num_open,7,ACC-08,25,present,rule,initials 'R2',,spec,
+RB06_NumericRules_Acct,E_cur_decimal,8,ACC-08,150,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_equals,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_dne,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_contains,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_starts,4,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_case,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_pck_equals,7,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_pck_contains,8,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_both,9,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_num_on_text,10,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_norule,11,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_equals,1,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_dne,2,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_contains,3,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_starts,4,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_case,5,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_pck_equals,7,ACC-02,Hot,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_pck_contains,8,ACC-02,Hot,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_both,9,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_num_on_text,10,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_norule,11,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_equals,1,ACC-03,ALPHA,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_dne,2,ACC-03,ALPHA,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_contains,3,ACC-03,ALPHA,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_starts,4,ACC-03,ALPHA,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_case,5,ACC-03,ALPHA,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-03,ALPHA,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_pck_equals,7,ACC-03,Warm,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_pck_contains,8,ACC-03,Warm,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_both,9,ACC-03,ALPHA,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_num_on_text,10,ACC-03,ALPHA,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_norule,11,ACC-03,ALPHA,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_equals,1,ACC-04,alphabet,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_dne,2,ACC-04,alphabet,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_contains,3,ACC-04,alphabet,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_starts,4,ACC-04,alphabet,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_case,5,ACC-04,alphabet,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-04,alphabet,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_pck_equals,7,ACC-04,Cold,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_pck_contains,8,ACC-04,Cold,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_both,9,ACC-04,alphabet,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_num_on_text,10,ACC-04,alphabet,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_norule,11,ACC-04,alphabet,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_equals,1,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_dne,2,ACC-05,Beta,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_contains,3,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_starts,4,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_case,5,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_pck_equals,7,ACC-05,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_pck_contains,8,ACC-05,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_both,9,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_num_on_text,10,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_norule,11,ACC-05,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_equals,1,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_dne,2,ACC-06,xyz,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_contains,3,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_starts,4,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_case,5,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_pck_equals,7,ACC-06,Hot,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_pck_contains,8,ACC-06,Hot,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_both,9,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_num_on_text,10,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_norule,11,ACC-06,xyz,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_equals,1,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_dne,2,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_contains,3,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_starts,4,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_case,5,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_pck_equals,7,ACC-07,Warm,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_pck_contains,8,ACC-07,Warm,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_both,9,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_num_on_text,10,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_norule,11,ACC-07,,missing,none,none,,spec,Show when false or blank is cleared
+RB07_TextRules_Acct,E_txt_equals,1,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_dne,2,ACC-08,Beta,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_contains,3,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_starts,4,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_case,5,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_txt_blankop,6,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_pck_equals,7,ACC-08,Cold,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_pck_contains,8,ACC-08,Cold,present,rule,icon standard:task,,spec,
+RB07_TextRules_Acct,E_txt_both,9,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_num_on_text,10,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB07_TextRules_Acct,E_norule,11,ACC-08,Beta,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-01,,missing,missing,icon standard:incident,,spec,
+RB08_MultiPriority_Acct,E_inactive,10,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-02,0,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-02,0,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-02,0,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-02,0,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-02,0,present,default,initials 'DEF',,known-issue,"a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only)"
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-02,0,present,default,initials 'DEF',,known-issue,"a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only)"
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-02,0,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_inactive,10,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-03,-5,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-03,-5,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_inactive,10,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-04,5,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-04,5,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-04,5,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-04,5,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-04,5,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-04,5,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-04,5,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_inactive,10,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-05,10,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-05,10,present,rule,icon standard:task,,known-issue,tied priority: first MasterLabel wins in the next release; the current release picks the last one
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-05,10,present,rule,initials 'R2',,spec,
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-05,10,present,rule,icon standard:task | initials 'R2',,spec,multiple matches shown by Priority ascending then MasterLabel (current release: Priority descending)
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-05,10,present,rule,icon standard:task | initials 'R2' | initials 'R3',,spec,multiple matches shown by Priority ascending then MasterLabel (current release: Priority descending)
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-05,10,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-05,10,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-05,10,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_inactive,10,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-06,15,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-06,15,present,rule,icon standard:task,,known-issue,tied priority: first MasterLabel wins in the next release; the current release picks the last one
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-06,15,present,rule,initials 'R2',,spec,
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-06,15,present,rule,icon standard:task | initials 'R2',,spec,multiple matches shown by Priority ascending then MasterLabel (current release: Priority descending)
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-06,15,present,rule,icon standard:task | initials 'R2' | initials 'R3',,spec,multiple matches shown by Priority ascending then MasterLabel (current release: Priority descending)
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-06,15,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-06,15,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-06,15,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_inactive,10,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-07,20,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-07,20,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-07,20,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-07,20,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-07,20,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-07,20,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-07,20,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_inactive,10,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_one,1,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_off_two,2,ACC-08,25,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_off_pri,3,ACC-08,25,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_two,4,ACC-08,25,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_three,5,ACC-08,25,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_m_on_none,6,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB08_MultiPriority_Acct,E_m_on_none_def,7,ACC-08,25,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_off_none_def,8,ACC-08,25,present,default,initials 'DEF',,spec,
+RB08_MultiPriority_Acct,E_m_on_null,9,ACC-08,25,present,rule,icon standard:task,,spec,
+RB08_MultiPriority_Acct,E_inactive,10,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_D,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB09_ComboText_Acct,F_tex_M,2,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_V,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB09_ComboText_Acct,F_tex_DM,4,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB09_ComboText_Acct,F_tex_MV,6,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_D,1,ACC-02,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_M,2,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_V,3,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DM,4,ACC-02,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-02,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_MV,6,ACC-02,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-02,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_D,1,ACC-03,Gold,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_M,2,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_V,3,ACC-03,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_DM,4,ACC-03,Gold,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-03,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_MV,6,ACC-03,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-03,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_D,1,ACC-04,Silver,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_M,2,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_V,3,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DM,4,ACC-04,Silver,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-04,Silver,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_MV,6,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-04,Silver,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_D,1,ACC-05,other,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_M,2,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_V,3,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DM,4,ACC-05,other,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-05,other,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_MV,6,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-05,other,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_D,1,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB09_ComboText_Acct,F_tex_M,2,ACC-06,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_V,3,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB09_ComboText_Acct,F_tex_DM,4,ACC-06,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB09_ComboText_Acct,F_tex_MV,6,ACC-06,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-06,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB09_ComboText_Acct,F_tex_D,1,ACC-07,Gold,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_M,2,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_V,3,ACC-07,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_DM,4,ACC-07,Gold,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-07,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_MV,6,ACC-07,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-07,Gold,present,rule,icon standard:task bg=#2E844A,,spec,
+RB09_ComboText_Acct,F_tex_D,1,ACC-08,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_M,2,ACC-08,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_V,3,ACC-08,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DM,4,ACC-08,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_DV,5,ACC-08,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB09_ComboText_Acct,F_tex_MV,6,ACC-08,Alpha,present,none,none,,spec,no rule match and no Default configured
+RB09_ComboText_Acct,F_tex_DMV,7,ACC-08,Alpha,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB10_ComboNumber_Acct,F_num_M,2,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_V,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-01,,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-02,0,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M,2,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_V,3,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-02,0,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-02,0,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-02,0,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-02,0,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-02,0,zero-as-missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-02,0,zero-as-missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-02,0,zero-as-missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-02,0,zero-as-missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-03,-5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M,2,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_V,3,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-03,-5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-03,-5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-03,-5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-03,-5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-03,-5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-03,-5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-04,5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M,2,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_V,3,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-04,5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-04,5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-04,5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-04,5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-04,5,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-04,5,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-05,10,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M,2,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_V,3,ACC-05,10,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-05,10,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-05,10,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-05,10,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-05,10,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-05,10,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-05,10,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-05,10,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-05,10,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-06,15,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M,2,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_V,3,ACC-06,15,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-06,15,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-06,15,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-06,15,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-06,15,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-06,15,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-06,15,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-06,15,present,rule,icon standard:task bg=#2E844A,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-07,20,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M,2,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_V,3,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-07,20,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-07,20,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-07,20,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-07,20,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-07,20,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_D,1,ACC-08,25,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M,2,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_V,3,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM,4,ACC-08,25,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_DV,5,ACC-08,25,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV,6,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV,7,ACC-08,25,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_M_zero,8,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DM_zero,9,ACC-08,25,present,default,icon standard:approval bg=#0176D3,,spec,
+RB10_ComboNumber_Acct,F_num_MV_zero,10,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
+RB10_ComboNumber_Acct,F_num_DMV_zero,11,ACC-08,25,present,default,icon standard:approval bg=#0176D3,,spec,
+RB11_ComboCheckbox_Cont,F_che_D,1,CON-01,true,present,default,icon standard:approval bg=#0176D3,,spec,
+RB11_ComboCheckbox_Cont,F_che_M,2,CON-01,true,present,none,none,,spec,no rule match and no Default configured
+RB11_ComboCheckbox_Cont,F_che_DM,3,CON-01,true,present,default,icon standard:approval bg=#0176D3,,spec,
+RB11_ComboCheckbox_Cont,F_che_D,1,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
+RB11_ComboCheckbox_Cont,F_che_M,2,CON-02,false,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB11_ComboCheckbox_Cont,F_che_DM,3,CON-02,false,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB11_ComboCheckbox_Cont,F_che_D,1,CON-03,true,present,default,icon standard:approval bg=#0176D3,,spec,
+RB11_ComboCheckbox_Cont,F_che_M,2,CON-03,true,present,none,none,,spec,no rule match and no Default configured
+RB11_ComboCheckbox_Cont,F_che_DM,3,CON-03,true,present,default,icon standard:approval bg=#0176D3,,spec,
+RB11_ComboCheckbox_Cont,F_che_D,1,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
+RB11_ComboCheckbox_Cont,F_che_M,2,CON-04,false,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB11_ComboCheckbox_Cont,F_che_DM,3,CON-04,false,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB11_ComboCheckbox_Cont,F_che_D,1,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
+RB11_ComboCheckbox_Cont,F_che_M,2,CON-05,false,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB11_ComboCheckbox_Cont,F_che_DM,3,CON-05,false,missing,missing,icon standard:incident bg=#BA0517,,spec,
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-01,,missing,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-02,Alpha,present,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-02,Alpha,present,default,icon standard:approval,,spec,
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-02,Alpha,present,default,initials 'DEF',,spec,
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-03,Gold,present,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-03,Gold,present,default,icon standard:approval,,spec,
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-03,Gold,present,default,initials 'DEF',,spec,
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-04,Silver,present,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-04,Silver,present,default,icon standard:approval,,spec,
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-04,Silver,present,default,initials 'DEF',,spec,
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-05,other,present,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-05,other,present,default,icon standard:approval,,spec,
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-05,other,present,default,initials 'DEF',,spec,
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-06,,missing,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-07,Gold,present,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-07,Gold,present,default,icon standard:approval,,spec,
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-07,Gold,present,default,initials 'DEF',,spec,
+RB12a_ItemLevel_Acct,G_inactive,1,ACC-08,Alpha,present,none,none,,spec,item inactive
+RB12a_ItemLevel_Acct,G_samefield_1,2,ACC-08,Alpha,present,default,icon standard:approval,,spec,
+RB12a_ItemLevel_Acct,G_samefield_2,3,ACC-08,Alpha,present,default,initials 'DEF',,spec,
+RB12c_ItemLevel_Cont,G_adv_valid,1,CON-01,Gold,present,default,icon standard:approval,,spec,
+RB12c_ItemLevel_Cont,G_adv_blank,2,CON-01,Gold,present,none,none,,spec,no rule match and no Default configured
+RB12c_ItemLevel_Cont,G_adv_rule,3,CON-01,Gold,present,rule,icon standard:task,,spec,
+RB12c_ItemLevel_Cont,G_adv_valid,1,CON-02,Silver,present,default,icon standard:approval,,spec,
+RB12c_ItemLevel_Cont,G_adv_blank,2,CON-02,Silver,present,none,none,,spec,no rule match and no Default configured
+RB12c_ItemLevel_Cont,G_adv_rule,3,CON-02,Silver,present,none,none,,spec,no rule match and no Default configured
+RB12c_ItemLevel_Cont,G_adv_valid,1,CON-03,,missing,none,none,,spec,Show when false or blank is cleared
+RB12c_ItemLevel_Cont,G_adv_blank,2,CON-03,,missing,missing,icon standard:incident,,spec,
+RB12c_ItemLevel_Cont,G_adv_rule,3,CON-03,,missing,none,none,,spec,Show when false or blank is cleared
+RB12c_ItemLevel_Cont,G_adv_valid,1,CON-04,,missing,none,none,,spec,Show when false or blank is cleared
+RB12c_ItemLevel_Cont,G_adv_blank,2,CON-04,,missing,missing,icon standard:incident,,spec,
+RB12c_ItemLevel_Cont,G_adv_rule,3,CON-04,,missing,none,none,,spec,Show when false or blank is cleared
+RB12c_ItemLevel_Cont,G_adv_valid,1,CON-05,,missing,none,none,,spec,Show when false or blank is cleared
+RB12c_ItemLevel_Cont,G_adv_blank,2,CON-05,,missing,missing,icon standard:incident,,spec,
+RB12c_ItemLevel_Cont,G_adv_rule,3,CON-05,,missing,none,none,,spec,Show when false or blank is cleared
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-02,Alpha,present,default,icon standard:approval,,spec,
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-03,Gold,present,default,icon standard:approval,,spec,
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-04,Silver,present,default,icon standard:approval,,spec,
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-05,other,present,default,icon standard:approval,,spec,
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-07,Gold,present,default,icon standard:approval,,spec,
+RB12x_Inactive_Acct,G_samefield_1,1,ACC-08,Alpha,present,default,icon standard:approval,,spec,
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-02,0,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-03,-5,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-04,5,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-05,10,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-06,15,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-07,20,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-08,25,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-01,true,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
+RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-03,true,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
+RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-02,0,present,default,initials 'DEF',,known-issue,"a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only)"
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-02,Alpha,present,rule,icon standard:task,,spec,
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-02,Alpha,present,rule,icon standard:task,,known-gap,Empty Static Text Behavior is not applied to rule matches; expected icon only until decided
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-03,-5,present,default,initials 'DEF',,spec,
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-04,5,present,default,initials 'DEF',,spec,
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-04,Silver,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-05,10,present,default,initials 'DEF',,spec,
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-05,other,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-06,15,present,default,initials 'DEF',,spec,
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-06,,missing,none,none,,spec,Show when false or blank is cleared
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-07,20,present,default,initials 'DEF',,spec,
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
+RB13c_Known_Other_Acct,K_zero_static,1,ACC-08,25,present,default,initials 'DEF',,spec,
+RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-08,Alpha,present,rule,icon standard:task,,spec,
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-08,Alpha,present,rule,icon standard:task,,known-gap,Empty Static Text Behavior is not applied to rule matches; expected icon only until decided

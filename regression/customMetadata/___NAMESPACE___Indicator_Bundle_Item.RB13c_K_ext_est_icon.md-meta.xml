@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>RB13c_K-ext-est-icon</label>
+    <protected>false</protected>
+    <values>
+        <field>%%%NAMESPACE%%%Indicator_Bundle__c</field>
+        <value xsi:type="xsd:string">RB13c_Known_Other_Acct</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Indicator_Item__c</field>
+        <value xsi:type="xsd:string">K_ext_est_icon</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Order__c</field>
+        <value xsi:type="xsd:double">2</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>F-num-V-X1</label>
+    <protected>false</protected>
+    <values>
+        <field>%%%NAMESPACE%%%Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Description__c</field>
+        <value xsi:type="xsd:string">Levels V: distinct signature per level shows which fired (rule 1)</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Background__c</field>
+        <value xsi:type="xsd:string">#2E844A</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Foreground__c</field>
+        <value xsi:type="xsd:string">#FFFFFF</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Value__c</field>
+        <value xsi:type="xsd:string">standard:task</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Indicator_Item__c</field>
+        <value xsi:type="xsd:string">F_num_V</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Maximum__c</field>
+        <value xsi:type="xsd:double">20</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Minimum__c</field>
+        <value xsi:type="xsd:double">10</value>
+    </values>
+</CustomMetadata>
