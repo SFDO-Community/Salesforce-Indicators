@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UnknownConditions</fullName>
+    <active>true</active>
+    <description>Either too many or too few conditions set which would cause the extension to fail.</description>
+    <errorConditionFormula>( 
+  ISBLANK( Minimum__c )
+  &amp;&amp; ISBLANK( Maximum__c)
+  &amp;&amp; ISBLANK( Contains_Text__c ) 
+) || (
+  ( 
+    NOT( ISBLANK( Minimum__c ) ) 
+    || NOT( ISBLANK( Maximum__c ) )
+  )
+  &amp;&amp; NOT( ISBLANK( Contains_Text__c ) ) 
+)</errorConditionFormula>
+    <errorMessage>Uncertain extension criteria. Only set the numerical values of Minimum and/or Maximum; or set the Match Operator with a Text/Date Value</errorMessage>
+</ValidationRule>

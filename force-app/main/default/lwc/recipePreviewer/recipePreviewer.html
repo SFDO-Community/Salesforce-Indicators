@@ -1,0 +1,55 @@
+<template>
+    <lightning-card title="Recipe Previewer" icon-name="utility:preview">
+        <div class="slds-var-p-horizontal_medium slds-var-p-bottom_medium">
+            <p class="slds-var-p-bottom_small">
+                Paste a shared JSON recipe below, or upload the .recipe.json file, to see exactly
+                what it would look like — no data is saved to this org until you export it.
+            </p>
+
+            <lightning-textarea
+                name="recipeText"
+                label="Recipe JSON"
+                value={recipeText}
+                onchange={handleRecipeTextChange}
+            ></lightning-textarea>
+
+            <div class="slds-var-p-top_small slds-grid slds-grid_vertical-align-center">
+                <div class="slds-col">
+                    <lightning-input
+                        type="file"
+                        label="Or upload a .recipe.json file"
+                        accept=".json"
+                        onchange={handleFileUpload}
+                    ></lightning-input>
+                </div>
+            </div>
+
+            <template lwc:if={errorMessage}>
+                <div class="slds-var-p-top_small">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-alert_error" role="alert">
+                        <span class="slds-assistive-text">Error</span>
+                        {errorMessage}
+                    </div>
+                </div>
+            </template>
+
+            <div class="slds-var-p-top_small">
+                <lightning-button
+                    variant="brand"
+                    label="Load Preview"
+                    disabled={cannotLoadPreview}
+                    onclick={handleLoadPreviewClick}
+                ></lightning-button>
+                <lightning-button
+                    label="Clear"
+                    onclick={handleClear}
+                    class="slds-var-m-left_x-small"
+                ></lightning-button>
+            </div>
+        </div>
+
+        <template lwc:if={hasPreview}>
+            <c-key bundle={previewBundle} is-setup="true" suppress-edit-links="true" force-csv-export="true"></c-key>
+        </template>
+    </lightning-card>
+</template>

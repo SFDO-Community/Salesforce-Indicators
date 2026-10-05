@@ -1,0 +1,42 @@
+<template>
+    <span class={pillClass}>
+        <template lwc:if={indClickable}>
+            <a class="slds-pill__action" href="#" onclick={handleActionClick}>
+                <span class="slds-pill__icon_container">
+                    <c-indicator-bundle-item
+                        ind-text={indText}
+                        ind-size={indsSize}
+                        ind-shape={indsShape}
+                        ind-icon={indIcon}
+                        ind-image={indImage}
+                        ind-background-color={indBackgroundColor}
+                        ind-foreground-color={indForegroundColor}
+                        ind-alt-text={indAltText}
+                        ind-clickable={indClickable}
+                        ind-compact
+                    >
+                    </c-indicator-bundle-item>
+                </span>
+                <span class="slds-pill__label">{indBadgePillText}</span>
+            </a>
+        </template>
+        <template lwc:else>
+            <span class="slds-pill__icon_container">
+                <c-indicator-bundle-item
+                    ind-text={indText}
+                    ind-size={indsSize}
+                    ind-shape={indsShape}
+                    ind-icon={indIcon}
+                    ind-image={indImage}
+                    ind-background-color={indBackgroundColor}
+                    ind-foreground-color={indForegroundColor}
+                    ind-alt-text={indAltText}
+                    ind-clickable={indClickable}
+                    ind-compact
+                >
+                </c-indicator-bundle-item>
+            </span>
+            <span class="slds-pill__label slds-var-p-right_small">{indBadgePillText}</span>
+        </template>
+    </span>
+</template>

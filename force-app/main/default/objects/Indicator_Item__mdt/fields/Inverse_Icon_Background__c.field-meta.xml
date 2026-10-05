@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>Override the default background of the Inverse Indicator's Salesforce Icon.</inlineHelpText>
-    <label>Inverse Icon Background</label>
+    <label>Inverse Icon/Badge Background</label>
     <length>255</length>
     <required>false</required>
     <type>Text</type>

@@ -151,25 +151,18 @@ private class CmdtTests {
         Indicator_Bundle__mdt inactiveBundle = Build.aBundle().asInactive().build();
         Cmdt.setBundle(inactiveBundle);
 
-        // Indicator_Item__mdt inactiveItem = Build.anItem().asInactive().build();
-        // Cmdt.setItem(inactiveItem);
-
-        // Indicator_Item_Extension__mdt inactiveExtension = Build.anExtension().asInactive().withItem(inactiveItem).build();
-        // Cmdt.setItemExtension(inactiveExtension);
-
-        // Indicator_Bundle_Item__mdt inactiveBundleItem = Build.aBundleItem().withBundle(inactiveBundle).withItem(inactiveItem).build();
-        // Cmdt.setBundleItem(inactiveBundleItem);
-        
         // Actual test
         Test.startTest();
 
             List<Indicator_Bundle__mdt> allBundles = Cmdt.getAllBundles();
-    
+            List<Indicator_Bundle__mdt> allActiveBundles = Cmdt.getAllActiveBundles();
+
         Test.stopTest();
-    
+
         // Asserts
         Assert.isNotNull(allBundles);
         Assert.areEqual(inactiveBundle, allBundles[0]);
+        Assert.isTrue(allActiveBundles.isEmpty(), 'An inactive bundle should not be returned by getAllActiveBundles');
     }
 
 }

@@ -15,8 +15,24 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>%%%NAMESPACE%%%Badge_Icon_Position__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text_Color__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>%%%NAMESPACE%%%Description__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Display_Multiple__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Empty_Static_Text_Behavior__c</field>
@@ -47,6 +63,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>%%%NAMESPACE%%%Inverse_Badge_Icon_Position__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Badge_Pill_Text_Color__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Badge_Pill_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>%%%NAMESPACE%%%Inverse_Hover_Text__c</field>
         <value xsi:type="xsd:string">There is no Rating entered</value>
     </values>
@@ -60,7 +88,7 @@
     </values>
     <values>
         <field>%%%NAMESPACE%%%Inverse_Icon_Value__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">custom:custom97</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Inverse_Image__c</field>

@@ -1,0 +1,23 @@
+{
+  "name": "salesforce-indicators",
+  "version": "1.0.0",
+  "description": "Custom Metadata driven Lightning Web Component to visually highlight key data on Salesforce records.",
+  "scripts": {
+    "test:unit": "sfdx-lwc-jest",
+    "test:unit:watch": "sfdx-lwc-jest --watch",
+    "test:unit:coverage": "sfdx-lwc-jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SFDO-Community/Salesforce-Indicators.git"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/SFDO-Community/Salesforce-Indicators/issues"
+  },
+  "homepage": "https://github.com/SFDO-Community/Salesforce-Indicators#readme",
+  "devDependencies": {
+    "@salesforce/sfdx-lwc-jest": "^7.1.2"
+  }
+}

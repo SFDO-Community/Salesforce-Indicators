@@ -7,6 +7,18 @@
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
+        <field>%%%NAMESPACE%%%Badge_Icon_Position__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text_Color__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>%%%NAMESPACE%%%Contains_Text__c</field>
         <value xsi:type="xsd:string">CA</value>
     </values>

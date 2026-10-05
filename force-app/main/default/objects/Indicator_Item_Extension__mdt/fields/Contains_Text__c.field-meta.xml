@@ -3,7 +3,8 @@
     <fullName>Contains_Text__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <label>Contains Text</label>
+    <inlineHelpText>The value to match against the record&apos;s field. For text fields, enter a plain text string. For Date/DateTime fields, enter a relative date literal (e.g. TODAY, NEXT 30 DAYS, THIS YEAR). Pair with &apos;Match Operator&apos; to set the comparison. See documentation for supported date literals.</inlineHelpText>
+    <label>Text or Date Value</label>
     <length>255</length>
     <required>false</required>
     <type>Text</type>

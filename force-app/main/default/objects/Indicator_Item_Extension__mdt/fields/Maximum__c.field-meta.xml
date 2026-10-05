@@ -3,6 +3,7 @@
     <fullName>Maximum__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Upper bound of the numeric range (exclusive: field value must be less than this number). Leave blank for no upper limit.</inlineHelpText>
     <label>Maximum ( &lt; )</label>
     <precision>18</precision>
     <required>false</required>

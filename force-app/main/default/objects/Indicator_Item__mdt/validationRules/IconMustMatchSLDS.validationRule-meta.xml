@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IconMustMatchSLDS</fullName>
+    <active>true</active>
+    <description>SLDS Icons have a syntax</description>
+    <errorConditionFormula>NOT(
+  ISBLANK( Icon_Value__c )
+  || BEGINS( LOWER( Icon_Value__c ) , &apos;utility:&apos; )
+  || BEGINS( LOWER( Icon_Value__c ) , &apos;standard:&apos; )
+  || BEGINS( LOWER( Icon_Value__c ) , &apos;custom:&apos; )
+  || BEGINS( LOWER( Icon_Value__c ) , &apos;doctype:&apos; )
+  || BEGINS( LOWER( Icon_Value__c ) , &apos;action:&apos; )
+)</errorConditionFormula>
+    <errorDisplayField>Icon_Value__c</errorDisplayField>
+    <errorMessage>Icon syntax must match SLDS syntax starting with either &apos;standard&apos;, &apos;custom&apos;, &apos;utility&apos;, &apos;doctype&apos;, or &apos;action&apos; followed by a colon and the icon API name</errorMessage>
+</ValidationRule>

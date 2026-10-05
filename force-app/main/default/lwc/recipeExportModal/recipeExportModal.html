@@ -1,0 +1,74 @@
+<template>
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+    <lightning-modal-body>
+        <template lwc:if={itemOptions.length}>
+            <p class="slds-var-m-bottom_small">
+                <b>Items to include</b>
+            </p>
+            <lightning-checkbox-group
+                name="items"
+                options={itemOptions}
+                value={selectedItemDeveloperNames}
+                onchange={handleItemSelectionChange}
+            ></lightning-checkbox-group>
+        </template>
+        <template lwc:else>
+            <p>This bundle has no items to export.</p>
+        </template>
+
+        <template lwc:if={isBundle}>
+            <div class="slds-var-p-top_medium">
+                <lightning-input
+                    type="checkbox"
+                    label="Export items only (exclude the bundle itself)"
+                    checked={excludeBundle}
+                    onchange={handleExcludeBundleChange}
+                ></lightning-input>
+            </div>
+        </template>
+
+        <template lwc:if={forceCsvOnly}>
+            <p class="slds-var-p-top_medium">Exporting as CSV, ready for Salesforce Inspector Reloaded.</p>
+        </template>
+        <template lwc:else>
+            <div class="slds-var-p-top_medium">
+                <lightning-radio-group
+                    name="format"
+                    label="Export as"
+                    options={formatOptions}
+                    value={format}
+                    onchange={handleFormatChange}
+                ></lightning-radio-group>
+            </div>
+        </template>
+
+        <template lwc:if={showAttachToBundlePicker}>
+            <div class="slds-var-p-top_medium">
+                <lightning-combobox
+                    name="attachToBundle"
+                    label="Attach these items to a bundle in this org"
+                    options={attachToBundleOptions}
+                    value={attachToBundleDeveloperName}
+                    onchange={handleAttachToBundleChange}
+                ></lightning-combobox>
+            </div>
+        </template>
+
+        <template lwc:if={isCsvFormat}>
+            <p class="slds-var-p-top_medium slds-text-color_weak">
+                A CSV export can produce more than one file. Your browser may ask permission
+                to download multiple files — choose Allow to get all of them.
+            </p>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+        <lightning-button
+            variant="brand"
+            label="Export"
+            disabled={noItemsSelected}
+            onclick={handleExport}
+            class="slds-var-m-left_x-small"
+        ></lightning-button>
+    </lightning-modal-footer>
+</template>

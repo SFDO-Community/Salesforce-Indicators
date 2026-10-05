@@ -83,8 +83,8 @@ tasks:
     
     generate_accounts_and_contacts:
         description: Snowfakery - Generate Accounts and Contacts
-        class_path: cumulusci.tasks.bulkdata.snowfakery.Snowfakery 
-        options: 
+        class_path: cumulusci.tasks.bulkdata.snowfakery.Snowfakery
+        options:
             recipe: recipes/recipe.AccountsWithContacts.yml
             run_until_records_loaded: Account:100
     
@@ -92,6 +92,10 @@ tasks:
         description: Create or update a UserPreference through the Salesforce REST API
         class_path: tasks.user_preference.SetUserPreference
         group: regression
+
+    tokenize_cmdt_namespace:
+        description: Namespace-tokenize CMDT record files freshly retrieved from a non-namespaced org (adds %%%NAMESPACE%%% to <field> content and ___NAMESPACE___ to filenames, in place, idempotently).
+        class_path: tasks.tokenize_cmdt_namespace.TokenizeCmdtNamespace
 
 flows:
   sample_inds:

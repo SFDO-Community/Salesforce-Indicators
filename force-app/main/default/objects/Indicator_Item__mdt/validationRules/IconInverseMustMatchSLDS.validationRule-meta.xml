@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IconInverseMustMatchSLDS</fullName>
+    <active>true</active>
+    <description>SLDS Icons have a syntax</description>
+    <errorConditionFormula>NOT(
+  ISBLANK( Inverse_Icon_Value__c )
+  || BEGINS( LOWER( Inverse_Icon_Value__c ) , &apos;utility:&apos; )
+  || BEGINS( LOWER( Inverse_Icon_Value__c ) , &apos;standard:&apos; )
+  || BEGINS( LOWER( Inverse_Icon_Value__c ) , &apos;custom:&apos; )
+  || BEGINS( LOWER( Inverse_Icon_Value__c ) , &apos;doctype:&apos; )
+  || BEGINS( LOWER( Inverse_Icon_Value__c ) , &apos;action:&apos; )
+)</errorConditionFormula>
+    <errorDisplayField>Inverse_Icon_Value__c</errorDisplayField>
+    <errorMessage>Icon syntax must match SLDS syntax starting with either &apos;standard&apos;, &apos;custom&apos;, &apos;utility&apos;, &apos;doctype&apos;, or &apos;action&apos; followed by a colon and the icon API name</errorMessage>
+</ValidationRule>

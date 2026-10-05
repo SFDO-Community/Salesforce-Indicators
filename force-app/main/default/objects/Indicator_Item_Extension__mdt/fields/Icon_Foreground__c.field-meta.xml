@@ -3,7 +3,7 @@
     <fullName>Icon_Foreground__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>Override the default foreground of the Extenion Indicator's Salesforce Icon.</inlineHelpText>
+    <inlineHelpText>Override the default foreground of the Extension Indicator&apos;s Salesforce Icon.</inlineHelpText>
     <label>Icon Foreground</label>
     <length>255</length>
     <required>false</required>

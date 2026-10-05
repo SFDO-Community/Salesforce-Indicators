@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObjectRequired</fullName>
+    <active>true</active>
+    <description>In order to render on a page, this value must be set</description>
+    <errorConditionFormula>ISBLANK( sObject__c )</errorConditionFormula>
+    <errorDisplayField>sObject__c</errorDisplayField>
+    <errorMessage>An object must be assigned.</errorMessage>
+</ValidationRule>
