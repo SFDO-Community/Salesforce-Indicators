@@ -172,7 +172,14 @@ cci task run delete_data \
 
 ## Capturing Screenshots (Playwright)
 
-Run from `regression/playwright`. The browser is visible on purpose so a person can watch. Everything is read-only; no data in the org is changed. Set `REGRESSION_ORG` to a different org alias (default `Salesforce-Indicators__regression_prod`) and `REGRESSION_THEME` (`slds1`, `slds2`, `slds2-dark`) to keep each theme's output separate. Output goes to `playwright/output/<theme>/`.
+One-time setup (`@playwright/test` is a devDependency at the repo root; this also downloads the actual browser binary, which `npm install` does not):
+
+```bash
+npm install
+npx playwright install chromium
+```
+
+Run from `regression/playwright` (or `npm run test:regression -- <spec>` from the repo root). The browser is visible on purpose so a person can watch. Everything is read-only; no data in the org is changed. Set `REGRESSION_ORG` to a different org alias (default `Salesforce-Indicators__regression_prod`) and `REGRESSION_THEME` to keep each theme's output separate -- inferred from the org alias (see `inferTheme` in `lib.ts`) unless overridden. **Run these in the foreground, not backgrounded** -- a headed run backgrounded in an automated environment has stalled indefinitely with no error in this project's history (see `regression-indicator-capture` skill).
 
 ```bash
 npx playwright test capture.spec.ts   # every bundle x record: image + rendered avatars compared with planning/expected.csv

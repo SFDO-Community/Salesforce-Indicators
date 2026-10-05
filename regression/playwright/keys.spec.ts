@@ -1,7 +1,7 @@
 import { test, Page } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, inferTheme } from './lib';
+import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, inferTheme, inferEnv } from './lib';
 
 // Key capture: the Indicators Setup page shows a bundle's key inline (no modal, no inner scroll) once a bundle is
 // chosen in its selector. Captures one image + one text file per bundle to output/<theme>/keys/<shot_id>.png|txt.
@@ -11,8 +11,13 @@ import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, inferTheme } from './
 // the source is deployed (regression_dev). Override with SETUP_PAGE. ONLY_BUNDLES=RB01,RB06 limits the run.
 // Bundles not on the record pages (status not-on-page) are included: their keys show configuration only.
 const THEME = process.env.REGRESSION_THEME || inferTheme(ORG);
-const SETUP_PAGE = process.env.SETUP_PAGE || (ORG.endsWith('_dev') ? 'Indicators_Setup' : 'inds__Indicators_Setup');
-const OUT = path.join(__dirname, 'output', THEME, 'keys');
+const ENV = process.env.REGRESSION_ENV || inferEnv(ORG);
+const SETUP_PAGE = process.env.SETUP_PAGE || (ENV === 'dev' ? 'Indicators_Setup' : 'inds__Indicators_Setup');
+// output/<env>-<theme>/keys -- NOT output/<theme>/keys. Confirmed 2026-10-05: inferTheme alone collapses
+// e.g. regression_prod_slds2 and regression_dev_slds2 to the same 'slds2' folder, so a dev capture run
+// silently overwrote the earlier prod_slds2 screenshots in place -- lost human-comparison baselines with
+// no warning. Keep env in the path so prod and dev can never collide again.
+const OUT = path.join(__dirname, 'output', `${ENV}-${THEME}`, 'keys');
 const code = (b: string) => b.split('_')[0];
 const only = (process.env.ONLY_BUNDLES || '').split(',').filter(Boolean);
 const keyRows = readCsv(path.join(REG, 'planning', 'screenshot_matrix.csv')).filter(r => r.kind === 'key' && (!only.length || only.includes(code(r.bundle))));
@@ -36,7 +41,13 @@ test('keys: one per bundle from the Indicators Setup page', async ({ page }) => 
   // Fixed page chrome (utility bar, global header) gets stitched into tall element screenshots; hide it, keeping layout.
   await page.addStyleTag({ content: '.oneUtilityBar, .utilityBar, .slds-utility-bar_container, .forceUtilityBar, .oneGlobalNav, .slds-global-header_container { visibility: hidden !important; }' });
 
-  const report: string[][] = [['shot_id', 'bundle', 'result', 'text_chars', 'error']];
+  const KH = ['shot_id', 'bundle', 'result', 'text_chars', 'error'];
+  // Merge into any existing report rather than overwrite -- same bug/fix as capture.spec.ts (confirmed
+  // 2026-10-05): an ONLY_BUNDLES-filtered run must only touch the rows it actually captured.
+  const reportFile = path.join(OUT, 'keys_report.csv');
+  const prior = new Map<string, string[]>(
+    fs.existsSync(reportFile) ? readCsv(reportFile).map(r => [r.shot_id, KH.map(c => r[c] ?? '')]) : []
+  );
   for (const row of keyRows) {
     try {
       await chooseBundle(page, row.bundle);
@@ -54,16 +65,17 @@ test('keys: one per bundle from the Indicators Setup page', async ({ page }) => 
       await page.waitForTimeout(300);
       await key.screenshot({ path: path.join(OUT, `${row.shot_id}.png`) });
       fs.writeFileSync(path.join(OUT, `${row.shot_id}.txt`), text);
-      report.push([row.shot_id, row.bundle, 'CAPTURED', String(text.length), '']);
+      prior.set(row.shot_id, [row.shot_id, row.bundle, 'CAPTURED', String(text.length), '']);
       console.log(`CAPTURED  ${row.shot_id}  (${text.length} chars)`);
     } catch (e: any) {
       const msg = String(e.message || e).split('\n')[0];
-      report.push([row.shot_id, row.bundle, 'ERROR', '', msg]);
+      prior.set(row.shot_id, [row.shot_id, row.bundle, 'ERROR', '', msg]);
       console.log(`ERROR  ${row.shot_id}  ${msg}`);
       await page.screenshot({ path: path.join(OUT, `ERROR_${row.shot_id}.png`) }).catch(() => {});
       await page.keyboard.press('Escape').catch(() => {});
     }
   }
-  const csv = report.map(r => r.map(c => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
-  fs.writeFileSync(path.join(OUT, 'keys_report.csv'), '﻿' + csv);
+  const mergedRows = [...prior.values()].sort((a, b) => a[0].localeCompare(b[0]));
+  const csv = [KH, ...mergedRows].map(r => r.map(c => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
+  fs.writeFileSync(reportFile, '﻿' + csv);
 });

@@ -135,6 +135,21 @@ export function inferTheme(org: string): string {
   return 'unverified';   // bare regression_prod / regression_dev: no explicit theme deploy, no guess
 }
 
+/**
+ * Infer prod vs dev from the org alias -- by SEGMENT, not by suffix.
+ *
+ * Confirmed wrong 2026-10-04 (caught before it was ever run, not after): capture.spec.ts/keys.spec.ts
+ * both used `org.endsWith('_dev')` to decide prod vs dev (which expected*.csv to score against; which
+ * Indicators Setup page path, namespaced vs not, to use). That broke the moment themed dev orgs showed
+ * up (`regression_dev_slds2`, `regression_dev_slds1`, ...) -- none of those end in `_dev`, so they'd
+ * have silently scored against the PROD expected file (wrong item set) and tried the namespaced Setup
+ * page (wrong path on an unmanaged org). Matching on the `_dev_` / trailing `_dev` SEGMENT instead of
+ * the string suffix survives any theme suffix appended after it.
+ */
+export function inferEnv(org: string): 'prod' | 'dev' {
+  return org.split('_').includes('dev') ? 'dev' : 'prod';
+}
+
 export interface Avatar { descriptor: string; alt: string; raw: any }
 
 /** Compare-friendly form of an expected avatar string (drops colors and fallback annotations). */

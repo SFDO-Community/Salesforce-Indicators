@@ -277,6 +277,21 @@ flows:
         options:
             path: regression/settings-slds1
   
+  regression_dev_light:
+    group: regression
+    steps:
+      1:
+        flow: regression_dev
+      2:
+        task: deploy
+        options:
+            path: regression/settings-slds2
+      3:
+        task: set_user_preference
+        options:
+            preference: "Color Scheme"  # or '113' from https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_userpreference.htm
+            value: "LIGHT" # Trial and error showed options are: DARK, LIGHT, SYSTEM
+  
   regression_dev_dark:
     group: regression
     steps:

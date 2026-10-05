@@ -45,10 +45,16 @@ Useful filters on `capture.spec.ts`: `ONLY_BUNDLES=RB01,RB06`, `ONLY_RECORDS=ACC
 
 `regression/data/prod_only/*` only ever deploys to a prod-shaped org (released package, no validation
 rules) — an org built via the `regression_dev` flow is missing those items entirely. `capture.spec.ts`
-infers which `expected*.csv` to score against from the org alias: ends in `_dev` → `expected.dev.csv`,
-otherwise → `expected.csv`. Override with `REGRESSION_ENV=prod|dev` if the alias doesn't follow that
-convention. If the matching file doesn't exist yet, the spec fails fast with the command to build it
-rather than silently scoring against the wrong one:
+and `keys.spec.ts` both infer prod vs dev from the org alias via `inferEnv` (`lib.ts`): `dev` if `dev`
+appears as its own `_`-delimited segment anywhere in the alias, `prod` otherwise. This is deliberately
+*not* a suffix check — confirmed necessary 2026-10-04 when themed dev orgs showed up
+(`regression_dev_slds2`, `regression_dev_slds1`, ...; see `inferTheme`'s own history above for the
+matching theme-side lesson). A suffix check (`org.endsWith('_dev')`) would have silently scored
+`regression_dev_slds2` against the PROD expected file and pointed `keys.spec.ts` at the namespaced
+Setup page path, both wrong, with no error. Override with `REGRESSION_ENV=prod|dev` or `SETUP_PAGE` if
+an alias genuinely doesn't follow the `..._dev...`/`..._prod...` segment convention. If the matching
+expected file doesn't exist yet, `capture.spec.ts` fails fast with the command to build it rather than
+silently scoring against the wrong one:
 
 ```bash
 python regression/scripts/build_expected.py --env dev        # -> planning/expected.dev.csv

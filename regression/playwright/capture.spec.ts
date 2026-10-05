@@ -1,7 +1,7 @@
 import { test, Page, Locator } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, recordIds, normalizeExpected, Avatar, inferTheme } from './lib';
+import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, recordIds, normalizeExpected, Avatar, inferTheme, inferEnv } from './lib';
 
 // Regression capture: for every active bundle x record in planning/screenshot_matrix.csv, screenshot the
 // bundle element, read what actually rendered, and compare with planning/expected.csv. Read-only: no data in
@@ -22,10 +22,14 @@ import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, recordIds, normalizeE
 // NOT end in '_dev') reads planning/expected.csv; 'dev' (default when ORG ends in '_dev') reads
 // planning/expected.dev.csv, built by `python regression/scripts/build_expected.py --env dev`.
 const THEME = process.env.REGRESSION_THEME || inferTheme(ORG);
-const ENV = process.env.REGRESSION_ENV || (ORG.endsWith('_dev') ? 'dev' : 'prod');
+const ENV = process.env.REGRESSION_ENV || inferEnv(ORG);
 const list = (v?: string) => (v || '').split(',').filter(Boolean);
 const ONLY_BUNDLES = list(process.env.ONLY_BUNDLES), ONLY_RECORDS = list(process.env.ONLY_RECORDS);
-const OUT = path.join(__dirname, 'output', THEME);
+// output/<env>-<theme>/ -- NOT output/<theme>/. Confirmed 2026-10-05: inferTheme alone collapses e.g.
+// regression_prod_slds2 and regression_dev_slds2 to the same 'slds2' folder, so a dev capture run
+// silently overwrote the earlier prod_slds2 screenshots in place -- lost human-comparison baselines with
+// no warning. Keep env in the path so prod and dev can never collide again.
+const OUT = path.join(__dirname, 'output', `${ENV}-${THEME}`);
 const code = (b: string) => b.split('_')[0];
 const natural = (a: string, b: string) => code(a).localeCompare(code(b), undefined, { numeric: true });
 
@@ -84,8 +88,18 @@ test('capture: bundle shots vs expected', async ({ page }) => {
   const origin = await loginAndGetOrigin(page);
 
   const H = ['shot_id', 'kind', 'result', 'expected_visible', 'actual_visible', 'expected_empty_slots', 'actual_empty_slots', 'hover_ok', 'expected', 'actual', 'actual_alt_text', 'basis_of_expected', 'error'];
-  const report: string[][] = [H];
-  const raws: any[] = [];
+  // Merge into any existing report/raw-JSON rather than overwrite -- a filtered run (ONLY_BUNDLES etc.)
+  // must only touch the rows it actually captured. Confirmed 2026-10-05: the old unconditional overwrite
+  // let a 2-row subset spot-check silently wipe a complete 116-row report down to 2 rows. Shots this run
+  // doesn't touch keep whatever they already had.
+  const reportFile = path.join(OUT, 'capture_report.csv');
+  const prior = new Map<string, string[]>(
+    fs.existsSync(reportFile) ? readCsv(reportFile).map(r => [r.shot_id, H.map(c => r[c] ?? '')]) : []
+  );
+  const rawFile = path.join(OUT, 'capture_raw.json');
+  const priorRaws = new Map<string, any>(
+    fs.existsSync(rawFile) ? (JSON.parse(fs.readFileSync(rawFile, 'utf-8')) as any[]).map(r => [r.shot, r]) : []
+  );
   const skipped = matrix.filter(r => r.kind === 'hover').length;
 
   for (const sobject of ['Account', 'Contact']) {
@@ -125,13 +139,13 @@ test('capture: bundle shots vs expected', async ({ page }) => {
             const hoverOk = expHovers.every(h => alts.includes(h));
             const basis = [...new Set(exp.map(e => e.basis).filter(x => x !== 'spec'))].join('+') || 'spec';
             const result = visOk && slotOk && hoverOk ? 'PASS' : (basis !== 'spec' ? 'KNOWN' : 'DIFF');
-            report.push([shot.shot_id, 'bundle', result, String(expVis.length), String(actVis.length), String(expAll.length - expVis.length),
+            prior.set(shot.shot_id, [shot.shot_id, 'bundle', result, String(expVis.length), String(actVis.length), String(expAll.length - expVis.length),
               String(actAll.length - actVis.length), hoverOk ? 'Y' : 'N', expAll.join(' ; '), actAll.join(' ; '), alts.join(' ; '), basis, '']);
-            raws.push({ shot: shot.shot_id, avatars: actual.map(a => a.raw) });
+            priorRaws.set(shot.shot_id, { shot: shot.shot_id, avatars: actual.map(a => a.raw) });
             console.log(`${result}  ${shot.shot_id}  visible ${expVis.length}/${actVis.length}  empty slots ${expAll.length - expVis.length}/${actAll.length - actVis.length}${hoverOk ? '' : '  HOVER'}`);
           } catch (e: any) {
             const msg = String(e.message || e).split('\n')[0];
-            report.push([shot.shot_id, 'bundle', 'ERROR', '', '', '', '', '', '', '', '', '', msg]);
+            prior.set(shot.shot_id, [shot.shot_id, 'bundle', 'ERROR', '', '', '', '', '', '', '', '', '', msg]);
             console.log(`ERROR  ${shot.shot_id}  ${msg}`);
             await page.screenshot({ path: path.join(OUT, 'shots', `ERROR_${shot.shot_id}.png`) }).catch(() => {});
           }
@@ -139,10 +153,11 @@ test('capture: bundle shots vs expected', async ({ page }) => {
       }
     }
   }
-  const csv = report.map(r => r.map(c => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
-  fs.writeFileSync(path.join(OUT, 'capture_report.csv'), '﻿' + csv);
-  fs.writeFileSync(path.join(OUT, 'capture_raw.json'), JSON.stringify(raws, null, 1));
+  const mergedRows = [...prior.values()].sort((a, b) => a[0].localeCompare(b[0]));
+  const csv = [H, ...mergedRows].map(r => r.map(c => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
+  fs.writeFileSync(reportFile, '﻿' + csv);
+  fs.writeFileSync(rawFile, JSON.stringify([...priorRaws.values()], null, 1));
   const tally: Record<string, number> = {};
-  for (const r of report.slice(1)) tally[r[2]] = (tally[r[2]] || 0) + 1;
-  console.log(`org=${ORG} theme=${THEME}  ${JSON.stringify(tally)}  (${skipped} popover hover rows skipped)  report: ${path.join(OUT, 'capture_report.csv')}`);
+  for (const r of mergedRows) tally[r[2]] = (tally[r[2]] || 0) + 1;
+  console.log(`org=${ORG} theme=${THEME}  ${JSON.stringify(tally)}  (${skipped} popover hover rows skipped; ${mergedRows.length} total rows in report)  report: ${reportFile}`);
 });

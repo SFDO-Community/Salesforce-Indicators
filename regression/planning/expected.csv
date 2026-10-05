@@ -497,7 +497,7 @@ RB05a_EmptyStatic_Acct,D_est_Number_pop_UseIconOnly,11,ACC-08,25,present,default
 RB05a_EmptyStatic_Acct,D_est_Number_pop_UseFieldValue,12,ACC-08,25,present,default,initials 'DEF',,spec,
 RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_Unset,1,CON-01,true,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
 RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseIconOnly,2,CON-01,true,present,default,icon standard:approval,,spec,
-RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-01,true,present,default,icon standard:approval,,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-01,true,present,default,icon standard:approval,,known-issue,"prod (v0.4) silently overrides 'Use Field Value'/blank for a boolean with the icon instead of the field value, ignoring the admin's configured behavior; fixed in the next release, confirmed correct by the maintainers 2026-10-05"
 RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_Unset,4,CON-01,true,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
 RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-01,true,present,default,initials 'DEF',,spec,
 RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-01,true,present,default,initials 'DEF',,spec,
@@ -509,7 +509,7 @@ RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-02,false,missing,non
 RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
 RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_Unset,1,CON-03,true,present,default,icon standard:approval,,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
 RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseIconOnly,2,CON-03,true,present,default,icon standard:approval,,spec,
-RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-03,true,present,default,icon standard:approval,,spec,
+RB05c_EmptyStatic_Cont,D_est_Checkbox_blank_UseFieldValue,3,CON-03,true,present,default,icon standard:approval,,known-issue,"prod (v0.4) silently overrides 'Use Field Value'/blank for a boolean with the icon instead of the field value, ignoring the admin's configured behavior; fixed in the next release, confirmed correct by the maintainers 2026-10-05"
 RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_Unset,4,CON-03,true,present,default,initials 'DEF',,spec,behavior cell blank: a metadata deploy applies the default 'Use Icon Only'
 RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseIconOnly,5,CON-03,true,present,default,initials 'DEF',,spec,
 RB05c_EmptyStatic_Cont,D_est_Checkbox_pop_UseFieldValue,6,CON-03,true,present,default,initials 'DEF',,spec,

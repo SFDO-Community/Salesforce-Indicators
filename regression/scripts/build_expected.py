@@ -89,8 +89,18 @@ def avatar(c, level, it, v, e_ctx=None):
     img_bad = "DoesNotExist" in c["image"]; img_ok = bool(c["image"]) and not img_bad
     text = c["text"][:3]
     beh = it["Empty_Static_Text_Behavior__c"] or "Use Icon Only"   # a blank cell deploys as the picklist default
-    if level == "D" and not c["text"] and beh != "Use Icon Only" and v is not None and not isinstance(v, bool):
-        text = show(v)[:3]                                   # blank or 'Use Field Value' -> initials from the value
+    if level == "D" and not c["text"] and beh != "Use Icon Only" and v is not None:
+        # blank behavior or 'Use Field Value' -> show the field value as initials, honoring the admin's
+        # configured choice exactly -- including for a boolean, confirmed correct by the maintainers
+        # 2026-10-05: the component should never silently override an explicit 'Use Field Value' choice
+        # just because the type is a boolean. Only `prod` (the v0.4 package) still gets this wrong --
+        # it shows the icon instead, overriding the admin's configuration. The next release fixes it.
+        if isinstance(v, bool) and ENV == "prod":
+            basis, note = "known-issue", ("prod (v0.4) silently overrides 'Use Field Value'/blank for a "
+                "boolean with the icon instead of the field value, ignoring the admin's configured "
+                "behavior; fixed in the next release, confirmed correct by the maintainers 2026-10-05")
+        else:
+            text = show(v)[:3]
     if level == "V" and not c["text"] and beh == "Use Field Value":
         basis, note = "known-gap", "Empty Static Text Behavior is not applied to rule matches; expected icon only until decided"
     if img_ok: d = "image"
