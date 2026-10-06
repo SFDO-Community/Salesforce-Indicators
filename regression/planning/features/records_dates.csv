@@ -1,0 +1,12 @@
+﻿record_id,sobject,Name,offset,Description
+FDATE-01,Account,Feature Date -400,-400,Test_Date__c = load date -400 days (CCI anchor_date shifts it)
+FDATE-02,Account,Feature Date -90,-90,Test_Date__c = load date -90 days (CCI anchor_date shifts it)
+FDATE-03,Account,Feature Date -45,-45,Test_Date__c = load date -45 days (CCI anchor_date shifts it)
+FDATE-04,Account,Feature Date -35,-35,Test_Date__c = load date -35 days (CCI anchor_date shifts it)
+FDATE-05,Account,Feature Date -20,-20,Test_Date__c = load date -20 days (CCI anchor_date shifts it)
+FDATE-06,Account,Feature Date -10,-10,Test_Date__c = load date -10 days (CCI anchor_date shifts it)
+FDATE-07,Account,Feature Date -1,-1,Test_Date__c = load date -1 days (CCI anchor_date shifts it)
+FDATE-08,Account,Feature Date +0,0,Test_Date__c = load date +0 days (CCI anchor_date shifts it)
+FDATE-09,Account,Feature Date +1,1,Test_Date__c = load date +1 days (CCI anchor_date shifts it)
+FDATE-10,Account,Feature Date +10,10,Test_Date__c = load date +10 days (CCI anchor_date shifts it)
+FDATE-11,Account,Feature Date +45,45,Test_Date__c = load date +45 days (CCI anchor_date shifts it)

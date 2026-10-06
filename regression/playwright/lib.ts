@@ -1,3 +1,4 @@
+import type { Page } from '@playwright/test';
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -166,4 +167,20 @@ export interface Avatar { descriptor: string; alt: string; raw: any }
 /** Compare-friendly form of an expected avatar string (drops colors and fallback annotations). */
 export function normalizeExpected(s: string): string {
   return s.replace(/ bg=#[0-9A-Fa-f]+/g, '').replace(/ \(broken image fallback\)/, '').trim();
+}
+
+/**
+ * Open a tab on a Lightning record page, falling back to the "More Tabs" overflow menu.
+ * Shared by features.spec.ts and features.actions.spec.ts.
+ */
+export async function openTab(page: Page, title: string) {
+  const tab = page.getByRole('tab', { name: title, exact: true });
+  // A tab pushed into the overflow can still exist in the DOM (clipped, not hidden), so count() is not proof it
+  // is clickable: try it briefly, then fall back to the More Tabs menu.
+  if (await tab.count()) {
+    try { await tab.click({ timeout: 3_000 }); return; } catch { /* in the overflow menu */ }
+  }
+  // The "More Tabs" button is taller than the tab bar, so its centre lands on the panel below it: click near the top.
+  await page.getByRole('button', { name: 'More Tabs' }).first().click({ position: { x: 20, y: 10 }, timeout: 20_000 });
+  await page.getByRole('menuitem', { name: title, exact: true }).click({ timeout: 20_000 });
 }

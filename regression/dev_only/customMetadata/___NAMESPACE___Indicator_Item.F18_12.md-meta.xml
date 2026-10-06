@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>F18_12</label>
+    <protected>false</protected>
+    <values>
+        <field>%%%NAMESPACE%%%Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text__c</field>
+        <value xsi:type="xsd:string">Other</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Description__c</field>
+        <value xsi:type="xsd:string">Date: After Start LAST MONTH</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Display_Multiple__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Empty_Static_Text_Behavior__c</field>
+        <value xsi:type="xsd:string">Use Icon Only</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Field__c</field>
+        <value xsi:type="xsd:string">Test_Date__c</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Background__c</field>
+        <value xsi:type="xsd:string">#e5e5e5</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Value__c</field>
+        <value xsi:type="xsd:string">standard:today</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Badge_Pill_Text__c</field>
+        <value xsi:type="xsd:string">No date</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Icon_Value__c</field>
+        <value xsi:type="xsd:string">standard:empty</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Show_False_or_Blank__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%sObject__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+</CustomMetadata>

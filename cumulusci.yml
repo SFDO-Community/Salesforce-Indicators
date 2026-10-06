@@ -240,38 +240,76 @@ flows:
   
   regression_dev:
     group: regression
+    # ORDER MATTERS (dev-only feature tests):
+    #  * Test_Date__c and its permission set deploy and are assigned BEFORE the dataset loads: without field-level
+    #    security on Test_Date__c the date records cannot be inserted.
+    #  * regression/dev_only/flexipages has the SAME API NAME as regression/flexipages (it is a superset of it), so it
+    #    must deploy AFTER the base page or the base page overwrites it.
+    #  * The CMDT can only deploy a custom-field mapping (Test_Date__c) with the corrected OneFieldMappingRequired
+    #    validation rule (no TEXT() around the Field__c relationship); see regression/findings/.
     steps:
       1:
         flow: deploy_unmanaged
       2:
         task: deploy
-        description: Deploys - Regression dev-only (feature CMDT, Test_Date__c, display flow)
+        description: Deploys - Regression dev-only field (Account.Test_Date__c)
         options:
-            path: regression/dev_only
+            path: regression/dev_only/objects
       3:
-        task: update_admin_profile
+        task: deploy
+        description: Deploys - Regression dev-only permission set (FLS on Test_Date__c)
+        options:
+            path: regression/dev_only/permissionsets
       4:
-        flow: config_regression
+        task: assign_permission_sets
+        options:
+          api_names: Access_for_Regression_Feature_Testing
       5:
+        task: update_admin_profile
+      6:
+        flow: config_regression
+      7:
+        task: deploy
+        description: Deploys - Regression dev-only feature CMDT (RF14-RF18)
+        options:
+            path: regression/dev_only/customMetadata
+      8:
+        task: deploy
+        description: Deploys - Regression dev-only display flow
+        options:
+            path: regression/dev_only/flows
+      9:
         task: deploy
         description: Deploys - Regression Test Layouts
         options:
             path: regression/flexipages
             namespace_inject: false
-      6:
+      10:
+        task: deploy
+        description: Deploys - Regression dev-only layout (superset of the base page, same API name; must follow step 9)
+        options:
+            path: regression/dev_only/flexipages
+            namespace_inject: false
+      11:
         task: deploy
         description: Deploys - Regression Test Objects
         options:
             path: regression/objects
-      7:
+      12:
         task: load_sample_data
-      8:
+      13:
         task: load_dataset
         description: Loads - Regression dev-only feature records (FEAT-01..03)
         options:
             mapping: datasets/features/features.mapping.yml
             sql_path: datasets/features/features.dataset.sql
-      9:
+      14:
+        task: load_dataset
+        description: Loads - Regression dev-only DATE records (relative to load day via anchor_date)
+        options:
+            mapping: datasets/features_dates/features_dates.mapping.yml
+            sql_path: datasets/features_dates/features_dates.dataset.sql
+      15:
         task: snapshot_changes
 
   regression_dev_slds1:

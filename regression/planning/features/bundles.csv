@@ -3,3 +3,4 @@ RF14_BadgePill_Acct,F14 Badge/Pill fields (Account),Account,"Feature test: Badge
 RF15_Popover_Acct,F15 Popover hover text and merge tokens (Account),Account,"Feature test: hover popover body, {!Field} merge tokens, popover presence rules",dev-only
 RF16_Actions_Acct,F16 Popover actions (Account),Account,"Feature test: action button label/help/confirm/false-state gating, URL and Flow Modal actions",dev-only
 RF17_PopoverFallback_Acct,F17 Popover field-value fallback (Account),Account,"Feature test: showFieldValueAsHoverFallback=true on the page. Reuses F15_05/F15_06 (no hover text), so a popover shows the field value instead of nothing",dev-only
+RF18_Dates_Acct,F18 Date operators (Account),Account,"Feature test: relative-date extensions on Test_Date__c -- all 6 date operators against TODAY and LAST MONTH, plus THIS MONTH / NEXT 30 DAYS / THIS YEAR ranges. Expected results are computed at capture time (see features.dates.spec.ts).",dev-only

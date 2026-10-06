@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>RF18_Dates_Acct</label>
+    <protected>false</protected>
+    <values>
+        <field>%%%NAMESPACE%%%Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Icon__c</field>
+        <value xsi:type="xsd:string">standard:trailhead</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Text__c</field>
+        <value xsi:type="xsd:string">Feature test: relative-date extensions on Test_Date__c -- all 6 date operators against TODAY and LAST MONTH, plus THIS MONTH / NEXT 30 DAYS / THIS YEAR ranges. Expected results are computed at capture time (see features.dates.spec.ts).</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Title__c</field>
+        <value xsi:type="xsd:string">F18 Date operators (Account)</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Description__c</field>
+        <value xsi:type="xsd:string">Feature test: relative-date extensions on Test_Date__c -- all 6 date operators against TODAY and LAST MONTH, plus THIS MONTH / NEXT 30 DAYS / THIS YEAR ranges. Expected results are computed at capture time (see features.dates.spec.ts).</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%sObject__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+</CustomMetadata>

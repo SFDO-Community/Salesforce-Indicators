@@ -1,7 +1,7 @@
 import { test, Page, Locator } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, featureRecordIds, inferTheme, inferEnv } from './lib';
+import { REG, ORG, readCsv, loginAndGetOrigin, gotoStable, featureRecordIds, inferTheme, inferEnv, openTab } from './lib';
 
 // Feature capture (dev-only): Badge/Pill fields, popover hover text + merge tokens, action buttons.
 // For every style tab x feature record x bundle, screenshot the bundle, read every rendered indicator
@@ -30,7 +30,7 @@ const ONLY_STYLES = list(process.env.ONLY_STYLES), ONLY_RECORDS = list(process.e
 const NO_HOVER = !!process.env.NO_HOVER;
 
 const STYLE_TABS: Record<string, string> = { avatar: 'Avatar', badge: 'Badge', pill: 'Pill' };
-const BUNDLE_ORDER = ['RF14_BadgePill_Acct', 'RF15_Popover_Acct', 'RF17_PopoverFallback_Acct', 'RF16_Actions_Acct'];
+const BUNDLE_ORDER = ['RF14_BadgePill_Acct', 'RF15_Popover_Acct', 'RF17_PopoverFallback_Acct', 'RF16_Actions_Acct', 'RF18_Dates_Acct'];
 const prefix = (b: string) => b.split('_')[0];
 const CONTAINER = '.ind-popover-container';
 
@@ -69,18 +69,6 @@ function expectedFor(style: string, rec: string, bundle: string): ExpInd[] {
     }
   }
   return out;
-}
-
-async function openTab(page: Page, title: string) {
-  const tab = page.getByRole('tab', { name: title, exact: true });
-  // A tab pushed into the overflow can still exist in the DOM (clipped, not hidden), so count() is not proof it
-  // is clickable: try it briefly, then fall back to the More Tabs menu.
-  if (await tab.count()) {
-    try { await tab.click({ timeout: 3_000 }); return; } catch { /* in the overflow menu */ }
-  }
-  // The "More Tabs" button is taller than the tab bar, so its centre lands on the panel below it: click near the top.
-  await page.getByRole('button', { name: 'More Tabs' }).first().click({ position: { x: 20, y: 10 }, timeout: 20_000 });
-  await page.getByRole('menuitem', { name: title, exact: true }).click({ timeout: 20_000 });
 }
 
 const BUNDLE_EL = 'c-indicator-bundle:visible, inds-indicator-bundle:visible';

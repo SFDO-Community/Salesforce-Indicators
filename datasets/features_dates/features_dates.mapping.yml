@@ -1,0 +1,17 @@
+# Dev-only DATE feature-test records (RF18). A separate dataset from datasets/features: re-loading that one would
+# duplicate Feature Full/Blank/Cold. Source of truth for the offsets is regression/planning/features/records_dates.csv.
+#
+# anchor_date: CumulusCI shifts every Date/Datetime value by (load date - anchor_date), so Test_Date__c is always
+# "N days from the day you loaded it" -- https://cumulusci.readthedocs.io/en/stable/data.html#relative-dates
+# The stored values are anchor_date + offset. features.dates.spec.ts checks the loaded dates against today and warns
+# when the dataset is stale (loaded on an earlier day): reload (delete the 'Feature Date %' Accounts first).
+Insert Account:
+  sf_object: Account
+  table: Account
+  anchor_date: "2020-01-15"
+  fields:
+  - Name
+  - Test_Date__c
+  - Description
+  - Site
+  select_options: {}

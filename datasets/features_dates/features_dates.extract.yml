@@ -1,0 +1,7 @@
+extract:
+    Account:
+        fields:
+            - Name
+            - Test_Date__c
+            - Description
+            - Site

@@ -194,3 +194,66 @@ npx playwright test keys.spec.ts      # one key per bundle (image + text) from t
 python regression/scripts/build_expected.py
 python regression/scripts/build_shot_matrix.py
 ```
+
+
+## Feature tests (`dev_only`)
+
+Everything above compares the released package (v0.4, `regression_prod`) with the next build (`regression_dev`). This section is different: it tests the **new features** of the next build against the spec, so none of it can deploy to `regression_prod` (the records use fields and `{!Field}` syntax the released package does not have). When the next version is released, the feature rows graduate into the base set (`env=dev-only` becomes `both`, `dev_only/customMetadata` merges into `customMetadata`).
+
+```
+regression
+├───dev_only                    // Deploys only via the regression_dev flows
+│   ├───customMetadata          // Feature bundles RF14-RF17, items F14_xx-F16_xx, extensions (CCI-token style)
+│   ├───flexipages              // Account_Record_Page_Regression: the base page PLUS Avatar/Badge/Pill tabs
+│   ├───flows                   // Regression_Feature_Display: display-only screen flow (NO DML) for the Flow Modal action
+│   └───objects                 // Account.Test_Date__c (for the date round)
+├───data/dev_only               // CSVs generated from planning/features
+├───findings                    // Write-ups of real product bugs found by these tests (+ proposed patches)
+└───planning
+    ├───features                // SOURCE OF TRUTH, hand-editable, literal values: bundles, items, extensions, records
+    └───expected.features.csv   // Oracle output: one row per style x record x item
+```
+
+| Bundle | Covers |
+|---|---|
+| `RF14_BadgePill_Acct` | Badge/Pill text, text color, icon position, inverse variants, extension ownership, Display Multiple, merge token in label |
+| `RF15_Popover_Acct` | Popover hover text, `{!Field}` merge tokens (including a blank field), when a popover does or does not exist |
+| `RF17_PopoverFallback_Acct` | Same two items as RF15 with no hover text, on a page instance with `showFieldValueAsHoverFallback=true` |
+| `RF16_Actions_Acct` | Action button label/help/confirm, false-state action on/off, URL and Flow Modal actions |
+| `RF18_Dates_Acct` | Relative-date extensions on `Test_Date__c`: all 6 date operators against `TODAY` and `LAST MONTH`, plus `THIS MONTH`, `NEXT 30 DAYS`, `THIS YEAR` |
+
+Style (avatar / badge / pill) is a **FlexiPage property**, not CMDT, so the same bundles appear once per style tab. The records are style-independent: `datasets/features` (`Feature Full`, `Feature Blank`, `Feature Cold`) and, for the date bundle, `datasets/features_dates` (11 Accounts whose `Test_Date__c` is *load day + N days* via CumulusCI `anchor_date`). They are separate datasets because re-loading one would duplicate the other's records.
+
+### Build, deploy, load
+
+```bash
+python regression/scripts/build_feature_cmdt_csvs.py --force        # planning/features -> data/dev_only
+# then for each type (Indicator_Bundle, _Item, _Item_Extension, _Bundle_Item), as in "Generating CMDT Records":
+sf cmdt generate records --output-directory regression/dev_only/customMetadata --type-name <Type> \
+    --csv regression/data/dev_only/<file>.csv --name-column MasterLabel
+python regression/scripts/namespace_cmdt_records.py regression/dev_only/customMetadata --cci
+python regression/scripts/build_expected_features.py                # oracle
+```
+
+`sf cmdt generate` re-creates un-tokenized copies of records that already exist; delete those duplicates (keep the `___NAMESPACE___` ones) before running the namespace script, or it refuses to overwrite. The `regression_dev` flows deploy `dev_only` in pieces, in a deliberate order: the field and its permission set first (`Access_for_Regression_Feature_Testing`, assigned before anything else), then the CMDT, the flow, and finally `dev_only/flexipages`, which must come **after** the base `regression/flexipages` because it has the same API name and would otherwise be overwritten. A custom-field mapping (`Test_Date__c` in an item's `Field__c`) deploys fine as the bare API name: Salesforce stores it as the field's durable ID. It only works with the corrected `OneFieldMappingRequired` validation rule (see `findings/one-field-mapping-required-custom-field.md`); with the original rule the item fails, and the dependent bundle items then fail with a misleading *"The Indicator Bundle and Indicator Item must belong to the same sObject"*. The permission set must be assigned before the datasets load, or the date records cannot be inserted. The flow then loads `datasets/features` and `datasets/features_dates`.
+
+> **The dev page is a hand-maintained copy.** `dev_only/flexipages/Account_Record_Page_Regression` has the same API name as the base page and contains copies of its 12 bundle components. If the base page's existing bundles change, mirror the change here. At release this file replaces the base page.
+
+### Run
+
+Run from `regression/playwright`, **in the foreground, one record per run** (about 2 minutes each):
+
+```bash
+ONLY_RECORDS=FEAT-01 REGRESSION_ORG=<dev org alias> npx playwright test features.spec.ts
+```
+
+`features.spec.ts` is read-only: it reads each rendered indicator and hovers to read the popover (action buttons are never clicked). It writes `output/<env>-<theme>/features/` (`features_report.csv`, bundle shots, `shots/popovers/` crops); reports merge by key, so filtered runs are safe. Filters: `ONLY_STYLES`, `ONLY_RECORDS`, `ONLY_BUNDLES`, `NO_HOVER=1`.
+
+`features.dates.spec.ts` is read-only and checks RF18. Its expected results are **computed at run time** (the dates are relative to the day the dataset loaded, so a stored CSV would go stale): it asks the org what `TODAY` is (SOQL), reads each record's actual date, and applies the operator table with a small date calculator written in the spec, independent of `DateUtility.cls` and the LWC. If no record equals `TODAY` the dataset is stale and the spec skips with reload instructions. Avoid running within an hour or two of local midnight (org-user and loader timezones can disagree about "today"). Default style is `badge`; `ONLY_STYLES=avatar,pill` extends it.
+
+`features.actions.spec.ts` **does click** and is therefore opt-in (`ACTIONS=1`). URL actions open a new tab, so requests to the target host are stubbed (nothing leaves the machine); the Flow Modal runs the no-DML display flow and is closed with the header X, never Finish.
+
+At 1600px the style tabs sit under the **More Tabs** overflow menu; `openTab()` in `lib.ts` handles it (the More button is taller than the tab bar, so it is clicked near its top).
+
+### Results so far (dev, SLDS2)
+Display and popover (first full run, before RF18): 173 PASS / 4 DIFF over 177 indicator rows. The four DIFFs are one product bug (a `{!Field}` token in item-level Badge/Pill Text is not resolved), written up with a proposed one-line fix in `findings/badge-pill-merge-token.md`. Actions: 11 of 11 PASS.

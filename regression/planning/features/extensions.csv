@@ -1,6 +1,21 @@
 ﻿ext_id,item_id,operator,text,min,max,priority,icon,static_text,image,bg,fg,hover,badge_text,badge_color,badge_pos,env
 E14_03,F14_03,Equals,Hot,,,1,standard:reward,,,#fff3cd,,,Ext Text,red,end,dev-only
-E14_04,F14_04,Equals,Hot,,,1,standard:reward,,,#c23934,,,,,,dev-only
-E14_07a,F14_07,Equals,Hot,,,1,standard:reward,,,#c23934,,,Hot Ext,,,dev-only
+E14_04,F14_04,Equals,Hot,,,1,standard:reward,,,#f4b6b3,,,,,,dev-only
+E14_07a,F14_07,Equals,Hot,,,1,standard:reward,,,#f4b6b3,,,Hot Ext,,,dev-only
 E14_07b,F14_07,Contains,ot,,,2,standard:reward,,,#dd7a01,,,Contains ot,,,dev-only
 E15_04,F15_04,Equals,Hot,,,1,standard:reward,,,,,{!Name} is a {!Rating} Rating,,,,dev-only
+E18_01,F18_01,Equals,TODAY,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_02,F18_02,Does Not Equal,TODAY,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_03,F18_03,Before Start,TODAY,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_04,F18_04,After End,TODAY,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_05,F18_05,Before End,TODAY,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_06,F18_06,After Start,TODAY,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_07,F18_07,Equals,LAST MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_08,F18_08,Does Not Equal,LAST MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_09,F18_09,Before Start,LAST MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_10,F18_10,After End,LAST MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_11,F18_11,Before End,LAST MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_12,F18_12,After Start,LAST MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_13,F18_13,Equals,THIS MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_14,F18_14,Equals,NEXT 30 DAYS,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E18_15,F18_15,Equals,THIS YEAR,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
