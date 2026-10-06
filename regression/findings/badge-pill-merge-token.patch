@@ -1,0 +1,11 @@
+--- a/force-app/main/default/lwc/indicatorBundle/indicatorBundle.js	2026-10-06 02:37:36.344869700 -0400
++++ b/force-app/main/default/lwc/indicatorBundle/indicatorBundle.js	2026-10-06 02:37:36.485114300 -0400
+@@ -654,7 +654,7 @@
+                                 fId: iid,                   // Used to generate resultsById which is used in click handling
+                                 fTextValue: dataValue,      // Retain for debug purposes
+                                 ...resolveImage(item, dataValue, matchedExtension),
+-                                ...resolveBadgePillText(item, dataValue, matchedExtension, displayValue),
++                                ...resolveBadgePillText(ibi, dataValue, matchedExtension, displayValue),   // ibi = merged copy; `item` is the wired original with raw {!Field} tokens
+                                 ...resolveShowAvatar(item, dataValue, matchedExtension, showDefault),
+                                 ...resolveIconName(item, dataValue, matchedExtension, this.indsStyle),
+                                 ...resolveIconColors(item, dataValue, matchedExtension),

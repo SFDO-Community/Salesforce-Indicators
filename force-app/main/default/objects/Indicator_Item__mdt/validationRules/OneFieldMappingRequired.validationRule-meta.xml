@@ -4,9 +4,9 @@
     <active>true</active>
     <description>Only one field mapping value can be provided, else the component breaks because it won&apos;t find a field or will be unsure what to do with both.</description>
     <errorConditionFormula>(
-  ISBLANK(Advanced_Field__c) &amp;&amp; ISBLANK(TEXT(Field__c)) 
+  ISBLANK(Advanced_Field__c) &amp;&amp; ISBLANK(Field__c) 
 ) || (
-  NOT(ISBLANK(Advanced_Field__c)) &amp;&amp; NOT(ISBLANK(TEXT(Field__c)))
+  NOT(ISBLANK(Advanced_Field__c)) &amp;&amp; NOT(ISBLANK(Field__c))
 )</errorConditionFormula>
     <errorMessage>Provide either a picklist selected Field or use the Advanced Field to type a related/special field path.</errorMessage>
 </ValidationRule>
