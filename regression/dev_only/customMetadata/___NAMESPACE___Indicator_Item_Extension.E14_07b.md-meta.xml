@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>E14_07b</label>
+    <protected>false</protected>
+    <values>
+        <field>%%%NAMESPACE%%%Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text__c</field>
+        <value xsi:type="xsd:string">Contains ot</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Contains_Text__c</field>
+        <value xsi:type="xsd:string">ot</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Description__c</field>
+        <value xsi:type="xsd:string">Feature test extension E14_07b</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Background__c</field>
+        <value xsi:type="xsd:string">#dd7a01</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Value__c</field>
+        <value xsi:type="xsd:string">standard:reward</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Indicator_Item__c</field>
+        <value xsi:type="xsd:string">F14_07</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Priority__c</field>
+        <value xsi:type="xsd:double">2</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Text_Operator__c</field>
+        <value xsi:type="xsd:string">Contains</value>
+    </values>
+</CustomMetadata>

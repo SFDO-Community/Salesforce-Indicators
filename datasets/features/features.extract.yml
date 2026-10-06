@@ -1,0 +1,10 @@
+extract:
+    Account:
+        fields:
+            - Name
+            - AccountNumber
+            - TickerSymbol
+            - Rating
+            - NumberOfEmployees
+            - Description
+            - Site

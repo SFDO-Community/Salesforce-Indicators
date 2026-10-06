@@ -56,6 +56,17 @@ export function recordIds(): Record<string, { id: string; sobject: string }> {
   return out;
 }
 
+/** Feature-test Accounts (dev-only dataset datasets/features): planning record_id (FEAT-01...) -> org Id, via Name. */
+export function featureRecordIds(): Record<string, { id: string; sobject: string }> {
+  const out: Record<string, { id: string; sobject: string }> = {};
+  const acc = sf(`data query -q "SELECT Id, Name FROM Account WHERE Name LIKE 'Feature %'"`).records;
+  for (const r of readCsv(path.join(REG, 'planning', 'features', 'records_account.csv'))) {
+    const hit = acc.find((a: any) => a.Name === r.Name);
+    if (hit) out[r.record_id] = { id: hit.Id, sobject: 'Account' };
+  }
+  return out;
+}
+
 /**
  * Frontdoor login, settled onto a stable app-domain origin.
  *

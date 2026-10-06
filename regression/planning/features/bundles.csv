@@ -1,0 +1,5 @@
+﻿bundle_id,title,sobject,description,env
+RF14_BadgePill_Acct,F14 Badge/Pill fields (Account),Account,"Feature test: Badge/Pill text, color, position, inverse variants, extension ownership",dev-only
+RF15_Popover_Acct,F15 Popover hover text and merge tokens (Account),Account,"Feature test: hover popover body, {!Field} merge tokens, popover presence rules",dev-only
+RF16_Actions_Acct,F16 Popover actions (Account),Account,"Feature test: action button label/help/confirm/false-state gating, URL and Flow Modal actions",dev-only
+RF17_PopoverFallback_Acct,F17 Popover field-value fallback (Account),Account,"Feature test: showFieldValueAsHoverFallback=true on the page. Reuses F15_05/F15_06 (no hover text), so a popover shows the field value instead of nothing",dev-only

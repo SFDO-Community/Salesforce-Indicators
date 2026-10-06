@@ -1,0 +1,17 @@
+# Dev-only FEATURE-test records (Badge/Pill, popover, actions). Source of truth for the values is
+# regression/planning/features/records_account.csv -- keep the two in sync by hand. The Site column carries
+# the planning record_id, same convention as datasets/regression.
+#
+# Not loaded by regression_prod: these records only make sense against the dev-only bundles (RF14-RF16).
+Insert Account:
+  sf_object: Account
+  table: Account
+  fields:
+  - Name
+  - AccountNumber
+  - TickerSymbol
+  - Rating
+  - NumberOfEmployees
+  - Description
+  - Site
+  select_options: {}

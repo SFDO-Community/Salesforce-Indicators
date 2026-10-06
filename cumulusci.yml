@@ -244,9 +244,10 @@ flows:
       1:
         flow: deploy_unmanaged
       2:
-        task: deploy_post
+        task: deploy
+        description: Deploys - Regression dev-only (feature CMDT, Test_Date__c, display flow)
         options:
-            path: unpackaged/post
+            path: regression/dev_only
       3:
         task: update_admin_profile
       4:
@@ -265,6 +266,12 @@ flows:
       7:
         task: load_sample_data
       8:
+        task: load_dataset
+        description: Loads - Regression dev-only feature records (FEAT-01..03)
+        options:
+            mapping: datasets/features/features.mapping.yml
+            sql_path: datasets/features/features.dataset.sql
+      9:
         task: snapshot_changes
 
   regression_dev_slds1:
