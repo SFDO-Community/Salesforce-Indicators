@@ -101,6 +101,8 @@ test('features: date operators vs computed expectation', async ({ page }) => {
       const containers = bundle.locator('.ind-popover-container');
       for (let i = 0; i < 40 && (await containers.count()) < items.length; i++) await page.waitForTimeout(300);
       const n = await containers.count();
+      await page.waitForLoadState('networkidle', { timeout: 8_000 }).catch(() => {});   // let lazily loaded icon sprites paint (see features.spec.ts)
+      await page.waitForTimeout(1_000);
       await bundle.screenshot({ path: path.join(OUT, 'shots', `${style}_${rec.Site}_RF18.png`) });
       let pass = 0, diff = 0;
       for (let i = 0; i < items.length; i++) {

@@ -185,6 +185,12 @@ test('features: style x record x bundle vs expected', async ({ page }) => {
     for (const style of styles) {
       await openTab(page, STYLE_TABS[style]);
       await page.locator(BUNDLE_EL).first().waitFor({ timeout: 30_000 });
+      // Icon sprites load lazily and a freshly created org is slow at it: a screenshot taken right after the DOM settles can show
+      // coloured circles with NO glyph (seen on the first SLDS1 run in a new org). DOM reads were unaffected, but a pixel baseline
+      // would enshrine the blank state. Wait ONCE per tab-open (Lightning never fully idles, so this usually spends the whole
+      // timeout: doing it per bundle cost ~2 extra minutes per record and blew the run's time budget).
+      await page.waitForLoadState('networkidle', { timeout: 8_000 }).catch(() => {});
+      await page.waitForTimeout(1_500);
       for (let bi = 0; bi < BUNDLE_ORDER.length; bi++) {
         const bundleName = BUNDLE_ORDER[bi];
         if (ONLY_BUNDLES.length && !ONLY_BUNDLES.includes(prefix(bundleName))) continue;

@@ -16,7 +16,7 @@
     </values>
     <values>
         <field>%%%NAMESPACE%%%Icon_Background__c</field>
-        <value xsi:type="xsd:string">#f4b6b3</value>
+        <value xsi:type="xsd:string">#757575</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Icon_Value__c</field>

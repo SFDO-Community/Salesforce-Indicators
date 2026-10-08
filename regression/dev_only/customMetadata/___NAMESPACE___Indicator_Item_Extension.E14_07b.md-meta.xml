@@ -7,6 +7,10 @@
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text_Color__c</field>
+        <value xsi:type="xsd:string">#ffffff</value>
+    </values>
+    <values>
         <field>%%%NAMESPACE%%%Badge_Pill_Text__c</field>
         <value xsi:type="xsd:string">Contains ot</value>
     </values>
@@ -20,7 +24,11 @@
     </values>
     <values>
         <field>%%%NAMESPACE%%%Icon_Background__c</field>
-        <value xsi:type="xsd:string">#dd7a01</value>
+        <value xsi:type="xsd:string">#a85700</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Icon_Foreground__c</field>
+        <value xsi:type="xsd:string">#ffffff</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Icon_Value__c</field>

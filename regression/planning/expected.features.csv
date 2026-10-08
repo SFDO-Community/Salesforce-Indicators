@@ -1,11 +1,11 @@
 ﻿shot_id,style,record_id,bundle,item_id,visible_count,labels,icons,bgs,text_colors,positions,popover,popover_bodies,button_labels,help_texts,confirm_required,action_urls,basis,notes,verifies
 avatar_FEAT-01_RF14_F14_01,avatar,FEAT-01,RF14_BadgePill_Acct,F14_01,1,,standard:number_input,#2e844a,,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-avatar_FEAT-01_RF14_F14_02,avatar,FEAT-01,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#cdefc4,,,no,,,,,,spec,,Badge text blank -> field display value
+avatar_FEAT-01_RF14_F14_02,avatar,FEAT-01,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#0b5cab,,,no,,,,,,spec,,Badge text blank -> field display value
 avatar_FEAT-01_RF14_F14_03,avatar,FEAT-01,RF14_BadgePill_Acct,F14_03,1,,standard:reward,#fff3cd,,,no,,,,,,spec,,Matched extension supplies its own text/color/position
-avatar_FEAT-01_RF14_F14_04,avatar,FEAT-01,RF14_BadgePill_Acct,F14_04,1,,standard:reward,#f4b6b3,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
+avatar_FEAT-01_RF14_F14_04,avatar,FEAT-01,RF14_BadgePill_Acct,F14_04,1,,standard:reward,#757575,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
 avatar_FEAT-01_RF14_F14_05,avatar,FEAT-01,RF14_BadgePill_Acct,F14_05,1,,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
 avatar_FEAT-01_RF14_F14_06,avatar,FEAT-01,RF14_BadgePill_Acct,F14_06,1,,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-avatar_FEAT-01_RF14_F14_07,avatar,FEAT-01,RF14_BadgePill_Acct,F14_07,2,|,standard:reward|standard:reward,#f4b6b3|#dd7a01,|,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
+avatar_FEAT-01_RF14_F14_07,avatar,FEAT-01,RF14_BadgePill_Acct,F14_07,2,|,standard:reward|standard:reward,#c23934|#a85700,|,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
 avatar_FEAT-01_RF14_F14_08,avatar,FEAT-01,RF14_BadgePill_Acct,F14_08,1,,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text
 avatar_FEAT-01_RF14_F14_09,avatar,FEAT-01,RF14_BadgePill_Acct,F14_09,1,,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end)
 avatar_FEAT-01_RF15_F15_01,avatar,FEAT-01,RF15_Popover_Acct,F15_01,1,,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
@@ -82,7 +82,7 @@ avatar_FEAT-02_RF18_F18_15,avatar,FEAT-02,RF18_Dates_Acct,F18_15,1,,standard:emp
 avatar_FEAT-02_RF17_F15_05,avatar,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
 avatar_FEAT-02_RF17_F15_06,avatar,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
 avatar_FEAT-03_RF14_F14_01,avatar,FEAT-03,RF14_BadgePill_Acct,F14_01,1,,standard:number_input,#2e844a,,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-avatar_FEAT-03_RF14_F14_02,avatar,FEAT-03,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#cdefc4,,,no,,,,,,spec,,Badge text blank -> field display value
+avatar_FEAT-03_RF14_F14_02,avatar,FEAT-03,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#0b5cab,,,no,,,,,,spec,,Badge text blank -> field display value
 avatar_FEAT-03_RF14_F14_03,avatar,FEAT-03,RF14_BadgePill_Acct,F14_03,1,,standard:reward,,,,no,,,,,,spec,,Matched extension supplies its own text/color/position
 avatar_FEAT-03_RF14_F14_04,avatar,FEAT-03,RF14_BadgePill_Acct,F14_04,1,,standard:reward,,,,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
 avatar_FEAT-03_RF14_F14_05,avatar,FEAT-03,RF14_BadgePill_Acct,F14_05,1,,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
@@ -123,12 +123,12 @@ avatar_FEAT-03_RF18_F18_15,avatar,FEAT-03,RF18_Dates_Acct,F18_15,1,,standard:emp
 avatar_FEAT-03_RF17_F15_05,avatar,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,,standard:number_input,,,,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover
 avatar_FEAT-03_RF17_F15_06,avatar,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,,standard:employee,,,,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
 badge_FEAT-01_RF14_F14_01,badge,FEAT-01,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,end,no,,,,,,spec,,"Item badge text/color/position, no extension"
-badge_FEAT-01_RF14_F14_02,badge,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#cdefc4,,start,no,,,,,,spec,,Badge text blank -> field display value
+badge_FEAT-01_RF14_F14_02,badge,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#0b5cab,#ffffff,start,no,,,,,,spec,,Badge text blank -> field display value
 badge_FEAT-01_RF14_F14_03,badge,FEAT-01,RF14_BadgePill_Acct,F14_03,1,Ext Text,standard:reward,#fff3cd,red,end,no,,,,,,spec,,Matched extension supplies its own text/color/position
-badge_FEAT-01_RF14_F14_04,badge,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#f4b6b3,,start,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
+badge_FEAT-01_RF14_F14_04,badge,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#757575,,start,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
 badge_FEAT-01_RF14_F14_05,badge,FEAT-01,RF14_BadgePill_Acct,F14_05,1,Hot,standard:reward,,,start,no,,,,,,spec,,Inverse badge text/color/position on blank record
 badge_FEAT-01_RF14_F14_06,badge,FEAT-01,RF14_BadgePill_Acct,F14_06,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-badge_FEAT-01_RF14_F14_07,badge,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#f4b6b3|#dd7a01,|,start|start,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
+badge_FEAT-01_RF14_F14_07,badge,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#c23934|#a85700,#ffffff|#ffffff,start|start,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
 badge_FEAT-01_RF14_F14_08,badge,FEAT-01,RF14_BadgePill_Acct,F14_08,1,Hot account,standard:account,,,start,no,,,,,,spec,,Merge token inside Badge/Pill Text
 badge_FEAT-01_RF14_F14_09,badge,FEAT-01,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,start,no,,,,,,spec,,Icon position start (F14_01 covers end)
 badge_FEAT-01_RF15_F15_01,badge,FEAT-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,start,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
@@ -205,7 +205,7 @@ badge_FEAT-02_RF18_F18_15,badge,FEAT-02,RF18_Dates_Acct,F18_15,1,No date,standar
 badge_FEAT-02_RF17_F15_05,badge,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
 badge_FEAT-02_RF17_F15_06,badge,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
 badge_FEAT-03_RF14_F14_01,badge,FEAT-03,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,end,no,,,,,,spec,,"Item badge text/color/position, no extension"
-badge_FEAT-03_RF14_F14_02,badge,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#cdefc4,,start,no,,,,,,spec,,Badge text blank -> field display value
+badge_FEAT-03_RF14_F14_02,badge,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#0b5cab,#ffffff,start,no,,,,,,spec,,Badge text blank -> field display value
 badge_FEAT-03_RF14_F14_03,badge,FEAT-03,RF14_BadgePill_Acct,F14_03,1,Item Text,standard:reward,,black,start,no,,,,,,spec,,Matched extension supplies its own text/color/position
 badge_FEAT-03_RF14_F14_04,badge,FEAT-03,RF14_BadgePill_Acct,F14_04,1,Item Text,standard:reward,,navy,end,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
 badge_FEAT-03_RF14_F14_05,badge,FEAT-03,RF14_BadgePill_Acct,F14_05,1,Cold,standard:reward,,,start,no,,,,,,spec,,Inverse badge text/color/position on blank record
@@ -246,12 +246,12 @@ badge_FEAT-03_RF18_F18_15,badge,FEAT-03,RF18_Dates_Acct,F18_15,1,No date,standar
 badge_FEAT-03_RF17_F15_05,badge,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,start,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover
 badge_FEAT-03_RF17_F15_06,badge,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,3,standard:employee,,,start,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
 pill_FEAT-01_RF14_F14_01,pill,FEAT-01,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-pill_FEAT-01_RF14_F14_02,pill,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#cdefc4,,,no,,,,,,spec,,Badge text blank -> field display value
+pill_FEAT-01_RF14_F14_02,pill,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#0b5cab,#ffffff,,no,,,,,,spec,,Badge text blank -> field display value
 pill_FEAT-01_RF14_F14_03,pill,FEAT-01,RF14_BadgePill_Acct,F14_03,1,Ext Text,standard:reward,#fff3cd,red,,no,,,,,,spec,,Matched extension supplies its own text/color/position
-pill_FEAT-01_RF14_F14_04,pill,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#f4b6b3,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
+pill_FEAT-01_RF14_F14_04,pill,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#757575,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
 pill_FEAT-01_RF14_F14_05,pill,FEAT-01,RF14_BadgePill_Acct,F14_05,1,Hot,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
 pill_FEAT-01_RF14_F14_06,pill,FEAT-01,RF14_BadgePill_Acct,F14_06,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-pill_FEAT-01_RF14_F14_07,pill,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#f4b6b3|#dd7a01,|,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
+pill_FEAT-01_RF14_F14_07,pill,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#c23934|#a85700,#ffffff|#ffffff,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
 pill_FEAT-01_RF14_F14_08,pill,FEAT-01,RF14_BadgePill_Acct,F14_08,1,Hot account,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text
 pill_FEAT-01_RF14_F14_09,pill,FEAT-01,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end)
 pill_FEAT-01_RF15_F15_01,pill,FEAT-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
@@ -328,7 +328,7 @@ pill_FEAT-02_RF18_F18_15,pill,FEAT-02,RF18_Dates_Acct,F18_15,1,No date,standard:
 pill_FEAT-02_RF17_F15_05,pill,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
 pill_FEAT-02_RF17_F15_06,pill,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
 pill_FEAT-03_RF14_F14_01,pill,FEAT-03,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-pill_FEAT-03_RF14_F14_02,pill,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#cdefc4,,,no,,,,,,spec,,Badge text blank -> field display value
+pill_FEAT-03_RF14_F14_02,pill,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#0b5cab,#ffffff,,no,,,,,,spec,,Badge text blank -> field display value
 pill_FEAT-03_RF14_F14_03,pill,FEAT-03,RF14_BadgePill_Acct,F14_03,1,Item Text,standard:reward,,black,,no,,,,,,spec,,Matched extension supplies its own text/color/position
 pill_FEAT-03_RF14_F14_04,pill,FEAT-03,RF14_BadgePill_Acct,F14_04,1,Item Text,standard:reward,,navy,,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
 pill_FEAT-03_RF14_F14_05,pill,FEAT-03,RF14_BadgePill_Acct,F14_05,1,Cold,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record

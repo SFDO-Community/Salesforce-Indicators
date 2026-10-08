@@ -1,6 +1,6 @@
 ﻿item_id,bundle,extra_bundles,sobject,field_api,icon,static_text,image,bg,fg,hover,badge_text,badge_color,badge_pos,show_missing,inv_icon,inv_static,inv_bg,inv_fg,inv_hover,inv_badge_text,inv_badge_color,inv_badge_pos,display_multiple,empty_static,zero_behavior,order,action_type,action_target,action_label,action_help,action_confirm,action_false,env,verifies
-F14_01,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,#2e844a,,,Has Number,#ffffff,end,,,,,,,,,,,Use Icon Only,,1,,,,,,,dev-only,"Item badge text/color/position, no extension"
-F14_02,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,#cdefc4,,,,,,,,,,,,,,,,Use Icon Only,,2,,,,,,,dev-only,Badge text blank -> field display value
+F14_01,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,#2e844a,#ffffff,,Has Number,#ffffff,end,,,,,,,,,,,Use Icon Only,,1,,,,,,,dev-only,"Item badge text/color/position, no extension"
+F14_02,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,#0b5cab,#ffffff,,,#ffffff,,,,,,,,,,,,Use Icon Only,,2,,,,,,,dev-only,Badge text blank -> field display value
 F14_03,RF14_BadgePill_Acct,,Account,Rating,standard:reward,,,,,,Item Text,black,start,,,,,,,,,,,Use Icon Only,,3,,,,,,,dev-only,Matched extension supplies its own text/color/position
 F14_04,RF14_BadgePill_Acct,,Account,Rating,standard:reward,,,,,,Item Text,navy,end,,,,,,,,,,,Use Icon Only,,4,,,,,,,dev-only,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
 F14_05,RF14_BadgePill_Acct,,Account,Rating,standard:reward,,,,,,,,,true,standard:empty,,,,,Enter a Rating,turquoise,start,,Use Icon Only,,5,,,,,,,dev-only,Inverse badge text/color/position on blank record
