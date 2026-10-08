@@ -50,7 +50,7 @@ sf cmdt generate records \
 
 ### The `prod_only` records
 
-A few configurations cannot be deployed to an org that has the newer validation rules introduced in v0.5+ (for example an image without a fallback icon, or a rule with both text and numeric criteria). They still matter for `regression_prod`, which runs the released package without those rules for v0.4. `scripts/build_cmdt_csvs.py` writes them to `regression/data/prod_only/` (14 records: 4 items, 4 bundle items, 6 extensions) instead of the base CSVs. Bundles are never split, so the record pages do not change.
+A few configurations cannot be deployed to an org that has the newer validation rules introduced in v0.5+ (for example an image without a fallback icon, or a rule with both text and numeric criteria). They still matter for `regression_prod`, which runs the released package without those rules for v0.4. `scripts/build_cmdt_csvs.py` writes them to `regression/data/prod_only/` (17 records: 4 items, 4 bundle items, 9 extensions; three extensions were added when the corrected Extension validation rules landed, see `findings/validation-type-rules-never-fire.md`) instead of the base CSVs. Bundles are never split, so the record pages do not change.
 
 Which records are `prod_only` comes from the `env` column of `planning/indicators.csv` and `planning/extensions.csv`. A bundle item follows its item.
 
@@ -257,3 +257,16 @@ At 1600px the style tabs sit under the **More Tabs** overflow menu; `openTab()` 
 
 ### Results so far (dev, SLDS2)
 Display and popover (first full run, before RF18): 173 PASS / 4 DIFF over 177 indicator rows. The four DIFFs are one product bug (a `{!Field}` token in item-level Badge/Pill Text is not resolved), written up with a proposed one-line fix in `findings/badge-pill-merge-token.md`. Actions: 11 of 11 PASS.
+
+### Validation-rule tests (check-only deploys, no browser)
+
+`planning/validation/cases.csv` lists one case per row: a record that **must be accepted** (`expect=pass`), **must be rejected** by a named rule (`fail`), or **should be rejected but currently is not** (`gap`, a documented hole). `scripts/run_validation_tests.py` turns the table into Metadata API packages and runs them with `sf project deploy start --dry-run` (validate, then roll back: **nothing is saved to the org**):
+
+```bash
+python regression/scripts/run_validation_tests.py --org <alias>     # rules currently in the org
+python regression/scripts/run_validation_tests.py --org <alias> --rules regression/findings/proposed-validation-rules   # try a rule change first
+```
+
+Results: `output/validation/<alias>[__candidate]/validation_report.csv` (`PASS`, `FAIL`, `WRONG_RULE`, `GAP_OPEN`, `GAP_CLOSED`). A shared set of valid parent bundles and items is added to every package so a child never fails because its parent did. `--rules` applies *candidate* rule files inside the same rolled-back deploy, so a fix can be proven before it is committed. The first run found that `Numeric_Missing_Minimum` and `String_Missing_Contains_Text` never fire (`findings/validation-type-rules-never-fire.md`).
+
+`scripts/scan_records_against_rules.py` answers the opposite question: *would a rule change reject any record this repo ships?* It packages the real record sets (`sample_*`, `training_Indicators`, the regression sets), strips the CumulusCI tokens, and compares check-only deploys with and without candidate rules (`NEW_FAIL` = the change would break that record). It found that `sample_Lead` and `training_Indicators` do not pass the branch's own rules today (`findings/shipped-config-fails-validation.md`).

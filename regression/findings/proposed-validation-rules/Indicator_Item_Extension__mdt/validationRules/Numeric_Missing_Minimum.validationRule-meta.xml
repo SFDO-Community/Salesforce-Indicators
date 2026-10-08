@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Numeric_Missing_Minimum</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK( Minimum__c )
+&amp;&amp; (
+    Indicator_Item__r.Field__r.DataType = &apos;integer&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;int&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;long&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;double&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;currency&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;percent&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Minimum__c</errorDisplayField>
+    <errorMessage>Indicator Item is a Numeric Type and requires a Minimum value.</errorMessage>
+</ValidationRule>

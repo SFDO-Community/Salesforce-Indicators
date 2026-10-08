@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>String_Missing_Contains_Text</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK( Contains_Text__c )
+&amp;&amp; (
+    Indicator_Item__r.Field__r.DataType = &apos;string&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;textarea&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;picklist&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;multipicklist&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;combobox&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;phone&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;email&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;url&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Contains_Text__c</errorDisplayField>
+    <errorMessage>Indicator Item is a String/Picklist Type and requires a Contains Text value</errorMessage>
+</ValidationRule>

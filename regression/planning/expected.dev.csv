@@ -945,9 +945,9 @@ RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-05,10,present,none,none,,spec,no 
 RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-06,15,present,none,none,,spec,no rule match and no Default configured
 RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-07,20,present,none,none,,spec,no rule match and no Default configured
 RB13a_Known_TextOnNum_Acct,K_txtrule_num,1,ACC-08,25,present,none,none,,spec,no rule match and no Default configured
-RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-01,true,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-01,true,present,none,none,,spec,no rule match and no Default configured
 RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
-RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-03,true,present,error,COMPONENT ERROR (o.toLowerCase is not a function),,known-issue,text rule on a non-text field throws; whole bundle fails
+RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-03,true,present,none,none,,spec,no rule match and no Default configured
 RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
 RB13b_Known_TextOnChk_Cont,K_txtrule_chk,1,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
 RB13c_Known_Other_Acct,K_zero_static,1,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
