@@ -57,13 +57,24 @@ export function recordIds(): Record<string, { id: string; sobject: string }> {
   return out;
 }
 
-/** Feature-test Accounts (dev-only dataset datasets/features): planning record_id (FEAT-01...) -> org Id, via Name. */
-export function featureRecordIds(): Record<string, { id: string; sobject: string }> {
+/**
+ * Feature-test records from the dev-only dataset (datasets/features): planning record_id -> org Id, matched on Name.
+ * Default 'Account' (FEAT-01..03) so the specs that only know Accounts are unaffected; 'Contact' returns FCON-01..04.
+ */
+export function featureRecordIds(sobject: 'Account' | 'Contact' = 'Account'): Record<string, { id: string; sobject: string }> {
   const out: Record<string, { id: string; sobject: string }> = {};
-  const acc = sf(`data query -q "SELECT Id, Name FROM Account WHERE Name LIKE 'Feature %'"`).records;
-  for (const r of readCsv(path.join(REG, 'planning', 'features', 'records_account.csv'))) {
-    const hit = acc.find((a: any) => a.Name === r.Name);
-    if (hit) out[r.record_id] = { id: hit.Id, sobject: 'Account' };
+  if (sobject === 'Account') {
+    const acc = sf(`data query -q "SELECT Id, Name FROM Account WHERE Name LIKE 'Feature %'"`).records;
+    for (const r of readCsv(path.join(REG, 'planning', 'features', 'records_account.csv'))) {
+      const hit = acc.find((a: any) => a.Name === r.Name);
+      if (hit) out[r.record_id] = { id: hit.Id, sobject: 'Account' };
+    }
+  } else {
+    const con = sf(`data query -q "SELECT Id, LastName FROM Contact WHERE LastName LIKE 'Feature Contact %'"`).records;
+    for (const r of readCsv(path.join(REG, 'planning', 'features', 'records_contact.csv'))) {
+      const hit = con.find((c: any) => c.LastName === r.LastName);
+      if (hit) out[r.record_id] = { id: hit.Id, sobject: 'Contact' };
+    }
   }
   return out;
 }

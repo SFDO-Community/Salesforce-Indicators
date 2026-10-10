@@ -1,40 +1,43 @@
-﻿item_id,bundle,extra_bundles,sobject,field_api,icon,static_text,image,bg,fg,hover,badge_text,badge_color,badge_pos,show_missing,inv_icon,inv_static,inv_bg,inv_fg,inv_hover,inv_badge_text,inv_badge_color,inv_badge_pos,display_multiple,empty_static,zero_behavior,order,action_type,action_target,action_label,action_help,action_confirm,action_false,env,verifies
-F14_01,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,#2e844a,#ffffff,,Has Number,#ffffff,end,,,,,,,,,,,Use Icon Only,,1,,,,,,,dev-only,"Item badge text/color/position, no extension"
-F14_02,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,#0b5cab,#ffffff,,,#ffffff,,,,,,,,,,,,Use Icon Only,,2,,,,,,,dev-only,Badge text blank -> field display value
-F14_03,RF14_BadgePill_Acct,,Account,Rating,standard:reward,,,,,,Item Text,black,start,,,,,,,,,,,Use Icon Only,,3,,,,,,,dev-only,Matched extension supplies its own text/color/position
-F14_04,RF14_BadgePill_Acct,,Account,Rating,standard:reward,,,,,,Item Text,navy,end,,,,,,,,,,,Use Icon Only,,4,,,,,,,dev-only,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-F14_05,RF14_BadgePill_Acct,,Account,Rating,standard:reward,,,,,,,,,true,standard:empty,,,,,Enter a Rating,turquoise,start,,Use Icon Only,,5,,,,,,,dev-only,Inverse badge text/color/position on blank record
-F14_06,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,,,,,,,true,standard:empty,,,,,,,,,Use Icon Only,,6,,,,,,,dev-only,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-F14_07,RF14_BadgePill_Acct,,Account,Rating,standard:reward,,,,,,,,,,,,,,,,,,true,Use Icon Only,,7,,,,,,,dev-only,Display Multiple: two matching extensions -> two badges
-F14_08,RF14_BadgePill_Acct,,Account,TickerSymbol,standard:account,,,,,,{!Rating} account,,,,,,,,,,,,,Use Icon Only,,8,,,,,,,dev-only,Merge token inside Badge/Pill Text
-F14_09,RF14_BadgePill_Acct,,Account,AccountNumber,standard:number_input,,,,,,Start Pos,,start,,,,,,,,,,,Use Icon Only,,9,,,,,,,dev-only,Icon position start (F14_01 covers end)
-F15_01,RF15_Popover_Acct,,Account,AccountNumber,standard:number_input,,,,,Plain hover text,,,,,,,,,,,,,,Use Icon Only,,1,,,,,,,dev-only,Plain hover text in popover body
-F15_02,RF15_Popover_Acct,,Account,TickerSymbol,standard:account,,,,,Ticker Symbol is {!TickerSymbol},,,,,,,,,,,,,,Use Icon Only,,2,,,,,,,dev-only,Merge token resolved in hover text
-F15_03,RF15_Popover_Acct,,Account,AccountNumber,standard:number_input,,,,,,,,,true,standard:empty,,,,Number is [{!AccountNumber}],,,,,Use Icon Only,,3,,,,,,,dev-only,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-F15_04,RF15_Popover_Acct,,Account,Rating,standard:reward,,,,,Item hover,,,,,,,,,,,,,,Use Icon Only,,4,,,,,,,dev-only,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-F15_05,RF15_Popover_Acct,RF17_PopoverFallback_Acct,Account,AccountNumber,standard:number_input,,,,,,,,,,,,,,,,,,,Use Icon Only,,5,,,,,,,dev-only,No hover text and no action: no popover
-F15_06,RF15_Popover_Acct,RF17_PopoverFallback_Acct,Account,NumberOfEmployees,standard:employee,,,,,,,,,,,,,,,,,,,Use Icon Only,,6,,,,,,,dev-only,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-F15_07,RF15_Popover_Acct,,Account,Rating,standard:reward,,,,,,,,,true,standard:empty,,,,There is no Rating,,,,,Use Icon Only,,7,,,,,,,dev-only,Inverse hover text on blank record
-F16_01,RF16_Actions_Acct,,Account,TickerSymbol,standard:account,,,,,Open the quote,,,,,,,,,,,,,,Use Icon Only,,1,URL,https://finance.yahoo.com/quote/{!TickerSymbol},,,,,dev-only,URL action with merge token: resolved target
-F16_02,RF16_Actions_Acct,,Account,AccountNumber,standard:number_input,,,,,Default label,,,,,,,,,,,,,,Use Icon Only,,2,URL,https://www.yahoo.com,,,,,dev-only,"No Action Button Label: default ""Open"""
-F16_03,RF16_Actions_Acct,,Account,AccountNumber,standard:number_input,,,,,Custom label,,,,,,,,,,,,,,Use Icon Only,,3,URL,https://www.yahoo.com,Check Quote,Opens Yahoo in a new tab,,,dev-only,Custom button label and help text
-F16_04,RF16_Actions_Acct,,Account,AccountNumber,standard:number_input,,,,,Confirm required,,,,,,,,,,,,,,Use Icon Only,,4,URL,https://www.yahoo.com,,,true,,dev-only,Confirm Required: clicking the indicator does nothing; popover button works
-F16_05,RF16_Actions_Acct,,Account,Rating,standard:reward,,,,,,,,,true,standard:empty,,,,No rating yet,,,,,Use Icon Only,,5,URL,https://www.yahoo.com,,,,true,dev-only,Show False/Blank Action on: button present on blank record
-F16_06,RF16_Actions_Acct,,Account,Rating,standard:reward,,,,,,,,,true,standard:empty,,,,No rating yet,,,,,Use Icon Only,,6,URL,https://www.yahoo.com,,,,false,dev-only,Show False/Blank Action off: no button on blank record
-F16_07,RF16_Actions_Acct,,Account,AccountNumber,standard:number_input,,,,,Flow modal,,,,,,,,,,,,,,Use Icon Only,,7,Flow Modal,Regression_Feature_Display,,,,,dev-only,"Flow Modal action: default label ""Launch""; modal opens"
-F16_08,RF16_Actions_Acct,,Account,TickerSymbol,standard:account,,,,,,,,,,,,,,,,,,,Use Icon Only,,8,URL,https://finance.yahoo.com/quote/{!TickerSymbol},,,,,dev-only,"Action with no hover text: popover has footer only, no body"
-F18_01,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,1,,,,,,,dev-only,Date: Equals TODAY
-F18_02,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,2,,,,,,,dev-only,Date: Does Not Equal TODAY
-F18_03,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,3,,,,,,,dev-only,Date: Before Start TODAY
-F18_04,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,4,,,,,,,dev-only,Date: After End TODAY
-F18_05,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,5,,,,,,,dev-only,Date: Before End TODAY
-F18_06,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,6,,,,,,,dev-only,Date: After Start TODAY
-F18_07,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,7,,,,,,,dev-only,Date: Equals LAST MONTH
-F18_08,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,8,,,,,,,dev-only,Date: Does Not Equal LAST MONTH
-F18_09,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,9,,,,,,,dev-only,Date: Before Start LAST MONTH
-F18_10,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,10,,,,,,,dev-only,Date: After End LAST MONTH
-F18_11,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,11,,,,,,,dev-only,Date: Before End LAST MONTH
-F18_12,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,12,,,,,,,dev-only,Date: After Start LAST MONTH
-F18_13,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,13,,,,,,,dev-only,Date: Equals THIS MONTH
-F18_14,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,14,,,,,,,dev-only,Date: Equals NEXT 30 DAYS
-F18_15,RF18_Dates_Acct,,Account,Test_Date__c,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,15,,,,,,,dev-only,Date: Equals THIS YEAR
+﻿item_id,bundle,extra_bundles,sobject,field_api,advanced_field,icon,static_text,image,bg,fg,hover,badge_text,badge_color,badge_pos,show_missing,inv_icon,inv_static,inv_bg,inv_fg,inv_hover,inv_badge_text,inv_badge_color,inv_badge_pos,display_multiple,empty_static,zero_behavior,order,action_type,action_target,action_label,action_help,action_confirm,action_false,env,verifies
+F14_01,RF14_BadgePill_Acct,,Account,AccountNumber,,standard:number_input,,,#2e844a,#ffffff,,Has Number,#ffffff,end,,,,,,,,,,,Use Icon Only,,1,,,,,,,dev-only,"Item badge text/color/position, no extension"
+F14_02,RF14_BadgePill_Acct,,Account,AccountNumber,,standard:number_input,,,#0b5cab,#ffffff,,,#ffffff,,,,,,,,,,,,Use Icon Only,,2,,,,,,,dev-only,Badge text blank -> field display value
+F14_03,RF14_BadgePill_Acct,,Account,Rating,,standard:reward,,,,,,Item Text,black,start,,,,,,,,,,,Use Icon Only,,3,,,,,,,dev-only,Matched extension supplies its own text/color/position
+F14_04,RF14_BadgePill_Acct,,Account,Rating,,standard:reward,,,,,,Item Text,navy,end,,,,,,,,,,,Use Icon Only,,4,,,,,,,dev-only,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
+F14_05,RF14_BadgePill_Acct,,Account,Rating,,standard:reward,,,,,,,,,true,standard:empty,,,,,Enter a Rating,turquoise,start,,Use Icon Only,,5,,,,,,,dev-only,Inverse badge text/color/position on blank record
+F14_06,RF14_BadgePill_Acct,,Account,AccountNumber,,standard:number_input,,,,,,,,,true,standard:empty,,,,,,,,,Use Icon Only,,6,,,,,,,dev-only,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
+F14_07,RF14_BadgePill_Acct,,Account,Rating,,standard:reward,,,,,,,,,,,,,,,,,,true,Use Icon Only,,7,,,,,,,dev-only,Display Multiple: two matching extensions -> two badges
+F14_08,RF14_BadgePill_Acct,,Account,TickerSymbol,,standard:account,,,,,,{!Rating} account,,,,,,,,,,,,,Use Icon Only,,8,,,,,,,dev-only,Merge token inside Badge/Pill Text
+F14_09,RF14_BadgePill_Acct,,Account,AccountNumber,,standard:number_input,,,,,,Start Pos,,start,,,,,,,,,,,Use Icon Only,,9,,,,,,,dev-only,Icon position start (F14_01 covers end)
+F15_01,RF15_Popover_Acct,RF19a_CardBoth_Acct;RF19b_CardBgOnly_Acct;RF19c_CardFgOnly_Acct;RF19d_CardNone_Acct,Account,AccountNumber,,standard:number_input,,,,,Plain hover text,,,,,,,,,,,,,,Use Icon Only,,1,,,,,,,dev-only,Plain hover text in popover body
+F15_02,RF15_Popover_Acct,,Account,TickerSymbol,,standard:account,,,,,Ticker Symbol is {!TickerSymbol},,,,,,,,,,,,,,Use Icon Only,,2,,,,,,,dev-only,Merge token resolved in hover text
+F15_03,RF15_Popover_Acct,,Account,AccountNumber,,standard:number_input,,,,,,,,,true,standard:empty,,,,Number is [{!AccountNumber}],,,,,Use Icon Only,,3,,,,,,,dev-only,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
+F15_04,RF15_Popover_Acct,,Account,Rating,,standard:reward,,,,,Item hover,,,,,,,,,,,,,,Use Icon Only,,4,,,,,,,dev-only,Extension hover with {!Name} and {!Rating} tokens overrides item hover
+F15_05,RF15_Popover_Acct,RF17_PopoverFallback_Acct,Account,AccountNumber,,standard:number_input,,,,,,,,,,,,,,,,,,,Use Icon Only,,5,,,,,,,dev-only,No hover text and no action: no popover
+F15_06,RF15_Popover_Acct,RF17_PopoverFallback_Acct,Account,NumberOfEmployees,,standard:employee,,,,,,,,,,,,,,,,,,,Use Icon Only,,6,,,,,,,dev-only,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
+F15_07,RF15_Popover_Acct,,Account,Rating,,standard:reward,,,,,,,,,true,standard:empty,,,,There is no Rating,,,,,Use Icon Only,,7,,,,,,,dev-only,Inverse hover text on blank record
+F16_01,RF16_Actions_Acct,,Account,TickerSymbol,,standard:account,,,,,Open the quote,,,,,,,,,,,,,,Use Icon Only,,1,URL,https://finance.yahoo.com/quote/{!TickerSymbol},,,,,dev-only,URL action with merge token: resolved target
+F16_02,RF16_Actions_Acct,,Account,AccountNumber,,standard:number_input,,,,,Default label,,,,,,,,,,,,,,Use Icon Only,,2,URL,https://www.yahoo.com,,,,,dev-only,"No Action Button Label: default ""Open"""
+F16_03,RF16_Actions_Acct,,Account,AccountNumber,,standard:number_input,,,,,Custom label,,,,,,,,,,,,,,Use Icon Only,,3,URL,https://www.yahoo.com,Check Quote,Opens Yahoo in a new tab,,,dev-only,Custom button label and help text
+F16_04,RF16_Actions_Acct,,Account,AccountNumber,,standard:number_input,,,,,Confirm required,,,,,,,,,,,,,,Use Icon Only,,4,URL,https://www.yahoo.com,,,true,,dev-only,Confirm Required: clicking the indicator does nothing; popover button works
+F16_05,RF16_Actions_Acct,,Account,Rating,,standard:reward,,,,,,,,,true,standard:empty,,,,No rating yet,,,,,Use Icon Only,,5,URL,https://www.yahoo.com,,,,true,dev-only,Show False/Blank Action on: button present on blank record
+F16_06,RF16_Actions_Acct,,Account,Rating,,standard:reward,,,,,,,,,true,standard:empty,,,,No rating yet,,,,,Use Icon Only,,6,URL,https://www.yahoo.com,,,,false,dev-only,Show False/Blank Action off: no button on blank record
+F16_07,RF16_Actions_Acct,,Account,AccountNumber,,standard:number_input,,,,,Flow modal,,,,,,,,,,,,,,Use Icon Only,,7,Flow Modal,Regression_Feature_Display,,,,,dev-only,"Flow Modal action: default label ""Launch""; modal opens"
+F16_08,RF16_Actions_Acct,,Account,TickerSymbol,,standard:account,,,,,,,,,,,,,,,,,,,Use Icon Only,,8,URL,https://finance.yahoo.com/quote/{!TickerSymbol},,,,,dev-only,"Action with no hover text: popover has footer only, no body"
+F18_01,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,1,,,,,,,dev-only,Date: Equals TODAY
+F18_02,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,2,,,,,,,dev-only,Date: Does Not Equal TODAY
+F18_03,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,3,,,,,,,dev-only,Date: Before Start TODAY
+F18_04,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,4,,,,,,,dev-only,Date: After End TODAY
+F18_05,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,5,,,,,,,dev-only,Date: Before End TODAY
+F18_06,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,6,,,,,,,dev-only,Date: After Start TODAY
+F18_07,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,7,,,,,,,dev-only,Date: Equals LAST MONTH
+F18_08,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,8,,,,,,,dev-only,Date: Does Not Equal LAST MONTH
+F18_09,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,9,,,,,,,dev-only,Date: Before Start LAST MONTH
+F18_10,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,10,,,,,,,dev-only,Date: After End LAST MONTH
+F18_11,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,11,,,,,,,dev-only,Date: Before End LAST MONTH
+F18_12,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,12,,,,,,,dev-only,Date: After Start LAST MONTH
+F18_13,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,13,,,,,,,dev-only,Date: Equals THIS MONTH
+F18_14,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,14,,,,,,,dev-only,Date: Equals NEXT 30 DAYS
+F18_15,RF18_Dates_Acct,,Account,Test_Date__c,,standard:today,,,#e5e5e5,,,Other,,,true,standard:empty,,,,,No date,,,,Use Icon Only,,15,,,,,,,dev-only,Date: Equals THIS YEAR
+F20_01,RF20_Contact_Con,,Contact,DoNotCall,,standard:call,,,,,On the do-not-call list,Do not call,,,true,standard:empty,,,,OK to call,Callable,,,,Use Icon Only,,1,,,,,,,dev-only,Checkbox on Contact: true state and the false/blank inverse state
+F20_02,RF20_Contact_Con,,Contact,LastName,,standard:contact,,,,,Last name is {!LastName},,,,,,,,,,,,,,Use Icon Only,,2,,,,,,,dev-only,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold
+F20_03,RF20_Contact_Con,,Contact,,Account.Name,standard:account,,,,,Parent account name,,,,,,,,,,,,,,Use Icon Only,,3,,,,,,,dev-only,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account)

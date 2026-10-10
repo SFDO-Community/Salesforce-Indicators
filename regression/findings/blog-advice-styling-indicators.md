@@ -19,6 +19,10 @@ If you override only one color, the others come from the theme, and the theme's 
 | Avatar icon with a custom background but no **Icon Foreground** | glyph is **black** | n/a (background ignored) | n/a |
 | Badge/Pill with a light background and no **Badge/Pill Text Color** | dark text, readable | dark text, readable | **light text on a light background: hard to read** |
 
+The **card's header icon** (the small icon beside the card title, set with *Card Icon Background / Foreground* on the Bundle) behaves differently from an indicator's avatar:
+it **does** show your background and foreground colours on **all three themes**, including SLDS2 and dark mode. (With the **Dynamic Forms** title style the card uses a plain
+utility icon and ignores those colours by design; the **Key** always shows them.) As with indicators, set the background and foreground together.
+
 **Advice:** when you choose a background, always choose the foreground and the text color with it. Use dark text on light
 backgrounds and white text on dark backgrounds, and check the result in dark mode before you ship. Don't count on an
 avatar's custom background showing up on SLDS2: treat it as a bonus on SLDS1 only, and make sure the icon itself carries
@@ -90,6 +94,7 @@ field this way (a validation rule rejected it); the **Advanced Field** box was t
 | Claim | Evidence |
 |---|---|
 | Colors by theme (section 1, 2) | Same configuration captured on three theme orgs; avatar/badge shots under `output/dev-*/features/shots/` |
+| Card icon colours on every theme, Dynamic Forms ignores them, Key shows them (section 1) | `features.cards.spec.ts`: 18 checks x 3 themes; card and Key screenshots in `shots/cards/` |
 | Extension owns its look (3) | Oracle rows `F14_03`, `F14_04`; all PASS on 3 themes |
 | Empty chip when no inverse text (4) | `F14_06` on the blank record |
 | Blank token -> empty string (5) | `F15_03`: popover text `Number is []` |

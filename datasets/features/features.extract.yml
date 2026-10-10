@@ -8,3 +8,10 @@ extract:
             - NumberOfEmployees
             - Description
             - Site
+    Contact:
+        fields:
+            - FirstName
+            - LastName
+            - DoNotCall
+            - Title
+            - AccountId

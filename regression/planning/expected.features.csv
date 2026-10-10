@@ -1,370 +1,490 @@
-﻿shot_id,style,record_id,bundle,item_id,visible_count,labels,icons,bgs,text_colors,positions,popover,popover_bodies,button_labels,help_texts,confirm_required,action_urls,basis,notes,verifies
-avatar_FEAT-01_RF14_F14_01,avatar,FEAT-01,RF14_BadgePill_Acct,F14_01,1,,standard:number_input,#2e844a,,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-avatar_FEAT-01_RF14_F14_02,avatar,FEAT-01,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#0b5cab,,,no,,,,,,spec,,Badge text blank -> field display value
-avatar_FEAT-01_RF14_F14_03,avatar,FEAT-01,RF14_BadgePill_Acct,F14_03,1,,standard:reward,#fff3cd,,,no,,,,,,spec,,Matched extension supplies its own text/color/position
-avatar_FEAT-01_RF14_F14_04,avatar,FEAT-01,RF14_BadgePill_Acct,F14_04,1,,standard:reward,#757575,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-avatar_FEAT-01_RF14_F14_05,avatar,FEAT-01,RF14_BadgePill_Acct,F14_05,1,,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
-avatar_FEAT-01_RF14_F14_06,avatar,FEAT-01,RF14_BadgePill_Acct,F14_06,1,,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-avatar_FEAT-01_RF14_F14_07,avatar,FEAT-01,RF14_BadgePill_Acct,F14_07,2,|,standard:reward|standard:reward,#c23934|#a85700,|,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
-avatar_FEAT-01_RF14_F14_08,avatar,FEAT-01,RF14_BadgePill_Acct,F14_08,1,,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text
-avatar_FEAT-01_RF14_F14_09,avatar,FEAT-01,RF14_BadgePill_Acct,F14_09,1,,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end)
-avatar_FEAT-01_RF15_F15_01,avatar,FEAT-01,RF15_Popover_Acct,F15_01,1,,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
-avatar_FEAT-01_RF15_F15_02,avatar,FEAT-01,RF15_Popover_Acct,F15_02,1,,standard:account,,,,yes,Ticker Symbol is CRM,,,,,spec,,Merge token resolved in hover text
-avatar_FEAT-01_RF15_F15_03,avatar,FEAT-01,RF15_Popover_Acct,F15_03,1,,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-avatar_FEAT-01_RF15_F15_04,avatar,FEAT-01,RF15_Popover_Acct,F15_04,1,,standard:reward,,,,yes,Feature Full is a Hot Rating,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-avatar_FEAT-01_RF15_F15_05,avatar,FEAT-01,RF15_Popover_Acct,F15_05,1,,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover
-avatar_FEAT-01_RF15_F15_06,avatar,FEAT-01,RF15_Popover_Acct,F15_06,1,,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-avatar_FEAT-01_RF15_F15_07,avatar,FEAT-01,RF15_Popover_Acct,F15_07,1,,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record
-avatar_FEAT-01_RF16_F16_01,avatar,FEAT-01,RF16_Actions_Acct,F16_01,1,,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,URL action with merge token: resolved target
-avatar_FEAT-01_RF16_F16_02,avatar,FEAT-01,RF16_Actions_Acct,F16_02,1,,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open"""
-avatar_FEAT-01_RF16_F16_03,avatar,FEAT-01,RF16_Actions_Acct,F16_03,1,,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text
-avatar_FEAT-01_RF16_F16_04,avatar,FEAT-01,RF16_Actions_Acct,F16_04,1,,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-avatar_FEAT-01_RF16_F16_05,avatar,FEAT-01,RF16_Actions_Acct,F16_05,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record
-avatar_FEAT-01_RF16_F16_06,avatar,FEAT-01,RF16_Actions_Acct,F16_06,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record
-avatar_FEAT-01_RF16_F16_07,avatar,FEAT-01,RF16_Actions_Acct,F16_07,1,,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-avatar_FEAT-01_RF16_F16_08,avatar,FEAT-01,RF16_Actions_Acct,F16_08,1,,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,"Action with no hover text: popover has footer only, no body"
-avatar_FEAT-01_RF18_F18_01,avatar,FEAT-01,RF18_Dates_Acct,F18_01,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY
-avatar_FEAT-01_RF18_F18_02,avatar,FEAT-01,RF18_Dates_Acct,F18_02,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY
-avatar_FEAT-01_RF18_F18_03,avatar,FEAT-01,RF18_Dates_Acct,F18_03,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY
-avatar_FEAT-01_RF18_F18_04,avatar,FEAT-01,RF18_Dates_Acct,F18_04,1,,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY
-avatar_FEAT-01_RF18_F18_05,avatar,FEAT-01,RF18_Dates_Acct,F18_05,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY
-avatar_FEAT-01_RF18_F18_06,avatar,FEAT-01,RF18_Dates_Acct,F18_06,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY
-avatar_FEAT-01_RF18_F18_07,avatar,FEAT-01,RF18_Dates_Acct,F18_07,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH
-avatar_FEAT-01_RF18_F18_08,avatar,FEAT-01,RF18_Dates_Acct,F18_08,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-avatar_FEAT-01_RF18_F18_09,avatar,FEAT-01,RF18_Dates_Acct,F18_09,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH
-avatar_FEAT-01_RF18_F18_10,avatar,FEAT-01,RF18_Dates_Acct,F18_10,1,,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH
-avatar_FEAT-01_RF18_F18_11,avatar,FEAT-01,RF18_Dates_Acct,F18_11,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH
-avatar_FEAT-01_RF18_F18_12,avatar,FEAT-01,RF18_Dates_Acct,F18_12,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH
-avatar_FEAT-01_RF18_F18_13,avatar,FEAT-01,RF18_Dates_Acct,F18_13,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH
-avatar_FEAT-01_RF18_F18_14,avatar,FEAT-01,RF18_Dates_Acct,F18_14,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-avatar_FEAT-01_RF18_F18_15,avatar,FEAT-01,RF18_Dates_Acct,F18_15,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR
-avatar_FEAT-01_RF17_F15_05,avatar,FEAT-01,RF17_PopoverFallback_Acct,F15_05,1,,standard:number_input,,,,yes,FEAT-FULL-001,,,,,spec,,No hover text and no action: no popover
-avatar_FEAT-01_RF17_F15_06,avatar,FEAT-01,RF17_PopoverFallback_Acct,F15_06,1,,standard:employee,,,,yes,25,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-avatar_FEAT-02_RF14_F14_01,avatar,FEAT-02,RF14_BadgePill_Acct,F14_01,0,,,,,,,,,,,,spec,,"Item badge text/color/position, no extension"
-avatar_FEAT-02_RF14_F14_02,avatar,FEAT-02,RF14_BadgePill_Acct,F14_02,0,,,,,,,,,,,,spec,,Badge text blank -> field display value
-avatar_FEAT-02_RF14_F14_03,avatar,FEAT-02,RF14_BadgePill_Acct,F14_03,0,,,,,,,,,,,,spec,,Matched extension supplies its own text/color/position
-avatar_FEAT-02_RF14_F14_04,avatar,FEAT-02,RF14_BadgePill_Acct,F14_04,0,,,,,,,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-avatar_FEAT-02_RF14_F14_05,avatar,FEAT-02,RF14_BadgePill_Acct,F14_05,1,,standard:empty,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
-avatar_FEAT-02_RF14_F14_06,avatar,FEAT-02,RF14_BadgePill_Acct,F14_06,1,,standard:empty,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-avatar_FEAT-02_RF14_F14_07,avatar,FEAT-02,RF14_BadgePill_Acct,F14_07,0,,,,,,,,,,,,spec,,Display Multiple: two matching extensions -> two badges
-avatar_FEAT-02_RF14_F14_08,avatar,FEAT-02,RF14_BadgePill_Acct,F14_08,0,,,,,,,,,,,,spec,,Merge token inside Badge/Pill Text
-avatar_FEAT-02_RF14_F14_09,avatar,FEAT-02,RF14_BadgePill_Acct,F14_09,0,,,,,,,,,,,,spec,,Icon position start (F14_01 covers end)
-avatar_FEAT-02_RF15_F15_01,avatar,FEAT-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body
-avatar_FEAT-02_RF15_F15_02,avatar,FEAT-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,spec,,Merge token resolved in hover text
-avatar_FEAT-02_RF15_F15_03,avatar,FEAT-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,,yes,Number is [],,,,,unconfirmed,merge token on blank field: blank-vs-raw-token resolution unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-avatar_FEAT-02_RF15_F15_04,avatar,FEAT-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-avatar_FEAT-02_RF15_F15_05,avatar,FEAT-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
-avatar_FEAT-02_RF15_F15_06,avatar,FEAT-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-avatar_FEAT-02_RF15_F15_07,avatar,FEAT-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,,yes,There is no Rating,,,,,spec,,Inverse hover text on blank record
-avatar_FEAT-02_RF16_F16_01,avatar,FEAT-02,RF16_Actions_Acct,F16_01,0,,,,,,,,,,,,spec,,URL action with merge token: resolved target
-avatar_FEAT-02_RF16_F16_02,avatar,FEAT-02,RF16_Actions_Acct,F16_02,0,,,,,,,,,,,,spec,,"No Action Button Label: default ""Open"""
-avatar_FEAT-02_RF16_F16_03,avatar,FEAT-02,RF16_Actions_Acct,F16_03,0,,,,,,,,,,,,spec,,Custom button label and help text
-avatar_FEAT-02_RF16_F16_04,avatar,FEAT-02,RF16_Actions_Acct,F16_04,0,,,,,,,,,,,,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-avatar_FEAT-02_RF16_F16_05,avatar,FEAT-02,RF16_Actions_Acct,F16_05,1,,standard:empty,,,,yes,No rating yet,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record
-avatar_FEAT-02_RF16_F16_06,avatar,FEAT-02,RF16_Actions_Acct,F16_06,1,,standard:empty,,,,yes,No rating yet,,,,,spec,,Show False/Blank Action off: no button on blank record
-avatar_FEAT-02_RF16_F16_07,avatar,FEAT-02,RF16_Actions_Acct,F16_07,0,,,,,,,,,,,,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-avatar_FEAT-02_RF16_F16_08,avatar,FEAT-02,RF16_Actions_Acct,F16_08,0,,,,,,,,,,,,spec,,"Action with no hover text: popover has footer only, no body"
-avatar_FEAT-02_RF18_F18_01,avatar,FEAT-02,RF18_Dates_Acct,F18_01,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY
-avatar_FEAT-02_RF18_F18_02,avatar,FEAT-02,RF18_Dates_Acct,F18_02,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY
-avatar_FEAT-02_RF18_F18_03,avatar,FEAT-02,RF18_Dates_Acct,F18_03,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY
-avatar_FEAT-02_RF18_F18_04,avatar,FEAT-02,RF18_Dates_Acct,F18_04,1,,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY
-avatar_FEAT-02_RF18_F18_05,avatar,FEAT-02,RF18_Dates_Acct,F18_05,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY
-avatar_FEAT-02_RF18_F18_06,avatar,FEAT-02,RF18_Dates_Acct,F18_06,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY
-avatar_FEAT-02_RF18_F18_07,avatar,FEAT-02,RF18_Dates_Acct,F18_07,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH
-avatar_FEAT-02_RF18_F18_08,avatar,FEAT-02,RF18_Dates_Acct,F18_08,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-avatar_FEAT-02_RF18_F18_09,avatar,FEAT-02,RF18_Dates_Acct,F18_09,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH
-avatar_FEAT-02_RF18_F18_10,avatar,FEAT-02,RF18_Dates_Acct,F18_10,1,,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH
-avatar_FEAT-02_RF18_F18_11,avatar,FEAT-02,RF18_Dates_Acct,F18_11,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH
-avatar_FEAT-02_RF18_F18_12,avatar,FEAT-02,RF18_Dates_Acct,F18_12,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH
-avatar_FEAT-02_RF18_F18_13,avatar,FEAT-02,RF18_Dates_Acct,F18_13,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH
-avatar_FEAT-02_RF18_F18_14,avatar,FEAT-02,RF18_Dates_Acct,F18_14,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-avatar_FEAT-02_RF18_F18_15,avatar,FEAT-02,RF18_Dates_Acct,F18_15,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR
-avatar_FEAT-02_RF17_F15_05,avatar,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
-avatar_FEAT-02_RF17_F15_06,avatar,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-avatar_FEAT-03_RF14_F14_01,avatar,FEAT-03,RF14_BadgePill_Acct,F14_01,1,,standard:number_input,#2e844a,,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-avatar_FEAT-03_RF14_F14_02,avatar,FEAT-03,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#0b5cab,,,no,,,,,,spec,,Badge text blank -> field display value
-avatar_FEAT-03_RF14_F14_03,avatar,FEAT-03,RF14_BadgePill_Acct,F14_03,1,,standard:reward,,,,no,,,,,,spec,,Matched extension supplies its own text/color/position
-avatar_FEAT-03_RF14_F14_04,avatar,FEAT-03,RF14_BadgePill_Acct,F14_04,1,,standard:reward,,,,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-avatar_FEAT-03_RF14_F14_05,avatar,FEAT-03,RF14_BadgePill_Acct,F14_05,1,,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
-avatar_FEAT-03_RF14_F14_06,avatar,FEAT-03,RF14_BadgePill_Acct,F14_06,1,,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-avatar_FEAT-03_RF14_F14_07,avatar,FEAT-03,RF14_BadgePill_Acct,F14_07,1,,standard:reward,,,,no,,,,,,spec,,Display Multiple: two matching extensions -> two badges
-avatar_FEAT-03_RF14_F14_08,avatar,FEAT-03,RF14_BadgePill_Acct,F14_08,1,,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text
-avatar_FEAT-03_RF14_F14_09,avatar,FEAT-03,RF14_BadgePill_Acct,F14_09,1,,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end)
-avatar_FEAT-03_RF15_F15_01,avatar,FEAT-03,RF15_Popover_Acct,F15_01,1,,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
-avatar_FEAT-03_RF15_F15_02,avatar,FEAT-03,RF15_Popover_Acct,F15_02,1,,standard:account,,,,yes,Ticker Symbol is ZZZ,,,,,spec,,Merge token resolved in hover text
-avatar_FEAT-03_RF15_F15_03,avatar,FEAT-03,RF15_Popover_Acct,F15_03,1,,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-avatar_FEAT-03_RF15_F15_04,avatar,FEAT-03,RF15_Popover_Acct,F15_04,1,,standard:reward,,,,yes,Item hover,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-avatar_FEAT-03_RF15_F15_05,avatar,FEAT-03,RF15_Popover_Acct,F15_05,1,,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover
-avatar_FEAT-03_RF15_F15_06,avatar,FEAT-03,RF15_Popover_Acct,F15_06,1,,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-avatar_FEAT-03_RF15_F15_07,avatar,FEAT-03,RF15_Popover_Acct,F15_07,1,,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record
-avatar_FEAT-03_RF16_F16_01,avatar,FEAT-03,RF16_Actions_Acct,F16_01,1,,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,URL action with merge token: resolved target
-avatar_FEAT-03_RF16_F16_02,avatar,FEAT-03,RF16_Actions_Acct,F16_02,1,,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open"""
-avatar_FEAT-03_RF16_F16_03,avatar,FEAT-03,RF16_Actions_Acct,F16_03,1,,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text
-avatar_FEAT-03_RF16_F16_04,avatar,FEAT-03,RF16_Actions_Acct,F16_04,1,,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-avatar_FEAT-03_RF16_F16_05,avatar,FEAT-03,RF16_Actions_Acct,F16_05,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record
-avatar_FEAT-03_RF16_F16_06,avatar,FEAT-03,RF16_Actions_Acct,F16_06,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record
-avatar_FEAT-03_RF16_F16_07,avatar,FEAT-03,RF16_Actions_Acct,F16_07,1,,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-avatar_FEAT-03_RF16_F16_08,avatar,FEAT-03,RF16_Actions_Acct,F16_08,1,,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,"Action with no hover text: popover has footer only, no body"
-avatar_FEAT-03_RF18_F18_01,avatar,FEAT-03,RF18_Dates_Acct,F18_01,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY
-avatar_FEAT-03_RF18_F18_02,avatar,FEAT-03,RF18_Dates_Acct,F18_02,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY
-avatar_FEAT-03_RF18_F18_03,avatar,FEAT-03,RF18_Dates_Acct,F18_03,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY
-avatar_FEAT-03_RF18_F18_04,avatar,FEAT-03,RF18_Dates_Acct,F18_04,1,,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY
-avatar_FEAT-03_RF18_F18_05,avatar,FEAT-03,RF18_Dates_Acct,F18_05,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY
-avatar_FEAT-03_RF18_F18_06,avatar,FEAT-03,RF18_Dates_Acct,F18_06,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY
-avatar_FEAT-03_RF18_F18_07,avatar,FEAT-03,RF18_Dates_Acct,F18_07,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH
-avatar_FEAT-03_RF18_F18_08,avatar,FEAT-03,RF18_Dates_Acct,F18_08,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-avatar_FEAT-03_RF18_F18_09,avatar,FEAT-03,RF18_Dates_Acct,F18_09,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH
-avatar_FEAT-03_RF18_F18_10,avatar,FEAT-03,RF18_Dates_Acct,F18_10,1,,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH
-avatar_FEAT-03_RF18_F18_11,avatar,FEAT-03,RF18_Dates_Acct,F18_11,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH
-avatar_FEAT-03_RF18_F18_12,avatar,FEAT-03,RF18_Dates_Acct,F18_12,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH
-avatar_FEAT-03_RF18_F18_13,avatar,FEAT-03,RF18_Dates_Acct,F18_13,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH
-avatar_FEAT-03_RF18_F18_14,avatar,FEAT-03,RF18_Dates_Acct,F18_14,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-avatar_FEAT-03_RF18_F18_15,avatar,FEAT-03,RF18_Dates_Acct,F18_15,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR
-avatar_FEAT-03_RF17_F15_05,avatar,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,,standard:number_input,,,,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover
-avatar_FEAT-03_RF17_F15_06,avatar,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,,standard:employee,,,,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-badge_FEAT-01_RF14_F14_01,badge,FEAT-01,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,end,no,,,,,,spec,,"Item badge text/color/position, no extension"
-badge_FEAT-01_RF14_F14_02,badge,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#0b5cab,#ffffff,start,no,,,,,,spec,,Badge text blank -> field display value
-badge_FEAT-01_RF14_F14_03,badge,FEAT-01,RF14_BadgePill_Acct,F14_03,1,Ext Text,standard:reward,#fff3cd,red,end,no,,,,,,spec,,Matched extension supplies its own text/color/position
-badge_FEAT-01_RF14_F14_04,badge,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#757575,,start,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-badge_FEAT-01_RF14_F14_05,badge,FEAT-01,RF14_BadgePill_Acct,F14_05,1,Hot,standard:reward,,,start,no,,,,,,spec,,Inverse badge text/color/position on blank record
-badge_FEAT-01_RF14_F14_06,badge,FEAT-01,RF14_BadgePill_Acct,F14_06,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-badge_FEAT-01_RF14_F14_07,badge,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#c23934|#a85700,#ffffff|#ffffff,start|start,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
-badge_FEAT-01_RF14_F14_08,badge,FEAT-01,RF14_BadgePill_Acct,F14_08,1,Hot account,standard:account,,,start,no,,,,,,spec,,Merge token inside Badge/Pill Text
-badge_FEAT-01_RF14_F14_09,badge,FEAT-01,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,start,no,,,,,,spec,,Icon position start (F14_01 covers end)
-badge_FEAT-01_RF15_F15_01,badge,FEAT-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,start,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
-badge_FEAT-01_RF15_F15_02,badge,FEAT-01,RF15_Popover_Acct,F15_02,1,CRM,standard:account,,,start,yes,Ticker Symbol is CRM,,,,,spec,,Merge token resolved in hover text
-badge_FEAT-01_RF15_F15_03,badge,FEAT-01,RF15_Popover_Acct,F15_03,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-badge_FEAT-01_RF15_F15_04,badge,FEAT-01,RF15_Popover_Acct,F15_04,1,Hot,standard:reward,,,start,yes,Feature Full is a Hot Rating,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-badge_FEAT-01_RF15_F15_05,badge,FEAT-01,RF15_Popover_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,No hover text and no action: no popover
-badge_FEAT-01_RF15_F15_06,badge,FEAT-01,RF15_Popover_Acct,F15_06,1,25,standard:employee,,,start,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-badge_FEAT-01_RF15_F15_07,badge,FEAT-01,RF15_Popover_Acct,F15_07,1,Hot,standard:reward,,,start,no,,,,,,spec,,Inverse hover text on blank record
-badge_FEAT-01_RF16_F16_01,badge,FEAT-01,RF16_Actions_Acct,F16_01,1,CRM,standard:account,,,start,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,URL action with merge token: resolved target
-badge_FEAT-01_RF16_F16_02,badge,FEAT-01,RF16_Actions_Acct,F16_02,1,FEAT-FULL-001,standard:number_input,,,start,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open"""
-badge_FEAT-01_RF16_F16_03,badge,FEAT-01,RF16_Actions_Acct,F16_03,1,FEAT-FULL-001,standard:number_input,,,start,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text
-badge_FEAT-01_RF16_F16_04,badge,FEAT-01,RF16_Actions_Acct,F16_04,1,FEAT-FULL-001,standard:number_input,,,start,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-badge_FEAT-01_RF16_F16_05,badge,FEAT-01,RF16_Actions_Acct,F16_05,1,Hot,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record
-badge_FEAT-01_RF16_F16_06,badge,FEAT-01,RF16_Actions_Acct,F16_06,1,Hot,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record
-badge_FEAT-01_RF16_F16_07,badge,FEAT-01,RF16_Actions_Acct,F16_07,1,FEAT-FULL-001,standard:number_input,,,start,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-badge_FEAT-01_RF16_F16_08,badge,FEAT-01,RF16_Actions_Acct,F16_08,1,CRM,standard:account,,,start,yes,,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,"Action with no hover text: popover has footer only, no body"
-badge_FEAT-01_RF18_F18_01,badge,FEAT-01,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals TODAY
-badge_FEAT-01_RF18_F18_02,badge,FEAT-01,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal TODAY
-badge_FEAT-01_RF18_F18_03,badge,FEAT-01,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start TODAY
-badge_FEAT-01_RF18_F18_04,badge,FEAT-01,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End TODAY
-badge_FEAT-01_RF18_F18_05,badge,FEAT-01,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End TODAY
-badge_FEAT-01_RF18_F18_06,badge,FEAT-01,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start TODAY
-badge_FEAT-01_RF18_F18_07,badge,FEAT-01,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals LAST MONTH
-badge_FEAT-01_RF18_F18_08,badge,FEAT-01,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-badge_FEAT-01_RF18_F18_09,badge,FEAT-01,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start LAST MONTH
-badge_FEAT-01_RF18_F18_10,badge,FEAT-01,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End LAST MONTH
-badge_FEAT-01_RF18_F18_11,badge,FEAT-01,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End LAST MONTH
-badge_FEAT-01_RF18_F18_12,badge,FEAT-01,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start LAST MONTH
-badge_FEAT-01_RF18_F18_13,badge,FEAT-01,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS MONTH
-badge_FEAT-01_RF18_F18_14,badge,FEAT-01,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-badge_FEAT-01_RF18_F18_15,badge,FEAT-01,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS YEAR
-badge_FEAT-01_RF17_F15_05,badge,FEAT-01,RF17_PopoverFallback_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,start,yes,FEAT-FULL-001,,,,,spec,,No hover text and no action: no popover
-badge_FEAT-01_RF17_F15_06,badge,FEAT-01,RF17_PopoverFallback_Acct,F15_06,1,25,standard:employee,,,start,yes,25,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-badge_FEAT-02_RF14_F14_01,badge,FEAT-02,RF14_BadgePill_Acct,F14_01,0,,,,,,,,,,,,spec,,"Item badge text/color/position, no extension"
-badge_FEAT-02_RF14_F14_02,badge,FEAT-02,RF14_BadgePill_Acct,F14_02,0,,,,,,,,,,,,spec,,Badge text blank -> field display value
-badge_FEAT-02_RF14_F14_03,badge,FEAT-02,RF14_BadgePill_Acct,F14_03,0,,,,,,,,,,,,spec,,Matched extension supplies its own text/color/position
-badge_FEAT-02_RF14_F14_04,badge,FEAT-02,RF14_BadgePill_Acct,F14_04,0,,,,,,,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-badge_FEAT-02_RF14_F14_05,badge,FEAT-02,RF14_BadgePill_Acct,F14_05,1,Enter a Rating,standard:empty,,turquoise,start,no,,,,,,spec,,Inverse badge text/color/position on blank record
-badge_FEAT-02_RF14_F14_06,badge,FEAT-02,RF14_BadgePill_Acct,F14_06,1,,standard:empty,,,start,no,,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-badge_FEAT-02_RF14_F14_07,badge,FEAT-02,RF14_BadgePill_Acct,F14_07,0,,,,,,,,,,,,spec,,Display Multiple: two matching extensions -> two badges
-badge_FEAT-02_RF14_F14_08,badge,FEAT-02,RF14_BadgePill_Acct,F14_08,0,,,,,,,,,,,,spec,,Merge token inside Badge/Pill Text
-badge_FEAT-02_RF14_F14_09,badge,FEAT-02,RF14_BadgePill_Acct,F14_09,0,,,,,,,,,,,,spec,,Icon position start (F14_01 covers end)
-badge_FEAT-02_RF15_F15_01,badge,FEAT-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body
-badge_FEAT-02_RF15_F15_02,badge,FEAT-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,spec,,Merge token resolved in hover text
-badge_FEAT-02_RF15_F15_03,badge,FEAT-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,start,yes,Number is [],,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess; merge token on blank field: blank-vs-raw-token resolution unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-badge_FEAT-02_RF15_F15_04,badge,FEAT-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-badge_FEAT-02_RF15_F15_05,badge,FEAT-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
-badge_FEAT-02_RF15_F15_06,badge,FEAT-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-badge_FEAT-02_RF15_F15_07,badge,FEAT-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,start,yes,There is no Rating,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Inverse hover text on blank record
-badge_FEAT-02_RF16_F16_01,badge,FEAT-02,RF16_Actions_Acct,F16_01,0,,,,,,,,,,,,spec,,URL action with merge token: resolved target
-badge_FEAT-02_RF16_F16_02,badge,FEAT-02,RF16_Actions_Acct,F16_02,0,,,,,,,,,,,,spec,,"No Action Button Label: default ""Open"""
-badge_FEAT-02_RF16_F16_03,badge,FEAT-02,RF16_Actions_Acct,F16_03,0,,,,,,,,,,,,spec,,Custom button label and help text
-badge_FEAT-02_RF16_F16_04,badge,FEAT-02,RF16_Actions_Acct,F16_04,0,,,,,,,,,,,,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-badge_FEAT-02_RF16_F16_05,badge,FEAT-02,RF16_Actions_Acct,F16_05,1,,standard:empty,,,start,yes,No rating yet,Open,,false,https://www.yahoo.com,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action on: button present on blank record
-badge_FEAT-02_RF16_F16_06,badge,FEAT-02,RF16_Actions_Acct,F16_06,1,,standard:empty,,,start,yes,No rating yet,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action off: no button on blank record
-badge_FEAT-02_RF16_F16_07,badge,FEAT-02,RF16_Actions_Acct,F16_07,0,,,,,,,,,,,,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-badge_FEAT-02_RF16_F16_08,badge,FEAT-02,RF16_Actions_Acct,F16_08,0,,,,,,,,,,,,spec,,"Action with no hover text: popover has footer only, no body"
-badge_FEAT-02_RF18_F18_01,badge,FEAT-02,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals TODAY
-badge_FEAT-02_RF18_F18_02,badge,FEAT-02,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal TODAY
-badge_FEAT-02_RF18_F18_03,badge,FEAT-02,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start TODAY
-badge_FEAT-02_RF18_F18_04,badge,FEAT-02,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End TODAY
-badge_FEAT-02_RF18_F18_05,badge,FEAT-02,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End TODAY
-badge_FEAT-02_RF18_F18_06,badge,FEAT-02,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start TODAY
-badge_FEAT-02_RF18_F18_07,badge,FEAT-02,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals LAST MONTH
-badge_FEAT-02_RF18_F18_08,badge,FEAT-02,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-badge_FEAT-02_RF18_F18_09,badge,FEAT-02,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start LAST MONTH
-badge_FEAT-02_RF18_F18_10,badge,FEAT-02,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End LAST MONTH
-badge_FEAT-02_RF18_F18_11,badge,FEAT-02,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End LAST MONTH
-badge_FEAT-02_RF18_F18_12,badge,FEAT-02,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start LAST MONTH
-badge_FEAT-02_RF18_F18_13,badge,FEAT-02,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS MONTH
-badge_FEAT-02_RF18_F18_14,badge,FEAT-02,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-badge_FEAT-02_RF18_F18_15,badge,FEAT-02,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS YEAR
-badge_FEAT-02_RF17_F15_05,badge,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
-badge_FEAT-02_RF17_F15_06,badge,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-badge_FEAT-03_RF14_F14_01,badge,FEAT-03,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,end,no,,,,,,spec,,"Item badge text/color/position, no extension"
-badge_FEAT-03_RF14_F14_02,badge,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#0b5cab,#ffffff,start,no,,,,,,spec,,Badge text blank -> field display value
-badge_FEAT-03_RF14_F14_03,badge,FEAT-03,RF14_BadgePill_Acct,F14_03,1,Item Text,standard:reward,,black,start,no,,,,,,spec,,Matched extension supplies its own text/color/position
-badge_FEAT-03_RF14_F14_04,badge,FEAT-03,RF14_BadgePill_Acct,F14_04,1,Item Text,standard:reward,,navy,end,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-badge_FEAT-03_RF14_F14_05,badge,FEAT-03,RF14_BadgePill_Acct,F14_05,1,Cold,standard:reward,,,start,no,,,,,,spec,,Inverse badge text/color/position on blank record
-badge_FEAT-03_RF14_F14_06,badge,FEAT-03,RF14_BadgePill_Acct,F14_06,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-badge_FEAT-03_RF14_F14_07,badge,FEAT-03,RF14_BadgePill_Acct,F14_07,1,Cold,standard:reward,,,start,no,,,,,,spec,,Display Multiple: two matching extensions -> two badges
-badge_FEAT-03_RF14_F14_08,badge,FEAT-03,RF14_BadgePill_Acct,F14_08,1,Cold account,standard:account,,,start,no,,,,,,spec,,Merge token inside Badge/Pill Text
-badge_FEAT-03_RF14_F14_09,badge,FEAT-03,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,start,no,,,,,,spec,,Icon position start (F14_01 covers end)
-badge_FEAT-03_RF15_F15_01,badge,FEAT-03,RF15_Popover_Acct,F15_01,1,FEAT-COLD-003,standard:number_input,,,start,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
-badge_FEAT-03_RF15_F15_02,badge,FEAT-03,RF15_Popover_Acct,F15_02,1,ZZZ,standard:account,,,start,yes,Ticker Symbol is ZZZ,,,,,spec,,Merge token resolved in hover text
-badge_FEAT-03_RF15_F15_03,badge,FEAT-03,RF15_Popover_Acct,F15_03,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-badge_FEAT-03_RF15_F15_04,badge,FEAT-03,RF15_Popover_Acct,F15_04,1,Cold,standard:reward,,,start,yes,Item hover,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-badge_FEAT-03_RF15_F15_05,badge,FEAT-03,RF15_Popover_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,spec,,No hover text and no action: no popover
-badge_FEAT-03_RF15_F15_06,badge,FEAT-03,RF15_Popover_Acct,F15_06,1,3,standard:employee,,,start,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-badge_FEAT-03_RF15_F15_07,badge,FEAT-03,RF15_Popover_Acct,F15_07,1,Cold,standard:reward,,,start,no,,,,,,spec,,Inverse hover text on blank record
-badge_FEAT-03_RF16_F16_01,badge,FEAT-03,RF16_Actions_Acct,F16_01,1,ZZZ,standard:account,,,start,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,URL action with merge token: resolved target
-badge_FEAT-03_RF16_F16_02,badge,FEAT-03,RF16_Actions_Acct,F16_02,1,FEAT-COLD-003,standard:number_input,,,start,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open"""
-badge_FEAT-03_RF16_F16_03,badge,FEAT-03,RF16_Actions_Acct,F16_03,1,FEAT-COLD-003,standard:number_input,,,start,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text
-badge_FEAT-03_RF16_F16_04,badge,FEAT-03,RF16_Actions_Acct,F16_04,1,FEAT-COLD-003,standard:number_input,,,start,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-badge_FEAT-03_RF16_F16_05,badge,FEAT-03,RF16_Actions_Acct,F16_05,1,Cold,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record
-badge_FEAT-03_RF16_F16_06,badge,FEAT-03,RF16_Actions_Acct,F16_06,1,Cold,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record
-badge_FEAT-03_RF16_F16_07,badge,FEAT-03,RF16_Actions_Acct,F16_07,1,FEAT-COLD-003,standard:number_input,,,start,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-badge_FEAT-03_RF16_F16_08,badge,FEAT-03,RF16_Actions_Acct,F16_08,1,ZZZ,standard:account,,,start,yes,,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,"Action with no hover text: popover has footer only, no body"
-badge_FEAT-03_RF18_F18_01,badge,FEAT-03,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals TODAY
-badge_FEAT-03_RF18_F18_02,badge,FEAT-03,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal TODAY
-badge_FEAT-03_RF18_F18_03,badge,FEAT-03,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start TODAY
-badge_FEAT-03_RF18_F18_04,badge,FEAT-03,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End TODAY
-badge_FEAT-03_RF18_F18_05,badge,FEAT-03,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End TODAY
-badge_FEAT-03_RF18_F18_06,badge,FEAT-03,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start TODAY
-badge_FEAT-03_RF18_F18_07,badge,FEAT-03,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals LAST MONTH
-badge_FEAT-03_RF18_F18_08,badge,FEAT-03,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-badge_FEAT-03_RF18_F18_09,badge,FEAT-03,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start LAST MONTH
-badge_FEAT-03_RF18_F18_10,badge,FEAT-03,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End LAST MONTH
-badge_FEAT-03_RF18_F18_11,badge,FEAT-03,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End LAST MONTH
-badge_FEAT-03_RF18_F18_12,badge,FEAT-03,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start LAST MONTH
-badge_FEAT-03_RF18_F18_13,badge,FEAT-03,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS MONTH
-badge_FEAT-03_RF18_F18_14,badge,FEAT-03,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-badge_FEAT-03_RF18_F18_15,badge,FEAT-03,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS YEAR
-badge_FEAT-03_RF17_F15_05,badge,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,start,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover
-badge_FEAT-03_RF17_F15_06,badge,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,3,standard:employee,,,start,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-pill_FEAT-01_RF14_F14_01,pill,FEAT-01,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-pill_FEAT-01_RF14_F14_02,pill,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#0b5cab,#ffffff,,no,,,,,,spec,,Badge text blank -> field display value
-pill_FEAT-01_RF14_F14_03,pill,FEAT-01,RF14_BadgePill_Acct,F14_03,1,Ext Text,standard:reward,#fff3cd,red,,no,,,,,,spec,,Matched extension supplies its own text/color/position
-pill_FEAT-01_RF14_F14_04,pill,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#757575,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-pill_FEAT-01_RF14_F14_05,pill,FEAT-01,RF14_BadgePill_Acct,F14_05,1,Hot,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
-pill_FEAT-01_RF14_F14_06,pill,FEAT-01,RF14_BadgePill_Acct,F14_06,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-pill_FEAT-01_RF14_F14_07,pill,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#c23934|#a85700,#ffffff|#ffffff,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges
-pill_FEAT-01_RF14_F14_08,pill,FEAT-01,RF14_BadgePill_Acct,F14_08,1,Hot account,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text
-pill_FEAT-01_RF14_F14_09,pill,FEAT-01,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end)
-pill_FEAT-01_RF15_F15_01,pill,FEAT-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
-pill_FEAT-01_RF15_F15_02,pill,FEAT-01,RF15_Popover_Acct,F15_02,1,CRM,standard:account,,,,yes,Ticker Symbol is CRM,,,,,spec,,Merge token resolved in hover text
-pill_FEAT-01_RF15_F15_03,pill,FEAT-01,RF15_Popover_Acct,F15_03,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-pill_FEAT-01_RF15_F15_04,pill,FEAT-01,RF15_Popover_Acct,F15_04,1,Hot,standard:reward,,,,yes,Feature Full is a Hot Rating,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-pill_FEAT-01_RF15_F15_05,pill,FEAT-01,RF15_Popover_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover
-pill_FEAT-01_RF15_F15_06,pill,FEAT-01,RF15_Popover_Acct,F15_06,1,25,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-pill_FEAT-01_RF15_F15_07,pill,FEAT-01,RF15_Popover_Acct,F15_07,1,Hot,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record
-pill_FEAT-01_RF16_F16_01,pill,FEAT-01,RF16_Actions_Acct,F16_01,1,CRM,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,URL action with merge token: resolved target
-pill_FEAT-01_RF16_F16_02,pill,FEAT-01,RF16_Actions_Acct,F16_02,1,FEAT-FULL-001,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open"""
-pill_FEAT-01_RF16_F16_03,pill,FEAT-01,RF16_Actions_Acct,F16_03,1,FEAT-FULL-001,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text
-pill_FEAT-01_RF16_F16_04,pill,FEAT-01,RF16_Actions_Acct,F16_04,1,FEAT-FULL-001,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-pill_FEAT-01_RF16_F16_05,pill,FEAT-01,RF16_Actions_Acct,F16_05,1,Hot,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record
-pill_FEAT-01_RF16_F16_06,pill,FEAT-01,RF16_Actions_Acct,F16_06,1,Hot,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record
-pill_FEAT-01_RF16_F16_07,pill,FEAT-01,RF16_Actions_Acct,F16_07,1,FEAT-FULL-001,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-pill_FEAT-01_RF16_F16_08,pill,FEAT-01,RF16_Actions_Acct,F16_08,1,CRM,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,"Action with no hover text: popover has footer only, no body"
-pill_FEAT-01_RF18_F18_01,pill,FEAT-01,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY
-pill_FEAT-01_RF18_F18_02,pill,FEAT-01,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY
-pill_FEAT-01_RF18_F18_03,pill,FEAT-01,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY
-pill_FEAT-01_RF18_F18_04,pill,FEAT-01,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY
-pill_FEAT-01_RF18_F18_05,pill,FEAT-01,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY
-pill_FEAT-01_RF18_F18_06,pill,FEAT-01,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY
-pill_FEAT-01_RF18_F18_07,pill,FEAT-01,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH
-pill_FEAT-01_RF18_F18_08,pill,FEAT-01,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-pill_FEAT-01_RF18_F18_09,pill,FEAT-01,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH
-pill_FEAT-01_RF18_F18_10,pill,FEAT-01,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH
-pill_FEAT-01_RF18_F18_11,pill,FEAT-01,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH
-pill_FEAT-01_RF18_F18_12,pill,FEAT-01,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH
-pill_FEAT-01_RF18_F18_13,pill,FEAT-01,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH
-pill_FEAT-01_RF18_F18_14,pill,FEAT-01,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-pill_FEAT-01_RF18_F18_15,pill,FEAT-01,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR
-pill_FEAT-01_RF17_F15_05,pill,FEAT-01,RF17_PopoverFallback_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,,yes,FEAT-FULL-001,,,,,spec,,No hover text and no action: no popover
-pill_FEAT-01_RF17_F15_06,pill,FEAT-01,RF17_PopoverFallback_Acct,F15_06,1,25,standard:employee,,,,yes,25,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-pill_FEAT-02_RF14_F14_01,pill,FEAT-02,RF14_BadgePill_Acct,F14_01,0,,,,,,,,,,,,spec,,"Item badge text/color/position, no extension"
-pill_FEAT-02_RF14_F14_02,pill,FEAT-02,RF14_BadgePill_Acct,F14_02,0,,,,,,,,,,,,spec,,Badge text blank -> field display value
-pill_FEAT-02_RF14_F14_03,pill,FEAT-02,RF14_BadgePill_Acct,F14_03,0,,,,,,,,,,,,spec,,Matched extension supplies its own text/color/position
-pill_FEAT-02_RF14_F14_04,pill,FEAT-02,RF14_BadgePill_Acct,F14_04,0,,,,,,,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-pill_FEAT-02_RF14_F14_05,pill,FEAT-02,RF14_BadgePill_Acct,F14_05,1,Enter a Rating,standard:empty,,turquoise,,no,,,,,,spec,,Inverse badge text/color/position on blank record
-pill_FEAT-02_RF14_F14_06,pill,FEAT-02,RF14_BadgePill_Acct,F14_06,1,,standard:empty,,,,no,,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-pill_FEAT-02_RF14_F14_07,pill,FEAT-02,RF14_BadgePill_Acct,F14_07,0,,,,,,,,,,,,spec,,Display Multiple: two matching extensions -> two badges
-pill_FEAT-02_RF14_F14_08,pill,FEAT-02,RF14_BadgePill_Acct,F14_08,0,,,,,,,,,,,,spec,,Merge token inside Badge/Pill Text
-pill_FEAT-02_RF14_F14_09,pill,FEAT-02,RF14_BadgePill_Acct,F14_09,0,,,,,,,,,,,,spec,,Icon position start (F14_01 covers end)
-pill_FEAT-02_RF15_F15_01,pill,FEAT-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body
-pill_FEAT-02_RF15_F15_02,pill,FEAT-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,spec,,Merge token resolved in hover text
-pill_FEAT-02_RF15_F15_03,pill,FEAT-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,,yes,Number is [],,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess; merge token on blank field: blank-vs-raw-token resolution unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-pill_FEAT-02_RF15_F15_04,pill,FEAT-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-pill_FEAT-02_RF15_F15_05,pill,FEAT-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
-pill_FEAT-02_RF15_F15_06,pill,FEAT-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-pill_FEAT-02_RF15_F15_07,pill,FEAT-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,,yes,There is no Rating,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Inverse hover text on blank record
-pill_FEAT-02_RF16_F16_01,pill,FEAT-02,RF16_Actions_Acct,F16_01,0,,,,,,,,,,,,spec,,URL action with merge token: resolved target
-pill_FEAT-02_RF16_F16_02,pill,FEAT-02,RF16_Actions_Acct,F16_02,0,,,,,,,,,,,,spec,,"No Action Button Label: default ""Open"""
-pill_FEAT-02_RF16_F16_03,pill,FEAT-02,RF16_Actions_Acct,F16_03,0,,,,,,,,,,,,spec,,Custom button label and help text
-pill_FEAT-02_RF16_F16_04,pill,FEAT-02,RF16_Actions_Acct,F16_04,0,,,,,,,,,,,,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-pill_FEAT-02_RF16_F16_05,pill,FEAT-02,RF16_Actions_Acct,F16_05,1,,standard:empty,,,,yes,No rating yet,Open,,false,https://www.yahoo.com,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action on: button present on blank record
-pill_FEAT-02_RF16_F16_06,pill,FEAT-02,RF16_Actions_Acct,F16_06,1,,standard:empty,,,,yes,No rating yet,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action off: no button on blank record
-pill_FEAT-02_RF16_F16_07,pill,FEAT-02,RF16_Actions_Acct,F16_07,0,,,,,,,,,,,,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-pill_FEAT-02_RF16_F16_08,pill,FEAT-02,RF16_Actions_Acct,F16_08,0,,,,,,,,,,,,spec,,"Action with no hover text: popover has footer only, no body"
-pill_FEAT-02_RF18_F18_01,pill,FEAT-02,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY
-pill_FEAT-02_RF18_F18_02,pill,FEAT-02,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY
-pill_FEAT-02_RF18_F18_03,pill,FEAT-02,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY
-pill_FEAT-02_RF18_F18_04,pill,FEAT-02,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY
-pill_FEAT-02_RF18_F18_05,pill,FEAT-02,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY
-pill_FEAT-02_RF18_F18_06,pill,FEAT-02,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY
-pill_FEAT-02_RF18_F18_07,pill,FEAT-02,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH
-pill_FEAT-02_RF18_F18_08,pill,FEAT-02,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-pill_FEAT-02_RF18_F18_09,pill,FEAT-02,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH
-pill_FEAT-02_RF18_F18_10,pill,FEAT-02,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH
-pill_FEAT-02_RF18_F18_11,pill,FEAT-02,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH
-pill_FEAT-02_RF18_F18_12,pill,FEAT-02,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH
-pill_FEAT-02_RF18_F18_13,pill,FEAT-02,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH
-pill_FEAT-02_RF18_F18_14,pill,FEAT-02,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-pill_FEAT-02_RF18_F18_15,pill,FEAT-02,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR
-pill_FEAT-02_RF17_F15_05,pill,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover
-pill_FEAT-02_RF17_F15_06,pill,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-pill_FEAT-03_RF14_F14_01,pill,FEAT-03,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,,no,,,,,,spec,,"Item badge text/color/position, no extension"
-pill_FEAT-03_RF14_F14_02,pill,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#0b5cab,#ffffff,,no,,,,,,spec,,Badge text blank -> field display value
-pill_FEAT-03_RF14_F14_03,pill,FEAT-03,RF14_BadgePill_Acct,F14_03,1,Item Text,standard:reward,,black,,no,,,,,,spec,,Matched extension supplies its own text/color/position
-pill_FEAT-03_RF14_F14_04,pill,FEAT-03,RF14_BadgePill_Acct,F14_04,1,Item Text,standard:reward,,navy,,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state)
-pill_FEAT-03_RF14_F14_05,pill,FEAT-03,RF14_BadgePill_Acct,F14_05,1,Cold,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record
-pill_FEAT-03_RF14_F14_06,pill,FEAT-03,RF14_BadgePill_Acct,F14_06,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed)
-pill_FEAT-03_RF14_F14_07,pill,FEAT-03,RF14_BadgePill_Acct,F14_07,1,Cold,standard:reward,,,,no,,,,,,spec,,Display Multiple: two matching extensions -> two badges
-pill_FEAT-03_RF14_F14_08,pill,FEAT-03,RF14_BadgePill_Acct,F14_08,1,Cold account,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text
-pill_FEAT-03_RF14_F14_09,pill,FEAT-03,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end)
-pill_FEAT-03_RF15_F15_01,pill,FEAT-03,RF15_Popover_Acct,F15_01,1,FEAT-COLD-003,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body
-pill_FEAT-03_RF15_F15_02,pill,FEAT-03,RF15_Popover_Acct,F15_02,1,ZZZ,standard:account,,,,yes,Ticker Symbol is ZZZ,,,,,spec,,Merge token resolved in hover text
-pill_FEAT-03_RF15_F15_03,pill,FEAT-03,RF15_Popover_Acct,F15_03,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token)
-pill_FEAT-03_RF15_F15_04,pill,FEAT-03,RF15_Popover_Acct,F15_04,1,Cold,standard:reward,,,,yes,Item hover,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover
-pill_FEAT-03_RF15_F15_05,pill,FEAT-03,RF15_Popover_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover
-pill_FEAT-03_RF15_F15_06,pill,FEAT-03,RF15_Popover_Acct,F15_06,1,3,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
-pill_FEAT-03_RF15_F15_07,pill,FEAT-03,RF15_Popover_Acct,F15_07,1,Cold,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record
-pill_FEAT-03_RF16_F16_01,pill,FEAT-03,RF16_Actions_Acct,F16_01,1,ZZZ,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,URL action with merge token: resolved target
-pill_FEAT-03_RF16_F16_02,pill,FEAT-03,RF16_Actions_Acct,F16_02,1,FEAT-COLD-003,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open"""
-pill_FEAT-03_RF16_F16_03,pill,FEAT-03,RF16_Actions_Acct,F16_03,1,FEAT-COLD-003,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text
-pill_FEAT-03_RF16_F16_04,pill,FEAT-03,RF16_Actions_Acct,F16_04,1,FEAT-COLD-003,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works
-pill_FEAT-03_RF16_F16_05,pill,FEAT-03,RF16_Actions_Acct,F16_05,1,Cold,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record
-pill_FEAT-03_RF16_F16_06,pill,FEAT-03,RF16_Actions_Acct,F16_06,1,Cold,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record
-pill_FEAT-03_RF16_F16_07,pill,FEAT-03,RF16_Actions_Acct,F16_07,1,FEAT-COLD-003,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens"
-pill_FEAT-03_RF16_F16_08,pill,FEAT-03,RF16_Actions_Acct,F16_08,1,ZZZ,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,"Action with no hover text: popover has footer only, no body"
-pill_FEAT-03_RF18_F18_01,pill,FEAT-03,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY
-pill_FEAT-03_RF18_F18_02,pill,FEAT-03,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY
-pill_FEAT-03_RF18_F18_03,pill,FEAT-03,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY
-pill_FEAT-03_RF18_F18_04,pill,FEAT-03,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY
-pill_FEAT-03_RF18_F18_05,pill,FEAT-03,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY
-pill_FEAT-03_RF18_F18_06,pill,FEAT-03,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY
-pill_FEAT-03_RF18_F18_07,pill,FEAT-03,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH
-pill_FEAT-03_RF18_F18_08,pill,FEAT-03,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH
-pill_FEAT-03_RF18_F18_09,pill,FEAT-03,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH
-pill_FEAT-03_RF18_F18_10,pill,FEAT-03,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH
-pill_FEAT-03_RF18_F18_11,pill,FEAT-03,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH
-pill_FEAT-03_RF18_F18_12,pill,FEAT-03,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH
-pill_FEAT-03_RF18_F18_13,pill,FEAT-03,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH
-pill_FEAT-03_RF18_F18_14,pill,FEAT-03,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS
-pill_FEAT-03_RF18_F18_15,pill,FEAT-03,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR
-pill_FEAT-03_RF17_F15_05,pill,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover
-pill_FEAT-03_RF17_F15_06,pill,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,3,standard:employee,,,,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab)
+﻿shot_id,style,record_id,bundle,item_id,visible_count,labels,icons,bgs,text_colors,positions,popover,popover_bodies,button_labels,help_texts,confirm_required,action_urls,basis,notes,verifies,via
+avatar_FEAT-01_RF14_F14_01,avatar,FEAT-01,RF14_BadgePill_Acct,F14_01,1,,standard:number_input,#2e844a,,,no,,,,,,spec,,"Item badge text/color/position, no extension",
+avatar_FEAT-02_RF14_F14_01,avatar,FEAT-02,RF14_BadgePill_Acct,F14_01,0,,,,,,,,,,,,spec,,"Item badge text/color/position, no extension",
+avatar_FEAT-03_RF14_F14_01,avatar,FEAT-03,RF14_BadgePill_Acct,F14_01,1,,standard:number_input,#2e844a,,,no,,,,,,spec,,"Item badge text/color/position, no extension",
+avatar_FEAT-01_RF14_F14_02,avatar,FEAT-01,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#0b5cab,,,no,,,,,,spec,,Badge text blank -> field display value,
+avatar_FEAT-02_RF14_F14_02,avatar,FEAT-02,RF14_BadgePill_Acct,F14_02,0,,,,,,,,,,,,spec,,Badge text blank -> field display value,
+avatar_FEAT-03_RF14_F14_02,avatar,FEAT-03,RF14_BadgePill_Acct,F14_02,1,,standard:number_input,#0b5cab,,,no,,,,,,spec,,Badge text blank -> field display value,
+avatar_FEAT-01_RF14_F14_03,avatar,FEAT-01,RF14_BadgePill_Acct,F14_03,1,,standard:reward,#fff3cd,,,no,,,,,,spec,,Matched extension supplies its own text/color/position,
+avatar_FEAT-02_RF14_F14_03,avatar,FEAT-02,RF14_BadgePill_Acct,F14_03,0,,,,,,,,,,,,spec,,Matched extension supplies its own text/color/position,
+avatar_FEAT-03_RF14_F14_03,avatar,FEAT-03,RF14_BadgePill_Acct,F14_03,1,,standard:reward,,,,no,,,,,,spec,,Matched extension supplies its own text/color/position,
+avatar_FEAT-01_RF14_F14_04,avatar,FEAT-01,RF14_BadgePill_Acct,F14_04,1,,standard:reward,#757575,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+avatar_FEAT-02_RF14_F14_04,avatar,FEAT-02,RF14_BadgePill_Acct,F14_04,0,,,,,,,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+avatar_FEAT-03_RF14_F14_04,avatar,FEAT-03,RF14_BadgePill_Acct,F14_04,1,,standard:reward,,,,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+avatar_FEAT-01_RF14_F14_05,avatar,FEAT-01,RF14_BadgePill_Acct,F14_05,1,,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+avatar_FEAT-02_RF14_F14_05,avatar,FEAT-02,RF14_BadgePill_Acct,F14_05,1,,standard:empty,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+avatar_FEAT-03_RF14_F14_05,avatar,FEAT-03,RF14_BadgePill_Acct,F14_05,1,,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+avatar_FEAT-01_RF14_F14_06,avatar,FEAT-01,RF14_BadgePill_Acct,F14_06,1,,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+avatar_FEAT-02_RF14_F14_06,avatar,FEAT-02,RF14_BadgePill_Acct,F14_06,1,,standard:empty,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+avatar_FEAT-03_RF14_F14_06,avatar,FEAT-03,RF14_BadgePill_Acct,F14_06,1,,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+avatar_FEAT-01_RF14_F14_07,avatar,FEAT-01,RF14_BadgePill_Acct,F14_07,2,|,standard:reward|standard:reward,#c23934|#a85700,|,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges,
+avatar_FEAT-02_RF14_F14_07,avatar,FEAT-02,RF14_BadgePill_Acct,F14_07,0,,,,,,,,,,,,spec,,Display Multiple: two matching extensions -> two badges,
+avatar_FEAT-03_RF14_F14_07,avatar,FEAT-03,RF14_BadgePill_Acct,F14_07,1,,standard:reward,,,,no,,,,,,spec,,Display Multiple: two matching extensions -> two badges,
+avatar_FEAT-01_RF14_F14_08,avatar,FEAT-01,RF14_BadgePill_Acct,F14_08,1,,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text,
+avatar_FEAT-02_RF14_F14_08,avatar,FEAT-02,RF14_BadgePill_Acct,F14_08,0,,,,,,,,,,,,spec,,Merge token inside Badge/Pill Text,
+avatar_FEAT-03_RF14_F14_08,avatar,FEAT-03,RF14_BadgePill_Acct,F14_08,1,,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text,
+avatar_FEAT-01_RF14_F14_09,avatar,FEAT-01,RF14_BadgePill_Acct,F14_09,1,,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end),
+avatar_FEAT-02_RF14_F14_09,avatar,FEAT-02,RF14_BadgePill_Acct,F14_09,0,,,,,,,,,,,,spec,,Icon position start (F14_01 covers end),
+avatar_FEAT-03_RF14_F14_09,avatar,FEAT-03,RF14_BadgePill_Acct,F14_09,1,,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end),
+avatar_FEAT-01_RF15_F15_01,avatar,FEAT-01,RF15_Popover_Acct,F15_01,1,,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,
+avatar_FEAT-02_RF15_F15_01,avatar,FEAT-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body,
+avatar_FEAT-03_RF15_F15_01,avatar,FEAT-03,RF15_Popover_Acct,F15_01,1,,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,
+avatar_FCON-01_RF15_F15_01,avatar,FCON-01,RF15_Popover_Acct,F15_01,1,,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+avatar_FCON-02_RF15_F15_01,avatar,FCON-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+avatar_FCON-03_RF15_F15_01,avatar,FCON-03,RF15_Popover_Acct,F15_01,1,,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+avatar_FCON-04_RF15_F15_01,avatar,FCON-04,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Plain hover text in popover body,mappedField:AccountId
+avatar_FEAT-01_RF15_F15_02,avatar,FEAT-01,RF15_Popover_Acct,F15_02,1,,standard:account,,,,yes,Ticker Symbol is CRM,,,,,spec,,Merge token resolved in hover text,
+avatar_FEAT-02_RF15_F15_02,avatar,FEAT-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,spec,,Merge token resolved in hover text,
+avatar_FEAT-03_RF15_F15_02,avatar,FEAT-03,RF15_Popover_Acct,F15_02,1,,standard:account,,,,yes,Ticker Symbol is ZZZ,,,,,spec,,Merge token resolved in hover text,
+avatar_FCON-01_RF15_F15_02,avatar,FCON-01,RF15_Popover_Acct,F15_02,1,,standard:account,,,,yes,Ticker Symbol is CRM,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+avatar_FCON-02_RF15_F15_02,avatar,FCON-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+avatar_FCON-03_RF15_F15_02,avatar,FCON-03,RF15_Popover_Acct,F15_02,1,,standard:account,,,,yes,Ticker Symbol is ZZZ,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+avatar_FCON-04_RF15_F15_02,avatar,FCON-04,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Merge token resolved in hover text,mappedField:AccountId
+avatar_FEAT-01_RF15_F15_03,avatar,FEAT-01,RF15_Popover_Acct,F15_03,1,,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+avatar_FEAT-02_RF15_F15_03,avatar,FEAT-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,,yes,Number is [],,,,,unconfirmed,merge token on blank field: blank-vs-raw-token resolution unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+avatar_FEAT-03_RF15_F15_03,avatar,FEAT-03,RF15_Popover_Acct,F15_03,1,,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+avatar_FCON-01_RF15_F15_03,avatar,FCON-01,RF15_Popover_Acct,F15_03,1,,standard:number_input,,,,no,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+avatar_FCON-02_RF15_F15_03,avatar,FCON-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,,yes,Number is [],,,,,unconfirmed,merge token on blank field: blank-vs-raw-token resolution unconfirmed; mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+avatar_FCON-03_RF15_F15_03,avatar,FCON-03,RF15_Popover_Acct,F15_03,1,,standard:number_input,,,,no,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+avatar_FCON-04_RF15_F15_03,avatar,FCON-04,RF15_Popover_Acct,F15_03,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+avatar_FEAT-01_RF15_F15_04,avatar,FEAT-01,RF15_Popover_Acct,F15_04,1,,standard:reward,,,,yes,Feature Full is a Hot Rating,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+avatar_FEAT-02_RF15_F15_04,avatar,FEAT-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+avatar_FEAT-03_RF15_F15_04,avatar,FEAT-03,RF15_Popover_Acct,F15_04,1,,standard:reward,,,,yes,Item hover,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+avatar_FCON-01_RF15_F15_04,avatar,FCON-01,RF15_Popover_Acct,F15_04,1,,standard:reward,,,,yes,Feature Full is a Hot Rating,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+avatar_FCON-02_RF15_F15_04,avatar,FCON-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+avatar_FCON-03_RF15_F15_04,avatar,FCON-03,RF15_Popover_Acct,F15_04,1,,standard:reward,,,,yes,Item hover,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+avatar_FCON-04_RF15_F15_04,avatar,FCON-04,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+avatar_FEAT-01_RF15_F15_05,avatar,FEAT-01,RF15_Popover_Acct,F15_05,1,,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,
+avatar_FEAT-02_RF15_F15_05,avatar,FEAT-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,
+avatar_FEAT-03_RF15_F15_05,avatar,FEAT-03,RF15_Popover_Acct,F15_05,1,,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,
+avatar_FCON-01_RF15_F15_05,avatar,FCON-01,RF15_Popover_Acct,F15_05,1,,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+avatar_FCON-02_RF15_F15_05,avatar,FCON-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+avatar_FCON-03_RF15_F15_05,avatar,FCON-03,RF15_Popover_Acct,F15_05,1,,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+avatar_FCON-04_RF15_F15_05,avatar,FCON-04,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",No hover text and no action: no popover,mappedField:AccountId
+avatar_FEAT-01_RF15_F15_06,avatar,FEAT-01,RF15_Popover_Acct,F15_06,1,,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+avatar_FEAT-02_RF15_F15_06,avatar,FEAT-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+avatar_FEAT-03_RF15_F15_06,avatar,FEAT-03,RF15_Popover_Acct,F15_06,1,,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+avatar_FCON-01_RF15_F15_06,avatar,FCON-01,RF15_Popover_Acct,F15_06,1,,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+avatar_FCON-02_RF15_F15_06,avatar,FCON-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+avatar_FCON-03_RF15_F15_06,avatar,FCON-03,RF15_Popover_Acct,F15_06,1,,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+avatar_FCON-04_RF15_F15_06,avatar,FCON-04,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+avatar_FEAT-01_RF15_F15_07,avatar,FEAT-01,RF15_Popover_Acct,F15_07,1,,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,
+avatar_FEAT-02_RF15_F15_07,avatar,FEAT-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,,yes,There is no Rating,,,,,spec,,Inverse hover text on blank record,
+avatar_FEAT-03_RF15_F15_07,avatar,FEAT-03,RF15_Popover_Acct,F15_07,1,,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,
+avatar_FCON-01_RF15_F15_07,avatar,FCON-01,RF15_Popover_Acct,F15_07,1,,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,mappedField:AccountId
+avatar_FCON-02_RF15_F15_07,avatar,FCON-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,,yes,There is no Rating,,,,,spec,,Inverse hover text on blank record,mappedField:AccountId
+avatar_FCON-03_RF15_F15_07,avatar,FCON-03,RF15_Popover_Acct,F15_07,1,,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,mappedField:AccountId
+avatar_FCON-04_RF15_F15_07,avatar,FCON-04,RF15_Popover_Acct,F15_07,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Inverse hover text on blank record,mappedField:AccountId
+avatar_FEAT-01_RF16_F16_01,avatar,FEAT-01,RF16_Actions_Acct,F16_01,1,,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,URL action with merge token: resolved target,
+avatar_FEAT-02_RF16_F16_01,avatar,FEAT-02,RF16_Actions_Acct,F16_01,0,,,,,,,,,,,,spec,,URL action with merge token: resolved target,
+avatar_FEAT-03_RF16_F16_01,avatar,FEAT-03,RF16_Actions_Acct,F16_01,1,,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,URL action with merge token: resolved target,
+avatar_FEAT-01_RF16_F16_02,avatar,FEAT-01,RF16_Actions_Acct,F16_02,1,,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open""",
+avatar_FEAT-02_RF16_F16_02,avatar,FEAT-02,RF16_Actions_Acct,F16_02,0,,,,,,,,,,,,spec,,"No Action Button Label: default ""Open""",
+avatar_FEAT-03_RF16_F16_02,avatar,FEAT-03,RF16_Actions_Acct,F16_02,1,,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open""",
+avatar_FEAT-01_RF16_F16_03,avatar,FEAT-01,RF16_Actions_Acct,F16_03,1,,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text,
+avatar_FEAT-02_RF16_F16_03,avatar,FEAT-02,RF16_Actions_Acct,F16_03,0,,,,,,,,,,,,spec,,Custom button label and help text,
+avatar_FEAT-03_RF16_F16_03,avatar,FEAT-03,RF16_Actions_Acct,F16_03,1,,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text,
+avatar_FEAT-01_RF16_F16_04,avatar,FEAT-01,RF16_Actions_Acct,F16_04,1,,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+avatar_FEAT-02_RF16_F16_04,avatar,FEAT-02,RF16_Actions_Acct,F16_04,0,,,,,,,,,,,,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+avatar_FEAT-03_RF16_F16_04,avatar,FEAT-03,RF16_Actions_Acct,F16_04,1,,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+avatar_FEAT-01_RF16_F16_05,avatar,FEAT-01,RF16_Actions_Acct,F16_05,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record,
+avatar_FEAT-02_RF16_F16_05,avatar,FEAT-02,RF16_Actions_Acct,F16_05,1,,standard:empty,,,,yes,No rating yet,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record,
+avatar_FEAT-03_RF16_F16_05,avatar,FEAT-03,RF16_Actions_Acct,F16_05,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record,
+avatar_FEAT-01_RF16_F16_06,avatar,FEAT-01,RF16_Actions_Acct,F16_06,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record,
+avatar_FEAT-02_RF16_F16_06,avatar,FEAT-02,RF16_Actions_Acct,F16_06,1,,standard:empty,,,,yes,No rating yet,,,,,spec,,Show False/Blank Action off: no button on blank record,
+avatar_FEAT-03_RF16_F16_06,avatar,FEAT-03,RF16_Actions_Acct,F16_06,1,,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record,
+avatar_FEAT-01_RF16_F16_07,avatar,FEAT-01,RF16_Actions_Acct,F16_07,1,,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+avatar_FEAT-02_RF16_F16_07,avatar,FEAT-02,RF16_Actions_Acct,F16_07,0,,,,,,,,,,,,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+avatar_FEAT-03_RF16_F16_07,avatar,FEAT-03,RF16_Actions_Acct,F16_07,1,,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+avatar_FEAT-01_RF16_F16_08,avatar,FEAT-01,RF16_Actions_Acct,F16_08,1,,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,"Action with no hover text: popover has footer only, no body",
+avatar_FEAT-02_RF16_F16_08,avatar,FEAT-02,RF16_Actions_Acct,F16_08,0,,,,,,,,,,,,spec,,"Action with no hover text: popover has footer only, no body",
+avatar_FEAT-03_RF16_F16_08,avatar,FEAT-03,RF16_Actions_Acct,F16_08,1,,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,"Action with no hover text: popover has footer only, no body",
+avatar_FEAT-01_RF18_F18_01,avatar,FEAT-01,RF18_Dates_Acct,F18_01,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY,
+avatar_FEAT-02_RF18_F18_01,avatar,FEAT-02,RF18_Dates_Acct,F18_01,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY,
+avatar_FEAT-03_RF18_F18_01,avatar,FEAT-03,RF18_Dates_Acct,F18_01,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY,
+avatar_FEAT-01_RF18_F18_02,avatar,FEAT-01,RF18_Dates_Acct,F18_02,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY,
+avatar_FEAT-02_RF18_F18_02,avatar,FEAT-02,RF18_Dates_Acct,F18_02,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY,
+avatar_FEAT-03_RF18_F18_02,avatar,FEAT-03,RF18_Dates_Acct,F18_02,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY,
+avatar_FEAT-01_RF18_F18_03,avatar,FEAT-01,RF18_Dates_Acct,F18_03,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY,
+avatar_FEAT-02_RF18_F18_03,avatar,FEAT-02,RF18_Dates_Acct,F18_03,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY,
+avatar_FEAT-03_RF18_F18_03,avatar,FEAT-03,RF18_Dates_Acct,F18_03,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY,
+avatar_FEAT-01_RF18_F18_04,avatar,FEAT-01,RF18_Dates_Acct,F18_04,1,,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY,
+avatar_FEAT-02_RF18_F18_04,avatar,FEAT-02,RF18_Dates_Acct,F18_04,1,,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY,
+avatar_FEAT-03_RF18_F18_04,avatar,FEAT-03,RF18_Dates_Acct,F18_04,1,,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY,
+avatar_FEAT-01_RF18_F18_05,avatar,FEAT-01,RF18_Dates_Acct,F18_05,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY,
+avatar_FEAT-02_RF18_F18_05,avatar,FEAT-02,RF18_Dates_Acct,F18_05,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY,
+avatar_FEAT-03_RF18_F18_05,avatar,FEAT-03,RF18_Dates_Acct,F18_05,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY,
+avatar_FEAT-01_RF18_F18_06,avatar,FEAT-01,RF18_Dates_Acct,F18_06,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY,
+avatar_FEAT-02_RF18_F18_06,avatar,FEAT-02,RF18_Dates_Acct,F18_06,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY,
+avatar_FEAT-03_RF18_F18_06,avatar,FEAT-03,RF18_Dates_Acct,F18_06,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY,
+avatar_FEAT-01_RF18_F18_07,avatar,FEAT-01,RF18_Dates_Acct,F18_07,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH,
+avatar_FEAT-02_RF18_F18_07,avatar,FEAT-02,RF18_Dates_Acct,F18_07,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH,
+avatar_FEAT-03_RF18_F18_07,avatar,FEAT-03,RF18_Dates_Acct,F18_07,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH,
+avatar_FEAT-01_RF18_F18_08,avatar,FEAT-01,RF18_Dates_Acct,F18_08,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+avatar_FEAT-02_RF18_F18_08,avatar,FEAT-02,RF18_Dates_Acct,F18_08,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+avatar_FEAT-03_RF18_F18_08,avatar,FEAT-03,RF18_Dates_Acct,F18_08,1,,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+avatar_FEAT-01_RF18_F18_09,avatar,FEAT-01,RF18_Dates_Acct,F18_09,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH,
+avatar_FEAT-02_RF18_F18_09,avatar,FEAT-02,RF18_Dates_Acct,F18_09,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH,
+avatar_FEAT-03_RF18_F18_09,avatar,FEAT-03,RF18_Dates_Acct,F18_09,1,,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH,
+avatar_FEAT-01_RF18_F18_10,avatar,FEAT-01,RF18_Dates_Acct,F18_10,1,,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH,
+avatar_FEAT-02_RF18_F18_10,avatar,FEAT-02,RF18_Dates_Acct,F18_10,1,,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH,
+avatar_FEAT-03_RF18_F18_10,avatar,FEAT-03,RF18_Dates_Acct,F18_10,1,,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH,
+avatar_FEAT-01_RF18_F18_11,avatar,FEAT-01,RF18_Dates_Acct,F18_11,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH,
+avatar_FEAT-02_RF18_F18_11,avatar,FEAT-02,RF18_Dates_Acct,F18_11,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH,
+avatar_FEAT-03_RF18_F18_11,avatar,FEAT-03,RF18_Dates_Acct,F18_11,1,,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH,
+avatar_FEAT-01_RF18_F18_12,avatar,FEAT-01,RF18_Dates_Acct,F18_12,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH,
+avatar_FEAT-02_RF18_F18_12,avatar,FEAT-02,RF18_Dates_Acct,F18_12,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH,
+avatar_FEAT-03_RF18_F18_12,avatar,FEAT-03,RF18_Dates_Acct,F18_12,1,,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH,
+avatar_FEAT-01_RF18_F18_13,avatar,FEAT-01,RF18_Dates_Acct,F18_13,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH,
+avatar_FEAT-02_RF18_F18_13,avatar,FEAT-02,RF18_Dates_Acct,F18_13,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH,
+avatar_FEAT-03_RF18_F18_13,avatar,FEAT-03,RF18_Dates_Acct,F18_13,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH,
+avatar_FEAT-01_RF18_F18_14,avatar,FEAT-01,RF18_Dates_Acct,F18_14,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+avatar_FEAT-02_RF18_F18_14,avatar,FEAT-02,RF18_Dates_Acct,F18_14,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+avatar_FEAT-03_RF18_F18_14,avatar,FEAT-03,RF18_Dates_Acct,F18_14,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+avatar_FEAT-01_RF18_F18_15,avatar,FEAT-01,RF18_Dates_Acct,F18_15,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR,
+avatar_FEAT-02_RF18_F18_15,avatar,FEAT-02,RF18_Dates_Acct,F18_15,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR,
+avatar_FEAT-03_RF18_F18_15,avatar,FEAT-03,RF18_Dates_Acct,F18_15,1,,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR,
+avatar_FCON-01_RF20_F20_01,avatar,FCON-01,RF20_Contact_Con,F20_01,1,,standard:call,,,,yes,On the do-not-call list,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+avatar_FCON-02_RF20_F20_01,avatar,FCON-02,RF20_Contact_Con,F20_01,1,,standard:empty,,,,yes,OK to call,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+avatar_FCON-03_RF20_F20_01,avatar,FCON-03,RF20_Contact_Con,F20_01,1,,standard:call,,,,yes,On the do-not-call list,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+avatar_FCON-04_RF20_F20_01,avatar,FCON-04,RF20_Contact_Con,F20_01,1,,standard:empty,,,,yes,OK to call,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+avatar_FCON-01_RF20_F20_02,avatar,FCON-01,RF20_Contact_Con,F20_02,1,,standard:contact,,,,yes,Last name is Feature Contact Full,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+avatar_FCON-02_RF20_F20_02,avatar,FCON-02,RF20_Contact_Con,F20_02,1,,standard:contact,,,,yes,Last name is Feature Contact Blank,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+avatar_FCON-03_RF20_F20_02,avatar,FCON-03,RF20_Contact_Con,F20_02,1,,standard:reward,#c23934,,,no,,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+avatar_FCON-04_RF20_F20_02,avatar,FCON-04,RF20_Contact_Con,F20_02,1,,standard:contact,,,,yes,Last name is Feature Contact Orphan,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+avatar_FCON-01_RF20_F20_03,avatar,FCON-01,RF20_Contact_Con,F20_03,1,,standard:account,,,,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+avatar_FCON-02_RF20_F20_03,avatar,FCON-02,RF20_Contact_Con,F20_03,1,,standard:account,,,,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+avatar_FCON-03_RF20_F20_03,avatar,FCON-03,RF20_Contact_Con,F20_03,1,,standard:account,,,,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+avatar_FCON-04_RF20_F20_03,avatar,FCON-04,RF20_Contact_Con,F20_03,0,,,,,,,,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+avatar_FEAT-01_RF17_F15_05,avatar,FEAT-01,RF17_PopoverFallback_Acct,F15_05,1,,standard:number_input,,,,yes,FEAT-FULL-001,,,,,spec,,No hover text and no action: no popover,
+avatar_FEAT-02_RF17_F15_05,avatar,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,
+avatar_FEAT-03_RF17_F15_05,avatar,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,,standard:number_input,,,,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover,
+avatar_FEAT-01_RF17_F15_06,avatar,FEAT-01,RF17_PopoverFallback_Acct,F15_06,1,,standard:employee,,,,yes,25,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+avatar_FEAT-02_RF17_F15_06,avatar,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+avatar_FEAT-03_RF17_F15_06,avatar,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,,standard:employee,,,,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+badge_FEAT-01_RF14_F14_01,badge,FEAT-01,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,end,no,,,,,,spec,,"Item badge text/color/position, no extension",
+badge_FEAT-02_RF14_F14_01,badge,FEAT-02,RF14_BadgePill_Acct,F14_01,0,,,,,,,,,,,,spec,,"Item badge text/color/position, no extension",
+badge_FEAT-03_RF14_F14_01,badge,FEAT-03,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,end,no,,,,,,spec,,"Item badge text/color/position, no extension",
+badge_FEAT-01_RF14_F14_02,badge,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#0b5cab,#ffffff,start,no,,,,,,spec,,Badge text blank -> field display value,
+badge_FEAT-02_RF14_F14_02,badge,FEAT-02,RF14_BadgePill_Acct,F14_02,0,,,,,,,,,,,,spec,,Badge text blank -> field display value,
+badge_FEAT-03_RF14_F14_02,badge,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#0b5cab,#ffffff,start,no,,,,,,spec,,Badge text blank -> field display value,
+badge_FEAT-01_RF14_F14_03,badge,FEAT-01,RF14_BadgePill_Acct,F14_03,1,Ext Text,standard:reward,#fff3cd,red,end,no,,,,,,spec,,Matched extension supplies its own text/color/position,
+badge_FEAT-02_RF14_F14_03,badge,FEAT-02,RF14_BadgePill_Acct,F14_03,0,,,,,,,,,,,,spec,,Matched extension supplies its own text/color/position,
+badge_FEAT-03_RF14_F14_03,badge,FEAT-03,RF14_BadgePill_Acct,F14_03,1,Item Text,standard:reward,,black,start,no,,,,,,spec,,Matched extension supplies its own text/color/position,
+badge_FEAT-01_RF14_F14_04,badge,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#757575,,start,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+badge_FEAT-02_RF14_F14_04,badge,FEAT-02,RF14_BadgePill_Acct,F14_04,0,,,,,,,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+badge_FEAT-03_RF14_F14_04,badge,FEAT-03,RF14_BadgePill_Acct,F14_04,1,Item Text,standard:reward,,navy,end,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+badge_FEAT-01_RF14_F14_05,badge,FEAT-01,RF14_BadgePill_Acct,F14_05,1,Hot,standard:reward,,,start,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+badge_FEAT-02_RF14_F14_05,badge,FEAT-02,RF14_BadgePill_Acct,F14_05,1,Enter a Rating,standard:empty,,turquoise,start,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+badge_FEAT-03_RF14_F14_05,badge,FEAT-03,RF14_BadgePill_Acct,F14_05,1,Cold,standard:reward,,,start,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+badge_FEAT-01_RF14_F14_06,badge,FEAT-01,RF14_BadgePill_Acct,F14_06,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+badge_FEAT-02_RF14_F14_06,badge,FEAT-02,RF14_BadgePill_Acct,F14_06,1,,standard:empty,,,start,no,,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+badge_FEAT-03_RF14_F14_06,badge,FEAT-03,RF14_BadgePill_Acct,F14_06,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+badge_FEAT-01_RF14_F14_07,badge,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#c23934|#a85700,#ffffff|#ffffff,start|start,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges,
+badge_FEAT-02_RF14_F14_07,badge,FEAT-02,RF14_BadgePill_Acct,F14_07,0,,,,,,,,,,,,spec,,Display Multiple: two matching extensions -> two badges,
+badge_FEAT-03_RF14_F14_07,badge,FEAT-03,RF14_BadgePill_Acct,F14_07,1,Cold,standard:reward,,,start,no,,,,,,spec,,Display Multiple: two matching extensions -> two badges,
+badge_FEAT-01_RF14_F14_08,badge,FEAT-01,RF14_BadgePill_Acct,F14_08,1,Hot account,standard:account,,,start,no,,,,,,spec,,Merge token inside Badge/Pill Text,
+badge_FEAT-02_RF14_F14_08,badge,FEAT-02,RF14_BadgePill_Acct,F14_08,0,,,,,,,,,,,,spec,,Merge token inside Badge/Pill Text,
+badge_FEAT-03_RF14_F14_08,badge,FEAT-03,RF14_BadgePill_Acct,F14_08,1,Cold account,standard:account,,,start,no,,,,,,spec,,Merge token inside Badge/Pill Text,
+badge_FEAT-01_RF14_F14_09,badge,FEAT-01,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,start,no,,,,,,spec,,Icon position start (F14_01 covers end),
+badge_FEAT-02_RF14_F14_09,badge,FEAT-02,RF14_BadgePill_Acct,F14_09,0,,,,,,,,,,,,spec,,Icon position start (F14_01 covers end),
+badge_FEAT-03_RF14_F14_09,badge,FEAT-03,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,start,no,,,,,,spec,,Icon position start (F14_01 covers end),
+badge_FEAT-01_RF15_F15_01,badge,FEAT-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,start,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,
+badge_FEAT-02_RF15_F15_01,badge,FEAT-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body,
+badge_FEAT-03_RF15_F15_01,badge,FEAT-03,RF15_Popover_Acct,F15_01,1,FEAT-COLD-003,standard:number_input,,,start,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,
+badge_FCON-01_RF15_F15_01,badge,FCON-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,start,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+badge_FCON-02_RF15_F15_01,badge,FCON-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+badge_FCON-03_RF15_F15_01,badge,FCON-03,RF15_Popover_Acct,F15_01,1,FEAT-COLD-003,standard:number_input,,,start,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+badge_FCON-04_RF15_F15_01,badge,FCON-04,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Plain hover text in popover body,mappedField:AccountId
+badge_FEAT-01_RF15_F15_02,badge,FEAT-01,RF15_Popover_Acct,F15_02,1,CRM,standard:account,,,start,yes,Ticker Symbol is CRM,,,,,spec,,Merge token resolved in hover text,
+badge_FEAT-02_RF15_F15_02,badge,FEAT-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,spec,,Merge token resolved in hover text,
+badge_FEAT-03_RF15_F15_02,badge,FEAT-03,RF15_Popover_Acct,F15_02,1,ZZZ,standard:account,,,start,yes,Ticker Symbol is ZZZ,,,,,spec,,Merge token resolved in hover text,
+badge_FCON-01_RF15_F15_02,badge,FCON-01,RF15_Popover_Acct,F15_02,1,CRM,standard:account,,,start,yes,Ticker Symbol is CRM,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+badge_FCON-02_RF15_F15_02,badge,FCON-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+badge_FCON-03_RF15_F15_02,badge,FCON-03,RF15_Popover_Acct,F15_02,1,ZZZ,standard:account,,,start,yes,Ticker Symbol is ZZZ,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+badge_FCON-04_RF15_F15_02,badge,FCON-04,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Merge token resolved in hover text,mappedField:AccountId
+badge_FEAT-01_RF15_F15_03,badge,FEAT-01,RF15_Popover_Acct,F15_03,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+badge_FEAT-02_RF15_F15_03,badge,FEAT-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,start,yes,Number is [],,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess; merge token on blank field: blank-vs-raw-token resolution unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+badge_FEAT-03_RF15_F15_03,badge,FEAT-03,RF15_Popover_Acct,F15_03,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+badge_FCON-01_RF15_F15_03,badge,FCON-01,RF15_Popover_Acct,F15_03,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+badge_FCON-02_RF15_F15_03,badge,FCON-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,start,yes,Number is [],,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess; merge token on blank field: blank-vs-raw-token resolution unconfirmed; mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+badge_FCON-03_RF15_F15_03,badge,FCON-03,RF15_Popover_Acct,F15_03,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+badge_FCON-04_RF15_F15_03,badge,FCON-04,RF15_Popover_Acct,F15_03,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+badge_FEAT-01_RF15_F15_04,badge,FEAT-01,RF15_Popover_Acct,F15_04,1,Hot,standard:reward,,,start,yes,Feature Full is a Hot Rating,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+badge_FEAT-02_RF15_F15_04,badge,FEAT-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+badge_FEAT-03_RF15_F15_04,badge,FEAT-03,RF15_Popover_Acct,F15_04,1,Cold,standard:reward,,,start,yes,Item hover,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+badge_FCON-01_RF15_F15_04,badge,FCON-01,RF15_Popover_Acct,F15_04,1,Hot,standard:reward,,,start,yes,Feature Full is a Hot Rating,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+badge_FCON-02_RF15_F15_04,badge,FCON-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+badge_FCON-03_RF15_F15_04,badge,FCON-03,RF15_Popover_Acct,F15_04,1,Cold,standard:reward,,,start,yes,Item hover,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+badge_FCON-04_RF15_F15_04,badge,FCON-04,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+badge_FEAT-01_RF15_F15_05,badge,FEAT-01,RF15_Popover_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,No hover text and no action: no popover,
+badge_FEAT-02_RF15_F15_05,badge,FEAT-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,
+badge_FEAT-03_RF15_F15_05,badge,FEAT-03,RF15_Popover_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,spec,,No hover text and no action: no popover,
+badge_FCON-01_RF15_F15_05,badge,FCON-01,RF15_Popover_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,start,no,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+badge_FCON-02_RF15_F15_05,badge,FCON-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+badge_FCON-03_RF15_F15_05,badge,FCON-03,RF15_Popover_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,start,no,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+badge_FCON-04_RF15_F15_05,badge,FCON-04,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",No hover text and no action: no popover,mappedField:AccountId
+badge_FEAT-01_RF15_F15_06,badge,FEAT-01,RF15_Popover_Acct,F15_06,1,25,standard:employee,,,start,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+badge_FEAT-02_RF15_F15_06,badge,FEAT-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+badge_FEAT-03_RF15_F15_06,badge,FEAT-03,RF15_Popover_Acct,F15_06,1,3,standard:employee,,,start,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+badge_FCON-01_RF15_F15_06,badge,FCON-01,RF15_Popover_Acct,F15_06,1,25,standard:employee,,,start,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+badge_FCON-02_RF15_F15_06,badge,FCON-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+badge_FCON-03_RF15_F15_06,badge,FCON-03,RF15_Popover_Acct,F15_06,1,3,standard:employee,,,start,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+badge_FCON-04_RF15_F15_06,badge,FCON-04,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+badge_FEAT-01_RF15_F15_07,badge,FEAT-01,RF15_Popover_Acct,F15_07,1,Hot,standard:reward,,,start,no,,,,,,spec,,Inverse hover text on blank record,
+badge_FEAT-02_RF15_F15_07,badge,FEAT-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,start,yes,There is no Rating,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Inverse hover text on blank record,
+badge_FEAT-03_RF15_F15_07,badge,FEAT-03,RF15_Popover_Acct,F15_07,1,Cold,standard:reward,,,start,no,,,,,,spec,,Inverse hover text on blank record,
+badge_FCON-01_RF15_F15_07,badge,FCON-01,RF15_Popover_Acct,F15_07,1,Hot,standard:reward,,,start,no,,,,,,spec,,Inverse hover text on blank record,mappedField:AccountId
+badge_FCON-02_RF15_F15_07,badge,FCON-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,start,yes,There is no Rating,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Inverse hover text on blank record,mappedField:AccountId
+badge_FCON-03_RF15_F15_07,badge,FCON-03,RF15_Popover_Acct,F15_07,1,Cold,standard:reward,,,start,no,,,,,,spec,,Inverse hover text on blank record,mappedField:AccountId
+badge_FCON-04_RF15_F15_07,badge,FCON-04,RF15_Popover_Acct,F15_07,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Inverse hover text on blank record,mappedField:AccountId
+badge_FEAT-01_RF16_F16_01,badge,FEAT-01,RF16_Actions_Acct,F16_01,1,CRM,standard:account,,,start,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,URL action with merge token: resolved target,
+badge_FEAT-02_RF16_F16_01,badge,FEAT-02,RF16_Actions_Acct,F16_01,0,,,,,,,,,,,,spec,,URL action with merge token: resolved target,
+badge_FEAT-03_RF16_F16_01,badge,FEAT-03,RF16_Actions_Acct,F16_01,1,ZZZ,standard:account,,,start,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,URL action with merge token: resolved target,
+badge_FEAT-01_RF16_F16_02,badge,FEAT-01,RF16_Actions_Acct,F16_02,1,FEAT-FULL-001,standard:number_input,,,start,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open""",
+badge_FEAT-02_RF16_F16_02,badge,FEAT-02,RF16_Actions_Acct,F16_02,0,,,,,,,,,,,,spec,,"No Action Button Label: default ""Open""",
+badge_FEAT-03_RF16_F16_02,badge,FEAT-03,RF16_Actions_Acct,F16_02,1,FEAT-COLD-003,standard:number_input,,,start,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open""",
+badge_FEAT-01_RF16_F16_03,badge,FEAT-01,RF16_Actions_Acct,F16_03,1,FEAT-FULL-001,standard:number_input,,,start,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text,
+badge_FEAT-02_RF16_F16_03,badge,FEAT-02,RF16_Actions_Acct,F16_03,0,,,,,,,,,,,,spec,,Custom button label and help text,
+badge_FEAT-03_RF16_F16_03,badge,FEAT-03,RF16_Actions_Acct,F16_03,1,FEAT-COLD-003,standard:number_input,,,start,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text,
+badge_FEAT-01_RF16_F16_04,badge,FEAT-01,RF16_Actions_Acct,F16_04,1,FEAT-FULL-001,standard:number_input,,,start,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+badge_FEAT-02_RF16_F16_04,badge,FEAT-02,RF16_Actions_Acct,F16_04,0,,,,,,,,,,,,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+badge_FEAT-03_RF16_F16_04,badge,FEAT-03,RF16_Actions_Acct,F16_04,1,FEAT-COLD-003,standard:number_input,,,start,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+badge_FEAT-01_RF16_F16_05,badge,FEAT-01,RF16_Actions_Acct,F16_05,1,Hot,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record,
+badge_FEAT-02_RF16_F16_05,badge,FEAT-02,RF16_Actions_Acct,F16_05,1,,standard:empty,,,start,yes,No rating yet,Open,,false,https://www.yahoo.com,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action on: button present on blank record,
+badge_FEAT-03_RF16_F16_05,badge,FEAT-03,RF16_Actions_Acct,F16_05,1,Cold,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record,
+badge_FEAT-01_RF16_F16_06,badge,FEAT-01,RF16_Actions_Acct,F16_06,1,Hot,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record,
+badge_FEAT-02_RF16_F16_06,badge,FEAT-02,RF16_Actions_Acct,F16_06,1,,standard:empty,,,start,yes,No rating yet,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action off: no button on blank record,
+badge_FEAT-03_RF16_F16_06,badge,FEAT-03,RF16_Actions_Acct,F16_06,1,Cold,standard:reward,,,start,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record,
+badge_FEAT-01_RF16_F16_07,badge,FEAT-01,RF16_Actions_Acct,F16_07,1,FEAT-FULL-001,standard:number_input,,,start,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+badge_FEAT-02_RF16_F16_07,badge,FEAT-02,RF16_Actions_Acct,F16_07,0,,,,,,,,,,,,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+badge_FEAT-03_RF16_F16_07,badge,FEAT-03,RF16_Actions_Acct,F16_07,1,FEAT-COLD-003,standard:number_input,,,start,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+badge_FEAT-01_RF16_F16_08,badge,FEAT-01,RF16_Actions_Acct,F16_08,1,CRM,standard:account,,,start,yes,,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,"Action with no hover text: popover has footer only, no body",
+badge_FEAT-02_RF16_F16_08,badge,FEAT-02,RF16_Actions_Acct,F16_08,0,,,,,,,,,,,,spec,,"Action with no hover text: popover has footer only, no body",
+badge_FEAT-03_RF16_F16_08,badge,FEAT-03,RF16_Actions_Acct,F16_08,1,ZZZ,standard:account,,,start,yes,,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,"Action with no hover text: popover has footer only, no body",
+badge_FEAT-01_RF18_F18_01,badge,FEAT-01,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals TODAY,
+badge_FEAT-02_RF18_F18_01,badge,FEAT-02,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals TODAY,
+badge_FEAT-03_RF18_F18_01,badge,FEAT-03,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals TODAY,
+badge_FEAT-01_RF18_F18_02,badge,FEAT-01,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal TODAY,
+badge_FEAT-02_RF18_F18_02,badge,FEAT-02,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal TODAY,
+badge_FEAT-03_RF18_F18_02,badge,FEAT-03,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal TODAY,
+badge_FEAT-01_RF18_F18_03,badge,FEAT-01,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start TODAY,
+badge_FEAT-02_RF18_F18_03,badge,FEAT-02,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start TODAY,
+badge_FEAT-03_RF18_F18_03,badge,FEAT-03,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start TODAY,
+badge_FEAT-01_RF18_F18_04,badge,FEAT-01,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End TODAY,
+badge_FEAT-02_RF18_F18_04,badge,FEAT-02,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End TODAY,
+badge_FEAT-03_RF18_F18_04,badge,FEAT-03,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End TODAY,
+badge_FEAT-01_RF18_F18_05,badge,FEAT-01,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End TODAY,
+badge_FEAT-02_RF18_F18_05,badge,FEAT-02,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End TODAY,
+badge_FEAT-03_RF18_F18_05,badge,FEAT-03,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End TODAY,
+badge_FEAT-01_RF18_F18_06,badge,FEAT-01,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start TODAY,
+badge_FEAT-02_RF18_F18_06,badge,FEAT-02,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start TODAY,
+badge_FEAT-03_RF18_F18_06,badge,FEAT-03,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start TODAY,
+badge_FEAT-01_RF18_F18_07,badge,FEAT-01,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals LAST MONTH,
+badge_FEAT-02_RF18_F18_07,badge,FEAT-02,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals LAST MONTH,
+badge_FEAT-03_RF18_F18_07,badge,FEAT-03,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals LAST MONTH,
+badge_FEAT-01_RF18_F18_08,badge,FEAT-01,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+badge_FEAT-02_RF18_F18_08,badge,FEAT-02,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+badge_FEAT-03_RF18_F18_08,badge,FEAT-03,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+badge_FEAT-01_RF18_F18_09,badge,FEAT-01,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start LAST MONTH,
+badge_FEAT-02_RF18_F18_09,badge,FEAT-02,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start LAST MONTH,
+badge_FEAT-03_RF18_F18_09,badge,FEAT-03,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before Start LAST MONTH,
+badge_FEAT-01_RF18_F18_10,badge,FEAT-01,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End LAST MONTH,
+badge_FEAT-02_RF18_F18_10,badge,FEAT-02,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End LAST MONTH,
+badge_FEAT-03_RF18_F18_10,badge,FEAT-03,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After End LAST MONTH,
+badge_FEAT-01_RF18_F18_11,badge,FEAT-01,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End LAST MONTH,
+badge_FEAT-02_RF18_F18_11,badge,FEAT-02,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End LAST MONTH,
+badge_FEAT-03_RF18_F18_11,badge,FEAT-03,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Before End LAST MONTH,
+badge_FEAT-01_RF18_F18_12,badge,FEAT-01,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start LAST MONTH,
+badge_FEAT-02_RF18_F18_12,badge,FEAT-02,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start LAST MONTH,
+badge_FEAT-03_RF18_F18_12,badge,FEAT-03,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: After Start LAST MONTH,
+badge_FEAT-01_RF18_F18_13,badge,FEAT-01,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS MONTH,
+badge_FEAT-02_RF18_F18_13,badge,FEAT-02,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS MONTH,
+badge_FEAT-03_RF18_F18_13,badge,FEAT-03,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS MONTH,
+badge_FEAT-01_RF18_F18_14,badge,FEAT-01,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+badge_FEAT-02_RF18_F18_14,badge,FEAT-02,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+badge_FEAT-03_RF18_F18_14,badge,FEAT-03,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+badge_FEAT-01_RF18_F18_15,badge,FEAT-01,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS YEAR,
+badge_FEAT-02_RF18_F18_15,badge,FEAT-02,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS YEAR,
+badge_FEAT-03_RF18_F18_15,badge,FEAT-03,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,start,no,,,,,,spec,,Date: Equals THIS YEAR,
+badge_FCON-01_RF20_F20_01,badge,FCON-01,RF20_Contact_Con,F20_01,1,Do not call,standard:call,,,start,yes,On the do-not-call list,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+badge_FCON-02_RF20_F20_01,badge,FCON-02,RF20_Contact_Con,F20_01,1,Callable,standard:empty,,,start,yes,OK to call,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+badge_FCON-03_RF20_F20_01,badge,FCON-03,RF20_Contact_Con,F20_01,1,Do not call,standard:call,,,start,yes,On the do-not-call list,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+badge_FCON-04_RF20_F20_01,badge,FCON-04,RF20_Contact_Con,F20_01,1,Callable,standard:empty,,,start,yes,OK to call,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+badge_FCON-01_RF20_F20_02,badge,FCON-01,RF20_Contact_Con,F20_02,1,Feature Contact Full,standard:contact,,,start,yes,Last name is Feature Contact Full,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+badge_FCON-02_RF20_F20_02,badge,FCON-02,RF20_Contact_Con,F20_02,1,Feature Contact Blank,standard:contact,,,start,yes,Last name is Feature Contact Blank,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+badge_FCON-03_RF20_F20_02,badge,FCON-03,RF20_Contact_Con,F20_02,1,Cold contact,standard:reward,#c23934,#ffffff,start,no,,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+badge_FCON-04_RF20_F20_02,badge,FCON-04,RF20_Contact_Con,F20_02,1,Feature Contact Orphan,standard:contact,,,start,yes,Last name is Feature Contact Orphan,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+badge_FCON-01_RF20_F20_03,badge,FCON-01,RF20_Contact_Con,F20_03,1,Feature Full,standard:account,,,start,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+badge_FCON-02_RF20_F20_03,badge,FCON-02,RF20_Contact_Con,F20_03,1,Feature Blank,standard:account,,,start,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+badge_FCON-03_RF20_F20_03,badge,FCON-03,RF20_Contact_Con,F20_03,1,Feature Cold,standard:account,,,start,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+badge_FCON-04_RF20_F20_03,badge,FCON-04,RF20_Contact_Con,F20_03,0,,,,,,,,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+badge_FEAT-01_RF17_F15_05,badge,FEAT-01,RF17_PopoverFallback_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,start,yes,FEAT-FULL-001,,,,,spec,,No hover text and no action: no popover,
+badge_FEAT-02_RF17_F15_05,badge,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,
+badge_FEAT-03_RF17_F15_05,badge,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,start,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover,
+badge_FEAT-01_RF17_F15_06,badge,FEAT-01,RF17_PopoverFallback_Acct,F15_06,1,25,standard:employee,,,start,yes,25,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+badge_FEAT-02_RF17_F15_06,badge,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+badge_FEAT-03_RF17_F15_06,badge,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,3,standard:employee,,,start,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+pill_FEAT-01_RF14_F14_01,pill,FEAT-01,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,,no,,,,,,spec,,"Item badge text/color/position, no extension",
+pill_FEAT-02_RF14_F14_01,pill,FEAT-02,RF14_BadgePill_Acct,F14_01,0,,,,,,,,,,,,spec,,"Item badge text/color/position, no extension",
+pill_FEAT-03_RF14_F14_01,pill,FEAT-03,RF14_BadgePill_Acct,F14_01,1,Has Number,standard:number_input,#2e844a,#ffffff,,no,,,,,,spec,,"Item badge text/color/position, no extension",
+pill_FEAT-01_RF14_F14_02,pill,FEAT-01,RF14_BadgePill_Acct,F14_02,1,FEAT-FULL-001,standard:number_input,#0b5cab,#ffffff,,no,,,,,,spec,,Badge text blank -> field display value,
+pill_FEAT-02_RF14_F14_02,pill,FEAT-02,RF14_BadgePill_Acct,F14_02,0,,,,,,,,,,,,spec,,Badge text blank -> field display value,
+pill_FEAT-03_RF14_F14_02,pill,FEAT-03,RF14_BadgePill_Acct,F14_02,1,FEAT-COLD-003,standard:number_input,#0b5cab,#ffffff,,no,,,,,,spec,,Badge text blank -> field display value,
+pill_FEAT-01_RF14_F14_03,pill,FEAT-01,RF14_BadgePill_Acct,F14_03,1,Ext Text,standard:reward,#fff3cd,red,,no,,,,,,spec,,Matched extension supplies its own text/color/position,
+pill_FEAT-02_RF14_F14_03,pill,FEAT-02,RF14_BadgePill_Acct,F14_03,0,,,,,,,,,,,,spec,,Matched extension supplies its own text/color/position,
+pill_FEAT-03_RF14_F14_03,pill,FEAT-03,RF14_BadgePill_Acct,F14_03,1,Item Text,standard:reward,,black,,no,,,,,,spec,,Matched extension supplies its own text/color/position,
+pill_FEAT-01_RF14_F14_04,pill,FEAT-01,RF14_BadgePill_Acct,F14_04,1,Hot,standard:reward,#757575,,,no,,,,,,spec,extension owns state: item Badge/Pill Text NOT inherited,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+pill_FEAT-02_RF14_F14_04,pill,FEAT-02,RF14_BadgePill_Acct,F14_04,0,,,,,,,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+pill_FEAT-03_RF14_F14_04,pill,FEAT-03,RF14_BadgePill_Acct,F14_04,1,Item Text,standard:reward,,navy,,no,,,,,,spec,,Matched extension with blank badge fields does NOT inherit the item (extension owns state),
+pill_FEAT-01_RF14_F14_05,pill,FEAT-01,RF14_BadgePill_Acct,F14_05,1,Hot,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+pill_FEAT-02_RF14_F14_05,pill,FEAT-02,RF14_BadgePill_Acct,F14_05,1,Enter a Rating,standard:empty,,turquoise,,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+pill_FEAT-03_RF14_F14_05,pill,FEAT-03,RF14_BadgePill_Acct,F14_05,1,Cold,standard:reward,,,,no,,,,,,spec,,Inverse badge text/color/position on blank record,
+pill_FEAT-01_RF14_F14_06,pill,FEAT-01,RF14_BadgePill_Acct,F14_06,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+pill_FEAT-02_RF14_F14_06,pill,FEAT-02,RF14_BadgePill_Acct,F14_06,1,,standard:empty,,,,no,,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+pill_FEAT-03_RF14_F14_06,pill,FEAT-03,RF14_BadgePill_Acct,F14_06,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,spec,,Show False/Blank on with NO inverse badge fields: what renders (unconfirmed),
+pill_FEAT-01_RF14_F14_07,pill,FEAT-01,RF14_BadgePill_Acct,F14_07,2,Hot Ext|Contains ot,standard:reward|standard:reward,#c23934|#a85700,#ffffff|#ffffff,|,no|no,|,|,|,|,|,spec,,Display Multiple: two matching extensions -> two badges,
+pill_FEAT-02_RF14_F14_07,pill,FEAT-02,RF14_BadgePill_Acct,F14_07,0,,,,,,,,,,,,spec,,Display Multiple: two matching extensions -> two badges,
+pill_FEAT-03_RF14_F14_07,pill,FEAT-03,RF14_BadgePill_Acct,F14_07,1,Cold,standard:reward,,,,no,,,,,,spec,,Display Multiple: two matching extensions -> two badges,
+pill_FEAT-01_RF14_F14_08,pill,FEAT-01,RF14_BadgePill_Acct,F14_08,1,Hot account,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text,
+pill_FEAT-02_RF14_F14_08,pill,FEAT-02,RF14_BadgePill_Acct,F14_08,0,,,,,,,,,,,,spec,,Merge token inside Badge/Pill Text,
+pill_FEAT-03_RF14_F14_08,pill,FEAT-03,RF14_BadgePill_Acct,F14_08,1,Cold account,standard:account,,,,no,,,,,,spec,,Merge token inside Badge/Pill Text,
+pill_FEAT-01_RF14_F14_09,pill,FEAT-01,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end),
+pill_FEAT-02_RF14_F14_09,pill,FEAT-02,RF14_BadgePill_Acct,F14_09,0,,,,,,,,,,,,spec,,Icon position start (F14_01 covers end),
+pill_FEAT-03_RF14_F14_09,pill,FEAT-03,RF14_BadgePill_Acct,F14_09,1,Start Pos,standard:number_input,,,,no,,,,,,spec,,Icon position start (F14_01 covers end),
+pill_FEAT-01_RF15_F15_01,pill,FEAT-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,
+pill_FEAT-02_RF15_F15_01,pill,FEAT-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body,
+pill_FEAT-03_RF15_F15_01,pill,FEAT-03,RF15_Popover_Acct,F15_01,1,FEAT-COLD-003,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,
+pill_FCON-01_RF15_F15_01,pill,FCON-01,RF15_Popover_Acct,F15_01,1,FEAT-FULL-001,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+pill_FCON-02_RF15_F15_01,pill,FCON-02,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+pill_FCON-03_RF15_F15_01,pill,FCON-03,RF15_Popover_Acct,F15_01,1,FEAT-COLD-003,standard:number_input,,,,yes,Plain hover text,,,,,spec,,Plain hover text in popover body,mappedField:AccountId
+pill_FCON-04_RF15_F15_01,pill,FCON-04,RF15_Popover_Acct,F15_01,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Plain hover text in popover body,mappedField:AccountId
+pill_FEAT-01_RF15_F15_02,pill,FEAT-01,RF15_Popover_Acct,F15_02,1,CRM,standard:account,,,,yes,Ticker Symbol is CRM,,,,,spec,,Merge token resolved in hover text,
+pill_FEAT-02_RF15_F15_02,pill,FEAT-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,spec,,Merge token resolved in hover text,
+pill_FEAT-03_RF15_F15_02,pill,FEAT-03,RF15_Popover_Acct,F15_02,1,ZZZ,standard:account,,,,yes,Ticker Symbol is ZZZ,,,,,spec,,Merge token resolved in hover text,
+pill_FCON-01_RF15_F15_02,pill,FCON-01,RF15_Popover_Acct,F15_02,1,CRM,standard:account,,,,yes,Ticker Symbol is CRM,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+pill_FCON-02_RF15_F15_02,pill,FCON-02,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+pill_FCON-03_RF15_F15_02,pill,FCON-03,RF15_Popover_Acct,F15_02,1,ZZZ,standard:account,,,,yes,Ticker Symbol is ZZZ,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token resolved in hover text,mappedField:AccountId
+pill_FCON-04_RF15_F15_02,pill,FCON-04,RF15_Popover_Acct,F15_02,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Merge token resolved in hover text,mappedField:AccountId
+pill_FEAT-01_RF15_F15_03,pill,FEAT-01,RF15_Popover_Acct,F15_03,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+pill_FEAT-02_RF15_F15_03,pill,FEAT-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,,yes,Number is [],,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess; merge token on blank field: blank-vs-raw-token resolution unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+pill_FEAT-03_RF15_F15_03,pill,FEAT-03,RF15_Popover_Acct,F15_03,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,spec,,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),
+pill_FCON-01_RF15_F15_03,pill,FCON-01,RF15_Popover_Acct,F15_03,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+pill_FCON-02_RF15_F15_03,pill,FCON-02,RF15_Popover_Acct,F15_03,1,,standard:empty,,,,yes,Number is [],,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess; merge token on blank field: blank-vs-raw-token resolution unconfirmed; mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+pill_FCON-03_RF15_F15_03,pill,FCON-03,RF15_Popover_Acct,F15_03,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+pill_FCON-04_RF15_F15_03,pill,FCON-04,RF15_Popover_Acct,F15_03,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Merge token on a BLANK field in inverse hover (unconfirmed: blank vs raw token),mappedField:AccountId
+pill_FEAT-01_RF15_F15_04,pill,FEAT-01,RF15_Popover_Acct,F15_04,1,Hot,standard:reward,,,,yes,Feature Full is a Hot Rating,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+pill_FEAT-02_RF15_F15_04,pill,FEAT-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+pill_FEAT-03_RF15_F15_04,pill,FEAT-03,RF15_Popover_Acct,F15_04,1,Cold,standard:reward,,,,yes,Item hover,,,,,spec,,Extension hover with {!Name} and {!Rating} tokens overrides item hover,
+pill_FCON-01_RF15_F15_04,pill,FCON-01,RF15_Popover_Acct,F15_04,1,Hot,standard:reward,,,,yes,Feature Full is a Hot Rating,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+pill_FCON-02_RF15_F15_04,pill,FCON-02,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+pill_FCON-03_RF15_F15_04,pill,FCON-03,RF15_Popover_Acct,F15_04,1,Cold,standard:reward,,,,yes,Item hover,,,,,unconfirmed,mapped record: merge token resolves against the Account or the Contact? unconfirmed,Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+pill_FCON-04_RF15_F15_04,pill,FCON-04,RF15_Popover_Acct,F15_04,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Extension hover with {!Name} and {!Rating} tokens overrides item hover,mappedField:AccountId
+pill_FEAT-01_RF15_F15_05,pill,FEAT-01,RF15_Popover_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,
+pill_FEAT-02_RF15_F15_05,pill,FEAT-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,
+pill_FEAT-03_RF15_F15_05,pill,FEAT-03,RF15_Popover_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,
+pill_FCON-01_RF15_F15_05,pill,FCON-01,RF15_Popover_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+pill_FCON-02_RF15_F15_05,pill,FCON-02,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+pill_FCON-03_RF15_F15_05,pill,FCON-03,RF15_Popover_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,,no,,,,,,spec,,No hover text and no action: no popover,mappedField:AccountId
+pill_FCON-04_RF15_F15_05,pill,FCON-04,RF15_Popover_Acct,F15_05,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",No hover text and no action: no popover,mappedField:AccountId
+pill_FEAT-01_RF15_F15_06,pill,FEAT-01,RF15_Popover_Acct,F15_06,1,25,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+pill_FEAT-02_RF15_F15_06,pill,FEAT-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+pill_FEAT-03_RF15_F15_06,pill,FEAT-03,RF15_Popover_Acct,F15_06,1,3,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+pill_FCON-01_RF15_F15_06,pill,FCON-01,RF15_Popover_Acct,F15_06,1,25,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+pill_FCON-02_RF15_F15_06,pill,FCON-02,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+pill_FCON-03_RF15_F15_06,pill,FCON-03,RF15_Popover_Acct,F15_06,1,3,standard:employee,,,,no,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+pill_FCON-04_RF15_F15_06,pill,FCON-04,RF15_Popover_Acct,F15_06,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),mappedField:AccountId
+pill_FEAT-01_RF15_F15_07,pill,FEAT-01,RF15_Popover_Acct,F15_07,1,Hot,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,
+pill_FEAT-02_RF15_F15_07,pill,FEAT-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,,yes,There is no Rating,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Inverse hover text on blank record,
+pill_FEAT-03_RF15_F15_07,pill,FEAT-03,RF15_Popover_Acct,F15_07,1,Cold,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,
+pill_FCON-01_RF15_F15_07,pill,FCON-01,RF15_Popover_Acct,F15_07,1,Hot,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,mappedField:AccountId
+pill_FCON-02_RF15_F15_07,pill,FCON-02,RF15_Popover_Acct,F15_07,1,,standard:empty,,,,yes,There is no Rating,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Inverse hover text on blank record,mappedField:AccountId
+pill_FCON-03_RF15_F15_07,pill,FCON-03,RF15_Popover_Acct,F15_07,1,Cold,standard:reward,,,,no,,,,,,spec,,Inverse hover text on blank record,mappedField:AccountId
+pill_FCON-04_RF15_F15_07,pill,FCON-04,RF15_Popover_Acct,F15_07,0,,,,,,,,,,,,unconfirmed,"mappedField points at a blank AccountId: nothing, an illustration or an error? unconfirmed",Inverse hover text on blank record,mappedField:AccountId
+pill_FEAT-01_RF16_F16_01,pill,FEAT-01,RF16_Actions_Acct,F16_01,1,CRM,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,URL action with merge token: resolved target,
+pill_FEAT-02_RF16_F16_01,pill,FEAT-02,RF16_Actions_Acct,F16_01,0,,,,,,,,,,,,spec,,URL action with merge token: resolved target,
+pill_FEAT-03_RF16_F16_01,pill,FEAT-03,RF16_Actions_Acct,F16_01,1,ZZZ,standard:account,,,,yes,Open the quote,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,URL action with merge token: resolved target,
+pill_FEAT-01_RF16_F16_02,pill,FEAT-01,RF16_Actions_Acct,F16_02,1,FEAT-FULL-001,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open""",
+pill_FEAT-02_RF16_F16_02,pill,FEAT-02,RF16_Actions_Acct,F16_02,0,,,,,,,,,,,,spec,,"No Action Button Label: default ""Open""",
+pill_FEAT-03_RF16_F16_02,pill,FEAT-03,RF16_Actions_Acct,F16_02,1,FEAT-COLD-003,standard:number_input,,,,yes,Default label,Open,,false,https://www.yahoo.com,spec,,"No Action Button Label: default ""Open""",
+pill_FEAT-01_RF16_F16_03,pill,FEAT-01,RF16_Actions_Acct,F16_03,1,FEAT-FULL-001,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text,
+pill_FEAT-02_RF16_F16_03,pill,FEAT-02,RF16_Actions_Acct,F16_03,0,,,,,,,,,,,,spec,,Custom button label and help text,
+pill_FEAT-03_RF16_F16_03,pill,FEAT-03,RF16_Actions_Acct,F16_03,1,FEAT-COLD-003,standard:number_input,,,,yes,Custom label,Check Quote,Opens Yahoo in a new tab,false,https://www.yahoo.com,spec,,Custom button label and help text,
+pill_FEAT-01_RF16_F16_04,pill,FEAT-01,RF16_Actions_Acct,F16_04,1,FEAT-FULL-001,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+pill_FEAT-02_RF16_F16_04,pill,FEAT-02,RF16_Actions_Acct,F16_04,0,,,,,,,,,,,,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+pill_FEAT-03_RF16_F16_04,pill,FEAT-03,RF16_Actions_Acct,F16_04,1,FEAT-COLD-003,standard:number_input,,,,yes,Confirm required,Open,,true,https://www.yahoo.com,spec,,Confirm Required: clicking the indicator does nothing; popover button works,
+pill_FEAT-01_RF16_F16_05,pill,FEAT-01,RF16_Actions_Acct,F16_05,1,Hot,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record,
+pill_FEAT-02_RF16_F16_05,pill,FEAT-02,RF16_Actions_Acct,F16_05,1,,standard:empty,,,,yes,No rating yet,Open,,false,https://www.yahoo.com,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action on: button present on blank record,
+pill_FEAT-03_RF16_F16_05,pill,FEAT-03,RF16_Actions_Acct,F16_05,1,Cold,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action on: button present on blank record,
+pill_FEAT-01_RF16_F16_06,pill,FEAT-01,RF16_Actions_Acct,F16_06,1,Hot,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record,
+pill_FEAT-02_RF16_F16_06,pill,FEAT-02,RF16_Actions_Acct,F16_06,1,,standard:empty,,,,yes,No rating yet,,,,,unconfirmed,false state with no inverse Badge/Pill Text: empty label is a guess,Show False/Blank Action off: no button on blank record,
+pill_FEAT-03_RF16_F16_06,pill,FEAT-03,RF16_Actions_Acct,F16_06,1,Cold,standard:reward,,,,yes,,Open,,false,https://www.yahoo.com,spec,,Show False/Blank Action off: no button on blank record,
+pill_FEAT-01_RF16_F16_07,pill,FEAT-01,RF16_Actions_Acct,F16_07,1,FEAT-FULL-001,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+pill_FEAT-02_RF16_F16_07,pill,FEAT-02,RF16_Actions_Acct,F16_07,0,,,,,,,,,,,,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+pill_FEAT-03_RF16_F16_07,pill,FEAT-03,RF16_Actions_Acct,F16_07,1,FEAT-COLD-003,standard:number_input,,,,yes,Flow modal,Launch,,false,Regression_Feature_Display,spec,,"Flow Modal action: default label ""Launch""; modal opens",
+pill_FEAT-01_RF16_F16_08,pill,FEAT-01,RF16_Actions_Acct,F16_08,1,CRM,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/CRM,spec,,"Action with no hover text: popover has footer only, no body",
+pill_FEAT-02_RF16_F16_08,pill,FEAT-02,RF16_Actions_Acct,F16_08,0,,,,,,,,,,,,spec,,"Action with no hover text: popover has footer only, no body",
+pill_FEAT-03_RF16_F16_08,pill,FEAT-03,RF16_Actions_Acct,F16_08,1,ZZZ,standard:account,,,,yes,,Open,,false,https://finance.yahoo.com/quote/ZZZ,spec,,"Action with no hover text: popover has footer only, no body",
+pill_FEAT-01_RF18_F18_01,pill,FEAT-01,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY,
+pill_FEAT-02_RF18_F18_01,pill,FEAT-02,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY,
+pill_FEAT-03_RF18_F18_01,pill,FEAT-03,RF18_Dates_Acct,F18_01,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals TODAY,
+pill_FEAT-01_RF18_F18_02,pill,FEAT-01,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY,
+pill_FEAT-02_RF18_F18_02,pill,FEAT-02,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY,
+pill_FEAT-03_RF18_F18_02,pill,FEAT-03,RF18_Dates_Acct,F18_02,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal TODAY,
+pill_FEAT-01_RF18_F18_03,pill,FEAT-01,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY,
+pill_FEAT-02_RF18_F18_03,pill,FEAT-02,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY,
+pill_FEAT-03_RF18_F18_03,pill,FEAT-03,RF18_Dates_Acct,F18_03,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start TODAY,
+pill_FEAT-01_RF18_F18_04,pill,FEAT-01,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY,
+pill_FEAT-02_RF18_F18_04,pill,FEAT-02,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY,
+pill_FEAT-03_RF18_F18_04,pill,FEAT-03,RF18_Dates_Acct,F18_04,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End TODAY,
+pill_FEAT-01_RF18_F18_05,pill,FEAT-01,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY,
+pill_FEAT-02_RF18_F18_05,pill,FEAT-02,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY,
+pill_FEAT-03_RF18_F18_05,pill,FEAT-03,RF18_Dates_Acct,F18_05,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End TODAY,
+pill_FEAT-01_RF18_F18_06,pill,FEAT-01,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY,
+pill_FEAT-02_RF18_F18_06,pill,FEAT-02,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY,
+pill_FEAT-03_RF18_F18_06,pill,FEAT-03,RF18_Dates_Acct,F18_06,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start TODAY,
+pill_FEAT-01_RF18_F18_07,pill,FEAT-01,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH,
+pill_FEAT-02_RF18_F18_07,pill,FEAT-02,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH,
+pill_FEAT-03_RF18_F18_07,pill,FEAT-03,RF18_Dates_Acct,F18_07,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals LAST MONTH,
+pill_FEAT-01_RF18_F18_08,pill,FEAT-01,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+pill_FEAT-02_RF18_F18_08,pill,FEAT-02,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+pill_FEAT-03_RF18_F18_08,pill,FEAT-03,RF18_Dates_Acct,F18_08,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Does Not Equal LAST MONTH,
+pill_FEAT-01_RF18_F18_09,pill,FEAT-01,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH,
+pill_FEAT-02_RF18_F18_09,pill,FEAT-02,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH,
+pill_FEAT-03_RF18_F18_09,pill,FEAT-03,RF18_Dates_Acct,F18_09,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before Start LAST MONTH,
+pill_FEAT-01_RF18_F18_10,pill,FEAT-01,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH,
+pill_FEAT-02_RF18_F18_10,pill,FEAT-02,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH,
+pill_FEAT-03_RF18_F18_10,pill,FEAT-03,RF18_Dates_Acct,F18_10,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After End LAST MONTH,
+pill_FEAT-01_RF18_F18_11,pill,FEAT-01,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH,
+pill_FEAT-02_RF18_F18_11,pill,FEAT-02,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH,
+pill_FEAT-03_RF18_F18_11,pill,FEAT-03,RF18_Dates_Acct,F18_11,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Before End LAST MONTH,
+pill_FEAT-01_RF18_F18_12,pill,FEAT-01,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH,
+pill_FEAT-02_RF18_F18_12,pill,FEAT-02,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH,
+pill_FEAT-03_RF18_F18_12,pill,FEAT-03,RF18_Dates_Acct,F18_12,1,No date,standard:empty,,,,no,,,,,,spec,,Date: After Start LAST MONTH,
+pill_FEAT-01_RF18_F18_13,pill,FEAT-01,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH,
+pill_FEAT-02_RF18_F18_13,pill,FEAT-02,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH,
+pill_FEAT-03_RF18_F18_13,pill,FEAT-03,RF18_Dates_Acct,F18_13,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS MONTH,
+pill_FEAT-01_RF18_F18_14,pill,FEAT-01,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+pill_FEAT-02_RF18_F18_14,pill,FEAT-02,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+pill_FEAT-03_RF18_F18_14,pill,FEAT-03,RF18_Dates_Acct,F18_14,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals NEXT 30 DAYS,
+pill_FEAT-01_RF18_F18_15,pill,FEAT-01,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR,
+pill_FEAT-02_RF18_F18_15,pill,FEAT-02,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR,
+pill_FEAT-03_RF18_F18_15,pill,FEAT-03,RF18_Dates_Acct,F18_15,1,No date,standard:empty,,,,no,,,,,,spec,,Date: Equals THIS YEAR,
+pill_FCON-01_RF20_F20_01,pill,FCON-01,RF20_Contact_Con,F20_01,1,Do not call,standard:call,,,,yes,On the do-not-call list,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+pill_FCON-02_RF20_F20_01,pill,FCON-02,RF20_Contact_Con,F20_01,1,Callable,standard:empty,,,,yes,OK to call,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+pill_FCON-03_RF20_F20_01,pill,FCON-03,RF20_Contact_Con,F20_01,1,Do not call,standard:call,,,,yes,On the do-not-call list,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+pill_FCON-04_RF20_F20_01,pill,FCON-04,RF20_Contact_Con,F20_01,1,Callable,standard:empty,,,,yes,OK to call,,,,,spec,,Checkbox on Contact: true state and the false/blank inverse state,
+pill_FCON-01_RF20_F20_02,pill,FCON-01,RF20_Contact_Con,F20_02,1,Feature Contact Full,standard:contact,,,,yes,Last name is Feature Contact Full,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+pill_FCON-02_RF20_F20_02,pill,FCON-02,RF20_Contact_Con,F20_02,1,Feature Contact Blank,standard:contact,,,,yes,Last name is Feature Contact Blank,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+pill_FCON-03_RF20_F20_02,pill,FCON-03,RF20_Contact_Con,F20_02,1,Cold contact,standard:reward,#c23934,#ffffff,,no,,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+pill_FCON-04_RF20_F20_02,pill,FCON-04,RF20_Contact_Con,F20_02,1,Feature Contact Orphan,standard:contact,,,,yes,Last name is Feature Contact Orphan,,,,,spec,,Text on Contact: merge token in hover; badge label falls back to the field value; extension on Contains Cold,
+pill_FCON-01_RF20_F20_03,pill,FCON-01,RF20_Contact_Con,F20_03,1,Feature Full,standard:account,,,,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+pill_FCON-02_RF20_F20_03,pill,FCON-02,RF20_Contact_Con,F20_03,1,Feature Blank,standard:account,,,,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+pill_FCON-03_RF20_F20_03,pill,FCON-03,RF20_Contact_Con,F20_03,1,Feature Cold,standard:account,,,,yes,Parent account name,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+pill_FCON-04_RF20_F20_03,pill,FCON-04,RF20_Contact_Con,F20_03,0,,,,,,,,,,,,spec,,Advanced Field traversal Contact -> Account.Name (blank when the contact has no account),
+pill_FEAT-01_RF17_F15_05,pill,FEAT-01,RF17_PopoverFallback_Acct,F15_05,1,FEAT-FULL-001,standard:number_input,,,,yes,FEAT-FULL-001,,,,,spec,,No hover text and no action: no popover,
+pill_FEAT-02_RF17_F15_05,pill,FEAT-02,RF17_PopoverFallback_Acct,F15_05,0,,,,,,,,,,,,spec,,No hover text and no action: no popover,
+pill_FEAT-03_RF17_F15_05,pill,FEAT-03,RF17_PopoverFallback_Acct,F15_05,1,FEAT-COLD-003,standard:number_input,,,,yes,FEAT-COLD-003,,,,,spec,,No hover text and no action: no popover,
+pill_FEAT-01_RF17_F15_06,pill,FEAT-01,RF17_PopoverFallback_Acct,F15_06,1,25,standard:employee,,,,yes,25,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+pill_FEAT-02_RF17_F15_06,pill,FEAT-02,RF17_PopoverFallback_Acct,F15_06,0,,,,,,,,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),
+pill_FEAT-03_RF17_F15_06,pill,FEAT-03,RF17_PopoverFallback_Acct,F15_06,1,3,standard:employee,,,,yes,3,,,,,spec,,No hover text: popover appears only when showFieldValueAsHoverFallback is on (Popover Fallback tab),

@@ -19,3 +19,4 @@ E18_12,F18_12,After Start,LAST MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,
 E18_13,F18_13,Equals,THIS MONTH,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
 E18_14,F18_14,Equals,NEXT 30 DAYS,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
 E18_15,F18_15,Equals,THIS YEAR,,,1,standard:key_dates,,,#cdefc4,,,Match,,,dev-only
+E20_02,F20_02,Contains,Cold,,,1,standard:reward,,,#c23934,#ffffff,,Cold contact,#ffffff,,dev-only

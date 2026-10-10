@@ -1,6 +1,11 @@
-﻿bundle_id,title,sobject,description,env
-RF14_BadgePill_Acct,F14 Badge/Pill fields (Account),Account,"Feature test: Badge/Pill text, color, position, inverse variants, extension ownership",dev-only
-RF15_Popover_Acct,F15 Popover hover text and merge tokens (Account),Account,"Feature test: hover popover body, {!Field} merge tokens, popover presence rules",dev-only
-RF16_Actions_Acct,F16 Popover actions (Account),Account,"Feature test: action button label/help/confirm/false-state gating, URL and Flow Modal actions",dev-only
-RF17_PopoverFallback_Acct,F17 Popover field-value fallback (Account),Account,"Feature test: showFieldValueAsHoverFallback=true on the page. Reuses F15_05/F15_06 (no hover text), so a popover shows the field value instead of nothing",dev-only
-RF18_Dates_Acct,F18 Date operators (Account),Account,"Feature test: relative-date extensions on Test_Date__c -- all 6 date operators against TODAY and LAST MONTH, plus THIS MONTH / NEXT 30 DAYS / THIS YEAR ranges. Expected results are computed at capture time (see features.dates.spec.ts).",dev-only
+﻿bundle_id,title,sobject,description,env,card_icon,card_text,card_bg,card_fg
+RF14_BadgePill_Acct,F14 Badge/Pill fields (Account),Account,"Feature test: Badge/Pill text, color, position, inverse variants, extension ownership",dev-only,,,,
+RF15_Popover_Acct,F15 Popover hover text and merge tokens (Account),Account,"Feature test: hover popover body, {!Field} merge tokens, popover presence rules",dev-only,,,,
+RF16_Actions_Acct,F16 Popover actions (Account),Account,"Feature test: action button label/help/confirm/false-state gating, URL and Flow Modal actions",dev-only,,,,
+RF17_PopoverFallback_Acct,F17 Popover field-value fallback (Account),Account,"Feature test: showFieldValueAsHoverFallback=true on the page. Reuses F15_05/F15_06 (no hover text), so a popover shows the field value instead of nothing",dev-only,,,,
+RF18_Dates_Acct,F18 Date operators (Account),Account,"Feature test: relative-date extensions on Test_Date__c -- all 6 date operators against TODAY and LAST MONTH, plus THIS MONTH / NEXT 30 DAYS / THIS YEAR ranges. Expected results are computed at capture time (see features.dates.spec.ts).",dev-only,,,,
+RF19a_CardBoth_Acct,F19a Card colours: background + foreground,Account,Feature test: Card_Icon_Background/Foreground on the card header and in the Key (the shared applyColorVars bug),dev-only,standard:account,Account {!Name} is rated {!Rating},#0b5cab,#ffffff
+RF19b_CardBgOnly_Acct,F19b Card colours: background only,Account,Feature test: Card_Icon_Background/Foreground on the card header and in the Key (the shared applyColorVars bug),dev-only,standard:account,Card colour test (background only),#a85700,
+RF19c_CardFgOnly_Acct,F19c Card colours: foreground only,Account,Feature test: Card_Icon_Background/Foreground on the card header and in the Key (the shared applyColorVars bug),dev-only,standard:account,Card colour test (foreground only),,#c23934
+RF19d_CardNone_Acct,F19d Card colours: none,Account,Feature test: Card_Icon_Background/Foreground on the card header and in the Key (the shared applyColorVars bug),dev-only,standard:account,Card colour test (no custom colours),,
+RF20_Contact_Con,F20 Contact indicators and mappedField,Contact,"Feature test: Contact object; DoNotCall checkbox, LastName text + extension, Advanced Field Account.Name",dev-only,standard:contact,"Feature test: checkbox, text with extension, and advanced-field indicators on Contact",,

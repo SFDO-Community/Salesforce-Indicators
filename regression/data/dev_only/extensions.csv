@@ -19,3 +19,4 @@
 "true","","","Match","THIS MONTH","Feature test extension E18_13","","#cdefc4","","standard:key_dates","","F18_13","E18_13","","","1","","Equals"
 "true","","","Match","NEXT 30 DAYS","Feature test extension E18_14","","#cdefc4","","standard:key_dates","","F18_14","E18_14","","","1","","Equals"
 "true","","","Match","THIS YEAR","Feature test extension E18_15","","#cdefc4","","standard:key_dates","","F18_15","E18_15","","","1","","Equals"
+"true","","#ffffff","Cold contact","Cold","Feature test extension E20_02","","#c23934","#ffffff","standard:reward","","F20_02","E20_02","","","1","","Contains"

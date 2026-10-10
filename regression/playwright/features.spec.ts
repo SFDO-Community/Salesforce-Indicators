@@ -31,6 +31,13 @@ const NO_HOVER = !!process.env.NO_HOVER;
 
 const STYLE_TABS: Record<string, string> = { avatar: 'Avatar', badge: 'Badge', pill: 'Pill' };
 const BUNDLE_ORDER = ['RF14_BadgePill_Acct', 'RF15_Popover_Acct', 'RF17_PopoverFallback_Acct', 'RF16_Actions_Acct', 'RF18_Dates_Acct'];
+// OBJECT=Contact runs the Contact page instead (records FCON-01..04): ONE tab, "Features", holding the Contact bundle in three styles and then the
+// Account bundle RF15 shown through mappedField=AccountId (the oracle files those rows under the Contact's record id).
+const OBJECT = (process.env.OBJECT || 'Account') as 'Account' | 'Contact';
+const CONTACT_ORDER = [
+  ...['avatar', 'badge', 'pill'].map(style => ({ style, name: 'RF20_Contact_Con' })),
+  ...['avatar', 'badge', 'pill'].map(style => ({ style, name: 'RF15_Popover_Acct' })),
+];
 const prefix = (b: string) => b.split('_')[0];
 const CONTAINER = '.ind-popover-container';
 
@@ -84,7 +91,7 @@ async function settle(bundle: Locator, want: number) {
   }
 }
 
-interface Actual { icon: string; label: string; pos: string; color: string; bg: string; popover: string; body: string; button: string; help: string }
+interface Actual { icon: string; label: string; pos: string; color: string; bg: string; popover: string; body: string; button: string; help: string; badVars: string }
 
 async function readIndicator(page: Page, container: Locator, style: string, popoverShot: string): Promise<Actual> {
   let icon = '', label = '', pos = '', color = '', bg = '';
@@ -108,6 +115,10 @@ async function readIndicator(page: Page, container: Locator, style: string, popo
       bg = String(p.bg ?? '');
     }
   }
+  // Guard for a bug class found 2026-10-08: applyColorVars wrote the TEXT "undefined" into a CSS variable when only one of
+  // background/foreground was configured (glyph rendered black). Any inline custom property holding that text is a defect.
+  const styles: string[] = await container.locator('[style*="--"]').evaluateAll((els: Element[]) => els.map(e => (e as HTMLElement).style.cssText)).catch(() => []);
+  const badVars = styles.filter(s => /undefined/.test(s)).join(' | ');
   let popover = 'no', body = '', button = '', help = '';
   if (!NO_HOVER) {
     // Move the mouse to the container's centre instead of locator.hover(): hover() runs actionability checks and
@@ -138,7 +149,7 @@ async function readIndicator(page: Page, container: Locator, style: string, popo
     // let this popover close before the next target, or it can cover (and re-trigger) its neighbour
     await page.locator('.ind-popover').first().waitFor({ state: 'detached', timeout: 1_500 }).catch(() => {});
   }
-  return { icon, label, pos, color, bg, popover, body, button, help };
+  return { icon, label, pos, color, bg, popover, body, button, help, badVars };
 }
 
 const norm = (s: string) => (s ?? '').trim().toLowerCase();
@@ -151,6 +162,7 @@ function compare(style: string, e: ExpInd, a: Actual): string[] {
     if (norm(e.color) !== norm(a.color)) d.push(`text_color exp='${e.color}' act='${a.color}'`);
     if (style === 'badge' && norm(e.pos) !== norm(a.pos)) d.push(`position exp=${e.pos} act=${a.pos}`);
   }
+  if (a.badVars) d.push(`CSS variable holds the text 'undefined': ${a.badVars}`);
   if (!NO_HOVER) {
     if (e.popover !== a.popover) d.push(`popover exp=${e.popover} act=${a.popover}`);
     else if (e.popover === 'yes') {
@@ -166,7 +178,7 @@ const H = ['key', 'style', 'record_id', 'bundle', 'item_id', 'result', 'basis', 
 
 test('features: style x record x bundle vs expected', async ({ page }) => {
   page.setDefaultTimeout(15_000);   // no action may wait for the whole test timeout
-  const ids = featureRecordIds();
+  const ids = featureRecordIds(OBJECT);
   fs.mkdirSync(path.join(OUT, 'shots', 'popovers'), { recursive: true });
   const origin = await loginAndGetOrigin(page);
 
@@ -176,14 +188,20 @@ test('features: style x record x bundle vs expected', async ({ page }) => {
   const priorRaws = new Map<string, any>(fs.existsSync(rawFile) ? (JSON.parse(fs.readFileSync(rawFile, 'utf-8')) as any[]).map(r => [r.key, r]) : []);
 
   const records = Object.keys(ids).sort().filter(r => !ONLY_RECORDS.length || ONLY_RECORDS.includes(r));
-  const styles = Object.keys(STYLE_TABS).filter(s => !ONLY_STYLES.length || ONLY_STYLES.includes(s));
+  // A run that finds no records tests NOTHING yet would report success (seen when an org was mid-reload): fail loudly instead.
+  if (!records.length) throw new Error(`No ${OBJECT} feature records found in ${ORG} (looked for ${ONLY_RECORDS.join(',') || 'all'}). Is the dataset loaded? Use --org <alias>, not a default org.`);
+  const styleOk = (s: string) => !ONLY_STYLES.length || ONLY_STYLES.includes(s);
+  // A "group" = one tab and the bundle components on it, top to bottom (index = position among the visible bundle components).
+  const groups: { tab: string; entries: { style: string; name: string; index: number }[] }[] = OBJECT === 'Account'
+    ? Object.keys(STYLE_TABS).filter(styleOk).map(style => ({ tab: STYLE_TABS[style], entries: BUNDLE_ORDER.map((name, index) => ({ style, name, index })) }))
+    : [{ tab: 'Features', entries: CONTACT_ORDER.map((e, index) => ({ ...e, index })).filter(e => styleOk(e.style)) }];
 
   for (const rid of records) {
     console.log(`>> ${rid}: opening record`);
-    await gotoStable(page, `${origin}/lightning/r/Account/${ids[rid].id}/view`);
+    await gotoStable(page, `${origin}/lightning/r/${OBJECT}/${ids[rid].id}/view`);
     await page.getByRole('tab', { name: 'Details' }).waitFor({ timeout: 60_000 });
-    for (const style of styles) {
-      await openTab(page, STYLE_TABS[style]);
+    for (const grp of groups) {
+      await openTab(page, grp.tab);
       await page.locator(BUNDLE_EL).first().waitFor({ timeout: 30_000 });
       // Icon sprites load lazily and a freshly created org is slow at it: a screenshot taken right after the DOM settles can show
       // coloured circles with NO glyph (seen on the first SLDS1 run in a new org). DOM reads were unaffected, but a pixel baseline
@@ -191,8 +209,8 @@ test('features: style x record x bundle vs expected', async ({ page }) => {
       // timeout: doing it per bundle cost ~2 extra minutes per record and blew the run's time budget).
       await page.waitForLoadState('networkidle', { timeout: 8_000 }).catch(() => {});
       await page.waitForTimeout(1_500);
-      for (let bi = 0; bi < BUNDLE_ORDER.length; bi++) {
-        const bundleName = BUNDLE_ORDER[bi];
+      for (const ent of grp.entries) {
+        const { style, name: bundleName, index: bi } = ent;
         if (ONLY_BUNDLES.length && !ONLY_BUNDLES.includes(prefix(bundleName))) continue;
         const exp = expectedFor(style, rid, bundleName);
         const shotId = `${style}_${rid}_${prefix(bundleName)}`;

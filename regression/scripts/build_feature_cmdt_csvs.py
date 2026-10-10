@@ -62,7 +62,8 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
 
     write("bundles.csv", [{
-        "Active__c": "true", "Card_Icon__c": "standard:trailhead", "Card_Text__c": b["description"],
+        "Active__c": "true", "Card_Icon__c": b.get("card_icon") or "standard:trailhead", "Card_Text__c": b.get("card_text") or b["description"],
+        "Card_Icon_Background__c": b.get("card_bg", ""), "Card_Icon_Foreground__c": b.get("card_fg", ""),
         "Card_Title__c": b["title"], "Description__c": b["description"],
         "MasterLabel": b["bundle_id"], "sObject__c": b["sobject"],
     } for b in bundles])
@@ -72,6 +73,8 @@ def main():
         "Display_Multiple__c": i["display_multiple"] or "false",
         "Empty_Static_Text_Behavior__c": i["empty_static"] or "Use Icon Only",
         "Field__c": i["field_api"], "Hover_Text__c": i["hover"],
+        "Advanced_Field__c": i.get("advanced_field", ""),
+        "Advanced_Field_Label__c": i.get("advanced_field", "").replace(".", " "),
         "Icon_Background__c": i["bg"], "Icon_Foreground__c": i["fg"],
         "Icon_Value__c": i["icon"], "Image__c": i["image"], "Static_Text__c": i["static_text"],
         "Badge_Pill_Text__c": i["badge_text"], "Badge_Pill_Text_Color__c": i["badge_color"],

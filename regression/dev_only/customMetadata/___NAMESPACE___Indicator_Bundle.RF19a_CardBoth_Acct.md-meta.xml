@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>RF19a_CardBoth_Acct</label>
+    <protected>false</protected>
+    <values>
+        <field>%%%NAMESPACE%%%Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Icon_Background__c</field>
+        <value xsi:type="xsd:string">#0b5cab</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Icon_Foreground__c</field>
+        <value xsi:type="xsd:string">#ffffff</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Icon__c</field>
+        <value xsi:type="xsd:string">standard:account</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Text__c</field>
+        <value xsi:type="xsd:string">Account {!Name} is rated {!Rating}</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Card_Title__c</field>
+        <value xsi:type="xsd:string">F19a Card colours: background + foreground</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Description__c</field>
+        <value xsi:type="xsd:string">Feature test: Card_Icon_Background/Foreground on the card header and in the Key (the shared applyColorVars bug)</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%sObject__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,5 @@
+﻿record_id,sobject,LastName,FirstName,DoNotCall,account,Account.Name
+FCON-01,Contact,Feature Contact Full,Feature,true,FEAT-01,Feature Full
+FCON-02,Contact,Feature Contact Blank,Feature,,FEAT-02,Feature Blank
+FCON-03,Contact,Feature Contact Cold,Feature,true,FEAT-03,Feature Cold
+FCON-04,Contact,Feature Contact Orphan,Feature,,,

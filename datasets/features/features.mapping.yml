@@ -15,3 +15,17 @@ Insert Account:
   - Description
   - Site
   select_options: {}
+Insert Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+  - FirstName
+  - LastName
+  - DoNotCall
+  - Title
+  lookups:
+    AccountId:
+      table:
+      - Account
+      key_field: AccountId
+  select_options: {}
