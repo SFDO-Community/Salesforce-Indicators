@@ -1,0 +1,137 @@
+area: general-regression
+area_title: "General regression pass"
+area_risk: medium
+area_summary: >
+  IndicatorController.cls and Cmdt.cls were refactored on the path every bundle
+  load goes through, including the "Unbundled Items" (-1) view — so ordinary,
+  untouched configs deserve a pass too, not just the new features.
+paths:
+  - force-app/main/default/classes/Cmdt.cls
+  - force-app/main/default/classes/IndicatorController.cls
+  - force-app/main/default/lwc/indicatorBundle
+
+scenarios:
+  - slug: general-plain-config-pixel-identical
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Load a bundle that uses none of the new fields (no dates, no actions,
+      Avatar style) and compare its rendering side-by-side with a main org.
+    target: Plain, unconfigured-for-new-features bundle
+    wait_for: Bundle is rendered
+    expect: Pixel-for-pixel and data-for-data identical to main.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: general-unbundled-items-view
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Load the "Unbundled Items" view (bundle name -1) if configured in your
+      org.
+    target: Indicators component with bundleName = -1
+    wait_for: Unbundled items render
+    expect: Unassigned indicator items still render correctly.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: general-decimal-order-value-positioning
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Set an Order value with a decimal, e.g. 1.5, to insert an item between two
+      existing ones.
+    target: Indicator_Bundle_Item__mdt Order__c set to a decimal value
+    wait_for: Items render in the resulting order
+    expect: >
+      Item takes the expected position without renumbering siblings.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: general-inline-help-text-review
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: manual-only
+    manual_only_reason: >
+      Requires human judgment of whether reworded help text is clear and
+      accurate, not a pass/fail assertion.
+    app: salesforce
+    action: >
+      Spot-check the reworded inline help text on Active, Description, Advanced
+      Field, Display Multiple, Show False/Blank, Field, and sObject in Setup ->
+      Object Manager.
+    target: Field-level help text on Indicator_Item__mdt / Indicator_Bundle_Item__mdt
+    wait_for: n/a — this is a manual review step
+    expect: >
+      Text reads clearly and matches actual behavior — flag anything confusing
+      or inaccurate.
+    shot: false
+    fixture: null
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: general-full-sandbox-deploy
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: manual-only
+    manual_only_reason: >
+      Requires deploying to a real sandbox org outside the automated capture
+      environment.
+    app: salesforce
+    action: >
+      Deploy this branch to a full sandbox (not just a scratch org) and confirm
+      it deploys cleanly at that org's API version.
+    target: force-app deployed to a full sandbox
+    wait_for: Deploy completes without error
+    expect: >
+      No API-version deploy errors from the API version bump across LWC
+      metadata.
+    shot: false
+    fixture: null
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

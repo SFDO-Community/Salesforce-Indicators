@@ -12,20 +12,13 @@ git add <explicit paths>                     # never `git add -A` or `git add .`
 git diff --cached --stat                      # counts match what you intended
 git diff --cached --check                     # no whitespace errors
 git diff --cached | grep -iE "1password|trailblaze|access_token|sfdxurl"    # secret scan: expect nothing
-git diff --cached --name-only | grep -E "^(capture|temporary-resources|unpackaged|\.claude)|TestPlan|Test Plan|regression/(catalog|schema)|\.gitignore|^package"   # expect nothing (unless the commit is the skill itself)
+git diff --cached --name-only | grep -E "^(capture|temporary-resources|unpackaged|\.claude)|TestPlan|Test Plan|^catalog/|\.gitignore|^package"   # expect nothing (unless the commit is the skill itself)
 git status --short                            # what is left unstaged (should be the maintainer's own files)
 ```
 For product-code commits also run the unit suite (`npx sfdx-lwc-jest -- force-app`).
 
-## The README hunk problem
-`regression/README.md` carries a long **pending hunk of the maintainer's own** (the "Regression scenario catalog" section near the top). Stage only your hunks with a filtered patch; interactive `git add -p` is not available:
-```python
-d = subprocess.run(['git','diff','-U3','--','regression/README.md'], capture_output=True, text=True, encoding='utf-8').stdout
-head, *hunks = re.split(r'(?m)^(?=@@ )', d)
-keep = [h for h in hunks if 'Regression scenario catalog' not in h]      # exactly one hunk must be left out: assert it
-open(patch, 'w', newline='').write(head + ''.join(keep))                # then: git apply --cached --recount <patch>
-```
-Afterwards `git status` shows `MM` for the README: staged = yours, unstaged = theirs. Check `git diff --cached regression/README.md | grep -ci "scenario catalog"` is 0.
+## README hunks
+`regression/README.md` used to carry a pending hunk of the maintainer's own (the scenario catalog text); it now lives in `catalog/README.md`. If `git diff regression/README.md` ever shows hunks that are not yours, stage only yours with a filtered patch (`git diff -U3 -- <file>`, split on `^@@`, `git apply --cached --recount`); interactive `git add -p` is not available.
 
 ## Files that are never yours to stage
 `.gitignore`, `package.json`, `package-lock.json` (the maintainer's own edits); volunteer material and `temporary-resources/*` (and **never** `TestPlan.md` / `Test Plan.docx`: live password-share links);

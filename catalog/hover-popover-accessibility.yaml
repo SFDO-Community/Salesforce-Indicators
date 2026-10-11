@@ -1,0 +1,110 @@
+area: hover-popover-accessibility
+area_title: "Hover popover & accessibility"
+area_risk: low
+area_summary: >
+  Avatar, badge, and pill indicators all open a popover with hover text (and an
+  action button, if configured) instead of a plain title-attribute tooltip.
+  Avatar alt text now reads the field's label instead of raw hover text.
+paths:
+  - force-app/main/default/lwc/indicatorBundleItem
+  - force-app/main/default/lwc/indicatorBundleBadge
+  - force-app/main/default/lwc/indicatorBundlePill
+
+scenarios:
+  - slug: hover-popover-desktop-open
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: On desktop, hover an indicator with Hover Text configured.
+    target: Indicator with Hover Text configured
+    wait_for: Popover is visible below-left of the indicator with a top-left nubbin
+    expect: Popover opens below-left with a top-left nubbin; closes on mouse-leave.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: hover-popover-stays-open-on-mouse-into-popover
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Move the mouse from the indicator directly into the open popover.
+    target: Open hover popover
+    wait_for: Popover remains present in the DOM
+    expect: Popover stays open, doesn't flicker-close.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: hover-avatar-alt-text-accessibility
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Inspect an avatar's alt text, including one where Hover Text is blank or a
+      merge-token template.
+    target: Avatar-style indicator image/icon alt attribute
+    wait_for: Alt attribute value is present on the element
+    expect: >
+      Alt text reads the field's label, never blank or raw {!Field} merge-token
+      text.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: hover-popover-mobile-app-tap
+    added: 2026-09-07
+    added_reason: >
+      Added per artifact-feedback.md item 6 ("Hover, Popover, and Accessibility:
+      We should also be checking on mobile app.") during the regression-catalog
+      unification.
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: manual-only
+    manual_only_reason: >
+      Requires the Salesforce mobile app on a real or emulated device — not
+      reproducible through the browser-based capture pipeline.
+    app: salesforce
+    action: >
+      In the Salesforce mobile app, open a record with a configured indicator
+      and tap it.
+    target: Indicator with Hover Text configured, viewed in the mobile app
+    wait_for: Popover opens on tap
+    expect: >
+      Tapping opens the popover consistent with the touch behavior described in
+      touch-interaction.yaml (tap opens popover only; the click action, if any,
+      fires only from the popover's own action button).
+    shot: false
+    fixture: null
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: "See touch-interaction.yaml — same tap-vs-click-action semantics, mobile app surface."

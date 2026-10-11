@@ -1,6 +1,6 @@
 ---
 name: regression-checklist-from-catalog
-description: Generates the human-facing regression checklist artifact (an HTML page volunteers work through by hand) from the durable scenario catalog under regression/catalog/, either for a full seasonal pass or scoped to a branch/PR diff. Use this whenever someone needs a regression test plan for a sprint, a release, or "did this branch break anything" review, or asks to regenerate/update the sprint regression checklist. This is the READ side of the regression catalog — it never writes to regression/catalog/*.yaml (that's regression-scenario-author's job) and never opens a Salesforce org or writes Playwright code (that's documentation-capture-from-steps). Do NOT use this to add or edit a scenario.
+description: Generates the human-facing regression checklist artifact (an HTML page volunteers work through by hand) from the durable scenario catalog under catalog/, either for a full seasonal pass or scoped to a branch/PR diff. Use this whenever someone needs a regression test plan for a sprint, a release, or "did this branch break anything" review, or asks to regenerate/update the sprint regression checklist. This is the READ side of the regression catalog — it never writes to catalog/*.yaml (that's regression-scenario-author's job) and never opens a Salesforce org or writes Playwright code (that's documentation-capture-from-steps). Do NOT use this to add or edit a scenario.
 arguments:
   - name: mode
     description: "--seasonal for every active scenario across the whole catalog, or --diff <base>..<compare> for a sprint scoped to a branch/PR"
@@ -8,22 +8,22 @@ arguments:
 
 # Checklist from the catalog
 
-Turns the regression scenario catalog (`regression/catalog/*.yaml`, see
-`regression/README.md` and `regression/schema/scenario-schema.md`) into the HTML checklist
+Turns the regression scenario catalog (`catalog/*.yaml`, see
+`catalog/README.md` and `catalog/schema/scenario-schema.md`) into the HTML checklist
 artifact volunteers actually work through — the generator that replaces hand-authoring one
 from scratch every sprint.
 
 ```
-regression/catalog/*.yaml ──▶ [this skill] ──▶ published checklist artifact
-regression/before-you-start.yaml ──┘
+catalog/*.yaml ──▶ [this skill] ──▶ published checklist artifact
+catalog/before-you-start.yaml ──┘
 ```
 
-Read `regression/README.md` and `regression/schema/scenario-schema.md` before starting if you
+Read `catalog/README.md` and `catalog/schema/scenario-schema.md` before starting if you
 haven't already loaded them this session.
 
 ## 1. Select scenarios
 
-- **`--seasonal`**: every scenario with `status: active` across every `regression/catalog/*.yaml`
+- **`--seasonal`**: every scenario with `status: active` across every `catalog/*.yaml`
   file. No git diff involved — this is the "did a Salesforce platform release break anything"
   pass.
 - **`--diff <base>..<compare>`**: run `git diff --name-only <base>...<compare>` and:
@@ -52,7 +52,7 @@ reinvent the CSS each run; the point of extracting the template was so this does
 - **`{{KICKER}}` / `{{H1}}` / `{{LEDE}}` / `{{META_CHIPS}}`**: describe the actual run — for
   `--diff`, name the base/compare refs and a one-line summary of what changed (files/areas
   touched); for `--seasonal`, name the Salesforce release or date driving the pass.
-- **Before you start**: fill `{{CI_FACT}}` verbatim from `regression/before-you-start.yaml`, and
+- **Before you start**: fill `{{CI_FACT}}` verbatim from `catalog/before-you-start.yaml`, and
   fill `{{MANUAL_SETUP_ITEMS}}` from its `sprint_manual_setup_steps` for a `--diff` run or
   `seasonal_manual_setup_steps` for a `--seasonal` run — these differ on purpose (`dev_org`
   against the branch under test vs. `config_demo` against `main`'s released package; see that
@@ -70,7 +70,7 @@ reinvent the CSS each run; the point of extracting the template was so this does
   distinguish those two for a human reader.
 - **Risk badge**: use the scenario's own `risk` when set, otherwise the area's `area_risk`; if
   an area's scenarios disagree, use the highest risk present so the badge never undersells it.
-- **`{{CLOSING_NOTE}}`**: from `regression/before-you-start.yaml`, plus a line naming which
+- **`{{CLOSING_NOTE}}`**: from `catalog/before-you-start.yaml`, plus a line naming which
   areas in *this specific run* are most likely to surprise someone (e.g. carry forward
   `priority-order` and `touch-interaction` when they're in the selection, the way the original
   artifact called those two out) — write this part fresh per run, don't hardcode it in the

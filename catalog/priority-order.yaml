@@ -1,0 +1,49 @@
+area: priority-order
+area_title: "Extension priority order flip"
+area_risk: high
+area_summary: >
+  When two or more extensions on the same item are active at once, the tie-break
+  logic that decides which one "wins" changed direction: the extension with the
+  lowest Priority number now wins (ascending), where previously the highest
+  Priority number won. This is a standalone behavior change, not specific to date
+  extensions — it affects any multi-extension item regardless of match type, and
+  it's exercised from two different UI surfaces (the record page itself, and the
+  Key/legend modal's rule ordering — see key-legend-modal.yaml).
+area_setup: >
+  Use an item with two or more active Indicator_Item_Extension__mdt records
+  (any match type — string, numeric, or date) with different Priority__c values.
+paths:
+  - force-app/main/default/objects/Indicator_Item_Extension__mdt
+  - force-app/main/default/classes/Cmdt.cls
+  - force-app/main/default/classes/IndicatorController.cls
+
+scenarios:
+  - slug: extension-priority-order-flip
+    added: 2026-09-07
+    added_reason: >
+      Promoted out of date-extensions.yaml per artifact-feedback.md item 5 — the
+      original sprint plan nested this under the dates section even though the
+      flip is orthogonal to date matching. See catalog/README.md for the
+      unified-catalog migration this scenario is part of.
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      On a field with 2+ active extensions, note which one currently "wins" on
+      main, then compare the same record/config on this branch.
+    target: "Indicator_Item_Extension__mdt Priority__c across multiple records on one item"
+    wait_for: Indicator shows the winning extension's override appearance
+    expect: >
+      On this branch, the extension with the lowest Priority number now wins
+      (ascending), not the highest — flag any bundle where this changes the
+      winning rule from what's live today.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: "See key-legend-modal.yaml's rule-ordering scenario — same underlying change, different UI surface."

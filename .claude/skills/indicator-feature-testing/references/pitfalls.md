@@ -32,7 +32,7 @@
 
 ## Repo
 - `npm run test:unit` also picks up the Playwright `*.spec.ts` files (pre-existing; `jest.config.js` ignore patterns proposed, not applied): run `npx sfdx-lwc-jest -- force-app` for the real unit tests.
-- Several `.claude/skills/*` are untracked or gitignored on purpose, and two tracked skills (`regression-scenario-author`, `regression-checklist-from-catalog`) point at the untracked volunteer catalog.
+- Several `.claude/skills/*` are untracked or gitignored on purpose, and the two catalog skills (`regression-scenario-author`, `regression-checklist-from-catalog`) point at the top-level `catalog/`, a separate effort.
 - The project `CLAUDE.md` still says there is no `package.json`; on this branch there is (it arrived with the `feature/staging-claude` merge).
 
 ## Pixel baselines

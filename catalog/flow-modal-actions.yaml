@@ -1,0 +1,129 @@
+area: flow-modal-actions
+area_title: "Flow Modal click actions"
+area_risk: medium
+area_summary: >
+  A Bundle Item can now open a Screen Flow in a modal on click, in addition to
+  URL navigation, with pause/resume and a record refresh on finish.
+area_setup: >
+  On an Indicator_Bundle_Item__mdt: Action Type = Flow Modal, Action Target = a
+  Screen Flow API name. Test once with Action Confirm Required unchecked, once
+  checked.
+paths:
+  - force-app/main/default/lwc/flowModal
+  - force-app/main/default/objects/Indicator_Bundle_Item__mdt
+
+scenarios:
+  - slug: flow-modal-launches-without-confirm
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: Click the indicator directly with Confirm Required unchecked.
+    target: Indicator with Action Type = Flow Modal, Confirm Required unchecked
+    wait_for: Flow modal is visible
+    expect: Flow modal launches immediately.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: flow-modal-confirm-required-blocks-direct-click
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Click the same indicator directly with Confirm Required checked.
+    target: Indicator with Action Type = Flow Modal, Confirm Required checked
+    wait_for: No modal appears
+    expect: >
+      Nothing happens — the flow only launches from the popover's own action
+      button.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: flow-modal-pause-resume
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Pause the flow partway through, then re-trigger the action in the same
+      browser tab.
+    target: Paused flow interview
+    wait_for: Flow modal reopens at the paused screen
+    expect: >
+      Resumes the paused interview (same session only — a full page refresh is
+      expected to restart it, not resume).
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: flow-modal-finish-refreshes-record
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Finish the flow so it updates the record.
+    target: Record page indicators after Flow Modal finish
+    wait_for: Indicator data reflects the updated record without a manual refresh
+    expect: >
+      Record page's indicators re-render with the new data without a manual
+      refresh.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: flow-modal-close-via-header-x
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Close the modal using the header's X (note: the footer Close button is
+      intentionally absent).
+    target: Flow modal header close (X) control
+    wait_for: Modal is no longer visible
+    expect: Modal dismisses cleanly either way.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

@@ -1,0 +1,110 @@
+area: experience-cloud-flow-component
+area_title: "Experience Cloud & Flow screen component"
+area_risk: medium
+area_summary: >
+  New indicatorBundleExperience and indicatorBundleFlow components.
+paths:
+  - force-app/main/default/lwc/indicatorBundleExperience
+  - force-app/main/default/lwc/indicatorBundleFlow
+
+scenarios:
+  - slug: experience-cloud-record-detail-guest-user-fls
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Add the Indicators component to an Experience Cloud record-detail page
+      (implicit recordId).
+    target: Indicators component on a published Experience Cloud site, guest user
+    wait_for: Component renders on the published site
+    expect: >
+      Renders correctly for a guest/community user, respecting that user's
+      field-level security.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: >
+      functional-only rather than diffable: requires a published Experience
+      Cloud site and guest-user context, heavier to keep stable as a pixel
+      baseline than as a functional check.
+
+  - slug: experience-cloud-custom-page-url-params
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Add it to a custom (non-record) Experience page, supplying
+      recordId/objectApiName via the builder or URL parameter.
+    target: Indicators component on a custom Experience Cloud page
+    wait_for: Component resolves and renders the target record
+    expect: Resolves the record correctly from URL state.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: experience-cloud-show-refresh-never-appears
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Enable "Show Refresh" in the Experience Builder property panel for this
+      component.
+    target: Indicators component on Experience Cloud with Show Refresh enabled
+    wait_for: No Refresh button is present in the rendered component
+    expect: >
+      By design: the Refresh button still never appears on Experience Cloud,
+      even though the property is checked — confirm this is the intended
+      behavior, not a bug.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: flow-screen-component-renders-and-behaves
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Drop the new Indicators screen component into a Screen Flow and run it.
+    target: Indicators component embedded in a Screen Flow
+    wait_for: Component renders inside the running flow screen
+    expect: >
+      Renders and behaves like the record-page version, including style picker
+      (avatar/badge/pill).
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

@@ -50,8 +50,7 @@ Product suggestions that are not defects: `findings/v0.5.1-recommendations.md` (
 0. The full decision list is in `regression/TODO.md` (phase-1 known issues, replay plan, level-set, upgrade-check idea, backlog). Replay is a path-limited copy of the nine `force-app` files onto a branch from `feature/staging-claude`, not a cherry-pick.
 1. **Replay the `force-app` changes on `feature/staging-claude`:** `resolveBadgePillText(ibi, ...)` and the corrected `resolveTextShown()` comment; `OneFieldMappingRequired`; the three Extension rules + `MatchOperatorRequiresValue` message; `indicatorCssVars`.
 2. Send the findings to the maintainer; level-set `sample_Lead` / `training_Indicators` for v0.5, then re-run `scan_records_against_rules.py` on them.
-3. **Project clean-up and restructure** (maintainer-led): stale and half-started skills (`regression-scenario-author` and `regression-checklist-from-catalog` depend on the untracked volunteer catalog), volunteer-era material
-   (`capture/`, `temporary-resources/`, `unpackaged/regression/`, `datasets/regression2/`, `regression/catalog`, `regression/schema`), the stale "no package.json" line in `CLAUDE.md`, and multi-tool support (an `AGENTS.md` pointer).
+3. **Project clean-up and restructure** (maintainer-led): volunteer material was removed by the maintainer; the catalog now lives in top-level `catalog/` (with `catalog/README.md`, `catalog/schema/`, `catalog/before-you-start.yaml`); the `CLAUDE.md` package.json line is fixed. Still open: the video-pipeline commit, `.gitignore`/`.gitattributes` decisions, and multi-tool support (an `AGENTS.md` pointer).
 4. Later: re-baseline the pixel shots per release (and on any new machine); Playwright mobile-emulation feasibility (Salesforce chooses form factor from the user agent); Key and Configuration Manager style-awareness; Contact edge cases; Experience Cloud / Flow component ("Beta"); recipes (manual test).
 
 ## Not covered yet
@@ -59,4 +58,4 @@ Non-admin user (the product skips indicators and Key columns without field acces
 properties beyond what `RF19`/`RF20` touch; custom Number/Text fields with extensions (the type rules now exist but only Date was exercised on a custom field); the Flow Modal's Finish path (closes the modal and refreshes the record; the test flow changes no data).
 
 ## Maintainer-owned pending edits (do not stage on their behalf)
-`.gitignore`, `package.json`, `package-lock.json`, and the "Regression scenario catalog" hunk at the top of `regression/README.md`. `regression/NEXT_SESSION_PROMPT.md` is a convenience copy of the skill's `assets/new-session-prompt.md`.
+`.gitignore`, `package.json`, `package-lock.json`. `regression/NEXT_SESSION_PROMPT.md` is a convenience copy of the skill's `assets/new-session-prompt.md`.

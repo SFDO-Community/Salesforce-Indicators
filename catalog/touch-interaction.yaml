@@ -1,0 +1,127 @@
+area: touch-interaction
+area_title: "Touch interaction & false-or-blank actions"
+area_risk: high
+area_summary: >
+  On touch devices, tapping an indicator only opens its popover — it never fires
+  the click action directly. The action fires only from the popover's own
+  button. A new setting also controls whether the action is available while the
+  indicator is showing its false/blank state.
+paths:
+  - force-app/main/default/lwc/indicatorBundleItem
+  - force-app/main/default/lwc/indicatorBundle
+  - force-app/main/default/objects/Indicator_Bundle_Item__mdt
+
+scenarios:
+  - slug: touch-tap-hover-only-indicator
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      On a touch device (or Playwright touch emulation), tap an indicator that
+      has only Hover Text (no action).
+    target: Indicator with Hover Text only, no click action
+    wait_for: Popover opens on first tap, closes on second tap
+    expect: Popover opens; tapping again closes it.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: touch-tap-indicator-with-action-opens-popover-only
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Tap an indicator that has a click action configured.
+    target: Indicator with a URL or Flow Modal click action configured
+    wait_for: Popover opens; the action does not fire
+    expect: >
+      First tap opens the popover only — the action does not fire. Only tapping
+      the popover's action button fires it.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: touch-avatar-action-badge-overlay
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      On the Avatar style, view indicators with an action configured.
+    target: Avatar-style indicator with a click action configured
+    wait_for: A small action-badge overlay is visible on the avatar
+    expect: >
+      Indicators with an action show a small action-badge overlay so it's
+      visually distinguishable from a hover-only indicator.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: touch-false-blank-action-suppressed-by-default
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      With Show False/Blank Action unchecked (default) on a Bundle Item, view a
+      record where that field is false/blank.
+    target: Bundle Item with Show False/Blank Action unchecked
+    wait_for: No action button/badge appears while showing false/blank appearance
+    expect: Action/button is suppressed while showing the false/blank appearance.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: touch-false-blank-action-available-when-checked
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Check Show False/Blank Action and reload the same record.
+    target: Bundle Item with Show False/Blank Action checked
+    wait_for: Action becomes available in the false/blank state
+    expect: The action becomes available even in the false/blank state.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

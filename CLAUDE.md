@@ -97,4 +97,4 @@ The skill is plain markdown, so any AI tool can read it. These rules apply to ev
 
 ## Documentation videos and the scenario catalog
 
-Separate from the feature-test suite above and not yet tested: the documentation-video pipeline (`capture/`, `recordings/`, `videos/`, `docs/conventions.md`) and the scenario catalog (`regression/catalog`). Read `docs/documentation-video-and-catalog.md` before touching either. Media from these pipelines (mp4/wav/png) is never committed, and nothing here should commit `storageState`, browser profiles or traces.
+Separate from the feature-test suite above and not yet tested: the documentation-video pipeline (`capture/`, `recordings/`, `videos/`, `docs/conventions.md`) and the scenario catalog (`catalog/`). Read `docs/documentation-video-and-catalog.md` before touching either. Media from these pipelines (mp4/wav/png) is never committed, and nothing here should commit `storageState`, browser profiles or traces.

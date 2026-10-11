@@ -1,0 +1,130 @@
+area: date-extensions
+area_title: "Relative & definite date extensions"
+area_risk: high
+area_summary: >
+  Extensions can now match a Date/DateTime field against relative phrases
+  (NEXT 30 DAYS, THIS MONTH, 5 DAYS AGO) or a definite YYYY-MM-DD date, using new
+  operators on Text_Operator__c (now labeled Match Operator). Fiscal-year/quarter
+  phrases are not implemented yet — they should fail quietly, not error.
+area_setup: >
+  Create an Indicator_Item_Extension__mdt against a Date field (e.g. Contact
+  Birthdate or a custom date field) with Match Operator = one of Before Start /
+  After Start / Before End / After End, and Text or Date Value (formerly
+  "Contains Text") set per scenario below.
+paths:
+  - force-app/main/default/objects/Indicator_Item_Extension__mdt
+  - force-app/main/default/classes/Cmdt.cls
+  - force-app/main/default/classes/IndicatorController.cls
+  - force-app/main/default/lwc/indicatorBundle
+
+scenarios:
+  - slug: date-extension-next-30-days
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Set Match Operator/Value to NEXT 30 DAYS. Open a record whose date falls
+      inside that window, then move the date outside the window.
+    target: "Indicator_Item_Extension__mdt Match Operator / Text or Date Value"
+    wait_for: Indicator reflects the extension's override appearance, or reverts to base
+    expect: >
+      Appearance flips exactly at the 30-day boundary; moving the date outside
+      the window reverts it to the base appearance.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: date-extension-this-month-5-days-ago
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: Repeat the boundary check with THIS MONTH and 5 DAYS AGO.
+    target: "Indicator_Item_Extension__mdt Match Operator / Text or Date Value"
+    wait_for: Indicator reflects the extension's override appearance, or reverts to base
+    expect: Same clean boundary behavior as NEXT 30 DAYS, no console errors.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: date-extension-definite-date
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: "Set the value to a definite date, 2026-08-01, using Before Start."
+    target: "Indicator_Item_Extension__mdt Match Operator / Text or Date Value"
+    wait_for: Indicator reflects the extension's override appearance
+    expect: Matches records dated before Aug 1, 2026.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: date-extension-garbage-text
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: "Set the value to garbage text, banana."
+    target: "Indicator_Item_Extension__mdt Text or Date Value"
+    wait_for: No error toast appears; page renders normally
+    expect: Extension silently never matches — no error toast, no broken page.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: date-extension-fiscal-quarter-unsupported
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: high
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: "Set the value to LAST FISCAL QUARTER."
+    target: "Indicator_Item_Extension__mdt Text or Date Value"
+    wait_for: No error is thrown; page renders normally
+    expect: >
+      Treated as unparseable (no match), not a thrown error — fiscal periods are
+      a known gap.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

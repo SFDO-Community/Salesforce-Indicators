@@ -1,0 +1,72 @@
+# Data source for the generated checklist's "Before you start" block.
+# Kept separate from the catalog because CI/org setup drifts independently of
+# any single regression scenario — see catalog/README.md.
+#
+# Which org flow to use depends on WHAT is being regression-tested, because
+# dev_org and config_demo install different package variants against the same
+# unpackaged/config/sample_AccountContact source:
+#   - dev_org    = this branch's own force-app, deployed UNMANAGED, then the
+#                  config_dev steps (permission set, generated Account/Contact
+#                  data, sample_inds CMDT, sample layouts). The sample CMDT's
+#                  field references always match what's installed, because
+#                  both come from the same branch checkout.
+#   - config_demo = the latest RELEASED managed package (install_prod), then
+#                  the config_demo steps (perm set, generated data, sample_inds,
+#                  training indicators). If unpackaged/config/sample_AccountContact
+#                  on the checked-out branch references a field that only
+#                  exists in that branch's force-app and isn't in the released
+#                  package yet, config_demo's sample_inds deploy can fail or
+#                  mismatch — this is expected on an in-progress feature
+#                  branch, not a bug in either flow.
+# Net effect: a SPRINT/diff-scoped checklist for a feature branch should point
+# at dev_org (matches the branch under test); a SEASONAL full-catalog pass —
+# checking whether a Salesforce platform release broke the *released* package
+# — should be run from `main`, using config_demo, since only main's sample
+# config is guaranteed to match the installed managed package.
+
+ci_fact: >
+  Every push to a `feature/**` branch already triggers an automatic scratch org
+  and Apex test run (the `ci_feature` flow) with no setup on your part. That org
+  is unmanaged, has no sample data, and isn't meant to be logged into — it's an
+  Apex-test gate, not something you need to prepare for manual testing below.
+
+sprint_manual_setup_steps:
+  - >
+    Get a scratch org on this branch for manual testing:
+    `cci flow run dev_org --org dev` — this deploys the branch's own
+    unmanaged source plus the fixed Account "Salesforce" / Contact
+    "Astro Nomical" dataset, generated sample Account/Contact data, the
+    sample indicator config, and the Indicators Setup Access permission set.
+  - >
+    Assign yourself the `Manage_Indicator_Key` custom permission on at least
+    one test user, and test a *second* user who does **not** have it and who
+    lacks field-level security on one indicator field — several scenarios
+    below require comparing behavior between the two.
+  - >
+    Have one desktop browser *and* one phone/tablet (or Chrome DevTools device
+    toolbar touch emulation) on hand — touch-only and mobile-app scenarios can
+    only be verified on a real touch form factor.
+  - >
+    Open Setup → Custom Metadata Types in a second tab for the four objects
+    you'll be editing: `Indicator_Bundle__mdt`, `Indicator_Item__mdt`,
+    `Indicator_Bundle_Item__mdt`, `Indicator_Item_Extension__mdt`.
+  - >
+    Work top to bottom when the checklist includes the priority-order area —
+    it affects what you'll observe in every later section that uses
+    multi-extension items.
+
+seasonal_manual_setup_steps:
+  - >
+    Check out `main` first — a seasonal pass is testing the *released*
+    package against a new Salesforce platform release, not any in-progress
+    feature work, and only `main`'s sample config is guaranteed to match the
+    installed managed package.
+  - >
+    Get a scratch org against the released package:
+    `cci flow run config_demo --org demo`.
+  - The remaining setup steps are the same as the sprint checklist above.
+
+closing_note: >
+  Log anything that didn't match its "Expect" line with the section name, the
+  exact CMDT values you used, and a screenshot where relevant — check with your
+  sprint lead for where to file it.

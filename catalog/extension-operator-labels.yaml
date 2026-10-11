@@ -1,0 +1,82 @@
+area: extension-operator-labels
+area_title: "Extension operator & label changes"
+area_risk: low
+area_summary: >
+  Renamed fields and new picklist values on Indicator_Item_Extension__mdt.
+paths:
+  - force-app/main/default/objects/Indicator_Item_Extension__mdt
+
+scenarios:
+  - slug: extension-fields-relabeled
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Open an existing extension record in Setup.
+    target: Indicator_Item_Extension__mdt detail page in Setup
+    wait_for: Field labels are visible on the record detail page
+    expect: >
+      The field formerly labeled "Text Operator" now reads Match Operator, and
+      "Contains Text" now reads Text or Date Value — existing saved values are
+      unaffected, only labels changed.
+    shot: false
+    fixture: null
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: extension-non-date-operators-unaffected
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Confirm existing string/numeric extensions (Contains, Equals, Starts With,
+      Min/Max) on non-date fields still behave correctly.
+    target: Extensions using string/numeric match operators
+    wait_for: Indicator appearance matches the extension's configured override
+    expect: Still behave exactly as on main.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: extension-legacy-picklist-values-audit
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: manual-only
+    manual_only_reason: >
+      Requires auditing existing production CMDT data for legacy literal
+      picklist values; not reproducible in a capture/test org.
+    app: salesforce
+    action: >
+      Note the two inactive legacy-looking picklist values Before/After shipped
+      alongside the new operators.
+    target: Indicator_Item_Extension__mdt Match Operator picklist
+    wait_for: n/a — this is a data-audit step, not a UI interaction
+    expect: >
+      Confirm no existing production config already stores those literal
+      strings (would need reactivating/remapping).
+    shot: false
+    fixture: null
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

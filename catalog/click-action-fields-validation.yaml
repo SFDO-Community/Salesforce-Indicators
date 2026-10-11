@@ -1,0 +1,124 @@
+area: click-action-fields-validation
+area_title: "Click-action CMDT fields & validation rule"
+area_risk: medium
+area_summary: >
+  New Action Type / Target / Confirm / Help / Button Label fields.
+paths:
+  - force-app/main/default/objects/Indicator_Bundle_Item__mdt
+
+scenarios:
+  - slug: click-action-blank-target-validation-error
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      On a Bundle Item, set Action Type = URL and leave Action Target blank,
+      then save.
+    target: Indicator_Bundle_Item__mdt with Action Type = URL, Action Target blank
+    wait_for: Validation error message is shown
+    expect: >
+      Validation error, and the message specifically tells you to clear Action
+      Type (not Action Target) to disable the action.
+    shot: false
+    fixture: null
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: click-action-valid-target-saves
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Fill in a valid Action Target and save.
+    target: Indicator_Bundle_Item__mdt with Action Type and a valid Action Target
+    wait_for: Record saves without error
+    expect: Saves cleanly.
+    shot: false
+    fixture: null
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: click-action-cleared-type-with-stale-target-saves
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Clear Action Type only, leaving the old Action Target value in place, and
+      save.
+    target: Indicator_Bundle_Item__mdt with Action Type cleared, stale Action Target
+    wait_for: Record saves without error; no action shows on the record page
+    expect: >
+      Saves fine per the error message's own instructions; no action shows on
+      the record page.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: click-action-default-button-labels
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Leave Action Button Label blank for a URL action and for a Flow Modal
+      action.
+    target: Popover action button, Action Button Label blank
+    wait_for: Popover is open showing the action button
+    expect: >
+      Defaults to "Open" for URL and "Launch" for Flow Modal respectively.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: click-action-help-text-icon
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: Set Action Help Text and open the popover.
+    target: Popover footer, Action Help Text configured
+    wait_for: A help icon is visible in the popover footer
+    expect: Help icon appears in the popover footer with the configured text.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

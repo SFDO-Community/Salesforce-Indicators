@@ -1,0 +1,102 @@
+area: key-legend-modal
+area_title: "Key / legend modal"
+area_risk: medium
+area_summary: >
+  Refresh button, FLS filtering, and reordered rule list.
+paths:
+  - force-app/main/default/lwc/indicatorBundleKey
+  - force-app/main/default/lwc/key
+  - force-app/main/default/lwc/indicatorKeyRow
+
+scenarios:
+  - slug: key-legend-rules-ascending-priority-order
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Open the Key/legend modal (info icon) on a bundle with 2+ extensions on
+      the same item.
+    target: Key/legend modal, item with multiple extensions
+    wait_for: Modal is open and rule list is rendered
+    expect: >
+      Rules read in ascending Priority order — compare against main, order will
+      likely differ (tied to the priority-order flip).
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: "See priority-order.yaml — same underlying change, different UI surface."
+
+  - slug: key-legend-fls-hides-item
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Open the same modal as the test user who lacks field-level security on
+      one bundled field.
+    target: Key/legend modal, viewed by a user without FLS on one field
+    wait_for: That item's legend entry is absent from the DOM
+    expect: That item's legend entry is hidden entirely, not shown broken.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: key-legend-refresh-reloads-without-closing
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Click Refresh inside the modal.
+    target: Key/legend modal Refresh control
+    wait_for: Spinner appears then clears; modal remains open
+    expect: Spinner shows, data reloads without closing the modal.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: "See configuration-manager.yaml's Refresh scenario — same control, different host component."
+
+  - slug: key-legend-view-in-setup-link-opens-new-tab
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Click a "view in Setup" / edit-record link inside the modal.
+    target: Key/legend modal Setup deep link
+    wait_for: A new tab/window opens to the CMDT record
+    expect: >
+      Opens the CMDT record in a new tab (this was a silent no-op on main in
+      some contexts due to Lightning Web Security blocking window.open).
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

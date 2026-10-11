@@ -1,0 +1,94 @@
+area: merge-field-tokens
+area_title: "Merge-field tokens (SML syntax)"
+area_risk: low
+area_summary: >
+  Action Target, Hover Text, and the bundle's Card Text (description) now resolve
+  {!Field_API_Name} tokens against the wired record, refreshing whenever the
+  record data changes.
+area_setup: >
+  Ready-made example: the sample config ships an Account Ticker indicator on
+  Account with Action Target https://finance.yahoo.com/quote/{!TickerSymbol} —
+  use it directly after `cci flow run config_demo`, provided the demo Account has
+  a TickerSymbol value.
+paths:
+  - force-app/main/default/lwc/indicatorBundle
+  - force-app/main/default/lwc/indicatorBundleItem
+
+scenarios:
+  - slug: merge-token-action-target-navigation
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Open the Account Ticker sample record and click its indicator.
+    target: "Account Ticker indicator, Action Target with {!TickerSymbol} token"
+    wait_for: Browser navigates to the resolved URL
+    expect: >
+      Navigates to the Yahoo Finance URL with the record's actual ticker symbol
+      substituted in.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: >
+      The Account Ticker indicator itself comes from the sample_AccountContact
+      config (deployed by the same config_demo/dev_org flow that loads the
+      dev-dataset fixture, not a separate mechanism) — confirm whichever
+      Account it's assigned to (the fixed "Salesforce" record or a generated
+      one) actually has TickerSymbol populated before relying on this as a
+      diffable/functional check; that population isn't guaranteed today.
+
+  - slug: merge-token-hover-card-text-live-update
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Set a Hover Text and a bundle's Card Text to include a {!Field} token,
+      then edit that field's value on the record.
+    target: "Item Hover Text / Bundle Card Text containing a {!Field} token"
+    wait_for: Hover text / card description text updates without a page reload
+    expect: >
+      Hover text / card description update to the new value without a page
+      reload.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: merge-token-fls-blocked-field-resolves-empty
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Point a merge token at a field the current test user lacks field-level
+      security on.
+    target: Merge token referencing a field without FLS for the current user
+    wait_for: No error toast; token resolves to empty string
+    expect: >
+      Resolves to an empty string, not an error or a leaked value.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

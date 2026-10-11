@@ -1,16 +1,16 @@
 ---
 name: regression-scenario-author
-description: Authors or updates a durable regression scenario in regression/catalog/<area>.yaml — interviews for area, risk, expect line, and automation classification, then writes the entry with correct provenance stamps. Use this whenever a feature PR changes behavior and needs a regression scenario added, when existing test coverage for the core (pre-existing) functionality needs filling in, when a scenario needs its automation classification or expect line revised, or when the user asks to add/update/retire a regression catalog entry. This is the WRITE side of the regression catalog — it never renders the human-facing checklist (that's regression-checklist-from-catalog) and never opens an org or writes Playwright code (that's documentation-capture-from-steps, once a diffable/functional-only scenario is ready to be automated).
+description: Authors or updates a durable regression scenario in catalog/<area>.yaml — interviews for area, risk, expect line, and automation classification, then writes the entry with correct provenance stamps. Use this whenever a feature PR changes behavior and needs a regression scenario added, when existing test coverage for the core (pre-existing) functionality needs filling in, when a scenario needs its automation classification or expect line revised, or when the user asks to add/update/retire a regression catalog entry. This is the WRITE side of the regression catalog — it never renders the human-facing checklist (that's regression-checklist-from-catalog) and never opens an org or writes Playwright code (that's documentation-capture-from-steps, once a diffable/functional-only scenario is ready to be automated).
 ---
 
 # Author a regression scenario
 
-Writes and updates `regression/catalog/<area>.yaml` entries. Read `regression/README.md` and
-`regression/schema/scenario-schema.md` before starting if you haven't already loaded them this
+Writes and updates `catalog/<area>.yaml` entries. Read `catalog/README.md` and
+`catalog/schema/scenario-schema.md` before starting if you haven't already loaded them this
 session — this skill assumes that schema and doesn't repeat its field reference here.
 
 ```
-behavior change or coverage gap ──▶ [this skill] ──▶ regression/catalog/<area>.yaml
+behavior change or coverage gap ──▶ [this skill] ──▶ catalog/<area>.yaml
                                                               │
                                                               ▼
                                           regression-checklist-from-catalog (reads it)
@@ -21,7 +21,7 @@ behavior change or coverage gap ──▶ [this skill] ──▶ regression/cata
 ## When this runs
 
 - **A feature PR changes behavior.** The catalog update belongs in the *same PR* as the code
-  change (see `regression/README.md`) — this is the tool that PR uses to write it.
+  change (see `catalog/README.md`) — this is the tool that PR uses to write it.
 - **A coverage gap is found in core, pre-existing functionality.** The catalog was seeded by
   transcribing a single sprint's diff-driven checklist, so it's biased toward whatever that
   branch happened to touch — plain, unconfigured-bundle behavior and other long-standing
@@ -35,7 +35,7 @@ behavior change or coverage gap ──▶ [this skill] ──▶ regression/cata
 
 Don't guess at any of these — ask:
 
-1. **Area.** Does this belong in an existing `regression/catalog/<area>.yaml`, or does it need a
+1. **Area.** Does this belong in an existing `catalog/<area>.yaml`, or does it need a
    new area file? A new area needs the full front matter (`area`, `area_title`, `area_risk`,
    `area_summary`, `paths`) — write that once, not per scenario.
 2. **`paths`** (new area only). What repo paths, if changed, should pull this area into a

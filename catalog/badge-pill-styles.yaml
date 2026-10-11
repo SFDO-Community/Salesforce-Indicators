@@ -1,0 +1,150 @@
+area: badge-pill-styles
+area_title: "Badge & Pill indicator styles"
+area_risk: medium
+area_summary: >
+  New Badge and Pill render styles, selectable per-bundle, default to Avatar so
+  existing pages should look untouched until an admin opts in.
+paths:
+  - force-app/main/default/lwc/indicatorBundleBadge
+  - force-app/main/default/lwc/indicatorBundlePill
+  - force-app/main/default/lwc/indicatorBundle
+
+scenarios:
+  - slug: badge-pill-default-avatar-unchanged
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Confirm a bundle with indsStyle left at its default renders exactly as it
+      does on main (Avatar).
+    target: Bundle with indsStyle unset
+    wait_for: Bundle renders in Avatar style
+    expect: Zero visual difference for unconfigured bundles.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: badge-style-renders
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: Set indsStyle to Badge on that same bundle.
+    target: Bundle indsStyle = Badge
+    wait_for: Indicators render as SLDS badges
+    expect: >
+      Renders as SLDS badges; Badge Text Color and Badge Icon Position fields
+      apply.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: badge-style-image-only-known-gap
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      View an item configured with only an Image (no icon) in Badge style.
+    target: Badge-style item with Image field set, no Icon
+    wait_for: Badge renders (or fails to render the image)
+    expect: >
+      Known gap — confirm it: the image likely does not render in Badge style
+      at all. Flag if unexpected.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: pill-style-renders
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: Set indsStyle to Pill.
+    target: Bundle indsStyle = Pill
+    wait_for: Indicators render as labeled pills
+    expect: >
+      Renders as a labeled pill; clickable pills don't navigate to # when
+      clicked.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: badge-pill-false-blank-inverse-colors
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: Toggle Show False/Blank on a Badge or Pill item.
+    target: Badge/Pill item with Inverse Badge Text Color / Inverse Badge Icon Position set
+    wait_for: Item shows its false/blank appearance
+    expect: >
+      Inverse Badge Text Color / Inverse Badge Icon Position fields apply to the
+      false/blank state.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: badge-pill-click-actions-match-avatar
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: medium
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Confirm click actions (URL and Flow Modal) work identically in Badge and
+      Pill style as they do in Avatar style.
+    target: Badge/Pill items with URL and Flow Modal actions configured
+    wait_for: Action fires the same way as the Avatar-style equivalent
+    expect: Click actions behave identically across all three styles.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

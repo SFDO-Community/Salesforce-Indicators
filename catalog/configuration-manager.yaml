@@ -1,0 +1,79 @@
+area: configuration-manager
+area_title: "Configuration Manager"
+area_risk: low
+area_summary: >
+  Responsive sizing and a visible error banner.
+paths:
+  - force-app/main/default/lwc/configurationManager
+
+scenarios:
+  - slug: configuration-manager-responsive-resize
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Place Configuration Manager in a Small and then a Medium App Builder
+      region.
+    target: Configuration Manager component in App Builder
+    wait_for: Component re-renders at the new region width
+    expect: >
+      The bundle selector card resizes instead of staying pinned at a fixed
+      narrow width.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: configuration-manager-error-banner
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Force a load failure (e.g. temporarily break a bundle's config, or test
+      as a user without Manage_Indicator_Key).
+    target: Configuration Manager in a failing-load state
+    wait_for: A red error banner is visible in the component
+    expect: >
+      A visible red error banner appears in the component — not just a silent
+      console error.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: configuration-manager-refresh-control
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: Use the Refresh control from Configuration Manager.
+    target: Configuration Manager Refresh control
+    wait_for: Data reloads without closing the component
+    expect: Behaves the same as the Key modal's Refresh.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: "See key-legend-modal.yaml's Refresh scenario — same control, different host component."

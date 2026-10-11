@@ -21,7 +21,7 @@ Earlier work is recorded in the repository. **Do not start working yet.** First 
 5. Only after I confirm your answers, propose the first action and **wait for my go** before touching any org.
 
 **Answer key for the person grading this** (do not paste it into the session): a) `Salesforce-Indicators__regression_dev_slds1|slds2|slds2-dark`, every command passes `--org <alias>`; b) read-only queries and local work are fine, ask before any
-deploy / data change / spec run; c) the maintainer commits, the agent stages, never TestPlan.md/.docx, volunteer material, the maintainer's `.gitignore`/`package*.json`/README catalog hunk; d) the corrected rules reject them (Number Max-only, numeric rule
+deploy / data change / spec run; c) the maintainer commits, the agent stages, never TestPlan.md/.docx, volunteer material, the maintainer's `.gitignore`/`package*.json`; d) the corrected rules reject them (Number Max-only, numeric rule
 on text, text rule on checkbox) and they only deployed while the rules were dead; e) `EntityParticle.DataType` is lowercase (`integer`, `string`...) while the rules looked for `Number`/`Text`; proven with check-only deploys applying candidate rules
 inside the rolled-back deploy; f) it wrote the text `undefined` into a CSS variable when only one of background/foreground was set (black glyph); `features.spec.ts` fails any inline variable containing it, plus 6 unit tests; g) `delete_data`, `load_sample_data`,
 two `load_dataset`; specs run foreground from `regression/playwright`, under ~9 minutes per command, orgs may run in parallel in one command, dates in two halves; h) see `regression/STATE.md` "Open items".

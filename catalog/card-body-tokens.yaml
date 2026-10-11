@@ -1,0 +1,56 @@
+area: card-body-tokens
+area_title: "Card body tokens & SLDS2 section header"
+area_risk: low
+area_summary: >
+  Bundle description header rebuilt as a real (non-interactive) SLDS2 header.
+paths:
+  - force-app/main/default/lwc/indicatorBundle
+
+scenarios:
+  - slug: card-icon-coerced-to-utility-icon
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: diffable
+    manual_only_reason: null
+    app: salesforce
+    action: "Set a bundle's Card Icon to a standard: or custom: icon."
+    target: Bundle Card Icon field
+    wait_for: Header renders with an icon
+    expect: >
+      Header still shows an icon (now coerced to a similar utility icon) —
+      confirm it doesn't look broken or missing.
+    shot: true
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null
+
+  - slug: card-header-inert-not-clickable
+    added: 2026-08-10
+    added_reason: "original sprint regression plan (feature/staging-claude vs main)"
+    added_ref: null
+    status: active
+    superseded_by: null
+    risk: low
+    automation: functional-only
+    manual_only_reason: null
+    app: salesforce
+    action: >
+      Hover/click the section header title area (in the non-Lightning-Card /
+      Dynamic Forms usage).
+    target: Bundle section header title
+    wait_for: No click handler fires
+    expect: >
+      No longer behaves like a clickable button with no handler — it's inert
+      now, which is correct.
+    shot: false
+    fixture: dev-dataset
+    narration: null
+    narration_spoken: null
+    conditional: false
+    note: null

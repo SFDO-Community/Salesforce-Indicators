@@ -13,14 +13,14 @@
     {{LEDE}}                  - one paragraph explaining scope (diff summary or seasonal-pass note)
     {{META_CHIPS}}            - zero or more <span class="meta-chip">...</span>, e.g. base/compare
                                  branches, files changed, area count
-    {{CI_FACT}}                - from regression/before-you-start.yaml
-    {{MANUAL_SETUP_ITEMS}}     - <li> per item from regression/before-you-start.yaml's
+    {{CI_FACT}}                - from catalog/before-you-start.yaml
+    {{MANUAL_SETUP_ITEMS}}     - <li> per item from catalog/before-you-start.yaml's
                                  sprint_manual_setup_steps (a --diff run) or
                                  seasonal_manual_setup_steps (a --seasonal run) — these differ
                                  because a sprint checklist targets dev_org against the branch
                                  under test, while a seasonal pass targets config_demo against
                                  main's released package; see that file's header comment for why
-    {{#each AREA}}             - one block per selected regression/catalog/<area>.yaml file, in
+    {{#each AREA}}             - one block per selected catalog/<area>.yaml file, in
                                   catalog order unless the run is diff-scoped (then order by
                                   first-touched-file order is fine)
       {{AREA_INDEX}}            - 1-based position in this run (not a permanent id — areas can be
@@ -38,7 +38,7 @@
         {{EXPECT}}
       {{/each}}
     {{/each}}
-    {{CLOSING_NOTE}}           - from regression/before-you-start.yaml
+    {{CLOSING_NOTE}}           - from catalog/before-you-start.yaml
 
   Second-person voice throughout: write {{ACTION}}/{{EXPECT}} text as neutral
   imperative ("Set the value to...", "Confirm..."), matching how scenarios are
