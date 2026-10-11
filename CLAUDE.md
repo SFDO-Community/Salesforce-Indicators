@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Salesforce Indicators is a Custom-Metadata-driven Lightning Web Component package (namespace `inds`) maintained by the Salesforce.org Open Source Commons community. It lets admins configure visual "indicators" (icons/badges/pills with hover text, colors, and click actions) on Lightning record pages purely through Custom Metadata Type records — no Apex/LWC changes needed per use case.
 
-The project is SFDX source-format (`force-app` is the single package directory, see `sfdx-project.json`) and is built/released with **CumulusCI (`cci`)**, not raw `sf`/npm scripts. There is no `package.json` checked into the repo even though LWC `__tests__/` jest specs exist — don't assume `npm test`/jest tooling is wired up locally; it would need to be set up separately (e.g. `sfdx-lwc-jest`) before those tests are runnable.
+The project is SFDX source-format (`force-app` is the single package directory, see `sfdx-project.json`) and is built/released with **CumulusCI (`cci`)**, not raw `sf`/npm scripts. A `package.json` is checked in (LWC jest via `@salesforce/sfdx-lwc-jest`: `npm run test:unit`, plus Playwright for `regression/` and `capture/`). Run `npm install` first. `npm run test:unit` also picks up the Playwright specs under `regression/` unless `jest.config.js` ignores them (known, see `regression/findings/`).
 
 ## Common Commands
 
@@ -81,3 +81,20 @@ GitHub Actions delegate to reusable workflows in `SFDO-Community/standard-workfl
 - production 2GP release upload is a manual `workflow_dispatch` only.
 
 `CODEOWNERS` reserves `*.py`, `cumulusci.yml`, `/tasks`, `/.github`, and `/scripts` for `@SFDO-Community/sfdo-release-engineers` — expect changes in those paths to need that team's review.
+
+
+## Regression and feature testing (`regression/`)
+
+A Playwright + CumulusCI suite in `regression/` tests the next release's new features against scratch orgs. **Before working on it, read `.claude/skills/indicator-feature-testing/SKILL.md` (the method) and `regression/STATE.md` (current status).**
+The skill is plain markdown, so any AI tool can read it. These rules apply to every tool and session:
+
+- **Always pass `--org <alias>`** to `cci`, `sf` and the specs: a default org has pointed commands at the wrong scratch org before.
+- **Ask the maintainer before touching an org** (deploy, data change, delete, running specs) and say which org(s). Scratch orgs are shared with other people. Read-only queries to verify state are fine.
+- **The maintainer commits; assistants only stage** - by explicit path, never `git add -A`, never commit or push. Never stage `temporary-resources/TestPlan.md` or `Test Plan.docx` (live password-share links), volunteer material, or the maintainer's own pending edits.
+- **Change product code (`force-app`) only when asked**, with a unit test that fails without the fix first; the fix is then replayed on `feature/staging-claude`.
+- **Evidence over assertion:** prove claims with a query, probe or screenshot, and treat a test run that visited no records as a failure.
+- Put temporary files and logs in a scratch directory, not in the project.
+
+## Documentation videos and the scenario catalog
+
+Separate from the feature-test suite above and not yet tested: the documentation-video pipeline (`capture/`, `recordings/`, `videos/`, `docs/conventions.md`) and the scenario catalog (`regression/catalog`). Read `docs/documentation-video-and-catalog.md` before touching either. Media from these pipelines (mp4/wav/png) is never committed, and nothing here should commit `storageState`, browser profiles or traces.
