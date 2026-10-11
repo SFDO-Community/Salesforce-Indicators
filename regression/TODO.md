@@ -36,3 +36,13 @@ Agreed split (2026-10-11): volunteer material (removed by M) / documentation-vid
 - Key and Configuration Manager with the new fields and styles (ideas only); the Flow Modal Finish path.
 - Accessibility (its own session); touch/mobile (check feasibility first: Salesforce may convert small form factors to Classic); Experience Cloud / Flow component ("Beta").
 - Re-baseline the pixel shots per release and on any new machine.
+
+## 5. Getting this branch into the main line
+`feature/regression-vs-staging-claude` is pushed to GitHub (backup). It is long-lived and mixes concerns, so it is **not merged wholesale**; slices go from fresh branches (never sync the auto "Merge main into feature" PRs, see the merge-conflict playbook). Why the suite belongs with the code: its oracle, test CMDT and specs depend on product behaviour, and the graduation step turns it into the next cycle's regression; none of it ships (`force-app` is the only package directory). Isolated/orphan branches (`gh-pages` style) are for generated or large material on its own schedule: recordings, voice clips, renders, comparison viewers, run archives.
+| # | Slice | State |
+|---|---|---|
+| 5.1 | **Product fixes:** nine `force-app` files on `feature/staging-claude-regression-fixes` (worktree `Salesforce-Indicators.worktrees/staging-claude-regression-fixes`), staged, not committed. M reviews, commits, pushes, opens the PR. | ready for M |
+| 5.2 | **Feature-test suite:** `regression/` (planning, playwright, scripts, dev_only/prod_only, datasets, findings), the `indicator-feature-testing` skill, `CLAUDE.md` rules, `STATE`/`TODO`. | needs the team's OK on a 500+ file test suite in the community repo |
+| 5.3 | **Optional:** documentation-video pipeline (`capture/`, `docs/conventions.md`, `documentation-*` skills), `catalog/`, `design-*`/`maintain-*` skills, `datasets/default`, `scripts/py`. | team decision; each can be its own PR |
+| 5.4 | **Media storage** (recordings, renders): orphan branch, GitHub Releases, or outside git; `.gitattributes` was removed pending this. | undecided |
+| 5.5 | **Open questions:** does pushing a `feature/**` branch trigger the scratch-org workflow (not checked; `wip/` prefix avoids it); where the `regression/` restructure (2.4) lands relative to graduation. | M |
