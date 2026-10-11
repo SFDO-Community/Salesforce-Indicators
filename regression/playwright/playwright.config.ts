@@ -11,6 +11,11 @@ export default defineConfig({
   fullyParallel: false,
   reporter: [['list']],
   outputDir: './output/pw-artifacts',
+  // Pixel baselines (features.pixels.spec.ts) live beside the other captures, in the gitignored output folder, one folder per <env>-<theme>.
+  // They are machine-specific (font rendering), so they are regenerated per release and per machine, not committed.
+  snapshotPathTemplate: '{testDir}/output/baselines/{arg}{ext}',
+  // An ABSOLUTE tolerance, not a ratio: a ratio of 0.5% of a ~110,000px bundle shot would hide a whole glyph changing colour (~200px), the very bug class these baselines exist for.
+  expect: { toHaveScreenshot: { animations: 'disabled', maxDiffPixels: 40 } },
   use: {
     headless: false,
     viewport: { width: 1600, height: 1000 },
