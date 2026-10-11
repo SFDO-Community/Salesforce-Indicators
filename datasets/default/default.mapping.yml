@@ -1,0 +1,117 @@
+# Editing this file is usually not recommended because it will
+# be overwritten the next time you re-capture this data.
+#
+# You can change this file's contents permanently by creating a
+# .load.yml file and re-capturing:
+#
+#  https://cumulusci.readthedocs.io/en/stable/data.html#extracting-and-loading-sample-datasets
+
+Insert Account:
+  sf_object: Account
+  table: Account
+  fields:
+  - AccountNumber
+  - AccountSource
+  - AnnualRevenue
+  - BillingCity
+  - BillingCountry
+  - BillingGeocodeAccuracy
+  - BillingLatitude
+  - BillingLongitude
+  - BillingPostalCode
+  - BillingState
+  - BillingStreet
+  - CleanStatus
+  - Description
+  - DunsNumber
+  - Fax
+  - Industry
+  - Jigsaw
+  - NaicsCode
+  - NaicsDesc
+  - Name
+  - NumberOfEmployees
+  - Ownership
+  - Phone
+  - Rating
+  - ShippingCity
+  - ShippingCountry
+  - ShippingGeocodeAccuracy
+  - ShippingLatitude
+  - ShippingLongitude
+  - ShippingPostalCode
+  - ShippingState
+  - ShippingStreet
+  - Sic
+  - SicDesc
+  - Site
+  - TickerSymbol
+  - Tradestyle
+  - Type
+  - Website
+  - YearStarted
+  lookups:
+    ParentId:
+      table:
+      - Account
+      key_field: ParentId
+      after: Insert Account
+  select_options: {}
+Insert Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+  - AssistantName
+  - AssistantPhone
+  - Birthdate
+  - BuyerAttributes
+  - CleanStatus
+  - ContactSource
+  - Department
+  - Description
+  - DoNotCall
+  - Email
+  - EmailBouncedDate
+  - EmailBouncedReason
+  - Fax
+  - FirstName
+  - GenderIdentity
+  - HasOptedOutOfEmail
+  - HasOptedOutOfFax
+  - HomePhone
+  - Jigsaw
+  - LastName
+  - LeadSource
+  - MailingCity
+  - MailingCountry
+  - MailingGeocodeAccuracy
+  - MailingLatitude
+  - MailingLongitude
+  - MailingPostalCode
+  - MailingState
+  - MailingStreet
+  - MobilePhone
+  - OtherCity
+  - OtherCountry
+  - OtherGeocodeAccuracy
+  - OtherLatitude
+  - OtherLongitude
+  - OtherPhone
+  - OtherPostalCode
+  - OtherState
+  - OtherStreet
+  - Phone
+  - Pronouns
+  - Salutation
+  - Title
+  lookups:
+    AccountId:
+      table:
+      - Account
+      key_field: AccountId
+    ReportsToId:
+      table:
+      - Contact
+      key_field: ReportsToId
+      after: Insert Contact
+  select_options: {}
