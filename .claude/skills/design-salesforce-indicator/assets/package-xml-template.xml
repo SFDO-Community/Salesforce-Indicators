@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>inds__Indicator_Bundle__mdt.Account_Company_Info</members>
+		<members>inds__Indicator_Item__mdt.Account_Annual_Revenue</members>
+		<members>inds__Indicator_Bundle_Item__mdt.Account_Company_Info_Account_Annual_Revenue</members>
+		<members>inds__Indicator_Item_Extension__mdt.Account_Annual_Revenue_100k_500k</members>
+		<name>CustomMetadata</name>
+	</types>
+	<version>67.0</version>
+</Package>
