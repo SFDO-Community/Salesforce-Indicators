@@ -22,7 +22,7 @@ For product-code commits also run the unit suite (`npx sfdx-lwc-jest -- force-ap
 
 ## Files that are never yours to stage
 `.gitignore`, `package.json`, `package-lock.json` (the maintainer's own edits); volunteer material and `temporary-resources/*` (and **never** `TestPlan.md` / `Test Plan.docx`: live password-share links);
-`regression/NEXT_SESSION_PROMPT.md` unless asked; anything under `.claude/skills/` except the skill you were asked to change (several are deliberately untracked or gitignored).
+anything under `.claude/skills/` except the skill you were asked to change (several are deliberately untracked or gitignored).
 
 ## Commit message
 Subject in the imperative, a short body saying *what and why*, results if tests were run, and the attribution line the session supplies (e.g. `Co-Authored-By: ...`). Offer it in a code block; the maintainer pastes it.

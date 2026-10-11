@@ -84,6 +84,7 @@ videos/**/.waveform-cache/
 **/.playwright*/
 **/trace*.zip
 regression/playwright/output/
+.claude/skills/playwright-cli/
 
 # TEMPORARY SUPRESSION
 artifact-feedback.md

@@ -17,7 +17,7 @@ anything you remember or any memory file, **the repo wins**. This skill is the *
 2. **Ask before you touch an org** - deploy, data change, delete, or running specs - and say which org(s) and whether it changes data. Two people share these orgs; a collision already
    happened. Read-only queries to verify state are fine. Check-only (`--dry-run`) deploys need an explicit OK (it was given once for the validation-rule work, not as a standing permission).
 3. **The maintainer commits; you only stage.** Never `git commit` / `push`. Stage by explicit path, verify, and offer a commit message. See `references/commits-and-staging.md`.
-4. **Never stage** `regression/NEXT_SESSION_PROMPT.md` unasked, volunteer material (`temporary-resources/`, `unpackaged/regression/`, `datasets/regression2/`), the documentation-video
+4. **Never stage** volunteer material (`temporary-resources/`, `unpackaged/regression/`, `datasets/regression2/`), the documentation-video
    work (`capture/`, `recordings/`, `videos/`, `.tours/`, `docs/conventions.md`, `.gitattributes`) and the scenario catalog (`catalog/`) - those are separate efforts
    (see `CLAUDE.md`) - the maintainer's own pending edits (`.gitignore`, `package*.json`), and **never**
    `temporary-resources/TestPlan.md` / `Test Plan.docx` (live password-share links). Media (mp4/wav/png recordings) is never committed.
