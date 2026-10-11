@@ -69,3 +69,29 @@ $RECYCLE.BIN/
 
 # VS Code project settings
 .vscode/
+
+# Media from the documentation-video pipeline (storage strategy undecided)
+recordings/**/*.mp4
+recordings/**/shots/
+videos/**/renders/
+videos/**/.media/
+videos/**/.thumbnails/
+videos/**/.hyperframes/
+videos/**/.waveform-cache/
+
+# Playwright sessions and traces (never commit)
+**/storageState*.json
+**/.playwright*/
+**/trace*.zip
+regression/playwright/output/
+
+# TEMPORARY SUPRESSION
+artifact-feedback.md
+unpackaged/config/pipeline_Lead
+tasks/cci_demo.py
+
+.tours/documentation-video-pipeline.tour
+recordings/documentation/download-as-json/
+videos/download-as-json-walkthrough/
+
+design-salesforce-indicator-v1.zip

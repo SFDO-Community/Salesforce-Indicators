@@ -6,7 +6,9 @@
     "test:unit": "sfdx-lwc-jest",
     "test:unit:watch": "sfdx-lwc-jest --watch",
     "test:unit:coverage": "sfdx-lwc-jest --coverage",
-    "test:regression": "playwright test --config regression/playwright/playwright.config.ts"
+    "test:regression": "playwright test --config regression/playwright/playwright.config.ts",
+    "test:capture": "playwright test --config=capture/playwright.config.ts",
+    "test:capture:update": "playwright test --config=capture/playwright.config.ts --update-snapshots"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,10 @@
   },
   "homepage": "https://github.com/SFDO-Community/Salesforce-Indicators#readme",
   "devDependencies": {
-    "@playwright/test": "1.62.1",
-    "@salesforce/sfdx-lwc-jest": "^7.1.2"
+    "@playwright/test": "^1.62.1",
+    "@salesforce/sfdx-lwc-jest": "^7.1.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^26.4.0",
+    "js-yaml": "^5.4.1"
   }
 }
