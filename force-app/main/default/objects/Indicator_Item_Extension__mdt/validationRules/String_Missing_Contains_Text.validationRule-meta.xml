@@ -4,8 +4,14 @@
     <active>true</active>
     <errorConditionFormula>ISBLANK( Contains_Text__c )
 &amp;&amp; (
-    CONTAINS(Indicator_Item__r.Field__r.DataType,&apos;Text&apos;)
-    || CONTAINS(Indicator_Item__r.Field__r.DataType,&apos;Picklist&apos;)
+    Indicator_Item__r.Field__r.DataType = &apos;string&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;textarea&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;picklist&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;multipicklist&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;combobox&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;phone&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;email&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;url&apos;
 )</errorConditionFormula>
     <errorDisplayField>Contains_Text__c</errorDisplayField>
     <errorMessage>Indicator Item is a String/Picklist Type and requires a Contains Text value</errorMessage>

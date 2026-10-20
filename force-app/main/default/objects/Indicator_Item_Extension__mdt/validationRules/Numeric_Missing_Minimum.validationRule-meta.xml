@@ -4,9 +4,12 @@
     <active>true</active>
     <errorConditionFormula>ISBLANK( Minimum__c )
 &amp;&amp; (
-    CONTAINS(Indicator_Item__r.Field__r.DataType,&apos;Number&apos;)
-    || CONTAINS(Indicator_Item__r.Field__r.DataType,&apos;Currency&apos;)
-|| CONTAINS(Indicator_Item__r.Field__r.DataType,&apos;Percent&apos;)
+    Indicator_Item__r.Field__r.DataType = &apos;integer&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;int&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;long&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;double&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;currency&apos;
+    || Indicator_Item__r.Field__r.DataType = &apos;percent&apos;
 )</errorConditionFormula>
     <errorDisplayField>Minimum__c</errorDisplayField>
     <errorMessage>Indicator Item is a Numeric Type and requires a Minimum value.</errorMessage>

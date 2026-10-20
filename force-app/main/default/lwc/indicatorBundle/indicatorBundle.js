@@ -119,9 +119,11 @@ function resolveBadgeStyle(item, dataValue, matchedExtension) {
         };
 }
 
-// If the False Icon and False Text is entered and the Boolean is False or text value is empty, then set the False Text
-// If the Icon Text is entered then show that
-// If no Icon Text is entered if the field is a Boolean then show the icon otherwise show the field value
+// Static text shown in the indicator:
+// - Value present: a matched extension's Static Text, else the item's Static Text. If neither is set, Empty Static
+//   Text Behavior decides: 'Use Icon Only' shows no text (the icon renders); 'Use Field Value' shows the field's value
+//   for every field type, Boolean included, so an admin's explicit choice is honored; anything else uses the False Text.
+// - Value blank/false with Show False or Blank on: the False (Inverse) Static Text.
 function resolveTextShown(item, dataValue, matchedExtension, indsStyle) {
     const truncate = (text) => (indsStyle === 'avatar' ? text.substring(0, 3) : text);
 
@@ -654,7 +656,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                 fId: iid,                   // Used to generate resultsById which is used in click handling
                                 fTextValue: dataValue,      // Retain for debug purposes
                                 ...resolveImage(item, dataValue, matchedExtension),
-                                ...resolveBadgePillText(item, dataValue, matchedExtension, displayValue),
+                                ...resolveBadgePillText(ibi, dataValue, matchedExtension, displayValue),
                                 ...resolveShowAvatar(item, dataValue, matchedExtension, showDefault),
                                 ...resolveIconName(item, dataValue, matchedExtension, this.indsStyle),
                                 ...resolveIconColors(item, dataValue, matchedExtension),

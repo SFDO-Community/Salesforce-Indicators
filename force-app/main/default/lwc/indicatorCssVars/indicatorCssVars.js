@@ -23,6 +23,14 @@ export function applyColorVars(component, selector, vars, defaults = {}) {
     }
 
     Object.entries(vars).forEach(([name, value]) => {
-        target.style.setProperty(`--${name}`, value || defaults[name]);
+        const resolved = value || defaults[name];
+        if (resolved) {
+            target.style.setProperty(`--${name}`, resolved);
+        } else {
+            // Never write the text "undefined": Chrome stores it as the variable's value, which makes the SLDS icon hook that reads
+            // it invalid, so the glyph falls back to the browser default (black) instead of the theme default. Removing the property
+            // lets var(--name) stay unset and the hook's own fallback apply. It also clears a value left by an earlier render.
+            target.style.removeProperty(`--${name}`);
+        }
     });
 }
