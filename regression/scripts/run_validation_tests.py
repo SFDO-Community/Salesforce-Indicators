@@ -124,7 +124,9 @@ class Builder:
             self.rec("Indicator_Item", name, [("sObject", g("sObject")), ("Field", g("Field")), ("Advanced_Field", g("Advanced_Field")),
                      ("Active", True), ("Empty_Static_Text_Behavior", behavior), ("Icon_Value", g("Icon_Value")),
                      ("Inverse_Icon_Value", g("Inverse_Icon_Value")), ("Image", g("Image")), ("Inverse_Image", g("Inverse_Image")),
-                     ("Static_Text", g("Static_Text"))])
+                     ("Static_Text", g("Static_Text")), ("Show_False_or_Blank", True if g("Show_False_or_Blank") == "true" else None),
+                     ("Inverse_Static_Text", g("Inverse_Static_Text")), ("Inverse_Hover_Text", g("Inverse_Hover_Text")),
+                     ("Inverse_Badge_Pill_Text", g("Inverse_Badge_Pill_Text"))])
         elif c["object"] == "Extension":
             self.rec("Indicator_Item_Extension", name, [("Indicator_Item", g("item")), ("Active", True), ("Contains_Text", g("Contains_Text")),
                      ("Text_Operator", g("Text_Operator")), ("Minimum", g("Minimum")), ("Maximum", g("Maximum")),

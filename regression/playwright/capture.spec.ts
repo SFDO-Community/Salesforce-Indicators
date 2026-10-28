@@ -136,7 +136,9 @@ test('capture: bundle shots vs expected', async ({ page }) => {
             const slotOk = errored || expAll.length === actAll.length;
             const expHovers = exp.flatMap(e => e.expected_hover ? e.expected_hover.split(' | ') : []);
             const alts = actual.map(a => a.alt);
-            const hoverOk = expHovers.every(h => alts.includes(h));
+            // v0.4 (prod) put the hover text in the avatar's alt text. From v0.5 (dev) hover is a popover with generic alt text,
+            // and features.spec.ts tests the popover itself, so the alt-text check applies to prod only.
+            const hoverOk = ENV === 'dev' || expHovers.every(h => alts.includes(h));
             const basis = [...new Set(exp.map(e => e.basis).filter(x => x !== 'spec'))].join('+') || 'spec';
             const result = visOk && slotOk && hoverOk ? 'PASS' : (basis !== 'spec' ? 'KNOWN' : 'DIFF');
             prior.set(shot.shot_id, [shot.shot_id, 'bundle', result, String(expVis.length), String(actVis.length), String(expAll.length - expVis.length),

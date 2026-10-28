@@ -1,4 +1,4 @@
-﻿case_id,object,description,rule,expect,msg_contains,item,bundle,sObject,Field,Advanced_Field,Icon_Value,Inverse_Icon_Value,Image,Inverse_Image,Static_Text,Empty_Static_Text_Behavior,Contains_Text,Text_Operator,Minimum,Maximum,Action_Type,Action_Target
+﻿case_id,object,description,rule,expect,msg_contains,item,bundle,sObject,Field,Advanced_Field,Icon_Value,Inverse_Icon_Value,Image,Inverse_Image,Static_Text,Empty_Static_Text_Behavior,Contains_Text,Text_Operator,Minimum,Maximum,Action_Type,Action_Target,Show_False_or_Blank,Inverse_Static_Text,Inverse_Hover_Text,Inverse_Badge_Pill_Text
 B01,Bundle,Bundle with no sObject,ObjectRequired,fail,An object must be assigned,,,,,,,,,,,,,,,,,
 B02,Bundle,Valid bundle,(none),pass,,,,Account,,,,,,,,,,,,,,
 I01,Item,Item with no sObject (advanced field only),ObjectRequired,fail,An object must be assigned,,,,,Parent.AccountNumber,,,,,,,,,,,,
@@ -68,3 +68,9 @@ C15,Extension,"CUSTOM Multi-Select Picklist, no value",String_Missing_Contains_T
 C16,Extension,"CUSTOM Rich Text Area, numeric rule only",String_Missing_Contains_Text,fail,requires a Contains Text,VT_I_CRch,,,,,,,,,,,,,1,,,
 C17,Extension,"Formula (Number) field, Maximum only (formula fields report just ""formula"": number vs text is not known, so no rule can apply)",(no rule: GAP),gap,,VT_I_CFNm,,,,,,,,,,,,,,5,,
 C18,Extension,"Formula (Text) field, numeric rule only (see C17)",(no rule: GAP),gap,,VT_I_CFTx,,,,,,,,,,,,,1,,,
+S01,Item,"Show False or Blank on, no Inverse value at all (the B00 configuration)",ShowFalseOrBlankNeedsContent,gap,Show False or Blank is checked,,,Account,AccountNumber,,,,,,,,,,,,,,true,,,
+S02,Item,Show False or Blank on with an Inverse Icon,(none),pass,,,,Account,AccountNumber,,,utility:close,,,,,,,,,,,true,,,
+S03,Item,Show False or Blank on with Inverse Static Text only,(none),pass,,,,Account,AccountNumber,,,,,,,,,,,,,,true,No,,
+S04,Item,Show False or Blank on with Inverse Hover Text only (gets the fallback icon on purpose),(none),pass,,,,Account,AccountNumber,,,,,,,,,,,,,,true,,Missing,
+S05,Item,Show False or Blank on with Inverse Badge/Pill Text only,(none),pass,,,,Account,AccountNumber,,,,,,,,,,,,,,true,,,None
+S06,Item,Show False or Blank off and no Inverse values (a normal item),(none),pass,,,,Account,AccountNumber,,,,,,,,,,,,,,,,,

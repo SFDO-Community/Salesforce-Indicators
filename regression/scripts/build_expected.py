@@ -29,13 +29,14 @@ prod_only rows and broken PROD scoring, not just left dev unhandled -- don't rei
   spec         follows the stated intended behavior
   unspecified  behavior not defined yet (hover-only, blank rule content, ties...) - decide, then update
   known-issue  intended result differs from current behavior on purpose; observed behavior in notes
-  known-gap    feature gap (Empty Static Text Behavior is not applied to rule matches)
+  known-gap    feature gap (no rows use it now; the Empty Static Text on rule matches gap was decided as intended on 2026-10-28)
 Intended rules encoded here live in the functions below; change them here when the spec changes.
 """
 import csv, re, sys, collections
 from pathlib import Path
 
 REG = Path(__file__).resolve().parents[2] / "regression"
+DEFAULT_FALLBACK_ICON = "standard:default"   # indicatorBundle.js DEFAULT_FALLBACK_ICON
 ENV = sys.argv[sys.argv.index("--env") + 1] if "--env" in sys.argv else "prod"
 assert ENV in ("prod", "dev"), f"--env must be 'prod' or 'dev', got {ENV!r}"
 def rd(p): return list(csv.DictReader(open(p, encoding="utf-8-sig"))) if p.exists() else []
@@ -97,16 +98,19 @@ def avatar(c, level, it, v, e_ctx=None):
         if not isinstance(v, bool):
             text = show(v)[:3]
     if level == "V" and not c["text"] and beh == "Use Field Value":
-        basis, note = "known-gap", "Empty Static Text Behavior is not applied to rule matches; expected icon only until decided"
+        basis, note = "spec", "Empty Static Text Behavior is not applied to rule matches: an Extension has its own Static Text, so with none the icon shows (decided 2026-10-28)"
     if img_ok: d = "image"
     elif text: d = f"initials '{text}'"
     elif c["icon"]: d = f"icon {c['icon']}"
     elif img_bad:  d, basis, note = "empty slot (broken image, no fallback)", "known-issue", "prod-only: the next release requires a fallback icon; a slot with nothing visible is the current expectation"
+    elif c["hover"] and ENV == "dev": d, basis, note = f"icon {DEFAULT_FALLBACK_ICON}", "spec", "hover-only item: the next release shows the fallback icon so the popover has something to hover (team decision 2026-10-28)"
     elif c["hover"]: d, basis, note = "none", "known-issue", "hover text alone should not render an avatar (current release is expected to render one)"
+    elif ENV == "dev": d, note = f"icon {DEFAULT_FALLBACK_ICON}", ("a rule that matched with no content shows the fallback icon (team decision 2026-10-28; a validation rule could prevent it)" if level == "V" else "")
     else:          d, basis, note = "none", ("known-issue" if level == "V" else basis), ("a rule with no content should be prevented; observed: blank avatar" if level == "V" else "")
     if img_bad and (text or c["icon"]): d += " (broken image fallback)"
     if c["bg"] and d not in ("none",): d += f" bg={c['bg']}"
-    if level == "D" and c["text"] and isinstance(v, float) and v == 0:
+    # Fixed in the next release (2026-10-28): Static Text now applies to 0. Only the released v0.4 (prod) still ignores it.
+    if ENV == "prod" and level == "D" and c["text"] and isinstance(v, float) and v == 0:
         basis, note = "known-issue", "a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only)"
     return d, basis, note
 
@@ -167,6 +171,10 @@ for name, it in items:
             mc = content(it, "M")
             if it["Show_False_or_Blank__c"] != "true":
                 notes.append("Show when false or blank is cleared")
+            elif not any(mc[k] for k in ("hover", "text", "icon", "image")) and ENV == "dev":
+                level = "missing"
+                avatars.append(f"icon {DEFAULT_FALLBACK_ICON}")
+                notes.append("Missing enabled but no content: the next release shows the fallback icon (team decision 2026-10-28; see findings/show-false-or-blank-needs-content.md)")
             elif not any(mc[k] for k in ("hover", "text", "icon", "image")):
                 basis = "known-issue"
                 notes.append("Missing enabled but no content: nothing should render (current release suspected to leave an empty slot)")

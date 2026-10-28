@@ -981,7 +981,7 @@ RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-01,,missing,none,none,,spec,Show whe
 RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-01,,missing,none,none,,spec,Show when false or blank is cleared
 RB13c_Known_Other_Acct,K_zero_static,1,ACC-02,0,present,default,initials 'DEF',,known-issue,"a value of 0 ignores the static text (observed: shows '0', or icon only with Use Icon Only)"
 RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-02,Alpha,present,rule,icon standard:task,,spec,
-RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-02,Alpha,present,rule,icon standard:task,,known-gap,Empty Static Text Behavior is not applied to rule matches; expected icon only until decided
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-02,Alpha,present,rule,icon standard:task,,spec,
 RB13c_Known_Other_Acct,K_zero_static,1,ACC-03,-5,present,default,initials 'DEF',,spec,
 RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
 RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-03,Gold,present,none,none,,spec,no rule match and no Default configured
@@ -999,4 +999,4 @@ RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-07,Gold,present,none,none,,spec,no r
 RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
 RB13c_Known_Other_Acct,K_zero_static,1,ACC-08,25,present,default,initials 'DEF',,spec,
 RB13c_Known_Other_Acct,K_ext_est_icon,2,ACC-08,Alpha,present,rule,icon standard:task,,spec,
-RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-08,Alpha,present,rule,icon standard:task,,known-gap,Empty Static Text Behavior is not applied to rule matches; expected icon only until decided
+RB13c_Known_Other_Acct,K_ext_est_value,3,ACC-08,Alpha,present,rule,icon standard:task,,spec,

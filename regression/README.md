@@ -1,18 +1,69 @@
-# Breakdown
+# Regression and feature testing
+
+This folder tests the Indicators package in scratch orgs with Playwright (a browser reads what each record page actually renders) and with check-only deploys (for validation rules). It does two jobs:
+
+1. **Regression (phase 1):** the released package (v0.4, org alias `..._prod`) against the next build (`..._dev`), to find anything that changed unexpectedly.
+2. **Feature tests (phase 2, `dev_only`):** the new features of the next build against what they are supposed to do. These cannot deploy to the released package.
+
+Current status is in `STATE.md`, open decisions in `TODO.md`, and every real product bug found has a write-up in `findings/`.
+
+## Folder map
 
 ```
 regression
-├───customMetadata      // Output from `sf cmdt generate records` commands below (deploys to every org)
-├───data                // CSV files built from the `\planning` tables by `scripts/build_cmdt_csvs.py`
-│   └───prod_only       // Records that only deploy to orgs WITHOUT the newer validation rules (see below)
-├───destructive         // Approach for destructive deployment to delete custom metadata records
-├───flexipages          // Regression record pages (Account, Contact) with the bundles on tabs
-├───planning            // Planning files tracked by AI: indicators, extensions, records, expected results, screenshot matrix
-├───playwright          // Capture specs (bundle screenshots, keys) and their output
-├───prod_only           // Generated XML + package.xml for the `data/prod_only` records
-│   └───customMetadata
-└───scripts             // Supportive scripts for the regression process
+├───customMetadata      // The regression indicators (bundles, items, extensions, bundle items) as Salesforce XML; deploys to every org
+├───prod_only           // The few records that only the released package accepts (the newer validation rules reject them); see "prod_only"
+├───dev_only            // Everything for the NEW features. Deploys to dev orgs only (see "Feature tests")
+│   ├───customMetadata  //   feature indicators (RF14-RF20)
+│   ├───flexipages      //   record pages with the Avatar / Badge / Pill / Cards / Features tabs
+│   ├───flows           //   a display-only screen flow, used to test the Flow Modal click action
+│   ├───objects         //   17 custom test fields on Account (one per field type)
+│   └───permissionsets  //   gives the user access to those fields
+├───data                // CSVs generated from planning/ (and data/prod_only, data/dev_only); the input to `sf cmdt generate`
+├───planning            // SOURCE OF TRUTH for what is configured and what should be seen; see "Reading the names" below
+│   ├───features        //   the same, for the new features (hand-editable)
+│   └───validation      //   cases.csv: every validation-rule test case
+├───scripts             // build_*.py make the CSVs and the expected results; run_validation_tests.py, org_audit.py, compare_captures.py...
+├───playwright          // the browser specs, and their output (gitignored): reports, screenshots, pixel baselines, comparison.html
+├───findings            // write-ups of real bugs found, with evidence (and proposed patches)
+├───flexipages          // the base record pages (Account, Contact) with the 12 regression bundles on tabs
+├───objects             // Account and Contact object settings the org flows deploy in order to assign the respective flexipages
+├───settings-slds1 / settings-slds2   // Lightning Experience settings that switch a scratch org to the SLDS1 or SLDS2 look
+├───branding-themes     // the themes used to build the dark-mode org and be able to switch to SLDS1
+├───destructive         // a destructive-deploy package to delete the regression CMDT records (has its own README) *Legacy testing design*
+├───package.xml         // generic manifest used to deploy this folder
+├───STATE.md            // where things stand
+└───TODO.md             // what is open, who decides
 ```
+
+The sample data that gets loaded into the orgs is not in this folder: it is in `../datasets/` (`regression`, `features`, `features_dates`, `default`).
+
+## Reading the names (what RB05a, B00, ACC-02 mean)
+
+Everything is named so you can trace it from what you see on a record page back to the row that configured it. These names are our own convention (they are not Salesforce terms), and none of them was written down before this section.
+
+**Regression bundles, `RBnn...`** ("Regression Bundle"; it is not "rule based"). The number is the test area, the same number as the `B01`..`B13` in the card title on the record page:
+
+| Bundle | Tests | Item ids start with |
+|---|---|---|
+| `RB01` Any Value | what renders when the field has a value (icon, text, image, hover, colours) | `A` |
+| `RB02` Missing content | the "Show when false or blank" side (inverse) | `B` |
+| `RB03` Value-Rule | content that comes from an Extension rule | `C` |
+| `RB04` Zero, `RB05` Empty Static Text | zero handling; what shows when Static Text is empty | `D` |
+| `RB06` Numeric, `RB07` Text rules, `RB08` Multiple and Priority | Extension matching | `E` |
+| `RB09`-`RB11` Level combos | Text, Number, Checkbox fields with each combination of default / missing / rule content | `F` |
+| `RB12` Bundle and Item level | inactive bundle, same field twice, Advanced Field | `G` |
+| `RB13` Known issues | cases kept to document a behaviour | `K` |
+
+A trailing letter is the object: `a` = Account, `c` = Contact (`RB05a`, `RB05c`); `RB12x` is the inactive bundle; `RB13a/b/c` are three separate known-issue bundles. An **item** is one indicator (one field mapped to some content), named by the group letter plus what it configures: `A-icon` (icon only), `A-text`, `A-img-icon-text`, `B00` / `C00` (nothing configured, the empty case of that group), `D-zero-Blanks-M` (zero test, Treat Zeroes as Blanks, configured at the **M**issing level). The letters at the end of some ids are the content levels: **D**efault (the value is present), **M**issing (blank or false), **V** (a value rule from an Extension); in the deployed CMDT the dashes become underscores (`A-icon` is `A_icon`).
+
+**Records.** `ACC-01`..`ACC-08` are the 8 regression Accounts named `Regression ...`, each an archetype (blank, zero, negative, a text-rule match...); `CON-01`..`CON-05` are the Contacts. The feature tests use `FEAT-01`..`FEAT-04` (`Feature Full`, `Blank`, `Cold`, `Zero`), `FCON-01`..`FCON-04` (Contacts) and `FDATE-01`..`FDATE-11` (date records).
+
+**Feature tests, `RFnn`, `Fnn_xx`, `Enn_xx`.** `RF14`..`RF20` are feature bundles (Regression Feature), `F14_01` is an item in `RF14`, `E14_07a` an Extension. Each feature bundle shows up three times, once per style tab (Avatar, Badge, Pill).
+
+**A shot or result row** is `<object>_<bundle>_<record>`, e.g. `acc_RB05a_ACC-02` = the `RB05a` bundle on Account `Regression Zero`. In `comparison.html` and the `*_report.csv` files that is the key to search for.
+
+**To see how any of it is configured:** find the item id in `planning/indicators.csv` (one row each: field, content, behaviour, what it verifies), its Extensions in `planning/extensions.csv`, and what should be seen per record in `planning/expected.csv` (`expected.dev.csv` for dev orgs; the `basis` column is `spec`, `unconfirmed` or `known-issue`, and `notes` says why). The CSVs under `data/` are generated from those and are what actually gets deployed. Example: `C00` is in `planning/indicators.csv` as an Account Number item, with one Extension rule ("contains `alp`") that has no content, and `expected.csv` lists its eight records.
 
 ## Generating CMDT Records from CSV
 
