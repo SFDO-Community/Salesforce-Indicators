@@ -135,7 +135,8 @@ function resolveTextShown(item, dataValue, matchedExtension, indsStyle, displayV
         if (matchedExtension) {
             return { fTextShown: matchedExtension.TextValue ? truncate(matchedExtension.TextValue) : '' };
         }
-        if (dataValue && item.TextValue) {
+        // 0 is a value, so Static Text applies to it like any other value (Treat Zeroes as Blanks has already nulled it).
+        if (item.TextValue) {
             return { fTextShown: truncate(item.TextValue) };
         }
         if (item.EmptyStaticBehavior === 'Use Icon Only') {
