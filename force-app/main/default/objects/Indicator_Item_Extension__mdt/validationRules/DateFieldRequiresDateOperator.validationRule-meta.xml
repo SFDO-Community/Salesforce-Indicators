@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DateFieldRequiresDateOperator</fullName>
+    <active>true</active>
+    <description>Date/DateTime fields are matched with Contains_Text__c (a date literal) plus Text_Operator__c, never Minimum/Maximum. Contains and Starts With are text-only: the component ignores them on a real date, and a blank operator defaults to Contains.</description>
+    <errorConditionFormula>( LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;date&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;datetime&apos; )
+&amp;&amp; (
+    ISBLANK( Contains_Text__c )
+    || ISPICKVAL( Text_Operator__c, &apos;&apos; )
+    || ISPICKVAL( Text_Operator__c, &apos;Contains&apos; )
+    || ISPICKVAL( Text_Operator__c, &apos;Starts With&apos; )
+)</errorConditionFormula>
+    <errorDisplayField>Text_Operator__c</errorDisplayField>
+    <errorMessage>Date and Date/Time fields need a date value (a relative date such as TODAY or NEXT 30 DAYS, or a fixed date as YYYY-MM-DD) and a date operator: Equals, Does Not Equal, Before Start, After Start, Before End or After End.</errorMessage>
+</ValidationRule>
