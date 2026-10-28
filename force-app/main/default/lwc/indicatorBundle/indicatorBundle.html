@@ -59,7 +59,7 @@
                             <template if:true={results}>
                                 <template for:each={results} for:item="fld">
                                     <template lwc:if={showAvatarStyle}>
-                                        <div key={fld.fName}
+                                        <div key={fld.fId}
                                             if:true={fld.fShowAvatar}
                                             class={fld.fContainerClass}
                                             data-id={fld.fId}
@@ -116,7 +116,7 @@
                                         </div>
                                     </template>
                                     <template lwc:if={showPillStyle}>
-                                        <div key={fld.fName}
+                                        <div key={fld.fId}
                                             if:true={fld.fShowAvatar}
                                             class={fld.fContainerClass}
                                             data-id={fld.fId}
@@ -174,7 +174,7 @@
                                         </div>
                                     </template>
                                     <template lwc:if={showBadgeStyle}>
-                                        <div key={fld.fName}
+                                        <div key={fld.fId}
                                             if:true={fld.fShowAvatar}
                                             class={fld.fContainerClass}
                                             data-id={fld.fId}

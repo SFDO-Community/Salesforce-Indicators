@@ -219,6 +219,9 @@
         <fields>DeveloperName</fields>
         <fields>Indicator_Bundle__c</fields>
         <fields>Order__c</fields>
+        <fields>Action_Type__c</fields>
+        <fields>Action_Target__c</fields>
+        <fields>Show_False_or_Blank_Action__c</fields>
         <relatedList>Indicator_Bundle_Item__mdt.Indicator_Item__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -242,7 +245,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hEi00000ErG6e</masterLabel>
+        <masterLabel>00hhP000001MJps</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

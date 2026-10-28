@@ -39,10 +39,10 @@ export const CSV_HEADERS = {
         'DeveloperName', 'MasterLabel', 'inds__Active__c', 'inds__sObject__c',
         'inds__Field__c', 'inds__Advanced_Field__c', 'inds__Advanced_Field_Label__c',
         'inds__Static_Text__c', 'inds__Icon_Value__c', 'inds__Image__c',
-        'inds__Icon_Background__c', 'inds__Icon_Foreground__c', 'inds__Hover_Text__c',
+        'inds__Icon_Background__c', 'inds__Icon_Foreground__c', 'inds__Hover_Text__c', 'inds__Badge_Pill_Text__c',
         'inds__Show_False_or_Blank__c', 'inds__Inverse_Static_Text__c', 'inds__Inverse_Icon_Value__c',
         'inds__Inverse_Image__c', 'inds__Inverse_Icon_Background__c', 'inds__Inverse_Icon_Foreground__c',
-        'inds__Inverse_Hover_Text__c', 'inds__Zero_Behavior__c', 'inds__Empty_Static_Text_Behavior__c',
+        'inds__Inverse_Hover_Text__c', 'inds__Inverse_Badge_Pill_Text__c', 'inds__Zero_Behavior__c', 'inds__Empty_Static_Text_Behavior__c',
         'inds__Display_Multiple__c', 'inds__Badge_Icon_Position__c', 'inds__Badge_Pill_Text_Color__c',
         'inds__Inverse_Badge_Icon_Position__c', 'inds__Inverse_Badge_Pill_Text_Color__c', 'inds__Description__c'
     ],
@@ -56,7 +56,7 @@ export const CSV_HEADERS = {
         'DeveloperName', 'MasterLabel', 'inds__Indicator_Item__c', 'inds__Active__c',
         'inds__Contains_Text__c', 'inds__Text_Operator__c', 'inds__Minimum__c', 'inds__Maximum__c',
         'inds__Priority__c', 'inds__Static_Text__c', 'inds__Icon_Value__c', 'inds__Image__c',
-        'inds__Icon_Background__c', 'inds__Icon_Foreground__c', 'inds__Hover_Text__c',
+        'inds__Icon_Background__c', 'inds__Icon_Foreground__c', 'inds__Hover_Text__c', 'inds__Badge_Pill_Text__c',
         'inds__Badge_Icon_Position__c', 'inds__Badge_Pill_Text_Color__c', 'inds__Description__c'
     ]
 };
@@ -127,6 +127,7 @@ function extensionToRecipe(ext) {
         BackgroundColor: ext.BackgroundColor,
         ForegroundColor: ext.ForegroundColor,
         ExtensionHoverText: ext.ExtensionHoverText,
+        ExtensionBadgePillText: ext.ExtensionBadgePillText,
         BadgeIconPosition: ext.BadgeIconPosition,
         BadgeTextColor: ext.BadgePillTextColor,
         ExtensionDescription: ext.ExtensionDescription
@@ -152,6 +153,7 @@ function itemToRecipe(item, { includeBundleItem }) {
         BackgroundColor: item.BackgroundColor,
         ForegroundColor: item.ForegroundColor,
         HoverValue: item.HoverValue,
+        BadgePillText: item.BadgePillText,
         DisplayFalse: item.DisplayFalse,
         FalseTextValue: item.FalseTextValue,
         FalseIcon: item.FalseIcon,
@@ -159,6 +161,7 @@ function itemToRecipe(item, { includeBundleItem }) {
         InverseBackgroundColor: item.InverseBackgroundColor,
         InverseForegroundColor: item.InverseForegroundColor,
         FalseHoverValue: item.FalseHoverValue,
+        FalseBadgePillText: item.FalseBadgePillText,
         ZeroBehavior: item.ZeroBehavior,
         EmptyStaticBehavior: item.EmptyStaticBehavior,
         DisplayMultiple: item.DisplayMultiple,
@@ -236,6 +239,7 @@ function extensionFromRecipe(ext) {
         BackgroundColor: ext.BackgroundColor,
         ForegroundColor: ext.ForegroundColor,
         ExtensionHoverText: ext.ExtensionHoverText,
+        ExtensionBadgePillText: ext.ExtensionBadgePillText,
         BadgeIconPosition: ext.BadgeIconPosition,
         BadgeTextColor: ext.BadgePillTextColor,
         ExtensionDescription: ext.ExtensionDescription
@@ -262,6 +266,7 @@ function itemFromRecipe(item) {
         BackgroundColor: item.BackgroundColor,
         ForegroundColor: item.ForegroundColor,
         HoverValue: item.HoverValue,
+        BadgePillText: item.BadgePillText,
         DisplayFalse: item.DisplayFalse,
         FalseTextValue: item.FalseTextValue,
         FalseIcon: item.FalseIcon,
@@ -269,6 +274,7 @@ function itemFromRecipe(item) {
         InverseBackgroundColor: item.InverseBackgroundColor,
         InverseForegroundColor: item.InverseForegroundColor,
         FalseHoverValue: item.FalseHoverValue,
+        FalseBadgePillText: item.FalseBadgePillText,
         ZeroBehavior: item.ZeroBehavior,
         EmptyStaticBehavior: item.EmptyStaticBehavior,
         DisplayMultiple: item.DisplayMultiple,
@@ -409,6 +415,7 @@ export function recipeToCsvRows(recipe, options = {}) {
             inds__Icon_Background__c: item.BackgroundColor,
             inds__Icon_Foreground__c: item.ForegroundColor,
             inds__Hover_Text__c: item.HoverValue,
+            inds__Badge_Pill_Text__c: item.BadgePillText,
             inds__Show_False_or_Blank__c: item.DisplayFalse,
             inds__Inverse_Static_Text__c: item.FalseTextValue,
             inds__Inverse_Icon_Value__c: item.FalseIcon,
@@ -416,6 +423,7 @@ export function recipeToCsvRows(recipe, options = {}) {
             inds__Inverse_Icon_Background__c: item.InverseBackgroundColor,
             inds__Inverse_Icon_Foreground__c: item.InverseForegroundColor,
             inds__Inverse_Hover_Text__c: item.FalseHoverValue,
+            inds__Inverse_Badge_Pill_Text__c: item.FalseBadgePillText,
             inds__Zero_Behavior__c: item.ZeroBehavior,
             inds__Empty_Static_Text_Behavior__c: item.EmptyStaticBehavior,
             inds__Display_Multiple__c: item.DisplayMultiple,
@@ -469,6 +477,7 @@ export function recipeToCsvRows(recipe, options = {}) {
                 inds__Icon_Background__c: ext.BackgroundColor,
                 inds__Icon_Foreground__c: ext.ForegroundColor,
                 inds__Hover_Text__c: ext.ExtensionHoverText,
+                inds__Badge_Pill_Text__c: ext.ExtensionBadgePillText,
                 inds__Badge_Icon_Position__c: ext.BadgeIconPosition,
                 inds__Badge_Pill_Text_Color__c: ext.BadgeTextColor,
                 inds__Description__c: ext.ExtensionDescription

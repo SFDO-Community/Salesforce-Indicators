@@ -46,11 +46,13 @@ function resolveImage(item, dataValue, matchedExtension) {
 // configured value twice. displayValue is the field's locale-formatted display value, used only
 // when Badge_Pill_Text__c itself is blank.
 function resolveBadgePillText(item, dataValue, matchedExtension, displayValue) {
+    // 0 is a value, so test the display value for blank rather than falsy.
+    const shown = displayValue === null || displayValue === undefined ? '' : String(displayValue);
     if (hasValue(dataValue)) {
         if (matchedExtension) {
-            return { fBadgePillText: matchedExtension.BadgePillText || displayValue || '' };
+            return { fBadgePillText: matchedExtension.BadgePillText || shown };
         }
-        return { fBadgePillText: item.BadgePillText || displayValue || '' };
+        return { fBadgePillText: item.BadgePillText || shown };
     }
     return { fBadgePillText: item.DisplayFalse ? item.FalseBadgePillText : '' };
 }
@@ -76,7 +78,7 @@ function resolveShowAvatar(item, dataValue, matchedExtension, showDefault) {
 // here; they only matter for those components' standalone Flow Screen usage.
 const DEFAULT_FALLBACK_ICON = 'standard:default';
 
-function resolveIconName(item, dataValue, matchedExtension, indsStyle) {
+function resolveIconName(item, dataValue, matchedExtension, indsStyle, displayValue) {
     const iconName = hasValue(dataValue)
         ? (matchedExtension ? matchedExtension.IconName : item.IconName)
         : (item.DisplayFalse ? item.FalseIcon : '');
@@ -91,7 +93,7 @@ function resolveIconName(item, dataValue, matchedExtension, indsStyle) {
         return { fIconName: indsStyle === 'badge' ? 'utility:info' : '' };
     }
 
-    const { fTextShown } = resolveTextShown(item, dataValue, matchedExtension, indsStyle);
+    const { fTextShown } = resolveTextShown(item, dataValue, matchedExtension, indsStyle, displayValue);
     return { fIconName: fTextShown ? '' : DEFAULT_FALLBACK_ICON };
 }
 
@@ -122,14 +124,16 @@ function resolveBadgeStyle(item, dataValue, matchedExtension) {
 // Static text shown in the indicator:
 // - Value present: a matched extension's Static Text, else the item's Static Text. If neither is set, Empty Static
 //   Text Behavior decides: 'Use Icon Only' shows no text (the icon renders); 'Use Field Value' shows the field's value
-//   for every field type, Boolean included, so an admin's explicit choice is honored; anything else uses the False Text.
+//   field's display value (locale-formatted, same as Badge/Pill Text); anything else uses the False Text. A Boolean
+//   (checkbox) has no meaningful text to show, so it never renders "true"/"false" - its displayValue is blank and the
+//   icon carries it.
 // - Value blank/false with Show False or Blank on: the False (Inverse) Static Text.
-function resolveTextShown(item, dataValue, matchedExtension, indsStyle) {
+function resolveTextShown(item, dataValue, matchedExtension, indsStyle, displayValue) {
     const truncate = (text) => (indsStyle === 'avatar' ? text.substring(0, 3) : text);
 
     if (hasValue(dataValue)) {
         if (matchedExtension) {
-            return { fTextShown: matchedExtension.TextValue ? matchedExtension.TextValue.substring(0, 3) : '' };
+            return { fTextShown: matchedExtension.TextValue ? truncate(matchedExtension.TextValue) : '' };
         }
         if (dataValue && item.TextValue) {
             return { fTextShown: truncate(item.TextValue) };
@@ -138,7 +142,9 @@ function resolveTextShown(item, dataValue, matchedExtension, indsStyle) {
             return { fTextShown: '' };
         }
         if (item.EmptyStaticBehavior === 'Use Field Value') {
-            return { fTextShown: truncate(String(dataValue)) };
+            // 0 is a value, so test for blank rather than falsy.
+            const shown = displayValue === null || displayValue === undefined ? '' : String(displayValue);
+            return { fTextShown: shown ? truncate(shown) : '' };
         }
         return { fTextShown: item.FalseTextValue ? truncate(item.FalseTextValue) : '' };
     }
@@ -476,14 +482,17 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                         // getFieldDisplayValue is undefined for field types with no distinct formatted
                         // representation (Text, Picklist, Checkbox, ...) - raw already *is* the display
                         // value for those, so fall back to dataValue rather than rendering blank.
-                        let displayValue = getFieldDisplayValue(data, dataField) ?? dataValue ?? '';
+                        // A Boolean never has one: "true"/"false" isn't a label, so it stays blank and the icon shows.
+                        let displayValue = typeof dataValue === 'boolean'
+                            ? ''
+                            : (getFieldDisplayValue(data, dataField) ?? dataValue ?? '');
 
                         let showDefault = false;
                         if( item.HoverValue || item.BadgePillText || item.TextValue || item.IconName || item.ImageUrl ){
                             showDefault = true;
                         }
 
-                        let matchedExtension;
+                        const matchedExtensions = [];
 
                         // If the record has a value and the CMDT indicator setting has extensions
                         if((dataValue || dataValue === 0) && item.Extensions){
@@ -518,7 +527,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                     // String comparison — ContainsText holds a plain text value to match.
                                     else if(extension.ContainsText) {
 
-                                        let fieldValue = dataValue.toLowerCase();
+                                        let fieldValue = String(dataValue).toLowerCase();
                                         let compareValue = extension.ContainsText.toLowerCase();
 
                                         // console.log('Value',dataValue + ' ' + extension.TextOperator + ' ' + compareValue);   // Retain for debug purposes
@@ -554,7 +563,8 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                     // console.log('Match Status', match);   // Retain for debug purposes
                                     if(match) {
                                         // If there is a match for an Extension, assign the extension's override values and these will be used later
-                                        matchedExtension = {
+                                        const matchedExtension = {
+                                            "Id" : extension.ExtensionId ?? extIdx,
                                             "IconName" : extension.ExtensionIconValue,
                                             "TextValue" : extension.ExtensionTextValue,
                                             "ImageUrl" : extension.ExtensionImageUrl,
@@ -579,31 +589,10 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                                             matchedExtension.BadgePillText = this.mergeTemplate(matchedExtension.BadgePillText, extMergeFields, data);
                                         }
 
-                                        if(item.DisplayMultiple){
-                                            // Multiple matching: collect every hit.
-                                            anyMatch = true;
-                                            matchingFields.push(
-                                                {
-                                                    fName: item.FieldApiName,
-                                                    fTextValue: dataValue,
-                                                    fImageURL: matchedExtension.ImageUrl,
-                                                    fBadgePillText: matchedExtension.BadgePillText || displayValue || '',
-                                                    fShowAvatar: true,
-                                                    fIconName : matchedExtension.IconName,
-                                                    fIconBackground : matchedExtension.IconBackground,
-                                                    fIconForeground : matchedExtension.IconForeground,
-                                                    fTextShown: matchedExtension.TextValue,
-                                                    fItemClass: (this.itemsById[item.IndicatorId] && this.itemsById[item.IndicatorId].ActionTarget) ? 'clickable' : '',
-                                                    fContainerClass: 'slds-is-relative ind-popover-container',
-                                                    fTextColor: matchedExtension.BadgePillTextColor,
-                                                    fIconPosition: matchedExtension.BadgeIconPosition
-                                                }
-                                            );
-                                        } else {
+                                        matchedExtensions.push(matchedExtension);
+                                        if(!item.DisplayMultiple){
                                             break;  // Single-match: priority 1 wins; stop here.
                                         }
-
-                                        // console.dir(matchedExtension);
                                     }
                                 }   // End-If extension.IsActive
                             }
@@ -615,68 +604,15 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
                         // from itemsById.
                         this.mergeValuesIntoTarget(item, data);
 
-                        // If multiple matching is enabled and did not find a single match
-                        // or if multiple matching is not enabled
-                        // proceed to assign the indicator properties based on Indicator Item values
-                        if (anyMatch != true || item.DisplayMultiple != true) {
-                            const iid = item.IndicatorId;
-                            const ibi = this.itemsById[iid];
-                            // Mirrors resolveTextShown()'s hasValue/DisplayFalse fallback so the
-                            // popover shows the same false/blank hover text the indicator itself
-                            // switches to, instead of always reading the "true" HoverValue (which
-                            // is often empty when the field is blank).
-                            const resolvedHoverValue = matchedExtension
-                                ? (matchedExtension.HoverValue || '')
-                                : hasValue(dataValue)
-                                    ? (ibi?.HoverValue || '')
-                                    : (item.DisplayFalse ? (ibi?.FalseHoverValue || '') : '');
-                            // Opt-in (page/flow property, not CMDT) - when there's no configured
-                            // Hover Text for the "true" state, show the field's display value in the
-                            // popover instead of leaving it empty. Off by default since it means
-                            // every indicator gets a popover, changing mobile tap behavior.
-                            const fPopoverBody = resolvedHoverValue
-                                || (this.showFieldValueAsHoverFallback && hasValue(dataValue) ? displayValue : '');
-                            // The action stays available in the false/blank state only when the
-                            // bundle item opts in via Show_False_or_Blank_Action__c; otherwise it's
-                            // suppressed along with the rest of the "true" appearance. Stored on
-                            // itemsById so handleIndicatorClick/handlePopoverAction (which look the
-                            // item up by id, not through fld) can also honor it.
-                            const fActionAllowed = hasValue(dataValue) || !!item.DisplayFalseAction;
-                            if (ibi) {
-                                ibi.ActionAllowed = fActionAllowed;
-                            }
-                            const fActionType = fActionAllowed ? (item.ActionType ?? '') : '';
-                            // Has hover text and/or an action - independent of fItemClass, which is only
-                            // set when there's an action. Drives the touch dotted-underline hint (see
-                            // fContainerClass/indicatorBundle.css) so popover-only items get it too.
-                            const fHasPopover = !!(fPopoverBody || fActionType);
+                        // Multiple matching renders one indicator per matched Extension; otherwise (single
+                        // mode, or nothing matched) one indicator from the first match or the Item's own values.
+                        const toRender = item.DisplayMultiple && matchedExtensions.length
+                            ? matchedExtensions
+                            : [matchedExtensions[0]];
+                        toRender.forEach(matchedExtension => {
                             matchingFields.push(
-                            {
-                                fName: item.FieldApiName,   // Retain for debug purposes
-                                fId: iid,                   // Used to generate resultsById which is used in click handling
-                                fTextValue: dataValue,      // Retain for debug purposes
-                                ...resolveImage(item, dataValue, matchedExtension),
-                                ...resolveBadgePillText(ibi, dataValue, matchedExtension, displayValue),
-                                ...resolveShowAvatar(item, dataValue, matchedExtension, showDefault),
-                                ...resolveIconName(item, dataValue, matchedExtension, this.indsStyle),
-                                ...resolveIconColors(item, dataValue, matchedExtension),
-                                ...resolveBadgeStyle(item, dataValue, matchedExtension),
-                                ...resolveTextShown(item, dataValue, matchedExtension, this.indsStyle),
-                                fItemClass: (ibi && ibi.ActionTarget && fActionType) ? 'clickable' : '',
-                                fContainerClass: 'slds-is-relative ind-popover-container' + (fHasPopover ? ' has-popover' : ''),
-                                fFieldLabel: item.FieldLabel ? item.FieldLabel + ' indicator' : '',
-                                fPopoverBody,
-                                fActionType,
-                                fHasPopover,
-                                fActionButtonLabel: item.ActionButtonLabel ?? '',
-                                fActionHelpText: item.ActionHelpText ?? '',
-                                fActionConfirmRequired: item.ActionConfirmRequired ?? false,
-                                fResolvedActionButtonLabel: item.ActionButtonLabel
-                                    ? item.ActionButtonLabel
-                                    : (item.ActionType === 'Flow Modal' ? 'Launch' : 'Open'),
-                                fShowPopover: false,
-                            });
-                        }
+                                this.buildResult(item, dataValue, displayValue, showDefault, matchedExtension, toRender.length > 1));
+                        });
                     }   // End-If item.IsActive
                 });
             this.results = matchingFields;
@@ -688,6 +624,81 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
             this.errorOccurred = true;
         }
 
+    }
+
+    // Builds one rendered indicator (an entry of this.results) for an Item, using a matched
+    // Extension's override values when one is passed. Shared by single and Display Multiple mode,
+    // so every matched Extension gets the same popover/action/label fields as a single match.
+    // fId is what the template's data-id and the hover/click handlers key on, so it has to be
+    // unique per rendered indicator: with Display Multiple one Item yields several, which is why
+    // the Extension's id is appended and fItemId carries the Item's own id for itemsById lookups.
+    buildResult(item, dataValue, displayValue, showDefault, matchedExtension, isMultiple) {
+        const iid = item.IndicatorId;
+        const ibi = this.itemsById[iid];
+        // Mirrors resolveTextShown()'s hasValue/DisplayFalse fallback so the
+        // popover shows the same false/blank hover text the indicator itself
+        // switches to, instead of always reading the "true" HoverValue (which
+        // is often empty when the field is blank).
+        const resolvedHoverValue = matchedExtension
+            ? (matchedExtension.HoverValue || '')
+            : hasValue(dataValue)
+                ? (ibi?.HoverValue || '')
+                : (item.DisplayFalse ? (ibi?.FalseHoverValue || '') : '');
+        // Opt-in (page/flow property, not CMDT) - when there's no configured
+        // Hover Text for the "true" state, show the field's display value in the
+        // popover instead of leaving it empty. Off by default since it means
+        // every indicator gets a popover, changing mobile tap behavior.
+        // 0 is a value, so the display value is stringified rather than tested for falsiness.
+        const fallbackBody = displayValue === null || displayValue === undefined ? '' : String(displayValue);
+        const fPopoverBody = resolvedHoverValue
+            || (this.showFieldValueAsHoverFallback && hasValue(dataValue) ? fallbackBody : '');
+        // The action stays available in the false/blank state only when the
+        // bundle item opts in via Show_False_or_Blank_Action__c; otherwise it's
+        // suppressed along with the rest of the "true" appearance. Stored on
+        // itemsById so handleIndicatorClick/handlePopoverAction (which look the
+        // item up by id, not through fld) can also honor it.
+        const fActionAllowed = hasValue(dataValue) || !!item.DisplayFalseAction;
+        if (ibi) {
+            ibi.ActionAllowed = fActionAllowed;
+        }
+        const fActionType = fActionAllowed ? (item.ActionType ?? '') : '';
+        // Has hover text and/or an action - independent of fItemClass, which is only
+        // set when there's an action. Drives the touch dotted-underline hint (see
+        // fContainerClass/indicatorBundle.css) so popover-only items get it too.
+        const fHasPopover = !!(fPopoverBody || fActionType);
+        return {
+            fName: item.FieldApiName,   // Retain for debug purposes
+            fId: isMultiple ? iid + '-' + matchedExtension.Id : iid,   // Used to generate resultsById which is used in click handling
+            fItemId: iid,
+            fTextValue: dataValue,      // Retain for debug purposes
+            ...resolveImage(item, dataValue, matchedExtension),
+            ...resolveBadgePillText(ibi, dataValue, matchedExtension, displayValue),
+            ...resolveShowAvatar(item, dataValue, matchedExtension, showDefault),
+            ...resolveIconName(item, dataValue, matchedExtension, this.indsStyle, displayValue),
+            ...resolveIconColors(item, dataValue, matchedExtension),
+            ...resolveBadgeStyle(item, dataValue, matchedExtension),
+            ...resolveTextShown(item, dataValue, matchedExtension, this.indsStyle, displayValue),
+            fItemClass: (ibi && ibi.ActionTarget && fActionType) ? 'clickable' : '',
+            fContainerClass: 'slds-is-relative ind-popover-container' + (fHasPopover ? ' has-popover' : ''),
+            fFieldLabel: item.FieldLabel ? item.FieldLabel + ' indicator' : '',
+            fPopoverBody,
+            fActionType,
+            fHasPopover,
+            fActionButtonLabel: item.ActionButtonLabel ?? '',
+            fActionHelpText: item.ActionHelpText ?? '',
+            fActionConfirmRequired: item.ActionConfirmRequired ?? false,
+            fResolvedActionButtonLabel: item.ActionButtonLabel
+                ? item.ActionButtonLabel
+                : (item.ActionType === 'Flow Modal' ? 'Launch' : 'Open'),
+            fShowPopover: false,
+        };
+    }
+
+    // The data-id on the markup is a result's fId, which (Display Multiple) isn't always the
+    // Item's id - map back to the Item for itemsById lookups.
+    itemForResultId(id) {
+        const fld = this.results.find(f => f.fId === id);
+        return this.itemsById[fld ? fld.fItemId : id];
     }
 
     mergeValuesIntoTarget(item, data) {
@@ -780,7 +791,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     handleIndicatorClick(event) {
         const id = event.target.dataset?.id;
         if (!id) return;
-        const item = this.itemsById[id];
+        const item = this.itemForResultId(id);
         if (!item) return;
 
         if (this.isTouchDevice) {
@@ -843,7 +854,7 @@ export default class IndicatorBundle extends NavigationMixin(LightningElement) {
     handlePopoverAction(event) {
         const id = event.currentTarget.dataset.id;
         if (!id) return;
-        const item = this.itemsById[id];
+        const item = this.itemForResultId(id);
         if (!item) return;
         this.setPopoverVisible(id, false);
         this.fireAction(item);
