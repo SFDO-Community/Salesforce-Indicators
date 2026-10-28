@@ -59,7 +59,7 @@ export function recordIds(): Record<string, { id: string; sobject: string }> {
 
 /**
  * Feature-test records from the dev-only dataset (datasets/features): planning record_id -> org Id, matched on Name.
- * Default 'Account' (FEAT-01..03) so the specs that only know Accounts are unaffected; 'Contact' returns FCON-01..04.
+ * Default 'Account' (FEAT-01..04) so the specs that only know Accounts are unaffected; 'Contact' returns FCON-01..04.
  */
 export function featureRecordIds(sobject: 'Account' | 'Contact' = 'Account'): Record<string, { id: string; sobject: string }> {
   const out: Record<string, { id: string; sobject: string }> = {};

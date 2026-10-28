@@ -1,4 +1,5 @@
-﻿record_id,sobject,Name,AccountNumber,TickerSymbol,Rating,NumberOfEmployees,Description
-FEAT-01,Account,Feature Full,FEAT-FULL-001,CRM,Hot,25,Archetype: every field populated
-FEAT-02,Account,Feature Blank,,,,,Archetype: every feature field blank
-FEAT-03,Account,Feature Cold,FEAT-COLD-003,ZZZ,Cold,3,"Archetype: populated, but no Hot rule matches"
+﻿record_id,sobject,Name,AccountNumber,TickerSymbol,Rating,NumberOfEmployees,Description,AnnualRevenue
+FEAT-01,Account,Feature Full,FEAT-FULL-001,CRM,Hot,25,Archetype: every field populated,1500
+FEAT-02,Account,Feature Blank,,,,,Archetype: every feature field blank,
+FEAT-03,Account,Feature Cold,FEAT-COLD-003,ZZZ,Cold,3,"Archetype: populated, but no Hot rule matches",
+FEAT-04,Account,Feature Zero,,,,0,"Archetype: numeric fields are zero (0 is a value, or blank under Treat Zeroes as Blanks)",0

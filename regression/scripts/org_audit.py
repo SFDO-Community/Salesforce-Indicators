@@ -9,7 +9,7 @@ data either fails confusingly or, worse, tests nothing: a default-org mistake an
     python regression/scripts/org_audit.py --alias-prefix Salesforce-Indicators__regression_dev_ --orgs slds1
 
 Checks per org (expected value in brackets):
-  Feature accounts [14 = 3 FEAT + 11 FDATE]; Regression accounts [8]; Regression contacts [5]; Feature contacts [4, linked to the Feature accounts, FCON-04 orphan];
+  Feature accounts [15 = 4 FEAT + 11 FDATE]; Regression accounts [8]; Regression contacts [5]; Feature contacts [4, linked to the Feature accounts, FCON-04 orphan];
   a date record equal to the org's TODAY [fresh dates]; newest CMDT present [RF19 x4, RF20 x1]; Extension validation rules [lists them: the corrected set has NoExtensionOnCheckboxField];
   the three prod-only extensions [0 on an org built from the current flow]; org expiry.
 Exit code 0 when every org passes the data checks, 1 otherwise (rules / prod-only extensions are informational).
@@ -56,7 +56,7 @@ def audit(org):
             ok = False
         rows.append((label, actual, expected, "ok" if good else ("MISMATCH" if hard else "info")))
 
-    check("Feature accounts (3 FEAT + 11 FDATE)", count(org, "SELECT COUNT() FROM Account WHERE Name LIKE 'Feature %'"), 14)
+    check("Feature accounts (4 FEAT + 11 FDATE)", count(org, "SELECT COUNT() FROM Account WHERE Name LIKE 'Feature %'"), 15)
     check("Regression accounts", count(org, "SELECT COUNT() FROM Account WHERE Name LIKE 'Regression %'"), 8)
     check("Regression contacts", count(org, "SELECT COUNT() FROM Contact WHERE LastName LIKE 'Regression %'"), 5)
     cons = q(org, "SELECT Title, Account.Name FROM Contact WHERE LastName LIKE 'Feature Contact %' ORDER BY Title").get("records", [])

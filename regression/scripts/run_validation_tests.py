@@ -51,6 +51,23 @@ PARENT_ITEMS = {  # name: (sObject, Field__c or None, Advanced_Field__c or None)
     "VT_I_Date": ("Account", "Test_Date__c", None),         # Date (custom field)
     "VT_I_Adv": ("Account", None, "Parent.AccountNumber"),  # Advanced field: no DataType, so no type-driven rule applies
     "VT_I_Chk": ("Contact", "DoNotCall", None),             # Checkbox
+    "VT_I_CNum": ("Account", "Test_Number__c", None),      # CUSTOM Number(18,0): reports "number" (a standard Number is "integer")
+    "VT_I_CDec": ("Account", "Test_Decimal__c", None),     # CUSTOM Number(16,2)
+    "VT_I_CTxt": ("Account", "Test_Text__c", None),        # CUSTOM Text
+    "VT_I_CChk": ("Account", "Test_Checkbox__c", None),    # CUSTOM Checkbox
+    "VT_I_CCur": ("Account", "Test_Currency__c", None),
+    "VT_I_CPct": ("Account", "Test_Percent__c", None),
+    "VT_I_CPck": ("Account", "Test_Picklist__c", None),
+    "VT_I_CLng": ("Account", "Test_LongText__c", None),
+    "VT_I_CEml": ("Account", "Test_Email__c", None),
+    "VT_I_CPhn": ("Account", "Test_Phone__c", None),
+    "VT_I_CUrl": ("Account", "Test_Url__c", None),   # C07-C13: custom Currency/Percent/Picklist/Long Text/Email/Phone/Url
+    "VT_I_CDT": ("Account", "Test_DateTime__c", None),
+    "VT_I_CMul": ("Account", "Test_Multi__c", None),
+    "VT_I_CRch": ("Account", "Test_RichText__c", None),
+    "VT_I_CFNm": ("Account", "Test_FormulaNum__c", None),
+    "VT_I_CFTx": ("Account", "Test_FormulaTxt__c", None),   # C14-C18: custom Date/Time, Multi-Select, Rich Text, formula Number/Text
+    "VT_I_Bday": ("Contact", "Birthdate", None),           # Date (STANDARD field; Test_Date__c above is custom)
     "VT_I_Con": ("Contact", "LastName", None),              # Text on a different sObject (for the sObject-mismatch case)
 }
 NUMERIC = {"Minimum", "Maximum", "Order"}

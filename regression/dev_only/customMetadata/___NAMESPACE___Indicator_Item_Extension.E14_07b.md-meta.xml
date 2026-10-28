@@ -23,6 +23,10 @@
         <value xsi:type="xsd:string">Feature test extension E14_07b</value>
     </values>
     <values>
+        <field>%%%NAMESPACE%%%Hover_Text__c</field>
+        <value xsi:type="xsd:string">Contains hover</value>
+    </values>
+    <values>
         <field>%%%NAMESPACE%%%Icon_Background__c</field>
         <value xsi:type="xsd:string">#a85700</value>
     </values>

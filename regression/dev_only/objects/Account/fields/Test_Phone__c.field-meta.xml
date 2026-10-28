@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Test_Phone__c</fullName>
+    <label>Test Phone</label>
+    <required>false</required>
+    <type>Phone</type>
+    <trackFeedHistory>false</trackFeedHistory>
+</CustomField>

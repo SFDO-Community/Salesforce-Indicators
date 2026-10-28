@@ -1,5 +1,7 @@
 # Finding: the two type-driven Extension validation rules can never fire
 
+> **Follow-up 2026-10-26:** the fix below was validated only against **standard** fields. On **custom** fields the rules still never fired: custom fields report different type strings to the rule engine (and the SOQL values listed here are not what it sees). See `validation-rules-miss-custom-fields.md`; the rules now use `LOWER()` plus `number`/`text`/`longtextarea`/`richtextarea`.
+
 **Found by:** the new validation-rule test suite (`regression/scripts/run_validation_tests.py`,
 `regression/planning/validation/cases.csv`), 2026-10-08, against a scratch org built from this branch (SLDS1 org).
 **Severity:** functional gap in shipped validation. An admin can save an Extension whose criteria do not fit the item's field type.

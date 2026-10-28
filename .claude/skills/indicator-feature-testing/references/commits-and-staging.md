@@ -17,6 +17,23 @@ git status --short                            # what is left unstaged (should be
 ```
 For product-code commits also run the unit suite (`npx sfdx-lwc-jest -- force-app`).
 
+## Getting a product commit onto `feature/staging-claude` (no worktree, no stash)
+A worktree is easy to get stuck in after a PR; this order uses only ordinary branches. Product files = the `force-app` set listed in `regression/TODO.md` 1.3 (never the maintainer's own pending `force-app` edits unless they say so).
+```bash
+# 1. on feature/regression-vs-staging-claude: two commits, product first
+git add <explicit product paths> && git commit            # commit P: force-app only (LWC + tests + rules + help text)
+git add <explicit regression/skills/docs paths> && git commit   # commit R: everything else of yours; the tree must be CLEAN before switching
+# 2. branch from the target and bring P over
+git switch -c feature/staging-claude-<topic> feature/staging-claude
+git cherry-pick <sha of P>                                # conflicts only if staging changed the same lines; keep staging's wording
+npx sfdx-lwc-jest -- force-app                            # unit tests green on THIS branch before pushing
+git push -u origin feature/staging-claude-<topic>        # then open the PR
+# 3. go back (no worktree to remove)
+git switch feature/regression-vs-staging-claude
+```
+Why not switch with uncommitted changes: `regression/` does not exist on `feature/staging-claude`, so git refuses to switch while tracked `regression/` files are modified. Why commit P here first: this branch's orgs and specs need the product changes too, and the cherry-pick leaves the same content on both branches.
+After the PR merges: `git merge feature/staging-claude` into this branch (identical content merges cleanly), then check `git diff feature/staging-claude HEAD -- force-app` is empty apart from the maintainer's own edits. Check that diff **before** the first commit as well: if a file differs by more than your change (as `NoExtensionOnCheckboxField`'s description did, 2026-10-26), align it first so the cherry-pick is clean.
+
 ## README hunks
 `regression/README.md` used to carry a pending hunk of the maintainer's own (the scenario catalog text); it now lives in `catalog/README.md`. If `git diff regression/README.md` ever shows hunks that are not yours, stage only yours with a filtered patch (`git diff -U3 -- <file>`, split on `^@@`, `git apply --cached --recount`); interactive `git add -p` is not available.
 

@@ -73,6 +73,8 @@ sf scanner run dfa --sfgejvmargs "-Xmx5g" --format=csv --outfile=CodeAnalyzerDFA
 - `unpackaged/config/` holds deploy-only sample and training configuration (`sample_AccountContact`, `sample_Lead`, `training_Indicators`) applied via dedicated CCI tasks/flows after install — used for demos/onboarding, not shipped in the package.
 - `recipes/*.yml` are Snowfakery recipes for generating sample Lead/Account/Contact data in dev and demo orgs.
 
+**Repurposed Extension fields (do not trust the labels):** `Contains_Text__c` ("Text or Date Value") and `Text_Operator__c` ("Match Operator") hold a plain text value, a relative date literal (`TODAY`, `NEXT 30 DAYS`) or a fixed `YYYY-MM-DD` date. Apex parses the value into `StartDate`/`EndDate`; `indicatorBundle` takes the date branch only when that parse succeeded **and** the field value looks like a date (so a Text field holding ISO dates works too). Date operators: `Equals`, `Does Not Equal`, `Before Start`, `After Start`, `Before End`, `After End`; `Contains`/`Starts With` are text-only and an unparseable literal silently degrades to text ("contains"). Date/DateTime fields never use `Minimum__c`/`Maximum__c`. Numeric ranges need `Minimum__c` (a Maximum-only rule never matches). Validation rules read `Field__r.DataType`, compared with `LOWER()`. Its value differs between standard fields (`integer`, `string`, `date`...) and custom fields (`number`, `text`, `longtextarea`, `richtextarea`, `date`...), and it is NOT what SOQL on `EntityParticle` returns for custom fields; a formula field reports just `formula` for both Number and Text, so no rule can check formula fields (`regression/findings/validation-rules-miss-custom-fields.md`). It is blank for `Advanced_Field__c` items. `UnknownConditions` stays as the catch-all for both. Validation-rule descriptions are capped at 255 characters.
+
 ## CI/CD
 
 GitHub Actions delegate to reusable workflows in `SFDO-Community/standard-workflows`:
@@ -94,6 +96,7 @@ The skill is plain markdown, so any AI tool can read it. These rules apply to ev
 - **Change product code (`force-app`) only when asked**, with a unit test that fails without the fix first; the fix is then replayed on `feature/staging-claude`.
 - **Evidence over assertion:** prove claims with a query, probe or screenshot, and treat a test run that visited no records as a failure.
 - Put temporary files and logs in a scratch directory, not in the project.
+- **Leave every `.zip` under `.claude/skills/` alone** (e.g. `design-salesforce-indicator-v1.zip`). They are old snapshots kept only because that is how a skill is imported into the Claude Desktop app; they are expected to be out of date. Update the unzipped skill folders, never rebuild or edit the archives.
 
 ## Documentation videos and the scenario catalog
 

@@ -8,11 +8,13 @@ CREATE TABLE "Account" (
 	"NumberOfEmployees" VARCHAR(255),
 	"Description" VARCHAR(255),
 	"Site" VARCHAR(255),
+	"AnnualRevenue" VARCHAR(255),
 	PRIMARY KEY (id)
 );
-INSERT INTO "Account" VALUES('Account-1','Feature Full','FEAT-FULL-001','CRM','Hot','25','Archetype: every field populated','FEAT-01');
-INSERT INTO "Account" VALUES('Account-2','Feature Blank','','','','','Archetype: every feature field blank','FEAT-02');
-INSERT INTO "Account" VALUES('Account-3','Feature Cold','FEAT-COLD-003','ZZZ','Cold','3','Archetype: populated, but no Hot rule matches','FEAT-03');
+INSERT INTO "Account" VALUES('Account-1','Feature Full','FEAT-FULL-001','CRM','Hot','25','Archetype: every field populated','FEAT-01','1500');
+INSERT INTO "Account" VALUES('Account-2','Feature Blank','','','','','Archetype: every feature field blank','FEAT-02','');
+INSERT INTO "Account" VALUES('Account-3','Feature Cold','FEAT-COLD-003','ZZZ','Cold','3','Archetype: populated, but no Hot rule matches','FEAT-03','');
+INSERT INTO "Account" VALUES('Account-4','Feature Zero','','','','0','Archetype: numeric fields are zero (0 is a value, or blank under Treat Zeroes as Blanks)','FEAT-04','0');
 CREATE TABLE "Contact" (
 	id VARCHAR(255) NOT NULL,
 	"FirstName" VARCHAR(255),

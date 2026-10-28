@@ -43,7 +43,7 @@ and renders child components by style: `indicatorBundleItem` (avatar), `indicato
 | `RF19a-d` | card icon colours: both / background only / foreground only / none (+ Dynamic Forms variants) |
 | `RF20_Contact_Con` | Contact: `DoNotCall` checkbox, `LastName` text + extension, Advanced Field `Account.Name` |
 
-Records: Accounts `FEAT-01..03` (Feature Full / Blank / Cold), Contacts `FCON-01..04` (linked to them; `FCON-04` has no account), 11 date Accounts `FDATE-01..11` (offset from load day via CCI `anchor_date`).
+Records: Accounts `FEAT-01..04` (Feature Full / Blank / Cold / Zero; `FEAT-04` has `NumberOfEmployees` and `AnnualRevenue` = 0 to test zero handling in Badge/Pill labels via `F14_10`-`F14_12`), Contacts `FCON-01..04` (linked to them; `FCON-04` has no account), 11 date Accounts `FDATE-01..11` (offset from load day via CCI `anchor_date`).
 Style tabs `Avatar` / `Badge` / `Pill` hold RF14, RF15, RF17, RF16, RF18 in that order; tab `Cards` holds RF19; the Contact dev page has one tab `Features`.
 
 ## Decisions and why (do not re-litigate without new evidence)

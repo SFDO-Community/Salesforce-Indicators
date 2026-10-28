@@ -3,7 +3,8 @@
     <fullName>inds__Contains_Text__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <label>Contains Text</label>
+    <inlineHelpText>The value to match. Text fields: a plain text string. Date/DateTime fields (and Text fields holding ISO dates): a relative date literal (e.g. TODAY, NEXT 30 DAYS, THIS YEAR) or a fixed date as YYYY-MM-DD. Pair with Match Operator.</inlineHelpText>
+    <label>Text or Date Value</label>
     <length>255</length>
     <required>false</required>
     <type>Text</type>

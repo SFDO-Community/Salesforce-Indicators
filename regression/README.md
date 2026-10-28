@@ -203,10 +203,11 @@ Everything above compares the released package (v0.4, `regression_prod`) with th
 ```
 regression
 ├───dev_only                    // Deploys only via the regression_dev flows
-│   ├───customMetadata          // Feature bundles RF14-RF17, items F14_xx-F16_xx, extensions (CCI-token style)
+│   ├───customMetadata          // Feature bundles RF14-RF20, their items, extensions and bundle items (CCI-token style)
 │   ├───flexipages              // Account_Record_Page_Regression: the base page PLUS Avatar/Badge/Pill tabs
 │   ├───flows                   // Regression_Feature_Display: display-only screen flow (NO DML) for the Flow Modal action
-│   └───objects                 // Account.Test_Date__c (for the date round)
+│   ├───objects                 // Account.Test_*__c: 17 custom fields, one per field type (Date for the date round; the rest for the validation-rule tests)
+│   └───permissionsets          // Access_for_Regression_Feature_Testing: field access to every Test_*__c (the formula ones read-only)
 ├───data/dev_only               // CSVs generated from planning/features
 ├───findings                    // Write-ups of real product bugs found by these tests (+ proposed patches)
 └───planning
@@ -216,7 +217,7 @@ regression
 
 | Bundle | Covers |
 |---|---|
-| `RF14_BadgePill_Acct` | Badge/Pill text, text color, icon position, inverse variants, extension ownership, Display Multiple, merge token in label |
+| `RF14_BadgePill_Acct` | Badge/Pill text, text color, icon position, inverse variants, extension ownership, Display Multiple, merge token in label, and **Zero Value Handling** (`F14_10` integer 0 as a number, `F14_11` integer 0 as blank, `F14_12` currency 0) |
 | `RF15_Popover_Acct` | Popover hover text, `{!Field}` merge tokens (including a blank field), when a popover does or does not exist |
 | `RF17_PopoverFallback_Acct` | Same two items as RF15 with no hover text, on a page instance with `showFieldValueAsHoverFallback=true` |
 | `RF16_Actions_Acct` | Action button label/help/confirm, false-state action on/off, URL and Flow Modal actions |
@@ -224,7 +225,7 @@ regression
 | `RF19a-d` (`..._CardBoth/CardBgOnly/CardFgOnly/CardNone_Acct`) | `Card_Icon_Background` / `Card_Icon_Foreground` in all four combinations, on the card header **and in the Key**; `a` and `b` also with the Dynamic Forms title (utility icon, no custom colours by design). Card text has `{!Name}` / `{!Rating}` tokens |
 | `RF20_Contact_Con` | Contact object: `DoNotCall` checkbox (true / inverse), `LastName` text with an extension and a merge token, Advanced Field `Account.Name`. The Account bundle `RF15` is also shown on the Contact page through `mappedField=AccountId` (footer on) |
 
-Style (avatar / badge / pill) is a **FlexiPage property**, not CMDT, so the same bundles appear once per style tab. The records are style-independent: `datasets/features` (Accounts `Feature Full`, `Feature Blank`, `Feature Cold`, and Contacts `FCON-01..04` linked to them through `AccountId`; `FCON-04` has no account) and, for the date bundle, `datasets/features_dates` (11 Accounts whose `Test_Date__c` is *load day + N days* via CumulusCI `anchor_date`). They are separate datasets because re-loading one would duplicate the other's records.
+Style (avatar / badge / pill) is a **FlexiPage property**, not CMDT, so the same bundles appear once per style tab. The records are style-independent: `datasets/features` (Accounts `Feature Full`, `Feature Blank`, `Feature Cold`, `Feature Zero` (`NumberOfEmployees` and `AnnualRevenue` both 0), and Contacts `FCON-01..04` linked to them through `AccountId`; `FCON-04` has no account) and, for the date bundle, `datasets/features_dates` (11 Accounts whose `Test_Date__c` is *load day + N days* via CumulusCI `anchor_date`). They are separate datasets because re-loading one would duplicate the other's records.
 
 ### Build, deploy, load
 
@@ -243,7 +244,7 @@ python regression/scripts/build_expected_features.py                # oracle
 
 ### Run
 
-Run from `regression/playwright`, **in the foreground, one record per run** (about 2 minutes each):
+Run from `regression/playwright`, **in the foreground, one record per run** (about 2 minutes each; keep any one command under about 9 minutes, and run one org at a time if memory is tight, since a crashed browser shows as an `ERROR` row):
 
 ```bash
 ONLY_RECORDS=FEAT-01 REGRESSION_ORG=<dev org alias> npx playwright test features.spec.ts
@@ -259,8 +260,10 @@ ONLY_RECORDS=FEAT-01 REGRESSION_ORG=<dev org alias> npx playwright test features
 
 At 1600px the style tabs sit under the **More Tabs** overflow menu; `openTab()` in `lib.ts` handles it (the More button is taller than the tab bar, so it is clicked near its top).
 
-### Results so far (dev, SLDS2)
-Display and popover (first full run, before RF18): 173 PASS / 4 DIFF over 177 indicator rows. The four DIFFs are one product bug (a `{!Field}` token in item-level Badge/Pill Text is not resolved), written up with a proposed one-line fix in `findings/badge-pill-merge-token.md`. Actions: 11 of 11 PASS.
+### Results
+This README does not carry numbers, because they go stale. The current results per org, the open items and the findings are in `STATE.md` (status) and `TODO.md` (decisions); each real product bug has a write-up in `findings/`. Scoring labels: `PASS` matches the oracle, `DIFF` differs on a `spec` row, `REVIEW` differs on an `unconfirmed` row (a question to answer), `KNOWN` is explained by a known issue, `ERROR` means the spec could not read it (a browser crash is an ERROR, re-run that row).
+
+**How the expected results are made.** The oracle (`planning/expected*.csv`) is generated from the planning CSVs by `build_expected*.py`; it states the *intended* behaviour, and its `basis` column says how sure we are (`spec`, `unconfirmed`, `known-issue`). A Boolean never shows true/false text (the icon carries it), and Zero Value Handling and currency formatting are modelled in `build_expected_features.py`. Pixel diffs exist because DOM scoring cannot see colour or layout, and the DOM scoring passed a real zero bug that only a pixel diff caught.
 
 ### Validation-rule tests (check-only deploys, no browser)
 
@@ -271,12 +274,12 @@ python regression/scripts/run_validation_tests.py --org <alias>     # rules curr
 python regression/scripts/run_validation_tests.py --org <alias> --rules regression/findings/proposed-validation-rules   # try a rule change first
 ```
 
-Results: `output/validation/<alias>[__candidate]/validation_report.csv` (`PASS`, `FAIL`, `WRONG_RULE`, `GAP_OPEN`, `GAP_CLOSED`). A shared set of valid parent bundles and items is added to every package so a child never fails because its parent did. `--rules` applies *candidate* rule files inside the same rolled-back deploy, so a fix can be proven before it is committed. The first run found that `Numeric_Missing_Minimum` and `String_Missing_Contains_Text` never fire (`findings/validation-type-rules-never-fire.md`).
+Results: `output/validation/<alias>[__candidate]/validation_report.csv` (`PASS`, `FAIL`, `WRONG_RULE`, `GAP_OPEN`, `GAP_CLOSED`). A shared set of valid parent bundles and items is added to every package so a child never fails because its parent did. `--rules` applies *candidate* rule files inside the same rolled-back deploy, so a fix can be proven before it is committed. The cases cover the Date/DateTime, Checkbox, numeric and text rules on both standard fields (`D04`, `E05`...) and one custom field of every type (`C01`-`C18`). The first run found that `Numeric_Missing_Minimum` and `String_Missing_Contains_Text` never fire (`findings/validation-type-rules-never-fire.md`), and a later one that all four type rules skipped custom fields because the rule engine reports different type names for them (`findings/validation-rules-miss-custom-fields.md`; the rules now compare `LOWER()` and list both name sets). Formula fields cannot be checked at all (they report just `formula`): cases `C17`/`C18` stay documented gaps, as do `I13`, `G03`, `G04`. A result of 64 PASS + those 5 gaps is the clean state.
 
-`scripts/scan_records_against_rules.py` answers the opposite question: *would a rule change reject any record this repo ships?* It packages the real record sets (`sample_*`, `training_Indicators`, the regression sets), strips the CumulusCI tokens, and compares check-only deploys with and without candidate rules (`NEW_FAIL` = the change would break that record). It found that `sample_Lead` and `training_Indicators` do not pass the branch's own rules today (`findings/shipped-config-fails-validation.md`).
+`scripts/scan_records_against_rules.py` answers the opposite question: *would a rule change reject any record this repo ships?* It packages the real record sets (`sample_*`, `training_Indicators`, the regression sets), strips the CumulusCI tokens, and compares check-only deploys with and without candidate rules (`NEW_FAIL` = the change would break that record). Pass it `--rules <folder of rule files>` and `--sets` from `sample_AccountContact, sample_Lead, training_Indicators, pipeline_Lead, regression_base, regression_dev_only, regression_prod_only`. It found that `sample_Lead` and `training_Indicators` do not pass the branch's own rules today (`findings/shipped-config-fails-validation.md`).
 
 `scripts/add_feature_tabs.py` adds the batch-2 tabs to the dev pages by cloning an existing tab ("Cards" on the Account page, "Features" on the Contact page; the Contact dev page is first copied from the base page). To refresh records after a dataset change: `cci task run delete_data --objects Entitlement,Contact,Account --org <alias>`, then `load_sample_data` and the two `load_dataset` commands for `datasets/features` and `datasets/features_dates`.
 
-`features.pixels.spec.ts` keeps **pixel baselines** for the shots whose point is colour or layout (14 per theme: RF14 on the Avatar/Badge/Pill tabs for `FEAT-01` and `FEAT-02`, the card header icons `RF19a-d` plus the Dynamic Forms variants, and the Key modal for `RF19b`/`RF19c`). Baselines live in the gitignored `playwright/output/baselines/<env>-<theme>/` because rendering depends on the machine's fonts: write them with `--update-snapshots=all` on a known-good org and compare by running the spec normally. The tolerance is an **absolute 40 pixels** (`playwright.config.ts`), deliberately not a ratio, so a single glyph changing colour is caught (a ratio would hide it). Assertions are soft, so one run lists every differing shot. Re-baseline per release and per machine.
+`features.pixels.spec.ts` keeps **pixel baselines** for the shots whose point is colour or layout (14 per theme: RF14 on the Avatar/Badge/Pill tabs for `FEAT-01` and `FEAT-02`, the card header icons `RF19a-d` plus the Dynamic Forms variants, and the Key modal for `RF19b`/`RF19c`). Baselines live in the gitignored `playwright/output/baselines/<env>-<theme>/` because rendering depends on the machine's fonts: write them with `--update-snapshots=all` on a known-good org and compare by running the spec normally. The tolerance is an **absolute 40 pixels** (`playwright.config.ts`), deliberately not a ratio, so a single glyph changing colour is caught (a ratio would hide it). Assertions are soft, so one run lists every differing shot. Re-baseline per release and per machine, and whenever a feature record or indicator is added to a baselined bundle (adding the three zero items to RF14 changed those six shots on every theme). The light-theme org and the older SLDS2 org share one baseline folder, `dev-slds2`, because the folder is named from the alias's theme.
 
 `scripts/org_audit.py` is a **read-only** readiness check for the dev orgs (expected Feature/Regression accounts and contacts, a date record equal to the org's `TODAY`, the newest CMDT, the Extension validation rules); run it before the specs. `scripts/compare_captures.py` compares two phase-1 runs, scoring and pixels: `backup --to <dir>` before re-running `capture.spec.ts`/`keys.spec.ts` (they merge into the existing output folder), then `compare --before <dir>`. Needs Pillow. The full procedure for repeating a pass is `.claude/skills/indicator-feature-testing/references/release-cycle.md`.

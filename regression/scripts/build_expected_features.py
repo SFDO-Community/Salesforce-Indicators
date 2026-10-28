@@ -70,6 +70,16 @@ def merge(template, rec):
     return re.sub(r"\{!(\w+)\}", sub, template or ""), used_blank
 
 
+CURRENCY_SCALE = {"AnnualRevenue": 0}   # field -> decimal places; the UI API's formatted display value is shown instead of the raw number
+
+
+def is_zero(v):
+    try:
+        return float(v) == 0
+    except (TypeError, ValueError):
+        return False
+
+
 def ext_matches(e, value):
     v, t = str(value).lower(), (e["text"] or "").lower()
     return {"Equals": v == t, "Contains": t in v, "Starts With": v.startswith(t), "Does Not Equal": v != t}.get(e["operator"], False)
@@ -82,9 +92,16 @@ def build_row(style, rec, it, bundle, record_id=None, via=""):
     fb = bundle in FB_BUNDLES
     field = it["field_api"] or it.get("advanced_field", "")
     value = rec.get(field, "")
-    has = not blank(value)
+    # Zero Value Handling: "Treat Zeroes as Blanks" nulls a 0 before anything else runs, so it takes the blank/inverse
+    # state; otherwise (default "Treat Zeroes as Numbers") 0 is a value like any other.
+    zero_blank = it.get("zero_behavior") == "Treat Zeroes as Blanks" and not blank(value) and is_zero(value)
+    has = not blank(value) and not zero_blank
     display = str(value)
     basis, notes = "spec", []
+    if has and field in CURRENCY_SCALE and not blank(value):
+        # getFieldDisplayValue() formats currency with the field's own scale (Account.AnnualRevenue has 0 decimals).
+        # Observed 2026-10-26 in USD / en-US scratch orgs ("$1,500", "$0"); other locales/currencies would differ.
+        display = "${:,.{n}f}".format(float(value), n=CURRENCY_SCALE[field])
     inds = []   # one dict per rendered indicator
     if has:
         matched = [e for e in exts_by_item.get(it["item_id"], []) if ext_matches(e, value)]

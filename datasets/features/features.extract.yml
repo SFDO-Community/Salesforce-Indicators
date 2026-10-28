@@ -8,6 +8,7 @@ extract:
             - NumberOfEmployees
             - Description
             - Site
+            - AnnualRevenue
     Contact:
         fields:
             - FirstName

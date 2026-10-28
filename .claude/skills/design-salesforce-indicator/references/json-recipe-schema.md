@@ -61,12 +61,13 @@ Mirrors `IndicatorController.IndicatorItem`'s *item-intrinsic* fields only — t
 | `ImageUrl` | `inds__Image__c` | |
 | `BackgroundColor` / `ForegroundColor` | `inds__Icon_Background__c` / `inds__Icon_Foreground__c` | |
 | `HoverValue` | `inds__Hover_Text__c` | |
+| `BadgePillText` | `inds__Badge_Pill_Text__c` | Badge/Pill label. |
 | `DisplayFalse` | `inds__Show_False_or_Blank__c` | |
-| `FalseTextValue` / `FalseIcon` / `FalseImageUrl` / `InverseBackgroundColor` / `InverseForegroundColor` / `FalseHoverValue` | `inds__Inverse_*__c` | Only meaningful when `DisplayFalse` is true. |
+| `FalseTextValue` / `FalseIcon` / `FalseImageUrl` / `InverseBackgroundColor` / `InverseForegroundColor` / `FalseHoverValue` / `FalseBadgePillText` | `inds__Inverse_*__c` | Only meaningful when `DisplayFalse` is true. |
 | `ZeroBehavior` | `inds__Zero_Behavior__c` | |
 | `EmptyStaticBehavior` | `inds__Empty_Static_Text_Behavior__c` | |
 | `DisplayMultiple` | `inds__Display_Multiple__c` | |
-| `BadgeIconPosition` / `BadgeTextColor` / `FalseBadgeIconPosition` / `FalseBadgeTextColor` | `inds__Badge_*__c` / `inds__Inverse_Badge_*__c` | |
+| `BadgeIconPosition` / `BadgeTextColor` / `FalseBadgeIconPosition` / `FalseBadgeTextColor` | `inds__Badge_*__c` / `inds__Inverse_Badge_*__c` (colour: `Badge_Pill_Text_Color`) | |
 | `IndicatorDescription` | `inds__Description__c` | Internal notes. |
 | `bundleItem` | — | `null` when `recipeType` is `"items"`. See below. |
 | `extensions` | — | Array, possibly empty. See below. |
@@ -100,8 +101,8 @@ Mirrors `IndicatorController.IndicatorExtension`, `DeveloperName` again replacin
 | `TextOperator` | `inds__Text_Operator__c` | |
 | `Minimum` / `Maximum` | `inds__Minimum__c` / `inds__Maximum__c` | |
 | `PriorityOrder` | `inds__Priority__c` | |
-| `ExtensionTextValue` / `ExtensionIconValue` / `ExtensionImageUrl` / `BackgroundColor` / `ForegroundColor` / `ExtensionHoverText` | `inds__Static_Text__c` / `inds__Icon_Value__c` / `inds__Image__c` / `inds__Icon_Background__c` / `inds__Icon_Foreground__c` / `inds__Hover_Text__c` | Only the ones the rule overrides need to be non-null. |
-| `BadgeIconPosition` / `BadgeTextColor` | `inds__Badge_Icon_Position__c` / `inds__Badge_Text_Color__c` | |
+| `ExtensionTextValue` / `ExtensionIconValue` / `ExtensionImageUrl` / `BackgroundColor` / `ForegroundColor` / `ExtensionHoverText` / `ExtensionBadgePillText` | `inds__Static_Text__c` / `inds__Icon_Value__c` / `inds__Image__c` / `inds__Icon_Background__c` / `inds__Icon_Foreground__c` / `inds__Hover_Text__c` / `inds__Badge_Pill_Text__c` | Only the ones the rule overrides need to be non-null. |
+| `BadgeIconPosition` / `BadgeTextColor` | `inds__Badge_Icon_Position__c` / `inds__Badge_Pill_Text_Color__c` | |
 | `ExtensionDescription` | `inds__Description__c` | Internal notes. |
 
 ## Worked example — item-only recipe

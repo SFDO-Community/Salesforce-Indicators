@@ -48,7 +48,7 @@ deep copy of the item, passing it is behavior-neutral when an item has no tokens
 
 **Status update (2026-10-06):** the one-line fix is applied on `feature/regression-vs-staging-claude` (`indicatorBundle.js`, to be made on `feature/staging-claude` officially), together with a Jest regression test, `indicatorBundle/__tests__/indicatorBundle.badgePillText.test.js` (badge + pill true state, and the inverse label, including a blank field resolving to an empty string). **The 3 tests fail without the fix** (`Received: "Account is {!Name}"`) **and pass with it**; the 14 existing indicatorBundle tests still pass. Still to do: verify in an org by re-running `features.spec.ts`.
 
-**A second fix travels with it:** the comment above `resolveTextShown()` still said "if the field is a Boolean then show the icon", which the code no longer does (Use Field Value shows the value for every field type; confirmed intended with the maintainer). The comment now describes the real behavior. Comment-only change.
+**A second fix travels with it:** the comment above `resolveTextShown()` still said "if the field is a Boolean then show the icon", which the code no longer does (at the time Use Field Value showed the value for every field type; **superseded 2026-10-25: a Boolean shows its icon and never "true"/"false" text, as in v0.4**). The comment now describes the real behavior. Comment-only change.
 
 **Verify after applying:** re-run `features.spec.ts`; `F14_08` should move from DIFF to PASS on Badge and Pill for
 `Feature Full` and `Feature Cold`, and nothing else should change (the Jest test covers the unit-level behavior).
