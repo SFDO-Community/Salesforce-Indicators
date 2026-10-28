@@ -105,6 +105,9 @@
         <fields>DeveloperName</fields>
         <fields>Indicator_Item__c</fields>
         <fields>Order__c</fields>
+        <fields>Action_Type__c</fields>
+        <fields>Action_Target__c</fields>
+        <fields>Show_False_or_Blank_Action__c</fields>
         <relatedList>Indicator_Bundle_Item__mdt.Indicator_Bundle__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
@@ -113,7 +116,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hAU000000fnEU</masterLabel>
+        <masterLabel>00hhP000001MJpq</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

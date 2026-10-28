@@ -3,6 +3,6 @@
     <fullName>NoExtensionOnCheckboxField</fullName>
     <active>true</active>
     <description>A checkbox has no text or number to match, and a text rule on a checkbox crashes the component.</description>
-    <errorConditionFormula>Indicator_Item__r.Field__r.DataType = &apos;boolean&apos;</errorConditionFormula>
+    <errorConditionFormula>LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;boolean&apos;</errorConditionFormula>
     <errorMessage>Extensions are not supported on Checkbox fields. Use the item&apos;s own True and False (Inverse) settings instead.</errorMessage>
 </ValidationRule>

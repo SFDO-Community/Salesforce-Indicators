@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Text_Operator__c</fullName>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>How to compare the field value against the match value. Text options: Contains (default), Equals, Does Not Equal, Starts With. Date/DateTime options: Before Start, After Start, Before End, After End — relative to the range boundaries.</inlineHelpText>
+    <inlineHelpText>How to compare the field value with the Text or Date Value. Text/Picklist: Contains (default), Equals, Does Not Equal, Starts With. Date/DateTime: Equals (within the date range), Does Not Equal, Before Start, After Start, Before End, After End. Leave blank for numeric ranges.</inlineHelpText>
     <label>Match Operator</label>
     <required>false</required>
     <type>Picklist</type>
