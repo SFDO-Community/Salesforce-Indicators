@@ -244,3 +244,29 @@ describe('c-indicator-bundle popover fallback for zero', () => {
         expect(container.classList.contains('has-popover')).toBe(false);
     });
 });
+
+// Static Text is the item's configured text for a present value, so it must show for 0 as well as for any other
+// value (it used to be skipped for 0, which fell through to the field value or icon-only).
+describe('c-indicator-bundle Static Text for zero', () => {
+    afterEach(() => {
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+        jest.clearAllMocks();
+    });
+
+    it.each(['Treat Zeroes as Numbers', ''])('shows the Static Text for a 0 when Zero Value Handling is "%s"', async (zero) => {
+        const bundle = makeBundle({ DisplayMultiple: false, ZeroBehavior: zero, TextValue: 'DEF', IconName: '', HoverValue: 'x' });
+        const element = await setupComponent(bundle, 0, 'avatar', '0');
+        expect(element.shadowRoot.querySelector('c-indicator-bundle-item').indText).toBe('DEF');
+    });
+
+    it('still shows the blank (False) text, not the Static Text, for a 0 under Treat Zeroes as Blanks', async () => {
+        const bundle = makeBundle({
+            DisplayMultiple: false, ZeroBehavior: 'Treat Zeroes as Blanks', TextValue: 'DEF', IconName: '', HoverValue: 'x',
+            DisplayFalse: true, FalseTextValue: 'No', FalseIcon: 'utility:close'
+        });
+        const element = await setupComponent(bundle, 0, 'avatar', '0');
+        expect(element.shadowRoot.querySelector('c-indicator-bundle-item').indText).toBe('No');
+    });
+});
