@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>MatchOperatorRequiresValue</fullName>
+    <fullName>Match_Operator_Requires_Value</fullName>
     <active>true</active>
     <description>In order to use the match operator, there must be a value to match</description>
     <errorConditionFormula>( ISPICKVAL( Text_Operator__c, &apos;&apos; ) &amp;&amp; NOT( ISBLANK( Contains_Text__c ) ) )
 || ( NOT( ISBLANK( TEXT( Text_Operator__c ) ) ) &amp;&amp; ISBLANK( Contains_Text__c ) )</errorConditionFormula>
-    <errorMessage>Both the Match Operator and the Text/Date Value must be assigned</errorMessage>
+    <errorMessage>Both the Match Operator and the Text/Date Value must be assigned [IE_03]</errorMessage>
 </ValidationRule>

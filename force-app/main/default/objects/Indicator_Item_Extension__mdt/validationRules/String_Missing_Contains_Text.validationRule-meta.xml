@@ -17,5 +17,5 @@
     || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;richtextarea&apos;
 )</errorConditionFormula>
     <errorDisplayField>Contains_Text__c</errorDisplayField>
-    <errorMessage>Indicator Item is a String/Picklist Type and requires a Contains Text value</errorMessage>
+    <errorMessage>Indicator Item is a String/Picklist Type and requires a Contains Text value [IE_02]</errorMessage>
 </ValidationRule>
