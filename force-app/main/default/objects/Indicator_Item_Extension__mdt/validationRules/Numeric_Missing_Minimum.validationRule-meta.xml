@@ -13,5 +13,5 @@
     || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;number&apos;
 )</errorConditionFormula>
     <errorDisplayField>Minimum__c</errorDisplayField>
-    <errorMessage>Indicator Item is a Numeric Type and requires a Minimum value.</errorMessage>
+    <errorMessage>Indicator Item is a Numeric Type and requires a Minimum value. [IE_01]</errorMessage>
 </ValidationRule>

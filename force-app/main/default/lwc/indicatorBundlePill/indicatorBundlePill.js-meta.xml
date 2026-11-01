@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>65.0</apiVersion>
+    <apiVersion>68.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Indicator Pill</masterLabel>
     <description>Display an at-a-glance pill indicator with an avatar and label for use on record pages or in flows.</description>

@@ -3,5 +3,5 @@
     <fullName>Bundle_and_Item_Different_sObjects</fullName>
     <active>true</active>
     <errorConditionFormula>Indicator_Bundle__r.sObject__c != Indicator_Item__r.sObject__c</errorConditionFormula>
-    <errorMessage>The Indicator Bundle and Indicator Item must belong to the same sObject.</errorMessage>
+    <errorMessage>The Indicator Bundle and Indicator Item must belong to the same sObject. [BI_02]</errorMessage>
 </ValidationRule>
