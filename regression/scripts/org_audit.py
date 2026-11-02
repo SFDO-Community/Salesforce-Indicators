@@ -10,7 +10,7 @@ data either fails confusingly or, worse, tests nothing: a default-org mistake an
 
 Checks per org (expected value in brackets):
   Feature accounts [15 = 4 FEAT + 11 FDATE]; Regression accounts [8]; Regression contacts [5]; Feature contacts [4, linked to the Feature accounts, FCON-04 orphan];
-  a date record equal to the org's TODAY [fresh dates]; newest CMDT present [RF19 x4, RF20 x1]; Extension validation rules [lists them: the corrected set has NoExtensionOnCheckboxField];
+  a date record equal to the org's TODAY [fresh dates]; newest CMDT present [RF19 x4, RF20 x1]; Extension validation rules [lists them: the corrected set has No_Extension_On_Checkbox_Field];
   the three prod-only extensions [0 on an org built from the current flow]; org expiry.
 Exit code 0 when every org passes the data checks, 1 otherwise (rules / prod-only extensions are informational).
 """
@@ -68,7 +68,7 @@ def audit(org):
     check("RF19 card bundles", count(org, "SELECT COUNT() FROM Indicator_Bundle__mdt WHERE DeveloperName LIKE 'RF19%'"), 4)
     check("RF20 Contact bundle", count(org, "SELECT COUNT() FROM Indicator_Bundle__mdt WHERE DeveloperName LIKE 'RF20%'"), 1)
     rules = sorted(r["ValidationName"] for r in q(org, "SELECT ValidationName FROM ValidationRule WHERE EntityDefinition.QualifiedApiName = 'Indicator_Item_Extension__mdt'", True).get("records", []))
-    check("corrected checkbox rule present (NoExtensionOnCheckboxField)", "NoExtensionOnCheckboxField" in rules, True, hard=False)
+    check("corrected checkbox rule present (No_Extension_On_Checkbox_Field)", "No_Extension_On_Checkbox_Field" in rules, True, hard=False)
     check("prod-only extensions present (0 = built from the current flow)",
           count(org, "SELECT COUNT() FROM Indicator_Item_Extension__mdt WHERE DeveloperName IN ('E_num_max_X1','E_num_on_text_X1','K_txtrule_chk_X1')"), 0, hard=False)
     return rows, ok, expiry(org)
