@@ -12,7 +12,6 @@
 "true","","","Custom colors on initials","false","","AccountNumber","","#B34A00","#FFFFFF","","","DEF","","","","","","","A-text-colors","false","Account",""
 "true","","","Icon with hover; hover popover shot","false","Use Icon Only","AccountNumber","Hover D","","","standard:approval","","","","","","","","","A-icon-hover","false","Account",""
 "true","","","Image with hover; hover popover shot","false","Use Icon Only","AccountNumber","Hover D","","","standard:approval","https://login.salesforce.com/logos/Custom/Building_Grey/logo.png","","","","","","","","A-img-hover","false","Account",""
-"true","","","Show=Y but nothing configured: nothing renders","false","Use Icon Only","DoNotCall","","","","","","","","","","","","","B00","true","Contact",""
 "true","","","Content populated but Show unchecked: nothing renders","false","Use Icon Only","DoNotCall","","","","","","","","","","standard:incident","","MIS","B-off","false","Contact",""
 "true","","","Icon renders (Missing)","false","Use Icon Only","DoNotCall","","","","","","","","","","standard:incident","","","B-icon","true","Contact",""
 "true","","","Initials render (Missing)","false","Use Icon Only","DoNotCall","","","","","","","","","","","","MIS","B-text","true","Contact",""

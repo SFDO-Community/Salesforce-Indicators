@@ -14,7 +14,7 @@ A-icon-hover,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Tex
 A-img-hover,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-valid+icon+hover,,,Use Icon Only,,,,,0,both,Image with hover; hover popover shot,value; null
 A-img-only,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-valid,,,Use Icon Only,,,,,0,prod-only,Image with no fallback icon (dev validation blocks),value; null
 A-badimg-only,B01 Any Value content (Account),A,D,TXT-1,Account,AccountNumber,Text,img-bad,,,Use Icon Only,,,,,0,prod-only,Broken image with no fallback icon (dev validation blocks),value; null
-B00,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,,,,0,both,Show=Y but nothing configured: nothing renders,true; false
+B00,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,,,,0,prod-only,Show=Y but nothing configured: nothing renders,true; false
 B-off,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,,icon+text,,,0,both,Content populated but Show unchecked: nothing renders,true; false
 B-icon,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,icon,,,0,both,Icon renders (Missing),true; false
 B-text,B02 Missing content (Contact),B,M,CHK-1,Contact,DoNotCall,Checkbox,,,,Use Icon Only,Y,text,,,0,both,Initials render (Missing),true; false

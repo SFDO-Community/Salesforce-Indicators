@@ -39,10 +39,10 @@ None of the left-hand values can ever match the right-hand strings, so the rules
 confirmed by behaviour: every case that depends on these rules is accepted. I did not separately test whether `CONTAINS` is case-sensitive,
 because `integer`/`string` do not contain `Number`/`Text` in any case.)
 
-## Fix (validated; APPLIED in this repo, not yet in `staging-claude`)
+## Fix (validated; SHIPPED on `feature/staging-claude`)
 Rewrite both rules to compare `DataType` with the real values, and add one new rule so a checkbox cannot carry an extension at all:
-`regression/findings/proposed-validation-rules/Indicator_Item_Extension__mdt/validationRules/`
-(`Numeric_Missing_Minimum`, `String_Missing_Contains_Text`, and the **new** `NoExtensionOnCheckboxField`). These files are now also in `force-app/.../Indicator_Item_Extension__mdt/validationRules/`, together with a one-character fix to `MatchOperatorRequiresValue`'s message (a stray `)`).
+`force-app/main/default/objects/Indicator_Item_Extension__mdt/validationRules/`
+(`Numeric_Missing_Minimum`, `String_Missing_Contains_Text`, and the **new** `NoExtensionOnCheckboxField`, now `No_Extension_On_Checkbox_Field`, tag `IE_06`). The proposed copies were deleted once shipped. Rule names below are the original PascalCase ones; unreleased rules were renamed to `Snake_Case` and every message gained a `[XX_NN]` support tag in commit `0c0837b` (see `CLAUDE.md`, "Validation rules: naming and support tags"). The change also included a one-character fix to `MatchOperatorRequiresValue`'s message (a stray `)`).
 
 **The new checkbox rule was approved by the maintainer** (a checkbox has nothing to match; the item's own True/False settings do that job).
 
@@ -68,7 +68,7 @@ original six rules and no `NoExtensionOnCheckboxField`.
 ## How to re-run
 ```bash
 python regression/scripts/run_validation_tests.py --org <alias>                      # current rules in the org
-python regression/scripts/run_validation_tests.py --org <alias> --rules regression/findings/proposed-validation-rules   # candidate rules
+python regression/scripts/run_validation_tests.py --org <alias> --rules <dir of candidate rule XML>   # only for rules not yet in force-app
 ```
 Both use `sf project deploy start --dry-run`; results in `regression/playwright/output/validation/<alias>[__candidate]/validation_report.csv`.
 To add a case, add a row to `planning/validation/cases.csv` (`expect` = `pass`, `fail`, or `gap`).

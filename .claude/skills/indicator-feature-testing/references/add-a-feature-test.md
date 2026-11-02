@@ -49,7 +49,7 @@ Separate datasets, because reloading one would duplicate the other's records. Co
 
 ## 7. Pre-flight, then ask to deploy
 ```bash
-python regression/scripts/scan_records_against_rules.py --org <alias> --rules regression/findings/proposed-validation-rules --sets regression_dev_only   # needs OK: check-only deploy
+python regression/scripts/scan_records_against_rules.py --org <alias> --rules <dir of candidate rule XML> --sets regression_dev_only   # needs OK: check-only deploy
 ```
 The new records must be accepted under both the rules in the org and the corrected ones. Then ask the maintainer to deploy (`running-the-suite.md`), and extend the spec if the new feature needs a new check.
 Order inside the `regression_dev` flow is deliberate (field + permission set before data; base pages before dev pages): see `cumulusci.yml`.

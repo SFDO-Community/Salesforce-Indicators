@@ -3,6 +3,7 @@
 **Found by:** dev-only feature tests (bundle `RF18_Dates_Acct`, first bundle in this repo to map a **custom** field,
 `Account.Test_Date__c`), 2026-10-06. Diagnosed and fixed in the org by the maintainer; the corrected rule is in this
 repo (`Indicator_Item__mdt/validationRules/OneFieldMappingRequired.validationRule-meta.xml`).
+**Status:** SHIPPED on `feature/staging-claude` (commit `300e044`, PR #239); the rule is now `One_Field_Mapping_Required`, tag `II_03`.
 **Severity:** functional bug in the shipped validation rule. An admin who picks a custom field in the **Field** picklist
 cannot save the Indicator Item, and cannot edit an existing one. Standard fields are unaffected, which is why it was
 never seen: every sample/training item in `unpackaged/config` maps a standard field.

@@ -101,7 +101,7 @@ sf cmdt generate records \
 
 ### The `prod_only` records
 
-A few configurations cannot be deployed to an org that has the newer validation rules introduced in v0.5+ (for example an image without a fallback icon, or a rule with both text and numeric criteria). They still matter for `regression_prod`, which runs the released package without those rules for v0.4. `scripts/build_cmdt_csvs.py` writes them to `regression/data/prod_only/` (17 records: 4 items, 4 bundle items, 9 extensions; three extensions were added when the corrected Extension validation rules landed, see `findings/validation-type-rules-never-fire.md`) instead of the base CSVs. Bundles are never split, so the record pages do not change.
+A few configurations cannot be deployed to an org that has the newer validation rules introduced in v0.5+ (for example an image without a fallback icon, or a rule with both text and numeric criteria). They still matter for `regression_prod`, which runs the released package without those rules for v0.4. `scripts/build_cmdt_csvs.py` writes them to `regression/data/prod_only/` (19 records: 5 items, 5 bundle items, 9 extensions; three extensions were added when the corrected Extension validation rules landed, see `findings/validation-type-rules-never-fire.md`) instead of the base CSVs. Bundles are never split, so the record pages do not change.
 
 Which records are `prod_only` comes from the `env` column of `planning/indicators.csv` and `planning/extensions.csv`. A bundle item follows its item.
 
@@ -322,7 +322,7 @@ This README does not carry numbers, because they go stale. The current results p
 
 ```bash
 python regression/scripts/run_validation_tests.py --org <alias>     # rules currently in the org
-python regression/scripts/run_validation_tests.py --org <alias> --rules regression/findings/proposed-validation-rules   # try a rule change first
+python regression/scripts/run_validation_tests.py --org <alias> --rules <dir of candidate rule XML>   # try a rule change first
 ```
 
 Results: `output/validation/<alias>[__candidate]/validation_report.csv` (`PASS`, `FAIL`, `WRONG_RULE`, `GAP_OPEN`, `GAP_CLOSED`). A shared set of valid parent bundles and items is added to every package so a child never fails because its parent did. `--rules` applies *candidate* rule files inside the same rolled-back deploy, so a fix can be proven before it is committed. The cases cover the Date/DateTime, Checkbox, numeric and text rules on both standard fields (`D04`, `E05`...) and one custom field of every type (`C01`-`C18`). The first run found that `Numeric_Missing_Minimum` and `String_Missing_Contains_Text` never fire (`findings/validation-type-rules-never-fire.md`), and a later one that all four type rules skipped custom fields because the rule engine reports different type names for them (`findings/validation-rules-miss-custom-fields.md`; the rules now compare `LOWER()` and list both name sets). Formula fields cannot be checked at all (they report just `formula`): cases `C17`/`C18` stay documented gaps, as do `I13`, `G03`, `G04`. A result of 64 PASS + those 5 gaps is the clean state.

@@ -111,7 +111,6 @@ RB02a_Missing_Acct,B_text_field,1,ACC-05,other,present,none,none,,spec,no rule m
 RB02a_Missing_Acct,B_text_field,1,ACC-06,,missing,missing,icon standard:incident,,spec,
 RB02a_Missing_Acct,B_text_field,1,ACC-07,Gold,present,none,none,,spec,no rule match and no Default configured
 RB02a_Missing_Acct,B_text_field,1,ACC-08,Alpha,present,none,none,,spec,no rule match and no Default configured
-RB02c_Missing_Cont,B00,1,CON-01,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_off,2,CON-01,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_icon,3,CON-01,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_text,4,CON-01,true,present,none,none,,spec,no rule match and no Default configured
@@ -125,7 +124,6 @@ RB02c_Missing_Cont,B_icon_colors,11,CON-01,true,present,none,none,,spec,no rule 
 RB02c_Missing_Cont,B_text_colors,12,CON-01,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_icon_hover,13,CON-01,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_img_hover,14,CON-01,true,present,none,none,,spec,no rule match and no Default configured
-RB02c_Missing_Cont,B00,1,CON-02,false,missing,missing,icon standard:default,,spec,Missing enabled but no content: the next release shows the fallback icon (team decision 2026-10-28; see findings/show-false-or-blank-needs-content.md)
 RB02c_Missing_Cont,B_off,2,CON-02,false,missing,none,none,,spec,Show when false or blank is cleared
 RB02c_Missing_Cont,B_icon,3,CON-02,false,missing,missing,icon standard:incident,,spec,
 RB02c_Missing_Cont,B_text,4,CON-02,false,missing,missing,initials 'MIS',,spec,
@@ -139,7 +137,6 @@ RB02c_Missing_Cont,B_icon_colors,11,CON-02,false,missing,missing,icon standard:i
 RB02c_Missing_Cont,B_text_colors,12,CON-02,false,missing,missing,initials 'MIS' bg=#B34A00,,spec,
 RB02c_Missing_Cont,B_icon_hover,13,CON-02,false,missing,missing,icon standard:incident,Hover M,spec,
 RB02c_Missing_Cont,B_img_hover,14,CON-02,false,missing,missing,image,Hover M,spec,
-RB02c_Missing_Cont,B00,1,CON-03,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_off,2,CON-03,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_icon,3,CON-03,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_text,4,CON-03,true,present,none,none,,spec,no rule match and no Default configured
@@ -153,7 +150,6 @@ RB02c_Missing_Cont,B_icon_colors,11,CON-03,true,present,none,none,,spec,no rule 
 RB02c_Missing_Cont,B_text_colors,12,CON-03,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_icon_hover,13,CON-03,true,present,none,none,,spec,no rule match and no Default configured
 RB02c_Missing_Cont,B_img_hover,14,CON-03,true,present,none,none,,spec,no rule match and no Default configured
-RB02c_Missing_Cont,B00,1,CON-04,false,missing,missing,icon standard:default,,spec,Missing enabled but no content: the next release shows the fallback icon (team decision 2026-10-28; see findings/show-false-or-blank-needs-content.md)
 RB02c_Missing_Cont,B_off,2,CON-04,false,missing,none,none,,spec,Show when false or blank is cleared
 RB02c_Missing_Cont,B_icon,3,CON-04,false,missing,missing,icon standard:incident,,spec,
 RB02c_Missing_Cont,B_text,4,CON-04,false,missing,missing,initials 'MIS',,spec,
@@ -167,7 +163,6 @@ RB02c_Missing_Cont,B_icon_colors,11,CON-04,false,missing,missing,icon standard:i
 RB02c_Missing_Cont,B_text_colors,12,CON-04,false,missing,missing,initials 'MIS' bg=#B34A00,,spec,
 RB02c_Missing_Cont,B_icon_hover,13,CON-04,false,missing,missing,icon standard:incident,Hover M,spec,
 RB02c_Missing_Cont,B_img_hover,14,CON-04,false,missing,missing,image,Hover M,spec,
-RB02c_Missing_Cont,B00,1,CON-05,false,missing,missing,icon standard:default,,spec,Missing enabled but no content: the next release shows the fallback icon (team decision 2026-10-28; see findings/show-false-or-blank-needs-content.md)
 RB02c_Missing_Cont,B_off,2,CON-05,false,missing,none,none,,spec,Show when false or blank is cleared
 RB02c_Missing_Cont,B_icon,3,CON-05,false,missing,missing,icon standard:incident,,spec,
 RB02c_Missing_Cont,B_text,4,CON-05,false,missing,missing,initials 'MIS',,spec,

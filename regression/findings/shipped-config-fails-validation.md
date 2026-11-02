@@ -40,6 +40,6 @@ Not done here: it is content (icons and operator choices) that the maintainers s
 
 ## Re-run
 ```bash
-python regression/scripts/scan_records_against_rules.py --org <alias> --rules regression/findings/proposed-validation-rules --sets sample_Lead,training_Indicators
+python regression/scripts/scan_records_against_rules.py --org <alias> --sets sample_Lead,training_Indicators
 ```
 Per-set reports: `regression/playwright/output/validation/<alias>__scan/scan_<set>.csv`.

@@ -13,7 +13,7 @@ then compares which records are rejected.
     NOW_ACCEPTED  rejected today, accepted by the candidate rules
 
 Usage (repo root):
-    python regression/scripts/scan_records_against_rules.py --org <alias> --rules regression/findings/proposed-validation-rules
+    python regression/scripts/scan_records_against_rules.py --org <alias> --rules <dir of candidate rule XML>
     python regression/scripts/scan_records_against_rules.py --org <alias> --rules <dir> --sets sample_Lead,training_Indicators
 
 Each set is self-contained (its own bundles, items, extensions, bundle items), so it deploys on its own.

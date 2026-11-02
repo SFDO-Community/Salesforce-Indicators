@@ -4,7 +4,7 @@
 `regression/scripts/run_validation_tests.py` with new cases `D01`-`D06`, `C01`-`C18`, 2026-10-26, `Salesforce-Indicators__regression_dev_slds2` (SLDS2 light).
 **Severity:** validation gap. An admin who maps an Item to a **custom** field (the common case) could save an Extension that does not fit the field type, and four rules that were
 believed to be working did nothing for those fields. Most visible consequence: a text rule on a custom Number or Checkbox field, the configuration that crashed the v0.4 component.
-**Status:** fixed in this repo and verified in the org (rules redeployed by the maintainer, suite re-run); not yet replayed on `feature/staging-claude`. Formula fields are an open, documented limitation.
+**Status:** fixed in this repo and verified in the org (rules redeployed by the maintainer, suite re-run); SHIPPED on `feature/staging-claude` (the `LOWER()` rules are in `force-app`; renamed and tagged in `0c0837b`, see `CLAUDE.md`). Formula fields are an open, documented limitation.
 
 ## What happens
 Four rules on `Indicator_Item_Extension__mdt` branch on `Indicator_Item__r.Field__r.DataType`:

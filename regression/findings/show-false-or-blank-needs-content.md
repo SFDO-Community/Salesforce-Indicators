@@ -1,6 +1,6 @@
 # Proposal: a validation rule so "Show False or Blank" always has something to show
 
-**Status:** proposal, tested with check-only deploys; **not** added to `force-app`. Needs a maintainer decision (`TODO.md` 1.6).
+**Status:** SHIPPED on `feature/staging-claude` (commit `0c0837b`) as `Show_False_Or_Blank_Needs_Content`, tag `II_08`, at `force-app/main/default/objects/Indicator_Item__mdt/validationRules/`. The proposed XML copy was deleted; the formula and message below are unchanged. `B00` / `RB02c_B00` are now `prod-only` and case `S01` expects `fail`.
 **Found by:** the phase-1 known issue `B00` (`RB02c`, Contact `DoNotCall`): an Item with **Show when False or Blank** checked and no Inverse value at all.
 **Tested:** 2026-10-28 on `Salesforce-Indicators__regression_dev_slds2-light` (check-only; nothing saved).
 
@@ -11,7 +11,7 @@ The same icon appears for a matched Extension rule that has no content (`C00`) a
 so this is almost always a configuration mistake the form could catch.
 
 ## Proposed rule (`Indicator_Item__mdt`)
-File: `findings/proposed-validation-rules/Indicator_Item__mdt/validationRules/ShowFalseOrBlankNeedsContent.validationRule-meta.xml`
+File: `force-app/main/default/objects/Indicator_Item__mdt/validationRules/Show_False_Or_Blank_Needs_Content.validationRule-meta.xml` (originally proposed as `ShowFalseOrBlankNeedsContent`)
 
 ```
 Show_False_or_Blank__c &&
@@ -29,7 +29,7 @@ Hover Text counts as content on purpose: an Inverse that has only hover text is 
   `pipeline_Lead` (22), `regression_dev_only` (127), `sample_Lead` and `training_Indicators`. Caveat: `sample_Lead` (34) and `training_Indicators` (23) already fail other rules, and a record that fails one rule reports only
   one error, so the scan cannot prove those two sets are free of this problem.
 
-## If the rule ships
-- `B00` can no longer deploy to dev orgs. Move it (and its bundle item `RB02c_B00`) to the `prod_only` set (`env` column in `planning/indicators.csv`) like the other records the newer rules reject; dev then loses that item, and `RB02c` shows one fewer indicator there.
-- Customers: an existing Item saved with Show False or Blank on and no Inverse value would be rejected the next time it is edited (not on upgrade). That is the same exposure as the other new rules; list it in the release notes and in the upgrade check (`TODO.md` 3.3: a plain SOQL query finds these items).
-- To apply: copy the file to `force-app/main/default/objects/Indicator_Item__mdt/validationRules/`, deploy, run `run_validation_tests.py` (expect `S01` to become `PASS`: change its `expect` from `gap` to `fail`).
+## Rollout (done)
+- `B00` and its bundle item `RB02c_B00` moved to `prod-only` (`env` in `planning/indicators.csv`, XML in `prod_only/customMetadata`). It still documents what v0.4 does (a blank avatar); dev orgs lose that item, so `RB02c` has one fewer indicator there and the prod-only count for that bundle is 3.
+- `planning/validation/cases.csv`: `S01` changed from `gap` to `fail` (it is now rejected with the new message), and the `rule` column uses the new names.
+- Customers: an existing Item saved with Show False or Blank on and no Inverse value is rejected the next time it is edited (not on upgrade). Still to do: list it in the release notes (`TODO.md` 1.2) and in the upgrade check (`TODO.md` 3.3: a plain SOQL query finds these items).

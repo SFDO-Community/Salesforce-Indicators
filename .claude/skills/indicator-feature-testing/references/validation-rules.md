@@ -11,7 +11,7 @@ Each deploy is a call against an org: ask first.
   `pipeline_Lead`, `regression_base`, `regression_dev_only`, `regression_prod_only`), strips CumulusCI tokens and compares check-only deploys with and without candidate rules (`NEW_FAIL` = the change would break it). Per-set reports.
 
 ## Try a rule change before committing it
-Put candidate rule files in source format under `<dir>/<Object>__mdt/validationRules/*.validationRule-meta.xml` (the proposed set lives in `regression/findings/proposed-validation-rules/`). `--rules <dir>` applies them **inside the same
+Put candidate rule files in source format under `<dir>/<Object>__mdt/validationRules/*.validationRule-meta.xml` (use this for rules that are only proposed; none are pending, and the shipped ones live in `force-app`). `--rules <dir>` applies them **inside the same
 rolled-back deploy**, so the org keeps its original rules (verify: `sf data query -t -q "SELECT ValidationName FROM ValidationRule WHERE EntityDefinition.QualifiedApiName='Indicator_Item_Extension__mdt'"`). A change that rejects shipped
 records must be paired with moving those records (this is how three regression extensions became `prod-only`).
 
@@ -22,7 +22,7 @@ records must be paired with moving those records (this is how three regression e
 - An omitted picklist field takes its **default** (`Empty_Static_Text_Behavior__c` defaults to `Use Icon Only`), so a rule that wants it blank cannot be triggered by deploy.
 - A rejected parent makes its children fail with a misleading message ("Bundle and Item must belong to the same sObject"); look for the root-cause record, not the cascade.
 - Date literals (`LAST MONTHS`, free text) are **not** validated and cannot be (no triggers on CMDT); documented as known gaps `G03`/`G04`.
-- The rules (16 today): Bundle `ObjectRequired`; Item `ObjectRequired`, `OneFieldMappingRequired`, `IconMustMatchSLDS`, `IconInverseMustMatchSLDS`, `FallbackIconRequiredForImage`, `FallbackIconRequiredForInverseImage`, `EmptyStaticTextMustHaveBehavior`;
-  Extension `MatchOperatorRequiresValue`, `UnknownConditions`, `Numeric_Missing_Minimum`, `String_Missing_Contains_Text`, `NoExtensionOnCheckboxField`, `IconMustMatchSLDS`, `FallbackIconRequiredForImage`;
+- The rules (19 today; names are `Snake_Case` and every message ends in a `[XX_NN]` tag, see the "Validation rules: naming and support tags" table in `CLAUDE.md`): Bundle `Object_Required`; Item `EmptyStaticTextMustHaveBehavior` (legacy PascalCase), `Object_Required`, `One_Field_Mapping_Required`, `Icon_Must_Match_SLDS`, `Icon_Inverse_Must_Match_SLDS`, `Fallback_Icon_Required_For_Image`, `Fallback_Icon_Required_For_Inverse_Image`, `Show_False_Or_Blank_Needs_Content`, `EmptyStaticTextMustHaveBehavior`;
+  Extension `Match_Operator_Requires_Value`, `Unknown_Conditions`, `Numeric_Missing_Minimum`, `String_Missing_Contains_Text`, `No_Extension_On_Checkbox_Field`, `Icon_Must_Match_SLDS`, `Fallback_Icon_Required_For_Image`, `Date_Field_Requires_Date_Operator`; Bundle Item `Action_Type_Requires_Target`, `Bundle_and_Item_Different_sObjects`;
   Bundle Item `Action_Type_Requires_Target`, `Bundle_and_Item_Different_sObjects`.
 - Adding a case: add a row to `cases.csv` (reference an existing org item by DeveloperName for type-driven cases, or a `VT_I_*` parent), run the tool, read `validation_report.csv`.
