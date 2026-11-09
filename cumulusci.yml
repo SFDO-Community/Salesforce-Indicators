@@ -4,7 +4,7 @@ project:
     package:
         name: Salesforce-Indicators
         namespace: inds
-        api_version: '65.0'
+        api_version: '68.0'
     git:
         default_branch: 'main'
     test:
