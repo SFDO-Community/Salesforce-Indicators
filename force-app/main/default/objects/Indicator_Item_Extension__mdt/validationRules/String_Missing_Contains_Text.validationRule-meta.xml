@@ -4,9 +4,18 @@
     <active>true</active>
     <errorConditionFormula>ISBLANK( Contains_Text__c )
 &amp;&amp; (
-    CONTAINS(Indicator_Item__r.Field__r.DataType,&apos;Text&apos;)
-    || CONTAINS(Indicator_Item__r.Field__r.DataType,&apos;Picklist&apos;)
+    LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;string&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;textarea&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;picklist&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;multipicklist&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;combobox&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;phone&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;email&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;url&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;text&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;longtextarea&apos;
+    || LOWER( Indicator_Item__r.Field__r.DataType ) = &apos;richtextarea&apos;
 )</errorConditionFormula>
     <errorDisplayField>Contains_Text__c</errorDisplayField>
-    <errorMessage>Indicator Item is a String/Picklist Type and requires a Contains Text value</errorMessage>
+    <errorMessage>Indicator Item is a String/Picklist Type and requires a Contains Text value [IE_02]</errorMessage>
 </ValidationRule>

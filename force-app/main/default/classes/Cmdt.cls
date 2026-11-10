@@ -29,12 +29,14 @@ public with sharing class Cmdt {
                 Active__c,
                 Advanced_Field__c,
                 Advanced_Field_Label__c,
+                Badge_Pill_Text__c,
                 Display_Multiple__c,
                 Empty_Static_Text_Behavior__c,
                 Field__c, Field__r.QualifiedApiName,
                 Hover_Text__c,
                 Icon_Value__c,
                 Image__c,
+                Inverse_Badge_Pill_Text__c,
                 Inverse_Hover_Text__c,
                 Inverse_Icon_Value__c,
                 Inverse_Image__c,
@@ -48,9 +50,9 @@ public with sharing class Cmdt {
                 Inverse_Icon_Background__c,
                 Inverse_Icon_Foreground__c,
                 Description__c,
-                Badge_Text_Color__c,
+                Badge_Pill_Text_Color__c,
                 Badge_Icon_Position__c,
-                Inverse_Badge_Text_Color__c,
+                Inverse_Badge_Pill_Text_Color__c,
                 Inverse_Badge_Icon_Position__c
             FROM Indicator_Item__mdt
             // WHERE Active__c = TRUE
@@ -64,7 +66,9 @@ public with sharing class Cmdt {
             SELECT Indicator_Bundle__c, Indicator_Bundle__r.DeveloperName,
                 Indicator_Item__c, Indicator_Item__r.DeveloperName,
                 Order__c,
-                Action_Type__c, Action_Target__c
+                Action_Type__c, Action_Target__c,
+                Action_Button_Label__c, Action_Help_Text__c, Action_Confirm_Required__c,
+                Show_False_or_Blank_Action__c
             FROM Indicator_Bundle_Item__mdt
             // WHERE Indicator_Bundle__r.Active__c = TRUE
             // AND Indicator_Item__r.Active__c = TRUE
@@ -76,7 +80,8 @@ public with sharing class Cmdt {
         // Gather all active Item Extensions and put them into a Map (key: Indicator Item; List of Extensions)
         // Using SOQL because of the Order By clause rather than creating a custom sort method.
         for(Indicator_Item_Extension__mdt itemExtension : [
-            SELECT Id, Active__c,
+            SELECT Id, DeveloperName, MasterLabel, Active__c,
+                Badge_Pill_Text__c,
                 Contains_Text__c,
                 Text_Operator__c,
                 Hover_Text__c,
@@ -91,12 +96,12 @@ public with sharing class Cmdt {
                 Icon_Background__c,
                 Icon_Foreground__c,
                 Description__c,
-                Badge_Text_Color__c,
+                Badge_Pill_Text_Color__c,
                 Badge_Icon_Position__c
             FROM Indicator_Item_Extension__mdt
             // WHERE Active__c = TRUE
             // AND Indicator_Item__r.Active__c = TRUE
-            ORDER BY Indicator_Item__c, Priority__c DESC, MasterLabel
+            ORDER BY Indicator_Item__c, Priority__c ASC NULLS LAST, MasterLabel
         ]){
             setItemExtension(itemExtension);
         }
@@ -178,7 +183,7 @@ public with sharing class Cmdt {
     }
 
     public static List<Indicator_Bundle_Item__mdt> getBundleItems(String bundleDevName){
-        if(bundleItemsByBundle.containsKey(bundleDevname))
+        if(bundleItemsByBundle.containsKey(bundleDevName))
             return bundleItemsByBundle.get(bundleDevName);
         else
             return new List<Indicator_Bundle_Item__mdt>();
@@ -213,16 +218,9 @@ public with sharing class Cmdt {
         extensionsByItem = new Map<String,List<Indicator_Item_Extension__mdt>>();
         activeExtensionsByItem = new Map<String,List<Indicator_Item_Extension__mdt>>();
 
-        // When NOT running a test - initialize the static variables with data that exists in the org.
-        initializeConfiguration();
-        if(Test.isRunningTest()) {
-            bundlesByName.clear();
-            activeBundlesByName.clear();
-            itemsByName.clear();
-            activeItemsByName.clear();
-            bundleItemsByBundle.clear();
-            extensionsByItem.clear();
-            activeExtensionsByItem.clear();
+        // Tests build up their own CMDT state via setBundle/setItem/etc., so skip querying the org's real CMDT data.
+        if(!Test.isRunningTest()) {
+            initializeConfiguration();
         }
     }
 }

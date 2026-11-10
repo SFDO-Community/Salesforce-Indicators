@@ -15,7 +15,7 @@ export default class FlowModal extends LightningModal {
     get flowVariables(){
         if(!this.recordId) return undefined;
 
-        console.log('Returning Id: ', this.recordId);
+        // console.log('Returning Id: ', this.recordId);
         
         return [
             {

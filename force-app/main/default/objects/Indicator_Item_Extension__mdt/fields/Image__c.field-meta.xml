@@ -3,6 +3,7 @@
     <fullName>Image__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>(Optional) URL to an image displayed when this rule matches, overriding the parent item&apos;s image.</inlineHelpText>
     <label>Image</label>
     <length>255</length>
     <required>false</required>

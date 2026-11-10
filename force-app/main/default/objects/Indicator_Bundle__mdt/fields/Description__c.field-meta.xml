@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Description__c</fullName>
-    <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Internal notes about this bundle. Not displayed to end users on record pages.</inlineHelpText>
     <label>Description</label>
     <required>false</required>
     <type>TextArea</type>

@@ -3,6 +3,26 @@
     <label>Account Company Info-Account Location</label>
     <protected>false</protected>
     <values>
+        <field>%%%NAMESPACE%%%Action_Button_Label__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Action_Confirm_Required__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Action_Help_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Action_Target__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Action_Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>%%%NAMESPACE%%%Indicator_Bundle__c</field>
         <value xsi:type="xsd:string">Account_Company_Info</value>
     </values>
@@ -13,5 +33,9 @@
     <values>
         <field>%%%NAMESPACE%%%Order__c</field>
         <value xsi:type="xsd:double">3.0</value>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Show_False_or_Blank_Action__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
 </CustomMetadata>

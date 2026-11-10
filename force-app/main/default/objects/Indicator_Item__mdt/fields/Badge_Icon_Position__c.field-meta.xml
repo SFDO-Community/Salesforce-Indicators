@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Badge_Icon_Position__c</fullName>
-    <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Where the icon appears relative to the badge text. Start places it before the text (left in left-to-right layouts); End places it after.</inlineHelpText>
     <label>Badge Icon Position</label>
     <required>false</required>
     <type>Picklist</type>

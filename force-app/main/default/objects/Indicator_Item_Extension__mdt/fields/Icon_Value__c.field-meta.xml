@@ -3,6 +3,7 @@
     <fullName>Icon_Value__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>(Optional) SLDS icon name (e.g. standard:account) displayed when this rule matches, overriding the parent item&apos;s icon.</inlineHelpText>
     <label>Icon Value</label>
     <length>255</length>
     <required>false</required>

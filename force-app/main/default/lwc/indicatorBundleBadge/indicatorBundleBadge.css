@@ -3,3 +3,8 @@
     --slds-c-badge-icon-color-foreground: var(--foregroundColor);
     --slds-c-badge-text-color: var(--textColor);
 }
+
+.clickable {
+    cursor: pointer;
+    --slds-c-badge-color-border: var(--slds-g-color-border-accent-3);
+}

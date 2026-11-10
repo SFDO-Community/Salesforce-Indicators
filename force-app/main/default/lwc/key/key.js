@@ -1,5 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import hasManagePermission from '@salesforce/customPermission/Manage_Indicator_Key';
+import { applyColorVars } from 'c/indicatorCssVars';
+import RecipeExportModal from 'c/recipeExportModal';
 
 export default class Key extends LightningElement {
 
@@ -13,51 +15,73 @@ export default class Key extends LightningElement {
     isOpen = false;
     isBundle = false;
     @api isSetup = false;
+    @api showRefresh = false;
+    @api isLoading = false;
+    @api suppressedItemIds = [];
+    // The Edit Bundle/Edit Indicator buttons build a Setup deep-link from
+    // BundleId/IndicatorId. When bundle data comes from a previewed JSON recipe
+    // instead of a live wire, those slots hold DeveloperNames, not real record Ids —
+    // set this so the Previewer can hide those links rather than send a manage-
+    // permission user to a broken/misleading Setup URL.
+    @api suppressEditLinks = false;
+    // Set by the Previewer: re-exporting a recipe you just loaded as JSON again is a
+    // pointless extra decision, so skip the format choice and go straight to CSV.
+    @api forceCsvExport = false;
 
     @api
     set bundle(value){
         this._bundle = value;
+        if (value) this._processBundle(value);
     }
     get bundle(){
         return this._bundle;
     }
 
-    renderedCallback() { 
+    renderedCallback() {
         if(this.bundle){
             this.initCSSVariables();
         }
     }
 
     initCSSVariables() {
-
-        if(this.bundle.CardIconBackground || this.bundle.CardIconForeground) {
-            var css = this.template.querySelector(".cardIcon").style;
-
-            css.setProperty('--backgroundColor', this.bundle.CardIconBackground);
-            css.setProperty('--foregroundColor', this.bundle.CardIconForeground);
-        }
-
+        applyColorVars(this, '.cardIcon', {
+            backgroundColor: this.bundle.CardIconBackground,
+            foregroundColor: this.bundle.CardIconForeground
+        });
     }
 
-    connectedCallback(){
-        
-        // this.indicatorItems = this.bundle.Items;
+    handleRefresh() {
+        this.dispatchEvent(new CustomEvent('refreshkey'));
+    }
+
+    async handleExport() {
+        await RecipeExportModal.open({
+            size: 'medium',
+            description: 'Select which items to export, and in what format.',
+            bundle: this.bundle,
+            forceCsvOnly: this.forceCsvExport
+        });
+    }
+
+    _processBundle(bundle){
+
+        this.indicatorItems = [];
+        this.activeSections = [];
+        this.allSections = [];
 
         this.bundleDetails = {
-            Title: this.bundle.CardTitle,
-            Body: this.bundle.CardText,
-            Icon: this.bundle.CardIcon,
-            Description: this.bundle.BundleDescription,
-            BundleId: this.bundle.BundleId,
-            IsActive: this.bundle.IsActive,
-            ObjectName: this.bundle.ObjectName
+            Title: bundle.CardTitle,
+            Body: bundle.CardText,
+            Icon: bundle.CardIcon,
+            Description: bundle.BundleDescription,
+            BundleId: bundle.BundleId,
+            IsActive: bundle.IsActive,
+            ObjectName: bundle.ObjectName
         }
 
-        if(this.bundle.BundleId){
-            this.isBundle = true;
-        }
+        this.isBundle = !!bundle.BundleId;
 
-        if(this.bundle.CardIconBackground || this.bundle.CardIconCoreground ){
+        if(bundle.CardIconBackground || bundle.CardIconCoreground ){
             this.bundleDetails.IconClass = 'cardIcon slds-var-m-right_xx-small ';
         } else {
             // ! Was throwing error because it couldn't find this style 'cardIcon' to override... ?
@@ -66,8 +90,8 @@ export default class Key extends LightningElement {
 
         // console.log(JSON.stringify(this.bundleDetails));
 
-        this.bundle.Items.forEach(
-            item => 
+        bundle.Items.forEach(
+            item =>
             {
                 let indicators = [];
                 let indicatorCount = 0;
@@ -94,9 +118,9 @@ export default class Key extends LightningElement {
 
                     let normalIcon = {
                         IndicatorId: item.IndicatorId,
-                        IconName: item.IconName ? item.IconName : '', 
-                        TextValue: item.TextValue ? item.TextValue.toUpperCase().substring(0,3) : '', 
-                        ImageUrl: item.ImageUrl ? item.ImageUrl : '', 
+                        IconName: item.IconName ? item.IconName : '',
+                        TextValue: item.TextValue ? item.TextValue.toUpperCase().substring(0,3) : '',
+                        ImageUrl: item.ImageUrl ? item.ImageUrl : '',
                         HoverValue: item.HoverValue ? '\"' + item.HoverValue + '\"' : 'Field Value',
                         Priority: '',
                         ExtensionLogic: item.FieldLabel + ' has a value',
@@ -139,9 +163,9 @@ export default class Key extends LightningElement {
 
                     let inverseIcon = {
                         IndicatorId: item.IndicatorId,
-                        IconName: item.FalseIcon ? item.FalseIcon : '', 
-                        TextValue: item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : '', 
-                        ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '', 
+                        IconName: item.FalseIcon ? item.FalseIcon : '',
+                        TextValue: item.FalseTextValue ? item.FalseTextValue.toUpperCase().substring(0,3) : '',
+                        ImageUrl: item.FalseImageUrl ? item.FalseImageUrl : '',
                         HoverValue: item.FalseHoverValue ? '\"' + item.FalseHoverValue + '\"' : 'Field Value',
                         Priority: '',
                         ExtensionLogic: item.FieldLabel + ' is false or blank',
@@ -167,15 +191,8 @@ export default class Key extends LightningElement {
 
                 if(item.Extensions) {
 
-                    let orderedExtensions = [];
-
-                    for(var i = item.Extensions.length - 1; i >= 0; i--){
-                        orderedExtensions.push(item.Extensions[i]);
-                    }
-
-                    // Show / Iterate Extensions
-                    orderedExtensions.forEach(
-                        ext => 
+                    item.Extensions.forEach(
+                        ext =>
                         {
                             let fillDesc = '';
                             if(ext.ExtensionTextValue || ext.ExtensionTextValue === 0){
@@ -244,7 +261,7 @@ export default class Key extends LightningElement {
                     Indicators: indicators,
                     IsActive: item.IsActive
                 };
-                
+
                 if(item.IsActive){
                     bundleItem.showIndicator = true;
                 } else {
@@ -276,11 +293,25 @@ export default class Key extends LightningElement {
     }
 
     handleClick(event){
-        window.open('/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name,'_blank');
+        // window.open() is distorted by Lightning Web Security for Setup pages;
+        // a real anchor click uses native browser navigation instead. See docs/sdd/0002-window-open.md.
+        const link = this.refs.cmdtLink;
+        link.href = '/lightning/setup/CustomMetadata/page?address=%2F' + event.target.name;
+        link.click();
+    }
+
+    get filteredIndicatorItems() {
+        if (!this.suppressedItemIds?.length) return this.indicatorItems;
+        const suppressed = new Set(this.suppressedItemIds);
+        return this.indicatorItems.filter(i => !suppressed.has(i.IndicatorId));
     }
 
     get isManageEnabled() {
         return hasManagePermission;
+    }
+
+    get showEditLinks() {
+        return hasManagePermission && !this.suppressEditLinks;
     }
 
     @api
