@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Zero_Behavior__c</fullName>
-    <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Controls how numeric zero is treated. Treat Zeroes as Blanks shows the inverse/blank appearance when the field value is 0.</inlineHelpText>
     <label>Zero Value Handling</label>
     <required>false</required>
     <type>Picklist</type>

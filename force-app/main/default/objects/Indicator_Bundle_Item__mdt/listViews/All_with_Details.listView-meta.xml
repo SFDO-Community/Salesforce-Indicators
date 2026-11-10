@@ -6,6 +6,10 @@
     <columns>Indicator_Bundle__c</columns>
     <columns>Indicator_Item__c</columns>
     <columns>Order__c</columns>
+    <columns>Action_Type__c</columns>
+    <columns>Action_Target__c</columns>
+    <columns>Show_False_or_Blank_Action__c</columns>
     <filterScope>Everything</filterScope>
     <label>All with Details</label>
+    <language>en_US</language>
 </ListView>

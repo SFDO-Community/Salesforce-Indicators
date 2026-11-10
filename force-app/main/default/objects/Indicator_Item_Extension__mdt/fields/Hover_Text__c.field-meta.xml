@@ -3,6 +3,7 @@
     <fullName>Hover_Text__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Tooltip displayed when a user hovers over the indicator, overriding the parent item&apos;s hover text when this rule matches.</inlineHelpText>
     <label>Hover Text</label>
     <length>255</length>
     <required>false</required>
