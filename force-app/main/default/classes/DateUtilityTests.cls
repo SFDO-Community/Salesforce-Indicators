@@ -1,6 +1,9 @@
 @isTest
 private class DateUtilityTests {
 
+    final static string EXCEPTION_CLASS = '%%%NAMESPACE_DOT%%%DateUtility.DateConversionException';
+    final static string EXCEPTION_CLASS_MESSAGE = 'Expected exception of type DateUtility.DateConversionException';
+
     // ======================== REGULAR CONVERTER TESTS <start>
     @isTest
     static void testRelativeDayConversions() {
@@ -33,7 +36,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid day tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -41,7 +44,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid day tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -77,14 +80,14 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid week tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
         try {
             Date invalid = DateUtility.convertRelativeDate('PREV ' + String.valueOf(weekCount) + ' WEEKS');
             System.Assert.fail('Expected invalid week tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -120,7 +123,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid month tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -128,7 +131,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid month tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -163,7 +166,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid quarter tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -171,7 +174,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid quarter tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -206,7 +209,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid year tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -214,7 +217,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid year tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -225,7 +228,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid relative date to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -233,7 +236,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid relative date to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
     // ======================== REGULAR CONVERTER TESTS <end>
@@ -277,7 +280,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid day tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -285,7 +288,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid day tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -321,14 +324,14 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid week tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
         try {
             Date invalid = DateUtility.convertRelativeDate('PREV_N_WEEKS:' + String.valueOf(weekCount));
             System.Assert.fail('Expected invalid week tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -364,7 +367,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid month tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -372,7 +375,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid month tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -407,7 +410,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid quarter tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -415,7 +418,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid quarter tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -450,7 +453,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid year tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -458,7 +461,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid year tag to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
 
@@ -469,7 +472,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid relative date to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
 
         try {
@@ -477,7 +480,7 @@ private class DateUtilityTests {
             System.Assert.fail('Expected invalid relative date to fail');
         } catch(Exception e) {
             String eName = e.getTypeName();
-            System.Assert.areEqual(eName, 'DateUtility.DateConversionException', 'Expected exception of type DateUtility.DateConversionException');
+            System.Assert.areEqual(eName, EXCEPTION_CLASS, EXCEPTION_CLASS_MESSAGE);
         }
     }
     // ======================== SOQL SYNTAX TESTS <end>
@@ -597,14 +600,14 @@ private class DateUtilityTests {
             DateUtility.convertDefiniteDate('01/01/2025');
             System.Assert.fail('Expected non-ISO date format to throw DateConversionException');
         } catch (DateUtility.DateConversionException e) {
-            System.Assert.areEqual('DateUtility.DateConversionException', e.getTypeName());
+            System.Assert.areEqual(EXCEPTION_CLASS, e.getTypeName());
         }
 
         try {
             DateUtility.convertDefiniteDate('not a date');
             System.Assert.fail('Expected invalid string to throw DateConversionException');
         } catch (DateUtility.DateConversionException e) {
-            System.Assert.areEqual('DateUtility.DateConversionException', e.getTypeName());
+            System.Assert.areEqual(EXCEPTION_CLASS, e.getTypeName());
         }
     }
     // ======================== DEFINITE DATE TESTS <end>
