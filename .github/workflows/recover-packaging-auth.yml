@@ -1,0 +1,96 @@
+name: Recover packaging auth URL
+
+on:
+  push:
+    branches: [main-test-only]
+    paths:
+      - .github/workflows/recover-packaging-auth.yml
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review]
+    paths:
+      - .github/workflows/recover-packaging-auth.yml
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  recover:
+    if: >-
+      github.repository == 'SFDO-Community/Salesforce-Indicators' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||
+       (github.event.pull_request.head.repo.full_name == github.repository &&
+        github.event.pull_request.draft == false))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: packaging-prod
+    steps:
+      - name: Encrypt packaging auth URL
+        shell: bash
+        env:
+          PACKAGING_ORG_AUTH_URL: ${{ secrets.PACKAGING_ORG_AUTH_URL }}
+          RECOVERY_CERT_PEM: |
+            -----BEGIN CERTIFICATE-----
+            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
+            YI3n531QAxwONCwQDuKfzVqV6Dk=
+            -----END CERTIFICATE-----
+        run: |
+          set +x
+          set -euo pipefail
+          umask 077
+
+          if [[ -z "$PACKAGING_ORG_AUTH_URL" ]]; then
+            echo "::error::PACKAGING_ORG_AUTH_URL is empty or unavailable. Check the environment secret name."
+            exit 1
+          fi
+
+          cert_file="$(mktemp "$RUNNER_TEMP/packaging-recipient.XXXXXX")"
+          trap 'rm -f "$cert_file"' EXIT
+          printf '%s\n' "$RECOVERY_CERT_PEM" > "$cert_file"
+
+          printf '%s' "$PACKAGING_ORG_AUTH_URL" | openssl cms \
+            -encrypt -binary -aes-256-gcm -outform DER \
+            -recip "$cert_file" \
+            -keyopt rsa_padding_mode:oaep \
+            -keyopt rsa_oaep_md:sha256 \
+            -keyopt rsa_mgf1_md:sha256 \
+            -out "$RUNNER_TEMP/PACKAGING_ORG_AUTH_URL.cms"
+
+      - name: Upload encrypted auth URL
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: packaging-auth-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/PACKAGING_ORG_AUTH_URL.cms
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove temporary encrypted file
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/PACKAGING_ORG_AUTH_URL.cms"
