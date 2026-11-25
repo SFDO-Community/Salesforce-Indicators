@@ -3,7 +3,7 @@
     <fullName>Card_Text__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>Text to appear above the Indicators</inlineHelpText>
+    <inlineHelpText>Text to appear above the Indicators. Supports {!Field_API_Name} merge tokens replaced at render time with the record's field values.</inlineHelpText>
     <label>Card Text</label>
     <length>255</length>
     <required>false</required>

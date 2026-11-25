@@ -24,7 +24,7 @@
     </values>
     <values>
         <field>%%%NAMESPACE%%%Card_Title__c</field>
-        <value xsi:type="xsd:string">Training Indicators 7</value>
+        <value xsi:type="xsd:string">Training Indicators 8</value>
     </values>
     <values>
         <field>%%%NAMESPACE%%%Description__c</field>
