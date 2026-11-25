@@ -22,6 +22,58 @@ public class Build {
     return ((Integer) Math.random().intValue());
   }
 
+  // * Users & Permissions
+  // Starts with no object or field access, so a test only has what it explicitly grants.
+  public static User aMinimumAccessUser() {
+    Profile minimumAccess = [SELECT Id FROM Profile WHERE Name = 'Minimum Access - Salesforce' WITH SYSTEM_MODE];
+    User testUser = new User(
+      ProfileId = minimumAccess.Id,
+      LastName = 'Indicators Tester',
+      Alias = 'indstest',
+      Email = 'indicators.tester@example.com',
+      Username = aRandomString(20).toLowerCase() + '@indicators.example.com',
+      TimeZoneSidKey = 'America/New_York',
+      LocaleSidKey = 'en_US',
+      LanguageLocaleKey = 'en_US',
+      EmailEncodingKey = 'UTF-8'
+    );
+    insert as system testUser;
+    return testUser;
+  }
+
+  // Assigns a permission set that ships with the package, e.g. Indicators_User_Access
+  public static void assignPermissionSet(User assignee, String permissionSetName) {
+    PermissionSet permissionSet = [SELECT Id FROM PermissionSet WHERE Name = :permissionSetName WITH SYSTEM_MODE];
+    insert as system new PermissionSetAssignment(AssigneeId = assignee.Id, PermissionSetId = permissionSet.Id);
+  }
+
+  // Grants read access through a temporary, test-only permission set, so none is shipped in the package.
+  public static void grantReadAccess(User assignee, String sObjectName, List<String> fieldNames) {
+    String name = 'Test_Access_' + aRandomString();
+    PermissionSet permissionSet = new PermissionSet(Name = name, Label = name);
+    insert as system permissionSet;
+
+    // Object access has to exist before any of its fields can be granted
+    insert as system new ObjectPermissions(
+      ParentId = permissionSet.Id,
+      SObjectType = sObjectName,
+      PermissionsRead = true
+    );
+
+    List<FieldPermissions> fieldPermissions = new List<FieldPermissions>();
+    for(String fieldName : fieldNames) {
+      fieldPermissions.add(new FieldPermissions(
+        ParentId = permissionSet.Id,
+        SObjectType = sObjectName,
+        Field = sObjectName + '.' + fieldName,
+        PermissionsRead = true
+      ));
+    }
+    insert as system fieldPermissions;
+
+    insert as system new PermissionSetAssignment(AssigneeId = assignee.Id, PermissionSetId = permissionSet.Id);
+  }
+
   // * Indicator Bundle
   public class BundleBuilder {
     // Add withMethods here
@@ -60,6 +112,7 @@ public class Build {
         SELECT DurableId
         FROM EntityDefinition
         WHERE QualifiedApiName = :sObjectName
+        WITH SYSTEM_MODE
       ]
       ?.DurableId;
       return this;
@@ -109,7 +162,7 @@ public class Build {
 
     public ItemBuilder withSObjectAndAdvancedField(String sObjectName, String advancedField){
       this.advancedField = advancedField;
-      this.sObjectName = [SELECT DurableId FROM EntityDefinition WHERE QualifiedApiName = :sObjectName]?.DurableId;
+      this.sObjectName = [SELECT DurableId FROM EntityDefinition WHERE QualifiedApiName = :sObjectName WITH SYSTEM_MODE]?.DurableId;
       return this;
     }
     public ItemBuilder withSObjectAndField(String sObjectName, String fieldName) {
@@ -119,6 +172,7 @@ public class Build {
         WHERE
           EntityDefinition.qualifiedApiName = :sObjectName
           AND qualifiedApiName = :fieldName
+        WITH SYSTEM_MODE
       ];
       this.field = particle.DurableId;
       this.sObjectName = particle.EntityDefinition.DurableId;
