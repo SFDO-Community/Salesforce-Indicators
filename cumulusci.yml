@@ -38,6 +38,9 @@ tasks:
         options:
             required_org_code_coverage_percent: 75
 
+    deploy:
+        class_path: tasks.deploy_datasource.DeployWithDatasourceNamespace
+
     deploy_sample_indicators:
         description: Deploys - Sample Indicators
         name: Deploy Sample Indicators
