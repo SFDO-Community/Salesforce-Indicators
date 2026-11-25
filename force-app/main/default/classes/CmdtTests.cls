@@ -2,6 +2,26 @@
 private class CmdtTests {
 
     @isTest
+    static void userPermissionSetCanLoadConfiguration() {
+        // Cmdt skips its queries in tests, so run them explicitly as a user with only the user permission set
+        User testUser = Build.aMinimumAccessUser();
+        Build.assignPermissionSet(testUser, 'Indicators_User_Access');
+        Exception failure;
+
+        Test.startTest();
+            System.runAs(testUser) {
+                try {
+                    Cmdt.initializeConfiguration();
+                } catch(Exception e) {
+                    failure = e;
+                }
+            }
+        Test.stopTest();
+
+        Assert.isNull(failure, 'Loading configuration should not fail: ' + failure?.getMessage());
+    }
+
+    @isTest
     static void successfullySetAndGetBundle() {
         // Test data setup
         Indicator_Bundle__mdt bundle = 

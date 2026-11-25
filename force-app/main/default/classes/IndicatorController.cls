@@ -224,7 +224,8 @@ public with sharing class IndicatorController {
                 durableIds.add(indicatorItem.Field__c);
             }
 
-            for(EntityParticle particle : [SELECT DurableId, QualifiedApiName, MasterLabel FROM EntityParticle WHERE DurableId = :durableIds]){
+            // System mode: this only resolves field names/labels. Record values are still FLS-enforced by getRecord in the LWC.
+            for(EntityParticle particle : [SELECT DurableId, QualifiedApiName, MasterLabel FROM EntityParticle WHERE DurableId = :durableIds WITH SYSTEM_MODE]){
                 fieldByDurableId.put(particle.DurableId, particle.QualifiedApiName);
                 labelByDurableId.put(particle.DurableId, particle.MasterLabel);
             }
@@ -248,7 +249,8 @@ public with sharing class IndicatorController {
                 }
             }
 
-            for(EntityParticle particle : [SELECT DurableId, QualifiedApiName, MasterLabel FROM EntityParticle WHERE DurableId = :durableIds]){
+            // System mode: this only resolves field names/labels. Record values are still FLS-enforced by getRecord in the LWC.
+            for(EntityParticle particle : [SELECT DurableId, QualifiedApiName, MasterLabel FROM EntityParticle WHERE DurableId = :durableIds WITH SYSTEM_MODE]){
                 fieldByDurableId.put(particle.DurableId, particle.QualifiedApiName);
                 labelByDurableId.put(particle.DurableId, particle.MasterLabel);
             }
