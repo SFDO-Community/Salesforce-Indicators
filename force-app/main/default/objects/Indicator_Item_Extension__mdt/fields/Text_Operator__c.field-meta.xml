@@ -50,18 +50,6 @@
                 <default>false</default>
                 <label>After Start</label>
             </value>
-            <value>
-                <fullName>After</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>After</label>
-            </value>
-            <value>
-                <fullName>Before</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Before</label>
-            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
