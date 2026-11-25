@@ -72,9 +72,12 @@ private class IndicatorControllerTests {
     static void relativeDateExtensionPopulatesStartAndEndDate() {
         User testUser = aViewingUser();
         IndicatorController.IndicatorBundle wrapper;
+        // Date.today() depends on the user's time zone, so it has to be read as the same user
+        Date todayForTestUser;
 
         Test.startTest();
             System.runAs(testUser) {
+                todayForTestUser = Date.today();
                 wrapper = IndicatorController.getIndicatorBundle(aBundle.DeveloperName);
             }
         Test.stopTest();
@@ -83,8 +86,8 @@ private class IndicatorControllerTests {
         IndicatorController.IndicatorExtension ext = wrapper.Items[1].Extensions[0];
         Assert.isNotNull(ext.StartDate, 'StartDate should be set for a relative date extension');
         Assert.isNotNull(ext.EndDate, 'EndDate should be set for a relative date extension');
-        Assert.areEqual(Date.today(), ext.StartDate, 'TODAY StartDate should be today');
-        Assert.areEqual(Date.today().addDays(1), ext.EndDate, 'TODAY EndDate should be tomorrow');
+        Assert.areEqual(todayForTestUser, ext.StartDate, 'TODAY StartDate should be today');
+        Assert.areEqual(todayForTestUser.addDays(1), ext.EndDate, 'TODAY EndDate should be tomorrow');
     }
 
     @isTest
