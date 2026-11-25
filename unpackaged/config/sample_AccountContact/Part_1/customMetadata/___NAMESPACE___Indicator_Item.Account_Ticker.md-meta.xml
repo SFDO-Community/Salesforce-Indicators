@@ -19,7 +19,11 @@
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>%%%NAMESPACE%%%Badge_Text_Color__c</field>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text_Color__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Badge_Pill_Text__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
@@ -63,7 +67,11 @@
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>%%%NAMESPACE%%%Inverse_Badge_Text_Color__c</field>
+        <field>%%%NAMESPACE%%%Inverse_Badge_Pill_Text_Color__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>%%%NAMESPACE%%%Inverse_Badge_Pill_Text__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

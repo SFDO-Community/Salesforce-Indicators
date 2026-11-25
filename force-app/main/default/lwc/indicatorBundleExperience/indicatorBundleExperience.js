@@ -14,6 +14,7 @@ export default class IndicatorBundleExperience extends LightningElement {
     @api titleStyle = 'Lightning Card';
     @api showTitle;
     @api showDescription;
+    @api indsStyle = 'avatar';
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh = false; // default input; wrapper will force false for Experience
@@ -23,6 +24,10 @@ export default class IndicatorBundleExperience extends LightningElement {
     // Context (can be provided by admin or URL)
     @api recordId;
     @api objectApiName;
+
+    // Platform-injected on supported page regions (Lightning App Builder and Experience Builder
+    // both populate this automatically); forwarded to indicatorBundle for error illustration sizing.
+    @api flexipageRegionWidth;
 
     _state = {};
     @wire(CurrentPageReference)

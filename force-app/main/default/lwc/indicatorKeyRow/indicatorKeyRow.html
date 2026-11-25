@@ -1,16 +1,18 @@
 <template>
+    <a lwc:ref="cmdtLink" href="" target="_blank" rel="noopener noreferrer" style="display:none"></a>
     <lightning-layout
         vertical-align="center"
         pull-to-boundary="small"
         multiple-rows
     >
         <lightning-layout-item padding="horizontal-small" size="1"  >
-            <c-indicator-bundle-item  
+            <c-indicator-bundle-item
                 ind-icon={keyIcon}
                 ind-image={keyImage}
                 ind-text={keyText}
                 ind-background-color={keyBackground}
                 ind-foreground-color={keyForeground}
+                ind-compact
             ></c-indicator-bundle-item>
         </lightning-layout-item>
         <lightning-layout-item padding="horizontal-small" size="3"  >
@@ -52,9 +54,9 @@
         <lightning-layout-item padding="horizontal-small" size="2"  >
             {keyExtensionLogic}
         </lightning-layout-item>
-        <template lwc:if={isManageEnabled}>
+        <template lwc:if={showEditButton}>
             <lightning-layout-item padding="horizontal-small" size="1" class="slds-text-align_right">
-                <lightning-button-icon 
+                <lightning-button-icon
                     name={keyId} 
                     title="Edit Indicator" 
                     alternative-text="Edit Indicator" 

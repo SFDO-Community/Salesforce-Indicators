@@ -2,6 +2,26 @@
 private class CmdtTests {
 
     @isTest
+    static void userPermissionSetCanLoadConfiguration() {
+        // Cmdt skips its queries in tests, so run them explicitly as a user with only the user permission set
+        User testUser = Build.aMinimumAccessUser();
+        Build.assignPermissionSet(testUser, 'Indicators_User_Access');
+        Exception failure;
+
+        Test.startTest();
+            System.runAs(testUser) {
+                try {
+                    Cmdt.initializeConfiguration();
+                } catch(Exception e) {
+                    failure = e;
+                }
+            }
+        Test.stopTest();
+
+        Assert.isNull(failure, 'Loading configuration should not fail: ' + failure?.getMessage());
+    }
+
+    @isTest
     static void successfullySetAndGetBundle() {
         // Test data setup
         Indicator_Bundle__mdt bundle = 
@@ -151,25 +171,18 @@ private class CmdtTests {
         Indicator_Bundle__mdt inactiveBundle = Build.aBundle().asInactive().build();
         Cmdt.setBundle(inactiveBundle);
 
-        // Indicator_Item__mdt inactiveItem = Build.anItem().asInactive().build();
-        // Cmdt.setItem(inactiveItem);
-
-        // Indicator_Item_Extension__mdt inactiveExtension = Build.anExtension().asInactive().withItem(inactiveItem).build();
-        // Cmdt.setItemExtension(inactiveExtension);
-
-        // Indicator_Bundle_Item__mdt inactiveBundleItem = Build.aBundleItem().withBundle(inactiveBundle).withItem(inactiveItem).build();
-        // Cmdt.setBundleItem(inactiveBundleItem);
-        
         // Actual test
         Test.startTest();
 
             List<Indicator_Bundle__mdt> allBundles = Cmdt.getAllBundles();
-    
+            List<Indicator_Bundle__mdt> allActiveBundles = Cmdt.getAllActiveBundles();
+
         Test.stopTest();
-    
+
         // Asserts
         Assert.isNotNull(allBundles);
         Assert.areEqual(inactiveBundle, allBundles[0]);
+        Assert.isTrue(allActiveBundles.isEmpty(), 'An inactive bundle should not be returned by getAllActiveBundles');
     }
 
 }

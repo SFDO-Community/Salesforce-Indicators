@@ -3,6 +3,7 @@
     <fullName>Field__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The field on the record that drives this indicator item. For fields on a related record, use Advanced Field instead.</inlineHelpText>
     <label>Field</label>
     <metadataRelationshipControllingField>Indicator_Item__mdt.sObject__c</metadataRelationshipControllingField>
     <referenceTo>EntityParticle</referenceTo>

@@ -1,12 +1,12 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 export default class IndicatorBundleFlow extends LightningElement {
-    // Pass-through configuration
     @api recordId;
     @api bundleName;
     @api titleStyle = 'Lightning Card';
     @api showTitle;
     @api showDescription;
+    @api indsStyle = 'avatar';
     @api indsSize = 'large';
     @api indsShape = 'base';
     @api showRefresh;

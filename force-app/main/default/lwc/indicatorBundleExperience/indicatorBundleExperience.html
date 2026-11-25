@@ -1,16 +1,23 @@
 <template>
-    <!-- Thin wrapper to host indicatorBundle in Experience Cloud contexts -->
-    <c-indicator-bundle
-        bundle-name={bundleName}
-        title-style={titleStyle}
-        show-title={showTitle}
-        show-description={showDescription}
-        inds-size={indsSize}
-        inds-shape={indsShape}
-        show-refresh={resolvedShowRefresh}
-        mapped-field={mappedField}
-        show-footer={showFooter}
-        record-id={resolvedRecordId}
-        object-api-name={resolvedObjectApiName}
-    ></c-indicator-bundle>
+    <!-- Thin wrapper to host indicatorBundle in Experience Cloud contexts.
+         Experience Builder regions (unlike Lightning App Builder ones) don't add their own
+         spacing around components, so slds-var-m-around_small keeps the card from sitting flush
+         against neighboring regions/components on a Digital Experience page. -->
+    <div class="slds-var-m-around_small">
+        <c-indicator-bundle
+            bundle-name={bundleName}
+            title-style={titleStyle}
+            show-title={showTitle}
+            show-description={showDescription}
+            inds-style={indsStyle}
+            inds-size={indsSize}
+            inds-shape={indsShape}
+            show-refresh={resolvedShowRefresh}
+            mapped-field={mappedField}
+            show-footer={showFooter}
+            record-id={resolvedRecordId}
+            object-api-name={resolvedObjectApiName}
+            flexipage-region-width={flexipageRegionWidth}
+        ></c-indicator-bundle>
+    </div>
 </template>

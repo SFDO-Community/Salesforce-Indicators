@@ -146,11 +146,15 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Badges</label>
+        <label>Badges/Pills</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Badge_Text_Color__c</field>
+                <field>Badge_Pill_Text__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Badge_Pill_Text_Color__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -160,7 +164,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Inverse_Badge_Text_Color__c</field>
+                <field>Inverse_Badge_Pill_Text__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Inverse_Badge_Pill_Text_Color__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -211,6 +219,9 @@
         <fields>DeveloperName</fields>
         <fields>Indicator_Bundle__c</fields>
         <fields>Order__c</fields>
+        <fields>Action_Type__c</fields>
+        <fields>Action_Target__c</fields>
+        <fields>Show_False_or_Blank_Action__c</fields>
         <relatedList>Indicator_Bundle_Item__mdt.Indicator_Item__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -234,7 +245,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hQL00000Ggnxc</masterLabel>
+        <masterLabel>00hhP000001MJps</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

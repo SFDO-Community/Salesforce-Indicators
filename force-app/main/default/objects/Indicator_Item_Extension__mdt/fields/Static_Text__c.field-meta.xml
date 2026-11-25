@@ -3,6 +3,7 @@
     <fullName>Static_Text__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>(Optional) Text displayed when this rule matches, overriding the parent item&apos;s static text. Displays the first 3 characters or emoji.</inlineHelpText>
     <label>Static Text</label>
     <length>255</length>
     <required>false</required>

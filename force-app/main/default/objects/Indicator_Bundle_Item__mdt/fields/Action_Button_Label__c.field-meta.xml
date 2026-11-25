@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Badge_Text_Color__c</fullName>
+    <fullName>Action_Button_Label__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText></inlineHelpText>
-    <label>Badge Text Color</label>
+    <inlineHelpText>Label shown on the action button in the hover popover. Defaults to &quot;Open&quot; for URL actions and &quot;Launch&quot; for Flow actions when blank.</inlineHelpText>
+    <label>Action Button Label</label>
     <length>255</length>
     <required>false</required>
     <type>Text</type>
