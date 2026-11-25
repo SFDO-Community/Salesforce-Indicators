@@ -1,4 +1,5 @@
 <template>
+    <a lwc:ref="cmdtLink" href="" target="_blank" rel="noopener noreferrer" style="display:none"></a>
     <lightning-card variant="narrow" class="slds-var-p-around_medium">
         <template lwc:if={isSetup}>
             <lightning-button-stateful
@@ -12,6 +13,24 @@
                 onclick={handleState}>
             </lightning-button-stateful>
         </template>
+        <template lwc:if={showRefresh}>
+            <lightning-button-icon
+                slot="actions"
+                icon-name="utility:refresh"
+                alternative-text="Refresh"
+                title="Refresh"
+                onclick={handleRefresh}
+            ></lightning-button-icon>
+        </template>
+        <template lwc:if={isManageEnabled}>
+            <lightning-button-icon
+                slot="actions"
+                icon-name="utility:download"
+                alternative-text="Export"
+                title="Export as JSON recipe or CSV"
+                onclick={handleExport}
+            ></lightning-button-icon>
+        </template>
         <h3 slot="title">
             <lightning-icon 
                 lwc:if={bundleDetails.Icon}
@@ -22,6 +41,10 @@
             </lightning-icon>
             {bundleDetails.Title}
         </h3>
+        <div class="slds-is-relative">
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Refreshing" size="small" variant="brand"></lightning-spinner>
+        </template>
         <p class="slds-var-p-horizontal_medium">{bundleDetails.Body}</br></br></br></p>
         <lightning-layout pull-to-boundary="small">
             <lightning-layout-item padding="horizontal-small" size="10" class="slds-text-align_left">
@@ -66,10 +89,10 @@
                 </template>
             </lightning-layout-item>
             <lightning-layout-item padding="horizontal-small" size="2" class="slds-text-align_right">
-                <template lwc:if={isManageEnabled}>
+                <template lwc:if={showEditLinks}>
                     <template lwc:if={isBundle}>
-                        <lightning-button 
-                            name={bundleDetails.BundleId} 
+                        <lightning-button
+                            name={bundleDetails.BundleId}
                             onclick={handleClick} 
                             label="Edit Bundle" 
                             title="Edit Bundle" 
@@ -83,7 +106,7 @@
         <lightning-accordion allow-multiple-sections-open
                         active-section-name={activeSections}
                         onsectiontoggle={handleToggleSection}>
-            <template for:each={indicatorItems} for:item="indicatorItem">
+            <template for:each={filteredIndicatorItems} for:item="indicatorItem">
                 <template lwc:if={indicatorItem.showIndicator}>
                     <div key={indicatorItem.FieldApiName}>
                         
@@ -131,7 +154,7 @@
                                     </template>
                                 </lightning-layout-item>
                                 <lightning-layout-item padding="horizontal-small" size="2" class="slds-text-align_right">
-                                    <template lwc:if={isManageEnabled}>
+                                    <template lwc:if={showEditLinks}>
                                         <lightning-button name={indicatorItem.IndicatorId} onclick={handleClick} label="Edit Indicator" title="Edit Indicator" icon-name="utility:setup"></lightning-button>
                                     </template>
                                 </lightning-layout-item>
@@ -232,6 +255,7 @@
                                             key-foreground={indicator.Foreground}
                                             key-is-active={indicator.IsActive}
                                             is-manage-enabled={isManageEnabled}
+                                            suppress-edit-links={suppressEditLinks}
                                         ></c-indicator-key-row>
                                     </template>
                                 </div>
@@ -244,5 +268,6 @@
                 </template>
             </template>
         </lightning-accordion>
+        </div>
     </lightning-card>
 </template>

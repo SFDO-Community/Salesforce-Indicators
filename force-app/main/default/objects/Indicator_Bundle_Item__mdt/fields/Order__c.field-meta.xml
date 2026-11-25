@@ -3,7 +3,7 @@
     <fullName>Order__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <inlineHelpText>Order to display on the page.</inlineHelpText>
+    <inlineHelpText>Display order within the bundle. Lowest number appears first. Supports decimals (e.g. 1.5) to insert between existing items without renumbering.</inlineHelpText>
     <label>Order</label>
     <precision>4</precision>
     <required>false</required>

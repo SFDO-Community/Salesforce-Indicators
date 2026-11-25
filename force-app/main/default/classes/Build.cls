@@ -22,6 +22,58 @@ public class Build {
     return ((Integer) Math.random().intValue());
   }
 
+  // * Users & Permissions
+  // Starts with no object or field access, so a test only has what it explicitly grants.
+  public static User aMinimumAccessUser() {
+    Profile minimumAccess = [SELECT Id FROM Profile WHERE Name = 'Minimum Access - Salesforce' WITH SYSTEM_MODE];
+    User testUser = new User(
+      ProfileId = minimumAccess.Id,
+      LastName = 'Indicators Tester',
+      Alias = 'indstest',
+      Email = 'indicators.tester@example.com',
+      Username = aRandomString(20).toLowerCase() + '@indicators.example.com',
+      TimeZoneSidKey = 'America/New_York',
+      LocaleSidKey = 'en_US',
+      LanguageLocaleKey = 'en_US',
+      EmailEncodingKey = 'UTF-8'
+    );
+    insert as system testUser;
+    return testUser;
+  }
+
+  // Assigns a permission set that ships with the package, e.g. Indicators_User_Access
+  public static void assignPermissionSet(User assignee, String permissionSetName) {
+    PermissionSet permissionSet = [SELECT Id FROM PermissionSet WHERE Name = :permissionSetName WITH SYSTEM_MODE];
+    insert as system new PermissionSetAssignment(AssigneeId = assignee.Id, PermissionSetId = permissionSet.Id);
+  }
+
+  // Grants read access through a temporary, test-only permission set, so none is shipped in the package.
+  public static void grantReadAccess(User assignee, String sObjectName, List<String> fieldNames) {
+    String name = 'Test_Access_' + aRandomString();
+    PermissionSet permissionSet = new PermissionSet(Name = name, Label = name);
+    insert as system permissionSet;
+
+    // Object access has to exist before any of its fields can be granted
+    insert as system new ObjectPermissions(
+      ParentId = permissionSet.Id,
+      SObjectType = sObjectName,
+      PermissionsRead = true
+    );
+
+    List<FieldPermissions> fieldPermissions = new List<FieldPermissions>();
+    for(String fieldName : fieldNames) {
+      fieldPermissions.add(new FieldPermissions(
+        ParentId = permissionSet.Id,
+        SObjectType = sObjectName,
+        Field = sObjectName + '.' + fieldName,
+        PermissionsRead = true
+      ));
+    }
+    insert as system fieldPermissions;
+
+    insert as system new PermissionSetAssignment(AssigneeId = assignee.Id, PermissionSetId = permissionSet.Id);
+  }
+
   // * Indicator Bundle
   public class BundleBuilder {
     // Add withMethods here
@@ -60,6 +112,7 @@ public class Build {
         SELECT DurableId
         FROM EntityDefinition
         WHERE QualifiedApiName = :sObjectName
+        WITH SYSTEM_MODE
       ]
       ?.DurableId;
       return this;
@@ -109,7 +162,7 @@ public class Build {
 
     public ItemBuilder withSObjectAndAdvancedField(String sObjectName, String advancedField){
       this.advancedField = advancedField;
-      this.sObjectName = [SELECT DurableId FROM EntityDefinition WHERE QualifiedApiName = :sObjectName]?.DurableId;
+      this.sObjectName = [SELECT DurableId FROM EntityDefinition WHERE QualifiedApiName = :sObjectName WITH SYSTEM_MODE]?.DurableId;
       return this;
     }
     public ItemBuilder withSObjectAndField(String sObjectName, String fieldName) {
@@ -119,6 +172,7 @@ public class Build {
         WHERE
           EntityDefinition.qualifiedApiName = :sObjectName
           AND qualifiedApiName = :fieldName
+        WITH SYSTEM_MODE
       ];
       this.field = particle.DurableId;
       this.sObjectName = particle.EntityDefinition.DurableId;
@@ -133,6 +187,12 @@ public class Build {
       return this;
     }
     private String hoverText;
+
+    public ItemBuilder withBadgePillText(String badgePillText) {
+      this.badgePillText = badgePillText;
+      return this;
+    }
+    private String badgePillText;
 
     public ItemBuilder withIconValue(String iconValue) {
       this.iconValue = iconValue;
@@ -157,6 +217,12 @@ public class Build {
       return this;
     }
     private String inverseHoverText;
+
+    public ItemBuilder withInverseBadgePillText(String inverseBadgePillText) {
+      this.inverseBadgePillText = inverseBadgePillText;
+      return this;
+    }
+    private String inverseBadgePillText;
 
     public ItemBuilder withInverseIconValue(String inverseIconValue) {
       this.inverseIconValue = inverseIconValue;
@@ -202,9 +268,11 @@ public class Build {
         Empty_Static_Text_Behavior__c = emptyStaticBehavior,
         Field__c = field,
         Hover_Text__c = hoverText,
+        Badge_Pill_Text__c = badgePillText,
         Icon_Value__c = iconValue,
         Image__c = imageUrl,
         Inverse_Hover_Text__c = inverseHoverText,
+        Inverse_Badge_Pill_Text__c = inverseBadgePillText,
         Inverse_Icon_Value__c = inverseIconValue,
         Inverse_Image__c = inverseImageUrl,
         Inverse_Static_Text__c = inverseStaticText,
@@ -246,6 +314,30 @@ public class Build {
     }
     private Decimal order;
 
+    public BundleItemBuilder withActionButtonLabel(String actionButtonLabel) {
+      this.actionButtonLabel = actionButtonLabel;
+      return this;
+    }
+    private String actionButtonLabel;
+
+    public BundleItemBuilder withActionHelpText(String actionHelpText) {
+      this.actionHelpText = actionHelpText;
+      return this;
+    }
+    private String actionHelpText;
+
+    public BundleItemBuilder withActionConfirmRequired(Boolean actionConfirmRequired) {
+      this.actionConfirmRequired = actionConfirmRequired;
+      return this;
+    }
+    private Boolean actionConfirmRequired = false;
+
+    public BundleItemBuilder withShowFalseOrBlankAction(Boolean showFalseOrBlankAction) {
+      this.showFalseOrBlankAction = showFalseOrBlankAction;
+      return this;
+    }
+    private Boolean showFalseOrBlankAction = false;
+
     public Indicator_Bundle_Item__mdt build() {
       return new Indicator_Bundle_Item__mdt(
         //objectApi = withVariable
@@ -253,7 +345,11 @@ public class Build {
         MasterLabel = devname,
         Indicator_Bundle__r = bundle,
         Indicator_Item__r = item,
-        Order__c = order
+        Order__c = order,
+        Action_Button_Label__c = actionButtonLabel,
+        Action_Help_Text__c = actionHelpText,
+        Action_Confirm_Required__c = actionConfirmRequired,
+        Show_False_or_Blank_Action__c = showFalseOrBlankAction
       );
     }
   } // End BundleItem Builder
@@ -287,6 +383,12 @@ public class Build {
       return this;
     }
     private String hoverText;
+
+    public ExtensionBuilder withBadgePillText(String badgePillText) {
+      this.badgePillText = badgePillText;
+      return this;
+    }
+    private String badgePillText;
 
     public ExtensionBuilder withIconValue(String iconValue) {
       this.iconValue = iconValue;
@@ -329,6 +431,13 @@ public class Build {
       return this;
     }
     private String staticText;
+
+    public ExtensionBuilder withTextOperator(String textOperator) {
+      this.textOperator = textOperator;
+      return this;
+    }
+    private String textOperator;
+
     public Indicator_Item_Extension__mdt build() {
       return new Indicator_Item_Extension__mdt(
         //objectApi = withVariable
@@ -337,13 +446,15 @@ public class Build {
         Active__c = isActive,
         Contains_Text__c = containsText,
         Hover_Text__c = hoverText,
+        Badge_Pill_Text__c = badgePillText,
         Icon_Value__c = iconValue,
         Image__c = imageUrl,
         Indicator_Item__r = item,
         Maximum__c = maximum,
         Minimum__c = minimum,
         Priority__c = priority,
-        Static_Text__c = staticText
+        Static_Text__c = staticText,
+        Text_Operator__c = textOperator
       );
     }
   } // End Extension Builder
